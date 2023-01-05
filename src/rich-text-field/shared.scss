@@ -1,0 +1,22 @@
+@use "../../node_modules/bootstrap-sass-variables/input-border-radius-lg" as *;
+
+.rich-text-field,
+.document-field {
+    position: relative;
+
+    --ck-border-radius: #{$input-border-radius-lg};
+
+    &>.spinner-container {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        pointer-events: none;
+        z-index: 10;
+        opacity: 0;
+        transition: opacity 0.25s ease-in-out;
+        &.show {
+            opacity: 1;
+        }
+    }
+
+}

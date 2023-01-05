@@ -1,0 +1,7 @@
+.card {
+    // overflow: auto;
+    
+    // Fun fact about how overflow makes position: sticky not work on children:
+    // https://github.com/w3c/csswg-drafts/issues/865
+    contain: content;
+}

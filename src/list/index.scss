@@ -1,0 +1,132 @@
+@use "../../node_modules/bootstrap-sass-variables/prefix" as *;
+@use "../../node_modules/bootstrap-sass-variables/enable-shadows" as *;
+@use "../../node_modules/bootstrap-sass-variables/primary" as *;
+@use "../../node_modules/bootstrap-sass-variables/btn-box-shadow" as *;
+@use "../../node_modules/bootstrap-sass-variables/btn-focus-width" as *;
+@use "../../node_modules/bootstrap-sass-variables/btn-focus-width" as *;
+@use "../../node_modules/bootstrap-sass-variables/functions/to-rgb" as *;
+
+/*
+ A gridlist is kind of like a list-group, but different enough that we need a fair amount of styling.
+
+ In particular, a list-group-item can't contain interactive children, but a gridlist-item can.
+*/
+.gridlist-group {
+    &>.gridlist-item {
+        --#{$prefix}btn-focus-shadow-rgb: #{to-rgb(mix($primary, $primary, 15%))};
+        --#{$prefix}btn-box-shadow: #{$btn-box-shadow};
+        --#{$prefix}btn-focus-box-shadow: 0 0 0 #{$btn-focus-width} rgba(var(--#{$prefix}btn-focus-shadow-rgb), .5);
+        position: relative;
+
+        // TODO: This would be nice, but it causes really weird issues with arrow key navigation???
+        // That's weird and shouldn't happen, surely.
+        /*&:not(:focus-within) {
+            content-visibility: auto;
+        }*/
+        height: calc(var(--bs-list-group-item-padding-y) * 2 + (1em * var(--bs-body-line-height)));
+        &:not(:focus-within) {
+            contain: strict;
+            content-visibility: auto;
+        }
+
+        cursor: pointer;
+
+        &.list-group-item {
+            padding: 0;
+        }
+
+        &.gridlist-item-placeholder {
+            cursor: wait;
+        }
+        &>.placeholder-glow {
+            pointer-events: none;
+            transition: opacity 0.15 linear;
+            position: absolute; 
+            inset: 0;
+            padding: var(--#{$prefix}list-group-item-padding-y) var(--#{$prefix}list-group-item-padding-x);
+        }
+
+        // Most of this is just to make sure that the focus ring appears around the ENTIRE item,
+        // while also allowing icons at the start or end to exist on top of it.
+        &>.gridlist-item-text {
+            position: relative;
+            z-index: 1;
+            padding: var(--#{$prefix}list-group-item-padding-y) var(--#{$prefix}list-group-item-padding-x);
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
+            outline: none;
+
+            &:focus-visible {
+                outline-width: $btn-focus-width;
+                outline-color: rgba(var(--#{$prefix}btn-focus-shadow-rgb), .5);
+                //z-index: 1;
+
+                // Avoid using mixin so we can pass custom focus shadow properly (also because we can't modularly)
+                @if $enable-shadows {
+                    box-shadow: var(--#{$prefix}btn-box-shadow),
+                    var(--#{$prefix}btn-focus-box-shadow);
+                }
+
+                @else {
+                    box-shadow: var(--#{$prefix}btn-focus-box-shadow);
+                }
+            }
+        }
+
+        /*&:focus-within {
+            z-index: 10;
+
+            &>.gridlist-item-text {
+                z-index: 3;
+            }
+
+            &>.list-group-item-icon {
+                z-index: 4;
+            }
+        }*/
+
+        //display: grid;
+        &>.list-group-item-icon {
+            z-index: 2;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            inset-block-start: 0;
+            inset-block-end: 0;
+            display: flex;
+            align-items: center;
+
+            &.list-group-item-icon-start {
+                inset-inline-start: 0;
+
+                &>.btn {
+                    border-start-start-radius: inherit;
+                    border-end-start-radius: inherit;
+                }
+            }
+
+            &.list-group-item-icon-end {
+                inset-inline-end: 0;
+
+                &>.btn {
+                    border-start-end-radius: inherit;
+                    border-end-end-radius: inherit;
+                }
+            }
+
+            &>.btn {
+                height: 100%;
+            }
+        }
+
+        &.list-group-item-with-icon-start>.gridlist-item-text {
+            padding-inline-start: 2em;
+        }
+
+        &.list-group-item-with-icon-end>.gridlist-item-text {
+            padding-inline-end: 2em;
+        }
+    }
+}

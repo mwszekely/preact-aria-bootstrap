@@ -1,0 +1,225 @@
+@use "../../node_modules/bootstrap-sass-variables/input-line-height" as *;
+@use "../../node_modules/bootstrap-sass-variables/input-padding-x" as *;
+@use "../../node_modules/bootstrap-sass-variables/input-padding-y" as *;
+@use "../../node_modules/bootstrap-sass-variables/input-border-width" as *;
+
+$default-text-field-spinner-size: 1.3;
+
+
+// Changes from default Bootstrap CSS:
+// * Free .form-controls are wrapped in a couple of extra divs for icon/size/margin reasons.
+// * Based on the type, a max-width is applied to the input's container
+// * Show/hide numeric spin buttons
+
+.form-text-field {
+
+    --form-control-container-max-width: auto;
+
+    --form-text-field-padding-start: #{$input-padding-x};
+    --form-text-field-padding-end: #{$input-padding-x};
+
+    --form-control-padding-from-spin-buttons: 1.5em;
+    &.hide-spin-buttons {
+        --form-control-padding-from-spin-buttons: 0em;
+    }
+
+    &.form-text-field-type-number.form-text-field-number-sized {
+
+        --form-control-container-max-width: calc(0.5em + (1ch * var(--form-text-field-digits, 1)) + var(--form-text-field-padding-start) + var(--form-text-field-padding-end) + var(--form-control-padding-from-spin-buttons));
+    }
+
+    // Ensure that, by default, date/time controls are a reasonable width
+    // (partially so that the browser's default icon appears nearby)
+    &.form-text-field-type-datetime-local {
+        //              12 characters +     the border    + AM/PM + misc. + padding + padding
+        --form-control-container-max-width: calc(12ch + (#{$input-border-width} * 2) + 3em + 4.5em + var(--form-text-field-padding-start) + var(--form-text-field-padding-end) + var(--form-control-padding-from-spin-buttons));
+    }
+
+    &.form-text-field-type-date {
+        //              8 characters  +     the border    + misc. + padding + padding
+        --form-control-container-max-width: calc(8ch + (#{$input-border-width} * 2) + 3em + var(--form-text-field-padding-start) + var(--form-text-field-padding-end) + var(--form-control-padding-from-spin-buttons));
+    }
+
+    &.form-text-field-type-time {
+        --form-control-container-max-width: calc(4ch + (#{$input-border-width} * 2) + 3em + 1em + var(--form-text-field-padding-start) + var(--form-text-field-padding-end) + var(--form-control-padding-from-spin-buttons));
+
+
+        &.form-text-field-time-seconds {
+            --form-control-container-max-width: calc(6ch + (#{$input-border-width} * 2) + 3em + 2em + var(--form-text-field-padding-start) + var(--form-text-field-padding-end) + var(--form-control-padding-from-spin-buttons));
+        }
+    }
+
+    // Icons adjust the input's padding, so set those variables here
+    &.form-text-field-with-icon-start {
+        --form-text-field-padding-start: calc(1em * #{$input-line-height} + 2 * #{$input-padding-y});
+        &>.form-floating>.form-label {
+            padding-left: calc(#{$input-padding-x} + 1.5em);
+        }
+    }
+
+    &.form-text-field-with-icon-end, &.pending {
+        --form-text-field-padding-end: calc(1em * #{$input-line-height} + 2 * #{$input-padding-y});
+        &>.form-floating>.form-label {
+            padding-right: calc(#{$input-padding-x} + 1.5em);
+        }
+    }
+
+    &.hide-spin-buttons>.form-text-field-control-container>.form-control[type=number] {
+        -moz-appearance: textfield;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    &>.form-text-field-control-container {
+        position: relative;
+        max-width: var(--form-control-container-max-width, auto);
+
+        // Make sure the input has the correct width and padding to account for start/end icons
+        &>.form-control {
+            transition: padding 0.25s ease-in-out;
+            padding-inline-end: var(--form-text-field-padding-end);
+            padding-inline-start: var(--form-text-field-padding-start);
+        }
+
+
+        &>.form-control-icon {
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+
+            &.show {
+                opacity: 1;
+            }
+
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: calc(1em * #{$input-line-height});
+        }
+
+        &>.form-control-icon-start {
+            left: #{$input-padding-y};
+        }
+
+        &>.form-control-icon-end {
+            right: #{$input-padding-y};
+        }
+
+        &>.spinner-container {
+            pointer-events: none;
+
+            &>.spinner {
+                height: calc(1em * #{$input-line-height});
+                width: calc(1em * #{$input-line-height});
+            }
+        }
+
+    }
+
+
+    &.pending>.form-text-field-control-container>.spinner-container.show {
+        opacity: 1;
+    }
+
+    /* &>.form-text-field-container {
+        position: relative;
+    }
+
+    --form-text-field-padding-start: #{$input-padding-x};
+    --form-text-field-padding-end: #{$input-padding-x};
+
+    &.form-text-field-with-icon-start {
+        --form-text-field-padding-start: calc(1em * #{$input-line-height} + 2 * #{$input-padding-y});
+    }
+
+    &.form-text-field-with-icon-end {
+        --form-text-field-padding-end: calc(1em * #{$input-line-height} + 2 * #{$input-padding-y});
+    }
+
+    &.form-text-field-type-datetime-local {
+        &>.form-text-field-container {
+            //              12 characters +     the border    + AM/PM + misc. + padding + padding
+            max-width: calc(12ch + (#{$input-border-width} * 2) + 3em + 4.5em + var(--form-text-field-padding-start) + var(--form-text-field-padding-end));
+        }
+    }
+
+    &.form-text-field-type-date {
+        &>.form-text-field-container {
+            //              8 characters  +     the border    + misc. + padding + padding
+            max-width: calc(8ch + (#{$input-border-width} * 2) + 3em + var(--form-text-field-padding-start) + var(--form-text-field-padding-end));
+        }
+    }
+
+    &.form-text-field-type-time {
+        &>.form-text-field-container {
+            max-width: calc(4ch + (#{$input-border-width} * 2) + 3em + 1em + var(--form-text-field-padding-start) + var(--form-text-field-padding-end));
+        }
+
+        &.form-text-field-time-seconds {
+            &>.form-text-field-container {
+                max-width: calc(6ch + (#{$input-border-width} * 2) + 3em + 2em + var(--form-text-field-padding-start) + var(--form-text-field-padding-end));
+            }
+        }
+    }
+
+    &>.form-text-field-container>input.form-control.hide-spin-buttons {
+        &[type=number] {
+            -moz-appearance: textfield;
+
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+    }
+
+    &>.form-text-field-container>.form-control {
+        transition: padding 0.25s ease-in-out;
+        padding-inline-end: var(--form-text-field-padding-end);
+        padding-inline-start: var(--form-text-field-padding-start);
+    }
+
+    &.pending>.form-text-field-container>.spinner-container.show {
+        opacity: 1;
+    }
+
+    &>.form-text-field-container>.form-control-icon {
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.25s ease-in-out;
+
+        &.show {
+            opacity: 1;
+        }
+
+        position: absolute;
+        height: calc(1em * #{$input-line-height});
+        width: calc(1em * #{$input-line-height});
+        bottom: #{$input-padding-y};
+    }
+
+    &>.form-text-field-container>.form-control-icon-start {
+        left: #{$input-padding-y};
+    }
+
+    &>.form-text-field-container>.form-control-icon-end {
+        right: #{$input-padding-y};
+    }
+
+    &>.form-text-field-container>.spinner-container {
+        pointer-events: none;
+
+        &>.spinner {
+            height: calc(1em * #{$input-line-height});
+            width: calc(1em * #{$input-line-height});
+        }
+    }*/
+}

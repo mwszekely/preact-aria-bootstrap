@@ -1,0 +1,73 @@
+@use "../../node_modules/bootstrap-sass-variables/prefix" as *;
+@use "../../node_modules/bootstrap-sass-variables/enable-shadows" as *;
+@use "../../node_modules/bootstrap-sass-variables/primary" as *;
+@use "../../node_modules/bootstrap-sass-variables/body-bg" as *;
+@use "../../node_modules/bootstrap-sass-variables/btn-box-shadow" as *;
+@use "../../node_modules/bootstrap-sass-variables/btn-focus-width" as *;
+@use "../../node_modules/bootstrap-sass-variables/btn-focus-width" as *;
+@use "../../node_modules/bootstrap-sass-variables/functions/to-rgb" as *;
+@use "../../node_modules/bootstrap-sass-variables/success" as *;
+@use "../../node_modules/bootstrap-sass-variables/danger" as *;
+@use "../../node_modules/preact-transition/src/index.scss" as *;
+
+.tabs-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr;
+}
+
+.tab-panel {
+    height: 100%;
+    width: 100%;
+    padding: 1.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    // Very specific property set to prevent scrolling performance issues in Chrome.
+    will-change: transform;
+}
+
+.tab-panels-container {
+    // Ensure the container appears over the bottom of the focus ring
+    // (there's no other way to just hide the bottom, so this is a workaround
+    z-index: 1;
+    background: $body-bg;
+}
+
+.nav-tabs.typeahead-status-valid>.nav-item>.nav-link {
+    &:focus {
+        color: $success;
+    }
+}
+
+.nav-tabs.typeahead-status-invalid>.nav-item>.nav-link {
+    &:focus {
+        color: $danger;
+    }
+}
+
+.nav-link {
+
+    --#{$prefix}btn-focus-shadow-rgb: #{to-rgb(mix($primary, $primary, 15%))};
+    --#{$prefix}btn-box-shadow: #{$btn-box-shadow};
+    --#{$prefix}btn-focus-box-shadow: 0 0 0 #{$btn-focus-width} rgba(var(--#{$prefix}btn-focus-shadow-rgb), .5);
+
+    cursor: pointer;
+
+    &:focus-visible {
+        z-index: 1;
+        outline: none;
+
+        // Avoid using mixin so we can pass custom focus shadow properly (also because we can't modularly)
+        @if $enable-shadows {
+            box-shadow: var(--#{$prefix}btn-box-shadow),
+            var(--#{$prefix}btn-focus-box-shadow);
+        }
+
+        @else {
+            box-shadow: var(--#{$prefix}btn-focus-box-shadow);
+        }
+    }
+}

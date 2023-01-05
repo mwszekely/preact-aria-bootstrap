@@ -1,0 +1,44 @@
+{
+  "name": "preact-aria-bootstrap",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Preact implementation of Bootstrap with better accessability",
+  "source": "src/index.tsx",
+  "module": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "npx npm-run-all --npm-path npm -pc build:*",
+    "watch": "npx npm-run-all --npm-path npm -pc watch:*",
+    "watch:ts": "tsc --watch",
+    "build:ts": "tsc",
+    "test": "jest",
+    "lint": "npx lint ./src",
+    "clean": "tsc --build --clean"
+  },
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "preact": "^10.11.2"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^35.4.0",
+    "@ckeditor/ckeditor5-dev-utils": "^32.0.2",
+    "@ckeditor/ckeditor5-editor-inline": "^35.4.0",
+    "@ckeditor/ckeditor5-react": "^5.0.5",
+    "@floating-ui/dom": "^1.0.10",
+    "@js-temporal/polyfill": "^0.4.3",
+    "@popperjs/core": "^2.11.6",
+    "@types/dompurify": "^2.4.0",
+    "bootstrap-icons": "^1.10.2",
+    "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
+    "clsx": "^1.2.1",
+    "dompurify": "^2.4.1",
+    "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
+    "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
+    "preact-transition": "github:mwszekely/preact-transition"
+  },
+  "devDependencies": {
+    "sass": "^1.56.1",
+    "typescript": "^4.9.3"
+  }
+}

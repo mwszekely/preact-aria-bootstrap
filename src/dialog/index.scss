@@ -1,0 +1,39 @@
+// Intentionally not .modal-backdrop, which has a lot of implicit styles applied to it
+.dialog-backdrop {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    &.dialog-backdrop-blur {
+        backdrop-filter: blur(0px);
+        transition: backdrop-filter 500ms ease-in-out;
+    }
+
+
+    &::after {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: black;
+        opacity: 0;
+        transition: opacity 500ms ease-in-out;
+    }
+
+    &.visible {
+        &.dialog-backdrop-blur {
+            backdrop-filter: blur(5px);
+            &::after {
+                opacity: 0.25;
+            }
+        }
+
+        &::after {
+            opacity: 0.5;
+        }
+    }
+}

@@ -1,0 +1,237 @@
+@use "../../node_modules/bootstrap-sass-variables/body-bg" as *;
+@use "../../node_modules/bootstrap-sass-variables/body-color" as *;
+
+#portal {
+    overflow: hidden;
+    &>* {
+        z-index: 1;
+    }
+}
+
+.keyboard-assist-icon-container {
+    --keyboard-assist-key-size: 2.666666rem;
+    background: rgba(var(--bs-body-bg-rgb), 0.875);
+    color: rgba(var(--bs-body-color-rgb), 1);
+    z-index: 1000000;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: grid;
+    column-gap: calc(var(--keyboard-assist-key-size) * 0.5);
+    row-gap: calc(var(--keyboard-assist-key-size) * 0.25);
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto auto auto;
+    padding:  calc(var(--keyboard-assist-key-size) * 0.25);
+    pointer-events: none;
+    border: 2px solid $body-color;
+    border-bottom: none;
+    border-right: none;
+    border-top-left-radius: calc(var(--keyboard-assist-key-size) * 0.5);
+    &:hover {
+        opacity: 0.15;
+    }
+}
+
+.keyboard-assist-arrow-keys, .keyboard-assist-home-end, .keyboard-assist-page-keys {
+    display: grid;
+    gap: calc(var(--keyboard-assist-key-size) * 0.125);
+}
+
+.keyboard-assist-arrow-keys {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr 1fr;
+}
+
+.keyboard-assist-page-keys {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr 1fr;
+}
+
+.keyboard-assist-home-end {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr 1fr;
+}
+
+.keyboard-assist-typeahead {
+    grid-row: 3 / span 1;
+}
+
+.keyboard-assist-instructions {
+    grid-row: 1 / span 1;
+}
+
+
+
+.keyboard-assist-arrow-keys,
+.keyboard-assist-page-keys,
+.keyboard-assist-home-end {
+    grid-row: 2 / span 1;
+}
+
+.keyboard-assist-instructions, .keyboard-assist-typeahead, .keyboard-assist-rich-text-f10, .keyboard-assist-leave-f2 {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.keyboard-assist-dismiss-message {
+    font-size: 0.66666666rem;
+    text-align: center;
+    //grid-row: 4 / span 1;
+    grid-column: 1 / -1;
+}
+
+.keyboard-assist-typeahead-message {
+    border-radius: calc(var(--keyboard-assist-key-size) * 2);
+    //margin: calc(var(--keyboard-assist-key-size) * 0.25) calc(var(--keyboard-assist-key-size) * 0.125);
+    padding: calc(var(--keyboard-assist-key-size) * 0.25) calc(var(--keyboard-assist-key-size) * 0.75);
+}
+
+.keyboard-assist-typeahead-message, .keyboard-assist-key {
+    color: $body-bg;
+    background: $body-color;
+
+    transition-property: opacity, color, background-color, border;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    position: relative;
+
+    @media (prefers-reduced-motion) {
+        transition-property: opacity !important;
+    }
+
+    &::after {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 300ms ease-in-out;
+        content: "";
+    }
+
+    &.keyboard-assist-key-disabled {
+
+        &.keyboard-assist-key-arrow-up, &.keyboard-assist-key-arrow-down, &.keyboard-assist-key-arrow-left, &.keyboard-assist-key-arrow-right {
+            border: 2px dotted $body-color;
+            color: $body-color;
+            background: $body-bg;
+            position: relative;
+        }
+        &.keyboard-assist-key-page-up, &.keyboard-assist-key-page-down, &.keyboard-assist-key-home, .keyboard-assist-key-end {
+            background: rgba(var(--bs-body-color-rgb), 0.125);
+            color: rgba(var(--bs-body-color-rgb), 1);
+        }
+        &::after {
+            opacity: 0.5;
+            content: "🚫";
+            font-size: calc(var(--keyboard-assist-key-size) * 0.75);
+        }
+    }
+}
+
+// https://css-tricks.com/books/greatest-css-tricks/scroll-shadows/ 
+.scroll-shadows {
+
+    // How this works
+    // There's always a shadow visible at the edges using a radial gradient.
+    // When at the edges, they are hidden by a $body-bg colored gradient that's on top of it.
+    // The shadow and its $body-bg curtain just have different background-attachments --
+    // --the shadow one is "scroll", which is like "sticky", and the hidey one is "local", which is like "relative".
+    // That's all.
+    //
+    // NOTE: The background attachment does cause the entire area to repaint on scroll, 
+    // which isn't the *worst* thing, but the gains are well worth it in my opinion.
+
+    --shadow-body-bg: rgb(var(--bs-body-bg-rgb));
+    --shadow-body-bg-trans: rgba(var(--bs-body-bg-rgb), 0);
+    
+    --shadow: rgba(41, 50, 56, 0.5);
+
+    --shadow-padding-x: 0px;
+    --shadow-padding-y: 0px;
+    --shadow-size-x: 0px;
+    --shadow-size-y: 0px;
+    &.scroll-shadows-x {
+        --shadow-padding-x: 40px;
+        --shadow-size-x: 14px;
+    }
+    &.scroll-shadows-y {
+        --shadow-padding-y: 40px;
+        --shadow-size-y: 14px;
+    }
+
+    background: 
+        
+    /* Shadow Cover TOP */
+    linear-gradient(to bottom, var(--shadow-body-bg) 30%, var(--shadow-body-bg-trans)) center top,
+    
+    /* Shadow Cover BOTTOM */
+    linear-gradient(to bottom, var(--shadow-body-bg-trans), var(--shadow-body-bg) 70%) center bottom,
+    
+    /* Shadow TOP */
+    radial-gradient(farthest-side at 50% 0, var(--shadow), rgba(0, 0, 0, 0)) center top,
+    
+    /* Shadow BOTTOM */
+    radial-gradient(farthest-side at 50% 100%, var(--shadow), rgba(0, 0, 0, 0)) center bottom,
+        
+    /* Shadow Cover LEFT */
+    linear-gradient(to right, var(--shadow-body-bg) 30%, var(--shadow-body-bg-trans)) left center,
+    
+    /* Shadow Cover RIGHT */
+    linear-gradient(to right, var(--shadow-body-bg-trans), var(--shadow-body-bg) 70%) right center,
+    
+    /* Shadow LEFT */
+    radial-gradient(farthest-side at 0% 50%, var(--shadow), rgba(0, 0, 0, 0)) left center,
+    
+    /* Shadow RIGHT */
+    radial-gradient(farthest-side at 100% 50%, var(--shadow), rgba(0, 0, 0, 0)) right center;
+    
+    background-repeat: no-repeat;
+    background-size:     
+    100% var(--shadow-padding-y), 100% var(--shadow-padding-y), 100% var(--shadow-size-y), 100% var(--shadow-size-y), 
+    var(--shadow-padding-x) 100%, var(--shadow-padding-x) 100%, var(--shadow-size-x) 100%, var(--shadow-size-x) 100%;
+    background-attachment: 
+    local, local, scroll, scroll, 
+    local, local, scroll, scroll;
+  }
+
+.keyboard-assist-arrow-keys>.keyboard-assist-key {
+    font-size: calc(var(--keyboard-assist-key-size) * 0.75);
+}
+
+.keyboard-assist-key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: calc(var(--keyboard-assist-key-size) * 0.33333);
+    border-radius: calc(var(--keyboard-assist-key-size) * 0.125);
+    height: var(--keyboard-assist-key-size);
+    width: var(--keyboard-assist-key-size);
+    overflow: hidden;
+
+
+    &.keyboard-assist-key-arrow-up,
+    &.keyboard-assist-key-arrow-down {
+        grid-column: 2 / span 1;
+    }
+
+    &.keyboard-assist-key-arrow-left,
+    &.keyboard-assist-key-arrow-down,
+    &.keyboard-assist-key-arrow-right {
+        grid-row: 2 / span 1;
+    }
+
+
+    &.keyboard-assist-key-arrow-left {
+        grid-column: 1 / span 1;
+    }
+
+    &.keyboard-assist-key-arrow-right {
+        grid-column: 3 / span 1;
+    }
+
+}

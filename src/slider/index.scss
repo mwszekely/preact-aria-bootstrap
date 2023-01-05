@@ -1,0 +1,234 @@
+@use "./form-range-track-bg" as *;
+@use "./form-range-tick" as *;
+@use "../../node_modules/bootstrap-sass-variables/primary" as *;
+
+.form-range-container {
+    display: grid;
+    grid-template-rows: auto 0.75rem 0.75rem 0.5rem;
+    grid-template-columns: 0.5rem repeat(var(--form-range-tick-count, 1), 1fr) 0.5rem;
+
+    &.form-range-vertical {
+        grid-template-rows: auto 0.5rem repeat(var(--form-range-tick-count, 1), 1fr) 0.5rem;
+        grid-template-columns: 0.75rem 0.75rem auto;
+    }
+
+    position: relative;
+
+    --tick-width: 0.125em;
+
+    &>.form-range-label {
+        grid-row: 1 / span 1;
+        grid-column: 1 / -1;
+    }
+
+    &.form-range-vertical>.form-range-label {
+        grid-row: 1 / span 1;
+        grid-column: 1 / -1;
+    }
+
+    &>input[type="range"].form-range {
+        z-index: 10;
+        grid-row: 2 / span 2;
+        grid-column: 1 / -1;
+
+        &.form-range-vertical {
+            grid-row: 2 / -1;
+            grid-column: 1 / span 2;
+        }
+
+        width: 100%;
+        height: 100%;
+    }
+
+    &>input[type="range"].form-range-vertical {
+        -webkit-appearance: slider-vertical;
+        width: 1rem;
+        justify-self: center;
+    }
+
+    & *:not(input[type="range"]) {
+        pointer-events: none;
+    }
+
+    &.form-range-vertical {
+
+        &>.form-range-track-background,
+        &>.form-range-track-fill-background,
+        &>.form-range-tooltip-container {
+            grid-column: 1 / span 2;
+            grid-row: 2 / -1;
+
+
+            // Force the tooltip that shows the value
+            // to only be visible over the thumb, wherever it is
+            &>.form-range-tooltip-root {
+                left: 50%;
+                top: unset;
+                bottom: calc(var(--range-value) * 100% + -1rem * (var(--range-value) - 0.5));
+                height: 1px;
+            }
+
+        }
+
+        &>.form-range-track-background,
+        &>.form-range-track-fill-background {
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 0.37rem;
+            margin-right: 0.37rem;
+        }
+    }
+
+    &>.form-range-tooltip-container {
+        position: relative;
+        grid-row: 2 / span 2;
+        grid-column: 1 / -1;
+
+        // Force the tooltip that shows the value
+        // to only be visible over the thumb, wherever it is
+        &>.form-range-tooltip-root {
+            position: absolute;
+            top: 0;
+            width: 0;
+            left: calc(var(--range-value) * 100% + -1rem * (var(--range-value) - 0.5));
+            height: 1.5rem;
+            background: none;
+            pointer-events: none;
+            contain: strict;
+        }
+    }
+
+    &>.form-range-track-background {
+        background: $form-range-track-bg;
+        z-index: -2;
+    }
+
+    &>.form-range-track-fill-background {
+        background: $primary;
+        z-index: -1;
+        width: calc(var(--form-range-value-percent) * 100%);
+    }
+
+    &.form-range-vertical>.form-range-track-fill-background {
+        width: auto;
+        height: calc(var(--form-range-value-percent) * 100%);
+        align-self: flex-end;
+    }
+
+    &>.form-range-track-track-background {
+        background: $form-range-track-bg;
+        z-index: -2;
+    }
+
+    &>.form-range-track-background,
+    &>.form-range-track-fill-background {
+        grid-row: 2 / span 2;
+        grid-column: 1 / -1;
+
+        content: "";
+        border-radius: 1rem;
+        margin-top: 0.37rem;
+        margin-bottom: 0.37rem;
+    }
+
+    &.form-range-vertical>.form-range-ticks {
+        display: none;
+        grid-column: 2 / span 2;
+        grid-row: 3 / -2;
+        flex-direction: column;
+
+        &>.form-range-tick {
+            width: auto;
+            height: 0;
+
+            &:not(:first-child):not(:last-child) {
+                &::before {
+                    left: 33.33333333%;
+                }
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                background: currentColor; //$form-range-tick;
+                top: unset;
+                bottom: unset;
+                left: 0;
+                right: 0;
+            }
+        }
+    }
+
+    &>.form-range-ticks {
+        grid-row: 3 / span 2;
+        grid-column: 2 / -2;
+        display: grid;
+        //justify-content: space-between;
+        //flex-wrap: nowrap;
+        pointer-events: none;
+        z-index: -10;
+        position: relative;
+        grid-template-columns: 1fr repeat(calc(var(--form-range-tick-count) - 2), 2fr) 1fr;
+
+        &>.form-range-tick {
+            position: relative;
+            padding-top: 0.875em;
+
+            &.form-range-tick-line {
+                position: relative;
+                background: none;
+                margin: 0;
+                text-align: center;
+
+                &:first-child {
+                    text-align: start;
+
+                    &::after {
+                        right: auto;
+                        left: 0;
+                    }
+                }
+
+                &:last-child {
+                    text-align: end;
+
+                    &::after {
+                        left: auto;
+                        right: 0;
+                    }
+                }
+
+
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    transform: scaleY(0.5);
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 1px;
+
+                    &:first-child,
+                    &:last-child {
+                        --form-tick-scale: 0.8;
+                    }
+
+                    background: linear-gradient(90deg, transparent 0%, transparent calc(50% - 1px), currentColor calc(50% + 0px), transparent calc(50% + 1px));
+                    //width: 1px;
+                    opacity: 0.6;
+                }
+
+                // It's really hard to change the height of an OPTION element,
+                // so let's just scale it instead, why not.
+
+                //transform: translate(calc(var(--form-range-tick-percent) - 50%), calc(0.75rem / 2)) scaleY(var(--form-tick-scale, 0.4));
+            }
+
+            //width: 0;
+        }
+    }
+}

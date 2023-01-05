@@ -1,0 +1,7 @@
+
+.icon {
+    &.svg-icon, &.image-icon {
+        width: var(--icon-size, 1.1em);
+        height: var(--icon-size, 1.1em);
+    }
+}

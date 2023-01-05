@@ -1,0 +1,32 @@
+@use "../../node_modules/bootstrap-sass-variables/zindex-toast" as *;
+
+$toast-close-btn-padding: 0.5em;
+
+// Higher than modal, lower than tooltip.
+$zindex-toast: 1060 !default;
+
+.toasts-container {
+  z-index: $zindex-toast;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  padding: 1em;
+  gap: 1em;
+  position: fixed;
+  left: 0;
+  right: 0;
+  // Don't set top to improve scrolling on mobile
+  bottom: 0;
+  pointer-events: none;
+  max-height: calc(var(--max-toast-count, 4) * 4em);
+  overflow: hidden;
+
+  & > .toast {
+    pointer-events: all;
+  }
+}
+
+html.document-scroll-hidden .toasts-container {
+  inset-inline-end: var(--scrollbar-width, 0px);
+}
+

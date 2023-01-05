@@ -1,0 +1,12 @@
+
+.portal-tooltip-child.popper-popup {
+    position: fixed;
+}
+.popper-popup>.tooltip>.tooltip-inner {
+    text-align: start;
+
+    min-width: 2em;
+
+    // Okay, this one's opinionated, but the default is just way too narrow and leaves a lot of empty space with all those line breaks
+    --bs-tooltip-max-width: 50vw;
+}

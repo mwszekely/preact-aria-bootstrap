@@ -1,0 +1,28 @@
+
+.pagination {
+    max-width: 100%;
+    white-space: nowrap;
+}
+.pagination-center {
+    display: inline-flex;
+    overflow-x: auto;
+
+    &>.page-item {
+
+        &>.page-link {
+            --bs-pagination-border-radius: 0;
+            border-radius: 0;
+            background: none;
+        }
+
+        &:first-child>.page-link {
+            border-left: none;
+        }
+
+        &:last-child>.page-link {
+            border-right: none;
+        }
+    }
+
+
+}

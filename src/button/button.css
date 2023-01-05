@@ -1,0 +1,26 @@
+.btn {
+  position: relative;
+}
+.btn > .spinner-border, .btn > .spinner-grow, .btn::after {
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+.btn > .spinner-border, .btn > .spinner-grow {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  pointer-events: none;
+  z-index: 1;
+}
+.btn.pending > .spinner-border, .btn.pending > .spinner-grow, .btn.pending::after {
+  opacity: 1;
+}
+.btn.pending::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=button.css.map */

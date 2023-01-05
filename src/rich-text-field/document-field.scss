@@ -1,0 +1,81 @@
+@forward "./shared.scss";
+@use "../../node_modules/bootstrap-sass-variables/box-shadow-sm" as *;
+
+
+.document-field {
+    /* border: 1px solid var(--ck-color-base-border); */
+    /* border-top: none; */
+    border-radius: var(--ck-border-radius);
+
+    /* Set vertical boundaries for the document editor. */
+    max-height: 65vh;
+
+    /* This element is a flex container for easier rendering. */
+    display: flex;
+    flex-direction: column;
+    //box-shadow: 0 0 5px hsl(0deg 0% 0% / 20%);
+}
+
+.document-field__toolbar {
+    /* Make sure the toolbar container is always above the editable. */
+    z-index: 1;
+
+    /* Create the illusion of the toolbar floating over the editable. */
+    //box-shadow: 0 0 5px hsla( 0,0%,0%,.2 );
+
+    /* Use the CKEditor CSS variables to keep the UI consistent. */
+    border-bottom: 1px solid var(--ck-color-toolbar-border);
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+
+.document-field__toolbar>.ck.ck-toolbar.ck-rounded-corners {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Adjust the look of the toolbar inside the container. */
+.document-field__toolbar .ck-toolbar {
+    border: 0;
+    border-radius: 0;
+}
+
+/* Make the editable container look like the inside of a native word processor application. */
+.document-field__editable-container {
+    padding: calc( 2 * var(--ck-spacing-large) );
+    background: var(--ck-color-base-foreground);
+
+    /* Make it possible to scroll the "page" of the edited content. */
+    overflow-y: scroll;
+    border: 1px solid var(--ck-color-base-border);
+    border-top: none;
+    --ck-border-radius: 0;
+}
+
+.document-field__editable-container .ck.ck-editor__editable {
+    /* Set the dimensions of the "page". */
+    width: 8.5in;
+    height: 11.5in;
+
+    /* Keep the "page" off the boundaries of the container. */
+    padding: 0.5in 1in 1in;
+    border: 1px hsl( 0,0%,82.7% ) solid;
+    background: white;
+
+    /* The "page" should cast a slight shadow (3D illusion). */
+    box-shadow: #{$box-shadow-sm};
+
+    /* Center the "page". */
+    margin: 0 auto;
+}
+
+/* Set the default font for the "page" of the content.*/
+.document-field .ck-content,
+.document-field .ck-heading-dropdown .ck-list .ck-button__label {
+    font: 16px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif;
+} 
+
+
+.ck.ck-toolbar__items {
+    border-top-right-radius: inherit;
+}

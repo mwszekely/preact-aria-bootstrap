@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/super-build/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/super-build/translations/es.js"></script>
+
+    <!--
+        <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/balloon/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/document/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/inline/ckeditor.js"></script>
+-->
+
+    <style>
+
+        .btn.pressed {
+            filter: invert();
+        }
+
+        code {
+            white-space: pre;
+        }
+
+        html,
+        body,
+        #root {
+            height: 100%;
+            width: 100%;
+            /*max-width: 40em;*/
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            font-size: 18px;
+        }
+
+        .render-counters {
+            position: fixed;
+            z-index: 99999999;
+            background: black;
+            bottom: 0;
+            right: 0;
+            border-top-left-radius: 0.5em;
+            width: auto;
+            color: white;
+        }
+
+       /* #portal {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            display: grid;
+            justify-content: center;
+            justify-items: center;
+            align-items: center;
+            align-content: center;
+        }
+
+        #portal>* {
+            grid-row: 1 / span 1;
+            grid-column: 1 / span 1;
+            pointer-events: all;
+            background: white;
+            border: 2px solid black;
+            border-radius: 2px;
+        }*/
+
+
+        div[role=rowgroup] {
+            display: flex;
+            flex-direction: column;
+        }
+
+        div[role=rowgroup]>div[role=row] {
+            display: flex;
+        }
+    </style>
+    <script>
+
+        window.onerror = function (e) {
+            debugger;
+            for (let p of arguments) {
+                alert(p);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <div id="portal"></div>
+    <script src="./bundle.js"></script>
+</body>
+
+</html>

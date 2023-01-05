@@ -1,0 +1,53 @@
+{
+    "name": "preact-aria-widgets-demo",
+    "version": "0.0.1",
+    "description": "A small set of hooks and other functions related to modifying Preact props.",
+    "main": "index.tsx",
+    "scripts": {
+        "watch": "rollup --config rollup.config.mjs --watch --no-watch.clearScreen",
+        "build": "rollup --config rollup.config.mjs",
+        "watch-sass": "sass --watch --load-path='../node_modules/bootstrap/scss' ../src/index.scss ./index-unprefixed.css",
+        "watch-css": "postcss ./index-unprefixed.css --watch -o ./index.css",
+        "build-sass": "sass --load-path='../node_modules/bootstrap/scss' ../src/index.scss ./index-unprefixed.css",
+        "build-css": "postcss ./index-unprefixed.css -o ./index.css",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "install": "npm run build"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
+        "@babel/preset-env": "^7.20.2",
+        "@rollup/plugin-alias": "^4.0.2",
+        "@rollup/plugin-babel": "^6.0.3",
+        "@rollup/plugin-commonjs": "^23.0.3",
+        "@rollup/plugin-node-resolve": "^15.0.1",
+        "@rollup/plugin-replace": "^5.0.2",
+        "@rollup/plugin-typescript": "^10.0.1",
+        "clsx": "^1.2.1",
+        "cssnano": "^5.1.14",
+        "postcss": "^8.4.20",
+        "postcss-cli": "^10.1.0",
+        "postcss-import": "^15.1.0",
+        "postcss-mixins": "^9.0.4",
+        "postcss-nesting": "^10.2.0",
+        "postcss-preset-env": "^7.8.3",
+        "rollup": "^3.6.0",
+        "rollup-plugin-polyfill-node": "^0.11.0",
+        "rollup-plugin-postcss": "^4.0.2",
+        "rollup-plugin-sourcemaps": "^0.6.3",
+        "rollup-plugin-svg": "^2.0.0",
+        "serve": "^14.1.2",
+        "typescript": "^4.9.3"
+    },
+    "dependencies": {
+        "@ckeditor/ckeditor5-alignment": "^35.4.0",
+        "@ckeditor/ckeditor5-basic-styles": "^35.4.0",
+        "@ckeditor/ckeditor5-build-inline": "^35.4.0",
+        "@ckeditor/ckeditor5-essentials": "^35.4.0",
+        "@ckeditor/ckeditor5-paragraph": "^35.4.0",
+        "@ckeditor/ckeditor5-theme-lark": "^35.4.0",
+        "preact": "^10.11.3",
+        "tslib": "^2.4.1"
+    }
+}

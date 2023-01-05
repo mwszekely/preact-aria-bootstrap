@@ -1,0 +1,40 @@
+
+.btn {
+    position: relative;
+    outline: none;
+
+    &>.spinner-border, &>.spinner-grow {
+        opacity: 0;
+        transition: opacity 0.25s ease-in-out;
+    }
+
+    &>.spinner-border, &>.spinner-grow {
+        position: absolute;
+        left: 0;
+        right:0;
+        top:0;
+        bottom:0;
+        inset: 0;
+        margin: auto;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &.pending {
+        &>.spinner-border, &>.spinner-grow {
+            opacity: 1;
+        }
+
+        &::after {  
+            content: "";
+            position: absolute;
+            left: 0;
+            right:0;
+            top:0;
+            bottom:0;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+    }
+}

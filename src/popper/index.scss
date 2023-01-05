@@ -1,0 +1,19 @@
+
+.popper-popup {
+    pointer-events: none;
+    position: absolute;
+    width: max-content;
+    left: var(--popup-source-x, 0);
+    inset-inline-start: var(--popup-source-x, 0);
+    top: var(--popup-source-y, 0);
+    &>:not(.ptl-exit-finalize) {
+        pointer-events: all;
+    }
+}
+
+.popper-arrow {
+    position: absolute;
+    left: var(--popup-arrow-x, unset);
+    inset-inline-start: var(--popup-arrow-x, unset);
+    top: var(--popup-arrow-y, unset);
+}
