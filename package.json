@@ -13,6 +13,7 @@
     "build:ts": "tsc",
     "test": "jest",
     "lint": "npx lint ./src",
+    "prepare": "npm run build || node ./true",
     "clean": "tsc --build --clean"
   },
   "author": "",
@@ -38,6 +39,7 @@
     "preact-transition": "github:mwszekely/preact-transition"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.6",
     "sass": "^1.56.1",
     "typescript": "^4.9.3"
   }
