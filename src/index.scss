@@ -7,6 +7,7 @@
 @forward "./utility/index.scss";
 @forward "./dialog/index.scss";
 @forward "./list/index.scss";
+@forward "./offcanvas/index.scss";
 @forward "./pagination/index.scss";
 @forward "./menu/index.scss";
 @forward "./tabs/index.scss";
@@ -15,3 +16,4 @@
 @forward "./rich-text-field/index.scss";
 @forward "./table/index.scss";
 @forward "../node_modules/bootstrap/scss/bootstrap";
+@forward "../node_modules/preact-transition/src/index.scss";

@@ -574,6 +574,18 @@
           padding-inline-end: 2em;
 }
 
+.offcanvas {
+  top: 0;
+  left: 0;
+  width: var(--bs-offcanvas-width);
+  border-right: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+}
+
+.offcanvas.ptl {
+  visibility: visible;
+  transform: translate(0, 0);
+}
+
 .pagination {
   max-width: 100%;
   white-space: nowrap;
@@ -664,44 +676,33 @@
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
 
-.ptl {
+.ptl.ptl-enter, .ptl.ptl-exit {
   transition-property: var(--ptl-properties, none);
+  transition-duration: var(--ptl-duration, 175ms);
+  isolation: isolate;
 }
 .ptl.ptl-measure {
   transition: none !important;
 }
-
-.ptl-enter,
-.ptl-exit {
-  transition-duration: var(--ptl-duration, 175ms);
-  isolation: isolate;
-}
-
-.ptl-enter {
+.ptl.ptl-enter {
   transition-timing-function: var(--ptl-enter-timing-function, cubic-bezier(0.05, 0.7, 0.1, 1));
 }
-
-.ptl-exit {
+.ptl.ptl-exit {
   transition-timing-function: var(--ptl-exit-timing-function, cubic-bezier(0.3, 0, 0.8, 0.15));
 }
-
-.ptl-exit-finalize {
+.ptl.ptl-exit-finalize {
   pointer-events: none;
 }
-
-.ptl-ev-hidden.ptl-exit.ptl-exit-finalize, .ptl-ev-hidden.ptl-pending {
+.ptl.ptl-ev-hidden.ptl-exit.ptl-exit-finalize, .ptl.ptl-ev-hidden.ptl-pending {
   visibility: hidden;
 }
-
-.ptl-ev-removed.ptl-exit.ptl-exit-finalize, .ptl-ev-removed.ptl-pending {
+.ptl.ptl-ev-removed.ptl-exit.ptl-exit-finalize, .ptl.ptl-ev-removed.ptl-pending {
   display: none;
 }
-
-.ptl-enter.ptl-enter-finalize, .ptl-enter.ptl-enter-init {
+.ptl.ptl-enter.ptl-enter-finalize, .ptl.ptl-enter.ptl-enter-init {
   transition: none;
 }
-
-.ptl-exit.ptl-exit-finalize, .ptl-exit.ptl-exit-init {
+.ptl.ptl-exit.ptl-exit-finalize, .ptl.ptl-exit.ptl-exit-init {
   transition: none;
 }
 
@@ -730,89 +731,89 @@
       opacity: 1;
   }*/
 }
-.ptl-fade {
+.ptl.ptl-fade {
   --ptl-properties: opacity;
 }
-.ptl-fade.ptl-enter-init, .ptl-fade.ptl-exit-transition, .ptl-fade.ptl-exit-finalize {
+.ptl.ptl-fade.ptl-enter-init, .ptl.ptl-fade.ptl-exit-transition, .ptl.ptl-fade.ptl-exit-finalize {
   opacity: var(--ptl-fade-min, 0);
 }
-.ptl-fade.ptl-exit-init, .ptl-fade.ptl-enter-transition, .ptl-fade.ptl-enter-finalize {
+.ptl.ptl-fade.ptl-exit-init, .ptl.ptl-fade.ptl-enter-transition, .ptl.ptl-fade.ptl-enter-finalize {
   opacity: var(--ptl-fade-max, 1);
 }
 
-.ptl-clip {
+.ptl.ptl-clip {
   --ptl-properties: clip-path;
   overflow: hidden;
   --ptl-clip-min-x: calc(0 + var(--ptl-clip-min-inline));
   --ptl-clip-min-y: calc(0 + var(--ptl-clip-min-block));
   --ptl-clip-origin-x: calc(0 + var(--ptl-clip-origin-inline));
 }
-.ptl-clip.ptl-enter-init, .ptl-clip.ptl-exit-transition, .ptl-clip.ptl-exit-finalize {
+.ptl.ptl-clip.ptl-enter-init, .ptl.ptl-clip.ptl-exit-transition, .ptl.ptl-clip.ptl-exit-finalize {
   -webkit-clip-path: inset(calc(100% * (0 + var(--ptl-clip-origin-y)) * (1 - var(--ptl-clip-min-y))) calc(100% * (1 - var(--ptl-clip-origin-x)) * (1 - var(--ptl-clip-min-x))) calc(100% * (1 - var(--ptl-clip-origin-y)) * (1 - var(--ptl-clip-min-y))) calc(100% * (0 + var(--ptl-clip-origin-x)) * (1 - var(--ptl-clip-min-x))));
           clip-path: inset(calc(100% * (0 + var(--ptl-clip-origin-y)) * (1 - var(--ptl-clip-min-y))) calc(100% * (1 - var(--ptl-clip-origin-x)) * (1 - var(--ptl-clip-min-x))) calc(100% * (1 - var(--ptl-clip-origin-y)) * (1 - var(--ptl-clip-min-y))) calc(100% * (0 + var(--ptl-clip-origin-x)) * (1 - var(--ptl-clip-min-x))));
 }
 @media (prefers-reduced-motion) {
-  .ptl-clip.ptl-enter-init, .ptl-clip.ptl-exit-transition, .ptl-clip.ptl-exit-finalize {
+  .ptl.ptl-clip.ptl-enter-init, .ptl.ptl-clip.ptl-exit-transition, .ptl.ptl-clip.ptl-exit-finalize {
     -webkit-clip-path: none;
             clip-path: none;
   }
 }
-.ptl-clip.ptl-enter-init.ptl-clip-ellipse, .ptl-clip.ptl-exit-transition.ptl-clip-ellipse, .ptl-clip.ptl-exit-finalize.ptl-clip-ellipse {
+.ptl.ptl-clip.ptl-enter-init.ptl-clip-ellipse, .ptl.ptl-clip.ptl-exit-transition.ptl-clip-ellipse, .ptl.ptl-clip.ptl-exit-finalize.ptl-clip-ellipse {
   -webkit-clip-path: ellipse(calc(100% * var(--ptl-clip-min-x)) calc(100% * var(--ptl-clip-min-y)) at calc(100% * var(--ptl-clip-origin-x)) calc(100% * var(--ptl-clip-origin-y)));
           clip-path: ellipse(calc(100% * var(--ptl-clip-min-x)) calc(100% * var(--ptl-clip-min-y)) at calc(100% * var(--ptl-clip-origin-x)) calc(100% * var(--ptl-clip-origin-y)));
 }
 @media (prefers-reduced-motion) {
-  .ptl-clip.ptl-enter-init.ptl-clip-ellipse, .ptl-clip.ptl-exit-transition.ptl-clip-ellipse, .ptl-clip.ptl-exit-finalize.ptl-clip-ellipse {
+  .ptl.ptl-clip.ptl-enter-init.ptl-clip-ellipse, .ptl.ptl-clip.ptl-exit-transition.ptl-clip-ellipse, .ptl.ptl-clip.ptl-exit-finalize.ptl-clip-ellipse {
     -webkit-clip-path: none;
             clip-path: none;
   }
 }
-.ptl-clip.ptl-exit-init, .ptl-clip.ptl-enter-transition, .ptl-clip.ptl-enter-finalize {
+.ptl.ptl-clip.ptl-exit-init, .ptl.ptl-clip.ptl-enter-transition, .ptl.ptl-clip.ptl-enter-finalize {
   -webkit-clip-path: inset(0 0 0 0);
           clip-path: inset(0 0 0 0);
 }
-.ptl-clip.ptl-exit-init.clip-ellipse, .ptl-clip.ptl-enter-transition.clip-ellipse, .ptl-clip.ptl-enter-finalize.clip-ellipse {
+.ptl.ptl-clip.ptl-exit-init.clip-ellipse, .ptl.ptl-clip.ptl-enter-transition.clip-ellipse, .ptl.ptl-clip.ptl-enter-finalize.clip-ellipse {
   -webkit-clip-path: ellipse(71% 71% at calc(100% * var(--ptl-clip-origin-x)) calc(100% * var(--ptl-clip-origin-y)));
           clip-path: ellipse(71% 71% at calc(100% * var(--ptl-clip-origin-x)) calc(100% * var(--ptl-clip-origin-y)));
 }
-.ptl-clip.ptl-inline-direction-ltr, .ptl-clip.ptl-inline-direction-rtl, .ptl-clip.ptl-block-direction-ttb, .ptl-clip.ptl-block-direction-btt {
+.ptl.ptl-clip.ptl-inline-direction-ltr, .ptl.ptl-clip.ptl-inline-direction-rtl, .ptl.ptl-clip.ptl-block-direction-ttb, .ptl.ptl-clip.ptl-block-direction-btt {
   --ptl-clip-min-x: calc(0 + var(--ptl-clip-min-inline));
   --ptl-clip-min-y: calc(0 + var(--ptl-clip-min-block));
 }
-.ptl-clip.ptl-inline-direction-ltr {
+.ptl.ptl-clip.ptl-inline-direction-ltr {
   --ptl-clip-origin-x: calc(0 + var(--ptl-clip-origin-inline));
 }
-.ptl-clip.ptl-inline-direction-rtl {
+.ptl.ptl-clip.ptl-inline-direction-rtl {
   --ptl-clip-origin-x: calc(1 - var(--ptl-clip-origin-inline));
 }
-.ptl-clip.ptl-block-direction-ttb {
+.ptl.ptl-clip.ptl-block-direction-ttb {
   --ptl-clip-origin-y: calc(0 + var(--ptl-clip-origin-block));
 }
-.ptl-clip.ptl-block-direction-btt {
+.ptl.ptl-clip.ptl-block-direction-btt {
   --ptl-clip-origin-y: calc(1 - var(--ptl-clip-origin-block));
 }
-.ptl-clip.ptl-block-direction-ltr, .ptl-clip.ptl-block-direction-rtl, .ptl-clip.ptl-inline-direction-ttb, .ptl-clip.ptl-inline-direction-btt {
+.ptl.ptl-clip.ptl-block-direction-ltr, .ptl.ptl-clip.ptl-block-direction-rtl, .ptl.ptl-clip.ptl-inline-direction-ttb, .ptl.ptl-clip.ptl-inline-direction-btt {
   --ptl-clip-min-x: calc(0 + var(--ptl-clip-min-block));
   --ptl-clip-min-y: calc(0 + var(--ptl-clip-min-inline));
 }
-.ptl-clip.ptl-block-direction-ltr {
+.ptl.ptl-clip.ptl-block-direction-ltr {
   --ptl-clip-origin-x: calc(0 + var(--ptl-clip-origin-block));
 }
-.ptl-clip.ptl-block-direction-rtl {
+.ptl.ptl-clip.ptl-block-direction-rtl {
   --ptl-clip-origin-x: calc(1 - var(--ptl-clip-origin-block));
 }
-.ptl-clip.ptl-inline-direction-ttb {
+.ptl.ptl-clip.ptl-inline-direction-ttb {
   --ptl-clip-origin-y: calc(0 + var(--ptl-clip-origin-inline));
 }
-.ptl-clip.ptl-inline-direction-btt {
+.ptl.ptl-clip.ptl-inline-direction-btt {
   --ptl-clip-origin-y: calc(1 - var(--ptl-clip-origin-inline));
 }
 
-.ptl-fade.ptl-clip {
+.ptl.ptl-fade.ptl-clip {
   --ptl-properties: clip-path, opacity;
 }
 
-.ptl-zoom {
+.ptl.ptl-zoom {
   --ptl-properties: transform;
   transform-origin: calc(var(--ptl-zoom-origin-x) * 100%) calc(var(--ptl-zoom-origin-y) * 100%);
   --ptl-zoom-min-x: calc(0 + var(--ptl-zoom-min-inline));
@@ -820,200 +821,200 @@
   --ptl-zoom-origin-x: calc(0 + var(--ptl-zoom-origin-inline));
   --ptl-zoom-origin-y: calc(0 + var(--ptl-zoom-origin-block));
 }
-.ptl-zoom.ptl-enter-init, .ptl-zoom.ptl-exit-transition, .ptl-zoom.ptl-exit-finalize {
+.ptl.ptl-zoom.ptl-enter-init, .ptl.ptl-zoom.ptl-exit-transition, .ptl.ptl-zoom.ptl-exit-finalize {
   transform: scale(calc(var(--ptl-zoom-min-x) * 1), calc(var(--ptl-zoom-min-y) * 1));
 }
 @media (prefers-reduced-motion) {
-  .ptl-zoom.ptl-enter-init, .ptl-zoom.ptl-exit-transition, .ptl-zoom.ptl-exit-finalize {
+  .ptl.ptl-zoom.ptl-enter-init, .ptl.ptl-zoom.ptl-exit-transition, .ptl.ptl-zoom.ptl-exit-finalize {
     transform: none;
   }
 }
-.ptl-zoom.ptl-exit-init, .ptl-zoom.ptl-enter-transition, .ptl-zoom.ptl-enter-finalize {
+.ptl.ptl-zoom.ptl-exit-init, .ptl.ptl-zoom.ptl-enter-transition, .ptl.ptl-zoom.ptl-enter-finalize {
   transform: scale(1, 1);
 }
 @media (prefers-reduced-motion) {
-  .ptl-zoom.ptl-exit-init, .ptl-zoom.ptl-enter-transition, .ptl-zoom.ptl-enter-finalize {
+  .ptl.ptl-zoom.ptl-exit-init, .ptl.ptl-zoom.ptl-enter-transition, .ptl.ptl-zoom.ptl-enter-finalize {
     transform: none;
   }
 }
-.ptl-zoom.ptl-inline-direction-ltr, .ptl-zoom.ptl-inline-direction-rtl, .ptl-zoom.ptl-block-direction-ttb, .ptl-zoom.ptl-block-direction-btt {
+.ptl.ptl-zoom.ptl-inline-direction-ltr, .ptl.ptl-zoom.ptl-inline-direction-rtl, .ptl.ptl-zoom.ptl-block-direction-ttb, .ptl.ptl-zoom.ptl-block-direction-btt {
   --ptl-zoom-min-x: calc(0 + var(--ptl-zoom-min-inline));
   --ptl-zoom-min-y: calc(0 + var(--ptl-zoom-min-block));
 }
-.ptl-zoom.ptl-block-direction-ltr, .ptl-zoom.ptl-block-direction-rtl, .ptl-zoom.ptl-inline-direction-ttb, .ptl-zoom.ptl-inline-direction-btt {
+.ptl.ptl-zoom.ptl-block-direction-ltr, .ptl.ptl-zoom.ptl-block-direction-rtl, .ptl.ptl-zoom.ptl-inline-direction-ttb, .ptl.ptl-zoom.ptl-inline-direction-btt {
   --ptl-zoom-min-x: calc(0 + var(--ptl-zoom-min-block));
   --ptl-zoom-min-y: calc(0 + var(--ptl-zoom-min-inline));
 }
-.ptl-zoom.ptl-inline-direction-ltr {
+.ptl.ptl-zoom.ptl-inline-direction-ltr {
   --ptl-zoom-origin-x: calc(0 + var(--ptl-zoom-origin-inline));
 }
-.ptl-zoom.ptl-inline-direction-rtl {
+.ptl.ptl-zoom.ptl-inline-direction-rtl {
   --ptl-zoom-origin-x: calc(1 - var(--ptl-zoom-origin-inline));
 }
-.ptl-zoom.ptl-block-direction-ttb {
+.ptl.ptl-zoom.ptl-block-direction-ttb {
   --ptl-zoom-origin-y: calc(0 + var(--ptl-zoom-origin-block));
 }
-.ptl-zoom.ptl-block-direction-btt {
+.ptl.ptl-zoom.ptl-block-direction-btt {
   --ptl-zoom-origin-y: calc(1 - var(--ptl-zoom-origin-block));
 }
-.ptl-zoom.ptl-block-direction-ltr {
+.ptl.ptl-zoom.ptl-block-direction-ltr {
   --ptl-zoom-origin-x: calc(0 + var(--ptl-zoom-origin-block));
 }
-.ptl-zoom.ptl-block-direction-rtl {
+.ptl.ptl-zoom.ptl-block-direction-rtl {
   --ptl-zoom-origin-x: calc(1 - var(--ptl-zoom-origin-block));
 }
-.ptl-zoom.ptl-inline-direction-ttb {
+.ptl.ptl-zoom.ptl-inline-direction-ttb {
   --ptl-zoom-origin-y: calc(0 + var(--ptl-zoom-origin-inline));
 }
-.ptl-zoom.ptl-inline-direction-btt {
+.ptl.ptl-zoom.ptl-inline-direction-btt {
   --ptl-zoom-origin-y: calc(1 - var(--ptl-zoom-origin-inline));
 }
 
-.ptl-zoom.ptl-fade {
+.ptl.ptl-zoom.ptl-fade {
   --ptl-properties: transform, opacity;
 }
 
-.ptl-slide {
+.ptl.ptl-slide {
   --ptl-properties: transform;
   --ptl-origin-x: calc(0 + var(--ptl-origin-inline));
   --ptl-origin-y: calc(0 + var(--ptl-origin-block));
 }
-.ptl-slide.ptl-enter-init, .ptl-slide.ptl-exit-transition, .ptl-slide.ptl-exit-finalize {
+.ptl.ptl-slide.ptl-enter-init, .ptl.ptl-slide.ptl-exit-transition, .ptl.ptl-slide.ptl-exit-finalize {
   transform: translate(calc(100% * var(--ptl-slide-target-x, 0)), calc(100% * var(--ptl-slide-target-y, 0)));
 }
 @media (prefers-reduced-motion) {
-  .ptl-slide.ptl-enter-init, .ptl-slide.ptl-exit-transition, .ptl-slide.ptl-exit-finalize {
+  .ptl.ptl-slide.ptl-enter-init, .ptl.ptl-slide.ptl-exit-transition, .ptl.ptl-slide.ptl-exit-finalize {
     transform: none;
   }
 }
-.ptl-slide.ptl-exit-init, .ptl-slide.ptl-enter-transition, .ptl-slide.ptl-enter-finalize {
+.ptl.ptl-slide.ptl-exit-init, .ptl.ptl-slide.ptl-enter-transition, .ptl.ptl-slide.ptl-enter-finalize {
   transform: translate(0, 0);
 }
-.ptl-slide.ptl-inline-direction-ltr {
+.ptl.ptl-slide.ptl-inline-direction-ltr {
   --ptl-slide-target-x: calc(1 * var(--ptl-slide-target-inline));
 }
-.ptl-slide.ptl-inline-direction-rtl {
+.ptl.ptl-slide.ptl-inline-direction-rtl {
   --ptl-slide-target-x: calc(-1 * var(--ptl-slide-target-inline));
 }
-.ptl-slide.ptl-block-direction-ttb {
+.ptl.ptl-slide.ptl-block-direction-ttb {
   --ptl-slide-target-y: calc(1 * var(--ptl-slide-target-block));
 }
-.ptl-slide.ptl-block-direction-btt {
+.ptl.ptl-slide.ptl-block-direction-btt {
   --ptl-slide-target-y: calc(-1 * var(--ptl-slide-target-block));
 }
-.ptl-slide.ptl-block-direction-ltr {
+.ptl.ptl-slide.ptl-block-direction-ltr {
   --ptl-slide-target-x: calc(1 * var(--ptl-slide-target-block));
 }
-.ptl-slide.ptl-block-direction-rtl {
+.ptl.ptl-slide.ptl-block-direction-rtl {
   --ptl-slide-target-x: calc(-1 * var(--ptl-slide-target-block));
 }
-.ptl-slide.ptl-inline-direction-ttb {
+.ptl.ptl-slide.ptl-inline-direction-ttb {
   --ptl-slide-target-y: calc(1 * var(--ptl-slide-target-inline));
 }
-.ptl-slide.ptl-inline-direction-btt {
+.ptl.ptl-slide.ptl-inline-direction-btt {
   --ptl-slide-target-y: calc(-1 * var(--ptl-slide-target-inline));
 }
 
-.ptl-slide.ptl-fade {
+.ptl.ptl-slide.ptl-fade {
   --ptl-properties: transform, opacity;
 }
 
-.ptl-slide.ptl-zoom {
+.ptl.ptl-slide.ptl-zoom {
   --ptl-properties: transform;
 }
-.ptl-slide.ptl-zoom.ptl-enter-init, .ptl-slide.ptl-zoom.ptl-exit-transition, .ptl-slide.ptl-zoom.ptl-exit-finalize {
+.ptl.ptl-slide.ptl-zoom.ptl-enter-init, .ptl.ptl-slide.ptl-zoom.ptl-exit-transition, .ptl.ptl-slide.ptl-zoom.ptl-exit-finalize {
   transform: translate(calc(100% * var(--ptl-slide-target-x, 0)), calc(100% * var(--ptl-slide-target-y, 0))) scale(calc(1 * var(--ptl-zoom-min-x, 0)), calc(1 * var(--ptl-zoom-min-y, 0)));
 }
-.ptl-slide.ptl-zoom.ptl-exit-init, .ptl-slide.ptl-zoom.ptl-enter-transition, .ptl-slide.ptl-zoom.ptl-enter-finalize {
+.ptl.ptl-slide.ptl-zoom.ptl-exit-init, .ptl.ptl-slide.ptl-zoom.ptl-enter-transition, .ptl.ptl-slide.ptl-zoom.ptl-enter-finalize {
   transform: translate(0%, 0%) scale(1, 1);
 }
 
-.ptl-slide.ptl-zoom.ptl-fade {
+.ptl.ptl-slide.ptl-zoom.ptl-fade {
   --ptl-properties: transform, opacity;
 }
 
-.ptl-flip {
+.ptl.ptl-flip {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   --ptl-properties: transform;
   --ptl-origin-x: calc(0 + var(--ptl-origin-inline));
   --ptl-origin-y: calc(0 + var(--ptl-origin-block));
 }
-.ptl-flip.ptl-enter-init, .ptl-flip.ptl-exit-transition, .ptl-flip.ptl-exit-finalize {
+.ptl.ptl-flip.ptl-enter-init, .ptl.ptl-flip.ptl-exit-transition, .ptl.ptl-flip.ptl-exit-finalize {
   transform: perspective(var(--ptl-perspective, 800px)) rotate3d(1, 0, 0, calc(var(--ptl-flip-angle-x, 0))) rotate3d(0, 1, 0, calc(var(--ptl-flip-angle-y, 0)));
 }
 @media (prefers-reduced-motion) {
-  .ptl-flip.ptl-enter-init, .ptl-flip.ptl-exit-transition, .ptl-flip.ptl-exit-finalize {
+  .ptl.ptl-flip.ptl-enter-init, .ptl.ptl-flip.ptl-exit-transition, .ptl.ptl-flip.ptl-exit-finalize {
     transform: none;
   }
 }
-.ptl-flip.ptl-exit-init, .ptl-flip.ptl-enter-transition, .ptl-flip.ptl-enter-finalize {
+.ptl.ptl-flip.ptl-exit-init, .ptl.ptl-flip.ptl-enter-transition, .ptl.ptl-flip.ptl-enter-finalize {
   transform: perspective(var(--ptl-perspective, 800px)) rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 0deg);
 }
-.ptl-flip.ptl-inline-direction-ltr {
+.ptl.ptl-flip.ptl-inline-direction-ltr {
   --ptl-flip-angle-x: calc(1 * var(--ptl-flip-angle-inline));
 }
-.ptl-flip.ptl-inline-direction-rtl {
+.ptl.ptl-flip.ptl-inline-direction-rtl {
   --ptl-flip-angle-x: calc(-1 * var(--ptl-flip-angle-inline));
 }
-.ptl-flip.ptl-block-direction-ttb {
+.ptl.ptl-flip.ptl-block-direction-ttb {
   --ptl-flip-angle-y: calc(1 * var(--ptl-flip-angle-block));
 }
-.ptl-flip.ptl-block-direction-btt {
+.ptl.ptl-flip.ptl-block-direction-btt {
   --ptl-flip-angle-y: calc(-1 * var(--ptl-flip-angle-block));
 }
-.ptl-flip.ptl-block-direction-ltr {
+.ptl.ptl-flip.ptl-block-direction-ltr {
   --ptl-flip-angle-x: calc(1 * var(--ptl-flip-angle-block));
 }
-.ptl-flip.ptl-block-direction-rtl {
+.ptl.ptl-flip.ptl-block-direction-rtl {
   --ptl-flip-angle-x: calc(-1 * var(--ptl-flip-angle-block));
 }
-.ptl-flip.ptl-inline-direction-ttb {
+.ptl.ptl-flip.ptl-inline-direction-ttb {
   --ptl-flip-angle-y: calc(1 * var(--ptl-flip-angle-inline));
 }
-.ptl-flip.ptl-inline-direction-btt {
+.ptl.ptl-flip.ptl-inline-direction-btt {
   --ptl-flip-angle-y: calc(-1 * var(--ptl-flip-angle-inline));
 }
 
-.ptl-collapse {
+.ptl.ptl-collapse {
   overflow: hidden;
   --ptl-properties: block-size;
   /*
-      // Initialize the height to the current transitioning size
-      // (the size we're caught in mid-transition, and/or also at the end)
-      &.ptl-enter-init, &.ptl-exit-init {
-          block-size: var(--ptl-transitioning-block-size); 
-      }
+  // Initialize the height to the current transitioning size
+  // (the size we're caught in mid-transition, and/or also at the end)
+  &.ptl-enter-init, &.ptl-exit-init {
+      block-size: var(--ptl-transitioning-block-size); 
+  }
 
-      // On exit, transition towards the specified minimum height.
-      &.ptl-exit-transition, &.ptl-exit-finalize { 
-          block-size: var(--ptl-collapse-min-block, 0); 
-          padding-block: 0 !important;
-      }
+  // On exit, transition towards the specified minimum height.
+  &.ptl-exit-transition, &.ptl-exit-finalize { 
+      block-size: var(--ptl-collapse-min-block, 0); 
+      padding-block: 0 !important;
+  }
 
-      // While entering, transition towards the height that was measured when the transition started
-      &.ptl-enter-transition { 
-          block-size: var(--ptl-surface-block-size); 
-      }
+  // While entering, transition towards the height that was measured when the transition started
+  &.ptl-enter-transition { 
+      block-size: var(--ptl-surface-block-size); 
+  }
 
-      // When entering has finished, defer to the normal browser height behavior.
-      // TODO: Register a resize observer when it's auto
-      &.ptl-enter-finalize { block-size: auto; }*/
+  // When entering has finished, defer to the normal browser height behavior.
+  // TODO: Register a resize observer when it's auto
+  &.ptl-enter-finalize { block-size: auto; }*/
 }
-.ptl-collapse.ptl-measure {
+.ptl.ptl-collapse.ptl-measure {
   block-size: auto !important;
 }
-.ptl-collapse.ptl-enter-init, .ptl-collapse.ptl-exit-transition, .ptl-collapse.ptl-exit-finalize {
+.ptl.ptl-collapse.ptl-enter-init, .ptl.ptl-collapse.ptl-exit-transition, .ptl.ptl-collapse.ptl-exit-finalize {
   block-size: var(--ptl-collapse-min-block);
 }
-.ptl-collapse.ptl-exit-init, .ptl-collapse.ptl-enter-transition {
+.ptl.ptl-collapse.ptl-exit-init, .ptl.ptl-collapse.ptl-enter-transition {
   block-size: var(--ptl-measure-height);
 }
-.ptl-collapse.ptl-enter-finalize {
+.ptl.ptl-collapse.ptl-enter-finalize {
   block-size: auto;
 }
 
-.ptl-collapse.ptl-fade {
+.ptl.ptl-collapse.ptl-fade {
   --ptl-properties: block-size, opacity;
 }
 

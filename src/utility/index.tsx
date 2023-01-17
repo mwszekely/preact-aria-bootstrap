@@ -59,7 +59,7 @@ export function forwardElementRef<T extends ForwardFn<any, any>>(t: T): T {
     return forwardRef(t) as T;
 }
 
-export function usePortalId(type: "tooltip" | "menu" | "dialog" | "drawer" | "toast") {
+export function usePortalId(type: "tooltip" | "menu" | "dialog" | "drawer" | "toast" | "offcanvas") {
     return "portal" //("portal-tooltip");
 }
 type Test = `keyboard-assist-lr_${boolean}-ud_${boolean}-pg_${boolean}-he_${boolean}-tp_${boolean}`;

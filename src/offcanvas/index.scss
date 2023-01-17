@@ -1,0 +1,13 @@
+// Intentionally not .modal-backdrop, which has a lot of implicit styles applied to it
+// TODO: The transition prop is overridden solely on CSS specificity, which is very fragile.
+// It would be better if the .offcanvas class didn't come with a `transition`, but...
+.offcanvas {
+    top: 0;
+    left: 0;
+    width: var(--bs-offcanvas-width);
+    border-right: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+}
+.offcanvas.ptl {
+    visibility: visible;
+    transform: translate(0,0);
+}

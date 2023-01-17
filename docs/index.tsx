@@ -2,7 +2,7 @@
 import { ComponentChildren, h, render } from "preact";
 import { memo } from "preact/compat";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
-import { BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Range, RangeThumb, RichTextField, Tab, TabPanel, Tabs, TextField, Toast, ToastErrorBoundary, ToastsProvider, usePushToast } from "../index";
+import { Accordion, AccordionSection, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, RichTextField, Tab, TabPanel, Tabs, TextField, Toast, ToastErrorBoundary, ToastsProvider, usePushToast } from "../index";
 import { KeyboardAssistProvider, RenderCounterProvider, useRenderCounters } from "../utility";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
@@ -109,6 +109,16 @@ function DialogDemo() {
     )
 }
 
+function OffcanvasDemo() {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <Offcanvas open={open} onClose={() => setOpen(false)} header={<span>Dialog title</span>} anchor={<ButtonAction onPress={() => setOpen(true)}>Open offcanvas</ButtonAction>}>
+            <div>This is the offcanvas content</div>
+        </Offcanvas>
+    )
+}
+
 function SliderDemo() {
     const [value, setValue] = useState(0);
 
@@ -197,6 +207,19 @@ const TableDemoRow = memo(function TableDemoRow({ row }: { row: number }) {
 })
 
 
+
+function AccordionDemo() {
+    return (
+        <Accordion>
+            {Array.from(function* () {
+                for (let i = 0; i < 5; ++i) {
+                    yield <AccordionSection key={i} index={i} header={"Section #" + i}>Accordion body content for section #{i}</AccordionSection>;
+                }
+            }())}
+        </Accordion>
+    )
+}
+
 declare module 'preact-prop-helpers' {
     interface PersistentStates {
         "main-demo-page-selected-tab-index": number | null;
@@ -238,6 +261,9 @@ const Component = () => {
 
     const [tabIndex, setTabIndex] = useState(0);
 
+    let i0 = 0;
+    let i1 = 0;
+
     return (
         <AllProviders>
             <RenderCounterDisplay />
@@ -247,30 +273,34 @@ const Component = () => {
                 labelPosition="hidden"
                 orientation="horizontal"
                 tabs={<>
-                    <Tab index={0}>Button</Tab>
-                    <Tab index={1}>Checkbox</Tab>
-                    <Tab index={2}>Menu</Tab>
-                    <Tab index={3}>Tooltip</Tab>
-                    <Tab index={4}>Radio</Tab>
-                    <Tab index={5}>Text field</Tab>
-                    <Tab index={6}>Gridlist demo</Tab>
-                    <Tab index={7}>Dialog</Tab>
-                    <Tab index={8}>Slider</Tab>
-                    <Tab index={9}>Toasts</Tab>
-                    <Tab index={10}>Data Table</Tab>
+                    <Tab index={i0++}>Button</Tab>
+                    <Tab index={i0++}>Checkbox</Tab>
+                    <Tab index={i0++}>Menu</Tab>
+                    <Tab index={i0++}>Tooltip</Tab>
+                    <Tab index={i0++}>Radio</Tab>
+                    <Tab index={i0++}>Text field</Tab>
+                    <Tab index={i0++}>Gridlist demo</Tab>
+                    <Tab index={i0++}>Dialog</Tab>
+                    <Tab index={i0++}>Slider</Tab>
+                    <Tab index={i0++}>Toasts</Tab>
+                    <Tab index={i0++}>Data Table</Tab>
+                    <Tab index={i0++}>Accordion</Tab>
+                    <Tab index={i0++}>Offcanvas</Tab>
                 </>}
                 panels={<>
-                    <TabPanel index={0}><ButtonB.Demo /></TabPanel>
-                    <TabPanel index={1}><Checkbox.Demo /></TabPanel>
-                    <TabPanel index={2}><MenuDemo /></TabPanel>
-                    <TabPanel index={3}><Tooltip.Demo /></TabPanel>
-                    <TabPanel index={4}><Radio.Demo /></TabPanel>
-                    <TabPanel index={5}><TextFieldD.Demo /></TabPanel>
-                    <TabPanel index={6}><ListDemo /></TabPanel>
-                    <TabPanel index={7}><DialogDemo /></TabPanel>
-                    <TabPanel index={8}><SliderDemo /></TabPanel>
-                    <TabPanel index={9}><ToastsDemo /></TabPanel>
-                    <TabPanel index={10}><TableDemo /></TabPanel>
+                    <TabPanel index={i1++}><ButtonB.Demo /></TabPanel>
+                    <TabPanel index={i1++}><Checkbox.Demo /></TabPanel>
+                    <TabPanel index={i1++}><MenuDemo /></TabPanel>
+                    <TabPanel index={i1++}><Tooltip.Demo /></TabPanel>
+                    <TabPanel index={i1++}><Radio.Demo /></TabPanel>
+                    <TabPanel index={i1++}><TextFieldD.Demo /></TabPanel>
+                    <TabPanel index={i1++}><ListDemo /></TabPanel>
+                    <TabPanel index={i1++}><DialogDemo /></TabPanel>
+                    <TabPanel index={i1++}><SliderDemo /></TabPanel>
+                    <TabPanel index={i1++}><ToastsDemo /></TabPanel>
+                    <TabPanel index={i1++}><TableDemo /></TabPanel>
+                    <TabPanel index={i1++}><AccordionDemo /></TabPanel>
+                    <TabPanel index={i1++}><OffcanvasDemo /></TabPanel>
                 </>}
             />
         </AllProviders>
