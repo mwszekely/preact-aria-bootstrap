@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { usePopper } from "popper";
+import { usePopper } from "../popper";
 import { ComponentChildren, Ref } from "preact";
 import { defaultRenderPortal } from "preact-aria-widgets";
 import { ParentDepthContext, useDefault } from "preact-aria-widgets/component/util";
