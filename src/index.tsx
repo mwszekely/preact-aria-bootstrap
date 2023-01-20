@@ -5,6 +5,7 @@ export { ButtonGroup } from "./button/button-group";
 export { Checkbox } from "./checkbox";
 export { Dialog } from "./dialog";
 export { BootstrapIcon, FontIcon } from "./icon";
+export { GridBsBreak, GridBsBreakProps, GridBsContainer, GridBsContainerProps, GridBsItem, GridBsItemProps, GridBsRow, GridBsRowProps, GridCss, GridCssItem, GridCssItemProps, GridCssProps, GridResponsive, GridStatic } from "./layout";
 export { List, ListItem } from "./list";
 export { Menu, MenuItem } from "./menu";
 export { Offcanvas, OffcanvasProps } from "./offcanvas";

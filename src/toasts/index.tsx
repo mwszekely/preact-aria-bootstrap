@@ -6,17 +6,32 @@ import { useCallback, useContext, useEffect, useErrorBoundary, useLayoutEffect }
 import { Button } from "../button";
 import { GlobalAttributes, usePortalId } from "../utility";
 import clsx from "clsx";
+import { usePortalChildren, PushPortalChild, UpdatePortalChild } from "preact-prop-helpers"
 
 
-export type StateUpdater<S> = (value: ((prevState: S) => S)) => void;
-export type PushToast = (toast: h.JSX.Element) => number;
-export type UpdateToast = (index: number, toast: h.JSX.Element) => void;
-const PushToastContext = createContext<PushToast>(null!);
-const UpdateToastContext = createContext<UpdateToast>(null!);
+
+//export type StateUpdater<S> = (value: ((prevState: S) => S)) => void;
+export type PushToast = PushPortalChild
+export type UpdateToast = UpdatePortalChild;
+const PushToastContext = createContext<PushPortalChild>(null!);
+const UpdateToastContext = createContext<UpdatePortalChild>(null!);
 const DefaultToastTimeout = createContext(Infinity);
 export function ToastsProvider({ children, defaultTimeout, visibleCount }: { children: ComponentChildren, visibleCount: number; defaultTimeout?: number }) {
 
-    const [pushToast, setPushToast] = useState<PushToast | null>(null);
+    const { children: portalChildren, portalElement, pushChild, removeChild, updateChild } = usePortalChildren({ target: usePortalId("toast") })
+
+    return (
+        <DefaultToastTimeout.Provider value={defaultTimeout ?? Infinity}>
+            <PushToastContext.Provider value={pushChild}>
+                <UpdateToastContext.Provider value={updateChild}>
+                    {children}
+                    {portalChildren}
+                </UpdateToastContext.Provider>
+            </PushToastContext.Provider>
+        </DefaultToastTimeout.Provider>
+    )
+
+    /*const [pushToast, setPushToast] = useState<PushToast | null>(null);
     const [updateToast, setUpdateToast] = useState<UpdateToast | null>(null);
 
     const pushToastStable = useStableCallback<NonNullable<typeof pushToast>>((toast) => {
@@ -40,7 +55,7 @@ export function ToastsProvider({ children, defaultTimeout, visibleCount }: { chi
                 }
             </DefaultToastTimeout.Provider>
         </>
-    )
+    )*/
 }
 
 export function usePushToast() {
@@ -54,7 +69,7 @@ export function useUpdateToast() {
 }
 
 // Extracted to a separate component to avoid rerendering all non-toast children
-function ToastsProviderHelper({ setPushToast, setUpdateToast, visibleCount }: { visibleCount: number; setPushToast: StateUpdater<PushToast | null>, setUpdateToast: StateUpdater<UpdateToast | null> }) {
+/*function ToastsProviderHelper({ setPushToast, setUpdateToast, visibleCount }: { visibleCount: number; setPushToast: StateUpdater<PushToast | null>, setUpdateToast: StateUpdater<UpdateToast | null> }) {
 
     const [children, setChildren, getChildren] = useState<h.JSX.Element[]>([]);
     const pushToast: PushToast | null = useCallback((toast: h.JSX.Element) => {
@@ -91,13 +106,7 @@ function ToastsProviderHelper({ setPushToast, setUpdateToast, visibleCount }: { 
     )
 }
 
-export interface ToastProps extends Pick<AriaToastProps<HTMLDivElement>, "politeness" | "index"> { children: ComponentChildren; timeout?: number; }
-interface ToastsContainerProps extends GlobalAttributes<HTMLDivElement> {
-    maxVisible: number;
-}
-
 const ToastsContainerChildrenContext = createContext<h.JSX.Element[]>([]);
-const UseToastContext = createContext<ToastsContext<ToastInfo>>(null!);
 function ToastsContainer({ maxVisible, ...props }: ToastsContainerProps) {
     const children = useContext(ToastsContainerChildrenContext);
 
@@ -114,14 +123,19 @@ function ToastsContainer({ maxVisible, ...props }: ToastsContainerProps) {
                 )
             }} />
     )
+}*/
+
+
+
+//const UseToastContext = createContext<ToastsContext<ToastInfo>>(null!);
+export interface ToastProps extends Pick<AriaToastProps<HTMLDivElement>, "politeness" | "index"> { children: ComponentChildren; timeout?: number; }
+interface ToastsContainerProps extends GlobalAttributes<HTMLDivElement> {
+    maxVisible: number;
 }
-
-
 
 const ToastDismissContext = createContext<() => void>(null!);
 export function Toast({ timeout, politeness, children, ...p }: Omit<ToastProps, "index">) {
     const { index, ...props } = p as ToastProps;
-    const useToast = useContext(UseToastContext);
     const defaultTimeout = useContext(DefaultToastTimeout);
     // const { useToastProps, dismiss, status } = useToast<HTMLDivElement>({ timeout: timeout ?? defaultTimeout, politeness });
 
@@ -130,6 +144,7 @@ export function Toast({ timeout, politeness, children, ...p }: Omit<ToastProps, 
         <AriaToast<HTMLDivElement>
             index={index}
             timeout={timeout ?? defaultTimeout}
+            children={children}
             render={info => {
                 const show = (info.toastReturn.showing);
                 return (
