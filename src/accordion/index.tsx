@@ -5,7 +5,8 @@ import { Accordion as AriaAccordion, AccordionProps as AriaAccordionProps, Accor
 import { useMergedProps } from "preact-prop-helpers";
 import { CollapseFade } from "preact-transition";
 import { memo } from "preact/compat";
-import { forwardElementRef, GlobalAttributes } from "../utility";
+import { forwardElementRef } from "../utility/forward-element-ref";
+import { GlobalAttributes } from "../utility/types";
 
 export interface AccordionProps extends Partial<Pick<AriaAccordionProps<HTMLButtonElement>, "navigationDirection" | "localStorageKey">>, GlobalAttributes<HTMLDivElement, "children"> {
 

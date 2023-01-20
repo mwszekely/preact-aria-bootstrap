@@ -6,9 +6,12 @@ import { returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, useRef
 import { ClipFade, ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useImperativeHandle, useRef } from "preact/hooks";
+import { GlobalAttributes } from "../utility/types";
 import { Button as ButtonAction, ButtonProps } from "../button/button-action";
 import { usePopper } from "../popper";
-import { forwardElementRef, GlobalAttributes, KeyboardAssistIcon, usePortalId } from "../utility";
+import { forwardElementRef } from "../utility/forward-element-ref";
+import { usePortalId } from "../utility/use-portal-id";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist";
 
 
 export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children"> {

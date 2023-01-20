@@ -4,10 +4,11 @@ import { ComponentChildren, h, JSX, Ref } from "preact";
 import { ElementToTag, LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets";
 import { useAsyncHandler, useCompleteListNavigation, useHasCurrentFocus, useMergedProps, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
 import { useCallback, useContext, useEffect, useLayoutEffect, useRef } from "preact/hooks";
-import { forwardElementRef, LabelledProps } from "../utility";
 import { Tooltip } from "../tooltip";
 import { memo } from "preact/compat";
 import { Temporal } from "@js-temporal/polyfill";
+import { forwardElementRef } from "../utility/forward-element-ref";
+import { LabelledProps } from "../utility/types";
 
 interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<h.JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
     value: T | null;

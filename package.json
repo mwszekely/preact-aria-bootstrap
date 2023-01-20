@@ -22,10 +22,6 @@
     "preact": "^10.11.2"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^35.4.0",
-    "@ckeditor/ckeditor5-dev-utils": "^32.0.2",
-    "@ckeditor/ckeditor5-editor-inline": "^35.4.0",
-    "@ckeditor/ckeditor5-react": "^5.0.5",
     "@floating-ui/dom": "^1.0.10",
     "@js-temporal/polyfill": "^0.4.3",
     "@popperjs/core": "^2.11.6",

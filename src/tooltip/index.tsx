@@ -3,9 +3,11 @@ import { usePopper, UsePopperProps } from "../popper"
 
 import { defaultRenderPortal, Tooltip as AriaTooltip } from "preact-aria-widgets"
 import { useMergedProps } from "preact-prop-helpers";
-import { forwardElementRef, GlobalAttributes, usePortalId } from "../utility";
 import clsx from "clsx";
 import { ZoomFade } from "preact-transition";
+import { usePortalId } from "../utility/use-portal-id";
+import { forwardElementRef } from "../utility/forward-element-ref";
+import { GlobalAttributes } from "../utility/types";
 
 export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "children"> {
 

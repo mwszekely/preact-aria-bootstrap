@@ -1,7 +1,9 @@
 import { Ref } from "preact";
 import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { forwardElementRef, GlobalAttributes, useClonedElement } from "utility";
+import { forwardElementRef } from "../utility/forward-element-ref";
+import { useClonedElement } from "../utility/use-cloned-element";
+import { GlobalAttributes } from "../utility/types";
 
 interface TypePropsBase<T extends EventTarget> extends GlobalAttributes<T, "children"> {
 

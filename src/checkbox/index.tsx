@@ -5,7 +5,7 @@ import { ComponentChildren, h, Ref } from "preact";
 import { Checkbox as AriaCheckbox, CheckboxChangeEvent, CheckboxProps as AriaCheckboxProps, EventDetail, ProgressWithHandler } from "preact-aria-widgets";
 import { UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { useContext } from "preact/hooks";
-import { LabelledProps } from "../utility";
+import { LabelledProps } from "../utility/types";
 import { WithinInputGroup } from "../input-group/shared";
 import { Tooltip } from "../tooltip";
 

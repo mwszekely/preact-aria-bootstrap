@@ -2,13 +2,15 @@
 import { ComponentChildren, h, render } from "preact";
 import { memo } from "preact/compat";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { NotificationProviderContext, useNotificationProvider } from "preact-aria-widgets"
 import { Accordion, AccordionSection, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, RichTextField, Tab, TabPanel, Tabs, TextField, Toast, ToastErrorBoundary, ToastsProvider, usePushToast } from "../index";
-import { KeyboardAssistProvider, RenderCounterProvider, useRenderCounters } from "../utility";
+import { RenderCounterProvider, useRenderCounters } from "../utility/render-counter";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
 import * as Radio from "./demos/radio";
 import * as TextFieldD from "./demos/text-field";
 import * as Tooltip from "./demos/tooltip";
+import { AllProviders } from "../utility/all-providers";
 
 
 
@@ -226,21 +228,6 @@ declare module 'preact-prop-helpers' {
     }
 }
 
-const AllProviders = ({ children }: { children: ComponentChildren }) => {
-
-    return (
-        <RenderCounterProvider>
-            <ToastsProvider visibleCount={4}>
-                <ToastErrorBoundary>
-                    <KeyboardAssistProvider>
-                        {children}
-                    </KeyboardAssistProvider>
-                </ToastErrorBoundary>
-            </ToastsProvider>
-        </RenderCounterProvider>
-    );
-}
-
 const RenderCounterDisplay = () => {
     const counters = useRenderCounters()!;
 
@@ -265,7 +252,7 @@ const Component = () => {
     let i1 = 0;
 
     return (
-        <AllProviders>
+        <AllProviders targetAssertive="aria-notifications-assertive" targetPolite="aria-notifications-polite">
             <RenderCounterDisplay />
             <Tabs
                 localStorageKey="main-demo-page-selected-tab-index"

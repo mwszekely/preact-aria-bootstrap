@@ -3,9 +3,15 @@
 $toast-close-btn-padding: 0.5em;
 
 // Higher than modal, lower than tooltip.
-$zindex-toast: 1060 !default;
+//$zindex-toast: 1060 !default;
 
-.toasts-container {
+#portal-toast {
+
+  position: fixed;
+  display: flex;
+  gap: 1em;
+  flex-direction: column-reverse;
+
   z-index: $zindex-toast;
   display: flex;
   flex-direction: column-reverse;
@@ -13,12 +19,12 @@ $zindex-toast: 1060 !default;
   padding: 1em;
   gap: 1em;
   position: fixed;
-  left: 0;
-  right: 0;
-  // Don't set top to improve scrolling on mobile
-  bottom: 0;
+
+  inset-block-end: 1em;
+  inset-inline-end: 1em;
+
   pointer-events: none;
-  max-height: calc(var(--max-toast-count, 4) * 4em);
+
   overflow: hidden;
 
   & > .toast {
