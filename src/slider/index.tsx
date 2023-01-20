@@ -1,11 +1,12 @@
-import { ComponentChildren, createContext, createElement, h, Ref } from "preact";
-import { EventDetail, UseSliderParameters, UseSliderThumbParameters, UseSliderThumb, useSlider, RangeChangeEvent, SliderThumbInfo, SliderContext, useSliderThumb } from "preact-aria-widgets";
-import { generateRandomId, ManagedChildInfo, useAsyncHandler, useHasCurrentFocus, useMergedProps, useRandomId, useRefElement } from "preact-prop-helpers";
-import { memo } from "preact/compat";
-import { StateUpdater, useCallback, useContext, useMemo, useRef, useState } from "preact/hooks";
-import { Tooltip } from "../tooltip";
-import { forwardElementRef, GlobalAttributes } from "../utility";
 import clsx from "clsx";
+import { ComponentChildren, createContext, createElement, h, Ref } from "preact";
+import { EventDetail, RangeChangeEvent, SliderContext, SliderThumbInfo, useSlider, UseSliderParameters, useSliderThumb, UseSliderThumbParameters } from "preact-aria-widgets";
+import { generateRandomId, useAsyncHandler, useHasCurrentFocus, useMergedProps, useRefElement } from "preact-prop-helpers";
+import { memo } from "preact/compat";
+import { useContext, useMemo, useRef, useState } from "preact/hooks";
+import { Tooltip } from "../tooltip";
+import { forwardElementRef } from "../utility/forward-element-ref";
+import { GlobalAttributes } from "../utility/types";
 
 
 

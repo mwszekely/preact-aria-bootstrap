@@ -5,8 +5,9 @@ import { ComponentChildren, h, Ref, createContext } from "preact";
 import { Radio as AriaRadio, RadioChangeEvent, RadioGroup as AriaRadioGroup, RadioGroupProps as AriaRadioGroupProps, RadioProps as AriaRadioProps, EventDetail, ProgressWithHandler, UseRadioGroupReturnType, LabelPosition, Progress } from "preact-aria-widgets";
 import { useAsync, useAsyncHandler, UseAsyncHandlerParameters, useHasCurrentFocus, useMergedProps, useRefElement, useState } from "preact-prop-helpers";
 import { useCallback, useContext, useMemo, useRef } from "preact/hooks";
-import { KeyboardAssistIcon, LabelledProps } from "../utility";
 import { Tooltip } from "../tooltip";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist";
+import { LabelledProps } from "../utility/types";
 
 
 export interface RadioGroupProps<V extends string | number> extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {

@@ -3,7 +3,8 @@ import { ComponentChildren, createContext, h, Ref } from "preact";
 import { ProgressWithHandler, Toolbar, ToolbarChild, ToolbarProps, useLabelSynthetic, UseToolbarParameters, UseToolbarReturnType, UseToolbarSubInfo } from "preact-aria-widgets";
 import { useAsync, useAsyncHandler, useHasCurrentFocus, useMergedProps, useRefElement, useState } from "preact-prop-helpers";
 import { useContext, useMemo, useRef } from "preact/hooks";
-import { KeyboardAssistIcon, LabelledProps } from "../utility";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist";
+import { LabelledProps } from "../utility/types";
 
 export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">, Pick<ToolbarProps<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>, "orientation"> {
     disabled?: boolean;

@@ -1,7 +1,7 @@
 import { cloneElement, ComponentChild, h, Ref, VNode } from "preact";
 import { useMergedProps, useMergedRefs } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { forwardElementRef } from "../utility";
+import { forwardElementRef } from "../utility/forward-element-ref";
 
 
 export interface IconProps<E extends Element> extends Omit<h.JSX.HTMLAttributes<E>, "label" | "children"> {

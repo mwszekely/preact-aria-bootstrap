@@ -7,7 +7,7 @@ import { useMenuSurface, UseMenuSurfaceReturnType } from "preact-aria-widgets/us
 import { useStableCallback, useState, useTimeout, useMergedProps, useRandomId } from "preact-prop-helpers";
 import { ZoomFade } from "preact-transition";
 import { useCallback, useContext, useImperativeHandle } from "preact/hooks";
-import { usePortalId } from "../utility";
+import { usePortalId } from "../utility/use-portal-id";
 import { Button, ButtonProps } from "../button"
 export interface PopoverProps {
     forceOpen?: boolean | null | undefined;

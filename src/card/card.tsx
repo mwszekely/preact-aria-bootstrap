@@ -3,7 +3,8 @@ import { ComponentChildren, createElement, Fragment, h, Ref, VNode } from "preac
 import { Heading } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { forwardElementRef, GlobalAttributes } from "../utility";
+import { forwardElementRef } from "../utility/forward-element-ref";
+import { GlobalAttributes } from "../utility/types";
 
 
 

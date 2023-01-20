@@ -1,13 +1,17 @@
 
 import clsx from "clsx";
-import { Paginated } from "../pagination";
 import { ComponentChildren, createContext, Ref, VNode } from "preact";
-import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableSectionProps as AriaTableSectionProps } from "preact-aria-widgets";
-import { useEnsureStability, useMergedProps, usePress, useRefElement, useStableGetter, useState, useWhatCausedRender } from "preact-prop-helpers";
+import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection } from "preact-aria-widgets";
+import { useEnsureStability, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
-import { useContext, useEffect, useLayoutEffect, useMemo } from "preact/hooks";
-import { CaptionedProps, forwardElementRef, GlobalAttributes, KeyboardAssistIcon, PaginatedProps, useClonedElement, useUpdateRenderCounter } from "../utility";
+import { useContext, useLayoutEffect, useMemo } from "preact/hooks";
+import { Paginated } from "../pagination";
+import { forwardElementRef } from "../utility/forward-element-ref";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist";
+import { useUpdateRenderCounter } from "../utility/render-counter";
+import { CaptionedProps, GlobalAttributes, PaginatedProps } from "../utility/types";
+import { useClonedElement } from "../utility/use-cloned-element";
 import { Table, TableCell, TableCellProps, TableProps, TableRow, TableRowProps, TableSection, TableSectionProps } from "./table";
 
 export interface DataTableProps extends TableProps {

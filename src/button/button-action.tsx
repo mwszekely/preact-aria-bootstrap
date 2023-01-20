@@ -6,7 +6,7 @@ import { useContext } from "preact/hooks";
 import { ButtonGroupContext, ButtonGroupChildProps, ButtonGroup } from "./button-group";
 import clsx from "clsx";
 import { Tooltip } from "../tooltip";
-import { forwardElementRef } from "../utility";
+import { forwardElementRef } from "../utility/forward-element-ref";
 import { memo } from "preact/compat";
 
 export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttributes<E>, "children" | "style" | "class" | "className">, Partial<ButtonGroupChildProps>, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {

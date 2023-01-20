@@ -1,7 +1,9 @@
 import { Ref } from "preact";
 import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { forwardElementRef, GlobalAttributes, useClonedElement } from "../utility";
+import { forwardElementRef } from "../utility/forward-element-ref";
+import { GlobalAttributes } from "../utility/types";
+import { useClonedElement } from "../utility/use-cloned-element";
 
 /**
  * Very simple, easy static grid that guarantees the number of columns is displayed,

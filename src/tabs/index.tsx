@@ -1,11 +1,12 @@
 
 import { ComponentChildren } from "preact";
 import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets"
-import { GlobalAttributes, KeyboardAssistIcon, LabelledProps } from "../utility";
 import { SlideZoomFade, Swappable } from "preact-transition";
 import { PersistentStates, returnZero, useMergedProps, useState, useTimeout } from "preact-prop-helpers";
 import clsx from "clsx";
 import { memo } from "preact/compat";
+import { GlobalAttributes, LabelledProps } from "../utility/types";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist";
 
 export interface TabsProps {
     orientation?: "horizontal" | "vertical";

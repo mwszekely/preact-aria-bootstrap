@@ -1,5 +1,4 @@
 import { memo } from "preact/compat";
-import { forwardElementRef, GlobalAttributes, useClonedElement, usePortalId } from "../utility";
 import { defaultRenderPortal, Dialog as AriaDialog, DialogProps as AriaDialogProps, Heading } from "preact-aria-widgets"
 import { ComponentChildren, h, Ref, VNode } from "preact";
 import { useMergedProps } from "preact-prop-helpers";
@@ -7,6 +6,10 @@ import { SlideFade } from "preact-transition";
 import clsx from "clsx";
 import { Button } from "../button/button-action";
 import { BootstrapIcon } from "../icon";
+import { forwardElementRef } from "../utility/forward-element-ref";
+import { GlobalAttributes } from "../utility/types";
+import { useClonedElement } from "../utility/use-cloned-element";
+import { usePortalId } from "../utility/use-portal-id";
 
 export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     open: boolean;

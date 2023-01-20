@@ -1,7 +1,7 @@
 import { cloneElement, ComponentChild, h, Ref, VNode } from "preact";
 import { useMergedProps, useMergedRefs } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { forwardElementRef } from "../utility";
+import { forwardElementRef } from "../utility/forward-element-ref";
 import { Icon, IconProps } from "./icon-base";
 
 export interface FontIconProps extends Omit<IconProps<HTMLElement>, "children"> {
