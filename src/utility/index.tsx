@@ -46,8 +46,8 @@ function childrenIsVnode(children: ComponentChildren | null | undefined): childr
         return true;
     return false;
 }
-export function useClonedElement(children: ComponentChildren | undefined | null, props: h.JSX.HTMLAttributes<any>, ref: Ref<any> | null | undefined) {
-    const c = (childrenIsVnode(children) ? children : <span>{children}</span>) as any as VNode;
+export function useClonedElement(children: ComponentChildren | undefined | null, props: h.JSX.HTMLAttributes<any>, ref: Ref<any> | null | undefined, DefaultElement: keyof h.JSX.IntrinsicElements = 'span') {
+    const c = (childrenIsVnode(children) ? children : <DefaultElement>{children}</DefaultElement>) as any as VNode;
     return createElement(c.type as any, useMergedProps(c.props, { ref: c.ref }, props, { ref }));
     //return cloneElement(c, useMergedProps(c.props, { ref: c.ref }, props, { ref }))
 }

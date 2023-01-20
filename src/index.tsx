@@ -17,4 +17,5 @@ export { TextField } from "./text-field";
 export { PushToast, Toast, ToastErrorBoundary, ToastsProvider, usePushToast, useUpdateToast } from "./toasts";
 export { Tooltip } from "./tooltip";
 export { KeyboardAssistProvider } from "./utility";
+export { Type, TypeProps } from "./typography"
 
