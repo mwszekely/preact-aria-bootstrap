@@ -24,5 +24,6 @@ export { PushToast, Toast, ToastErrorBoundary, ToastsProvider, usePushToast, use
 export { Tooltip } from "./tooltip";
 export { Type, TypeProps } from "./typography";
 export { AllProviders } from "./utility/all-providers";
+export { UtilityClasses } from "./utility/classes";
 export { KeyboardAssistProvider } from "./utility/keyboard-assist";
 
