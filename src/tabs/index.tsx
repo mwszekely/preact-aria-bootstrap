@@ -1,5 +1,5 @@
 
-import { ComponentChildren } from "preact";
+import { ComponentChildren, h, Ref } from "preact";
 import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets"
 import { SlideZoomFade, Swappable } from "preact-transition";
 import { PersistentStates, returnZero, useMergedProps, useState, useTimeout } from "preact-prop-helpers";
@@ -7,12 +7,15 @@ import clsx from "clsx";
 import { memo } from "preact/compat";
 import { GlobalAttributes, LabelledProps } from "../utility/types";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist";
+import { forwardElementRef } from "../utility/forward-element-ref";
 
-export interface TabsProps {
+export interface TabsProps extends GlobalAttributes<HTMLDivElement> {
     orientation?: "horizontal" | "vertical";
     tabs: ComponentChildren;
     panels: ComponentChildren;
     localStorageKey: keyof PersistentStates | null;
+    propsTabsContainer?: h.JSX.HTMLAttributes<HTMLUListElement>;
+    propsPanelsContainer?: h.JSX.HTMLAttributes<HTMLDivElement>;
 }
 
 export interface TabProps extends GlobalAttributes<HTMLLIElement, "children"> {
@@ -26,7 +29,7 @@ export interface TabPanelProps extends GlobalAttributes<HTMLDivElement, "childre
     children?: ComponentChildren;
 }
 
-export function Tabs({ orientation, label, localStorageKey, labelPosition, panels, tabs }: LabelledProps<TabsProps, never>) {
+export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }: LabelledProps<TabsProps, never>, ref: Ref<HTMLDivElement>) {
     return (
         <AriaTabs<HTMLUListElement, HTMLLIElement, HTMLLabelElement>
             localStorageKey={localStorageKey}
@@ -36,16 +39,16 @@ export function Tabs({ orientation, label, localStorageKey, labelPosition, panel
             render={info => {
                 const labelJsx = <label {...info.propsLabel}>{label}</label>;
                 return (
-                    <div class="tabs-container">
+                    <div {...useMergedProps({ class: "tabs-container" }, { ...props, ref })}>
                         {labelPosition == "before" && labelJsx}
                         <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != "none"}>
-                            <ul {...useMergedProps(info.propsContainer, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) })}>
+                            <ul {...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) })}>
                                 {tabs}
                             </ul>
                         </KeyboardAssistIcon>
                         {labelPosition == "before" && labelJsx}
                         <Swappable>
-                            <div class="tab-panels-container">
+                            <div {...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {})}>
                                 {panels}
                             </div>
                         </Swappable>
@@ -54,9 +57,9 @@ export function Tabs({ orientation, label, localStorageKey, labelPosition, panel
             }}
         />
     )
-}
+}))
 
-export function Tab({ index, getSortValue, children, ...props }: TabProps) {
+export const Tab = memo(forwardElementRef(function Tab({ index, getSortValue, children, ...props }: TabProps, ref: Ref<HTMLLIElement>) {
     return (
         <AriaTab<HTMLSpanElement>
             index={index}
@@ -64,14 +67,14 @@ export function Tab({ index, getSortValue, children, ...props }: TabProps) {
 
             render={info => {
                 return (
-                    <li {...useMergedProps<HTMLLIElement>(props, { className: `nav-item` })}><span {...useMergedProps(info.props, { className: clsx(`nav-link`, info.singleSelectionChildReturn.selected && "active") })}>{children}</span></li>
+                    <li {...useMergedProps<HTMLLIElement>(props, { ref, className: `nav-item` })}><span {...useMergedProps(info.props, { className: clsx(`nav-link`, info.singleSelectionChildReturn.selected && "active") })}>{children}</span></li>
                 )
             }}
         />
     )
-}
+}))
 
-export function TabPanel({ index, children, ...props }: TabPanelProps) {
+export const TabPanel = memo(forwardElementRef(function TabPanel({ index, children, ...props }: TabPanelProps, ref: Ref<HTMLDivElement>) {
     return (
         <AriaTabPanel<HTMLDivElement>
             index={index}
@@ -82,7 +85,7 @@ export function TabPanel({ index, children, ...props }: TabPanelProps) {
                 // which is bad if one tab is heavier than others -- it'll still affect them even when closed.
                 return (
                     <SlideZoomFade {...{ "data-index": index } as {}} exitVisibility="removed" delayMountUntilShown duration={500} show={info.tabPanelReturn.visible} slideTargetBlock={0} slideTargetInline={Math.sign(info.tabPanelReturn.visibleOffset ?? 0) * (1 / 24)} zoomMin={(11 / 12)} zoomOriginBlock={0} zoomOriginInline={0.5}>
-                        <div {...useMergedProps(info.props, props, { className: clsx("tab-panel scroll-shadows scroll-shadows-y") })}>
+                        <div {...useMergedProps(info.props, props, { ref, className: clsx("tab-panel scroll-shadows scroll-shadows-y") })}>
                             <TabPanelChildren visible={info.tabPanelReturn.visible || false}>{children}</TabPanelChildren>
                         </div>
                     </SlideZoomFade>
@@ -90,7 +93,7 @@ export function TabPanel({ index, children, ...props }: TabPanelProps) {
             }}
         />
     )
-}
+}))
 
 const TabPanelChildren = memo(function TabPanelChildren({ children, visible }: { visible: boolean, children: ComponentChildren }) {
     // It's more than likely that any given panel's children will be heavy to render,
