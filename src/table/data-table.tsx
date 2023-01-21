@@ -184,12 +184,14 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
                 useUpdateRenderCounter("DataTableCell");
 
                 const { pressReturn: { propsUnstable } } = usePress({
-                    pressParameters: {
-                        exclude: undefined, focusSelf, onPressSync: !isTableHead ? undefined : () => {
+                    pressParameters:  {
+                        focusSelf, 
+                        onPressSync: !isTableHead ? undefined : () => {
                             const { column, direction } = info.tableCellReturn.sortByThisColumn();
                             setSortingByThisColumn(true);
                             setSortDirection(direction)
-                        }
+                        },
+                        ...info.pressParameters
                     }, refElementReturn
                 })
 

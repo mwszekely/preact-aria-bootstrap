@@ -85,7 +85,7 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
 
             render={info => {
                 const { refElementReturn } = useRefElement<HTMLButtonElement>({ refElementParameters: {} })
-                const { pressReturn } = usePress<HTMLButtonElement>({ pressParameters: { exclude: undefined, onPressSync: info.singleSelectionChildReturn.setThisOneSelected, focusSelf: useCallback((e) => { e.focus(); }, []) }, refElementReturn })
+                const { pressReturn } = usePress<HTMLButtonElement>({ pressParameters: { focusSelf: useCallback((e) => { e.focus(); }, []),  ...info.pressParameters}, refElementReturn })
                 return (
                     <li class="page-item">
                         <button {...useMergedProps(info.props, refElementReturn.propsStable, pressReturn.propsUnstable, { class: "page-link", ref, onfocusin: onFocus || undefined }, {})}>{children}</button>

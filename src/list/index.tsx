@@ -81,11 +81,11 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, getSor
                 const { refElementReturn: { propsStable: p2, getElement }, refElementReturn } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
                 const { pressReturn: { longPress, propsUnstable: p1, pseudoActive } } = usePress<HTMLDivElement>({
                     pressParameters: {
-                        exclude: undefined,
                         focusSelf: useCallback(() => {
                             return getElement()?.focus();
                         }, []),
-                        onPressSync: useStableCallback((e) => infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.setThisOneSelected(e))
+                        onPressSync: useStableCallback((e) => infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.setThisOneSelected(e)),
+                        ...infoRow.rowAsChildOfGridReturn.pressParameters
                     },
                     refElementReturn
                 });
