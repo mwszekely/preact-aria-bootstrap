@@ -57,6 +57,8 @@
             border-bottom-left-radius: inherit;
             border-bottom-right-radius: inherit;
             outline: none;
+            display: flex;
+            justify-content: space-between;
 
             &:focus-visible {
                 outline-width: $btn-focus-width;

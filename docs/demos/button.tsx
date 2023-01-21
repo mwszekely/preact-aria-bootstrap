@@ -1,6 +1,6 @@
 
 import { useStableCallback, useState } from "preact-prop-helpers";
-import { BootstrapIcon, Button as ButtonAction, ButtonGroup } from "../../index";
+import { Badge, BootstrapIcon, Button as ButtonAction, ButtonGroup } from "../../index";
 import { useCallback } from "preact/hooks"
 import { Heading } from "preact-aria-widgets";
 import { ButtonThemes } from "../../context";
@@ -88,8 +88,8 @@ export function Demo() {
             <Blurb />
             <Code />
             <div># of times pressed: {pressCount}</div>
-            <ButtonAction variantTheme="secondary" onPress={onPressSync}>Press me (sync)</ButtonAction>
-            <ButtonAction variantTheme="info" onPress={onPressAsync}>Press me (async)</ButtonAction>
+            <ButtonAction variantTheme="secondary" onPress={onPressSync} badge={<Badge position="top-end">(sync)</Badge>}>Press me</ButtonAction>
+            <ButtonAction variantTheme="info" onPress={onPressAsync} badge={<Badge position="top-end">(sync)</Badge>}>Press me</ButtonAction>
             <ButtonAction variantFill="outline" onPress={onPressSync}><BootstrapIcon label="Press me (icon demo)" icon="plus-circle" /></ButtonAction>
             <ButtonAction variantFill="fill" onPress={onPressSync} tooltip="Press me (w/ tooltip)"><BootstrapIcon label={null} icon="plus-circle" /></ButtonAction>
             <ButtonAction variantSize="sm" onPress={onPressAsync} disabled>Press me (disabled)</ButtonAction>

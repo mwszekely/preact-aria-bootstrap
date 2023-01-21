@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { ButtonThemes } from "../context";
 import { ComponentChildren, createElement, Fragment, h, Ref, VNode } from "preact";
 import { Heading } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
@@ -8,7 +9,11 @@ import { GlobalAttributes } from "../utility/types";
 
 
 
-export interface CardProps extends GlobalAttributes<HTMLDivElement, "children"> { title?: ComponentChildren, subtitle?: ComponentChildren }
+export interface CardProps extends GlobalAttributes<HTMLDivElement, "children"> { 
+    title?: ComponentChildren;
+    subtitle?: ComponentChildren;
+    variantTheme?: ButtonThemes;
+ }
 interface CardBodyProps extends GlobalAttributes<HTMLDivElement, "children"> { }
 interface CardTextProps extends GlobalAttributes<HTMLDivElement, "children"> { }
 interface CardHeaderProps extends GlobalAttributes<HTMLDivElement, "children"> { }
@@ -19,7 +24,7 @@ interface CardImageProps extends GlobalAttributes<HTMLImageElement> { src: strin
 
 
 export const Card = memo(forwardElementRef(function Card(p: CardProps, ref: Ref<HTMLDivElement>) {
-    let { children, title, subtitle, ...props } = p;
+    let { children, title, subtitle, variantTheme, ...props } = p;
 
     if (title)
         children = <Heading heading={title}>{children}</Heading>;
@@ -27,7 +32,7 @@ export const Card = memo(forwardElementRef(function Card(p: CardProps, ref: Ref<
         children = <Heading heading={subtitle}>{children}</Heading>;
 
     return (
-        <div {...useMergedProps<HTMLDivElement>({ ref, className: "card elevation-raised-1 elevation-body-surface" }, props)}>{children}</div>
+        <div {...useMergedProps<HTMLDivElement>({ ref, className: clsx("card elevation-raised-1 elevation-body-surface", variantTheme && `text-bg-${variantTheme}`) }, props)}>{children}</div>
     )
 }));
 

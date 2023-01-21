@@ -1,14 +1,15 @@
 import clsx from "clsx";
-import { Paginated, Pagination } from "../pagination";
+import { ButtonThemes } from "../context";
 import { ComponentChildren, h, Ref, VNode } from "preact";
 import { Gridlist, GridlistChild, GridlistRow } from "preact-aria-widgets";
-import { findFirstTabbable, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
+import { returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { useCallback, useEffect } from "preact/hooks"
+import { useCallback } from "preact/hooks";
+import { Paginated } from "../pagination";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist";
 import { useUpdateRenderCounter } from "../utility/render-counter";
-import { GlobalAttributes, PaginatedProps, LabelledProps } from "../utility/types";
+import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types";
 import { useClonedElement } from "../utility/use-cloned-element";
 
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
@@ -19,12 +20,14 @@ export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> 
 
 export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "children"> {
     index: number;
+    variantTheme?: ButtonThemes;
     disabled?: boolean;
     selected?: boolean;
     iconStart?: ComponentChildren | null | undefined;
     iconEnd?: ComponentChildren | null | undefined;
     onSelectedChange?: null | ((selected: boolean) => (void | Promise<void>));
     getSortValue?: () => unknown;
+    badge?: VNode;
 }
 
 export function List({ disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
@@ -36,7 +39,7 @@ export function List({ disabled, selectedIndex, onSelectedIndexChange, label, la
     const [paginationStart, setPaginationStart] = useState<number | null>(0);
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
 
-    
+
 
     if (paginationSize)
         paginationLocation ||= "before";
@@ -68,8 +71,8 @@ export function List({ disabled, selectedIndex, onSelectedIndexChange, label, la
     )
 }
 
-export const ListItem = memo(forwardElementRef(function ListItem({ index, getSortValue, children, selected, disabled, iconEnd, iconStart, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
-   
+export const ListItem = memo(forwardElementRef(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
+
 
     return (
         <GridlistRow<HTMLDivElement, HTMLDivElement>
@@ -100,7 +103,8 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, getSor
                 })*/
                 const c = <>
                     <ListItemStartEnd index={0} hidden={iconStart == null} children={iconStart} />
-                    <ListItemText {...useMergedProps(p1, p2)}>{children}</ListItemText>
+                    <ListItemText {...useMergedProps(p1, p2)}><span>{children}</span>{badge}</ListItemText>
+                    
                     <ListItemStartEnd index={2} hidden={iconEnd == null} children={iconEnd} />
                 </>
                 const show = infoRow.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered ? infoRow.rowAsChildOfGridReturn.staggeredChildReturn.staggeredVisible : true;
@@ -111,16 +115,26 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, getSor
                         return <div aria-busy="true" class="gridlist-item gridlist-item-placeholder"><span class={clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow")}><span class="placeholder w-100"></span></span></div>;
 
                 return (
-                    <div aria-busy={(!show).toString()} class={clsx(
-                        `gridlist-item`,
-                        infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "",
-                        !show && "gridlist-item-placeholder",
-                        "list-group-item list-group-item-action",
-                        !!iconStart && "list-group-item-with-icon-start",
-                        !!iconEnd && "list-group-item-with-icon-end",
-                        disabled && "disabled",
-                        (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`
-                    )} {...useMergedProps(infoRow.props, { ...props, ref })}>
+                    <div
+                        aria-busy={(!show).toString()}
+                        {...useMergedProps(
+                            infoRow.props,
+                            { ...props, ref },
+                            {
+                                className: clsx(
+                                    `gridlist-item`,
+                                    variantTheme && `list-group-item-${variantTheme}`,
+                                    infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "",
+                                    !show && "gridlist-item-placeholder",
+                                    "list-group-item list-group-item-action",
+                                    !!iconStart && "list-group-item-with-icon-start",
+                                    !!iconEnd && "list-group-item-with-icon-end",
+                                    !!badge && "list-group-item-with-badge",
+                                    disabled && "disabled",
+                                    (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`
+                                )
+                            }
+                        )}>
 
                         {show && c}
                     </div>

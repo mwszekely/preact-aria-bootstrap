@@ -3,7 +3,7 @@ import { ComponentChildren, h, render } from "preact";
 import { memo } from "preact/compat";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { NotificationProviderContext, useNotificationProvider } from "preact-aria-widgets"
-import { Accordion, AccordionSection, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, RichTextField, Tab, TabPanel, Tabs, TextField, Toast, ToastErrorBoundary, ToastsProvider, usePushToast } from "../index";
+import { Accordion, AccordionSection, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, RichTextField, Tab, TabPanel, Tabs, TextField, Toast, ToastErrorBoundary, ToastsProvider, usePushToast } from "../index";
 import { RenderCounterProvider, useRenderCounters } from "../utility/render-counter";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
@@ -78,6 +78,7 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
     return (
         <ListItem
             index={i}
+            badge={<Badge variantTheme="info">10</Badge>}
             iconStart={(i & 0b01) ? iconStart : null}
             iconEnd={(i & 0b10) ? <ButtonAction variantSize="sm" variantFill="fill" variantTheme="light" onPress={() => alert("Delete button clicked")}><BootstrapIcon icon="trash-fill" label="Delete" /></ButtonAction> : null}>
             List item #{i}

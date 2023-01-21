@@ -33,6 +33,10 @@
   overflow: hidden;
 }
 
+.badge {
+  z-index: 1;
+}
+
 .form-check {
   position: relative;
 }
@@ -146,6 +150,8 @@
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
   outline: none;
+  display: flex;
+  justify-content: space-between;
 }
 .gridlist-group > .gridlist-item > .gridlist-item-text:focus-visible {
   outline-width: 0.25rem;

@@ -1,5 +1,5 @@
 import { DisabledContext, DefaultDisabledType, ButtonThemes } from "../context";
-import { ComponentChildren, h, Ref } from "preact";
+import { ComponentChildren, h, Ref, VNode } from "preact";
 import { Button as AriaButton, ButtonPressEvent, ElementToTag, EventDetail, Progress, ProgressWithHandler, ToolbarChild } from "preact-aria-widgets";
 import { AsyncHandler, returnZero, useAsyncHandler, UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { useContext } from "preact/hooks";
@@ -22,6 +22,8 @@ export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttri
 
     tag?: ElementToTag<E>;
 
+    badge?: VNode;
+
     variantTheme?: ButtonThemes;
     variantFill?: "fill" | "outline";
     variantSize?: "sm" | "md" | "lg";
@@ -40,7 +42,7 @@ export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttri
     pressed?: boolean;
 }
 
-export const Button = memo(forwardElementRef(function Button<E extends HTMLElement>({ tag: Tag, tooltip, buttonGroupIndex, children, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps<E>, ref?: Ref<E>) {
+export const Button = memo(forwardElementRef(function Button<E extends HTMLElement>({ tag: Tag, tooltip, buttonGroupIndex, children, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps<E>, ref?: Ref<E>) {
     Tag ??= "button" as never;
 
     const { currentCapture, pending: individualPending, syncHandler, callCount } = useAsyncHandler({
@@ -68,6 +70,8 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
     //disabled ||= (pendingIndex != null);
     disabled ||= pending;
     const d = disabled ? disabledType : false;
+
+    children = <>{children}{badge}</>
 
 
     if (buttonGroupInfo == null) {
@@ -144,7 +148,7 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extend
                     render={progressInfo => {
                         const { propsIndicator, propsRegion } = progressInfo;
                         const loadingJsx = (<span class="spinner-border" {...propsIndicator} />)
-                        const buttonClass = clsx(`btn`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
+                        const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
 
                         const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, !!callCount && loadingJsx))
                         if (tooltip) {
