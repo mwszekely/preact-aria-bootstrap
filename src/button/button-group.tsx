@@ -5,11 +5,14 @@ import { useAsync, useAsyncHandler, useHasCurrentFocus, useMergedProps, useRefEl
 import { useContext, useMemo, useRef } from "preact/hooks";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist";
 import { LabelledProps } from "../utility/types";
+import { ButtonProps } from "./button-action";
+import clsx from "clsx";
 
 export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">, Pick<ToolbarProps<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>, "orientation"> {
     disabled?: boolean;
     selectedIndex?: number | null;
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
+    variantSize?: ButtonProps<any>["variantSize"];
 }
 
 
@@ -29,7 +32,7 @@ export interface ButtonGroupChildProps {
 }
 export interface ButtonGroupContext { pendingIndex: number | null }
 export const ButtonGroupContext = createContext<ButtonGroupContext | null>(null);
-export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, orientation, label, labelPosition, disabled, selectedIndex, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>) {
+export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantSize, orientation, label, labelPosition, disabled, selectedIndex, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>) {
     const imperativeHandle = useRef<UseToolbarReturnType<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>>(null);
     type OSSI = UseToolbarParameters<HTMLSpanElement, HTMLButtonElement, UseToolbarSubInfo<HTMLButtonElement>>["toolbarParameters"]["onSelectedIndexChange"];
     const [capturedIndex, setCapturedIndex] = useState(null as number | null);
@@ -45,6 +48,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLSpanElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn })
 
     return (
+        
         <DisabledContext.Provider value={disabled ?? false}>
             <ButtonGroupContext.Provider value={useMemo(() => ({ pendingIndex }), [pendingIndex])}>
                 <Toolbar<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement>
@@ -61,7 +65,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                             <>
                                 {labelPosition == "before" && visibleLabel}
                                 <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={false} typeaheadActive={false}>
-                                    <span {...useMergedProps({ className: "btn-group" }, refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, info.propsToolbar, props, { ref })}>
+                                    <span {...useMergedProps({ className: clsx("btn-group", variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `btn-group-vertical`) }, refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, info.propsToolbar, props, { ref })}>
                                         {labelPosition == "within" && visibleLabel}
                                         {children}
                                     </span>
