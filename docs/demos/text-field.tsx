@@ -1,6 +1,6 @@
 
 import { useStableCallback, useState } from "preact-prop-helpers";
-import { BootstrapIcon, DocumentField, RichTextField, RichTextView, TextField } from "../../index";
+import { BootstrapIcon, DocumentField, InputGroup, RichTextField, RichTextView, TextField } from "../../index";
 import { useCallback } from "preact/hooks"
 import { Temporal } from "@js-temporal/polyfill";
 
@@ -81,7 +81,7 @@ export function Demo() {
             <div>Text: {text}, Number: {number}</div>
             <TextField label="Text field" iconStart={<BootstrapIcon icon="plus-circle" label={null} />} labelPosition="floating" onValueChange={setTextAsync} value={text} type="text" />
             <TextField label="Number field" iconEnd={<BootstrapIcon icon="pencil-fill" label={null} />} labelPosition="before" onValueChange={setNumberAsync} value={number} type="number" min={0} max={100} digitDisplay={3} />
-            <TextField label="Datetime field" labelPosition="before" onValueChange={setDateTimeAsync} value={dateTime} type="datetime-local" />
+            <InputGroup><TextField label="Datetime field" labelPosition="before" onValueChange={setDateTimeAsync} value={dateTime} type="datetime-local" /></InputGroup>
             <TextField label="Date field" labelPosition="before" onValueChange={setDateAsync} value={date} type="date" />
             <TextField label="Time field" labelPosition="before" onValueChange={setTimeAsync} value={time} type="time" />
             <TextField label="Time field (seconds)" labelPosition="before" onValueChange={setTimeAsync} value={time} type="time" seconds />

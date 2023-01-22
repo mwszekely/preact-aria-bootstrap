@@ -1,5 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import clsx from "clsx";
+import { WithinInputGroup } from "../input-group/shared";
 import { ComponentChildren, h, Ref } from "preact";
 import { LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets";
 import { useHasCurrentFocus, useMergedProps, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
@@ -9,6 +10,7 @@ import { DefaultDisabledType } from "../context";
 import { Tooltip } from "../tooltip";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { LabelledProps } from "../utility/types";
+import { Fade } from "preact-transition";
 
 interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<h.JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
     value: T | null;
@@ -454,14 +456,16 @@ export function useCommitTextField<C>({ getFocused, commit, currentCapture, show
         timeout: 50,
         triggerIndex: ++(triggerIndex.current),
         callback: () => {
-        if (!getFocused() && !showSpinner)
-            updateDOMValue(value);
-    }});
+            if (!getFocused() && !showSpinner)
+                updateDOMValue(value);
+        }
+    });
 }
 
 const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, V>({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }: LabelledProps<TFB<E, V>, "floating" | "tooltip">, ref?: Ref<any>) {
     const { refElementReturn: { getElement: getInputElement, propsStable: propsInput1 } } = useRefElement<HTMLInputElement>({ refElementParameters: {} });
     const { refElementReturn: { getElement: getLabelElement, propsStable: propsLabel1 } } = useRefElement<HTMLLabelElement>({ refElementParameters: {} });
+    const withinInputGroup = useContext(WithinInputGroup);
     const {
         propsInput: propsInput2,
         propsLabel: propsLabel2
@@ -506,7 +510,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
             render={progressInfo => {
 
 
-                const { asyncHandlerReturn: { pending: p, debouncingAsync, debouncingSync, currentCapture, syncHandler }, propsIndicator } = progressInfo;
+                const { asyncHandlerReturn: { pending: p, debouncingAsync, callCount, debouncingSync, currentCapture, syncHandler }, propsIndicator } = progressInfo;
 
                 const showSpinner = (p || debouncingAsync || debouncingSync);
 
@@ -548,16 +552,18 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
 
 
 
-                useCommitTextField<V>({ getFocused: getCurrentFocusedInner, currentCapture, showSpinner, value: value as V, commit: (value2) => {
+                useCommitTextField<V>({
+                    getFocused: getCurrentFocusedInner, currentCapture, showSpinner, value: value as V, commit: (value2) => {
 
-                    const element = getElement();
-                    if (element) {
-                        if (element instanceof HTMLInputElement && typeof value2 == "number")
-                            element.valueAsNumber = value2;
-                        else
-                            element.value = ((value2 as string) ?? "");
+                        const element = getElement();
+                        if (element) {
+                            if (element instanceof HTMLInputElement && typeof value2 == "number")
+                                element.valueAsNumber = value2;
+                            else
+                                element.value = ((value2 as string) ?? "");
+                        }
                     }
-                } })
+                })
 
 
 
@@ -622,50 +628,81 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
                     "data-async-has-error": progressInfo.asyncHandlerReturn.hasError,
                 } as {};
 
-                const labelJsx = (<label class="form-label" {...useMergedProps(propsLabel1, propsLabel2, propsLabel as h.JSX.HTMLAttributes<any>)}>{label}</label>);
+                const labelJsx = (<label class={clsx(!withinInputGroup ? "form-label" : "input-group-text")} {...useMergedProps(propsLabel1, propsLabel2, propsLabel as h.JSX.HTMLAttributes<any>)}>{label}</label>);
                 const inputJsx = <input {...dataProps} inputMode={inputMode || undefined} autocomplete={autocomplete || undefined} placeholder={placeholder ?? undefined} readonly={readonly} onInput={onInput as h.JSX.EventHandler<any>} {...useMergedProps({ ref }, p1, p2, propsInput1, propsInput2, { className: clsx(baseInputClass) }, propsInput as h.JSX.HTMLAttributes<any>)} />;
                 const textAreaJsx = <textarea {...dataProps} placeholder={placeholder ?? undefined} readonly={readonly} onInput={onInput as h.JSX.EventHandler<any>} rows={rows ?? 1} {...useMergedProps({ ref }, p1, p2, { className: clsx(baseInputClass, resizeable && "resizeable") }, propsInput1, propsInput2, propsInput as h.JSX.HTMLAttributes<any>)} />
                 const finalInputJsx = (isTextArea ? textAreaJsx : inputJsx);
 
+                if (!withinInputGroup) {
 
 
-                return (
-                    <div {...useMergedProps({
-                        className: clsx(
-                            "form-text-field",
-                            otherClasses,
-                            `mb-${marginBottom ?? 3}`,
-                            `form-text-field-type-${propsInput.type}`,
-                            !!iconStart && "form-text-field-with-icon-start",
-                            (!!iconEnd || showSpinner) && "form-text-field-with-icon-end",
-                            showSpinner && "pending")
-                    }, otherProps || {})}>
-                        {labelPosition == "before" && labelJsx}
-                        <div class={clsx("form-text-field-control-container", labelPosition == "floating" && "form-floating")}>
-                            {iconStart && <span class={clsx("form-control-icon-start form-control-icon show")}>{iconStart}</span>}
+                    return (
+                        <div {...useMergedProps({
+                            className: clsx(
+                                "form-text-field",
+                                otherClasses,
+                                `mb-${marginBottom ?? 3}`,
+                                `form-text-field-type-${propsInput.type}`,
+                                !!iconStart && "form-text-field-with-icon-start",
+                                (!!iconEnd || showSpinner) && "form-text-field-with-icon-end",
+                                showSpinner && "pending")
+                        }, otherProps || {})}>
+                            {labelPosition == "before" && labelJsx}
+                            <div class={clsx("form-text-field-control-container", labelPosition == "floating" && "form-floating")}>
+                                {iconStart && <span class={clsx("form-control-icon-start form-control-icon show")}>{iconStart}</span>}
+                                {labelPosition == "tooltip" ? <Tooltip tooltip={label}>{finalInputJsx}</Tooltip> : finalInputJsx}
+                                {labelPosition == "floating" && labelJsx}
+                                {iconEnd && <span class={clsx("form-control-icon-end form-control-icon", !showSpinner && "show")}>{iconEnd}</span>}
+                                <TextFieldSpinner callCount={callCount} containerClass={"form-control-icon-end form-control-icon"} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
+                            </div>
+                            {labelPosition == "after" && labelJsx}
+                        </div>
+                    );
+                }
+                else {
+
+
+                    return (
+                        <>
+                            {labelPosition == "before" && labelJsx}
+                            {iconStart && <span class={clsx("input-group-text")}>{iconStart}</span>}
                             {labelPosition == "tooltip" ? <Tooltip tooltip={label}>{finalInputJsx}</Tooltip> : finalInputJsx}
                             {labelPosition == "floating" && labelJsx}
-                            {iconEnd && <span class={clsx("form-control-icon-end form-control-icon", !showSpinner && "show")}>{iconEnd}</span>}
-                            <TextFieldSpinner containerClass={"form-control-icon-end form-control-icon"} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
-                        </div>
-                        {labelPosition == "after" && labelJsx}
-                    </div>
-                );
+                            {iconEnd && <span class={clsx("input-group-text", !showSpinner && "show")}>{iconEnd}</span>}
+                            <TextFieldSpinner callCount={callCount} containerClass={""} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
+                            {labelPosition == "after" && labelJsx}
+                        </>
+                    );
+                }
+
             }
             }
         />
     );
 }));
 
-export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSync, pending: p, propsIndicator, containerClass }: { containerClass: string, debouncingAsync: boolean, debouncingSync: boolean, pending: boolean, propsIndicator: h.JSX.HTMLAttributes<any> }) {
-    
+export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSync, pending: p, propsIndicator, containerClass, callCount }: { callCount: number, containerClass: string, debouncingAsync: boolean, debouncingSync: boolean, pending: boolean, propsIndicator: h.JSX.HTMLAttributes<any> }) {
+
+    if (callCount == 0)
+        return null;
+
     let pendingDisplayType = ((debouncingAsync || debouncingSync) ? 2 : p ? 1 : 0);
 
+    const withinInputGroup = useContext(WithinInputGroup);
 
-    return (
+    const ret = (
         <>
-        <span class={clsx(containerClass,`spinner-container`, (pendingDisplayType == 1) && "show")}><span class={clsx(`spinner spinner-border`)} {...((pendingDisplayType == 1) ? propsIndicator : {})} /></span>
-        <span class={clsx(containerClass,`spinner-container`, (pendingDisplayType == 2) && "show")}><span class={clsx(`spinner spinner-grow`)} {...((pendingDisplayType == 2) ? propsIndicator : {})} /></span>
+            <Fade show={(pendingDisplayType == 1)} animateOnMount><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-border spinner-border-sm`)} {...((pendingDisplayType == 1) ? propsIndicator : {})} /></span></Fade>
+            <Fade show={(pendingDisplayType == 2)} animateOnMount><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-grow spinner-grow-sm`)} {...((pendingDisplayType == 2) ? propsIndicator : {})} /></span></Fade>
         </>
     )
+
+    if (!withinInputGroup) {
+        return ret;
+    }
+    else {
+        return (
+            <div class="input-group-text input-group-text-field-spinners">{ret}</div>
+        )
+    }
 })

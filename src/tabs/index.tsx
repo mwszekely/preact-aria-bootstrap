@@ -39,7 +39,7 @@ export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, l
             render={info => {
                 const labelJsx = <label {...info.propsLabel}>{label}</label>;
                 return (
-                    <div {...useMergedProps({ class: "tabs-container" }, { ...props, ref })}>
+                    <div {...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref })}>
                         {labelPosition == "before" && labelJsx}
                         <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != "none"}>
                             <ul {...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) })}>

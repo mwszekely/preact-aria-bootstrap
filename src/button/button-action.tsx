@@ -150,6 +150,9 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extend
                         render={progressInfo => {
                             const { propsIndicator, propsRegion } = progressInfo;
                             const loadingJsx = (<Fade show={pending}><span class="spinner-border" {...propsIndicator} /></Fade>)
+                            if (pressed !== null)
+                                variantFill ??= (pressed? "fill" : "outline");
+                                
                             const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
 
                             const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx))

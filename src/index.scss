@@ -17,5 +17,5 @@
 @forward "./table/index.scss";
 @forward "./text-field/index.scss";
 @forward "./utility/index.scss";
-@forward "../node_modules/bootstrap/scss/bootstrap";
-@forward "../node_modules/preact-transition/src/index.scss";
+@forward "bootstrap-sass-variables/bootstrap.scss";
+@forward "preact-transition/src/index.scss";

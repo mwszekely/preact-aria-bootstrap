@@ -8,7 +8,7 @@ export { Checkbox } from "./checkbox";
 export { Dialog } from "./dialog";
 export { Figure, FigureProps } from "./figure";
 export { BootstrapIcon, FontIcon } from "./icon";
-export { InputGroup, InputGroupProps } from "./input-group";
+export { InputGroup, InputGroupProps, InputGroupText } from "./input-group";
 export { GridBsBreak, GridBsBreakProps, GridBsContainer, GridBsContainerProps, GridBsItem, GridBsItemProps, GridBsRow, GridBsRowProps, GridCss, GridCssItem, GridCssItemProps, GridCssProps, GridResponsive, GridStatic } from "./layout";
 export { List, ListItem } from "./list";
 export { Menu, MenuItem } from "./menu";

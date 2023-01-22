@@ -20,5 +20,5 @@ export const InputGroup = memo(forwardElementRef(function InputGroup({ wrap, siz
 }));
 
 export const InputGroupText = memo(forwardElementRef(function InputGroupText(props: GlobalAttributes<HTMLDivElement, "children">, ref: Ref<HTMLDivElement>) {
-    return <div {...useMergedProps(props)} ref={ref} />
+    return <div {...useMergedProps({ className: "input-group-text" }, props)} ref={ref} />
 }))

@@ -984,6 +984,13 @@
   grid-template-columns: auto;
   grid-template-rows: auto 1fr;
 }
+.tabs-container.tabs-container-vertical {
+  grid-template-rows: auto;
+  grid-template-columns: auto 1fr;
+}
+.tabs-container.tabs-container-vertical > .nav-tabs {
+  flex-direction: column;
+}
 
 .tab-panel {
   height: 100%;
@@ -1247,15 +1254,18 @@ th > button.sort-button {
   opacity: 1;
 }
 
+.input-group-text.input-group-text-field-spinners {
+  display: grid;
+}
+.input-group-text.input-group-text-field-spinners > * {
+  grid-area: 1/1/span 1/span 1;
+}
+
+#portal {
+  display: contents;
+}
 #portal > * {
-  z-index: 1;
-  position: fixed;
-  inset: 0;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  pointer-events: none;
+  display: contents;
 }
 
 .keyboard-assist-icon-container {

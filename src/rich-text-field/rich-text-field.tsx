@@ -70,7 +70,7 @@ export function RichTextField({ implementation, toolbarItems, onValueChange, val
             render={progressInfo => {
                 const [getFocused, setFocused] = usePassiveState(null, returnFalse);
                 const { asyncHandlerReturn, propsIndicator, propsRegion } = progressInfo;
-                const { pending: p, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
+                const { pending: p, callCount, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
 
                 const pending = (p || debouncingAsync || debouncingSync);
                 useCommitTextField({
@@ -91,7 +91,7 @@ export function RichTextField({ implementation, toolbarItems, onValueChange, val
                 return (
 
                     <div class={clsx("rich-text-field", pending && "pending")}>
-                    <TextFieldSpinner containerClass="" debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
+                    <TextFieldSpinner callCount={callCount} containerClass="" debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
                         <CkEditorWrapper
                             editorHandle={editorHandle}
                             implementation={implementation ?? (globalThis as any).CKEDITOR?.ClassicEditor ?? (globalThis as any).ClassicEditor}
@@ -123,7 +123,7 @@ export function DocumentField({ implementation, toolbarItems, onValueChange, val
             render={progressInfo => {
                 const [getFocused, setFocused] = usePassiveState(null, returnFalse);
                 const { asyncHandlerReturn, propsIndicator, propsRegion } = progressInfo;
-                const { pending: p, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
+                const { pending: p, callCount, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
 
                 const pending = (p || debouncingAsync || debouncingSync);
 
@@ -144,7 +144,7 @@ export function DocumentField({ implementation, toolbarItems, onValueChange, val
                 return (
 
                     <div class={clsx("document-field shadow-sm", pending && "pending")}>
-                        <TextFieldSpinner containerClass="" debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
+                        <TextFieldSpinner callCount={callCount} containerClass="" debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
                         <div class="document-field__toolbar shadow-sm"></div>
                         <div class="document-field__editable-container">
                             <CkEditorWrapper

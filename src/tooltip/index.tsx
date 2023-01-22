@@ -87,7 +87,7 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
             // Don't set hidden or inert or anything like that when is's closed!
             const tooltipContent =
                 <div {...propsPopup}>
-                    <ZoomFade exitVisibility="visible" show={info.tooltipReturn.isOpen || false} zoomMin={0.8} zoomOriginBlock={1} zoomOriginInline={(alignMode == "element"? 0.5 : 0)}>
+                    <ZoomFade exitVisibility="visible" show={tooltip == null? false : (info.tooltipReturn.isOpen || false)} zoomMin={0.8} zoomOriginBlock={1} zoomOriginInline={(alignMode == "element"? 0.5 : 0)}>
                         <div {...useMergedProps<any>(propsData, { className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, info.propsPopup)}>
                             <div {...useMergedProps(propsArrow, { className: "tooltip-arrow" })} />
                             <div class="tooltip-inner">
