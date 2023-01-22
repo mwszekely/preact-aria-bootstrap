@@ -41,7 +41,7 @@ export function List({ disabled, selectedIndex, onSelectedIndexChange, label, la
     const { refElementReturn } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
     const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLDivElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn })
     //const WINDOW_SIZE = 20;
-    const [paginationStart, setPaginationStart] = useState<number | null>(0);
+    const [paginationStart, setPaginationStart] = useState<number | null>(paginationSize == null? null : 0);
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
 
 
