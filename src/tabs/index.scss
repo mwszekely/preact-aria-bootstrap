@@ -1,13 +1,13 @@
-@use "../../node_modules/bootstrap-sass-variables/prefix" as *;
-@use "../../node_modules/bootstrap-sass-variables/enable-shadows" as *;
-@use "../../node_modules/bootstrap-sass-variables/primary" as *;
-@use "../../node_modules/bootstrap-sass-variables/body-bg" as *;
-@use "../../node_modules/bootstrap-sass-variables/btn-box-shadow" as *;
-@use "../../node_modules/bootstrap-sass-variables/btn-focus-width" as *;
-@use "../../node_modules/bootstrap-sass-variables/btn-focus-width" as *;
-@use "../../node_modules/bootstrap-sass-variables/functions/to-rgb" as *;
-@use "../../node_modules/bootstrap-sass-variables/success" as *;
-@use "../../node_modules/bootstrap-sass-variables/danger" as *;
+@use "bootstrap-sass-variables/prefix" as *;
+@use "bootstrap-sass-variables/enable-shadows" as *;
+@use "bootstrap-sass-variables/primary" as *;
+@use "bootstrap-sass-variables/body-bg" as *;
+@use "bootstrap-sass-variables/btn-box-shadow" as *;
+@use "bootstrap-sass-variables/btn-focus-width" as *;
+@use "bootstrap-sass-variables/btn-focus-width" as *;
+@use "bootstrap-sass-variables/functions/to-rgb" as *;
+@use "bootstrap-sass-variables/success" as *;
+@use "bootstrap-sass-variables/danger" as *;
 @use "../../node_modules/preact-transition/src/index.scss" as *;
 
 .tabs-container {

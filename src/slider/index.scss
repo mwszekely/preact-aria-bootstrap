@@ -1,6 +1,6 @@
 @use "./form-range-track-bg" as *;
 @use "./form-range-tick" as *;
-@use "../../node_modules/bootstrap-sass-variables/primary" as *;
+@use "bootstrap-sass-variables/primary" as *;
 
 .form-range-container {
     display: grid;

@@ -1,10 +1,10 @@
-@use "../../node_modules/bootstrap-sass-variables/prefix" as *;
-@use "../../node_modules/bootstrap-sass-variables/enable-shadows" as *;
-@use "../../node_modules/bootstrap-sass-variables/primary" as *;
-@use "../../node_modules/bootstrap-sass-variables/btn-box-shadow" as *;
-@use "../../node_modules/bootstrap-sass-variables/btn-focus-width" as *;
-@use "../../node_modules/bootstrap-sass-variables/dropdown-border-radius" as *;
-@use "../../node_modules/bootstrap-sass-variables/functions/to-rgb" as *;
+@use "bootstrap-sass-variables/prefix" as *;
+@use "bootstrap-sass-variables/enable-shadows" as *;
+@use "bootstrap-sass-variables/primary" as *;
+@use "bootstrap-sass-variables/btn-box-shadow" as *;
+@use "bootstrap-sass-variables/btn-focus-width" as *;
+@use "bootstrap-sass-variables/dropdown-border-radius" as *;
+@use "bootstrap-sass-variables/functions/to-rgb" as *;
 
 .popper-popup.popper-menu {
     --#{$prefix}dropdown-border-radius: #{$dropdown-border-radius};

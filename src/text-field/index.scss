@@ -1,7 +1,7 @@
-@use "../../node_modules/bootstrap-sass-variables/input-line-height" as *;
-@use "../../node_modules/bootstrap-sass-variables/input-padding-x" as *;
-@use "../../node_modules/bootstrap-sass-variables/input-padding-y" as *;
-@use "../../node_modules/bootstrap-sass-variables/input-border-width" as *;
+@use "bootstrap-sass-variables/input-line-height" as *;
+@use "bootstrap-sass-variables/input-padding-x" as *;
+@use "bootstrap-sass-variables/input-padding-y" as *;
+@use "bootstrap-sass-variables/input-border-width" as *;
 
 $default-text-field-spinner-size: 1.3;
 
