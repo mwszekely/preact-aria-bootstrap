@@ -38,6 +38,7 @@ export function Demo() {
             <Code />
             <Checkbox checked={checked}  onValueChange={setCheckedSync} label="Sync checkbox" labelPosition="after" />
             <Checkbox checked={checked} onValueChange={setCheckedAsync} label="Async checkbox" labelPosition="after" />
+            <Checkbox checked={checked} tristate onValueChange={setCheckedAsync} label="Async tristate checkbox" labelPosition="after" />
             {/*<DemoButton disabled={false} tag="button" />
             <DemoButton disabled="soft" tag="button" />
             <DemoButton disabled="hard" tag="button" />

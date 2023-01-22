@@ -15,20 +15,50 @@ export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children
     onValueChange(checked: boolean, event: CheckboxChangeEvent<HTMLInputElement>): void | Promise<void>;
     loadingLabel?: string;
     disabled?: boolean;
+
+    /**
+     * A checkbox can always be tristate implicitly by setting `checked` to `"mixed"`,
+     * but by setting `tristate` to `true` event handlers will properly cycle through all three states.
+     */
+    tristate?: boolean;
 }
 
-export function Checkbox({ label, labelPosition, checked, onValueChange, loadingLabel, debounce, throttle, inline, disabled: userDisabled, ...props }: LabelledProps<CheckboxProps, "tooltip">, ref?: Ref<any>) {
+export function Checkbox({ label, labelPosition, checked, tristate, onValueChange, loadingLabel, debounce, throttle, inline, disabled: userDisabled, ...props }: LabelledProps<CheckboxProps, "tooltip">, ref?: Ref<any>) {
     const isSwitch = (props as { _isSwitch: boolean })._isSwitch;
     if (isSwitch)
         delete (props as any)._isSwitch;
 
-        const w = useContext(WithinInputGroup);
+    const w = useContext(WithinInputGroup);
 
     return (
         <ProgressWithHandler<CheckboxChangeEvent<HTMLInputElement>, boolean, HTMLSpanElement, HTMLLabelElement>
             ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
-            asyncHandler={onValueChange}
-            capture={e => e[EventDetail].checked as boolean}
+            asyncHandler={(next, event) => {
+                if (tristate) {
+                    if (checked == false)
+                        return onValueChange?.("mixed" as unknown as boolean, event);
+                    else if (checked === "mixed")
+                        return onValueChange?.(true, event);
+                    else
+                        return onValueChange?.(false, event);
+                }
+                else {
+                    return onValueChange?.(next, event);
+                }
+            }}
+            capture={e => {
+                if (tristate) {
+                    if (checked == false)
+                        return "mixed" as unknown as boolean;
+                    else if (checked === "mixed")
+                        return true;
+                    else
+                        return false;
+                }
+                else {
+                    return e[EventDetail].checked as boolean
+                }
+            }}
             debounce={debounce}
             throttle={throttle}
 
@@ -55,7 +85,7 @@ export function Checkbox({ label, labelPosition, checked, onValueChange, loading
                         ariaLabel={labelPosition == 'hidden' ? label : null}
                         checked={(pending ? currentCapture : null) ?? checked}
                         onCheckedChange={syncHandler}
-                        labelPosition={labelPosition == "hidden" || labelPosition == "tooltip"? "none" : "separate"}
+                        labelPosition={labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate"}
                         tagInput="input"
                         tagLabel="label"
                         disabled={d}
@@ -65,10 +95,10 @@ export function Checkbox({ label, labelPosition, checked, onValueChange, loading
                             const inputJsx = <input class={clsx("form-check-input", w && (labelPosition == 'hidden') && "mt-0")} {...info.propsInput} />
                             const visibleLabel = <label class="form-check-label" {...info.propsLabel}>{label}</label>
                             return (
-                                <div {...useMergedProps({ className: clsx(labelPosition == "after" && ".form-check-reverse", w? "input-group-text" : "form-check", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse") }, props, { ref })}>
+                                <div {...useMergedProps({ className: clsx(labelPosition == "after" && ".form-check-reverse", w ? "input-group-text" : "form-check", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse") }, props, { ref })}>
                                     {loadingJsx}
                                     {labelPosition == "before" && visibleLabel}
-                                        {labelPosition == "tooltip"? <Tooltip forward tooltip={label}>{inputJsx}</Tooltip> : inputJsx}
+                                    {labelPosition == "tooltip" ? <Tooltip forward tooltip={label}>{inputJsx}</Tooltip> : inputJsx}
                                     {labelPosition == "after" && visibleLabel}
                                 </div>
                             )
