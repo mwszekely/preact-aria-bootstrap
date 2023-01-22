@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { cloneElement, ComponentChildren, h, Ref, VNode } from "preact";
+import { cloneElement, ComponentChildren, Ref, VNode } from "preact";
 import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref";

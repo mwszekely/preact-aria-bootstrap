@@ -1,12 +1,12 @@
-import clsx from "clsx";
-import { DefaultDisabledType } from "../context";
-import { ComponentChildren, h, JSX, Ref } from "preact";
-import { ElementToTag, LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets";
-import { useAsyncHandler, useCompleteListNavigation, useHasCurrentFocus, useMergedProps, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
-import { useCallback, useContext, useEffect, useLayoutEffect, useRef } from "preact/hooks";
-import { Tooltip } from "../tooltip";
-import { memo } from "preact/compat";
 import { Temporal } from "@js-temporal/polyfill";
+import clsx from "clsx";
+import { ComponentChildren, h, Ref } from "preact";
+import { LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets";
+import { useHasCurrentFocus, useMergedProps, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
+import { memo } from "preact/compat";
+import { useContext, useLayoutEffect, useRef } from "preact/hooks";
+import { DefaultDisabledType } from "../context";
+import { Tooltip } from "../tooltip";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { LabelledProps } from "../utility/types";
 

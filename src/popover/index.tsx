@@ -1,14 +1,15 @@
 import clsx from "clsx";
-import { usePopper } from "../popper";
 import { ComponentChildren, Ref } from "preact";
 import { defaultRenderPortal } from "preact-aria-widgets";
 import { ParentDepthContext, useDefault } from "preact-aria-widgets/component/util";
 import { useMenuSurface, UseMenuSurfaceReturnType } from "preact-aria-widgets/use-menu-surface";
-import { useStableCallback, useState, useTimeout, useMergedProps, useRandomId } from "preact-prop-helpers";
+import { useMergedProps, useRandomId, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { ZoomFade } from "preact-transition";
 import { useCallback, useContext, useImperativeHandle } from "preact/hooks";
+import { Button, ButtonProps } from "../button";
+import { usePopper } from "../popper";
 import { usePortalId } from "../utility/use-portal-id";
-import { Button, ButtonProps } from "../button"
+
 export interface PopoverProps {
     forceOpen?: boolean | null | undefined;
     label: ComponentChildren;

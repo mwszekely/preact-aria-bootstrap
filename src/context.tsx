@@ -1,4 +1,4 @@
-import { createContext, h, Ref } from "preact";
+import { createContext } from "preact";
 
 export const DisabledContext = createContext(false);
 export const DefaultDisabledType = createContext("soft" as "soft" | "hard");

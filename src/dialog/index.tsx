@@ -1,11 +1,10 @@
-import { memo } from "preact/compat";
-import { defaultRenderPortal, Dialog as AriaDialog, DialogProps as AriaDialogProps, Heading } from "preact-aria-widgets"
-import { ComponentChildren, h, Ref, VNode } from "preact";
+import clsx from "clsx";
+import { ComponentChildren, Ref, VNode } from "preact";
+import { defaultRenderPortal, Dialog as AriaDialog, DialogProps as AriaDialogProps, Heading } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
 import { SlideFade } from "preact-transition";
-import clsx from "clsx";
+import { memo } from "preact/compat";
 import { Button } from "../button/button-action";
-import { BootstrapIcon } from "../icon";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { GlobalAttributes } from "../utility/types";
 import { useClonedElement } from "../utility/use-cloned-element";

@@ -1,4 +1,4 @@
-import { ComponentChild, h, Ref } from "preact";
+import { Ref } from "preact";
 import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref";

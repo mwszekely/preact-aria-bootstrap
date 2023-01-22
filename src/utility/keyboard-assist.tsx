@@ -1,8 +1,8 @@
 import { ComponentChild, ComponentChildren, createContext, Ref, VNode } from "preact";
-import { generateRandomId, useGlobalHandler, useHasCurrentFocus, usePersistentState, useRefElement, useState, useMergedProps } from "preact-prop-helpers";
+import { generateRandomId, useGlobalHandler, useHasCurrentFocus, useMergedProps, usePersistentState, useRefElement, useState } from "preact-prop-helpers";
 import { CollapseFade, SlideZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
-import { useEffect, useLayoutEffect, useRef, useContext } from "preact/hooks";
+import { useContext, useEffect, useLayoutEffect, useRef } from "preact/hooks";
 import { forwardElementRef } from "./forward-element-ref";
 import { useClonedElement } from "./use-cloned-element";
 

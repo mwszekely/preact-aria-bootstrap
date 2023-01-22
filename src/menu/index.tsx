@@ -5,11 +5,11 @@ import { returnUndefined, returnZero, useMergedProps, useStableCallback, useStat
 import { ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useImperativeHandle, useRef } from "preact/hooks";
-import { useClonedElement } from "../utility/use-cloned-element";
 import { usePopper } from "../popper";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist";
 import { GlobalAttributes } from "../utility/types";
+import { useClonedElement } from "../utility/use-cloned-element";
 import { usePortalId } from "../utility/use-portal-id";
 
 

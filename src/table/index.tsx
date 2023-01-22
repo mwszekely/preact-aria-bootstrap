@@ -1,1 +1,1 @@
-export { DataTable, DataTableBody, DataTableCell, DataTableRow, DataTableHead, DataTableFoot } from "./data-table"
+export { DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow } from "./data-table";

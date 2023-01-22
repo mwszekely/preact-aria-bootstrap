@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { ButtonThemes } from "../context";
-import { ComponentChildren, createElement, Fragment, h, Ref, VNode } from "preact";
+import { ComponentChildren, createElement, Ref, VNode } from "preact";
 import { Heading } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
+import { ButtonThemes } from "../context";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { GlobalAttributes } from "../utility/types";
 

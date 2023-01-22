@@ -1,5 +1,5 @@
-import { cloneElement, ComponentChild, h, Ref, VNode } from "preact";
-import { useMergedProps, useMergedRefs } from "preact-prop-helpers";
+import { cloneElement, h, Ref, VNode } from "preact";
+import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref";
 

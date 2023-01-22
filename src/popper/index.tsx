@@ -1,9 +1,9 @@
-import { computePosition, flip, offset, arrow, shift, size, inline, hide, Placement, Side, Alignment, autoPlacement } from "@floating-ui/dom"
-import { useCallback, useEffect, useLayoutEffect, useRef } from "preact/hooks";
-import { returnZero, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers"
+import { Alignment, arrow, computePosition, flip, hide, offset, Placement, shift, Side, size } from "@floating-ui/dom";
 import { h } from "preact";
-import { CSSProperties } from "preact/compat";
+import { returnZero, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 import { identity, runImmediately } from "preact-prop-helpers/preact-extensions/use-passive-state";
+import { CSSProperties } from "preact/compat";
+import { useEffect, useLayoutEffect, useRef } from "preact/hooks";
 
 export interface UsePopperProps {
     popperParameters: {
