@@ -128,8 +128,7 @@
   }*/
 }
 .gridlist-group > .gridlist-item:not(:focus-within) {
-  contain: strict;
-  content-visibility: auto;
+  contain: content;
 }
 .gridlist-group > .gridlist-item.list-group-item {
   padding: 0;
@@ -1229,11 +1228,15 @@ th > button.sort-button {
   opacity: 1;
 }
 
-#portal {
-  overflow: hidden;
-}
 #portal > * {
   z-index: 1;
+  position: fixed;
+  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
 }
 
 .keyboard-assist-icon-container {
@@ -1260,7 +1263,9 @@ th > button.sort-button {
   opacity: 0.15;
 }
 
-.keyboard-assist-arrow-keys, .keyboard-assist-home-end, .keyboard-assist-page-keys {
+.keyboard-assist-arrow-keys,
+.keyboard-assist-home-end,
+.keyboard-assist-page-keys {
   display: grid;
   gap: calc(var(--keyboard-assist-key-size) * 0.125);
 }
@@ -1294,7 +1299,10 @@ th > button.sort-button {
   grid-row: 2/span 1;
 }
 
-.keyboard-assist-instructions, .keyboard-assist-typeahead, .keyboard-assist-rich-text-f10, .keyboard-assist-leave-f2 {
+.keyboard-assist-instructions,
+.keyboard-assist-typeahead,
+.keyboard-assist-rich-text-f10,
+.keyboard-assist-leave-f2 {
   grid-column: 1/-1;
   display: flex;
   justify-content: center;
@@ -1312,7 +1320,8 @@ th > button.sort-button {
   padding: calc(var(--keyboard-assist-key-size) * 0.25) calc(var(--keyboard-assist-key-size) * 0.75);
 }
 
-.keyboard-assist-typeahead-message, .keyboard-assist-key {
+.keyboard-assist-typeahead-message,
+.keyboard-assist-key {
   color: #fff;
   background: #212529;
   transition-property: opacity, color, background-color, border;
@@ -1321,11 +1330,13 @@ th > button.sort-button {
   position: relative;
 }
 @media (prefers-reduced-motion) {
-  .keyboard-assist-typeahead-message, .keyboard-assist-key {
+  .keyboard-assist-typeahead-message,
+  .keyboard-assist-key {
     transition-property: opacity !important;
   }
 }
-.keyboard-assist-typeahead-message::after, .keyboard-assist-key::after {
+.keyboard-assist-typeahead-message::after,
+.keyboard-assist-key::after {
   position: absolute;
   inset: 0;
   opacity: 0;
@@ -1335,17 +1346,27 @@ th > button.sort-button {
   transition: opacity 300ms ease-in-out;
   content: "";
 }
-.keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-up, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-down, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-left, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-right, .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-up, .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-down, .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-left, .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-right {
+.keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-up, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-down, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-left, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-right,
+.keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-up,
+.keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-down,
+.keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-left,
+.keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-right {
   border: 2px dotted #212529;
   color: #212529;
   background: #fff;
   position: relative;
 }
-.keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-page-up, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-page-down, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-home, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled .keyboard-assist-key-end, .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-page-up, .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-page-down, .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-home, .keyboard-assist-key.keyboard-assist-key-disabled .keyboard-assist-key-end {
+.keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-page-up, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-page-down, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-home,
+.keyboard-assist-typeahead-message.keyboard-assist-key-disabled .keyboard-assist-key-end,
+.keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-page-up,
+.keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-page-down,
+.keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-home,
+.keyboard-assist-key.keyboard-assist-key-disabled .keyboard-assist-key-end {
   background: rgba(var(--bs-body-color-rgb), 0.125);
   color: rgba(var(--bs-body-color-rgb), 1);
 }
-.keyboard-assist-typeahead-message.keyboard-assist-key-disabled::after, .keyboard-assist-key.keyboard-assist-key-disabled::after {
+.keyboard-assist-typeahead-message.keyboard-assist-key-disabled::after,
+.keyboard-assist-key.keyboard-assist-key-disabled::after {
   opacity: 0.5;
   content: "🚫";
   font-size: calc(var(--keyboard-assist-key-size) * 0.75);

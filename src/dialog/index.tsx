@@ -17,6 +17,8 @@ export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children
     header: ComponentChildren;
     anchor: VNode;
     footer?: null | undefined | ComponentChildren;
+    variantSize?: "xs" | "sm" | "md" | "lg" | "xl" | "unbounded";
+    fullscreen?: boolean | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 
     /**
      * If true, this dialog cannot be closed with the Escape key or by clicking the backdrop.
@@ -24,7 +26,9 @@ export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children
     modal?: boolean;
 }
 
-export const Dialog = memo(forwardElementRef(function Dialog({ open, header, headerPosition, footer, onClose, anchor, modal, children, ...props }: DialogProps, ref?: Ref<HTMLSpanElement>) {
+export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen, variantSize, header, headerPosition, footer, onClose, anchor, modal, children, ...props }: DialogProps, ref?: Ref<HTMLSpanElement>) {
+    variantSize ??= "xl";
+
     headerPosition ??= "start";
     if (headerPosition == "hidden") {
         console.assert(typeof header == "string", `A dialog whose label is hidden must provide the label to use as a string to the header`);
@@ -55,7 +59,15 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, header, hea
                                 portalId: usePortalId("dialog"),
                                 children: (
                                     <div {...info.propsFocusContainer}>
-                                        <div {...useMergedProps(info.propsDialog, { tabIndex: -1, className: clsx("modal", open ? "d-block" : "d-hidden") })}>
+                                        <div {...useMergedProps(info.propsDialog, {
+                                            tabIndex: -1,
+                                            className: clsx(
+                                                "modal",
+                                                open ? "d-block" : "d-hidden",
+                                                variantSize && `modal-${variantSize}`,
+                                                fullscreen && (fullscreen === true ? "modal-fullscreen" : `modal-fullscreen-${fullscreen}`)
+                                            )
+                                        })}>
                                             <div class={clsx("dialog-backdrop", open && "visible", modal && "dialog-backdrop-blur")} role="presentation"></div>
                                             <SlideFade animateOnMount={true} delayMountUntilShown={true} show={open} slideTargetBlock={0.125 * (open ? 1 : -1)}>
                                                 <div class="modal-dialog">

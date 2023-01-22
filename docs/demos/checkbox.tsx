@@ -1,6 +1,6 @@
 
 import { useStableCallback, useState } from "preact-prop-helpers";
-import { Checkbox } from "../../index";
+import { Checkbox, InputGroup } from "../../index";
 import { useCallback } from "preact/hooks"
 
 export function Blurb() {
@@ -24,7 +24,7 @@ export function Code() {
 }
 
 export function Demo() {
-    
+
     const [checked, setCheckedSync] = useState(false as boolean | "mixed");
 
     const setCheckedAsync = useCallback(async (checked: boolean | "mixed") => {
@@ -36,9 +36,13 @@ export function Demo() {
         <>
             <Blurb />
             <Code />
-            <Checkbox checked={checked}  onValueChange={setCheckedSync} label="Sync checkbox" labelPosition="after" />
+            <Checkbox checked={checked} onValueChange={setCheckedSync} label="Sync checkbox" labelPosition="after" />
             <Checkbox checked={checked} onValueChange={setCheckedAsync} label="Async checkbox" labelPosition="after" />
             <Checkbox checked={checked} tristate onValueChange={setCheckedAsync} label="Async tristate checkbox" labelPosition="after" />
+            <InputGroup>
+                <Checkbox checked={checked} onValueChange={setCheckedSync} label="Input group" labelPosition="after" />
+                <Checkbox checked={checked} onValueChange={setCheckedSync} label="Input group (tooltip)" labelPosition="tooltip" />
+            </InputGroup>
             {/*<DemoButton disabled={false} tag="button" />
             <DemoButton disabled="soft" tag="button" />
             <DemoButton disabled="hard" tag="button" />

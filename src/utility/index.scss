@@ -2,9 +2,18 @@
 @use "bootstrap-sass-variables/body-color" as *;
 
 #portal {
-    overflow: hidden;
+
+    //overflow: hidden;
     &>* {
         z-index: 1;
+        position: fixed;
+        inset: 0;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+
     }
 }
 
@@ -21,18 +30,21 @@
     row-gap: calc(var(--keyboard-assist-key-size) * 0.25);
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto auto auto auto;
-    padding:  calc(var(--keyboard-assist-key-size) * 0.25);
+    padding: calc(var(--keyboard-assist-key-size) * 0.25);
     pointer-events: none;
     border: 2px solid $body-color;
     border-bottom: none;
     border-right: none;
     border-top-left-radius: calc(var(--keyboard-assist-key-size) * 0.5);
+
     &:hover {
         opacity: 0.15;
     }
 }
 
-.keyboard-assist-arrow-keys, .keyboard-assist-home-end, .keyboard-assist-page-keys {
+.keyboard-assist-arrow-keys,
+.keyboard-assist-home-end,
+.keyboard-assist-page-keys {
     display: grid;
     gap: calc(var(--keyboard-assist-key-size) * 0.125);
 }
@@ -68,7 +80,10 @@
     grid-row: 2 / span 1;
 }
 
-.keyboard-assist-instructions, .keyboard-assist-typeahead, .keyboard-assist-rich-text-f10, .keyboard-assist-leave-f2 {
+.keyboard-assist-instructions,
+.keyboard-assist-typeahead,
+.keyboard-assist-rich-text-f10,
+.keyboard-assist-leave-f2 {
     grid-column: 1 / -1;
     display: flex;
     justify-content: center;
@@ -88,7 +103,8 @@
     padding: calc(var(--keyboard-assist-key-size) * 0.25) calc(var(--keyboard-assist-key-size) * 0.75);
 }
 
-.keyboard-assist-typeahead-message, .keyboard-assist-key {
+.keyboard-assist-typeahead-message,
+.keyboard-assist-key {
     color: $body-bg;
     background: $body-color;
 
@@ -114,16 +130,24 @@
 
     &.keyboard-assist-key-disabled {
 
-        &.keyboard-assist-key-arrow-up, &.keyboard-assist-key-arrow-down, &.keyboard-assist-key-arrow-left, &.keyboard-assist-key-arrow-right {
+        &.keyboard-assist-key-arrow-up,
+        &.keyboard-assist-key-arrow-down,
+        &.keyboard-assist-key-arrow-left,
+        &.keyboard-assist-key-arrow-right {
             border: 2px dotted $body-color;
             color: $body-color;
             background: $body-bg;
             position: relative;
         }
-        &.keyboard-assist-key-page-up, &.keyboard-assist-key-page-down, &.keyboard-assist-key-home, .keyboard-assist-key-end {
+
+        &.keyboard-assist-key-page-up,
+        &.keyboard-assist-key-page-down,
+        &.keyboard-assist-key-home,
+        .keyboard-assist-key-end {
             background: rgba(var(--bs-body-color-rgb), 0.125);
             color: rgba(var(--bs-body-color-rgb), 1);
         }
+
         &::after {
             opacity: 0.5;
             content: "🚫";
@@ -147,56 +171,67 @@
 
     --shadow-body-bg: rgb(var(--bs-body-bg-rgb));
     --shadow-body-bg-trans: rgba(var(--bs-body-bg-rgb), 0);
-    
+
     --shadow: rgba(41, 50, 56, 0.5);
 
     --shadow-padding-x: 0px;
     --shadow-padding-y: 0px;
     --shadow-size-x: 0px;
     --shadow-size-y: 0px;
+
     &.scroll-shadows-x {
         --shadow-padding-x: 40px;
         --shadow-size-x: 14px;
     }
+
     &.scroll-shadows-y {
         --shadow-padding-y: 40px;
         --shadow-size-y: 14px;
     }
 
-    background: 
-        
+    background:
     /* Shadow Cover TOP */
     linear-gradient(to bottom, var(--shadow-body-bg) 30%, var(--shadow-body-bg-trans)) center top,
-    
+
     /* Shadow Cover BOTTOM */
     linear-gradient(to bottom, var(--shadow-body-bg-trans), var(--shadow-body-bg) 70%) center bottom,
-    
+
     /* Shadow TOP */
     radial-gradient(farthest-side at 50% 0, var(--shadow), rgba(0, 0, 0, 0)) center top,
-    
+
     /* Shadow BOTTOM */
     radial-gradient(farthest-side at 50% 100%, var(--shadow), rgba(0, 0, 0, 0)) center bottom,
-        
+
     /* Shadow Cover LEFT */
     linear-gradient(to right, var(--shadow-body-bg) 30%, var(--shadow-body-bg-trans)) left center,
-    
+
     /* Shadow Cover RIGHT */
     linear-gradient(to right, var(--shadow-body-bg-trans), var(--shadow-body-bg) 70%) right center,
-    
+
     /* Shadow LEFT */
     radial-gradient(farthest-side at 0% 50%, var(--shadow), rgba(0, 0, 0, 0)) left center,
-    
+
     /* Shadow RIGHT */
     radial-gradient(farthest-side at 100% 50%, var(--shadow), rgba(0, 0, 0, 0)) right center;
-    
+
     background-repeat: no-repeat;
-    background-size:     
-    100% var(--shadow-padding-y), 100% var(--shadow-padding-y), 100% var(--shadow-size-y), 100% var(--shadow-size-y), 
-    var(--shadow-padding-x) 100%, var(--shadow-padding-x) 100%, var(--shadow-size-x) 100%, var(--shadow-size-x) 100%;
-    background-attachment: 
-    local, local, scroll, scroll, 
-    local, local, scroll, scroll;
-  }
+    background-size: 100% var(--shadow-padding-y),
+    100% var(--shadow-padding-y),
+    100% var(--shadow-size-y),
+    100% var(--shadow-size-y),
+    var(--shadow-padding-x) 100%,
+    var(--shadow-padding-x) 100%,
+    var(--shadow-size-x) 100%,
+    var(--shadow-size-x) 100%;
+    background-attachment: local,
+    local,
+    scroll,
+    scroll,
+    local,
+    local,
+    scroll,
+    scroll;
+}
 
 .keyboard-assist-arrow-keys>.keyboard-assist-key {
     font-size: calc(var(--keyboard-assist-key-size) * 0.75);
