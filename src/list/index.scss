@@ -12,6 +12,9 @@
  In particular, a list-group-item can't contain interactive children, but a gridlist-item can.
 */
 .gridlist-group {
+    & .spinner-border {
+        z-index: 2;
+    }
     &>.gridlist-item {
         --#{$prefix}btn-focus-shadow-rgb: #{to-rgb(mix($primary, $primary, 15%))};
         --#{$prefix}btn-box-shadow: #{$btn-box-shadow};
@@ -24,6 +27,7 @@
             content-visibility: auto;
         }*/
         height: calc(var(--bs-list-group-item-padding-y) * 2 + (1em * var(--bs-body-line-height)));
+
         &:not(:focus-within) {
             contain: strict;
             content-visibility: auto;
@@ -38,10 +42,11 @@
         &.gridlist-item-placeholder {
             cursor: wait;
         }
+
         &>.placeholder-glow {
             pointer-events: none;
             transition: opacity 0.15 linear;
-            position: absolute; 
+            position: absolute;
             inset: 0;
             padding: var(--#{$prefix}list-group-item-padding-y) var(--#{$prefix}list-group-item-padding-x);
         }
@@ -130,5 +135,20 @@
         &.list-group-item-with-icon-end>.gridlist-item-text {
             padding-inline-end: 2em;
         }
+    }
+}
+
+
+
+.list-group-item-badge-and-spinner {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    &>* {
+        grid-area: 1 / 1 / span 1 / span 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

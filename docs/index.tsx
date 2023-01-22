@@ -78,6 +78,7 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
     return (
         <ListItem
             index={i}
+            onPress={async () => { return new Promise(resolve => setTimeout(resolve, 2000))}}
             badge={<Badge variantTheme="info">10</Badge>}
             iconStart={(i & 0b01) ? iconStart : null}
             iconEnd={(i & 0b10) ? <ButtonAction variantSize="sm" variantFill="fill" variantTheme="light" onPress={() => alert("Delete button clicked")}><BootstrapIcon icon="trash-fill" label="Delete" /></ButtonAction> : null}>

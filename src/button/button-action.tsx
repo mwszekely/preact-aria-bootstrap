@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { Tooltip } from "../tooltip";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { memo } from "preact/compat";
+import { Fade } from "preact-transition";
 
 export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttributes<E>, "children" | "style" | "class" | "className">, Partial<ButtonGroupChildProps>, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
     ref?: Ref<E>;
@@ -140,25 +141,27 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extend
             onPress={onPress}
             pressed={pressed}
             render={buttonInfo => {
-                return <Progress<HTMLSpanElement, HTMLLabelElement>
-                    ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
-                    value={pending ? "indeterminate" : "disabled"}
+                return (
+                    <Progress<HTMLSpanElement, HTMLLabelElement>
+                        ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
+                        value={pending ? "indeterminate" : "disabled"}
 
-                    tagIndicator="span"
-                    render={progressInfo => {
-                        const { propsIndicator, propsRegion } = progressInfo;
-                        const loadingJsx = (<span class="spinner-border" {...propsIndicator} />)
-                        const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
+                        tagIndicator="span"
+                        render={progressInfo => {
+                            const { propsIndicator, propsRegion } = progressInfo;
+                            const loadingJsx = (<Fade show={pending}><span class="spinner-border" {...propsIndicator} /></Fade>)
+                            const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
 
-                        const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, !!callCount && loadingJsx))
-                        if (tooltip) {
-                            return <Tooltip forward tooltip={tooltip}>{ret}</Tooltip>
-                        }
-                        else {
-                            return ret;
-                        }
-                    }}
-                />
+                            const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx))
+                            if (tooltip) {
+                                return <Tooltip forward tooltip={tooltip}>{ret}</Tooltip>
+                            }
+                            else {
+                                return ret;
+                            }
+                        }}
+                    />
+                );
             }}
         />
     )
