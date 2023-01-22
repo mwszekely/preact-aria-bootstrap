@@ -8,11 +8,12 @@ import { LabelledProps } from "../utility/types";
 import { ButtonProps } from "./button-action";
 import clsx from "clsx";
 
-export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">, Pick<ToolbarProps<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>, "orientation"> {
+export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className"> {
     disabled?: boolean;
     selectedIndex?: number | null;
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
     variantSize?: ButtonProps<any>["variantSize"];
+    orientation?: ToolbarProps<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>["orientation"];
 }
 
 
@@ -56,7 +57,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                     ref={imperativeHandle}
                     role="group"
                     pageNavigationSize={0}
-                    orientation={orientation}
+                    orientation={orientation || "horizontal"}
                     ariaLabel={labelPosition == 'hidden' ? label : null}
                     selectedIndex={pendingIndex ?? selectedIndex}
                     render={info => {
