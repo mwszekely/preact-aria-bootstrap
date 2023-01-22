@@ -1,35 +1,39 @@
 import clsx from "clsx";
-import { ComponentChildren, Ref } from "preact";
+import { ComponentChildren, Ref, VNode } from "preact";
 import { defaultRenderPortal, Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenubarSubInfo, UseMenuItemReturnType, UseMenuReturnType } from "preact-aria-widgets";
-import { useTimeout } from "preact-prop-helpers";
-import { returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
-import { ClipFade, ZoomFade } from "preact-transition";
+import { returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
+import { ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useImperativeHandle, useRef } from "preact/hooks";
-import { GlobalAttributes } from "../utility/types";
-import { Button as ButtonAction, ButtonProps } from "../button/button-action";
+import { useClonedElement } from "../utility/use-cloned-element";
 import { usePopper } from "../popper";
 import { forwardElementRef } from "../utility/forward-element-ref";
-import { usePortalId } from "../utility/use-portal-id";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist";
+import { GlobalAttributes } from "../utility/types";
+import { usePortalId } from "../utility/use-portal-id";
 
 
 export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children"> {
     forceOpen?: boolean | null | undefined;
-    label: ComponentChildren;
-    disabled?: boolean;
+    //label: ComponentChildren;
+    //disabled?: boolean;
     children: ComponentChildren;
     selectedIndex?: number | null;
     align?: "start" | "end";
-    buttonVariantSize?: ButtonProps<HTMLButtonElement>["variantSize"];
-    buttonVariantFill?: ButtonProps<HTMLButtonElement>["variantFill"];
-    buttonVariantTheme?: ButtonProps<HTMLButtonElement>["variantTheme"];
-    buttonVariantDropdown?: ButtonProps<HTMLButtonElement>["variantDropdown"];
+    //buttonVariantSize?: ButtonProps<HTMLButtonElement>["variantSize"];
+    //buttonVariantFill?: ButtonProps<HTMLButtonElement>["variantFill"];
+    //buttonVariantTheme?: ButtonProps<HTMLButtonElement>["variantTheme"];
+    //buttonVariantDropdown?: ButtonProps<HTMLButtonElement>["variantDropdown"];
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
-    imperativeHandle?: Ref<UseMenuReturnType<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLButtonElement, UseMenubarSubInfo<HTMLDivElement>>>
+    imperativeHandle?: Ref<UseMenuReturnType<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLButtonElement, UseMenubarSubInfo<HTMLDivElement>>>;
+
+    /**
+     * This **MUST** be a `Button` or something that accepts `onPress` as a prop.
+     */
+    anchor: VNode;
 }
 
-export const Menu = memo(forwardElementRef(function Menu({ forceOpen, children, disabled, label, selectedIndex, buttonVariantDropdown, buttonVariantFill, buttonVariantSize, buttonVariantTheme, align, onSelectedIndexChange, imperativeHandle, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) {
+export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, onSelectedIndexChange, imperativeHandle, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) {
     const [openFromAnchor, setOpenFromAnchor, getOpenFromAnchor] = useState(forceOpen ?? false);
     const onOpen = useCallback(() => { setOpenFromAnchor(true); }, []);
     const onClose = useCallback(() => { setOpenFromAnchor(false); }, []);
@@ -80,16 +84,11 @@ export const Menu = memo(forwardElementRef(function Menu({ forceOpen, children, 
 
                 return (
                     <>
-                        <ButtonAction
-                            variantDropdown={buttonVariantDropdown}
-                            variantFill={buttonVariantFill}
-                            variantSize={buttonVariantSize}
-                            variantTheme={buttonVariantTheme}
-                            onPress={onAnchorPress}
-                            disabled={disabled}
-                            {...useMergedProps({ class: popperOpen ? "active" : "", ref }, props, info.propsTrigger, propsSource) as {}}>
-                            {label}
-                        </ButtonAction>
+                        {useClonedElement(anchor, useMergedProps({
+                            onPress: onAnchorPress,
+                            class: popperOpen ? "active" : ""
+                        } as {}, props, info.propsTrigger, propsSource) as {}, ref)}
+
                         {defaultRenderPortal({
                             portalId,
                             children: (

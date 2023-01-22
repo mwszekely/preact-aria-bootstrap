@@ -59,7 +59,7 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
      if (!visible)
          return null;*/
     const iconStart = (
-        <Menu buttonVariantSize="sm" buttonVariantFill="fill" buttonVariantTheme="light" label={<BootstrapIcon icon="menu-app" label="Open dropdown menu" />}>
+        <Menu anchor={<Button variantSize="sm" variantFill="fill" variantTheme="light" onPress={null}><BootstrapIcon icon="menu-app" label="Open dropdown menu" /></Button>}>
             {Array.from(function* () {
                 for (let i = 0; i < 10; ++i) {
                     yield (
@@ -90,11 +90,11 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
 function MenuDemo() {
     const [selectedIndex, setSelectedIndex] = useState(null as null | number);
     return (
-        <Menu selectedIndex={selectedIndex} buttonVariantDropdown="joined" onSelectedIndexChange={setSelectedIndex} label="Dropdown">
+        <Menu selectedIndex={selectedIndex} anchor={<Button variantDropdown="joined" onPress={null}>Open Dropdown Menu</Button>} onSelectedIndexChange={setSelectedIndex}>
             {Array.from(function* () {
                 for (let i = 0; i < 10; ++i) {
                     yield (
-                        <MenuItem index={i}>
+                        <MenuItem index={i} onPress={async () => { return new Promise(resolve => setTimeout(resolve, 2000)) }}>
                             Menu item #{i}
                         </MenuItem>
                     );
