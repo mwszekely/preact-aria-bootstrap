@@ -64,7 +64,6 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
     const defaultDisabled = useContext(DisabledContext);
     const disabledType = useContext(DefaultDisabledType);
     const pending = ((individualPending || singleSelectPending) ?? false);
-    variantFill ||= "fill";
     //variantSize ??= "md";
     let disabled = userDisabled;
     disabled ||= defaultDisabled;
@@ -92,7 +91,7 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
                 pressed={isThePressedOne}
                 onPress={syncHandler ?? null}
                 otherProps={props}
-                variantFill={variantFill}
+                variantFill={variantFill ?? null}
             />
         )
     }
@@ -113,7 +112,7 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
                         children={children}
                         loadingLabel={loadingLabel ?? null}
                         variantTheme={variantTheme ?? "primary"}
-                        variantFill={variantFill!}
+                        variantFill={variantFill ?? null}
                         variantSize={variantSize}
                         variantDropdown={variantDropdown || null}
                         pressed={toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne}
@@ -133,7 +132,7 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
 /**
  * A "raw" button -- just the markup.
  */
-const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extends Element>({ Tag, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }: { ref: Ref<E> | undefined, callCount: number, variantDropdown: "joined" | "split" | null; variantSize: "sm" | "md" | "lg" | undefined; variantFill: "fill" | "outline"; tooltip: ComponentChildren | undefined, children: ComponentChildren, variantTheme: ButtonThemes, pending: boolean, loadingLabel: string | null, Tag: string, disabled: boolean | "soft" | "hard", pressed: null | boolean, onPress: null | ((e: ButtonPressEvent<E>) => void), otherProps: h.JSX.HTMLAttributes<E> }, ref?: Ref<E>) {
+const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extends Element>({ Tag, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }: { ref: Ref<E> | undefined, callCount: number, variantDropdown: "joined" | "split" | null; variantSize: "sm" | "md" | "lg" | undefined; variantFill: "fill" | "outline" | null; tooltip: ComponentChildren | undefined, children: ComponentChildren, variantTheme: ButtonThemes, pending: boolean, loadingLabel: string | null, Tag: string, disabled: boolean | "soft" | "hard", pressed: null | boolean, onPress: null | ((e: ButtonPressEvent<E>) => void), otherProps: h.JSX.HTMLAttributes<E> }, ref?: Ref<E>) {
     return (
         <AriaButton<E>
             tagButton={(Tag) as never}
