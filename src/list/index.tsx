@@ -16,6 +16,7 @@ import { useClonedElement } from "../utility/use-cloned-element";
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
     disabled?: boolean;
     selectedIndex?: number | null;
+    staggered?: boolean;
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
 }
 
@@ -35,7 +36,7 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>
 }
 
-export function List({ disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
+export function List({ disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
 
     const [focusedInner, setFocusedInner] = useState(false);
     const { refElementReturn } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
@@ -55,7 +56,7 @@ export function List({ disabled, selectedIndex, onSelectedIndexChange, label, la
             onSelectedIndexChange={onSelectedIndexChange}
             paginationMin={paginationStart}
             paginationMax={paginationEnd}
-            staggered={true}
+            staggered={staggered || false}
             ariaLabel={labelPosition == "hidden" ? label : null}
             groupingType="without-groups"
             selectionLimit={selectedIndex === undefined ? "multi" : "single"}
