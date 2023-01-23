@@ -98,8 +98,8 @@
 
 .keyboard-assist-typeahead-message,
 .keyboard-assist-key {
-    color: $body-bg;
-    background: $body-color;
+    color: var(--bs-body-bg);
+    background: var(--bs-body-color);
 
     transition-property: opacity, color, background-color, border;
     transition-duration: 300ms;
@@ -129,7 +129,7 @@
         &.keyboard-assist-key-arrow-right {
             border: 2px dotted $body-color;
             color: $body-color;
-            background: $body-bg;
+            background: var(--bs-body-bg);
             position: relative;
         }
 

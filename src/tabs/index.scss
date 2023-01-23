@@ -41,7 +41,7 @@
     // Ensure the container appears over the bottom of the focus ring
     // (there's no other way to just hide the bottom, so this is a workaround
     z-index: 1;
-    background: $body-bg;
+    background: var(--bs-body-bg);
 }
 
 .nav-tabs.typeahead-status-valid>.nav-item>.nav-link {
