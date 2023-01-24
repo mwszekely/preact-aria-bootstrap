@@ -1,9 +1,9 @@
 import { Alignment, arrow, computePosition, flip, hide, offset, Placement, shift, Side, size } from "@floating-ui/dom";
 import { h } from "preact";
-import { returnZero, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
+import { returnZero, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 import { identity, runImmediately } from "preact-prop-helpers/preact-extensions/use-passive-state";
 import { CSSProperties } from "preact/compat";
-import { useEffect, useLayoutEffect, useRef } from "preact/hooks";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "preact/hooks";
 
 export interface UsePopperProps {
     popperParameters: {
@@ -42,12 +42,18 @@ const Map1 = {
     "data-popper-placement": "popperPlacement"
 }
 
+function useFoo() {
+
+}
+
 export function usePopper<SourceElement extends Element, PopupElement extends HTMLElement, ArrowElement extends HTMLElement>({ popperParameters: { open, getElement, alignMode, placement: requestedPlacement, absolutePositioning } }: UsePopperProps) {
     const [sourceElement, setSourceElement, getSourceElement] = useState<SourceElement | null>(null);
     const [popupElement, setPopupElement, getPopupElement] = useState<PopupElement | null>(null);
     const [arrowElement, setArrowElement, getArrowElement] = useState<ArrowElement | null>(null);
     const [getMouseX, setMouseX] = usePassiveState(null, returnZero, runImmediately);
     const [getMouseY, setMouseY] = usePassiveState(null, returnZero, runImmediately);
+    const cachedRects = useRef<DOMRectList | null>(null);
+    const cachedRect = useRef<DOMRectReadOnly | null>(null);
     //const getPlacement = useStableGetter(placement);
     //const popperInstance = useRef<Instance | null>(null);
 
@@ -60,6 +66,18 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
     const arrowStyle = useRef<CSSProperties>({});
     const lastUsedPlacement = useRef<Placement | null>(null);
     const hasOpenedAtLeastOnce = useRef(false);
+    const { elementSizeReturn, refElementReturn } = useElementSize({
+        elementSizeParameters: {
+            getObserveBox: useCallback(() => { return "content-box" }, []),
+            onSizeChange: useCallback((size) => {
+                const element = refElementReturn.getElement();
+                if (element) {
+                    cachedRects.current = element.getClientRects();
+                    cachedRect.current = element.getBoundingClientRect();
+                }
+            }, [])
+        }, refElementParameters: {}
+    })
 
     const handleUpdate = useStableCallback(async () => {
         if (open || hasOpenedAtLeastOnce.current) {
@@ -88,13 +106,13 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
                 // Importantly, this ALSO accounts for wrapping text, and picks the closest box to the mouse to use.
                 function getBoundingClientRect2(): DOMRectReadOnly {
                     if (alignMode == "element")
-                        return getElement!((sourceElement || document.body) as HTMLElement).getBoundingClientRect();
+                        return (cachedRect.current ||= (getElement!((sourceElement || document.body) as HTMLElement).getBoundingClientRect()));
 
                     const usedPlacement = lastUsedPlacement.current || requestedPlacement;
                     let [staticSide, staticAlignment] = (usedPlacement?.split('-')) as [Side, Alignment?];
 
                     console.assert(!!sourceElement);
-                    const rects = (sourceElement || document.body).getClientRects();
+                    const rects = (cachedRects.current ||= ((sourceElement || document.body).getClientRects()));
                     //let indexOfClosest = Infinity;
                     let distanceToClosest = Infinity;
                     let closestRect = null as DOMRectReadOnly | null;
@@ -134,31 +152,22 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
                             closestRect = new DOMRectReadOnly(x0, y0, x1 - x0, y1 - y0);
                         }
 
-                        /*if (containedX || containedY)
-                            indexOfOne = results.length;
-    
-                        if (containedX && containedY)
-                            indexOfBoth = results.length;
-                        results.push(new DOMRectReadOnly(x0, y0, x1 - x0, y1 - y0));*/
+                        
                     }
 
-                    /*if (indexOfBoth != -1)
-                        return results[indexOfBoth];
-                    if (indexOfOne != -1)
-                        return results[indexOfOne];*/
-                    return closestRect ?? (sourceElement || document.body).getBoundingClientRect();
+                    return closestRect ?? ((cachedRect.current ||= (sourceElement || document.body).getBoundingClientRect()));
 
                 }
-                const { middlewareData, placement: usedPlacement, strategy, x, y } = await computePosition({ 
-                    getBoundingClientRect: getBoundingClientRect2, 
-                    contextElement: sourceElement 
-                }, 
-                popupElement, 
-                {
-                    middleware,
-                    placement: requestedPlacement,
-                    strategy: absolutePositioning ? "absolute" : "fixed"
-                });
+                const { middlewareData, placement: usedPlacement, strategy, x, y } = await computePosition({
+                    getBoundingClientRect: getBoundingClientRect2,
+                    contextElement: sourceElement
+                },
+                    popupElement,
+                    {
+                        middleware,
+                        placement: requestedPlacement,
+                        strategy: absolutePositioning ? "absolute" : "fixed"
+                    });
 
                 const [staticSide, staticAlignment] = usedPlacement.split('-') as [Side, Alignment?];
                 lastUsedPlacement.current ||= staticSide;
