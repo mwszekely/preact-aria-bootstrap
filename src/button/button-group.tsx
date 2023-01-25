@@ -40,7 +40,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync<Parameters<NonNullable<OSSI>>, void | Promise<void>>(
         (e) => { return onSelectedIndexChangeAsync?.(e); },
         {
-            capture: (e, r) => { debugger; setCapturedIndex(e); return [e, r]; }
+            capture: (e, r) => { setCapturedIndex(e); return [e, r]; }
         });
 
     const pendingIndex = (pending ? capturedIndex : null);
