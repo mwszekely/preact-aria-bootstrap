@@ -2,9 +2,11 @@
 @use "./form-range-tick" as *;
 @use "bootstrap-sass-variables/primary" as *;
 
+// TODO: A lot of this needs to be de-nested and combined with horizontal/vertical sliders.
+
 .form-range-container {
     display: grid;
-    grid-template-rows: auto 0.75rem 0.75rem 0.5rem;
+    grid-template-rows: auto 0.75rem 0.75rem 1.5rem;
     grid-template-columns: 0.5rem repeat(var(--form-range-tick-count, 1), 1fr) 0.5rem;
 
     &.form-range-vertical {
@@ -47,7 +49,7 @@
     }
 
     & *:not(input[type="range"]) {
-        pointer-events: none;
+        //pointer-events: none;
     }
 
     &.form-range-vertical {
@@ -93,7 +95,7 @@
             left: calc(var(--range-value) * 100% + -1rem * (var(--range-value) - 0.5));
             height: 1.5rem;
             background: none;
-            pointer-events: none;
+            //pointer-events: none;
             contain: strict;
         }
     }
@@ -165,14 +167,15 @@
         display: grid;
         //justify-content: space-between;
         //flex-wrap: nowrap;
-        pointer-events: none;
-        z-index: -10;
+        //pointer-events: none;
         position: relative;
         grid-template-columns: 1fr repeat(calc(var(--form-range-tick-count) - 2), 2fr) 1fr;
 
         &>.form-range-tick {
             position: relative;
             padding-top: 0.875em;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             &.form-range-tick-line {
                 position: relative;
@@ -203,7 +206,8 @@
                 &::after {
                     content: "";
                     position: absolute;
-                    transform: scaleY(0.5);
+                    transform-origin: top;
+                    transform: scaleY(0.4);
                     top: 0;
                     left: 0;
                     right: 0;
@@ -211,6 +215,7 @@
                     margin-left: auto;
                     margin-right: auto;
                     width: 1px;
+                    z-index: -10;
 
                     &:first-child,
                     &:last-child {
@@ -231,4 +236,12 @@
             //width: 0;
         }
     }
+}
+
+.form-range-tick.form-range-tick-selectable>option {
+    cursor: pointer;
+}
+
+.form-range-tick>option {
+    display: inline-block;
 }

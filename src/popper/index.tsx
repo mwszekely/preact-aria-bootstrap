@@ -1,4 +1,4 @@
-import { Alignment, arrow, computePosition, flip, hide, offset, Placement, shift, Side, size } from "@floating-ui/dom";
+import { Alignment, arrow, autoUpdate, computePosition, flip, hide, offset, Placement, shift, Side, size } from "@floating-ui/dom";
 import { h } from "preact";
 import { returnZero, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 import { identity, runImmediately } from "preact-prop-helpers/preact-extensions/use-passive-state";
@@ -13,6 +13,13 @@ export interface UsePopperProps {
         absolutePositioning?: boolean;
 
         open: boolean;
+
+        /**
+         * When `alignMode` is `"mouse"`, this can be used to freeze the mouse tracking in place.
+         * 
+         * For example, tooltips track while open on the trigger, but stop tracking when open on the tooltip.
+         */
+        pauseMouseTracking?: boolean;
 
         /**
          * * `"mouse-start"`: The popper will follow the mouse cursor, within the bounds of the element, and will be start-aligned.
@@ -46,10 +53,10 @@ function useFoo() {
 
 }
 
-export function usePopper<SourceElement extends Element, PopupElement extends HTMLElement, ArrowElement extends HTMLElement>({ popperParameters: { open, getElement, alignMode, placement: requestedPlacement, absolutePositioning } }: UsePopperProps) {
-    const [sourceElement, setSourceElement, getSourceElement] = useState<SourceElement | null>(null);
-    const [popupElement, setPopupElement, getPopupElement] = useState<PopupElement | null>(null);
-    const [arrowElement, setArrowElement, getArrowElement] = useState<ArrowElement | null>(null);
+export function usePopper<SourceElement extends Element, PopupElement extends HTMLElement, ArrowElement extends HTMLElement>({ popperParameters: { pauseMouseTracking, open, getElement, alignMode, placement: requestedPlacement, absolutePositioning } }: UsePopperProps) {
+    //const [getSourceElement, setSourceElement] = usePassiveState<SourceElement | null, never>(null);
+    //const [getPopupElement, setPopupElement] = usePassiveState<PopupElement | null, never>(null);
+    //const [getArrowElement, setArrowElement] = usePassiveState<ArrowElement | null, never>(null);
     const [getMouseX, setMouseX] = usePassiveState(null, returnZero, runImmediately);
     const [getMouseY, setMouseY] = usePassiveState(null, returnZero, runImmediately);
     const cachedRects = useRef<DOMRectList | null>(null);
@@ -78,6 +85,8 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
             }, [])
         }, refElementParameters: {}
     })
+
+    //autoUpdate()
 
     const handleUpdate = useStableCallback(async () => {
         if (open || hasOpenedAtLeastOnce.current) {
@@ -152,7 +161,7 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
                             closestRect = new DOMRectReadOnly(x0, y0, x1 - x0, y1 - y0);
                         }
 
-                        
+
                     }
 
                     return closestRect ?? ((cachedRect.current ||= (sourceElement || document.body).getBoundingClientRect()));
@@ -201,40 +210,52 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
     });
 
     const getOpen = useStableGetter(open);
+    const getPauseMouseTracking = useStableGetter(pauseMouseTracking);
     useLayoutEffect(() => {
         if (open) {
             hasOpenedAtLeastOnce.current = true;
 
             const scrollListener = function (e: Event) { if (getOpen()) handleUpdate(); }
             const mouseListener = function (e: MouseEvent) {
-                setMouseX(e.clientX);
-                setMouseY(e.clientY);
-                if (getOpen()) {
+                const mouseElement = e.target as Node | null;
+                const sourceElement = getSourceElement();
+                const popupElement = getPopupElement();
+                if (!getPauseMouseTracking()) {
+                    setMouseX(e.clientX);
+                    setMouseY(e.clientY);
+                }
+                let shouldUpdate = false;
+                if (getOpen())
+                    shouldUpdate = true;
+                if (sourceElement?.contains(mouseElement) || popupElement?.contains(mouseElement)) {
+                    shouldUpdate = true;
+                }
+                if (shouldUpdate) {
                     handleUpdate();
                 }
             }
             document.addEventListener("scroll", scrollListener, { capture: true, passive: true });
-            window.addEventListener("resize", scrollListener, { passive: true });
-            document.addEventListener("mousemove", mouseListener, { passive: true });
+            window.addEventListener("resize", scrollListener, { capture: true, passive: true });
+            document.addEventListener("mousemove", mouseListener, { capture: true, passive: true });
             return () => {
                 document.removeEventListener("scroll", scrollListener, { capture: true });
                 document.removeEventListener("mousemove", mouseListener, { capture: true });
-                window.removeEventListener("resize", scrollListener);
+                window.removeEventListener("resize", scrollListener, { capture: true });
             }
         }
     }, [open])
 
-    useEffect(() => {
+    /*useEffect(() => {
         handleUpdate();
     }, [open])
 
     useEffect(() => {
         handleUpdate();
-    });
+    });*/
 
-    const { refElementReturn: { propsStable: propsSource } } = useRefElement<SourceElement>({ refElementParameters: { onElementChange: setSourceElement } });
-    const { refElementReturn: { propsStable: propsPopup } } = useRefElement<PopupElement>({ refElementParameters: { onElementChange: setPopupElement } });
-    const { refElementReturn: { propsStable: propsArrow } } = useRefElement<ArrowElement>({ refElementParameters: { onElementChange: setArrowElement } });
+    const { refElementReturn: { propsStable: propsSource, getElement: getSourceElement } } = useRefElement<SourceElement>({ refElementParameters: {} });
+    const { refElementReturn: { propsStable: propsPopup, getElement: getPopupElement } } = useRefElement<PopupElement>({ refElementParameters: {} });
+    const { refElementReturn: { propsStable: propsArrow, getElement: getArrowElement } } = useRefElement<ArrowElement>({ refElementParameters: {} });
 
     // Because we don't set our mouse coordinates until mousemove,
     // and because we don't listen for mousemove until open (for performance reasons),

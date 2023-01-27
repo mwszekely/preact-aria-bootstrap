@@ -78,7 +78,7 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
     return (
         <ListItem
             index={i}
-            onPress={async () => { return new Promise(resolve => setTimeout(resolve, 2000))}}
+            onPress={async () => { return new Promise(resolve => setTimeout(resolve, 2000)) }}
             badge={<Badge variantTheme="info">10</Badge>}
             iconStart={(i & 0b01) ? iconStart : null}
             iconEnd={(i & 0b10) ? <ButtonAction variantSize="sm" variantFill="fill" variantTheme="light" onPress={() => alert("Delete button clicked")}><BootstrapIcon icon="trash-fill" label="Delete" /></ButtonAction> : null}>
@@ -128,8 +128,20 @@ function SliderDemo() {
 
     return (
         <div>
-            <Range min={0} max={10} step={1} snap="continuous">
-                <RangeThumb onValueChange={setValue} value={value} index={0} label="Slider example #0" />
+            <p>Value: {value}</p>
+            <p>This slider is continuous:</p>
+            <Range onValueChange={setValue} min={0} max={10} step={1} snap="continuous">
+                <RangeThumb value={value} index={0} label="Slider example #0" />
+            </Range>
+
+            <p>This slider is discrete:</p>
+            <Range onValueChange={setValue} min={0} max={10} step={1} snap="discrete">
+                <RangeThumb value={value} index={0} label="Slider example #0" />
+            </Range>
+
+            <p>This shows its values as <code>10<sup>value</sup></code>, instead of <code>value</code>:</p>
+            <Range onValueChange={setValue} min={0} max={10} step={1} snap="continuous" getValueText={value => `${10**value}`}>
+                <RangeThumb value={value} index={0} label="Slider example #0" />
             </Range>
         </div>
     )

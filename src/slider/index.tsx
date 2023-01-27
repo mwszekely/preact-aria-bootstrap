@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ComponentChildren, createContext, createElement, h, Ref } from "preact";
-import { EventDetail, RangeChangeEvent, SliderContext, SliderThumbInfo, useSlider, UseSliderParameters, useSliderThumb, UseSliderThumbParameters } from "preact-aria-widgets";
+import { EventDetail, RangeChangeEvent, SliderContext, SliderProps, SliderThumbInfo, useSlider, UseSliderParameters, useSliderThumb, UseSliderThumbParameters } from "preact-aria-widgets";
 import { generateRandomId, useAsyncHandler, useHasCurrentFocus, useMergedProps, useRefElement } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 import { useContext, useMemo, useRef, useState } from "preact/hooks";
@@ -71,6 +71,7 @@ const StepContext = createContext<number | "any">(1);
 const SnapContext = createContext<"discrete" | "continuous">("discrete");
 const DisabledContext = createContext(false);
 const OrientationContext = createContext<"block" | "inline">("inline");
+const OnValueChangeContext = createContext<RangeProps["onValueChange"]>(null!);
 
 export const Range = memo(forwardElementRef(function Range({ max, min, debounce, hideTickValues, hideTicks, orientation, children, getValueText, getTooltipText, value, onValueChange, step, snap, label, disabled, ...rest }: RangeProps, ref: Ref<HTMLDivElement>) {
     const {
@@ -83,30 +84,32 @@ export const Range = memo(forwardElementRef(function Range({ max, min, debounce,
     let tickCount = (step == "any" ? Infinity : Math.ceil(1 + (max - min) / step));
 
     return (
-        <RangeThumbContext.Provider value={context}>
-            <DebounceContext.Provider value={debounce ?? false}>
-                <GetValueTextContext.Provider value={getTooltipText ?? getValueText ?? defaultGetValueText}>
-                    <GetListContext.Provider value={id}>
-                        <StepContext.Provider value={step}>
-                            <SnapContext.Provider value={snap ?? "discrete"}>
-                                <DisabledContext.Provider value={disabled ?? false}>
-                                    <OrientationContext.Provider value={orientation ?? "inline"}>
-                                        {createElement((label ? "label" : "div") as any, (useMergedProps<HTMLDivElement>({ class: clsx("form-range-container", orientation == "block" && "form-range-vertical"), ref, style: isFinite(tickCount) ? { "--form-range-tick-count": tickCount } : undefined }, rest)),
-                                            label && <div class="form-range-label">{label}</div>,
-                                            children ?? <RangeThumb index={0} min={min} max={max} value={value ?? 0} onValueChange={onValueChange} label={label ?? ""} />,
-                                            <div class="form-range-track-background" />,
-                                            <GetValueTextContext.Provider value={getValueText ?? defaultGetValueText}>
-                                                <RangeTicks min={min} max={max} step={step} id={id} hideTickValues={hideTickValues} />
-                                            </GetValueTextContext.Provider>
-                                        )}
-                                    </OrientationContext.Provider>
-                                </DisabledContext.Provider>
-                            </SnapContext.Provider>
-                        </StepContext.Provider>
-                    </GetListContext.Provider>
-                </GetValueTextContext.Provider>
-            </DebounceContext.Provider>
-        </RangeThumbContext.Provider>
+        <OnValueChangeContext.Provider value={onValueChange}>
+            <RangeThumbContext.Provider value={context}>
+                <DebounceContext.Provider value={debounce ?? false}>
+                    <GetValueTextContext.Provider value={getTooltipText ?? getValueText ?? defaultGetValueText}>
+                        <GetListContext.Provider value={id}>
+                            <StepContext.Provider value={step}>
+                                <SnapContext.Provider value={snap ?? "discrete"}>
+                                    <DisabledContext.Provider value={disabled ?? false}>
+                                        <OrientationContext.Provider value={orientation ?? "inline"}>
+                                            {createElement((label ? "label" : "div") as any, (useMergedProps<HTMLDivElement>({ class: clsx("form-range-container", orientation == "block" && "form-range-vertical"), ref, style: isFinite(tickCount) ? { "--form-range-tick-count": tickCount } : undefined }, rest)),
+                                                label && <div class="form-range-label">{label}</div>,
+                                                children ?? <RangeThumb index={0} min={min} max={max} value={value ?? 0} onValueChange={onValueChange} label={label ?? ""} />,
+                                                <div class="form-range-track-background" />,
+                                                <GetValueTextContext.Provider value={getValueText ?? defaultGetValueText}>
+                                                    <RangeTicks min={min} max={max} step={step} id={id} hideTickValues={hideTickValues} />
+                                                </GetValueTextContext.Provider>
+                                            )}
+                                        </OrientationContext.Provider>
+                                    </DisabledContext.Provider>
+                                </SnapContext.Provider>
+                            </StepContext.Provider>
+                        </GetListContext.Provider>
+                    </GetValueTextContext.Provider>
+                </DebounceContext.Provider>
+            </RangeThumbContext.Provider>
+        </OnValueChangeContext.Provider>
     );
 }));
 
@@ -115,6 +118,7 @@ function defaultGetValueText(number: number) {
 }
 
 const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues }: { id: string; step: number | "any", min: number, max: number, hideTickValues?: boolean | "auto" }) {
+    const onValueChange = useContext(OnValueChangeContext);
     if (step == "any")
         return null;
     hideTickValues ??= false;
@@ -124,10 +128,16 @@ const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues
         const atEnds = (i == min || (i + step) > max);
         const valuePercent = (i - min) / (max - min);
         let shouldHide = (hideTickValues == "auto" ? !atEnds : hideTickValues);
-        children.push(<option value={i} class={clsx(
-            "form-range-tick",
-           "form-range-tick-line"
-        )} key={i}>{shouldHide ? null : getValueText(i)}</option>)
+        children.push(
+            <div class={clsx(
+                "form-range-tick",
+                "form-range-tick-line",
+                onValueChange && "form-range-tick-selectable"
+            )}
+            ><option
+                onClick={() => { debugger; onValueChange?.(i) }}
+                value={i}
+                key={i}>{shouldHide ? null : getValueText(i)}</option></div>)
     }
     /*for (let i = min; i <= max; i += step) {
         children.push(<option value={i} class={clsx("form-range-tick")}>{getValueText(i)}</option>)
@@ -140,10 +150,11 @@ const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues
 });
 
 export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, value, max, min, onValueChange: onValueChangeAsync, disabled, label }: RangeThumbProps, ref: Ref<HTMLInputElement>) {
+    const parentOnValueChange = useContext(OnValueChangeContext);
     const context = useContext(RangeThumbContext);
     const debounceSetting = useContext(DebounceContext);
     const { syncHandler, pending, hasError, currentCapture } = useAsyncHandler({
-        asyncHandler: onValueChangeAsync ?? null,
+        asyncHandler: async (v, e) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); },
         capture,
         debounce: debounceSetting == true ? 1500 : debounceSetting != false ? debounceSetting : undefined
     });
@@ -206,7 +217,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
         },
         sliderThumbParameters: {
             tag: "input",
-            value: value,
+            value,
             valueText,
             max,
             min,
@@ -219,29 +230,41 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
     const clampedValuePercent = Math.max(0, Math.min(1, valuePercent));
     const tooltipRootRef = useRef<HTMLDivElement>(null);
 
+    // TODO: The tooltip is a nice idea, but there are a few problems that need solved conceptually:
+    // When hovering, the tooltip needs to show the value under the mouse, which is hard to calculate.
+    // It's not a "normal" tooltip, though given that each slider needs its own individual label, it's kind of close, but...
+    // The closest thing would just be a CSS mock tooltip with no roles or anything, but then dismiss behavior? etc...
+    /*
+    
+    <Tooltip
+        forward
+        absolutePositioning
+        getElement={(function (e: HTMLElement) { return tooltipRootRef.current || e; })}
+        alignMode="element"
+        tooltip={`${valueText}`}
+        children={}
+    />
+
+    */
+
     return (
         <>
-            <Tooltip
-                forward
-                absolutePositioning
-                getElement={(function (e: HTMLElement) {
-                    return tooltipRootRef.current || e;
-                })}
-                alignMode="element"
-                tooltip={`${valueText}`}><input {...useMergedProps<HTMLInputElement>(
-                    propsSliderThumb,
-                    p1,
-                    p2,
-                    {
-                        ref,
-                        ...({ orient: orientation == "block" ? "vertical" : undefined } as {}),
-                        class: clsx("form-range", orientation == "block" && "form-range-vertical"),
-                        disabled,
-                        tabIndex: 0,
-                        step: usedStep,
-                        list: useContext(GetListContext)
-                    })} /></Tooltip>
-            <div class="form-range-tooltip-container"><div ref={tooltipRootRef} class="form-range-tooltip-root" style={{ "--range-value": `${valuePercent}` }} /></div>
+            <input {...useMergedProps<HTMLInputElement>(
+                propsSliderThumb,
+                p1,
+                p2,
+                {
+                    ref,
+                    ...({ orient: orientation == "block" ? "vertical" : undefined } as {}),
+                    class: clsx("form-range", orientation == "block" && "form-range-vertical"),
+                    disabled,
+                    tabIndex: 0,
+                    step: usedStep,
+                    list: useContext(GetListContext)
+                })} />
+            <div class="form-range-tooltip-container">
+                <div ref={tooltipRootRef} class="form-range-tooltip-root" style={{ "--range-value": `${valuePercent}` }} />
+            </div>
             <div class="form-range-track-fill-background" style={{ "--form-range-value-percent": clampedValuePercent }} />
         </>
     );

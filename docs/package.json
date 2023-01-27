@@ -4,8 +4,10 @@
     "description": "A small set of hooks and other functions related to modifying Preact props.",
     "main": "index.tsx",
     "scripts": {
-        "watch": "rollup --config rollup.config.mjs --watch --no-watch.clearScreen",
-        "build": "rollup --config rollup.config.mjs",
+        "build": "npx npm-run-all --npm-path npm -sc build:js build:sass build:css",
+        "watch": "npx npm-run-all --npm-path npm -pc watch:*",
+        "watch:js": "rollup --config rollup.config.mjs --watch --no-watch.clearScreen",
+        "build:js": "rollup --config rollup.config.mjs",
         "watch:sass": "sass --watch --load-path='../node_modules/' ../src/index.scss ./index-unprefixed.css",
         "watch:css": "postcss ./index-unprefixed.css --watch -o ./index.css",
         "build:sass": "sass --load-path='../node_modules/' ../src/index.scss ./index-unprefixed.css",

@@ -1,3 +1,11 @@
+@use "bootstrap-sass-variables/zindex-tooltip" as *;
+
+#portal-tooltip {
+    display: contents;
+    &>.popper-popup {
+        z-index: $zindex-tooltip;
+    }
+}
 
 .portal-tooltip-child.popper-popup {
     position: fixed;
@@ -6,7 +14,4 @@
     text-align: start;
 
     min-width: 2em;
-
-    // Okay, this one's opinionated, but the default is just way too narrow and leaves a lot of empty space with all those line breaks
-    --bs-tooltip-max-width: 50vw;
 }

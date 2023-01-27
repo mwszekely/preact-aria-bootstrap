@@ -10,6 +10,8 @@ import { usePortalId } from "../utility/use-portal-id";
 
 export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "children"> {
 
+    maxWidth?: string;
+
     /**
      * If true, instead of creating a <span> element, this Tooltip will forward
      * the necessary props to the immediate child of this element (which must be exactly ONE VNode).
@@ -62,23 +64,26 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
     //align?: "start" | "center";
 }
 
-export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement, children, tooltip, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) {
+export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement, children, tooltip, maxWidth, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) {
 
     if (forward == null && typeof children == "object" && (children as VNode).props) {
         forward = true;
     }
 
-    return (
-        <AriaTooltip<HTMLSpanElement, HTMLDivElement> tooltipSemanticType={semanticType || (forward ? "label" : "description")} render={info => {
+    maxWidth ??= "33vw";
 
+    return (
+        <AriaTooltip<HTMLSpanElement, HTMLDivElement> tooltipSemanticType={semanticType || (forward ? "label" : "description")} render={tooltipInfo => {
+            const mouseTrackingPaused = ((tooltipInfo.tooltipReturn.displayReason == "hover-tooltip"))
             const portalId = usePortalId("tooltip");
             const { propsArrow, propsPopup, propsSource, propsData } = usePopper<HTMLSpanElement, HTMLDivElement, HTMLDivElement>({
                 popperParameters: {
-                    open: info.tooltipReturn.isOpen,
+                    open: tooltipInfo.tooltipReturn.isShowing,
                     getElement,
+                    pauseMouseTracking: mouseTrackingPaused,
                     absolutePositioning,
-                    placement: (alignMode == "element"? "top" : "top-start"),
-                    alignMode: alignMode ?? `mouse`
+                    placement: (alignMode == "element" ? "top" : "top-start"),
+                    alignMode: alignMode ?? (tooltipInfo.tooltipReturn.displayReason == "focus" ? "element" : `mouse`)
                 }
             })
 
@@ -86,9 +91,9 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
             // The tooltip must remain non-hidden to assistive technologies even when closed.
             // Don't set hidden or inert or anything like that when is's closed!
             const tooltipContent =
-                <div {...propsPopup}>
-                    <ZoomFade exitVisibility="visible" show={tooltip == null? false : (info.tooltipReturn.isOpen || false)} zoomMin={0.8} zoomOriginBlock={1} zoomOriginInline={(alignMode == "element"? 0.5 : 0)}>
-                        <div {...useMergedProps<any>(propsData, { className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, info.propsPopup)}>
+                <div {...useMergedProps(propsPopup, {})}>
+                    <ZoomFade exitVisibility="visible" show={tooltip == null ? false : (tooltipInfo.tooltipReturn.isOpen || false)} zoomMin={0.8} zoomOriginBlock={1} zoomOriginInline={(alignMode == "element" ? 0.5 : 0)}>
+                        <div {...useMergedProps<any>(propsData, { style: maxWidth? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup)}>
                             <div {...useMergedProps(propsArrow, { className: "tooltip-arrow" })} />
                             <div class="tooltip-inner">
                                 {tooltip}
@@ -102,14 +107,14 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
                 console.assert(!!vnode.type);
                 return (
                     <>
-                        {(cloneElement(vnode, useMergedProps(propsData, vnode.props, info.propsTrigger, propsSource, props, { ref }, { ref: vnode.ref })))}
+                        {(cloneElement(vnode, useMergedProps(propsData, vnode.props, tooltipInfo.propsTrigger, propsSource, props, { ref }, { ref: vnode.ref })))}
                         {portalJsx}
                     </>
                 )
             }
 
             return (<>
-                <span {...useMergedProps<any>({ ref }, propsData, info.propsTrigger, propsSource, props, { tabIndex: !containsTabbable ? 0 : undefined })}>
+                <span {...useMergedProps<any>({ ref }, propsData, tooltipInfo.propsTrigger, propsSource, props, { tabIndex: !containsTabbable ? 0 : undefined })}>
                     {children}
                     {portalJsx}
                 </span>
