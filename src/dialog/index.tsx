@@ -62,7 +62,7 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
                                         <div {...useMergedProps(info.propsDialog, {
                                             tabIndex: -1,
                                             className: clsx(
-                                                "modal",
+                                                "modal modal-dialog-scrollable",
                                                 open ? "d-block" : "d-hidden",
                                                 variantSize && `modal-${variantSize}`,
                                                 fullscreen && (fullscreen === true ? "modal-fullscreen" : `modal-fullscreen-${fullscreen}`)
