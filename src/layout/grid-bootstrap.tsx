@@ -174,13 +174,13 @@ export const GridBsItem = memo(forwardElementRef(function GridItem({
                 offsetXl && `offset-xl-${offsetXl}`,
                 offsetXxl && `offset-xxl-${offsetXxl}`,
 
-                span && `span-${span}`,
-                spanXs && `span-xs-${spanXs}`,
-                spanSm && `span-sm-${spanSm}`,
-                spanMd && `span-md-${spanMd}`,
-                spanLg && `span-lg-${spanLg}`,
-                spanXl && `span-xl-${spanXl}`,
-                spanXxl && `span-xxl-${spanXxl}`,
+                span && `col-${span}`,
+                spanXs && `col-xs-${spanXs}`,
+                spanSm && `col-sm-${spanSm}`,
+                spanMd && `col-md-${spanMd}`,
+                spanLg && `col-lg-${spanLg}`,
+                spanXl && `col-xl-${spanXl}`,
+                spanXxl && `col-xxl-${spanXxl}`,
             )
         }), ref)
     )
