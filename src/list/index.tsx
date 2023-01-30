@@ -42,7 +42,7 @@ export function List({ disabled, selectedIndex, onSelectedIndexChange, label, la
     const { refElementReturn } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
     const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLDivElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn })
     //const WINDOW_SIZE = 20;
-    const [paginationStart, setPaginationStart] = useState<number | null>(paginationSize == null? null : 0);
+    const [paginationStart, setPaginationStart] = useState<number | null>(paginationSize == null ? null : 0);
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
 
 
@@ -64,12 +64,18 @@ export function List({ disabled, selectedIndex, onSelectedIndexChange, label, la
 
                 useUpdateRenderCounter("Gridlist");
 
+                const labelJsx = <label {...info.propsGridlistLabel}>{label}</label>
+
                 return (
-                    <Paginated childCount={info.paginatedChildrenReturn.childCount ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
-                        <KeyboardAssistIcon leftRight={true} upDown={true} homeEnd={true} pageKeys={true} typeahead={false} typeaheadActive={false}>
-                            <div class={clsx(`list-group gridlist-group`)} {...useMergedProps(props, refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist)}>{children}</div>
-                        </KeyboardAssistIcon>
-                    </Paginated>
+                    <>
+                        {labelPosition == "before" && labelJsx}
+                        <Paginated childCount={info.paginatedChildrenReturn.childCount ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
+                            <KeyboardAssistIcon leftRight={true} upDown={true} homeEnd={true} pageKeys={true} typeahead={false} typeaheadActive={false}>
+                                <div class={clsx(`list-group gridlist-group`)} {...useMergedProps(props, refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist)}>{children}</div>
+                            </KeyboardAssistIcon>
+                        </Paginated>
+                        {labelPosition == "after" && labelJsx}
+                    </>
                 )
             }}
 
@@ -93,7 +99,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                         index={index}
                         ariaPropName="aria-selected"
                         getSortValue={getSortValue ?? returnZero}
-                        
+
                         render={infoRow => {
                             useUpdateRenderCounter("GridlistRow");
                             const { refElementReturn: { propsStable: p2, getElement }, refElementReturn } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
