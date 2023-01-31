@@ -130,19 +130,17 @@ function SliderDemo() {
         <div>
             <p>Value: {value}</p>
             <p>This slider is continuous:</p>
-            <Range onValueChange={setValue} min={0} max={10} step={1} snap="continuous">
-                <RangeThumb value={value} index={0} label="Slider example #0" />
+            <Range onValueChange={setValue} value={value} min={0} max={10} step={1} snap="continuous">
+                <RangeThumb index={0} label="Slider example #0" />
             </Range>
 
             <p>This slider is discrete:</p>
-            <Range onValueChange={setValue} min={0} max={10} step={1} snap="discrete">
-                <RangeThumb value={value} index={0} label="Slider example #0" />
+            <Range onValueChange={setValue} value={value} min={0} max={10} step={1} snap="discrete">
+                <RangeThumb index={0} label="Slider example #0" />
             </Range>
 
             <p>This shows its values as <code>10<sup>value</sup></code>, instead of <code>value</code>:</p>
-            <Range onValueChange={setValue} min={0} max={10} step={1} snap="continuous" getValueText={value => `${10**value}`}>
-                <RangeThumb value={value} index={0} label="Slider example #0" />
-            </Range>
+            <Range onValueChange={setValue} value={value} min={0} max={10} step={1} snap="continuous" getValueText={value => `${10**value}`} />
         </div>
     )
 }

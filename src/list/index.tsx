@@ -14,6 +14,8 @@ import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/type
 import { useClonedElement } from "../utility/use-cloned-element";
 
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
+    /** Used to determine if left/right arrow key navigation is shown as an option */
+    columns?: number;
     disabled?: boolean;
     selectedIndex?: number | null;
     staggered?: boolean;
@@ -36,7 +38,7 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>
 }
 
-export function List({ disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
+export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
 
     const [focusedInner, setFocusedInner] = useState(false);
     const { refElementReturn } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
@@ -70,9 +72,9 @@ export function List({ disabled, selectedIndex, onSelectedIndexChange, label, la
                     <>
                         {labelPosition == "before" && labelJsx}
                         <Paginated childCount={info.paginatedChildrenReturn.childCount ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
-                            <KeyboardAssistIcon leftRight={true} upDown={true} homeEnd={true} pageKeys={true} typeahead={false} typeaheadActive={false}>
-                                <div class={clsx(`list-group gridlist-group`)} {...useMergedProps(props, refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist)}>{children}</div>
-                            </KeyboardAssistIcon>
+
+                            <div class={clsx(`list-group gridlist-group`)} {...useMergedProps(props, refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist)}>{children}</div>
+
                         </Paginated>
                         {labelPosition == "after" && labelJsx}
                     </>
@@ -141,30 +143,32 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                             </>
 
                             return (
-                                <div
-                                    aria-busy={(!show).toString()}
-                                    {...useMergedProps(
-                                        infoRow.props,
-                                        { ...props, ref },
-                                        {
-                                            className: clsx(
-                                                `gridlist-item`,
-                                                variantTheme && `list-group-item-${variantTheme}`,
-                                                infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "",
-                                                !show && "gridlist-item-placeholder",
-                                                "list-group-item list-group-item-action",
-                                                !!iconStart && "list-group-item-with-icon-start",
-                                                !!iconEnd && "list-group-item-with-icon-end",
-                                                !!badge && "list-group-item-with-badge",
-                                                !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending",
-                                                disabled && "disabled",
-                                                (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`
-                                            )
-                                        }
-                                    )}>
+                                <KeyboardAssistIcon leftRight={(!!iconStart || !!iconEnd)} upDown={true} homeEnd={true} pageKeys={true} typeahead={false} typeaheadActive={false}>
+                                    <div
+                                        aria-busy={(!show).toString()}
+                                        {...useMergedProps(
+                                            infoRow.props,
+                                            { ...props, ref },
+                                            {
+                                                className: clsx(
+                                                    `gridlist-item`,
+                                                    variantTheme && `list-group-item-${variantTheme}`,
+                                                    infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "",
+                                                    !show && "gridlist-item-placeholder",
+                                                    "list-group-item list-group-item-action",
+                                                    !!iconStart && "list-group-item-with-icon-start",
+                                                    !!iconEnd && "list-group-item-with-icon-end",
+                                                    !!badge && "list-group-item-with-badge",
+                                                    !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending",
+                                                    disabled && "disabled",
+                                                    (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`
+                                                )
+                                            }
+                                        )}>
 
-                                    {show && c}
-                                </div>
+                                        {show && c}
+                                    </div>
+                                </KeyboardAssistIcon>
                             );
                         }} />)
 

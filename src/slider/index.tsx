@@ -3,7 +3,7 @@ import { ComponentChildren, createContext, createElement, h, Ref } from "preact"
 import { EventDetail, RangeChangeEvent, SliderContext, SliderProps, SliderThumbInfo, useSlider, UseSliderParameters, useSliderThumb, UseSliderThumbParameters } from "preact-aria-widgets";
 import { generateRandomId, useAsyncHandler, useHasCurrentFocus, useMergedProps, useRefElement } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { useContext, useMemo, useRef, useState } from "preact/hooks";
+import { useContext, useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { Tooltip } from "../tooltip";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { GlobalAttributes } from "../utility/types";
@@ -11,7 +11,7 @@ import { GlobalAttributes } from "../utility/types";
 
 
 
-interface RangeBaseProps extends GlobalAttributes<HTMLDivElement> {
+export interface RangeProps extends GlobalAttributes<HTMLDivElement> {
     debounce?: number | boolean;
     //ticks?: "numbers-all" | "numbers-edges" | "ticks-only" | "none";
     hideTicks?: boolean;
@@ -28,36 +28,22 @@ interface RangeBaseProps extends GlobalAttributes<HTMLDivElement> {
      * Defaults to the value of getValueText. Use this to further customize the tooltip that appears when hovering over the Range.
      */
     getTooltipText?: (value: number) => string;
-}
-
-interface RangeSingleProps extends RangeBaseProps {
-    children?: never;
-    value: number;
-    onValueChange: (value: number) => (void | Promise<void>);
     step?: number | null | "any";
     snap?: "discrete" | "continuous";   // "continuous" allows selecting values outside of the "step" restriction, but still prefers step values.
-    label: string;
-}
 
 
-interface RangeMultiProps extends RangeBaseProps {
-    children: ComponentChildren;
-    debounce?: number | boolean;
+    children?: ComponentChildren;
     value?: number;
     onValueChange?: (value: number) => (void | Promise<void>);
-    step?: number | null | "any";
-    snap?: "discrete" | "continuous";   // "continuous" allows selecting values outside of the "step" restriction, but still prefers step values.
     label?: string;
 }
-
-export type RangeProps = RangeSingleProps | RangeMultiProps;
 
 export interface RangeThumbProps {
     onValueChange?: (value: number) => (void | Promise<void>);
     label: string;
     disabled?: boolean;
     index: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["managedChildParameters"]["index"];
-    value: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["sliderThumbParameters"]["value"];
+    value?: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["sliderThumbParameters"]["value"];
     valueText?: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["sliderThumbParameters"]["valueText"];
     max?: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["sliderThumbParameters"]["max"];
     min?: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["sliderThumbParameters"]["min"];
@@ -65,6 +51,7 @@ export interface RangeThumbProps {
 
 const RangeThumbContext = createContext<SliderContext<SliderThumbInfo>>(null!);
 const DebounceContext = createContext<number | boolean>(false);
+const ValueContext = createContext<number | null>(null);
 const GetValueTextContext = createContext<(n: number) => string>(null!);
 const GetListContext = createContext("");
 const StepContext = createContext<number | "any">(1);
@@ -92,16 +79,18 @@ export const Range = memo(forwardElementRef(function Range({ max, min, debounce,
                             <StepContext.Provider value={step}>
                                 <SnapContext.Provider value={snap ?? "discrete"}>
                                     <DisabledContext.Provider value={disabled ?? false}>
-                                        <OrientationContext.Provider value={orientation ?? "inline"}>
-                                            {createElement((label ? "label" : "div") as any, (useMergedProps<HTMLDivElement>({ class: clsx("form-range-container", orientation == "block" && "form-range-vertical"), ref, style: isFinite(tickCount) ? { "--form-range-tick-count": tickCount } : undefined }, rest)),
-                                                label && <div class="form-range-label">{label}</div>,
-                                                children ?? <RangeThumb index={0} min={min} max={max} value={value ?? 0} onValueChange={onValueChange} label={label ?? ""} />,
-                                                <div class="form-range-track-background" />,
-                                                <GetValueTextContext.Provider value={getValueText ?? defaultGetValueText}>
-                                                    <RangeTicks min={min} max={max} step={step} id={id} hideTickValues={hideTickValues} />
-                                                </GetValueTextContext.Provider>
-                                            )}
-                                        </OrientationContext.Provider>
+                                        <ValueContext.Provider value={value ?? null}>
+                                            <OrientationContext.Provider value={orientation ?? "inline"}>
+                                                {createElement((label ? "label" : "div") as any, (useMergedProps<HTMLDivElement>({ class: clsx("form-range-container", orientation == "block" && "form-range-vertical"), ref, style: isFinite(tickCount) ? { "--form-range-tick-count": tickCount } : undefined }, rest)),
+                                                    label && <div class="form-range-label">{label}</div>,
+                                                    children ?? <RangeThumb index={0} min={min} max={max} value={value ?? 0} onValueChange={onValueChange} label={label ?? ""} />,
+                                                    <div class="form-range-track-background" />,
+                                                    <GetValueTextContext.Provider value={getValueText ?? defaultGetValueText}>
+                                                        <RangeTicks min={min} max={max} step={step} id={id} hideTickValues={hideTickValues} />
+                                                    </GetValueTextContext.Provider>
+                                                )}
+                                            </OrientationContext.Provider>
+                                        </ValueContext.Provider>
                                     </DisabledContext.Provider>
                                 </SnapContext.Provider>
                             </StepContext.Provider>
@@ -135,7 +124,10 @@ const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues
                 onValueChange && "form-range-tick-selectable"
             )}
             ><option
-                onClick={() => { debugger; onValueChange?.(i) }}
+                onClick={() => { 
+
+                    onValueChange?.(i);
+                 }}
                 value={i}
                 key={i}>{shouldHide ? null : getValueText(i)}</option></div>)
     }
@@ -159,15 +151,16 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
         debounce: debounceSetting == true ? 1500 : debounceSetting != false ? debounceSetting : undefined
     });
     const onValueChangeSync = syncHandler;// as UseSliderThumbArguments<HTMLInputElement>["onValueChange"];
-    value = (currentCapture ?? value);
+    const valueFromParent = useContext(ValueContext);
+    value = ((valueFromParent) ?? value ?? currentCapture) ?? 0;
     const getValueText = useContext(GetValueTextContext);
-    const valueText = useMemo(() => { return ((getValueText?.(value)) ?? (value == null ? "" : `${value}`)); }, [value, getValueText]);
+    const valueText = useMemo(() => { return ((getValueText?.(value!)) ?? (value == null ? "" : `${value}`)); }, [value, getValueText]);
     const orientation = useContext(OrientationContext);
     let parentDisabled = useContext(DisabledContext);
     disabled ||= parentDisabled;
 
     const [inputHasFocus, setInputHasFocus] = useState(false);
-    const { refElementReturn, refElementReturn: { propsStable: p1 } } = useRefElement<HTMLInputElement>({ refElementParameters: {} })
+    const { refElementReturn, refElementReturn: { propsStable: p1, getElement: getInputElement } } = useRefElement<HTMLInputElement>({ refElementParameters: {} })
     const { hasCurrentFocusReturn: { propsStable: p2 } } = useHasCurrentFocus<HTMLInputElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: setInputHasFocus, onCurrentFocusedInnerChanged: null }, refElementReturn });
     let usedStep = (useContext(StepContext) ?? 1);
     let userStep = usedStep;
@@ -202,7 +195,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
                 setForceSnap(true);
                 if (snapTimeout.current > 0)
                     clearTimeout(snapTimeout.current);
-                snapTimeout.current = setTimeout(() => { setForceSnap(false); }, 750);
+                snapTimeout.current = setTimeout(() => { setForceSnap(false); }, 500);
                 e[EventDetail].value = closestStep;
             }
 
@@ -247,6 +240,13 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
 
     */
 
+    useEffect(() => {
+        debugger;
+        const element = getInputElement();
+        if (element)
+            element.value = `${value}`;
+    }, [value])
+
     return (
         <>
             <input {...useMergedProps<HTMLInputElement>(
@@ -262,9 +262,9 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
                     step: usedStep,
                     list: useContext(GetListContext)
                 })} />
-            <div class="form-range-tooltip-container">
+            {/*<div class="form-range-tooltip-container">
                 <div ref={tooltipRootRef} class="form-range-tooltip-root" style={{ "--range-value": `${valuePercent}` }} />
-            </div>
+            </div>*/}
             <div class="form-range-track-fill-background" style={{ "--form-range-value-percent": clampedValuePercent }} />
         </>
     );
