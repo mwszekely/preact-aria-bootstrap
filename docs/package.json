@@ -10,9 +10,9 @@
         "watch:js": "rollup --config rollup.config.mjs --watch --no-watch.clearScreen",
         "build:js": "rollup --config rollup.config.mjs",
         "watch:sass": "sass --watch --load-path=\"./node_modules/\" ../src/index.scss ./index-unprefixed.css",
-        "watch:css": "postcss ./index-unprefixed.css --watch -o ./index.css",
+        "watch:css": "postcss ./index-unprefixed.css --use autoprefixer --watch -o ./index.css",
         "build:sass": "sass --load-path=\"./node_modules/\" ../src/index.scss ./index-unprefixed.css",
-        "build:css": "postcss ./index-unprefixed.css -o ./index.css",
+        "build:css": "postcss ./index-unprefixed.css --use autoprefixer -o ./index.css",
         "test": "echo \"Error: no test specified\" && exit 1",
         "install": "npm run build"
     },
@@ -27,6 +27,7 @@
         "@rollup/plugin-node-resolve": "^15.0.1",
         "@rollup/plugin-replace": "^5.0.2",
         "@rollup/plugin-typescript": "^11.0.0",
+        "autoprefixer": "^10.4.13",
         "postcss": "^8.4.21",
         "postcss-cli": "^10.1.0",
         "postcss-import": "^15.1.0",
@@ -42,9 +43,9 @@
     "dependencies": {
         "bootstrap": "5.3.0-alpha1",
         "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
-        "preact-transition": "github:mwszekely/preact-transition",
         "clsx": "^1.2.1",
         "preact": "^10.11.3",
+        "preact-transition": "github:mwszekely/preact-transition",
         "tslib": "^2.4.1"
     }
 }

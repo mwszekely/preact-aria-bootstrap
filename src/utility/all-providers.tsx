@@ -6,14 +6,14 @@ import { KeyboardAssistProvider } from "./keyboard-assist";
 import { RenderCounterProvider } from "./render-counter";
 
 
-export const AllProviders = memo(({ children, targetAssertive, targetPolite }: { children: ComponentChildren } & NotificationProviderProps) => {
+export const AllProviders = memo(({ children, targetAssertive, targetPolite, toastsVisibleCount }: { children: ComponentChildren, toastsVisibleCount?: number } & NotificationProviderProps) => {
 
     const { children: portalChildren, context } = useNotificationProvider({ targetAssertive, targetPolite })
 
     return (
         <RenderCounterProvider>
             <NotificationProviderContext.Provider value={context}>
-                <ToastsProvider visibleCount={4}>
+                <ToastsProvider visibleCount={toastsVisibleCount ?? 4}>
                     <ToastErrorBoundary>
                         <KeyboardAssistProvider>
                             {children}
