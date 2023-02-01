@@ -6,12 +6,12 @@
   "source": "src/index.tsx",
   "module": "index.js",
   "types": "index.d.ts",
+  "packageManager": "pnpm@7.26.2",
   "scripts": {
     "build": "npx npm-run-all --npm-path npm -pc build:*",
     "watch": "npx npm-run-all --npm-path npm -pc watch:*",
     "watch:ts": "tsc --watch",
     "build:ts": "tsc",
-    "test": "jest",
     "lint": "npx lint ./src",
     "prepare": "npm run build || node ./true",
     "clean": "tsc --build --clean"
@@ -24,7 +24,6 @@
   "dependencies": {
     "@floating-ui/dom": "^1.1.0",
     "@js-temporal/polyfill": "^0.4.3",
-    "@popperjs/core": "^2.11.6",
     "bootstrap-icons": "^1.10.3",
     "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
     "clsx": "^1.2.1",
@@ -36,7 +35,6 @@
   "devDependencies": {
     "@types/dompurify": "^2.4.0",
     "@types/lodash-es": "^4.17.6",
-    "sass": "^1.57.1",
     "typescript": "^4.9.4"
   }
 }

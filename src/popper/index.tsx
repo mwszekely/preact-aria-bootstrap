@@ -212,6 +212,7 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
     const getOpen = useStableGetter(open);
     const getPauseMouseTracking = useStableGetter(pauseMouseTracking);
     useLayoutEffect(() => {
+        handleUpdate();
         if (open) {
             hasOpenedAtLeastOnce.current = true;
 

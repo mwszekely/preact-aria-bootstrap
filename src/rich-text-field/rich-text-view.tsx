@@ -1,9 +1,12 @@
 
-import { sanitize } from "dompurify";
+
+import createDOMPurify from 'dompurify';
 import { memo } from 'preact/compat';
 
+const DOMPurify = createDOMPurify(window);
+
 export const RichTextView = memo(function RichTextView({ valueHtml }: { valueHtml: string }) {
-    const sanitized = sanitize(valueHtml);
+    const sanitized = DOMPurify.sanitize(valueHtml);
 
     return (
         <span class="rich-text-view" dangerouslySetInnerHTML={{ __html: sanitized }} />
