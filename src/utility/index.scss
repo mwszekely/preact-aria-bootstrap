@@ -5,6 +5,7 @@
 // so let's guarantee that with display: contents.
 #portal {
     display: contents;
+    position: fixed;
 }
 
 .keyboard-assist-icon-container {

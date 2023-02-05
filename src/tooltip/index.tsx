@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { cloneElement, ComponentChildren, Ref, VNode } from "preact";
-import { defaultRenderPortal, Tooltip as AriaTooltip } from "preact-aria-widgets";
-import { useMergedProps } from "preact-prop-helpers";
+import { defaultRenderPortal, Tooltip as AriaTooltip, TooltipStatus } from "preact-aria-widgets";
+import { useMergedProps, useState } from "preact-prop-helpers";
 import { ZoomFade } from "preact-transition";
 import { usePopper, UsePopperProps } from "../popper";
 import { forwardElementRef } from "../utility/forward-element-ref";
@@ -72,18 +72,20 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
 
     maxWidth ??= "33vw";
 
+    const [status, setStatus] = useState<TooltipStatus>(null);
+
     return (
-        <AriaTooltip<HTMLSpanElement, HTMLDivElement> tooltipSemanticType={semanticType || (forward ? "label" : "description")} render={tooltipInfo => {
-            const mouseTrackingPaused = ((tooltipInfo.tooltipReturn.displayReason == "hover-tooltip"))
+        <AriaTooltip<HTMLSpanElement, HTMLDivElement> onStatus={setStatus} tooltipSemanticType={semanticType || (forward ? "label" : "description")} render={tooltipInfo => {
+            //const mouseTrackingPaused = (status == "focus")
             const portalId = usePortalId("tooltip");
+            const isFocusOverride = (status == "focus");
             const { propsArrow, propsPopup, propsSource, propsData } = usePopper<HTMLSpanElement, HTMLDivElement, HTMLDivElement>({
                 popperParameters: {
-                    open: tooltipInfo.tooltipReturn.isShowing,
+                    open: status != null,
                     getElement,
-                    pauseMouseTracking: mouseTrackingPaused,
                     absolutePositioning,
-                    placement: (alignMode == "element" ? "top" : "top-start"),
-                    alignMode: alignMode ?? (tooltipInfo.tooltipReturn.displayReason == "focus" ? "element" : `mouse`)
+                    placement: isFocusOverride? "top" : (alignMode == "element" ? "top" : "top-start"),
+                    alignMode: isFocusOverride? "element" : alignMode ?? (`mouse`)
                 }
             })
 
@@ -92,7 +94,7 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
             // Don't set hidden or inert or anything like that when is's closed!
             const tooltipContent =
                 <div {...useMergedProps(propsPopup, {})}>
-                    <ZoomFade exitVisibility="visible" show={tooltip == null ? false : (tooltipInfo.tooltipReturn.isOpen || false)} zoomMin={0.8} zoomOriginBlock={1} zoomOriginInline={(alignMode == "element" ? 0.5 : 0)}>
+                    <ZoomFade exitVisibility="visible" show={tooltip == null ? false : (status != null)} zoomMin={0.8} zoomOriginBlock={1} /*zoomOriginInline={(alignMode == "element" ? 0.5 : 0)}*/>
                         <div {...useMergedProps<any>(propsData, { style: maxWidth? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup)}>
                             <div {...useMergedProps(propsArrow, { className: "tooltip-arrow" })} />
                             <div class="tooltip-inner">

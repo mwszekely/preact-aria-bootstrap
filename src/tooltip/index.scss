@@ -1,7 +1,12 @@
 @use "bootstrap-sass-variables/zindex-tooltip" as *;
 
 #portal-tooltip {
-    display: contents;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: $zindex-tooltip;
+
     &>.popper-popup {
         z-index: $zindex-tooltip;
     }

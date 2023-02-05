@@ -241,7 +241,6 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
     */
 
     useEffect(() => {
-        debugger;
         const element = getInputElement();
         if (element)
             element.value = `${value}`;

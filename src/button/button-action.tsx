@@ -156,7 +156,7 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extend
 
                             const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx))
                             if (tooltip) {
-                                return <Tooltip forward tooltip={tooltip}>{ret}</Tooltip>
+                                return <Tooltip forward tooltip={tooltip} alignMode="element">{ret}</Tooltip>
                             }
                             else {
                                 return ret;
