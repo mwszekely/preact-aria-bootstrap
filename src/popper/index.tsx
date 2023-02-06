@@ -94,6 +94,7 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
 
     const handleUpdate = useStableCallback(async (forceUpdate: boolean) => {
         if (forceUpdate || open || hasOpenedAtLeastOnce.current) {
+            const [requestedSide, requestedAlignment] = requestedPlacement.split('-') as [Side, Alignment?];
             hasOpenedAtLeastOnce.current = true;
             const sourceElement = getSourceElement();
             const popupElement = getPopupElement();
@@ -117,10 +118,10 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
                     //autoPlacement({ }), 
                     hide({ elementContext: "reference" })
                 ];
-    
+
                 const { middlewareData, placement: usedPlacement, strategy, x, y } = await computePosition({
                     contextElement: sourceElement,
-                    getBoundingClientRect: () => getBoundingClientRectByMouse(sourceElement, alignMode == "mouse"? "x" : "off", getMouseX(), getMouseY()),
+                    getBoundingClientRect: () => getBoundingClientRectByMouse(sourceElement, alignMode == "mouse" ? (requestedSide == "left" || requestedSide == "right" ? "y" : "x") : "off", getMouseX(), getMouseY()),
                     getClientRects: () => getClientRectsByMouse(sourceElement, getMouseX(), getMouseY())
                 },
                     popupElement,
@@ -130,13 +131,13 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
                         strategy: absolutePositioning ? "absolute" : "fixed"
                     });
 
-                const [staticSide, staticAlignment] = usedPlacement.split('-') as [Side, Alignment?];
-                setUsedSide(staticSide);
-                setUsedAlignment(staticAlignment ?? null);
+                const [usedSide, usedAlignment] = usedPlacement.split('-') as [Side, Alignment?];
+                setUsedSide(usedSide);
+                setUsedAlignment(usedAlignment ?? null);
                 setHidden(middlewareData.hide?.escaped || middlewareData.hide?.referenceHidden || false);
                 //lastUsedPlacement.current ||= staticSide;
 
-                popupProps.current["data-popper-placement"] = staticSide || "";
+                popupProps.current["data-popper-placement"] = usedSide || "";
                 /*popupProps.current["data-popup-arrow-static-alignment"] = staticAlignment || "";
                 popupProps.current["data-popup-escaped"] = middlewareData.hide?.escaped ? "true" : "";
                 popupProps.current["data-popup-reference-hidden"] = middlewareData.hide?.referenceHidden ? "true" : "";*/
