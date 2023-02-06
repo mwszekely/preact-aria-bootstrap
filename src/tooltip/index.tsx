@@ -2,7 +2,8 @@ import clsx from "clsx";
 import { cloneElement, ComponentChildren, Ref, VNode } from "preact";
 import { defaultRenderPortal, Tooltip as AriaTooltip, TooltipStatus } from "preact-aria-widgets";
 import { useMergedProps, useState } from "preact-prop-helpers";
-import { ZoomFade } from "preact-transition";
+import { SlideFade, Slide, Fade, ZoomFade } from "preact-transition";
+import { useEffect } from "preact/hooks";
 import { usePopper, UsePopperProps } from "../popper";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { GlobalAttributes } from "../utility/types";
@@ -59,12 +60,19 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
      */
     getElement?: (e: HTMLElement) => HTMLElement;
 
+    /**
+     * By default, this is `top`. Feel free to override.
+     */
+    placement?: UsePopperProps["popperParameters"]["placement"];
+
     alignMode?: UsePopperProps["popperParameters"]["alignMode"];
+
+    forceOpen?: boolean;
 
     //align?: "start" | "center";
 }
 
-export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement, children, tooltip, maxWidth, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) {
+export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) {
 
     if (forward == null && typeof children == "object" && (children as VNode).props) {
         forward = true;
@@ -72,36 +80,50 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
 
     maxWidth ??= "33vw";
 
-    const [status, setStatus] = useState<TooltipStatus>(null);
+    let [status, setStatus] = useState<TooltipStatus>(null);
+
+    useEffect(() => {
+        if (forceOpen)
+            setStatus("focus");
+    }, [forceOpen])
 
     return (
         <AriaTooltip<HTMLSpanElement, HTMLDivElement> onStatus={setStatus} tooltipSemanticType={semanticType || (forward ? "label" : "description")} render={tooltipInfo => {
             //const mouseTrackingPaused = (status == "focus")
+            if (forceOpen)
+                status = "focus";
+
             const portalId = usePortalId("tooltip");
             const isFocusOverride = (status == "focus");
-            const { propsArrow, propsPopup, propsSource, propsData } = usePopper<HTMLSpanElement, HTMLDivElement, HTMLDivElement>({
+            const { propsArrow, propsPopup, propsSource, propsData, popperReturn: { usedAlignment, usedSide, hidden } } = usePopper<HTMLSpanElement, HTMLDivElement, HTMLDivElement>({
                 popperParameters: {
                     open: status != null,
                     getElement,
                     absolutePositioning,
-                    placement: isFocusOverride? "top" : (alignMode == "element" ? "top" : "top-start"),
-                    alignMode: isFocusOverride? "element" : alignMode ?? (`mouse`)
+                    placement: placement ?? "top",
+                    alignMode: isFocusOverride ? "element" : alignMode ?? (`mouse`)
                 }
             })
+
+            const zoomOriginBlock = (usedSide == "top" || usedSide == "bottom") ? 1 : 0.5;
+            const zoomOriginInline = (usedSide == "left" || usedSide == "right") ? 1 : 0.5;
+
+            const slideTargetBlock = (usedSide == "top" ? 0.125 : usedSide == "bottom" ? -0.125 : 0);
+            const slideTargetInline = (usedSide == "right" ? 0.125 : usedSide == "left" ? -0.125 : 0);
 
             // IMPORTANT:
             // The tooltip must remain non-hidden to assistive technologies even when closed.
             // Don't set hidden or inert or anything like that when is's closed!
             const tooltipContent =
                 <div {...useMergedProps(propsPopup, {})}>
-                    <ZoomFade exitVisibility="visible" show={tooltip == null ? false : (status != null)} zoomMin={0.8} zoomOriginBlock={1} /*zoomOriginInline={(alignMode == "element" ? 0.5 : 0)}*/>
-                        <div {...useMergedProps<any>(propsData, { style: maxWidth? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup)}>
+                    <SlideFade exitVisibility="visible" show={hidden ? false : (tooltip == null ? false : (status != null))} slideTargetBlock={slideTargetBlock} slideTargetInline={slideTargetInline} /*zoomMin={0.8} zoomOriginBlock={zoomOriginBlock} zoomOriginInline={zoomOriginInline}*/ /*zoomOriginInline={(alignMode == "element" ? 0.5 : 0)}*/>
+                        <div {...useMergedProps<any>(propsData, { style: maxWidth ? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup)}>
                             <div {...useMergedProps(propsArrow, { className: "tooltip-arrow" })} />
                             <div class="tooltip-inner">
                                 {tooltip}
                             </div>
                         </div>
-                    </ZoomFade>
+                    </SlideFade>
                 </div>
             const portalJsx = absolutePositioning ? tooltipContent : defaultRenderPortal({ children: tooltipContent, portalId });
             if (forward) {

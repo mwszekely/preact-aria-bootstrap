@@ -33,14 +33,19 @@ export function Code() {
 }
 
 export function Demo() {
-   
+
 
     return (
         <>
             <Blurb />
             <Code />
             <div>This is text, <Tooltip tooltip="This is the tooltip content">and this is text that triggers a tooltip.</Tooltip></div>
-            
+            <div style={{ width: "15vw", height: "15vw", border: "2px dotted black", overflow: "scroll" }}>
+                <div style={{ width: "50vw", height: "50vw", background: "rgba(0,0,128,0.125)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <Tooltip tooltip="This is the tooltip content" forceOpen><div>Tooltip trigger</div></Tooltip>
+                </div>
+            </div>
+
         </>
     )
 }

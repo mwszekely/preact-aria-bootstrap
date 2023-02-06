@@ -22,8 +22,7 @@ export interface UsePopperProps {
         //pauseMouseTracking?: boolean;
 
         /**
-         * * `"mouse-start"`: The popper will follow the mouse cursor, within the bounds of the element, and will be start-aligned.
-         * * `"mouse-center"`: The popper will follow the mouse cursor, within the bounds of the element, and will be center-aligned.
+         * * `"mouse"`: The popper will follow the mouse cursor, within the bounds of the element.
          * * `"center"`: The popper will be centered on the element.
          */
         alignMode: "mouse" | "element";
@@ -57,6 +56,11 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
     //const [getSourceElement, setSourceElement] = usePassiveState<SourceElement | null, never>(null);
     //const [getPopupElement, setPopupElement] = usePassiveState<PopupElement | null, never>(null);
     //const [getArrowElement, setArrowElement] = usePassiveState<ArrowElement | null, never>(null);
+
+    const [hidden, setHidden] = useState(false);
+    const [usedSide, setUsedSide] = useState<Side | null>(null);
+    const [usedAlignment, setUsedAlignment] = useState<Alignment | null>(null);
+
     const [getMouseX, setMouseX] = usePassiveState(null, returnZero, runImmediately);
     const [getMouseY, setMouseY] = usePassiveState(null, returnZero, runImmediately);
     const cachedRects = useRef<DOMRectList | null>(null);
@@ -71,7 +75,7 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
     const popupProps = useRef<{ [key in keyof typeof Map1]?: string | undefined }>({});
     const popupStyle = useRef<CSSProperties>({});
     const arrowStyle = useRef<CSSProperties>({});
-    const lastUsedPlacement = useRef<Placement | null>(null);
+    //const lastUsedPlacement = useRef<Placement | null>(null);
     const hasOpenedAtLeastOnce = useRef(false);
     const { elementSizeReturn, refElementReturn } = useElementSize({
         elementSizeParameters: {
@@ -95,25 +99,27 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
             const popupElement = getPopupElement();
             const arrowElement = getArrowElement();
             if (sourceElement && popupElement && arrowElement) {
-                const [staticSide2, staticAlignment2] = requestedPlacement.split('-') as [Side, Alignment?];
+                //const [staticSide2, staticAlignment2] = requestedPlacement.split('-') as [Side, Alignment?];
                 // (staticAlignment2 == 'start' ? 1 : -1)
                 const middleware: Middleware[] = [
                     //offset({}),
-                    offset(/*(alignMode == "mouse" && staticAlignment2) ? { crossAxis: (popupElement.clientWidth / 2) * (0.75) * 0 } : undefined*/),
-                    shift({}),
+                    offset( /*(alignMode == "mouse" && staticAlignment2) ? { crossAxis: (popupElement.clientWidth / 2) * (0.75) * 0 } : undefined*/),
+                    shift({ elementContext: "reference" }),
                     arrow({ element: arrowElement, padding: 12 }),
-                    flip({}),
+                    flip({ elementContext: "reference" }),
                     size({
+                        elementContext: "reference",
                         apply({ availableWidth, availableHeight }) {
                             popupElement.style.setProperty("--popup-max-width", popupStyle.current.maxWidth = `${availableWidth}px`);
                             popupElement.style.setProperty("--popup-max-height", popupStyle.current.maxHeight = `${availableHeight}px`);
                         },
                     }),
                     //autoPlacement({ }), 
-                    hide({})
+                    hide({ elementContext: "reference" })
                 ];
     
                 const { middlewareData, placement: usedPlacement, strategy, x, y } = await computePosition({
+                    contextElement: sourceElement,
                     getBoundingClientRect: () => getBoundingClientRectByMouse(sourceElement, alignMode == "mouse"? "x" : "off", getMouseX(), getMouseY()),
                     getClientRects: () => getClientRectsByMouse(sourceElement, getMouseX(), getMouseY())
                 },
@@ -125,7 +131,10 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
                     });
 
                 const [staticSide, staticAlignment] = usedPlacement.split('-') as [Side, Alignment?];
-                lastUsedPlacement.current ||= staticSide;
+                setUsedSide(staticSide);
+                setUsedAlignment(staticAlignment ?? null);
+                setHidden(middlewareData.hide?.escaped || middlewareData.hide?.referenceHidden || false);
+                //lastUsedPlacement.current ||= staticSide;
 
                 popupProps.current["data-popper-placement"] = staticSide || "";
                 /*popupProps.current["data-popup-arrow-static-alignment"] = staticAlignment || "";
@@ -223,7 +232,12 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
         propsSource: useMergedProps(propsSource, extraSourceProps.current),
         propsPopup: { ...propsPopup, style: popupStyle.current, className: "popper-popup" } as h.JSX.HTMLAttributes<PopupElement>,
         propsArrow: { ...propsArrow, style: arrowStyle.current, className: "popper-arrow" } as h.JSX.HTMLAttributes<ArrowElement>,
-        propsData: { ...popupProps.current as h.JSX.HTMLAttributes<any> }
+        propsData: { ...popupProps.current as h.JSX.HTMLAttributes<any> },
+        popperReturn: {
+            usedSide,
+            usedAlignment,
+            hidden
+        }
     }
 }
 
