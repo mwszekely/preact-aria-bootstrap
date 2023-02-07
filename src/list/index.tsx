@@ -1,10 +1,10 @@
 import clsx from "clsx";
-import { ComponentChildren, h, Ref, VNode } from "preact";
+import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
 import { Gridlist, GridlistChild, GridlistRow, ProgressWithHandler } from "preact-aria-widgets";
 import { AsyncHandler, returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
-import { useCallback } from "preact/hooks";
+import { useCallback, useContext } from "preact/hooks";
 import { ButtonThemes } from "../context";
 import { Paginated } from "../pagination";
 import { forwardElementRef } from "../utility/forward-element-ref";
@@ -38,6 +38,8 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>
 }
 
+const DefaultDisabled = createContext(false);
+
 export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
 
     const [focusedInner, setFocusedInner] = useState(false);
@@ -53,40 +55,44 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
         paginationLocation ||= "before";
 
     return (
-        <Gridlist<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLLabelElement>
-            selectedIndex={selectedIndex ?? null}
-            onSelectedIndexChange={onSelectedIndexChange}
-            paginationMin={paginationStart}
-            paginationMax={paginationEnd}
-            staggered={staggered || false}
-            ariaLabel={labelPosition == "hidden" ? label : null}
-            groupingType="without-groups"
-            selectionLimit={selectedIndex === undefined ? "multi" : "single"}
-            render={info => {
+        <DefaultDisabled.Provider value={disabled ?? false}>
+            <Gridlist<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLLabelElement>
+                selectedIndex={selectedIndex ?? null}
+                onSelectedIndexChange={onSelectedIndexChange}
+                paginationMin={paginationStart}
+                paginationMax={paginationEnd}
+                staggered={staggered || false}
+                ariaLabel={labelPosition == "hidden" ? label : null}
+                groupingType="without-groups"
+                selectionLimit={selectedIndex === undefined ? "multi" : "single"}
+                render={info => {
 
-                useUpdateRenderCounter("Gridlist");
+                    useUpdateRenderCounter("Gridlist");
 
-                const labelJsx = <label {...info.propsGridlistLabel}>{label}</label>
+                    const labelJsx = <label {...info.propsGridlistLabel}>{label}</label>
 
-                return (
-                    <>
-                        {labelPosition == "before" && labelJsx}
-                        <Paginated childCount={info.paginatedChildrenReturn.childCount ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
+                    return (
+                        <>
+                            {labelPosition == "before" && labelJsx}
+                            <Paginated childCount={info.paginatedChildrenReturn.childCount ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
 
-                            <div class={clsx(`list-group gridlist-group`)} {...useMergedProps(props, refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist)}>{children}</div>
+                                <div class={clsx(`list-group gridlist-group`)} {...useMergedProps(props, refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist)}>{children}</div>
 
-                        </Paginated>
-                        {labelPosition == "after" && labelJsx}
-                    </>
-                )
-            }}
+                            </Paginated>
+                            {labelPosition == "after" && labelJsx}
+                        </>
+                    )
+                }}
 
-        />
+            />
+        </DefaultDisabled.Provider>
     )
 }
 
 export const ListItem = memo(forwardElementRef(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
 
+    const defaultDisabled = useContext(DefaultDisabled);
+    disabled ||= defaultDisabled;
 
     return (
         <ProgressWithHandler<h.JSX.TargetedEvent<any, Event>, void, HTMLSpanElement, HTMLLabelElement>
@@ -101,6 +107,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                         index={index}
                         ariaPropName="aria-selected"
                         getSortValue={getSortValue ?? returnZero}
+                        disabled={disabled}
 
                         render={infoRow => {
                             useUpdateRenderCounter("GridlistRow");
