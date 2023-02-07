@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { cloneElement, ComponentChildren, Ref, VNode } from "preact";
 import { defaultRenderPortal, Tooltip as AriaTooltip, TooltipStatus } from "preact-aria-widgets";
 import { useMergedProps, useState } from "preact-prop-helpers";
-import { SlideFade, Slide, Fade, ZoomFade } from "preact-transition";
+import { SlideFade } from "preact-transition";
 import { useEffect } from "preact/hooks";
 import { usePopper, UsePopperProps } from "../popper";
 import { forwardElementRef } from "../utility/forward-element-ref";

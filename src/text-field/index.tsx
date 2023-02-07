@@ -1,16 +1,16 @@
 import { Temporal } from "@js-temporal/polyfill";
 import clsx from "clsx";
-import { WithinInputGroup } from "../input-group/shared";
 import { ComponentChildren, h, Ref } from "preact";
 import { LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets";
 import { useHasCurrentFocus, useMergedProps, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext, useLayoutEffect, useRef } from "preact/hooks";
 import { DefaultDisabledType } from "../context";
+import { WithinInputGroup } from "../input-group/shared";
 import { Tooltip } from "../tooltip";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { LabelledProps } from "../utility/types";
-import { Fade } from "preact-transition";
 
 interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<h.JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
     value: T | null;

@@ -1,9 +1,10 @@
-import { Alignment, arrow, autoUpdate, computePosition, flip, hide, inline, Middleware, MiddlewareArguments, MiddlewareReturn, offset, Placement, shift, Side, size } from "@floating-ui/dom";
+import { Alignment, arrow, computePosition, flip, hide, Middleware, offset, Placement, shift, Side, size } from "@floating-ui/dom";
 import { h } from "preact";
 import { returnZero, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
-import { identity, runImmediately } from "preact-prop-helpers/preact-extensions/use-passive-state";
+import { runImmediately } from "preact-prop-helpers/preact-extensions/use-passive-state";
 import { CSSProperties } from "preact/compat";
 import { useCallback, useEffect, useLayoutEffect, useRef } from "preact/hooks";
+import identity from "lodash-es/identity";
 
 export interface UsePopperProps {
     popperParameters: {
