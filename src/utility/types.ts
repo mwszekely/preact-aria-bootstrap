@@ -1,5 +1,7 @@
 import { ComponentChildren, h } from "preact";
 
+export type OmitStrong<T, K extends keyof T> = Omit<T, K>;
+
 interface LabelledComponent1 {
     labelPosition: "hidden";
     label: string;

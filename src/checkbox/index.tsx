@@ -109,7 +109,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                                     }, props, { ref })}>
                                         {loadingJsx}
                                         {labelPosition == "before" && visibleLabel}
-                                        {labelPosition == "tooltip" ? <Tooltip forward tooltip={label} alignMode="element">{inputJsx}</Tooltip> : inputJsx}
+                                        {labelPosition == "tooltip" ? <Tooltip forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
                                         {labelPosition == "after" && visibleLabel}
                                     </div>
                                 )
@@ -119,7 +119,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                                     <>
                                         {labelPosition == "before" && <div {...({ className: clsx("input-group-text", pending && "pending") })}>{visibleLabel}</div>}
                                         <div {...useMergedProps({ className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline") }, props, { ref })}>
-                                            {labelPosition == "tooltip" ? <Tooltip forward tooltip={label} alignMode="element">{inputJsx}</Tooltip> : inputJsx}
+                                            {labelPosition == "tooltip" ? <Tooltip forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
                                         </div>
                                         {labelPosition == "after" && <div {...({ className: clsx("input-group-text", pending && "pending") })}>{visibleLabel}</div>}
                                     </>

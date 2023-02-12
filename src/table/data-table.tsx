@@ -184,8 +184,8 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
                 useUpdateRenderCounter("DataTableCell");
 
                 const { pressReturn: { propsUnstable } } = usePress({
-                    pressParameters:  {
-                        focusSelf, 
+                    pressParameters: {
+                        focusSelf,
                         onPressSync: !isTableHead ? undefined : () => {
                             const { column, direction } = info.tableCellReturn.sortByThisColumn();
                             setSortingByThisColumn(true);

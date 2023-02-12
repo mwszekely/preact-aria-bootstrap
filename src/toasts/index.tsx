@@ -60,7 +60,7 @@ export function Toast({ timeout, politeness, children, ...p }: Omit<ToastProps, 
     return (
         <AriaToast<HTMLDivElement>
             index={index}
-            timeout={ 10000000 ?? timeout ?? defaultTimeout}
+            timeout={10000000 ?? timeout ?? defaultTimeout}
             children={children}
             render={info => {
                 const show = (info.toastReturn.showing);

@@ -1,9 +1,10 @@
 import { Ref } from "preact";
 import { memo } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref";
+import { OmitStrong } from "../utility/types";
 import { Icon, IconProps } from "./icon-base";
 
-export interface FontIconProps extends Omit<IconProps<HTMLElement>, "children"> {
+export interface FontIconProps extends OmitStrong<IconProps<HTMLElement>, "children"> {
 
 }
 

@@ -32,7 +32,6 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     onSelectedChange?: null | ((selected: boolean) => (void | Promise<void>));
     getSortValue?: () => unknown;
     badge?: VNode;
-    //onPress?: (e: number) => void;
 
     loadingLabel?: string;
     onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>
@@ -45,11 +44,8 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
     const [focusedInner, setFocusedInner] = useState(false);
     const { refElementReturn } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
     const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLDivElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn })
-    //const WINDOW_SIZE = 20;
     const [paginationStart, setPaginationStart] = useState<number | null>(paginationSize == null ? null : 0);
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
-
-
 
     if (paginationSize)
         paginationLocation ||= "before";
@@ -108,6 +104,8 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                         ariaPropName="aria-selected"
                         getSortValue={getSortValue ?? returnZero}
                         disabled={disabled}
+                        noTypeahead={true}
+                        getText={useCallback((e: HTMLDivElement) => { return e?.querySelector(".gridlist-item-text")?.textContent || "" }, [])}
 
                         render={infoRow => {
                             useUpdateRenderCounter("GridlistRow");
@@ -150,7 +148,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                             </>
 
                             return (
-                                <KeyboardAssistIcon leftRight={(!!iconStart || !!iconEnd)} upDown={true} homeEnd={true} pageKeys={true} typeahead={false} typeaheadActive={false}>
+                                <KeyboardAssistIcon leftRight={(!!iconStart || !!iconEnd)} upDown={true} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={false}>
                                     <div
                                         aria-busy={(!show).toString()}
                                         {...useMergedProps(

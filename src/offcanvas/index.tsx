@@ -48,7 +48,7 @@ export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, heade
                                 portalId: usePortalId("offcanvas"),
                                 children: (
                                     <div {...info.propsFocusContainer}>
-                                        <Slide show={open} slideTargetInline={-1} duration={1000}>
+                                        <Slide show={open} slideTargetInline={-1} duration={500}>
                                             <div {...useMergedProps(info.propsDialog, { class: clsx("offcanvas"), tabIndex: -1 })}>
                                                 <div {...useMergedProps({ class: "offcanvas-header" })}>
                                                     <h5 {...useMergedProps(info.propsTitle, { class: "offcanvas-title" })}>{header}</h5>

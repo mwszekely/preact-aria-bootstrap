@@ -32,10 +32,7 @@ export const Icon = memo(forwardElementRef(function Icon<E extends Element>({ la
         ref,
     })
 
-    const iconElement = cloneElement(children, useMergedProps<any>(children.props, iconProps)); //<i {...props} role={label? "img" : "presentation"} aria-label={ariaLabel || (label ?? undefined)} ref={ref} />;
-
-    //if (tooltip)
-    //    return <Tooltip tooltip={tooltip}>{iconElement}</Tooltip>;
+    const iconElement = cloneElement(children, useMergedProps<any>(children.props, iconProps));
 
     return iconElement;
 }));

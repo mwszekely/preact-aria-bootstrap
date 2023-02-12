@@ -261,7 +261,6 @@ export const CkEditorWrapper = memo(forwardElementRef(function CkEditorWrapper({
             });
             editor.model.document.on("blur", (e: any) => { getOnFocusChange()(false); });
             editor.model.document.on("focus", (e: any) => { getOnFocusChange()(true); });
-            debugger;
 
             if (typeof editorHandle == "function")
                 editorHandle(editor);

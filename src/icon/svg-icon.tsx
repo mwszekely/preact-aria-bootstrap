@@ -4,9 +4,7 @@ import { forwardElementRef } from "../utility/forward-element-ref";
 import { Icon, IconProps } from "./icon-base";
 
 
-export interface SvgIconProps extends Omit<IconProps<SVGSVGElement>, "children"> {
-
-}
+export interface SvgIconProps extends Omit<IconProps<SVGSVGElement>, "children"> { }
 
 export const SvgIcon = memo(forwardElementRef(function SvgIcon(props: SvgIconProps, ref: Ref<SVGSVGElement>) {
     return (<Icon {...props} ref={ref}><svg class="svg-icon" /></Icon>);

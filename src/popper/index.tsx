@@ -1,10 +1,10 @@
 import { Alignment, arrow, computePosition, flip, hide, Middleware, offset, Placement, shift, Side, size } from "@floating-ui/dom";
+import identity from "lodash-es/identity";
 import { h } from "preact";
 import { returnZero, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 import { runImmediately } from "preact-prop-helpers/preact-extensions/use-passive-state";
 import { CSSProperties } from "preact/compat";
 import { useCallback, useEffect, useLayoutEffect, useRef } from "preact/hooks";
-import identity from "lodash-es/identity";
 
 export interface UsePopperProps {
     popperParameters: {
@@ -49,8 +49,9 @@ const Map1 = {
     "data-popper-placement": "popperPlacement"
 }
 
-function useFoo() {
-
+function roundByDPR(value: number) {
+    const dpr = window.devicePixelRatio || 1;
+    return Math.round(value * dpr) / dpr;
 }
 
 export function usePopper<SourceElement extends Element, PopupElement extends HTMLElement, ArrowElement extends HTMLElement>({ popperParameters: { open, getElement, alignMode, placement: requestedPlacement, absolutePositioning } }: UsePopperProps) {
@@ -103,21 +104,22 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
             if (sourceElement && popupElement && arrowElement) {
                 //const [staticSide2, staticAlignment2] = requestedPlacement.split('-') as [Side, Alignment?];
                 // (staticAlignment2 == 'start' ? 1 : -1)
+                const elementContext = (absolutePositioning ? "floating" : "reference")
                 const middleware: Middleware[] = [
                     //offset({}),
                     offset( /*(alignMode == "mouse" && staticAlignment2) ? { crossAxis: (popupElement.clientWidth / 2) * (0.75) * 0 } : undefined*/),
-                    shift({ elementContext: "reference" }),
+                    shift({ elementContext }),
                     arrow({ element: arrowElement, padding: 12 }),
-                    flip({ elementContext: "reference" }),
+                    flip({ elementContext }),
                     size({
-                        elementContext: "reference",
+                        elementContext,
                         apply({ availableWidth, availableHeight }) {
                             popupElement.style.setProperty("--popup-max-width", popupStyle.current.maxWidth = `${availableWidth}px`);
                             popupElement.style.setProperty("--popup-max-height", popupStyle.current.maxHeight = `${availableHeight}px`);
                         },
                     }),
                     //autoPlacement({ }), 
-                    hide({ elementContext: "reference" })
+                    hide({ elementContext })
                 ];
 
                 const { middlewareData, placement: usedPlacement, strategy, x, y } = await computePosition({
@@ -143,8 +145,8 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
                 popupProps.current["data-popup-escaped"] = middlewareData.hide?.escaped ? "true" : "";
                 popupProps.current["data-popup-reference-hidden"] = middlewareData.hide?.referenceHidden ? "true" : "";*/
 
-                popupElement.style.setProperty("--popup-source-x", popupStyle.current["--popup-source-x"] = x == null ? null : `${x}px`);
-                popupElement.style.setProperty("--popup-source-y", popupStyle.current["--popup-source-y"] = y == null ? null : `${y}px`);
+                popupElement.style.setProperty("--popup-source-x", popupStyle.current["--popup-source-x"] = x == null ? null : `${roundByDPR(x)}px`);
+                popupElement.style.setProperty("--popup-source-y", popupStyle.current["--popup-source-y"] = y == null ? null : `${roundByDPR(y)}px`);
                 popupElement.style.setProperty("--popup-shift-x", popupStyle.current["--popup-shift-x"] = middlewareData.shift?.x ? "true" : null);
                 popupElement.style.setProperty("--popup-shift-y", popupStyle.current["--popup-shift-y"] = middlewareData.shift?.y ? "true" : null);
                 popupElement.style.setProperty("--popup-offset-x", popupStyle.current["--popup-offset-x"] = middlewareData.offset?.x ? "true" : null);

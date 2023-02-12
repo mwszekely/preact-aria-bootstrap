@@ -2,7 +2,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import clsx from "clsx";
 import { ComponentChildren, h, Ref } from "preact";
 import { LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets";
-import { useHasCurrentFocus, useMergedProps, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
+import { UseAsyncReturnType, useHasCurrentFocus, useMergedProps, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext, useLayoutEffect, useRef } from "preact/hooks";
@@ -454,7 +454,7 @@ export function useCommitTextField<C>({ getFocused, commit, currentCapture, show
     const triggerIndex = useRef(0);
     useTimeout({
         timeout: 50,
-        triggerIndex: ++(triggerIndex.current),
+        triggerIndex: value,
         callback: () => {
             if (!getFocused() && !showSpinner)
                 updateDOMValue(value);
@@ -510,7 +510,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
             render={progressInfo => {
 
 
-                const { asyncHandlerReturn: { pending: p, debouncingAsync, callCount, debouncingSync, currentCapture, syncHandler }, propsIndicator } = progressInfo;
+                const { asyncHandlerReturn: { pending: p, debouncingAsync, callCount, debouncingSync, currentCapture, syncHandler, invocationResult }, propsIndicator } = progressInfo;
 
                 const showSpinner = (p || debouncingAsync || debouncingSync);
 
@@ -553,7 +553,11 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
 
 
                 useCommitTextField<V>({
-                    getFocused: getCurrentFocusedInner, currentCapture, showSpinner, value: value as V, commit: (value2) => {
+                    getFocused: getCurrentFocusedInner,
+                    currentCapture,
+                    showSpinner,
+                    value: value as V,
+                    commit: (value2) => {
 
                         const element = getElement();
                         if (element) {
@@ -650,10 +654,10 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
                             {labelPosition == "before" && labelJsx}
                             <div class={clsx("form-text-field-control-container", labelPosition == "floating" && "form-floating")}>
                                 {iconStart && <span class={clsx("form-control-icon-start form-control-icon show")}>{iconStart}</span>}
-                                {labelPosition == "tooltip" ? <Tooltip tooltip={label}>{finalInputJsx}</Tooltip> : finalInputJsx}
+                                {labelPosition == "tooltip" ? <Tooltip tooltip={label} absolutePositioning={true}>{finalInputJsx}</Tooltip> : finalInputJsx}
                                 {labelPosition == "floating" && labelJsx}
                                 {iconEnd && <span class={clsx("form-control-icon-end form-control-icon", !showSpinner && "show")}>{iconEnd}</span>}
-                                <TextFieldSpinner callCount={callCount} containerClass={"form-control-icon-end form-control-icon"} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
+                                <TextFieldSpinner callCount={callCount} containerClass={"form-control-icon-end form-control-icon"} invocationResult={invocationResult} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
                             </div>
                             {labelPosition == "after" && labelJsx}
                         </div>
@@ -666,10 +670,10 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
                         <>
                             {labelPosition == "before" && labelJsx}
                             {iconStart && <span class={clsx("input-group-text")}>{iconStart}</span>}
-                            {labelPosition == "tooltip" ? <Tooltip tooltip={label}>{finalInputJsx}</Tooltip> : finalInputJsx}
+                            {labelPosition == "tooltip" ? <Tooltip tooltip={label} absolutePositioning={true}>{finalInputJsx}</Tooltip> : finalInputJsx}
                             {labelPosition == "floating" && labelJsx}
                             {iconEnd && <span class={clsx("input-group-text", !showSpinner && "show")}>{iconEnd}</span>}
-                            <TextFieldSpinner callCount={callCount} containerClass={""} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
+                            <TextFieldSpinner callCount={callCount} containerClass={""} invocationResult={invocationResult} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
                             {labelPosition == "after" && labelJsx}
                         </>
                     );
@@ -681,9 +685,9 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
     );
 }));
 
-export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSync, pending: p, propsIndicator, containerClass, callCount }: { callCount: number, containerClass: string, debouncingAsync: boolean, debouncingSync: boolean, pending: boolean, propsIndicator: h.JSX.HTMLAttributes<any> }) {
+export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSync, pending: p, propsIndicator, containerClass, callCount, invocationResult }: { callCount: number, containerClass: string, debouncingAsync: boolean, debouncingSync: boolean, pending: boolean, propsIndicator: h.JSX.HTMLAttributes<any>, invocationResult: UseAsyncReturnType<any, any>["invocationResult"] }) {
 
-    if (callCount == 0)
+    if (invocationResult != "async")
         return null;
 
     let pendingDisplayType = ((debouncingAsync || debouncingSync) ? 2 : p ? 1 : 0);

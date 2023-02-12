@@ -6,8 +6,6 @@ import { ButtonThemes } from "../context";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { GlobalAttributes } from "../utility/types";
 
-//export type BadgeColorVariant = Omit<ButtonThemes, "link">;
-
 export interface BadgeProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     variantTheme?: ButtonThemes;
     roundedPill?: boolean;

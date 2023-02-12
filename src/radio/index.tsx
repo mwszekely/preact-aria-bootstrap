@@ -128,19 +128,15 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                         tagLabel="label"
                         disabled={d}
 
-
                         render={info => {
-
                             const inputJsx = <input class="form-check-input" {...useMergedProps(info.propsInput, props, { ref })} />;
-
-
 
                             return (
                                 <span {...useMergedProps({ className: clsx(labelPosition == "after" && ".form-check-reverse", "form-check", pending && "pending", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse") })}>
                                     {loadingJsx}
                                     <label class="form-check-label" {...info.propsLabel}>
                                         {labelPosition == "before" && label}
-                                        {labelPosition == "tooltip" ? <Tooltip forward tooltip={label} alignMode="element">{inputJsx}</Tooltip> : inputJsx}
+                                        {labelPosition == "tooltip" ? <Tooltip forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
                                         {labelPosition == "after" && label}
                                     </label>
                                 </span>

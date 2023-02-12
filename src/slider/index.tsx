@@ -123,10 +123,10 @@ const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues
                 onValueChange && "form-range-tick-selectable"
             )}
             ><option
-                onClick={() => { 
+                onClick={() => {
 
                     onValueChange?.(i);
-                 }}
+                }}
                 value={i}
                 key={i}>{shouldHide ? null : getValueText(i)}</option></div>)
     }

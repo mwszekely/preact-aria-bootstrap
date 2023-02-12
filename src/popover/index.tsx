@@ -83,7 +83,7 @@ export function Popover({
     const defaultParentDepth = useContext(ParentDepthContext);
     let myDepth = (defaultParentDepth) + 1;
 
-    const { propsSource: randomIdProps, randomIdReturn:  { id: surfaceId } } = useRandomId({ randomIdParameters: { prefix: "popover-surface-", otherReferencerProp: "aria-controls" } })
+    const { propsSource: randomIdProps, randomIdReturn: { id: surfaceId } } = useRandomId({ randomIdParameters: { prefix: "popover-surface-", otherReferencerProp: "aria-controls" } })
 
     const info = useMenuSurface<HTMLDivElement, HTMLDivElement, HTMLButtonElement>({
         dismissParameters: { closeOnBackdrop: true, closeOnEscape: true, closeOnLostFocus: true, onClose, open: menuOpen },

@@ -14,6 +14,14 @@ export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElem
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
     variantSize?: ButtonProps<any>["variantSize"];
     orientation?: ToolbarProps<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>["orientation"];
+
+    /**
+     * When true, each button in the group will have a gap between them and each have their own borders,
+     * as opposed to all being connected.
+     * 
+     * All other behavior remains the same. The group's class will be `btn-toolbar` instead of `btn-group`
+     */
+    separated?: boolean;
 }
 
 
@@ -33,7 +41,7 @@ export interface ButtonGroupChildProps {
 }
 export interface ButtonGroupContext { pendingIndex: number | null }
 export const ButtonGroupContext = createContext<ButtonGroupContext | null>(null);
-export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantSize, orientation, label, labelPosition, disabled, selectedIndex, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>) {
+export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>) {
     const imperativeHandle = useRef<UseToolbarReturnType<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>>(null);
     type OSSI = UseToolbarParameters<HTMLSpanElement, HTMLButtonElement, UseToolbarSubInfo<HTMLButtonElement>>["toolbarParameters"]["onSelectedIndexChange"];
     const [capturedIndex, setCapturedIndex] = useState(null as number | null);
@@ -44,12 +52,11 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
         });
 
     const pendingIndex = (pending ? capturedIndex : null);
-    const [focusedInner, setFocusedInner] = useState(false);
-    const { refElementReturn } = useRefElement<HTMLSpanElement>({ refElementParameters: {} })
-    const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLSpanElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn })
+
+    const classBase = (separated? "btn-toolbar" : "btn-group")
 
     return (
-        
+
         <DisabledContext.Provider value={disabled ?? false}>
             <ButtonGroupContext.Provider value={useMemo(() => ({ pendingIndex }), [pendingIndex])}>
                 <Toolbar<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement>
@@ -66,7 +73,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                             <>
                                 {labelPosition == "before" && visibleLabel}
                                 <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={false} typeaheadActive={false}>
-                                    <span {...useMergedProps({ className: clsx("btn-group", variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `btn-group-vertical`) }, refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, info.propsToolbar, props, { ref })}>
+                                    <span {...useMergedProps({ className: clsx(classBase, variantSize && `${classBase}-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref })}>
                                         {labelPosition == "within" && visibleLabel}
                                         {children}
                                     </span>
