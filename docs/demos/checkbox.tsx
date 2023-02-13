@@ -1,6 +1,6 @@
 
 import { useStableCallback, useState } from "preact-prop-helpers";
-import { Checkbox, InputGroup } from "../../index";
+import { Checkbox, CheckboxGroup, CheckboxGroupChild, InputGroup } from "../../index";
 import { useCallback } from "preact/hooks"
 
 export function Blurb() {
@@ -14,6 +14,7 @@ export function Blurb() {
                 <li><code>inline</code>: By default, checkboxes are <code>display: block</code>.</li>
             </ul>
             <p>Buttons-as-checkboxes are not currently supported, but toggle buttons are.</p>
+            <p>In addition, Checkbox Groups are supported. These are separate from normal <code>Checkbox</code> components (e.g. <code>CheckboxGroup</code> and <code>CheckboxGroupChild</code>), but take largely the same props, with the addition of the list navigation-related props used in things like Lists.</p>
         </>
     )
 }
@@ -43,19 +44,23 @@ export function Demo() {
                 <Checkbox checked={checked} onValueChange={setCheckedSync} label="Input group" labelPosition="after" />
                 <Checkbox checked={checked} onValueChange={setCheckedSync} label="Input group (tooltip)" labelPosition="tooltip" />
             </InputGroup>
-            {/*<DemoButton disabled={false} tag="button" />
-            <DemoButton disabled="soft" tag="button" />
-            <DemoButton disabled="hard" tag="button" />
-            <DemoButton disabled={false} tag="div" />
-            <DemoButton disabled="soft" tag="div" />
-            <DemoButton disabled="hard" tag="div" />
-            <Button<HTMLButtonElement>
-                exclude={undefined}
-                tagButton="button"
-                pressed={pressed}
-                onPress={e => setPressed(e[EventDetail].pressed ?? false)}
-                render={info => (<button {...info.props}>{`Toggle button (${pressed ? "pressed" : "unpressed"})`}</button>)}
-    />*/}
+
+            <p>In the following Checkbox Group Demo, each checkbox takes a random amount of time to update its value, including when the reason is because of the parent checkbox.</p>
+            <CheckboxGroup orientation="vertical" label="Checkbox Group parent" labelPosition="after">
+                {Array.from(function* () {
+                    for (let i = 0; i < 10; ++i) {
+                        yield <DemoGroupChild index={i} key={i} />
+                    }
+                }())}
+            </CheckboxGroup>
+
         </>
+    )
+}
+
+function DemoGroupChild({ index: i }: { index: number }) {
+    const [checked, setChecked] = useState(false);
+    return (
+        <CheckboxGroupChild index={i} labelPosition="after" label={`Child #${i}`} checked={checked} onValueChange={async (c) => { await new Promise(resolve => setTimeout(resolve, 750 + (Math.random() * 750))); setChecked(c) }} />
     )
 }

@@ -1,10 +1,10 @@
 
 import clsx from "clsx";
 import { h, Ref } from "preact";
-import { Checkbox as AriaCheckbox, CheckboxChangeEvent, EventDetail, ProgressWithHandler } from "preact-aria-widgets";
+import { Checkbox as AriaCheckbox, CheckboxChangeEvent, EventDetail, ProgressWithHandler, UseCheckboxReturnType } from "preact-aria-widgets";
 import { UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { useContext } from "preact/hooks";
+import { useContext, useImperativeHandle } from "preact/hooks";
 import { DefaultDisabledType, DisabledContext } from "../context";
 import { WithinInputGroup } from "../input-group/shared";
 import { Tooltip } from "../tooltip";
@@ -17,14 +17,24 @@ export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children
     loadingLabel?: string;
     disabled?: boolean;
 
+    forciblyPending?: boolean;
+
     /**
      * A checkbox can always be tristate implicitly by setting `checked` to `"mixed"`,
      * but by setting `tristate` to `true` event handlers will properly cycle through all three states.
      */
     tristate?: boolean;
+
+    imperativeHandle?: Ref<UseCheckboxReturnType<HTMLInputElement, HTMLLabelElement>>;
+
+    /** Optional props to spread *specifically* to the input element */
+    propsInput?: h.JSX.HTMLAttributes<HTMLInputElement>;
+
+    /** Optional props to spread *specifically* to the input element */
+    propsLabel?: h.JSX.HTMLAttributes<HTMLLabelElement>;
 }
 
-export function Checkbox({ label, labelPosition, checked, tristate, onValueChange, loadingLabel, debounce, throttle, inline, disabled: userDisabled, ...props }: LabelledProps<CheckboxProps, "tooltip">, ref?: Ref<any>) {
+export function Checkbox({ label, labelPosition, checked, tristate, onValueChange, loadingLabel, debounce, forciblyPending, throttle, inline, disabled: userDisabled, imperativeHandle, propsInput, propsLabel, ...props }: LabelledProps<CheckboxProps, "tooltip">, ref?: Ref<any>) {
     const isSwitch = (props as { _isSwitch: boolean })._isSwitch;
     if (isSwitch)
         delete (props as any)._isSwitch;
@@ -34,6 +44,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
     return (
         <ProgressWithHandler<CheckboxChangeEvent<HTMLInputElement>, boolean, HTMLSpanElement, HTMLLabelElement>
             ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
+            forciblyPending={forciblyPending}
             asyncHandler={(next, event) => {
                 if (tristate) {
                     if (checked == false)
@@ -90,11 +101,12 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                         tagInput="input"
                         tagLabel="label"
                         disabled={d}
+                        ref={imperativeHandle}
 
 
                         render={info => {
-                            const inputJsx = <input class={clsx("form-check-input", w && "mt-0")} {...info.propsInput} />
-                            const visibleLabel = <label class="form-check-label" {...info.propsLabel}>{label}</label>;
+                            const inputJsx = <input class={clsx("form-check-input", w && "mt-0")} {...useMergedProps(info.propsInput, propsInput || {})} />
+                            const visibleLabel = <label class="form-check-label" {...useMergedProps(info.propsLabel, propsLabel || {})}>{label}</label>;
 
                             if (!w) {
                                 return (
