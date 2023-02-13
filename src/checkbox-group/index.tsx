@@ -65,7 +65,7 @@ function CheckboxGroupParent({ label, labelPosition, debounce, loadingLabel, thr
     )
 }
 
-interface CheckboxGroupChildProps extends OmitStrong<LabelledProps<CheckboxProps, "tooltip">, "imperativeHandle"> {
+export interface CheckboxGroupChildProps extends OmitStrong<LabelledProps<CheckboxProps, "tooltip">, "imperativeHandle"> {
     getSortValue?(): unknown;
     hidden?: boolean;
 

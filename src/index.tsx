@@ -5,7 +5,7 @@ export { Button } from "./button/button-action";
 export { ButtonGroup } from "./button/button-group";
 export { Card, CardElement, CardElementProps } from "./card";
 export { Checkbox } from "./checkbox";
-export { CheckboxGroup, CheckboxGroupChild } from "./checkbox-group";
+export { CheckboxGroup, CheckboxGroupChild, CheckboxGroupProps, CheckboxGroupChildProps } from "./checkbox-group";
 export { Dialog } from "./dialog";
 export { Figure, FigureProps } from "./figure";
 export { BootstrapIcon, FontIcon } from "./icon";
