@@ -27,3 +27,4 @@ export { Type, TypeProps } from "./typography";
 export { AllProviders } from "./utility/all-providers";
 export { UtilityClasses } from "./utility/classes";
 export { KeyboardAssistProvider } from "./utility/keyboard-assist";
+export { HeadingReset, Heading } from "preact-aria-widgets";
