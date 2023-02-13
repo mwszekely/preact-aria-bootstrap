@@ -42,7 +42,7 @@ export interface CardElementTitleProps extends GlobalAttributes<HTMLHeadingEleme
      * * `subtitle`: The optional subtitle below the title.
      */
     type: "title";
-    title: string;
+    title: ComponentChildren;
     children: ComponentChildren;
 }
 export interface CardElementSubtitleProps extends GlobalAttributes<HTMLHeadingElement, "children"> {
@@ -51,7 +51,7 @@ export interface CardElementSubtitleProps extends GlobalAttributes<HTMLHeadingEl
      * * `subtitle`: The optional subtitle below the title.
      */
     type: "subtitle";
-    subtitle: string;
+    subtitle: ComponentChildren;
     children: ComponentChildren;
 }
 export interface CardElementImageProps extends GlobalAttributes<HTMLImageElement, "children"> {
