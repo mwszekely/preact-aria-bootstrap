@@ -3,9 +3,9 @@ export { Accordion, AccordionProps, AccordionSection, AccordionSectionProps } fr
 export { Badge, BadgeProps } from "./badge";
 export { Button } from "./button/button-action";
 export { ButtonGroup } from "./button/button-group";
-export { Card, CardElement, CardElementProps } from "./card";
+export { Card, CardElement, CardElementProps, CardGroup } from "./card";
 export { Checkbox } from "./checkbox";
-export { CheckboxGroup, CheckboxGroupChild, CheckboxGroupProps, CheckboxGroupChildProps } from "./checkbox-group";
+export { CheckboxGroup, CheckboxGroupChild, CheckboxGroupChildProps, CheckboxGroupProps } from "./checkbox-group";
 export { Dialog } from "./dialog";
 export { Figure, FigureProps } from "./figure";
 export { BootstrapIcon, FontIcon } from "./icon";
@@ -27,4 +27,3 @@ export { Type, TypeProps } from "./typography";
 export { AllProviders } from "./utility/all-providers";
 export { UtilityClasses } from "./utility/classes";
 export { KeyboardAssistProvider } from "./utility/keyboard-assist";
-
