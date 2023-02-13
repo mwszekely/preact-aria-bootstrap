@@ -9,18 +9,11 @@ import { GlobalAttributes } from "../utility/types";
 
 
 
-export interface CardProps extends GlobalAttributes<HTMLDivElement, "children"> { 
+export interface CardProps extends GlobalAttributes<HTMLDivElement, "children"> {
     title?: ComponentChildren;
     subtitle?: ComponentChildren;
     variantTheme?: ButtonThemes;
- }
-interface CardBodyProps extends GlobalAttributes<HTMLDivElement, "children"> { }
-interface CardTextProps extends GlobalAttributes<HTMLDivElement, "children"> { }
-interface CardHeaderProps extends GlobalAttributes<HTMLDivElement, "children"> { }
-interface CardFooterProps extends GlobalAttributes<HTMLDivElement, "children"> { }
-interface CardTitleProps extends GlobalAttributes<HTMLHeadingElement, "children"> { title: ComponentChildren; children: ComponentChildren; }
-interface CardSubtitleProps extends GlobalAttributes<HTMLHeadingElement, "children"> { subtitle: ComponentChildren; children: ComponentChildren; }
-interface CardImageProps extends GlobalAttributes<HTMLImageElement> { src: string, position: "bottom" | "top" | "both" }
+}
 
 
 export const Card = memo(forwardElementRef(function Card(p: CardProps, ref: Ref<HTMLDivElement>) {
@@ -32,11 +25,11 @@ export const Card = memo(forwardElementRef(function Card(p: CardProps, ref: Ref<
         children = <Heading heading={subtitle}>{children}</Heading>;
 
     return (
-        <div {...useMergedProps<HTMLDivElement>({ ref, className: clsx("card elevation-raised-1 elevation-body-surface", variantTheme && `text-bg-${variantTheme}`) }, props)}>{children}</div>
+        <div {...useMergedProps<HTMLDivElement>({ ref, className: clsx("card", variantTheme && `text-bg-${variantTheme}`) }, props)}>{children}</div>
     )
 }));
 
-export interface CardElementParagraphProps extends GlobalAttributes<HTMLElement, "children"> {
+export interface CardElementParagraphProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**
      * * `paragraph`: Any generic text. The default. Will be padded around the edges.
      */
@@ -48,15 +41,26 @@ export interface CardElementTitleProps extends GlobalAttributes<HTMLHeadingEleme
      * * `title`: The title at the top of the card.
      * * `subtitle`: The optional subtitle below the title.
      */
-    type: "title" | "subtitle";
+    type: "title";
+    title: string;
     children: ComponentChildren;
 }
-export interface CardElementImageProps extends GlobalAttributes<HTMLElement, "children"> {
+export interface CardElementSubtitleProps extends GlobalAttributes<HTMLHeadingElement, "children"> {
+    /**
+     * * `title`: The title at the top of the card.
+     * * `subtitle`: The optional subtitle below the title.
+     */
+    type: "subtitle";
+    subtitle: string;
+    children: ComponentChildren;
+}
+export interface CardElementImageProps extends GlobalAttributes<HTMLImageElement, "children"> {
     /**
      * * `image`: A header/footer image
      */
     type: "image";
     src: string;
+    position: "bottom" | "top" | "both";
     children: ComponentChildren;
 }
 export interface CardElementFlushProps extends GlobalAttributes<HTMLElement, "children"> {
@@ -66,37 +70,37 @@ export interface CardElementFlushProps extends GlobalAttributes<HTMLElement, "ch
     type: "flush";
     children: ComponentChildren;
 }
-export interface CardElementFooterProps extends GlobalAttributes<HTMLElement, "children"> {
+export interface CardElementFooterProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**
      * * `footer`: A small, separated blurb of info at the bottom of the card.
      */
     type?: "paragraph" | "footer";
     children: ComponentChildren;
 }
-export type CardElementProps = CardElementParagraphProps | CardElementFooterProps | CardElementImageProps | CardElementTitleProps | CardElementFlushProps;
+export type CardElementProps = CardElementParagraphProps | CardElementFooterProps | CardElementImageProps | CardElementTitleProps | CardElementSubtitleProps | CardElementFlushProps;
 
 
 function CardElement2<E extends Element>(p: CardElementProps, ref: Ref<E>): VNode<any> {
     switch (p.type) {
         default:
         case "paragraph": {
-            const { children, ...props } =(p as any as CardBodyProps);
+            const { children, ...props } = (p as any as CardElementParagraphProps);
             return <CardBody {...props} ref={ref as any}><CardText>{children}</CardText></CardBody>;
         }
         case "footer": {
-            const { children,...props } = (p as any as CardFooterProps);
+            const { children, ...props } = (p as any as CardElementParagraphProps);
             return <CardFooter {...props} ref={ref as any}>{children}</CardFooter>;
         }
         case "subtitle": {
-            const { children, subtitle, ...props } = (p as any as CardSubtitleProps);
+            const { children, subtitle, ...props } = (p as any as CardElementSubtitleProps);
             return <CardSubtitle subtitle={subtitle} {...useMergedProps<any>({ className: "card-body" }, props)} ref={ref as any}>{children}</CardSubtitle>;
         }
         case "title": {
-            const { children, title, ...props } = (p as any as CardTitleProps);
-            return <CardTitle title={title} {...useMergedProps<any>({ className: "card-body" }, props)} ref={ref as any}>{children}</CardTitle>;
+            const { children, title, ...props } = (p as any as CardElementTitleProps);
+            return <CardTitle title={title as any} {...useMergedProps<any>({ className: "card-body" }, props)} ref={ref as any}>{children}</CardTitle>;
         }
         case "image": {
-            const { src, position, ...props } = (p as any as CardImageProps);
+            const { src, position, ...props } = (p as any as CardElementImageProps);
             return <CardImage src={src} position={position} {...props} ref={ref as any} />;
         }
         case "flush": {
@@ -108,46 +112,47 @@ function CardElement2<E extends Element>(p: CardElementProps, ref: Ref<E>): VNod
 
 export const CardElement = memo(forwardElementRef(CardElement2));
 
-const CardImage = memo(forwardElementRef(function CardImage(p: CardImageProps, ref: Ref<HTMLImageElement>) {
-    const { position, ...props } = p;
+const CardImage = memo(forwardElementRef(function CardImage(p: Omit<CardElementImageProps, "type">, ref: Ref<HTMLImageElement>) {
+    const { position, src, ...props } = p;
     return (
         <img {...useMergedProps<HTMLImageElement>(props, { ref, className: `card-img${position == "both" ? "" : `-${position}`}` })} />
     )
 }));
 
-const CardBody = memo(forwardElementRef(function CardBody(props: CardBodyProps, ref: Ref<HTMLDivElement>) {
+const CardBody = memo(forwardElementRef(function CardBody(props: Omit<CardElementParagraphProps, "type">, ref: Ref<HTMLDivElement>) {
     return (
         <div {...useMergedProps<HTMLDivElement>(props, { ref, className: "card-body" })} />
     )
 }));
 
-const CardFooter = memo(forwardElementRef(function CardHeader(props: CardFooterProps, ref: Ref<HTMLDivElement>) {
+const CardFooter = memo(forwardElementRef(function CardHeader(p: Omit<CardElementFooterProps, "type">, ref: Ref<HTMLDivElement>) {
+    const { ...props } = p;
     return (
         <div {...useMergedProps<HTMLDivElement>(props, { ref, className: "card" })} />
     )
 }));
 
-const CardTitle = memo(forwardElementRef(function CardTitle<E extends Element>(p: CardTitleProps, ref: Ref<E>) {
+const CardTitle = memo(forwardElementRef(function CardTitle<E extends Element>(p: Omit<CardElementTitleProps, "type">, ref: Ref<E>) {
     const { title, children, ref: unused, ...props } = p;
     console.assert(ref == unused || unused == null);
     return <Heading heading={title} {...useMergedProps<E>(props, { ref, className: "card-title" }) as any}>{children}</Heading>
 }));
 
-const CardSubtitle = memo(forwardElementRef(function CardSubtitle<E extends Element>(p: CardSubtitleProps, ref: Ref<E>) {
+const CardSubtitle = memo(forwardElementRef(function CardSubtitle<E extends Element>(p: Omit<CardElementSubtitleProps, "type">, ref: Ref<E>) {
     const { subtitle, children, ref: unused, ...props } = p;
     console.assert(ref == unused || unused == null);
     return <Heading heading={subtitle} {...useMergedProps<E>(props, { ref, className: clsx("card-subtitle", "mb-2", "text-muted") }) as any}>{children}</Heading>
 }));
 
 
-const CardText = memo(forwardElementRef(function CardText(props: CardTextProps, ref: Ref<HTMLDivElement>) {
+const CardText = memo(forwardElementRef(function CardText(props: Omit<CardElementParagraphProps, "type">, ref: Ref<HTMLDivElement>) {
     return (
         <div {...useMergedProps<HTMLDivElement>(props, { ref, className: "card-text" })} />
     )
 }));
 
-const CardHeader = memo(forwardElementRef(function CardHeader(props: CardHeaderProps, ref: Ref<HTMLDivElement>) {
+/*const CardHeader = memo(forwardElementRef(function CardHeader(props: CardElementHeaderProps, ref: Ref<HTMLDivElement>) {
     return (
         <div {...useMergedProps<HTMLDivElement>(props, { ref, className: "card-header" })} />
     )
-}));
+}));*/
