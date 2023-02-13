@@ -63,7 +63,7 @@ export interface CardElementImageProps extends GlobalAttributes<HTMLImageElement
     position: "bottom" | "top" | "both";
     children: ComponentChildren;
 }
-export interface CardElementFlushProps extends GlobalAttributes<HTMLElement, "children"> {
+export interface CardElementFlushProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     /**
      * * `flush` Any non-card content that needs to have no padding. A list, for example.
      */
@@ -80,8 +80,8 @@ export interface CardElementFooterProps extends GlobalAttributes<HTMLDivElement,
 export type CardElementProps = CardElementParagraphProps | CardElementFooterProps | CardElementImageProps | CardElementTitleProps | CardElementSubtitleProps | CardElementFlushProps;
 
 
-function CardElement2<E extends Element>(p: CardElementProps, ref: Ref<E>): VNode<any> {
-    switch (p.type) {
+function CardElement2<E extends Element>({ type, ...p }: CardElementProps, ref: Ref<E>): VNode<any> {
+    switch (type) {
         default:
         case "paragraph": {
             const { children, ...props } = (p as any as CardElementParagraphProps);
@@ -104,7 +104,7 @@ function CardElement2<E extends Element>(p: CardElementProps, ref: Ref<E>): VNod
             return <CardImage src={src} position={position} {...props} ref={ref as any} />;
         }
         case "flush": {
-            const { children, ...props } = p;
+            const { children, ...props } = (p as any as CardElementFlushProps);
             return createElement("span", props, children);
         }
     }
@@ -125,10 +125,10 @@ const CardBody = memo(forwardElementRef(function CardBody(props: Omit<CardElemen
     )
 }));
 
-const CardFooter = memo(forwardElementRef(function CardHeader(p: Omit<CardElementFooterProps, "type">, ref: Ref<HTMLDivElement>) {
+const CardFooter = memo(forwardElementRef(function CardFooter(p: Omit<CardElementFooterProps, "type">, ref: Ref<HTMLDivElement>) {
     const { ...props } = p;
     return (
-        <div {...useMergedProps<HTMLDivElement>(props, { ref, className: "card" })} />
+        <div {...useMergedProps<HTMLDivElement>(props, { ref, className: "card-footer" })} />
     )
 }));
 
