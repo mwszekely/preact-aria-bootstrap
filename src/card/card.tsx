@@ -93,11 +93,11 @@ function CardElement2<E extends Element>({ type, ...p }: CardElementProps, ref: 
         }
         case "subtitle": {
             const { children, subtitle, ...props } = (p as any as CardElementSubtitleProps);
-            return <CardSubtitle subtitle={subtitle} {...useMergedProps<any>({ className: "card-body" }, props)} ref={ref as any}>{children}</CardSubtitle>;
+            return <CardSubtitle subtitle={subtitle} {...props} ref={ref as any}>{children}</CardSubtitle>;
         }
         case "title": {
             const { children, title, ...props } = (p as any as CardElementTitleProps);
-            return <CardTitle title={title as any} {...useMergedProps<any>({ className: "card-body" }, props)} ref={ref as any}>{children}</CardTitle>;
+            return <CardTitle title={title as any} {...props} ref={ref as any}>{children}</CardTitle>;
         }
         case "image": {
             const { src, position, ...props } = (p as any as CardElementImageProps);
@@ -135,13 +135,13 @@ const CardFooter = memo(forwardElementRef(function CardFooter(p: Omit<CardElemen
 const CardTitle = memo(forwardElementRef(function CardTitle<E extends Element>(p: Omit<CardElementTitleProps, "type">, ref: Ref<E>) {
     const { title, children, ref: unused, ...props } = p;
     console.assert(ref == unused || unused == null);
-    return <Heading heading={title} {...useMergedProps<E>(props, { ref, className: "card-title" }) as any}>{children}</Heading>
+    return <Heading heading={title} {...useMergedProps<E>(props, { ref, className: "card-title card-body" }) as any}>{children}</Heading>
 }));
 
 const CardSubtitle = memo(forwardElementRef(function CardSubtitle<E extends Element>(p: Omit<CardElementSubtitleProps, "type">, ref: Ref<E>) {
     const { subtitle, children, ref: unused, ...props } = p;
     console.assert(ref == unused || unused == null);
-    return <Heading heading={subtitle} {...useMergedProps<E>(props, { ref, className: clsx("card-subtitle", "mb-2", "text-muted") }) as any}>{children}</Heading>
+    return <Heading heading={subtitle} {...useMergedProps<E>(props, { ref, className: clsx("card-subtitle card-body", "mb-2", "text-muted") }) as any}>{children}</Heading>
 }));
 
 
