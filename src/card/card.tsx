@@ -19,10 +19,10 @@ export interface CardProps extends GlobalAttributes<HTMLDivElement, "children"> 
 export const Card = memo(forwardElementRef(function Card(p: CardProps, ref: Ref<HTMLDivElement>) {
     let { children, title, subtitle, variantTheme, ...props } = p;
 
-    if (title)
-        children = <Heading heading={title}>{children}</Heading>;
     if (subtitle)
         children = <Heading heading={subtitle}>{children}</Heading>;
+    if (title)
+        children = <Heading heading={title}>{children}</Heading>;
 
     return (
         <div {...useMergedProps<HTMLDivElement>({ ref, className: clsx("card", variantTheme && `text-bg-${variantTheme}`) }, props)}>{children}</div>

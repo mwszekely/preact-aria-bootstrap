@@ -6,7 +6,7 @@
   "source": "src/index.tsx",
   "module": "index.js",
   "types": "index.d.ts",
-  "packageManager": "pnpm@7.26.2",
+  "packageManager": "pnpm@7.27.0",
   "scripts": {
     "build": "npx npm-run-all --npm-path npm -pc build:*",
     "watch": "npx npm-run-all --npm-path npm -pc watch:*",
