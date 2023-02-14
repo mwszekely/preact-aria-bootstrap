@@ -62,7 +62,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                 <Toolbar<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement>
                     onSelectedIndexChange={onSelectedIndexChangeSync}
                     ref={imperativeHandle}
-                    role="group"
+                    role="toolbar"  // TODO: Was group, but that doesn't count as an application, I think?
                     pageNavigationSize={0}
                     orientation={orientation || "horizontal"}
                     ariaLabel={labelPosition == 'hidden' ? label : null}
