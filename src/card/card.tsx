@@ -20,9 +20,9 @@ export const Card = memo(forwardElementRef(function Card(p: CardProps, ref: Ref<
     let { children, title, subtitle, variantTheme, ...props } = p;
 
     if (subtitle)
-        children = <Heading heading={subtitle}>{children}</Heading>;
+        children = <CardSubtitle subtitle={subtitle}>{children}</CardSubtitle>;
     if (title)
-        children = <Heading heading={title}>{children}</Heading>;
+        children = <CardTitle title={title}>{children}</CardTitle>;
 
     return (
         <div {...useMergedProps<HTMLDivElement>({ ref, className: clsx("card", variantTheme && `text-bg-${variantTheme}`) }, props)}>{children}</div>
