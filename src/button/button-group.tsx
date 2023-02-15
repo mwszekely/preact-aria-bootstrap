@@ -73,7 +73,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                             <>
                                 {labelPosition == "before" && visibleLabel}
                                 <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={false} typeaheadActive={false}>
-                                    <span {...useMergedProps({ className: clsx(classBase, variantSize && `${classBase}-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref })}>
+                                    <span {...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref })}>
                                         {labelPosition == "within" && visibleLabel}
                                         {children}
                                     </span>
