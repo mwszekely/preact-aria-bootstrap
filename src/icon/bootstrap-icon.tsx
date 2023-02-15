@@ -4,7 +4,7 @@ import { memo } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { FontIcon, FontIconProps } from "./font-icon";
 
-export interface BootstrapIconProps extends Pick<FontIconProps, "label" | "className" | "class" | "style"> {
+export interface BootstrapIconProps extends Pick<FontIconProps, "label" | "className" | "class" | "style" | "role"> {
     icon: (typeof BootstrapIconClasses)[number];
 }
 
