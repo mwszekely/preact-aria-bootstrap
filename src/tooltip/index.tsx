@@ -3,7 +3,7 @@ import { cloneElement, ComponentChildren, Ref, VNode } from "preact";
 import { defaultRenderPortal, Tooltip as AriaTooltip, TooltipStatus } from "preact-aria-widgets";
 import { useMergedProps, useState } from "preact-prop-helpers";
 import { SlideFade } from "preact-transition";
-import { useEffect } from "preact/hooks";
+import { useCallback, useEffect } from "preact/hooks";
 import { usePopper, UsePopperProps } from "../popper";
 import { forwardElementRef } from "../utility/forward-element-ref";
 import { GlobalAttributes } from "../utility/types";
@@ -72,6 +72,9 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
     //align?: "start" | "center";
 }
 
+// TODO: This should be on `globalThis` in case this library is imported multiple times.
+const otherTooltipCloses = new Set<() => void>();
+
 export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) {
 
     if (forward == null && typeof children == "object" && (children as VNode).props) {
@@ -87,11 +90,25 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
             setStatus("focus");
     }, [forceOpen])
 
+    const myClose = useCallback(() => { setStatus(null); }, []);
+    useEffect(() => {
+    }, [])
+
     return (
         <AriaTooltip<HTMLSpanElement, HTMLDivElement> onStatus={setStatus} tooltipSemanticType={semanticType || (forward ? "label" : "description")} render={tooltipInfo => {
             //const mouseTrackingPaused = (status == "focus")
             if (forceOpen)
                 status = "focus";
+
+            // Any time the tooltip is shown, make sure all other open tooltips close themselves.
+            // ... (times like this I *really* appreciate JS is single-threaded)
+            useEffect(() => {
+                if (status != null) {
+                    otherTooltipCloses.forEach(close => close())
+                    otherTooltipCloses.add(myClose);
+                    return () => otherTooltipCloses.delete(myClose);
+                }
+            }, [status != null])
 
             const portalId = usePortalId("tooltip");
             const isFocusOverride = (status == "focus");

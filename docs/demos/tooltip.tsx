@@ -1,7 +1,8 @@
 
 import { useStableCallback, useState } from "preact-prop-helpers";
-import { Tooltip } from "../../index";
+import { Checkbox, CheckboxGroupChild, Tooltip } from "../../index";
 import { useCallback } from "preact/hooks"
+import { memo } from "preact/compat";
 
 export function Blurb() {
     return (
@@ -34,19 +35,36 @@ export function Code() {
 
 export function Demo() {
 
+    const [mounted, setMounted] = useState(false);
 
     return (
         <>
             <Blurb />
             <Code />
             <div>This is text, <Tooltip tooltip="This is the tooltip content">and this is text that triggers a tooltip.</Tooltip></div>
-            <div style={{ width: "15vw", height: "15vw", border: "2px dotted black", overflow: "scroll" }}>
+            {/*<div style={{ width: "15vw", height: "15vw", border: "2px dotted black", overflow: "scroll" }}>
                 <div style={{ width: "50vw", height: "50vw", background: "rgba(0,0,128,0.125)", display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <Tooltip tooltip="This is the tooltip content" forceOpen><div>Tooltip trigger</div></Tooltip>
                 </div>
+    </div>*/}
+            <Checkbox checked={mounted} onValueChange={setMounted} label="Mount lots of tooltips" labelPosition="after" />
+            <div style="border: 1px solid black; min-width: 100px; min-height: 100px;">
+                {mounted && <LotsOfTooltips />}
             </div>
 
         </>
     )
 }
+
+const LotsOfTooltips = memo(function LotsOfTooltips() {
+    return (
+        <div>
+            {Array.from(function*(){
+                for (let i = 0; i < 1000; ++i) {
+                    yield (<Tooltip tooltip={i.toString()}><span>{i}</span></Tooltip>)
+                }
+            }())}
+        </div>
+    )
+})
 
