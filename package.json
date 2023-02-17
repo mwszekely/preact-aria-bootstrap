@@ -22,12 +22,12 @@
     "preact": "^10.11.2"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.1.0",
+    "@floating-ui/dom": "^1.2.1",
     "@js-temporal/polyfill": "^0.4.3",
     "bootstrap-icons": "^1.10.3",
     "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
     "clsx": "^1.2.1",
-    "dompurify": "^2.4.3",
+    "dompurify": "^3.0.0",
     "lodash-es": "^4.17.21",
     "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
     "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
@@ -36,6 +36,6 @@
   "devDependencies": {
     "@types/dompurify": "^2.4.0",
     "@types/lodash-es": "^4.17.6",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   }
 }
