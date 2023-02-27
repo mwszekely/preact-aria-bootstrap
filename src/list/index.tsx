@@ -1,17 +1,17 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
 import { Gridlist, GridlistChild, GridlistRow, ProgressWithHandler } from "preact-aria-widgets";
 import { AsyncHandler, returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useContext } from "preact/hooks";
-import { ButtonThemes } from "../context";
-import { Paginated } from "../pagination";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { KeyboardAssistIcon } from "../utility/keyboard-assist";
-import { useUpdateRenderCounter } from "../utility/render-counter";
-import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types";
-import { useClonedElement } from "../utility/use-cloned-element";
+import { ButtonThemes } from "../context.js";
+import { Paginated } from "../pagination/index.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
+import { useUpdateRenderCounter } from "../utility/render-counter.js";
+import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types.js";
+import { useClonedElement } from "../utility/use-cloned-element.js";
 
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /** Used to determine if left/right arrow key navigation is shown as an option */

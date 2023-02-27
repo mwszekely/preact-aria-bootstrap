@@ -1,12 +1,12 @@
 
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, Ref } from "preact";
 import { Accordion as AriaAccordion, AccordionProps as AriaAccordionProps, AccordionSection as AriaAccordionSection, AccordionSectionProps as AriaAccordionSectionProps } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
 import { CollapseFade } from "preact-transition";
 import { memo } from "preact/compat";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { GlobalAttributes } from "../utility/types";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { GlobalAttributes } from "../utility/types.js";
 
 export interface AccordionProps extends Partial<Pick<AriaAccordionProps<HTMLButtonElement>, "navigationDirection" | "localStorageKey">>, GlobalAttributes<HTMLDivElement, "children"> {
 

@@ -1,1 +1,1 @@
-export { Figure, FigureProps } from "./figure";
+export { Figure, FigureProps } from "./figure.js";

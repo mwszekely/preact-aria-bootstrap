@@ -1,11 +1,11 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, createContext, createElement, h, Ref } from "preact";
 import { EventDetail, RangeChangeEvent, SliderContext, SliderThumbInfo, useSlider, UseSliderParameters, useSliderThumb, UseSliderThumbParameters } from "preact-aria-widgets";
 import { generateRandomId, useAsyncHandler, useHasCurrentFocus, useMergedProps, useRefElement } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 import { useContext, useEffect, useMemo, useRef, useState } from "preact/hooks";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { GlobalAttributes } from "../utility/types";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { GlobalAttributes } from "../utility/types.js";
 
 
 

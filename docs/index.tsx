@@ -3,14 +3,14 @@ import { ComponentChildren, h, render } from "preact";
 import { memo } from "preact/compat";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { NotificationProviderContext, useNotificationProvider } from "preact-aria-widgets"
-import { Accordion, AccordionSection, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, RichTextField, Tab, TabPanel, Tabs, TextField, Toast, ToastErrorBoundary, ToastsProvider, usePushToast } from "../index";
-import { RenderCounterProvider, useRenderCounters } from "../utility/render-counter";
+import { Accordion, AccordionSection, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, RichTextField, Tab, TabPanel, Tabs, TextField, Toast, ToastErrorBoundary, ToastsProvider, usePushToast } from "../dist/index.js";
+import { RenderCounterProvider, useRenderCounters } from "../dist/index.js";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
 import * as Radio from "./demos/radio";
 import * as TextFieldD from "./demos/text-field";
 import * as Tooltip from "./demos/tooltip";
-import { AllProviders } from "../utility/all-providers";
+import { AllProviders } from "../dist/index.js";
 
 
 

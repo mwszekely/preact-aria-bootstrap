@@ -2,9 +2,9 @@ import { Ref, VNode } from "preact";
 import { useStableGetter } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 import { useEffect, useRef } from "preact/hooks";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { KeyboardAssistIcon } from "../utility/keyboard-assist";
-import { useClonedElement } from "../utility/use-cloned-element";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
+import { useClonedElement } from "../utility/use-cloned-element.js";
 
 export type RichTextToolbarItems =
     '|' |

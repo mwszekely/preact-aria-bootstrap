@@ -1,6 +1,6 @@
 
 import { useStableCallback, useState } from "preact-prop-helpers";
-import { BootstrapIcon, DocumentField, InputGroup, RichTextField, RichTextView, TextField } from "../../index";
+import { BootstrapIcon, DocumentField, InputGroup, RichTextField, RichTextView, TextField } from "../../dist/index.js";
 import { useCallback } from "preact/hooks"
 import { Temporal } from "@js-temporal/polyfill";
 

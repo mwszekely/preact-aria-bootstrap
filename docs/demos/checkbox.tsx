@@ -1,6 +1,6 @@
 
 import { useStableCallback, useState } from "preact-prop-helpers";
-import { Checkbox, CheckboxGroup, CheckboxGroupChild, InputGroup } from "../../index";
+import { Checkbox, CheckboxGroup, CheckboxGroupChild, InputGroup } from "../../dist/index.js";
 import { useCallback } from "preact/hooks"
 
 export function Blurb() {

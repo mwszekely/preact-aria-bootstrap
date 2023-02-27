@@ -1,13 +1,13 @@
 
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, h, Ref } from "preact";
 import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets";
 import { PersistentStates, returnZero, useMergedProps, useState, useTimeout } from "preact-prop-helpers";
 import { SlideZoomFade, Swappable } from "preact-transition";
 import { memo } from "preact/compat";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { KeyboardAssistIcon } from "../utility/keyboard-assist";
-import { GlobalAttributes, LabelledProps } from "../utility/types";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
+import { GlobalAttributes, LabelledProps } from "../utility/types.js";
 
 export interface TabsProps extends GlobalAttributes<HTMLDivElement> {
     orientation?: "horizontal" | "vertical";

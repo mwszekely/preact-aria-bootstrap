@@ -1,13 +1,13 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { cloneElement, ComponentChildren, Ref, VNode } from "preact";
 import { defaultRenderPortal, Tooltip as AriaTooltip, TooltipStatus } from "preact-aria-widgets";
 import { useMergedProps, useState } from "preact-prop-helpers";
 import { SlideFade } from "preact-transition";
 import { useCallback, useEffect } from "preact/hooks";
-import { usePopper, UsePopperProps } from "../popper";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { GlobalAttributes } from "../utility/types";
-import { usePortalId } from "../utility/use-portal-id";
+import { usePopper, UsePopperProps } from "../popper/index.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { GlobalAttributes } from "../utility/types.js";
+import { usePortalId } from "../utility/use-portal-id.js";
 
 export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "children"> {
 

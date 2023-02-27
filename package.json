@@ -4,9 +4,17 @@
   "version": "0.0.1",
   "description": "Preact implementation of Bootstrap with better accessability",
   "source": "src/index.tsx",
-  "module": "index.js",
-  "types": "index.d.ts",
-  "packageManager": "pnpm@7.27.0",
+  "module": "/dist/index.js",
+  "types": "/dist/index.d.ts",
+  "packageManager": "pnpm@7.28.0",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "browser": "./dist/index.js",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "build": "npx npm-run-all --npm-path npm -pc build:*",
     "watch": "npx npm-run-all --npm-path npm -pc watch:*",
@@ -19,8 +27,9 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "preact": "^10.11.2"
+    "preact": "^10.13.0"
   },
+  "typings": "./dist/index.d.ts",
   "dependencies": {
     "@floating-ui/dom": "^1.2.1",
     "@js-temporal/polyfill": "^0.4.3",
@@ -29,9 +38,9 @@
     "clsx": "^1.2.1",
     "dompurify": "^3.0.0",
     "lodash-es": "^4.17.21",
-    "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
-    "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
-    "preact-transition": "github:mwszekely/preact-transition"
+    "preact-aria-widgets": "github:mwszekely/preact-aria-widgets#nodenext",
+    "preact-prop-helpers": "github:mwszekely/preact-prop-helpers#nodenext",
+    "preact-transition": "github:mwszekely/preact-transition#nodenext"
   },
   "devDependencies": {
     "@types/dompurify": "^2.4.0",

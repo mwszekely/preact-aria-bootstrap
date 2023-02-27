@@ -1,14 +1,14 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, h, Ref, VNode } from "preact";
 import { Button as AriaButton, ButtonPressEvent, ElementToTag, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets";
 import { returnZero, useAsyncHandler, UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext } from "preact/hooks";
-import { ButtonThemes, DefaultDisabledType, DisabledContext } from "../context";
-import { Tooltip, TooltipProps } from "../tooltip";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { ButtonGroupChildProps, ButtonGroupContext } from "./button-group";
+import { ButtonThemes, DefaultDisabledType, DisabledContext } from "../context.js";
+import { Tooltip, TooltipProps } from "../tooltip/index.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { ButtonGroupChildProps, ButtonGroupContext } from "./button-group.js";
 
 export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttributes<E>, "children" | "style" | "class" | "className">, Partial<ButtonGroupChildProps>, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
     ref?: Ref<E>;
@@ -154,8 +154,8 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extend
                             const { propsIndicator, propsRegion } = progressInfo;
                             const loadingJsx = (<Fade show={pending}><span class="spinner-border" {...propsIndicator} /></Fade>)
                             if (pressed !== null)
-                                variantFill ??= (pressed? "fill" : "outline");
-                                
+                                variantFill ??= (pressed ? "fill" : "outline");
+
                             const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
 
                             const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx))

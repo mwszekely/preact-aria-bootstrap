@@ -1,12 +1,12 @@
 
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, h, Ref } from "preact";
 import { useEnsureStability, useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { ButtonThemes } from "../context";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { GlobalAttributes } from "../utility/types";
-import { useClonedElement } from "../utility/use-cloned-element";
+import { ButtonThemes } from "../context.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { GlobalAttributes } from "../utility/types.js";
+import { useClonedElement } from "../utility/use-cloned-element.js";
 
 
 export interface TableProps extends GlobalAttributes<HTMLTableElement, "children" | "ref"> {

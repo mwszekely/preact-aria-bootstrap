@@ -1,10 +1,10 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { h, Ref } from "preact";
 import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { GlobalAttributes } from "../utility/types";
-import { WithinInputGroup } from "./shared";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { GlobalAttributes } from "../utility/types.js";
+import { WithinInputGroup } from "./shared.js";
 
 export interface InputGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLDivElement>, "children" | "style" | "class" | "className"> {
     wrap?: boolean;

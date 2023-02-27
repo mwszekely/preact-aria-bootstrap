@@ -1,6 +1,6 @@
 
 import { useStableCallback, useState } from "preact-prop-helpers";
-import { Checkbox, CheckboxGroupChild, Tooltip } from "../../index";
+import { Checkbox, CheckboxGroupChild, Tooltip } from "../../dist/index.js";
 import { useCallback } from "preact/hooks"
 import { memo } from "preact/compat";
 

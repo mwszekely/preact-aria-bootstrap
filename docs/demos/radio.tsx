@@ -1,6 +1,6 @@
 
 import { useStableCallback, useState } from "preact-prop-helpers";
-import { Checkbox, Radio, RadioGroup } from "../../index";
+import { Checkbox, Radio, RadioGroup } from "../../dist/index.js";
 import { useCallback } from "preact/hooks"
 
 export function Blurb() {

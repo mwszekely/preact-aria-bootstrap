@@ -12,6 +12,7 @@ demo/index.css
 demo/index.css.map
 demo/index.d.ts
 demo/index.d.ts.map
+!dist/**
 
 # Logs
 logs
@@ -97,7 +98,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/

@@ -1,12 +1,12 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { createContext, h, Ref } from "preact";
 import { Toolbar, ToolbarProps, useLabelSynthetic, UseToolbarParameters, UseToolbarReturnType, UseToolbarSubInfo } from "preact-aria-widgets";
-import { useAsync, useHasCurrentFocus, useMergedProps, useRefElement, useState } from "preact-prop-helpers";
+import { useAsync, useMergedProps, useState } from "preact-prop-helpers";
 import { useMemo, useRef } from "preact/hooks";
-import { DisabledContext } from "../context";
-import { KeyboardAssistIcon } from "../utility/keyboard-assist";
-import { LabelledProps } from "../utility/types";
-import { ButtonProps } from "./button-action";
+import { DisabledContext } from "../context.js";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
+import { LabelledProps } from "../utility/types.js";
+import { ButtonProps } from "./button-action.js";
 
 export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className"> {
     disabled?: boolean;
@@ -53,7 +53,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
 
     const pendingIndex = (pending ? capturedIndex : null);
 
-    const classBase = (separated? "btn-toolbar" : "btn-group")
+    const classBase = (separated ? "btn-toolbar" : "btn-group")
 
     return (
 

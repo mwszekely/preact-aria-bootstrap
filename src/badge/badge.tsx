@@ -1,10 +1,10 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { Ref } from "preact";
 import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { ButtonThemes } from "../context";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { GlobalAttributes } from "../utility/types";
+import { ButtonThemes } from "../context.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { GlobalAttributes } from "../utility/types.js";
 
 export interface BadgeProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     variantTheme?: ButtonThemes;
