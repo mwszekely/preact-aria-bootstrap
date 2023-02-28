@@ -21,7 +21,6 @@
     "watch:ts": "tsc --watch",
     "build:ts": "tsc",
     "lint": "npx lint ./src",
-    "prepare": "npm run build || node ./true",
     "clean": "tsc --build --clean"
   },
   "author": "",

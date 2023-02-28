@@ -47,14 +47,16 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
                     alignMode: isFocusOverride ? "element" : alignMode ?? (`mouse`)
                 }
             });
+            const slideTargetScale = (1 / 9);
+            const transitionDuration = 200;
             const zoomOriginBlock = (usedSide == "top" || usedSide == "bottom") ? 1 : 0.5;
             const zoomOriginInline = (usedSide == "left" || usedSide == "right") ? 1 : 0.5;
-            const slideTargetBlock = (usedSide == "top" ? 0.125 : usedSide == "bottom" ? -0.125 : 0);
-            const slideTargetInline = (usedSide == "right" ? 0.125 : usedSide == "left" ? -0.125 : 0);
+            const slideTargetBlock = (usedSide == "top" ? slideTargetScale : usedSide == "bottom" ? -slideTargetScale : 0);
+            const slideTargetInline = (usedSide == "right" ? slideTargetScale : usedSide == "left" ? -slideTargetScale : 0);
             // IMPORTANT:
             // The tooltip must remain non-hidden to assistive technologies even when closed.
             // Don't set hidden or inert or anything like that when is's closed!
-            const tooltipContent = _jsx("div", { ...useMergedProps(propsPopup, {}), children: _jsx(SlideFade, { exitVisibility: "visible", show: hidden ? false : (tooltip == null ? false : (status != null)), slideTargetBlock: slideTargetBlock, slideTargetInline: slideTargetInline, children: _jsxs("div", { ...useMergedProps(propsData, { style: maxWidth ? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup), children: [_jsx("div", { ...useMergedProps(propsArrow, { className: "tooltip-arrow" }) }), _jsx("div", { class: "tooltip-inner", children: tooltip })] }) }) });
+            const tooltipContent = _jsx("div", { ...useMergedProps(propsPopup, {}), children: _jsx(SlideFade, { exitVisibility: "visible", exclusivityKey: "tooltip", duration: transitionDuration, show: hidden ? false : (tooltip == null ? false : (status != null)), slideTargetBlock: slideTargetBlock, slideTargetInline: slideTargetInline, children: _jsxs("div", { ...useMergedProps(propsData, { style: maxWidth ? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup), children: [_jsx("div", { ...useMergedProps(propsArrow, { className: "tooltip-arrow" }) }), _jsx("div", { class: "tooltip-inner", children: tooltip })] }) }) });
             const portalJsx = absolutePositioning ? tooltipContent : defaultRenderPortal({ children: tooltipContent, portalId });
             if (forward) {
                 const vnode = children;

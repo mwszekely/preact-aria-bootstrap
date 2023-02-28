@@ -120,20 +120,23 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
                     placement: placement ?? "top",
                     alignMode: isFocusOverride ? "element" : alignMode ?? (`mouse`)
                 }
-            })
+            });
+
+            const slideTargetScale = (1 / 9);
+            const transitionDuration = 200;
 
             const zoomOriginBlock = (usedSide == "top" || usedSide == "bottom") ? 1 : 0.5;
             const zoomOriginInline = (usedSide == "left" || usedSide == "right") ? 1 : 0.5;
 
-            const slideTargetBlock = (usedSide == "top" ? 0.125 : usedSide == "bottom" ? -0.125 : 0);
-            const slideTargetInline = (usedSide == "right" ? 0.125 : usedSide == "left" ? -0.125 : 0);
+            const slideTargetBlock = (usedSide == "top" ? slideTargetScale : usedSide == "bottom" ? -slideTargetScale : 0);
+            const slideTargetInline = (usedSide == "right" ? slideTargetScale : usedSide == "left" ? -slideTargetScale : 0);
 
             // IMPORTANT:
             // The tooltip must remain non-hidden to assistive technologies even when closed.
             // Don't set hidden or inert or anything like that when is's closed!
             const tooltipContent =
                 <div {...useMergedProps(propsPopup, {})}>
-                    <SlideFade exitVisibility="visible" show={hidden ? false : (tooltip == null ? false : (status != null))} slideTargetBlock={slideTargetBlock} slideTargetInline={slideTargetInline} /*zoomMin={0.8} zoomOriginBlock={zoomOriginBlock} zoomOriginInline={zoomOriginInline}*/ /*zoomOriginInline={(alignMode == "element" ? 0.5 : 0)}*/>
+                    <SlideFade exitVisibility="visible" exclusivityKey="tooltip" duration={transitionDuration} show={hidden ? false : (tooltip == null ? false : (status != null))} slideTargetBlock={slideTargetBlock} slideTargetInline={slideTargetInline} /*zoomMin={0.8} zoomOriginBlock={zoomOriginBlock} zoomOriginInline={zoomOriginInline}*/ /*zoomOriginInline={(alignMode == "element" ? 0.5 : 0)}*/>
                         <div {...useMergedProps<any>(propsData, { style: maxWidth ? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup)}>
                             <div {...useMergedProps(propsArrow, { className: "tooltip-arrow" })} />
                             <div class="tooltip-inner">
