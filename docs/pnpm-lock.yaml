@@ -30,7 +30,7 @@ specifiers:
 
 dependencies:
   bootstrap: 5.3.0-alpha1
-  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/c121f814fb55bbe182ac3ca9043ea3a7d0b4b4ed_bootstrap@5.3.0-alpha1
+  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/3a4aa740916479581e9efdca9dbb07b0f3704e9a_bootstrap@5.3.0-alpha1
   clsx: 1.2.1
   preact: 10.13.0
   preact-transition: github.com/mwszekely/preact-transition/d2d44ec56f070b37c161741119e6f154a38d6310_preact@10.13.0
@@ -1867,7 +1867,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001458
-      electron-to-chromium: 1.4.311
+      electron-to-chromium: 1.4.314
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
@@ -2138,8 +2138,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /electron-to-chromium/1.4.311:
-    resolution: {integrity: sha512-RoDlZufvrtr2Nx3Yx5MB8jX3aHIxm8nRWPJm3yVvyHmyKaRvn90RjzB6hNnt0AkhS3IInJdyRfQb4mWhPvUjVw==}
+  /electron-to-chromium/1.4.314:
+    resolution: {integrity: sha512-+3RmNVx9hZLlc0gW//4yep0K5SYKmIvB5DXg1Yg6varsuAHlHwTeqeygfS8DWwLCsNOWrgj+p9qgM5WYjw1lXQ==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -3591,9 +3591,9 @@ packages:
       yargs-parser: 21.1.1
     dev: true
 
-  github.com/mwszekely/bootstrap-sass-variables/c121f814fb55bbe182ac3ca9043ea3a7d0b4b4ed_bootstrap@5.3.0-alpha1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/c121f814fb55bbe182ac3ca9043ea3a7d0b4b4ed}
-    id: github.com/mwszekely/bootstrap-sass-variables/c121f814fb55bbe182ac3ca9043ea3a7d0b4b4ed
+  github.com/mwszekely/bootstrap-sass-variables/3a4aa740916479581e9efdca9dbb07b0f3704e9a_bootstrap@5.3.0-alpha1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/3a4aa740916479581e9efdca9dbb07b0f3704e9a}
+    id: github.com/mwszekely/bootstrap-sass-variables/3a4aa740916479581e9efdca9dbb07b0f3704e9a
     name: bootstrap-sass-variables
     version: 0.0.1
     peerDependencies:
