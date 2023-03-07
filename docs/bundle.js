@@ -2155,11 +2155,11 @@
    * @returns
    */
   function useMergedRefs(rhs, lhs) {
-    useEnsureStability("useMergedRefs", lhs, rhs);
-    const combined = T$2(function combined(current) {
+    // This *must* be stable in order to prevent repeated reset `null` calls after every render.
+    const combined = useStableCallback(function combined(current) {
       processRef(current, lhs);
       processRef(current, rhs);
-    }, []);
+    });
     if (lhs == null && rhs == null) {
       return undefined;
     } else if (lhs == null) {
@@ -4552,7 +4552,7 @@
               break;
           }
         }
-        if (result && result == 'passthrough') {
+        if (result && result != 'passthrough') {
           e.preventDefault();
           e.stopPropagation();
         }
