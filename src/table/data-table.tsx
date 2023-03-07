@@ -124,8 +124,8 @@ export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, 
             tagTableRow="tr"
             render={info => {
                 useUpdateRenderCounter("DataTableRow");
-                const hideBecauseStaggered = (info.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered ? !info.rowAsChildOfGridReturn.staggeredChildReturn.staggeredVisible : false);
-                const hideBecausePaginated = (info.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !info.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible : false);
+                const hideBecauseStaggered = info.rowAsChildOfGridReturn.staggeredChildReturn.hideBecauseStaggered;
+                const hideBecausePaginated = info.rowAsChildOfGridReturn.paginatedChildReturn.hideBecausePaginated;
 
                 //useWhatCausedRender("DataTableRow", { props: { ...props, variantTheme, children, row }, state: info })
 

@@ -58,7 +58,7 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ Tag, t
                     const loadingJsx = (_jsx(Fade, { show: pending, children: _jsx("span", { class: "spinner-border", ...propsIndicator }) }));
                     if (pressed !== null)
                         variantFill ??= (pressed ? "fill" : "outline");
-                    const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
+                    const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
                     const ret = (h(Tag, useMergedProps(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx));
                     if (tooltip) {
                         return _jsx(Tooltip, { forward: true, alignMode: "element", semanticType: "label", absolutePositioning: true, placement: tooltipPlacement || "top", tooltip: tooltip, children: ret });

@@ -68,7 +68,7 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
             const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
             return (_jsx(AriaMenuItem, { ref: imperativeHandle, index: index, selectionMode: "activation", getSortValue: getSortValue ?? returnZero, disabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
                     const spinnerJsx = (_jsx("div", { ...progressInfo.propsIndicator, class: clsx("spinner-border", "spinner-border-sm") }));
-                    return (_jsxs("div", { ...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pseudoActive && "active") }, props), children: [children, _jsx("div", { class: "dropdown-item-icon dropdown-item-icon-end", children: spinnerJsx })] }));
+                    return (_jsxs("div", { ...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props), children: [children, _jsx("div", { class: "dropdown-item-icon dropdown-item-icon-end", children: spinnerJsx })] }));
                 }, ariaPropName: "aria-selected" }));
         } }));
 }));

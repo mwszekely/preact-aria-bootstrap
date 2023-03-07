@@ -23,6 +23,7 @@
     "build:sass": "sass --load-path=\"./node_modules\" ./src/index.scss:./dist/index.css",
     "build:ts": "tsc --build",
     "lint": "npx lint ./src",
+    "rebuild": "rm \"./pnpm-lock.yaml\" && rm -R \"./node_modules\" && pnpm install && pnpm run build",
     "clean": "tsc --build --clean"
   },
   "author": "",

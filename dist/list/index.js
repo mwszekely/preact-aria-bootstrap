@@ -33,7 +33,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
             return (_jsx(GridlistRow, { index: index, ariaPropName: "aria-selected", getSortValue: getSortValue ?? returnZero, disabled: disabled, noTypeahead: true, getText: useCallback((e) => { return e?.querySelector(".gridlist-item-text")?.textContent || ""; }, []), render: infoRow => {
                     useUpdateRenderCounter("GridlistRow");
                     const { refElementReturn: { propsStable: p2, getElement }, refElementReturn } = useRefElement({ refElementParameters: {} });
-                    const { pressReturn: { longPress, propsUnstable: p1, pseudoActive } } = usePress({
+                    const { pressReturn: { longPress, propsUnstable: p1, pressing } } = usePress({
                         pressParameters: {
                             focusSelf: useCallback(() => {
                                 return getElement()?.focus();
@@ -51,19 +51,21 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                         timeout,
                         callback: () => setShow(true)
                     })*/
-                    const show = infoRow.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered ? infoRow.rowAsChildOfGridReturn.staggeredChildReturn.staggeredVisible : true;
+                    const show = !infoRow.rowAsChildOfGridReturn.staggeredChildReturn.hideBecauseStaggered;
+                    const { propsIndicator, propsRegion } = progressInfo;
+                    const loadingJsx = (_jsx(Fade, { show: progressInfo.asyncHandlerReturn.pending, children: _jsx("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsIndicator }) }));
+                    //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
+                    const finalPropsForText = useMergedProps(p1, p2);
+                    const finalPropsForDiv = useMergedProps(infoRow.props, { ...props, ref }, {
+                        className: clsx(`gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`)
+                    });
+                    const c = _jsxs(_Fragment, { children: [_jsx(ListItemStartEnd, { index: 0, hidden: iconStart == null, children: iconStart }), _jsxs(ListItemText, { onPress: progressInfo.asyncHandlerReturn.syncHandler, ...finalPropsForText, children: [_jsx("span", { children: children }), _jsxs("span", { class: "list-group-item-badge-and-spinner", children: [_jsx("div", { children: badge }), _jsx("div", { children: loadingJsx })] })] }), _jsx(ListItemStartEnd, { index: 2, hidden: iconEnd == null, children: iconEnd })] });
                     if (!show)
                         if (infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated && !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible)
                             return null;
                         else
                             return _jsx("div", { "aria-busy": "true", class: "gridlist-item gridlist-item-placeholder", children: _jsx("span", { class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"), children: _jsx("span", { class: "placeholder w-100" }) }) });
-                    const { propsIndicator, propsRegion } = progressInfo;
-                    const loadingJsx = (_jsx(Fade, { show: progressInfo.asyncHandlerReturn.pending, children: _jsx("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsIndicator }) }));
-                    //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
-                    const c = _jsxs(_Fragment, { children: [_jsx(ListItemStartEnd, { index: 0, hidden: iconStart == null, children: iconStart }), _jsxs(ListItemText, { onPress: progressInfo.asyncHandlerReturn.syncHandler, ...useMergedProps(p1, p2), children: [_jsx("span", { children: children }), _jsxs("span", { class: "list-group-item-badge-and-spinner", children: [_jsx("div", { children: badge }), _jsx("div", { children: loadingJsx })] })] }), _jsx(ListItemStartEnd, { index: 2, hidden: iconEnd == null, children: iconEnd })] });
-                    return (_jsx(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: false, children: _jsx("div", { "aria-busy": (!show).toString(), ...useMergedProps(infoRow.props, { ...props, ref }, {
-                                className: clsx(`gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`)
-                            }), children: show && c }) }));
+                    return (_jsx(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: false, children: _jsx("div", { "aria-busy": (!show).toString(), ...finalPropsForDiv, children: show && c }) }));
                 } }));
         } }));
 }));

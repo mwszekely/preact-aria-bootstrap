@@ -155,7 +155,7 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                             const spinnerJsx = (<div {...progressInfo.propsIndicator} class={clsx("spinner-border", "spinner-border-sm")} />)
 
                             return (
-                                <div {...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pseudoActive && "active") }, props)}>
+                                <div {...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props)}>
                                     {children}
                                     <div class="dropdown-item-icon dropdown-item-icon-end">{spinnerJsx}</div>
                                 </div>

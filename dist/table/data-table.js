@@ -43,8 +43,8 @@ const DataTableSection = memo(forwardElementRef(function DataTableSection({ chil
 export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, children, variantTheme, ...props }, ref) {
     return (_jsx(AriaTableRow, { index: row, ariaPropName: "aria-selected", tagTableRow: "tr", render: info => {
             useUpdateRenderCounter("DataTableRow");
-            const hideBecauseStaggered = (info.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered ? !info.rowAsChildOfGridReturn.staggeredChildReturn.staggeredVisible : false);
-            const hideBecausePaginated = (info.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !info.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible : false);
+            const hideBecauseStaggered = info.rowAsChildOfGridReturn.staggeredChildReturn.hideBecauseStaggered;
+            const hideBecausePaginated = info.rowAsChildOfGridReturn.paginatedChildReturn.hideBecausePaginated;
             //useWhatCausedRender("DataTableRow", { props: { ...props, variantTheme, children, row }, state: info })
             return (_jsx(Fade, { show: !hideBecauseStaggered, animateOnMount: info.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered, delayMountUntilShown: true, children: _jsx(TableRow, { ...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" }), children: /*hideBecausePaginated? null : */ children }) }));
         } }));

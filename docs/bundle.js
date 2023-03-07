@@ -1817,7 +1817,7 @@
   }
   function debounceRendering(f) {
     var _options$debounceRend;
-    ((_options$debounceRend = l$2.debounceRendering) !== null && _options$debounceRend !== void 0 ? _options$debounceRend : setTimeout)(f);
+    ((_options$debounceRend = l$2.debounceRendering) !== null && _options$debounceRend !== void 0 ? _options$debounceRend : queueMicrotask)(f);
   }
   /**
    * Similar to `useState`, but for values that aren't "render-important" &ndash; updates don't cause a re-render and so the value shouldn't be used during render (though it certainly can, at least by re-rendering again).
@@ -2011,16 +2011,6 @@
    * @param inputs
    */
   function useBeforeLayoutEffect(effect, inputs) {
-    /*(() => {
-        const cleanup = useRef<void | (() => void) | null>(null);
-        const prevArgsRef = useRef<Inputs>(null!);
-        if (argsChanged(inputs, prevArgsRef.current)) {
-            prevArgsRef.current = inputs!;
-            if (cleanup.current)
-                cleanup.current();
-            cleanup.current = effect();
-        }
-    })();*/
     const [id] = p$1(() => generateRandomId());
     if (effect) toRun.set(id, {
       effect,
@@ -2165,6 +2155,11 @@
    * @returns
    */
   function useMergedRefs(rhs, lhs) {
+    useEnsureStability("useMergedRefs", lhs, rhs);
+    const combined = T$2(function combined(current) {
+      processRef(current, lhs);
+      processRef(current, rhs);
+    }, []);
     if (lhs == null && rhs == null) {
       return undefined;
     } else if (lhs == null) {
@@ -2173,10 +2168,6 @@
       return lhs;
     } else {
       return combined;
-    }
-    function combined(current) {
-      processRef(current, lhs);
-      processRef(current, rhs);
     }
   }
 
@@ -4401,8 +4392,6 @@
     return firstFocusable;
   }
 
-  /** Arguments passed to the child 'useLinearNavigationChild` */
-  //export interface UseLinearNavigationChildInfo { }
   /**
    * When used in tandem with `useRovingTabIndex`, allows control of
    * the tabbable index with the arrow keys.
@@ -4500,14 +4489,10 @@
     });
     const navigateToNext = useStableCallback((e, fromUserInteraction) => {
       return navigateRelative2(e, 1, fromUserInteraction, "single");
-      // setTabbableIndex(navigateRelative((getTabbableIndex() ?? 0), +1), fromUserInteraction)
     });
-
     const navigateToPrev = useStableCallback((e, fromUserInteraction) => {
       return navigateRelative2(e, -1, fromUserInteraction, "single");
-      // setTabbableIndex(navigateRelative((getTabbableIndex() ?? 0), +1), fromUserInteraction)
     });
-
     const getDisableArrowKeys = useStableGetter(linearNavigationParameters.disableArrowKeys);
     const getDisableHomeEndKeys = useStableGetter(linearNavigationParameters.disableHomeEndKeys);
     const getNavigationDirection = useStableGetter(linearNavigationParameters.navigationDirection);
@@ -4527,91 +4512,129 @@
         if (truePageNavigationSize < 1) {
           truePageNavigationSize = Math.round(pageNavigationSize * Math.max(100, getHighestIndex() + 1));
         }
+        let result = null;
+        // Arrow keys only take effect for components oriented in that direction,
+        // so we want to make sure we only listen for left/right or up/down when appropriate.
+        let keyPressIsValidForOrientation = true;
         switch (e.key) {
           case "ArrowUp":
-            {
-              //const propName = (info?.blockOrientation === "vertical" ? "blockDirection" : "inlineDirection");
-              const directionAllowed = !disableArrowKeys && allowsVerticalNavigation;
-              if (directionAllowed) {
-                const result = navigateToPrev(e, true);
-                if (result != "passthrough") {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }
-              }
-              break;
-            }
           case "ArrowDown":
-            {
-              const directionAllowed = !disableArrowKeys && allowsVerticalNavigation;
-              if (directionAllowed) {
-                const result = navigateToNext(e, true);
-                if (result != "passthrough") {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }
-              }
-              break;
-            }
-          case "ArrowLeft":
-            {
-              const directionAllowed = !disableArrowKeys && allowsHorizontalNavigation;
-              if (directionAllowed) {
-                const result = navigateToPrev(e, true);
-                if (result != "passthrough") {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }
-              }
-              break;
-            }
-          case "ArrowRight":
-            {
-              const directionAllowed = !disableArrowKeys && allowsHorizontalNavigation;
-              if (directionAllowed) {
-                const result = navigateToNext(e, true);
-                if (result != "passthrough") {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }
-              }
-              break;
-            }
-          case "PageUp":
-            {
-              if (truePageNavigationSize > 0) {
-                navigateRelative2(e, -truePageNavigationSize, true, "page");
-                e.preventDefault();
-                e.stopPropagation();
-              }
-              break;
-            }
-          case "PageDown":
-            {
-              if (truePageNavigationSize > 0) {
-                navigateRelative2(e, truePageNavigationSize, true, "page");
-                e.preventDefault();
-                e.stopPropagation();
-              }
-              break;
-            }
-          case "Home":
-            if (!disableHomeEndKeys) {
-              navigateToFirst(e, true);
-              e.preventDefault();
-              e.stopPropagation();
-            }
+            keyPressIsValidForOrientation = !disableArrowKeys && allowsVerticalNavigation;
             break;
-          case "End":
-            if (!disableHomeEndKeys) {
-              navigateToLast(e, true);
-              e.preventDefault();
-              e.stopPropagation();
-            }
+          case "ArrowLeft":
+          case "ArrowRight":
+            keyPressIsValidForOrientation = !disableArrowKeys && allowsHorizontalNavigation;
             break;
         }
+        if (keyPressIsValidForOrientation) {
+          switch (e.key) {
+            case "ArrowUp":
+            case "ArrowLeft":
+              result = navigateToPrev(e, true);
+              break;
+            case "ArrowDown":
+            case "ArrowRight":
+              result = navigateToNext(e, true);
+              break;
+            case "PageUp":
+            case "PageDown":
+              if (truePageNavigationSize > 0) {
+                navigateRelative2(e, truePageNavigationSize * (e.key.endsWith('n') ? -1 : 1), true, "page");
+                result = 'passthrough';
+              }
+              break;
+            case "Home":
+            case "End":
+              if (!disableHomeEndKeys) {
+                if (e.key.endsWith('e')) navigateToFirst(e, true);else navigateToLast(e, true);
+                result = 'passthrough';
+              }
+              break;
+          }
+        }
+        if (result && result == 'passthrough') {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        /*switch (e.key) {
+            case "ArrowUp": {
+                const directionAllowed = (!disableArrowKeys && allowsVerticalNavigation);
+                if (directionAllowed) {
+                    const result = navigateToPrev(e, true);
+                    if (result != "passthrough") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+                break;
+            }
+            case "ArrowDown": {
+                const directionAllowed = (!disableArrowKeys && allowsVerticalNavigation);
+                if (directionAllowed) {
+                    const result = navigateToNext(e, true);
+                    if (result != "passthrough") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+                break;
+            }
+             case "ArrowLeft": {
+                const directionAllowed = (!disableArrowKeys && allowsHorizontalNavigation);
+                if (directionAllowed) {
+                    const result = navigateToPrev(e, true);
+                    if (result != "passthrough") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+                break;
+            }
+            case "ArrowRight": {
+                const directionAllowed = (!disableArrowKeys && allowsHorizontalNavigation);
+                if (directionAllowed) {
+                    const result = navigateToNext(e, true);
+                    if (result != "passthrough") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+                break;
+            }
+            case "PageUp": {
+                if (truePageNavigationSize > 0) {
+                    navigateRelative2(e, -truePageNavigationSize, true, "page");
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                break;
+            }
+            case "PageDown": {
+                if (truePageNavigationSize > 0) {
+                    navigateRelative2(e, truePageNavigationSize, true, "page");
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                break;
+            }
+            case "Home":
+                if (!disableHomeEndKeys) {
+                    navigateToFirst(e, true);
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                break;
+             case "End":
+                if (!disableHomeEndKeys) {
+                    navigateToLast(e, true);
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                break;
+        }*/
       }
     });
+
     return {
       linearNavigationReturn: {
         propsStable: stableProps.current
@@ -4834,7 +4857,14 @@
       getAt: getManagedChildInfo,
       getHighestIndex: getHighestIndex,
       arraySlice: T$2(() => {
-        return managedChildrenArray.current.arr.slice();
+        let ret = managedChildrenArray.current.arr.slice();
+        const max = getHighestIndex();
+        for (let i = 0; i <= max; ++i) {
+          if (ret[i] == null) ret[i] = {
+            index: i
+          };
+        }
+        return ret;
       }, [])
     });
     const getChildren = T$2(() => managedChildren, []);
@@ -5042,10 +5072,9 @@
         setStateP(value);
       }
     }, []);
-    const getState = () => {
+    const getState = T$2(() => {
       return ref.current;
-    };
-    console.assert(ref.current === state || typeof state === "number" && isNaN(state));
+    }, []);
     return [state, setState, getState];
   }
 
@@ -5100,13 +5129,18 @@
       return changeTabbableIndex(function returnModifiedTabbableIndex(prevIndex) {
         let nextIndex = typeof updater === "function" ? updater(prevIndex !== null && prevIndex !== void 0 ? prevIndex : null) : updater;
         const untabbable = getUntabbable();
+        // Whether or not we're currently tabbable, make sure that when we switch from untabbable to tabbable,
+        // that we know which index to switch back to.
         if (nextIndex != null) setLastNonNullIndex(nextIndex);
+        // If we're untabbable, then any attempt to set a new index simply fails and sets it to `null`.
         if (untabbable) return null;
+        // If the requested index is hidden, then there's no need to focus any elements or run any extra logic.
+        if (nextIndex == null) return null;
+        // If we've made a change, and it was because the user clicked on it or something,
+        // then focus that element too
         if (prevIndex != nextIndex) {
-          const nextChild = nextIndex == null ? null : children.getAt(nextIndex);
-          if (nextChild?.hidden) {
-            return prevIndex !== null && prevIndex !== void 0 ? prevIndex : untabbable ? null : 0;
-          }
+          const nextChild = children.getAt(nextIndex);
+          console.assert(!nextChild?.hidden);
           if (nextChild != null && fromUserInteraction) {
             const element = nextChild.getElement();
             if (element) {
@@ -5116,7 +5150,8 @@
         }
         // TODO: Redundant?
         if (nextIndex != null) setLastNonNullIndex(nextIndex);
-        return nextIndex !== null && nextIndex !== void 0 ? nextIndex : untabbable ? null : 0;
+        // Finally, return the value the user requested the index be set to.
+        return nextIndex !== null && nextIndex !== void 0 ? nextIndex : 0;
       }, reason);
     }, []);
     // When we switch from tabbable to non/tabbable, we really want to remember the last tabbable child.
@@ -5189,7 +5224,8 @@
         setTabbableIndex,
         getInitiallyTabbedIndex
       },
-      rovingTabIndexChildParameters
+      rovingTabIndexChildParameters,
+      ..._void3
     } = _ref2;
     const {
       hidden,
@@ -6119,8 +6155,9 @@
     const onRearrangedGetter = useStableGetter(onRearranged);
     //const { setTabbableIndex } = rovingTabIndexReturn;
     const shuffle$1 = T$2(managedRows => {
-      const shuffledRows = shuffle(managedRows.arraySlice());
-      return rearrange(shuffledRows);
+      const originalRows = managedRows.arraySlice();
+      const shuffledRows = shuffle(originalRows);
+      return rearrange(originalRows, shuffledRows);
     }, [/* Must remain stable */]);
     // The sort function needs to be able to update whoever has all the sortable children.
     // Because that might not be the consumer of *this* hook directly (e.g. a table uses
@@ -6128,7 +6165,7 @@
     // get and set a forceUpdate function.
     //const [getForceUpdate, setForceUpdate] = usePassiveState<null | (() => void)>(null, returnNull);
     const [getForceUpdate, setForceUpdate] = usePassiveState(null, returnNull);
-    const rearrange = T$2(sortedRows => {
+    const rearrange = T$2((originalRows, sortedRows) => {
       mangleMap.current.clear();
       demangleMap.current.clear();
       // Update our sorted <--> unsorted indices map 
@@ -6225,14 +6262,15 @@
     // The actual sort function.
     const sort = T$2((managedRows, direction) => {
       const compare = getCompare();
-      const sortedRows = compare ? managedRows.arraySlice().sort((lhsRow, rhsRow) => {
+      const originalRows = managedRows.arraySlice();
+      const sortedRows = compare ? originalRows.sort((lhsRow, rhsRow) => {
         const lhsValue = lhsRow;
         const rhsValue = rhsRow;
         const result = compare(lhsValue, rhsValue);
         if (direction[0] == "d") return -result;
         return result;
       }) : managedRows.arraySlice();
-      return rearrange(sortedRows);
+      return rearrange(originalRows, sortedRows);
     }, [/* Must remain stable */]);
     return {
       sortableChildrenReturn: {
@@ -6384,6 +6422,44 @@
     };
   }
 
+  function useListNavigationSingleSelectionSortable(_ref) {
+    let {
+      linearNavigationParameters,
+      rovingTabIndexParameters,
+      typeaheadNavigationParameters,
+      singleSelectionParameters,
+      managedChildrenReturn,
+      rearrangeableChildrenParameters,
+      sortableChildrenParameters,
+      ..._void3
+    } = _ref;
+    const scr = useSortableChildren({
+      rearrangeableChildrenParameters,
+      sortableChildrenParameters
+    });
+    const {
+      rearrangeableChildrenReturn: {
+        indexDemangler,
+        indexMangler
+      }
+    } = scr;
+    const lnssr = useListNavigationSingleSelection({
+      linearNavigationParameters: {
+        ...linearNavigationParameters,
+        indexDemangler,
+        indexMangler
+      },
+      rovingTabIndexParameters,
+      typeaheadNavigationParameters,
+      singleSelectionParameters,
+      managedChildrenReturn
+    });
+    return {
+      ...lnssr,
+      ...scr
+    };
+  }
+
   function usePaginatedChildren(_ref) {
     let {
       managedChildrenReturn: {
@@ -6429,7 +6505,7 @@
           // This is only used during setState on mount, so this is fine.
           // (If we change from paginated to not paginated, this is caught during useLayoutEffect)
           getDefaultPaginationVisible: T$2(i => {
-            return parentIsPaginated ? i >= (paginationMin !== null && paginationMin !== void 0 ? paginationMin : -Infinity) && i < (paginationMax !== null && paginationMax !== void 0 ? paginationMax : Infinity) : true;
+            return p.current ? i >= (paginationMin !== null && paginationMin !== void 0 ? paginationMin : -Infinity) && i < (paginationMax !== null && paginationMax !== void 0 ? paginationMax : Infinity) : true;
           }, [])
         })
       }),
@@ -6516,22 +6592,20 @@
         // We've gone this long without hearing the next child mount itself...
         // We need to continue.
         timeoutHandle.current = -1;
-        setDisplayedStaggerIndex(c => {
-          var _getTargetStaggerInde;
-          return Math.min((_getTargetStaggerInde = getTargetStaggerIndex()) !== null && _getTargetStaggerInde !== void 0 ? _getTargetStaggerInde : 0, (c !== null && c !== void 0 ? c : 0) + 1);
-        });
+        let target = getTargetStaggerIndex();
+        if (target != null) setDisplayedStaggerIndex(c => Math.min(target, (c !== null && c !== void 0 ? c : 0) + 1));
       }, 50);
     }, [/* Must be empty */]);
     // The target index is the index that we're "animating" to.
     // Each child simply sets this to the highest value ever seen.
     // TODO: When unmounting children, we should reset this, but that requires us to track total # of children
-    const [getTargetStaggerIndex, setTargetStaggerIndex] = usePassiveState(T$2((newIndex, prevIndex) => {
+    const [getTargetStaggerIndex, setTargetStaggerIndex] = usePassiveState(T$2((newIndex, _prevIndex) => {
       // Any time our target changes,
       // ensure our timeout is running, and start a new one if not
       // For any newly mounted children, make sure they're aware of if they should consider themselves staggered or not
-      for (let i = prevIndex !== null && prevIndex !== void 0 ? prevIndex : 0; i < (newIndex !== null && newIndex !== void 0 ? newIndex : 0); ++i) {
-        getChildren().getAt(i)?.setParentIsStaggered(parentIsStaggered);
-      }
+      //for (let i = (prevIndex ?? 0); i < (newIndex ?? 0); ++i) {
+      //    getChildren().getAt(i)?.setParentIsStaggered(s.current);
+      //}
       if (timeoutHandle.current == -1) {
         resetEmergencyTimeout();
         // If there's no timeout running, then that also means we're not waiting for a child to mount.
@@ -6540,11 +6614,11 @@
       }
     }, [/* Must be empty */]), returnNull);
     const [getDisplayedStaggerIndex, setDisplayedStaggerIndex] = usePassiveState(T$2((newIndex, prevIndex) => {
-      var _getTargetStaggerInde2;
+      var _getTargetStaggerInde;
       if (newIndex == null) {
         return;
       }
-      setCurrentlyStaggering(newIndex >= ((_getTargetStaggerInde2 = getTargetStaggerIndex()) !== null && _getTargetStaggerInde2 !== void 0 ? _getTargetStaggerInde2 : 0));
+      setCurrentlyStaggering(newIndex < ((_getTargetStaggerInde = getTargetStaggerIndex()) !== null && _getTargetStaggerInde !== void 0 ? _getTargetStaggerInde : 0));
       // It's time to show the next child,
       // either because the current one finished mounting,
       // or because our emergency backup timeout fired.
@@ -6560,8 +6634,8 @@
     const parentIsStaggered = !!staggered;
     const childCallsThisToTellTheParentToMountTheNextOne = T$2(index => {
       setDisplayedStaggerIndex(s => {
-        var _getTargetStaggerInde3;
-        return Math.min((_getTargetStaggerInde3 = getTargetStaggerIndex()) !== null && _getTargetStaggerInde3 !== void 0 ? _getTargetStaggerInde3 : 0, 1 + Math.max(s !== null && s !== void 0 ? s : 0, index + 1));
+        var _getTargetStaggerInde2;
+        return Math.min((_getTargetStaggerInde2 = getTargetStaggerIndex()) !== null && _getTargetStaggerInde2 !== void 0 ? _getTargetStaggerInde2 : 0, 1 + Math.max(s !== null && s !== void 0 ? s : 0, index + 1));
       });
     }, []);
     s$1(() => {
@@ -6570,7 +6644,8 @@
     const childCallsThisToTellTheParentTheHighestIndex = T$2(mountedIndex => {
       setTargetStaggerIndex(i => Math.max(i !== null && i !== void 0 ? i : 0, 1 + mountedIndex));
     }, []);
-    // TODO: Modification during render
+    // TODO: Modification during render (but it's really, really hard to avoid here,
+    // but also probably fine because parents render before children? Does that include suspense?)
     const s = _$1(parentIsStaggered);
     s.current = parentIsStaggered;
     return {
@@ -6585,12 +6660,14 @@
           // It's okay that the dependencies aren't included.
           // It's more important that these can be called during render.
           //
-          // (If we switch, this is caught during useLayoutEffect anyway)
+          // (If we switch, this is caught during useLayoutEffect anyway,
+          // but only if we switch *after* the children mount! The ref
+          // is to take care of the case where we switch *before* they mount)
           getDefaultIsStaggered: T$2(() => {
-            return parentIsStaggered;
+            return s.current;
           }, []),
           getDefaultStaggeredVisible: T$2(i => {
-            if (parentIsStaggered) {
+            if (s.current) {
               const staggerIndex = getDisplayedStaggerIndex();
               if (staggerIndex == null) return false;
               return i < staggerIndex;
@@ -6616,7 +6693,7 @@
         }
       }
     } = _ref2;
-    const [parentIsStaggered, setParentIsStaggered] = useState(getDefaultIsStaggered());
+    const [parentIsStaggered, setParentIsStaggered] = useState(getDefaultIsStaggered);
     const [staggeredVisible, setStaggeredVisible] = useState(getDefaultStaggeredVisible(index));
     s$1(() => {
       childCallsThisToTellTheParentTheHighestIndex(index);
@@ -6629,7 +6706,6 @@
         "aria-busy": (!staggeredVisible).toString()
       },
       staggeredChildReturn: {
-        staggeredVisible,
         isStaggered: parentIsStaggered,
         hideBecauseStaggered: parentIsStaggered ? !staggeredVisible : false
       },
@@ -6928,7 +7004,6 @@
         setStaggeredVisible
       },
       staggeredChildReturn: {
-        staggeredVisible,
         isStaggered,
         hideBecauseStaggered
       },
@@ -7084,7 +7159,6 @@
         managedChildReturn,
         staggeredChildReturn: {
           isStaggered,
-          staggeredVisible,
           hideBecauseStaggered
         },
         paginatedChildReturn: {
@@ -7094,11 +7168,8 @@
         }
       },
       hasCurrentFocusReturn
-      //managedChildrenReturn,
-      //...gridNavigationSingleSelectionReturn
     };
   }
-
   function useCompleteGridNavigationCell(_ref3) {
     let {
       gridNavigationCellParameters,
@@ -7114,13 +7185,10 @@
       },
       rovingTabIndexChildParameters,
       textContentParameters,
-      //managedChildContext,
       completeGridNavigationCellParameters: {
         focusSelf,
         ...completeGridNavigationCellParameters
       }
-      //sortableChildParameters: { getSortValue },
-      //    pressParameters: { onPressSync, ...pressParameters },
     } = _ref3;
     const {
       index
@@ -7157,17 +7225,6 @@
       },
       refElementReturn
     });
-    /* const { pressReturn } = usePress<CellElement>({
-         pressParameters: {
-             onPressSync: useStableCallback<NonNullable<typeof onPressSync>>(e => {
-                 onPressSync?.(e);
-                 completeGridNavigationContext.onPressSync?.(e);
-             }),
-             focusSelf: null,
-             ...pressParameters
-         },
-         refElementReturn
-     });*/
     const baseInfo = {
       focusSelf,
       getElement: refElementReturn.getElement,
@@ -7176,9 +7233,7 @@
       getTabbable: rovingTabIndexChildReturn.getTabbable,
       setTabbable: rovingTabIndexChildReturn.setTabbable,
       tabbable: rovingTabIndexChildReturn.tabbable
-      //getSortValue
     };
-
     const {
       managedChildReturn
     } = useManagedChild({
@@ -7192,15 +7247,12 @@
       ...baseInfo,
       ...completeGridNavigationCellParameters
     });
-    const props = useMergedProps(refElementReturn.propsStable,
-    //pressReturn.propsStable,
-    rovingTabIndexChildReturn.propsUnstable, hasCurrentFocusReturn.propsStable);
+    const props = useMergedProps(refElementReturn.propsStable, rovingTabIndexChildReturn.propsUnstable, hasCurrentFocusReturn.propsStable);
     return {
       props,
       refElementReturn,
       rovingTabIndexChildReturn,
       pressParameters,
-      //pressReturn,
       hasCurrentFocusReturn,
       managedChildReturn,
       textContentReturn
@@ -7241,22 +7293,6 @@
       return true;
     }, []);
     const {
-      rearrangeableChildrenReturn: {
-        indexDemangler,
-        indexMangler,
-        ...rearrangeableChildrenReturn
-      },
-      sortableChildrenReturn
-    } = useSortableChildren({
-      rearrangeableChildrenParameters: {
-        onRearranged: useStableCallback(() => {
-          refreshPagination(paginatedChildrenParameters.paginationMin, paginatedChildrenParameters.paginationMax);
-        }),
-        ...rearrangeableChildrenParameters
-      },
-      sortableChildrenParameters
-    });
-    const {
       childrenHaveFocusParameters,
       managedChildrenParameters,
       rovingTabIndexChildContext,
@@ -7265,16 +7301,16 @@
       linearNavigationReturn,
       rovingTabIndexReturn,
       singleSelectionReturn,
-      typeaheadNavigationReturn
-    } = useListNavigationSingleSelection({
+      typeaheadNavigationReturn,
+      rearrangeableChildrenReturn,
+      sortableChildrenReturn
+    } = useListNavigationSingleSelectionSortable({
       managedChildrenReturn: {
         getChildren
       },
       linearNavigationParameters: {
         getHighestIndex: getHighestChildIndex,
         isValid,
-        indexDemangler,
-        indexMangler,
         ...linearNavigationParameters
       },
       typeaheadNavigationParameters: {
@@ -7286,10 +7322,15 @@
         ...rovingTabIndexParameters
       },
       singleSelectionParameters,
+      rearrangeableChildrenParameters: {
+        onRearranged: useStableCallback(() => {
+          refreshPagination(paginatedChildrenParameters.paginationMin, paginatedChildrenParameters.paginationMax);
+        }),
+        ...rearrangeableChildrenParameters
+      },
+      sortableChildrenParameters,
       ...completeListNavigationParameters
     });
-    //const { linearNavigationReturn, typeaheadNavigationReturn } = listNavigationSingleSelectionSortableReturn;
-    //const [childCount, setChildCount] = useState(0);
     const {
       childrenHaveFocusChildContext,
       childrenHaveFocusReturn
@@ -7324,7 +7365,7 @@
       managedChildrenReturn,
       paginatedChildrenParameters,
       linearNavigationParameters: {
-        indexDemangler
+        indexDemangler: rearrangeableChildrenReturn.indexDemangler
       }
     });
     const {
@@ -7350,11 +7391,7 @@
       context,
       props,
       managedChildrenReturn,
-      rearrangeableChildrenReturn: {
-        indexDemangler,
-        indexMangler,
-        ...rearrangeableChildrenReturn
-      },
+      rearrangeableChildrenReturn,
       staggeredChildrenReturn,
       paginatedChildrenReturn,
       sortableChildrenReturn,
@@ -7387,7 +7424,6 @@
         paginatedChildContext,
         staggeredChildContext
       },
-      //pressParameters: { onPressSync: ops1, ...pressParameters },
       sortableChildParameters: {
         getSortValue
       },
@@ -7431,7 +7467,6 @@
         staggeredChildContext
       }
     });
-    //let { hidden } = rovingTabIndexChildParameters;
     hidden ||= hideBecausePaginated || hideBecauseStaggered;
     let {
       disabled
@@ -7479,16 +7514,6 @@
       setTabbable,
       tabbable
     } = rovingTabIndexChildReturn;
-    /* const { pressReturn } = usePress<ChildElement>({
-         pressParameters: {
-             ...p1,
-             ...pressParameters,
-             onPressSync: disabled ? null : ((e) => {
-                 ops2?.(e);
-                 ops1?.(e);
-             })
-         }, refElementReturn
-     });*/
     const {
       getSelected,
       selected
@@ -7558,12 +7583,6 @@
       staggeredChildReturn
     };
   }
-  /*
-  function foo<ParentElement extends Element, ChildElement extends Element, M extends UseListNavigationSingleSelectionSortableChildInfo<ChildElement>>(p: UseCompleteListNavigationParameters<ParentElement, ChildElement, M>) {
-      const { singleSelectionReturn } = useCompleteListNavigation<ParentElement, ChildElement, M>(p);
-      const selectedIndex = 0;
-      useSingleSelectionDeclarative({ singleSelectionReturn, singleSelectionDeclarativeParameters: { selectedIndex } })
-  }*/
 
   /**
    * Combines dismissal hooks and focus trap hooks into one.
@@ -7587,8 +7606,6 @@
     const {
       open
     } = dismissParameters;
-    //const { getWindow } = escapeDismissParameters;
-    //const getDocument = useCallback(() => { return getWindow().document; }, [getWindow]);
     const {
       refElementPopupReturn,
       refElementSourceReturn
@@ -7706,12 +7723,15 @@
         longPressThreshold,
         excludeEnter: ee,
         excludePointer: ep,
-        excludeSpace: es
+        excludeSpace: es,
+        onPressingChange: opc
       }
     } = args;
     const excludeEnter = useStableCallback(ee !== null && ee !== void 0 ? ee : returnFalse);
     const excludeSpace = useStableCallback(es !== null && es !== void 0 ? es : returnFalse);
     const excludePointer = useStableCallback(ep !== null && ep !== void 0 ? ep : returnFalse);
+    const onPressingChange = useStableCallback(opc !== null && opc !== void 0 ? opc : noop$1);
+    const [getIsPressing, setIsPressing] = usePassiveState(onPressingChange, returnFalse);
     const hasPressEvent = onPressSync != null;
     /**
      * Explanations:
@@ -7759,6 +7779,7 @@
     const onTouchStart = T$2(e => {
       e.preventDefault();
       e.stopPropagation();
+      setIsPressing(true, e);
       setPointerDownStartedHere(true);
       setHovering(true);
       setLongPress(false);
@@ -7778,6 +7799,7 @@
         const elementAtTouch = document.elementFromPoint(((_touch$clientX = touch?.clientX) !== null && _touch$clientX !== void 0 ? _touch$clientX : 0) + x, ((_touch$clientY = touch?.clientY) !== null && _touch$clientY !== void 0 ? _touch$clientY : 0) + y);
         hoveringAtAnyPoint ||= (_element$contains = element?.contains(elementAtTouch)) !== null && _element$contains !== void 0 ? _element$contains : false;
       }
+      setIsPressing(hoveringAtAnyPoint && getPointerDownStartedHere(), e);
       setHovering(hoveringAtAnyPoint);
     }, []);
     const onTouchEnd = T$2(e => {
@@ -7792,12 +7814,14 @@
       setWaitingForSpaceUp(false);
       setHovering(false);
       setPointerDownStartedHere(false);
+      setIsPressing(false, e);
     }, []);
     const onPointerDown = T$2(e => {
       if (!excludePointer()) {
         if (e.buttons & 1) {
           e.preventDefault();
           e.stopPropagation();
+          setIsPressing(true, e);
           setPointerDownStartedHere(true);
           setHovering(true);
           setLongPress(false);
@@ -7812,13 +7836,13 @@
       // then we're definitely not in a press anymore (if we could we'd just wait for onPointerUp, but it could happen outside this element)
       if (!(e.buttons & 1)) setPointerDownStartedHere(listeningForPress = false);
       if (listeningForPress) {
-        //e.preventDefault();
-        //e.stopPropagation();
         const element = getElement();
         // Note: elementFromPoint starts reasonably expensive on a decent computer when on the order of 500 or so elements,
         // so we only test for hovering while actively attempting to detect a press
         const elementAtPointer = document.elementFromPoint(e.clientX, e.clientY);
-        setHovering(element == elementAtPointer || element?.contains(elementAtPointer) || false);
+        const hovering = element == elementAtPointer || element?.contains(elementAtPointer) || false;
+        setHovering(hovering);
+        setIsPressing(hovering && getPointerDownStartedHere(), e);
       }
     });
     const onPointerUp = T$2(e => {
@@ -7836,6 +7860,7 @@
       setHovering(false);
       setPointerDownStartedHere(false);
       setLongPress(false);
+      setIsPressing(false, e);
     }, []);
     const onPointerEnter = T$2(_e => {
       setHovering(true);
@@ -7909,25 +7934,29 @@
           // We don't actually activate it on a space keydown
           // but we do preventDefault to stop the page from scrolling.
           setWaitingForSpaceUp(true);
-          //onActiveStart(e);
+          setIsPressing(true, e);
           e.preventDefault();
         }
         if (e.key == "Enter" && !excludeEnter() && (!e.repeat || (allowRepeatPresses !== null && allowRepeatPresses !== void 0 ? allowRepeatPresses : false))) {
-          handlePress(e);
+          setIsPressing(true, e);
+          requestAnimationFrame(() => {
+            setIsPressing(false, e);
+            handlePress(e);
+          });
         }
       }
     });
     const onKeyUp = useStableCallback(e => {
       const waitingForSpaceUp = getWaitingForSpaceUp();
-      if (waitingForSpaceUp && e.key == " " && !excludeSpace()) handlePress(e);
+      if (waitingForSpaceUp && e.key == " " && !excludeSpace()) {
+        handlePress(e);
+        setIsPressing(false, e);
+      }
     });
     const onClick = useStableCallback(e => {
       const element = getElement();
       if (onPressSync) {
         e.preventDefault();
-        //const element = getElement();
-        //if (element)
-        //    focusSelf(element);
         if (e.detail > 1) {
           e.stopImmediatePropagation();
           e.stopPropagation();
@@ -7945,21 +7974,27 @@
           element?.tagName == 'input' && element.type == 'radio' && element.checked) {
             // Intentional, for now. Programmatic clicks shouldn't happen in most cases.
             // TODO: Remove this when I'm confident stray clicks won't be handled.
-            console.assert(false);
             debugger;
+            console.log("onclick was fired and will be handled as it doesn't look like it came from a pointer event", e);
+            setIsPressing(true, e);
+            requestAnimationFrame(() => {
+              setIsPressing(false, e);
+              handlePress(e);
+            });
             handlePress(e);
           }
         }
       }
     });
-    const onFocusOut = useStableCallback(_e => {
+    const onFocusOut = useStableCallback(e => {
       setWaitingForSpaceUp(false);
+      setIsPressing(false, e);
     });
     const p = supportsPointerEvents();
     return {
       pressReturn: {
-        pseudoActive: pointerDownStartedHere && hovering || waitingForSpaceUp || false,
-        //hovering,
+        pressing: pointerDownStartedHere && hovering || waitingForSpaceUp || false,
+        getIsPressing,
         longPress,
         propsUnstable: {
           onKeyDown,
@@ -8043,7 +8078,6 @@
     }
     return t;
   }
-  // why???
   const AsyncFunction = async function () {}.constructor;
   /**
    * Given an async function, returns a function that's suitable for non-async APIs,
@@ -13839,7 +13873,6 @@
       }, [])
     });
     const onVisibilityChange = T$2((index, visible) => {
-      debugger;
       const nextInLine = getNextIndexInLine();
       const currentInLine = getCurrentIndex();
       if (visible == "show" && index != currentInLine) {
@@ -13893,7 +13926,6 @@
     const c = GetExclusiveTransitionContext(exclusivityKey);
     useEnsureStability("useExclusiveTransition", c == null);
     const context = c ? q$1(c) : null;
-    //const index = useMemo(() => generateRandomId(), []);
     const index = F$2(() => {
       globalCount += 1;
       return globalCount.toString();
@@ -16585,6 +16617,9 @@
   // such as table ancestors and cross browser bugs.
   function getOffsetParent(element, polyfill) {
     const window = getWindow(element);
+    if (!isHTMLElement(element)) {
+      return window;
+    }
     let offsetParent = getTrueOffsetParent(element, polyfill);
     while (offsetParent && isTableElement(offsetParent) && getComputedStyle$1(offsetParent).position === 'static') {
       offsetParent = getTrueOffsetParent(offsetParent, polyfill);
@@ -16885,7 +16920,7 @@
     /*useEffect(() => {
         handleUpdate();
     }, [open])
-      useEffect(() => {
+     useEffect(() => {
         handleUpdate();
     });*/
     const {
@@ -17400,7 +17435,7 @@
             event.stopPropagation();
             setUserHasHidden(false);
             /*debugger;
-                  for (const lr of Both) {
+                 for (const lr of Both) {
                 for (const ud of Both) {
                     for (const pg of Both) {
                         for (const he of Both) {
@@ -17859,7 +17894,7 @@
               })
             });
             if (pressed !== null) variantFill ??= pressed ? "fill" : "outline";
-            const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
+            const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
             const ret = v$2(Tag, useMergedProps(otherProps, buttonInfo.props, {
               className: buttonClass,
               ref
@@ -19081,7 +19116,7 @@
               pressReturn: {
                 longPress,
                 propsUnstable: p1,
-                pseudoActive
+                pressing
               }
             } = usePress({
               pressParameters: {
@@ -19101,17 +19136,7 @@
                 timeout,
                 callback: () => setShow(true)
             })*/
-            const show = infoRow.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered ? infoRow.rowAsChildOfGridReturn.staggeredChildReturn.staggeredVisible : true;
-            if (!show) if (infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated && !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible) return null;else return o$2("div", {
-              "aria-busy": "true",
-              class: "gridlist-item gridlist-item-placeholder",
-              children: o$2("span", {
-                class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"),
-                children: o$2("span", {
-                  class: "placeholder w-100"
-                })
-              })
-            });
+            const show = !infoRow.rowAsChildOfGridReturn.staggeredChildReturn.hideBecauseStaggered;
             const {
               propsIndicator,
               propsRegion
@@ -19124,6 +19149,13 @@
               })
             });
             //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
+            const finalPropsForText = useMergedProps(p1, p2);
+            const finalPropsForDiv = useMergedProps(infoRow.props, {
+              ...props,
+              ref
+            }, {
+              className: clsx(`gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`)
+            });
             const c = o$2(d$2, {
               children: [o$2(ListItemStartEnd, {
                 index: 0,
@@ -19131,7 +19163,7 @@
                 children: iconStart
               }), o$2(ListItemText, {
                 onPress: progressInfo.asyncHandlerReturn.syncHandler,
-                ...useMergedProps(p1, p2),
+                ...finalPropsForText,
                 children: [o$2("span", {
                   children: children
                 }), o$2("span", {
@@ -19148,6 +19180,16 @@
                 children: iconEnd
               })]
             });
+            if (!show) if (infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated && !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible) return null;else return o$2("div", {
+              "aria-busy": "true",
+              class: "gridlist-item gridlist-item-placeholder",
+              children: o$2("span", {
+                class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"),
+                children: o$2("span", {
+                  class: "placeholder w-100"
+                })
+              })
+            });
             return o$2(KeyboardAssistIcon, {
               leftRight: !!iconStart || !!iconEnd,
               upDown: true,
@@ -19157,12 +19199,7 @@
               typeaheadActive: false,
               children: o$2("div", {
                 "aria-busy": (!show).toString(),
-                ...useMergedProps(infoRow.props, {
-                  ...props,
-                  ref
-                }, {
-                  className: clsx(`gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`)
-                }),
+                ...finalPropsForDiv,
                 children: show && c
               })
             });
@@ -19338,7 +19375,7 @@
     /*const onClose = useStableCallback<typeof onPressWithoutClose>((e) => {
         const ret = onPressWithoutClose?.(e);
         if (ret && (typeof ret == "object") && (ret instanceof Promise)) {
-          }
+         }
     })*/
     const imperativeHandle = _$1(null);
     return o$2(ProgressWithHandler, {
@@ -19366,7 +19403,7 @@
             return o$2("div", {
               ...useMergedProps(menuInfo.props, {
                 ref,
-                className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pseudoActive && "active")
+                className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active")
               }, props),
               children: [children, o$2("div", {
                 class: "dropdown-item-icon dropdown-item-icon-end",
@@ -30382,7 +30419,7 @@
         tooltip={`${valueText}`}
         children={}
     />
-      */
+     */
     h$1(() => {
       const element = getInputElement();
       if (element) element.value = `${value}`;
@@ -30674,8 +30711,8 @@
       tagTableRow: "tr",
       render: info => {
         useUpdateRenderCounter("DataTableRow");
-        const hideBecauseStaggered = info.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered ? !info.rowAsChildOfGridReturn.staggeredChildReturn.staggeredVisible : false;
-        const hideBecausePaginated = info.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !info.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible : false;
+        const hideBecauseStaggered = info.rowAsChildOfGridReturn.staggeredChildReturn.hideBecauseStaggered;
+        const hideBecausePaginated = info.rowAsChildOfGridReturn.paginatedChildReturn.hideBecausePaginated;
         //useWhatCausedRender("DataTableRow", { props: { ...props, variantTheme, children, row }, state: info })
         return o$2(Fade, {
           show: !hideBecauseStaggered,
