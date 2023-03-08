@@ -1,9 +1,8 @@
-import { Checkbox, CheckboxProps } from "../checkbox"
-import { h, Ref, RenderableProps } from "preact"
-import { CheckboxGroup as AriaCheckboxGroup, CheckboxGroupParent as AriaCheckboxGroupParent, CheckboxGroupChild as AriaCheckboxGroupChild, UseCheckboxReturnType, CheckboxChangeEvent } from "preact-aria-widgets"
+import { CheckboxChangeEvent, CheckboxGroup as AriaCheckboxGroup, CheckboxGroupChild as AriaCheckboxGroupChild, CheckboxGroupParent as AriaCheckboxGroupParent, UseCheckboxReturnType } from "preact-aria-widgets"
 import { returnZero, useMergedProps, useStableCallback } from "preact-prop-helpers"
 import { useRef, useState } from "preact/hooks"
-import { GlobalAttributes, LabelledProps, OmitStrong } from "../utility/types"
+import { Checkbox, CheckboxProps } from "../checkbox/index.js"
+import { GlobalAttributes, LabelledProps, OmitStrong } from "../utility/types.js"
 
 export interface CheckboxGroupProps extends GlobalAttributes<HTMLSpanElement, "children">, CheckboxGroupParentProps {
     orientation: "horizontal" | "vertical"

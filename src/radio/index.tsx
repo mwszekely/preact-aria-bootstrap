@@ -1,13 +1,13 @@
 
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { createContext, h, Ref } from "preact";
 import { LabelPosition, Progress, Radio as AriaRadio, RadioGroup as AriaRadioGroup, UseRadioGroupReturnType } from "preact-aria-widgets";
 import { useAsync, UseAsyncHandlerParameters, useMergedProps, useState } from "preact-prop-helpers";
 import { useContext, useMemo, useRef } from "preact/hooks";
-import { DefaultDisabledType, DisabledContext } from "../context";
-import { Tooltip } from "../tooltip";
-import { KeyboardAssistIcon } from "../utility/keyboard-assist";
-import { LabelledProps } from "../utility/types";
+import { DefaultDisabledType, DisabledContext } from "../context.js";
+import { Tooltip } from "../tooltip/index.js";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
+import { LabelledProps } from "../utility/types.js";
 
 
 export interface RadioGroupProps<V extends string | number> extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {

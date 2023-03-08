@@ -1,14 +1,14 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, Ref, VNode } from "preact";
 import { defaultRenderPortal, Dialog as AriaDialog, DialogProps as AriaDialogProps } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
 import { Fade, Slide } from "preact-transition";
 import { memo } from "preact/compat";
-import { Button } from "../button";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { GlobalAttributes } from "../utility/types";
-import { useClonedElement } from "../utility/use-cloned-element";
-import { usePortalId } from "../utility/use-portal-id";
+import { Button } from "../button/index.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { GlobalAttributes } from "../utility/types.js";
+import { useClonedElement } from "../utility/use-cloned-element.js";
+import { usePortalId } from "../utility/use-portal-id.js";
 
 export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     open: boolean;

@@ -1,17 +1,17 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
 import { Gridlist, GridlistChild, GridlistRow, ProgressWithHandler } from "preact-aria-widgets";
 import { AsyncHandler, returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useContext } from "preact/hooks";
-import { ButtonThemes } from "../context";
-import { Paginated } from "../pagination";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { KeyboardAssistIcon } from "../utility/keyboard-assist";
-import { useUpdateRenderCounter } from "../utility/render-counter";
-import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types";
-import { useClonedElement } from "../utility/use-cloned-element";
+import { ButtonThemes } from "../context.js";
+import { Paginated } from "../pagination/index.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
+import { useUpdateRenderCounter } from "../utility/render-counter.js";
+import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types.js";
+import { useClonedElement } from "../utility/use-cloned-element.js";
 
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /** Used to determine if left/right arrow key navigation is shown as an option */
@@ -110,7 +110,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                         render={infoRow => {
                             useUpdateRenderCounter("GridlistRow");
                             const { refElementReturn: { propsStable: p2, getElement }, refElementReturn } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
-                            const { pressReturn: { longPress, propsUnstable: p1, pseudoActive } } = usePress<HTMLDivElement>({
+                            const { pressReturn: { longPress, propsUnstable: p1, pressing } } = usePress<HTMLDivElement>({
                                 pressParameters: {
                                     focusSelf: useCallback(() => {
                                         return getElement()?.focus();
@@ -129,47 +129,50 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                                 timeout,
                                 callback: () => setShow(true)
                             })*/
-                            const show = infoRow.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered ? infoRow.rowAsChildOfGridReturn.staggeredChildReturn.staggeredVisible : true;
+                            const show = !infoRow.rowAsChildOfGridReturn.staggeredChildReturn.hideBecauseStaggered;
+                            const { propsIndicator, propsRegion } = progressInfo;
+                            const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending}><span class="spinner-border spinner-border-sm text-secondary" {...propsIndicator} /></Fade>)
+                            //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
+                            const finalPropsForText = useMergedProps(p1, p2);
+                            const finalPropsForDiv = useMergedProps(
+                                infoRow.props,
+                                { ...props, ref },
+                                {
+                                    className: clsx(
+                                        `gridlist-item`,
+                                        variantTheme && `list-group-item-${variantTheme}`,
+                                        infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "",
+                                        !show && "gridlist-item-placeholder",
+                                        "list-group-item list-group-item-action",
+                                        !!iconStart && "list-group-item-with-icon-start",
+                                        !!iconEnd && "list-group-item-with-icon-end",
+                                        !!badge && "list-group-item-with-badge",
+                                        !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending",
+                                        disabled && "disabled",
+                                        (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`
+                                    )
+                                }
+                            );
+                            const c = <>
+                                <ListItemStartEnd index={0} hidden={iconStart == null} children={iconStart} />
+                                <ListItemText onPress={progressInfo.asyncHandlerReturn.syncHandler} {...finalPropsForText}><span>{children}</span><span class="list-group-item-badge-and-spinner"><div>{badge}</div><div>{loadingJsx}</div></span></ListItemText>
+
+                                <ListItemStartEnd index={2} hidden={iconEnd == null} children={iconEnd} />
+                            </>
+
+
                             if (!show)
                                 if (infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated && !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible)
                                     return null!;
                                 else
                                     return <div aria-busy="true" class="gridlist-item gridlist-item-placeholder"><span class={clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow")}><span class="placeholder w-100"></span></span></div>;
 
-                            const { propsIndicator, propsRegion } = progressInfo;
-                            const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending}><span class="spinner-border spinner-border-sm text-secondary" {...propsIndicator} /></Fade>)
-                            //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
-
-                            const c = <>
-                                <ListItemStartEnd index={0} hidden={iconStart == null} children={iconStart} />
-                                <ListItemText onPress={progressInfo.asyncHandlerReturn.syncHandler} {...useMergedProps(p1, p2)}><span>{children}</span><span class="list-group-item-badge-and-spinner"><div>{badge}</div><div>{loadingJsx}</div></span></ListItemText>
-
-                                <ListItemStartEnd index={2} hidden={iconEnd == null} children={iconEnd} />
-                            </>
 
                             return (
                                 <KeyboardAssistIcon leftRight={(!!iconStart || !!iconEnd)} upDown={true} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={false}>
                                     <div
                                         aria-busy={(!show).toString()}
-                                        {...useMergedProps(
-                                            infoRow.props,
-                                            { ...props, ref },
-                                            {
-                                                className: clsx(
-                                                    `gridlist-item`,
-                                                    variantTheme && `list-group-item-${variantTheme}`,
-                                                    infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "",
-                                                    !show && "gridlist-item-placeholder",
-                                                    "list-group-item list-group-item-action",
-                                                    !!iconStart && "list-group-item-with-icon-start",
-                                                    !!iconEnd && "list-group-item-with-icon-end",
-                                                    !!badge && "list-group-item-with-badge",
-                                                    !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending",
-                                                    disabled && "disabled",
-                                                    (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`
-                                                )
-                                            }
-                                        )}>
+                                        {...finalPropsForDiv}>
 
                                         {show && c}
                                     </div>

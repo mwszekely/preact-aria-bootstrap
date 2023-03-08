@@ -1,8 +1,8 @@
 import { Ref } from "preact";
 import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { FontIcon, FontIconProps } from "./font-icon";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { FontIcon, FontIconProps } from "./font-icon.js";
 
 export interface BootstrapIconProps extends Pick<FontIconProps, "label" | "className" | "class" | "style" | "role"> {
     icon: (typeof BootstrapIconClasses)[number];

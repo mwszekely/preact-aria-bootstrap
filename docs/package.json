@@ -3,7 +3,8 @@
     "version": "0.0.1",
     "description": "A small set of hooks and other functions related to modifying Preact props.",
     "main": "index.tsx",
-    "packageManager": "pnpm@7.26.2",
+    "packageManager": "pnpm@7.28.0",
+    "browserslist": "defaults, iOS >= 12",
     "scripts": {
         "build": "npx npm-run-all --npm-path npm -sc build:js build:sass build:css",
         "watch": "npx npm-run-all --npm-path npm -pc watch:*",
@@ -13,13 +14,12 @@
         "watch:css": "postcss ./index-unprefixed.css --use autoprefixer --watch -o ./index.css",
         "build:sass": "sass --load-path=\"./node_modules/\" ../src/index.scss ./index-unprefixed.css",
         "build:css": "postcss ./index-unprefixed.css --use autoprefixer -o ./index.css",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "install": "npm run build"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@babel/core": "^7.20.12",
+        "@babel/core": "^7.21.0",
         "@babel/preset-env": "^7.20.2",
         "@rollup/plugin-alias": "^4.0.3",
         "@rollup/plugin-babel": "^6.0.3",
@@ -32,20 +32,20 @@
         "postcss-cli": "^10.1.0",
         "postcss-import": "^15.1.0",
         "postcss-mixins": "^9.0.4",
-        "postcss-nesting": "^11.0.0",
-        "postcss-preset-env": "^8.0.0",
-        "rollup": "^3.10.1",
+        "postcss-nesting": "^11.2.1",
+        "postcss-preset-env": "^8.0.1",
+        "rollup": "^3.17.3",
         "rollup-plugin-sourcemaps": "^0.6.3",
-        "sass": "^1.57.1",
+        "sass": "^1.58.3",
         "serve": "^14.2.0",
-        "typescript": "^4.9.4"
+        "typescript": "^4.9.5"
     },
     "dependencies": {
         "bootstrap": "5.3.0-alpha1",
         "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
         "clsx": "^1.2.1",
-        "preact": "^10.11.3",
-        "preact-transition": "github:mwszekely/preact-transition",
-        "tslib": "^2.4.1"
+        "preact": "^10.13.0",
+        "preact-transition": "github:mwszekely/preact-transition#nodenext",
+        "tslib": "^2.5.0"
     }
 }

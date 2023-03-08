@@ -3,8 +3,8 @@ import { generateRandomId, useGlobalHandler, useHasCurrentFocus, useMergedProps,
 import { CollapseFade, SlideZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext, useEffect, useLayoutEffect, useRef } from "preact/hooks";
-import { forwardElementRef } from "./forward-element-ref";
-import { useClonedElement } from "./use-cloned-element";
+import { forwardElementRef } from "./forward-element-ref.js";
+import { useClonedElement } from "./use-cloned-element.js";
 
 type Test = `keyboard-assist-lr_${boolean}-ud_${boolean}-pg_${boolean}-he_${boolean}-tp_${boolean}`;
 

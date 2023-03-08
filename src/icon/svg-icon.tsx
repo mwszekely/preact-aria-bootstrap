@@ -1,7 +1,7 @@
 import { Ref } from "preact";
 import { memo } from "preact/compat";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { Icon, IconProps } from "./icon-base";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { Icon, IconProps } from "./icon-base.js";
 
 
 export interface SvgIconProps extends Omit<IconProps<SVGSVGElement>, "children"> { }

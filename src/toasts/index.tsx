@@ -1,11 +1,11 @@
-import clsx from "clsx";
+import {clsx} from "clsx";
 import { ComponentChildren, createContext, h } from "preact";
 import { Toast as AriaToast, ToastProps as AriaToastProps, Toasts as AriaToasts } from "preact-aria-widgets";
 import { PushPortalChild, UpdatePortalChild, useMergedProps, usePortalChildren } from "preact-prop-helpers";
 import { SlideFade } from "preact-transition";
 import { useContext, useErrorBoundary } from "preact/hooks";
-import { Button } from "../button";
-import { usePortalId } from "../utility/use-portal-id";
+import { Button } from "../button/index.js";
+import { usePortalId } from "../utility/use-portal-id.js";
 
 
 

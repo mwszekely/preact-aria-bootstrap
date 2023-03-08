@@ -5,6 +5,7 @@
 package-lock.json
 !rollup.config.js
 !docs/bundle.js
+!docs/bundle.js.map
 !true.js
 demo/main.js
 demo/main.js.map
@@ -12,6 +13,7 @@ demo/index.css
 demo/index.css.map
 demo/index.d.ts
 demo/index.d.ts.map
+!dist/**
 
 # Logs
 logs
@@ -97,7 +99,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/

@@ -1,14 +1,14 @@
 
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { h, Ref } from "preact";
 import { Checkbox as AriaCheckbox, CheckboxChangeEvent, EventDetail, ProgressWithHandler, UseCheckboxReturnType } from "preact-aria-widgets";
 import { UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { useContext, useImperativeHandle } from "preact/hooks";
-import { DefaultDisabledType, DisabledContext } from "../context";
-import { WithinInputGroup } from "../input-group/shared";
-import { Tooltip } from "../tooltip";
-import { LabelledProps } from "../utility/types";
+import { DefaultDisabledType, DisabledContext } from "../context.js";
+import { WithinInputGroup } from "../input-group/shared.js";
+import { Tooltip } from "../tooltip/index.js";
+import { LabelledProps } from "../utility/types.js";
 
 export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
     inline?: boolean;

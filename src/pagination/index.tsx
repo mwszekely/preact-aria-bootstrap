@@ -3,9 +3,9 @@ import { Toolbar, ToolbarChild } from "preact-aria-widgets";
 import { useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 import { useCallback, useEffect, useRef } from "preact/hooks";
-import { BootstrapIcon } from "../icon";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { LabelledProps, PaginatedProps } from "../utility/types";
+import { BootstrapIcon } from "../icon/index.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { LabelledProps, PaginatedProps } from "../utility/types.js";
 
 export function Pagination({ childCount, windowSize, onChange, labelPosition, label }: LabelledProps<{ childCount: number, windowSize: number, onChange: (start: number | null, end: number | null) => void }, never>) {
     const [page, setPage] = useState(0);

@@ -1,10 +1,10 @@
 import { ComponentChildren } from "preact";
 import { NotificationProviderContext, NotificationProviderProps, useNotificationProvider } from "preact-aria-widgets";
 import { memo } from "preact/compat";
-import { ToastErrorBoundary, ToastsProvider } from "../toasts";
-import { KeyboardAssistProvider } from "./keyboard-assist";
-import { RenderCounterProvider } from "./render-counter";
-
+import { ToastErrorBoundary, ToastsProvider } from "../toasts/index.js";
+import { KeyboardAssistProvider } from "./keyboard-assist.js";
+import { RenderCounterProvider } from "./render-counter.js";
+import { ExclusiveTransitionProvider } from "preact-transition"
 
 export const AllProviders = memo(({ children, targetAssertive, targetPolite, toastsVisibleCount }: { children: ComponentChildren, toastsVisibleCount?: number } & NotificationProviderProps) => {
 
@@ -15,10 +15,12 @@ export const AllProviders = memo(({ children, targetAssertive, targetPolite, toa
             <NotificationProviderContext.Provider value={context}>
                 <ToastsProvider visibleCount={toastsVisibleCount ?? 4}>
                     <ToastErrorBoundary>
-                        <KeyboardAssistProvider>
-                            {children}
-                            {portalChildren}
-                        </KeyboardAssistProvider>
+                        <ExclusiveTransitionProvider exclusivityKey="tooltip">
+                            <KeyboardAssistProvider>
+                                {children}
+                                {portalChildren}
+                            </KeyboardAssistProvider>
+                        </ExclusiveTransitionProvider>
                     </ToastErrorBoundary>
                 </ToastsProvider>
             </NotificationProviderContext.Provider>

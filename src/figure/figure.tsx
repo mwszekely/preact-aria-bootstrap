@@ -1,9 +1,9 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { cloneElement, ComponentChildren, Ref, VNode } from "preact";
 import { useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { GlobalAttributes } from "../utility/types";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { GlobalAttributes } from "../utility/types.js";
 
 export interface FigureProps extends Omit<GlobalAttributes<HTMLElement>, "children"> {
     caption: ComponentChildren;

@@ -1,9 +1,9 @@
 
 import { useStableCallback, useState } from "preact-prop-helpers";
-import { Badge, BootstrapIcon, Button as ButtonAction, ButtonGroup } from "../../index";
+import { Badge, BootstrapIcon, Button as ButtonAction, ButtonGroup } from "../../dist/index.js";
 import { useCallback } from "preact/hooks"
 import { Heading } from "preact-aria-widgets";
-import { ButtonThemes } from "../../context";
+import { ButtonThemes } from "../../dist/index.js";
 
 export function Blurb() {
     return (

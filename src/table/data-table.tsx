@@ -1,18 +1,18 @@
 
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, createContext, Ref, VNode } from "preact";
 import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection } from "preact-aria-widgets";
 import { useEnsureStability, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext, useLayoutEffect, useMemo } from "preact/hooks";
-import { Paginated } from "../pagination";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { KeyboardAssistIcon } from "../utility/keyboard-assist";
-import { useUpdateRenderCounter } from "../utility/render-counter";
-import { CaptionedProps, GlobalAttributes, PaginatedProps } from "../utility/types";
-import { useClonedElement } from "../utility/use-cloned-element";
-import { Table, TableCell, TableCellProps, TableProps, TableRow, TableRowProps, TableSection, TableSectionProps } from "./table";
+import { Paginated } from "../pagination/index.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
+import { useUpdateRenderCounter } from "../utility/render-counter.js";
+import { CaptionedProps, GlobalAttributes, PaginatedProps } from "../utility/types.js";
+import { useClonedElement } from "../utility/use-cloned-element.js";
+import { Table, TableCell, TableCellProps, TableProps, TableRow, TableRowProps, TableSection, TableSectionProps } from "./table.js";
 
 export interface DataTableProps extends TableProps {
     children: ComponentChildren;
@@ -124,8 +124,8 @@ export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, 
             tagTableRow="tr"
             render={info => {
                 useUpdateRenderCounter("DataTableRow");
-                const hideBecauseStaggered = (info.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered ? !info.rowAsChildOfGridReturn.staggeredChildReturn.staggeredVisible : false);
-                const hideBecausePaginated = (info.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !info.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible : false);
+                const hideBecauseStaggered = info.rowAsChildOfGridReturn.staggeredChildReturn.hideBecauseStaggered;
+                const hideBecausePaginated = info.rowAsChildOfGridReturn.paginatedChildReturn.hideBecausePaginated;
 
                 //useWhatCausedRender("DataTableRow", { props: { ...props, variantTheme, children, row }, state: info })
 

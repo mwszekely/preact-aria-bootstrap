@@ -1,29 +1,23 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, Ref, VNode } from "preact";
 import { defaultRenderPortal, Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenubarSubInfo, UseMenuItemReturnType, UseMenuReturnType } from "preact-aria-widgets";
 import { returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useImperativeHandle, useRef } from "preact/hooks";
-import { usePopper } from "../popper";
-import { forwardElementRef } from "../utility/forward-element-ref";
-import { KeyboardAssistIcon } from "../utility/keyboard-assist";
-import { GlobalAttributes } from "../utility/types";
-import { useClonedElement } from "../utility/use-cloned-element";
-import { usePortalId } from "../utility/use-portal-id";
+import { usePopper } from "../popper/index.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
+import { GlobalAttributes } from "../utility/types.js";
+import { useClonedElement } from "../utility/use-cloned-element.js";
+import { usePortalId } from "../utility/use-portal-id.js";
 
 
 export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children"> {
     forceOpen?: boolean | null | undefined;
-    //label: ComponentChildren;
-    //disabled?: boolean;
     children: ComponentChildren;
     selectedIndex?: number | null;
     align?: "start" | "end";
-    //buttonVariantSize?: ButtonProps<HTMLButtonElement>["variantSize"];
-    //buttonVariantFill?: ButtonProps<HTMLButtonElement>["variantFill"];
-    //buttonVariantTheme?: ButtonProps<HTMLButtonElement>["variantTheme"];
-    //buttonVariantDropdown?: ButtonProps<HTMLButtonElement>["variantDropdown"];
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
     imperativeHandle?: Ref<UseMenuReturnType<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLButtonElement, UseMenubarSubInfo<HTMLDivElement>>>;
 
@@ -161,7 +155,7 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                             const spinnerJsx = (<div {...progressInfo.propsIndicator} class={clsx("spinner-border", "spinner-border-sm")} />)
 
                             return (
-                                <div {...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pseudoActive && "active") }, props)}>
+                                <div {...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props)}>
                                     {children}
                                     <div class="dropdown-item-icon dropdown-item-icon-end">{spinnerJsx}</div>
                                 </div>

@@ -1,8 +1,7 @@
 import { Alignment, arrow, computePosition, flip, hide, Middleware, offset, Placement, shift, Side, size } from "@floating-ui/dom";
-import identity from "lodash-es/identity";
+import { identity } from "lodash-es";
 import { h } from "preact";
-import { returnZero, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
-import { runImmediately } from "preact-prop-helpers/preact-extensions/use-passive-state";
+import { returnZero, runImmediately, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 import { CSSProperties } from "preact/compat";
 import { useCallback, useEffect, useLayoutEffect, useRef } from "preact/hooks";
 

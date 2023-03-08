@@ -1,3 +1,3 @@
-export { Card, CardElement, CardElementProps } from "./card";
-export { CardGroup } from "./card-group"
+export { Card, CardElement, CardElementProps } from "./card.js";
+export { CardGroup } from "./card-group.js"
 

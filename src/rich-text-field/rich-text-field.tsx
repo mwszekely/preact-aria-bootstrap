@@ -1,10 +1,10 @@
-import clsx from "clsx";
-import identity from "lodash-es/identity";
+import { clsx } from "clsx";
+import { identity } from "lodash-es";
 import { ProgressWithHandler } from "preact-aria-widgets";
 import { returnFalse, usePassiveState } from "preact-prop-helpers";
 import { useRef } from "preact/hooks";
-import { TextFieldSpinner, useCommitTextField } from "../text-field";
-import { CkEditorWrapper, CkEditorWrapperProps, RichTextToolbarItems } from "./ck-editor-wrapper";
+import { TextFieldSpinner, useCommitTextField } from "../text-field/index.js";
+import { CkEditorWrapper, CkEditorWrapperProps, RichTextToolbarItems } from "./ck-editor-wrapper.js";
 
 declare const CKEDITOR: {
     ClassicEditor: any;
