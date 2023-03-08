@@ -11669,7 +11669,8 @@
     let {
       tooltipParameters: {
         onStatus,
-        tooltipSemanticType
+        tooltipSemanticType,
+        hoverDelay
       },
       escapeDismissParameters
     } = _ref;
@@ -11722,13 +11723,17 @@
     });
     const stateIsMouse = T$2(() => getState()?.startsWith("h") || false, []);
     const stateIsFocus = T$2(() => getState()?.startsWith("f") || false, []);
-    const onHoverChanged = T$2((hovering, which) => {
+    let hoverTimeoutHandle = _$1(null);
+    const onHoverChanged = useStableCallback((hovering, which) => {
+      if (hoverTimeoutHandle.current) clearTimeout(hoverTimeoutHandle.current);
       if (hovering) {
-        setState(`hovering-${which}`);
+        hoverTimeoutHandle.current = setTimeout(() => {
+          setState(`hovering-${which}`);
+        }, hoverDelay || 0);
       } else {
         setState(null);
       }
-    }, []);
+    });
     const onCurrentFocusedInnerChanged = T$2((focused, which) => {
       if (!stateIsMouse()) {
         if (focused) {
@@ -13774,6 +13779,7 @@
       onStatus,
       getWindow,
       parentDepth,
+      hoverDelay,
       render,
       tooltipSemanticType
     } = _ref;
@@ -13786,7 +13792,8 @@
       },
       tooltipParameters: {
         onStatus,
-        tooltipSemanticType
+        tooltipSemanticType,
+        hoverDelay: hoverDelay !== null && hoverDelay !== void 0 ? hoverDelay : null
       }
     });
     A$1(ref, () => info);
@@ -17098,6 +17105,7 @@
       tooltip,
       placement,
       maxWidth,
+      hoverDelay,
       containsTabbable,
       absolutePositioning,
       semanticType,
@@ -17118,6 +17126,7 @@
     h$1(() => {}, []);
     return o$2(Tooltip$1, {
       onStatus: setStatus,
+      hoverDelay: hoverDelay,
       tooltipSemanticType: semanticType || (forward ? "label" : "description"),
       render: tooltipInfo => {
         //const mouseTrackingPaused = (status == "focus")

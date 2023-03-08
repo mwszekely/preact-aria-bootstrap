@@ -54,6 +54,8 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
      */
     containsTabbable?: boolean;
 
+    hoverDelay?: number;
+
     /**
      * Optional. If you want the tooltip to appear anchored to an element
      * that's *not* the thing that opens the tooltip, you can do that with this.
@@ -75,7 +77,7 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
 // TODO: This should be on `globalThis` in case this library is imported multiple times.
 const otherTooltipCloses = new Set<() => void>();
 
-export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) {
+export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, hoverDelay, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) {
 
     if (forward == null && typeof children == "object" && (children as VNode).props) {
         forward = true;
@@ -95,7 +97,7 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
     }, [])
 
     return (
-        <AriaTooltip<HTMLSpanElement, HTMLDivElement> onStatus={setStatus} tooltipSemanticType={semanticType || (forward ? "label" : "description")} render={tooltipInfo => {
+        <AriaTooltip<HTMLSpanElement, HTMLDivElement> onStatus={setStatus} hoverDelay={hoverDelay} tooltipSemanticType={semanticType || (forward ? "label" : "description")} render={tooltipInfo => {
             //const mouseTrackingPaused = (status == "focus")
             if (forceOpen)
                 status = "focus";

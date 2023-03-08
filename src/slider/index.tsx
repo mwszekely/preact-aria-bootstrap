@@ -34,7 +34,7 @@ export interface RangeProps extends GlobalAttributes<HTMLDivElement> {
     children?: ComponentChildren;
     value?: number;
     onValueChange?: (value: number) => (void | Promise<void>);
-    label?: string;
+    label?: ComponentChildren;
 }
 
 export interface RangeThumbProps {
@@ -82,7 +82,7 @@ export const Range = memo(forwardElementRef(function Range({ max, min, debounce,
                                             <OrientationContext.Provider value={orientation ?? "inline"}>
                                                 {createElement((label ? "label" : "div") as any, (useMergedProps<HTMLDivElement>({ class: clsx("form-range-container", orientation == "block" && "form-range-vertical"), ref, style: isFinite(tickCount) ? { "--form-range-tick-count": tickCount } : undefined }, rest)),
                                                     label && <div class="form-range-label">{label}</div>,
-                                                    children ?? <RangeThumb index={0} min={min} max={max} value={value ?? 0} onValueChange={onValueChange} label={label ?? ""} />,
+                                                    children ?? <RangeThumb index={0} min={min} max={max} value={value ?? 0} onValueChange={onValueChange} label={(label as string) ?? ""} />,
                                                     <div class="form-range-track-background" />,
                                                     <GetValueTextContext.Provider value={getValueText ?? defaultGetValueText}>
                                                         <RangeTicks min={min} max={max} step={step} id={id} hideTickValues={hideTickValues} />
@@ -144,6 +144,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
     const parentOnValueChange = useContext(OnValueChangeContext);
     const context = useContext(RangeThumbContext);
     const debounceSetting = useContext(DebounceContext);
+    console.assert(typeof label == "string");
     const { syncHandler, pending, hasError, currentCapture } = useAsyncHandler({
         asyncHandler: async (v, e) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); },
         capture,

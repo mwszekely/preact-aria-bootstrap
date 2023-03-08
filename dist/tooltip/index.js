@@ -10,7 +10,7 @@ import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { usePortalId } from "../utility/use-portal-id.js";
 // TODO: This should be on `globalThis` in case this library is imported multiple times.
 const otherTooltipCloses = new Set();
-export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }, ref) {
+export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, hoverDelay, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }, ref) {
     if (forward == null && typeof children == "object" && children.props) {
         forward = true;
     }
@@ -23,7 +23,7 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
     const myClose = useCallback(() => { setStatus(null); }, []);
     useEffect(() => {
     }, []);
-    return (_jsx(AriaTooltip, { onStatus: setStatus, tooltipSemanticType: semanticType || (forward ? "label" : "description"), render: tooltipInfo => {
+    return (_jsx(AriaTooltip, { onStatus: setStatus, hoverDelay: hoverDelay, tooltipSemanticType: semanticType || (forward ? "label" : "description"), render: tooltipInfo => {
             //const mouseTrackingPaused = (status == "focus")
             if (forceOpen)
                 status = "focus";

@@ -22,7 +22,7 @@ export interface RangeProps extends GlobalAttributes<HTMLDivElement> {
     children?: ComponentChildren;
     value?: number;
     onValueChange?: (value: number) => (void | Promise<void>);
-    label?: string;
+    label?: ComponentChildren;
 }
 export interface RangeThumbProps {
     onValueChange?: (value: number) => (void | Promise<void>);

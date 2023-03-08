@@ -51,6 +51,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
     const parentOnValueChange = useContext(OnValueChangeContext);
     const context = useContext(RangeThumbContext);
     const debounceSetting = useContext(DebounceContext);
+    console.assert(typeof label == "string");
     const { syncHandler, pending, hasError, currentCapture } = useAsyncHandler({
         asyncHandler: async (v, e) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); },
         capture,

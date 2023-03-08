@@ -23,12 +23,12 @@ dependencies:
   '@js-temporal/polyfill': 0.4.3
   bootstrap: 5.3.0-alpha1_@popperjs+core@2.11.6
   bootstrap-icons: 1.10.3
-  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/3a4aa740916479581e9efdca9dbb07b0f3704e9a_bootstrap@5.3.0-alpha1
+  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/655072eeea7305e0c07a936ecdcbc7d5090e8c6e_bootstrap@5.3.0-alpha1
   clsx: 1.2.1
   dompurify: 3.0.1
   lodash-es: 4.17.21
   preact: 10.13.0
-  preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/ebbef4672a123c03097d5b11ff52d97c74d678dd_preact@10.13.0
+  preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/c06fa02042c68cacc16efb09ea4b8fe40d086fb6_preact@10.13.0
   preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/1a65f1dfaee0be7969fa71f8eaed52382c7c2058_preact@10.13.0
   preact-transition: github.com/mwszekely/preact-transition/4c505a32d2bcd79d4679990442b366ee258c8284_preact@10.13.0
 
@@ -261,9 +261,9 @@ packages:
     resolution: {integrity: sha512-Ba9tGNYxXwaqKEi9sJJvPMKuo063umUPsHN0JJsjrs2j8KDSzkWLMZGZ+MH1Jf1Fq4OWZ5HsESJID6nRza2ang==}
     dev: false
 
-  github.com/mwszekely/bootstrap-sass-variables/3a4aa740916479581e9efdca9dbb07b0f3704e9a_bootstrap@5.3.0-alpha1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/3a4aa740916479581e9efdca9dbb07b0f3704e9a}
-    id: github.com/mwszekely/bootstrap-sass-variables/3a4aa740916479581e9efdca9dbb07b0f3704e9a
+  github.com/mwszekely/bootstrap-sass-variables/655072eeea7305e0c07a936ecdcbc7d5090e8c6e_bootstrap@5.3.0-alpha1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/655072eeea7305e0c07a936ecdcbc7d5090e8c6e}
+    id: github.com/mwszekely/bootstrap-sass-variables/655072eeea7305e0c07a936ecdcbc7d5090e8c6e
     name: bootstrap-sass-variables
     version: 0.0.1
     peerDependencies:
@@ -272,9 +272,9 @@ packages:
       bootstrap: 5.3.0-alpha1_@popperjs+core@2.11.6
     dev: false
 
-  github.com/mwszekely/preact-aria-widgets/ebbef4672a123c03097d5b11ff52d97c74d678dd_preact@10.13.0:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/ebbef4672a123c03097d5b11ff52d97c74d678dd}
-    id: github.com/mwszekely/preact-aria-widgets/ebbef4672a123c03097d5b11ff52d97c74d678dd
+  github.com/mwszekely/preact-aria-widgets/c06fa02042c68cacc16efb09ea4b8fe40d086fb6_preact@10.13.0:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/c06fa02042c68cacc16efb09ea4b8fe40d086fb6}
+    id: github.com/mwszekely/preact-aria-widgets/c06fa02042c68cacc16efb09ea4b8fe40d086fb6
     name: preact-aria-widgets
     version: 0.0.1
     peerDependencies:

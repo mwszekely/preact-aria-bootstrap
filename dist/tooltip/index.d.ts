@@ -38,6 +38,7 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
      * be `true`. If not, then pass `false` so that `tabIndex` is properly applied.
      */
     containsTabbable?: boolean;
+    hoverDelay?: number;
     /**
      * Optional. If you want the tooltip to appear anchored to an element
      * that's *not* the thing that opens the tooltip, you can do that with this.
@@ -50,5 +51,5 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
     alignMode?: UsePopperProps["popperParameters"]["alignMode"];
     forceOpen?: boolean;
 }
-export declare const Tooltip: ({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) => import("preact").JSX.Element;
+export declare const Tooltip: ({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, hoverDelay, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) => import("preact").JSX.Element;
 //# sourceMappingURL=index.d.ts.map
