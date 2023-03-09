@@ -68,10 +68,10 @@ export declare function usePopper<SourceElement extends Element, PopupElement ex
         disabled?: boolean | import("preact").JSX.SignalLike<boolean | undefined> | undefined;
         disableRemotePlayback?: boolean | import("preact").JSX.SignalLike<boolean | undefined> | undefined;
         download?: any;
-        decoding?: "async" | "auto" | "sync" | import("preact").JSX.SignalLike<"async" | "auto" | "sync" | undefined> | undefined;
+        decoding?: "auto" | "sync" | "async" | import("preact").JSX.SignalLike<"auto" | "sync" | "async" | undefined> | undefined;
         draggable?: boolean | import("preact").JSX.SignalLike<boolean | undefined> | undefined;
         encType?: string | import("preact").JSX.SignalLike<string | undefined> | undefined;
-        enterkeyhint?: "search" | "enter" | "done" | "go" | "next" | "previous" | "send" | import("preact").JSX.SignalLike<"search" | "enter" | "done" | "go" | "next" | "previous" | "send" | undefined> | undefined;
+        enterkeyhint?: "enter" | "done" | "go" | "next" | "previous" | "search" | "send" | import("preact").JSX.SignalLike<"enter" | "done" | "go" | "next" | "previous" | "search" | "send" | undefined> | undefined;
         for?: string | import("preact").JSX.SignalLike<string | undefined> | undefined;
         form?: string | import("preact").JSX.SignalLike<string | undefined> | undefined;
         formAction?: string | import("preact").JSX.SignalLike<string | undefined> | undefined;
@@ -196,7 +196,7 @@ export declare function usePopper<SourceElement extends Element, PopupElement ex
         "aria-colindex"?: string | undefined;
         "aria-colspan"?: string | undefined;
         "aria-controls"?: string | undefined;
-        "aria-current"?: boolean | "step" | "page" | "location" | "date" | "time" | undefined;
+        "aria-current"?: boolean | "page" | "step" | "location" | "date" | "time" | undefined;
         "aria-describedby"?: string | undefined;
         "aria-details"?: string | undefined;
         "aria-disabled"?: string | undefined;
@@ -205,7 +205,7 @@ export declare function usePopper<SourceElement extends Element, PopupElement ex
         "aria-expanded"?: string | undefined;
         "aria-flowto"?: string | undefined;
         "aria-grabbed"?: string | undefined;
-        "aria-haspopup"?: "dialog" | "grid" | "listbox" | "menu" | "tree" | "false" | "true" | undefined;
+        "aria-haspopup"?: "grid" | "dialog" | "listbox" | "menu" | "tree" | "false" | "true" | undefined;
         "aria-hidden"?: string | undefined;
         "aria-invalid"?: string | undefined;
         "aria-keyshortcuts"?: string | undefined;

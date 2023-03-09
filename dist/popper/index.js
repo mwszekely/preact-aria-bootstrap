@@ -168,9 +168,9 @@ export function usePopper({ popperParameters: { open, getElement, alignMode, pla
     useEffect(() => {
         handleUpdate();
     });*/
-    const { refElementReturn: { propsStable: propsSource, getElement: getSourceElement } } = useRefElement({ refElementParameters: {} });
-    const { refElementReturn: { propsStable: propsPopup, getElement: getPopupElement } } = useRefElement({ refElementParameters: {} });
-    const { refElementReturn: { propsStable: propsArrow, getElement: getArrowElement } } = useRefElement({ refElementParameters: {} });
+    const { refElementReturn: { getElement: getSourceElement }, propsStable: propsSource } = useRefElement({ refElementParameters: {} });
+    const { refElementReturn: { getElement: getPopupElement }, propsStable: propsPopup } = useRefElement({ refElementParameters: {} });
+    const { refElementReturn: { getElement: getArrowElement }, propsStable: propsArrow } = useRefElement({ refElementParameters: {} });
     // Because we don't set our mouse coordinates until mousemove,
     // and because we don't listen for mousemove until open (for performance reasons),
     // we need to listen for mouseenter just to capture that initial position at least.

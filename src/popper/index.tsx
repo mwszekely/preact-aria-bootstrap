@@ -217,9 +217,9 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
         handleUpdate();
     });*/
 
-    const { refElementReturn: { propsStable: propsSource, getElement: getSourceElement } } = useRefElement<SourceElement>({ refElementParameters: {} });
-    const { refElementReturn: { propsStable: propsPopup, getElement: getPopupElement } } = useRefElement<PopupElement>({ refElementParameters: {} });
-    const { refElementReturn: { propsStable: propsArrow, getElement: getArrowElement } } = useRefElement<ArrowElement>({ refElementParameters: {} });
+    const { refElementReturn: { getElement: getSourceElement }, propsStable: propsSource } = useRefElement<SourceElement>({ refElementParameters: {} });
+    const { refElementReturn: { getElement: getPopupElement }, propsStable: propsPopup } = useRefElement<PopupElement>({ refElementParameters: {} });
+    const { refElementReturn: { getElement: getArrowElement }, propsStable: propsArrow } = useRefElement<ArrowElement>({ refElementParameters: {} });
 
     // Because we don't set our mouse coordinates until mousemove,
     // and because we don't listen for mousemove until open (for performance reasons),

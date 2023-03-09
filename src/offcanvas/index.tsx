@@ -43,7 +43,7 @@ export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, heade
 
                     return (
                         <>
-                            {useClonedElement(anchor, useMergedProps(info.propsSource, props), ref)}
+                            {useClonedElement(anchor, useMergedProps(info.propsStableSource, props), ref)}
                             {defaultRenderPortal({
                                 portalId: usePortalId("offcanvas"),
                                 children: (

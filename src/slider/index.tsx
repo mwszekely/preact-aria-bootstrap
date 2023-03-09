@@ -160,7 +160,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
     disabled ||= parentDisabled;
 
     const [inputHasFocus, setInputHasFocus] = useState(false);
-    const { refElementReturn, refElementReturn: { propsStable: p1, getElement: getInputElement } } = useRefElement<HTMLInputElement>({ refElementParameters: {} })
+    const { refElementReturn, refElementReturn: { getElement: getInputElement }, propsStable: p1 } = useRefElement<HTMLInputElement>({ refElementParameters: {} })
     const { hasCurrentFocusReturn: { propsStable: p2 } } = useHasCurrentFocus<HTMLInputElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: setInputHasFocus, onCurrentFocusedInnerChanged: null }, refElementReturn });
     let usedStep = (useContext(StepContext) ?? 1);
     let userStep = usedStep;

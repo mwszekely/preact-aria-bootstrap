@@ -43,15 +43,15 @@ const DataTableSection = memo(forwardElementRef(function DataTableSection({ chil
 export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, children, variantTheme, ...props }, ref) {
     return (_jsx(AriaTableRow, { index: row, ariaPropName: "aria-selected", tagTableRow: "tr", render: info => {
             useUpdateRenderCounter("DataTableRow");
-            const hideBecauseStaggered = info.rowAsChildOfGridReturn.staggeredChildReturn.hideBecauseStaggered;
-            const hideBecausePaginated = info.rowAsChildOfGridReturn.paginatedChildReturn.hideBecausePaginated;
+            const hideBecauseStaggered = info.staggeredChildReturn.hideBecauseStaggered;
+            const hideBecausePaginated = info.paginatedChildReturn.hideBecausePaginated;
             //useWhatCausedRender("DataTableRow", { props: { ...props, variantTheme, children, row }, state: info })
-            return (_jsx(Fade, { show: !hideBecauseStaggered, animateOnMount: info.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered, delayMountUntilShown: true, children: _jsx(TableRow, { ...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" }), children: /*hideBecausePaginated? null : */ children }) }));
+            return (_jsx(Fade, { show: !hideBecauseStaggered, animateOnMount: info.staggeredChildReturn.isStaggered, delayMountUntilShown: true, children: _jsx(TableRow, { ...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" }), children: /*hideBecausePaginated? null : */ children }) }));
         } }));
 }));
 export const IsTableHeadContext = createContext(false);
 export const DataTableCell = memo(forwardElementRef(function DataTableCell({ column, colSpan, children, value, unsortable, variantTheme, fillY, ...props }, ref) {
-    const { refElementReturn, refElementReturn: { getElement } } = useRefElement({ refElementParameters: {} });
+    const { refElementReturn, refElementReturn: { getElement }, propsStable } = useRefElement({ refElementParameters: {} });
     const [sortingByThisColumn, setSortingByThisColumn] = useState(false);
     const [sortDirection, setSortDirection] = useState(null);
     const isTableHead = useContext(IsTableHeadContext);
@@ -63,7 +63,7 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
     };
     return (_jsx(AriaTableCell, { index: column, tagTableCell: isTableHead ? "th" : "td", focusSelf: focusSelf, getSortValue: useStableGetter(value ?? children), colSpan: colSpan, render: info => {
             useUpdateRenderCounter("DataTableCell");
-            const { pressReturn: { propsUnstable } } = usePress({
+            const { pressReturn, props: propsPress } = usePress({
                 pressParameters: {
                     focusSelf,
                     onPressSync: !isTableHead ? undefined : () => {
@@ -72,9 +72,10 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
                         setSortDirection(direction);
                     },
                     ...info.pressParameters
-                }, refElementReturn
+                },
+                refElementReturn
             });
-            const p = useMergedProps(refElementReturn.propsStable, propsUnstable, info.propsCell, { ref, ...props });
+            const p = useMergedProps(propsStable, propsPress, info.propsCell, { ref, ...props });
             children ??= value;
             children = useClonedElement(children, info.propsFocus, ref);
             return _jsx(TableCell, { ...p, tableHeadType: isTableHead ? (unsortable ? "unsortable" : "sortable") : null, fillY: fillY, variantTheme: variantTheme, children: children });

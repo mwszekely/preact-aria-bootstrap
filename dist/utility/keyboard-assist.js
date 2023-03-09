@@ -12,7 +12,7 @@ export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(
     const { id: figureDescriptionId, addHomeEnd, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = useContext(KeyboardAssistContext);
     const [randomId] = useState(() => generateRandomId());
     const [focusedInner, setFocusedInner] = useState(false);
-    const { refElementReturn } = useRefElement({ refElementParameters: {} });
+    const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
     const { hasCurrentFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn });
     leftRight &&= focusedInner;
     upDown &&= focusedInner;
@@ -67,7 +67,7 @@ export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(
             return () => removeTextF10(randomId);
         }
     }, [focusedInner]);
-    return (_jsx(_Fragment, { children: useClonedElement(children, useMergedProps(refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, props), ref) }));
+    return (_jsx(_Fragment, { children: useClonedElement(children, useMergedProps(propsStable, hasCurrentFocusReturn.propsStable, props), ref) }));
 });
 export function KeyboardAssistProvider({ children }) {
     const [id] = useState(() => generateRandomId("keyboard-assist-"));

@@ -41,9 +41,9 @@ const PaginationButtonLast = memo(forwardElementRef(({ index, onFocus }, ref) =>
 }));
 const PaginationButton = memo(forwardElementRef(function PaginationButton({ index, children, onFocus }, ref) {
     return (_jsx(ToolbarChild, { index: index, ariaPropName: "aria-current-page", getSortValue: useStableGetter(index), selectionMode: "focus", render: info => {
-            const { refElementReturn } = useRefElement({ refElementParameters: {} });
-            const { pressReturn } = usePress({ pressParameters: { focusSelf: useCallback((e) => { e.focus(); }, []), ...info.pressParameters }, refElementReturn });
-            return (_jsx("li", { class: "page-item", children: _jsx("button", { ...useMergedProps(info.props, refElementReturn.propsStable, pressReturn.propsUnstable, { class: "page-link", ref, onfocusin: onFocus || undefined }, {}), children: children }) }));
+            const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
+            const { pressReturn, props: propsPress } = usePress({ pressParameters: { onPressSync: null, focusSelf: useCallback((e) => { e.focus(); }, []), ...info.pressParameters }, refElementReturn });
+            return (_jsx("li", { class: "page-item", children: _jsx("button", { ...useMergedProps(info.props, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {}), children: children }) }));
         } }));
 }));
 export const Paginated = memo(function Paginated({ childCount, setPaginationEnd, setPaginationStart, paginationLabel, paginationLocation, paginationSize, children }) {

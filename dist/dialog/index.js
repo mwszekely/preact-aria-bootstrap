@@ -18,7 +18,7 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
                 const headingJsx = (_jsxs(_Fragment, { children: [_jsx("span", { class: "modal-title", children: header }), _jsx(Button, { class: "btn-close", onPress: () => onClose("escape"), "aria-label": "Close" })] }));
                 const bodyJsx = (_jsx("span", { class: "modal-body", children: children }));
                 const footerJsx = (_jsx("span", { class: "modal-footer", children: footer }));
-                return (_jsxs(_Fragment, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
+                return (_jsxs(_Fragment, { children: [useClonedElement(anchor, useMergedProps(info.propsStableSource, props), ref), defaultRenderPortal({
                             portalId: usePortalId("dialog"),
                             children: (_jsx("div", { ...info.propsFocusContainer, children: _jsxs("div", { ...useMergedProps(info.propsDialog, {
                                         tabIndex: -1,

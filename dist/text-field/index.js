@@ -152,8 +152,8 @@ export function useCommitTextField({ getFocused, commit, currentCapture, showSpi
     });
 }
 const TextFieldBase = memo(forwardElementRef(function TextFieldBase({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }, ref) {
-    const { refElementReturn: { getElement: getInputElement, propsStable: propsInput1 } } = useRefElement({ refElementParameters: {} });
-    const { refElementReturn: { getElement: getLabelElement, propsStable: propsLabel1 } } = useRefElement({ refElementParameters: {} });
+    const { refElementReturn: { getElement: getInputElement }, propsStable: propsInput1 } = useRefElement({ refElementParameters: {} });
+    const { refElementReturn: { getElement: getLabelElement }, propsStable: propsLabel1 } = useRefElement({ refElementParameters: {} });
     const withinInputGroup = useContext(WithinInputGroup);
     const { propsInput: propsInput2, propsLabel: propsLabel2 } = useLabel({
         labelParameters: {
@@ -201,7 +201,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase({ capture, o
                 if (!getCurrentFocusedInner() && !showSpinner)
                     updateDOMValue(value);
             });
-            const { refElementReturn: { propsStable: p1, getElement }, refElementReturn } = useRefElement({ refElementParameters: {} });
+            const { refElementReturn: { getElement }, refElementReturn, propsStable: p1 } = useRefElement({ refElementParameters: {} });
             const { hasCurrentFocusReturn: { propsStable: p2, getCurrentFocusedInner } } = useHasCurrentFocus({
                 hasCurrentFocusParameters: {
                     onCurrentFocusedInnerChanged: null, onCurrentFocusedChanged: useStableCallback((focused) => {

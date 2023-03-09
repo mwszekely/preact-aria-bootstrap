@@ -15,7 +15,7 @@ export function CheckboxGroup({ orientation, children, label, labelPosition, deb
 
             render={info => {
                 return (
-                    <span {...info.props}>
+                    <span {...info.propsStable}>
                         <CheckboxGroupParent label={label} labelPosition={labelPosition} debounce={debounce} loadingLabel={loadingLabel} throttle={throttle} disabled={disabled} inline={inline} getSortValue={getSortValue} />
                         {children}
                     </span>

@@ -124,13 +124,13 @@ export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, 
             tagTableRow="tr"
             render={info => {
                 useUpdateRenderCounter("DataTableRow");
-                const hideBecauseStaggered = info.rowAsChildOfGridReturn.staggeredChildReturn.hideBecauseStaggered;
-                const hideBecausePaginated = info.rowAsChildOfGridReturn.paginatedChildReturn.hideBecausePaginated;
+                const hideBecauseStaggered = info.staggeredChildReturn.hideBecauseStaggered;
+                const hideBecausePaginated = info.paginatedChildReturn.hideBecausePaginated;
 
                 //useWhatCausedRender("DataTableRow", { props: { ...props, variantTheme, children, row }, state: info })
 
                 return (
-                    <Fade show={!hideBecauseStaggered} animateOnMount={info.rowAsChildOfGridReturn.staggeredChildReturn.isStaggered} delayMountUntilShown={true}>
+                    <Fade show={!hideBecauseStaggered} animateOnMount={info.staggeredChildReturn.isStaggered} delayMountUntilShown={true}>
                         <TableRow {...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" })}>
                             {/*hideBecausePaginated? null : */children}
                         </TableRow>
@@ -161,7 +161,7 @@ export interface DataTableCellProps extends Omit<TableCellProps, "tableHeadType"
 export const IsTableHeadContext = createContext(false);
 
 export const DataTableCell = memo(forwardElementRef(function DataTableCell({ column, colSpan, children, value, unsortable, variantTheme, fillY, ...props }: DataTableCellProps, ref?: Ref<HTMLTableCellElement>) {
-    const { refElementReturn, refElementReturn: { getElement } } = useRefElement<HTMLTableCellElement>({ refElementParameters: {} });
+    const { refElementReturn, refElementReturn: { getElement }, propsStable } = useRefElement<HTMLTableCellElement>({ refElementParameters: {} });
     const [sortingByThisColumn, setSortingByThisColumn] = useState(false);
     const [sortDirection, setSortDirection] = useState(null as null | "ascending" | "descending");
     const isTableHead = useContext(IsTableHeadContext);
@@ -183,7 +183,7 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
             render={info => {
                 useUpdateRenderCounter("DataTableCell");
 
-                const { pressReturn: { propsUnstable } } = usePress({
+                const { pressReturn, props: propsPress } = usePress({
                     pressParameters: {
                         focusSelf,
                         onPressSync: !isTableHead ? undefined : () => {
@@ -192,10 +192,11 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
                             setSortDirection(direction)
                         },
                         ...info.pressParameters
-                    }, refElementReturn
+                    }, 
+                    refElementReturn
                 })
 
-                const p = useMergedProps<any>(refElementReturn.propsStable, propsUnstable, info.propsCell, { ref, ...props });
+                const p = useMergedProps<any>(propsStable, propsPress, info.propsCell, { ref, ...props });
                 children ??= (value as string);
                 children = useClonedElement(children, info.propsFocus, ref)
                 return <TableCell {...p} tableHeadType={isTableHead ? (unsortable ? "unsortable" : "sortable") : null} fillY={fillY} variantTheme={variantTheme}>{children}</TableCell>

@@ -42,7 +42,7 @@ const DefaultDisabled = createContext(false);
 export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
 
     const [focusedInner, setFocusedInner] = useState(false);
-    const { refElementReturn } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
+    const { refElementReturn, propsStable } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
     const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLDivElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn })
     const [paginationStart, setPaginationStart] = useState<number | null>(paginationSize == null ? null : 0);
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
@@ -72,7 +72,7 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
                             {labelPosition == "before" && labelJsx}
                             <Paginated childCount={info.paginatedChildrenReturn.childCount ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
 
-                                <div class={clsx(`list-group gridlist-group`)} {...useMergedProps(props, refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist)}>{children}</div>
+                                <div class={clsx(`list-group gridlist-group`)} {...useMergedProps(props, propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist)}>{children}</div>
 
                             </Paginated>
                             {labelPosition == "after" && labelJsx}
@@ -109,14 +109,14 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
 
                         render={infoRow => {
                             useUpdateRenderCounter("GridlistRow");
-                            const { refElementReturn: { propsStable: p2, getElement }, refElementReturn } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
-                            const { pressReturn: { longPress, propsUnstable: p1, pressing } } = usePress<HTMLDivElement>({
+                            const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
+                            const { pressReturn: { longPress, pressing }, props: p1 } = usePress<HTMLDivElement>({
                                 pressParameters: {
                                     focusSelf: useCallback(() => {
                                         return getElement()?.focus();
                                     }, []),
-                                    onPressSync: useStableCallback((e) => infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.setThisOneSelected(e)),
-                                    ...infoRow.rowAsChildOfGridReturn.pressParameters
+                                    onPressSync: useStableCallback((e) => infoRow.singleSelectionChildReturn.setThisOneSelected(e)),
+                                    //...infoRow.pressParameters
                                 },
                                 refElementReturn
                             });
@@ -129,7 +129,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                                 timeout,
                                 callback: () => setShow(true)
                             })*/
-                            const show = !infoRow.rowAsChildOfGridReturn.staggeredChildReturn.hideBecauseStaggered;
+                            const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
                             const { propsIndicator, propsRegion } = progressInfo;
                             const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending}><span class="spinner-border spinner-border-sm text-secondary" {...propsIndicator} /></Fade>)
                             //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
@@ -141,7 +141,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                                     className: clsx(
                                         `gridlist-item`,
                                         variantTheme && `list-group-item-${variantTheme}`,
-                                        infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated ? !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible && "d-none" : "",
+                                        infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "",
                                         !show && "gridlist-item-placeholder",
                                         "list-group-item list-group-item-action",
                                         !!iconStart && "list-group-item-with-icon-start",
@@ -149,7 +149,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                                         !!badge && "list-group-item-with-badge",
                                         !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending",
                                         disabled && "disabled",
-                                        (infoRow.rowAsChildOfGridReturn.singleSelectionChildReturn.selected || selected) && `active`
+                                        (infoRow.singleSelectionChildReturn.selected || selected) && `active`
                                     )
                                 }
                             );
@@ -162,7 +162,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
 
 
                             if (!show)
-                                if (infoRow.rowAsChildOfGridReturn.paginatedChildReturn.isPaginated && !infoRow.rowAsChildOfGridReturn.paginatedChildReturn.paginatedVisible)
+                                if (infoRow.paginatedChildReturn.isPaginated && !infoRow.paginatedChildReturn.paginatedVisible)
                                     return null!;
                                 else
                                     return <div aria-busy="true" class="gridlist-item gridlist-item-placeholder"><span class={clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow")}><span class="placeholder w-100"></span></span></div>;

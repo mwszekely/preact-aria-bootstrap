@@ -44,7 +44,7 @@ export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(
     const { id: figureDescriptionId, addHomeEnd, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = useContext(KeyboardAssistContext)!;
     const [randomId] = useState(() => generateRandomId());
     const [focusedInner, setFocusedInner] = useState(false);
-    const { refElementReturn } = useRefElement<any>({ refElementParameters: {} });
+    const { refElementReturn, propsStable } = useRefElement<any>({ refElementParameters: {} });
     const { hasCurrentFocusReturn } = useHasCurrentFocus<any>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn });
 
     leftRight &&= focusedInner;
@@ -117,7 +117,7 @@ export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(
 
             Also: if this is used, e.g., in a tbody, then inserting a dummy icon there won't work!
             */}
-            {useClonedElement(children, useMergedProps(refElementReturn.propsStable, hasCurrentFocusReturn.propsStable, props), ref)}
+            {useClonedElement(children, useMergedProps(propsStable, hasCurrentFocusReturn.propsStable, props), ref)}
         </>
     );
 })

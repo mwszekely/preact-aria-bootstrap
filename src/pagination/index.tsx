@@ -84,11 +84,11 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
             selectionMode="focus"
 
             render={info => {
-                const { refElementReturn } = useRefElement<HTMLButtonElement>({ refElementParameters: {} })
-                const { pressReturn } = usePress<HTMLButtonElement>({ pressParameters: { focusSelf: useCallback((e) => { e.focus(); }, []), ...info.pressParameters }, refElementReturn })
+                const { refElementReturn, propsStable } = useRefElement<HTMLButtonElement>({ refElementParameters: {} })
+                const { pressReturn, props: propsPress } = usePress<HTMLButtonElement>({ pressParameters: { onPressSync: null, focusSelf: useCallback((e) => { e.focus(); }, []), ...info.pressParameters }, refElementReturn })
                 return (
                     <li class="page-item">
-                        <button {...useMergedProps(info.props, refElementReturn.propsStable, pressReturn.propsUnstable, { class: "page-link", ref, onfocusin: onFocus || undefined }, {})}>{children}</button>
+                        <button {...useMergedProps(info.props, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {})}>{children}</button>
                     </li>
                 )
             }}
