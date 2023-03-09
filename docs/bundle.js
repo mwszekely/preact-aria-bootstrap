@@ -9150,12 +9150,18 @@
       refElementParameters
     } = _ref;
     debugLog("useButton");
-    const refElementReturn = useRefElement({
+    const {
+      refElementReturn,
+      propsStable: propsRef
+    } = useRefElement({
       refElementParameters
     });
     const focusSelf = T$2(e => e.focus?.(), []);
-    const pressReturn = usePress({
-      ...refElementReturn,
+    const {
+      pressReturn,
+      props: propsPress
+    } = usePress({
+      refElementReturn,
       pressParameters: {
         onPressSync: e => (disabled ? null : onPress)?.(enhanceEvent(e, {
           pressed: pressed == null ? null : !pressed
@@ -9164,16 +9170,8 @@
         ...pressParameters
       }
     });
-    const {
-      pressReturn: {
-        propsUnstable: pressProps
-      }
-    } = pressReturn;
-    const {
-      refElementReturn: {
-        propsStable: refProps
-      }
-    } = refElementReturn;
+    //const { pressReturn: { propsUnstable: pressProps } } = pressReturn;
+    //const { refElementReturn: { propsStable: refProps } } = refElementReturn;
     const baseProps = {
       "aria-pressed": pressed === true ? "true" : pressed === false ? "false" : undefined
     };
@@ -9190,9 +9188,9 @@
       "aria-disabled": disabled ? "true" : undefined
     };
     return {
-      ...refElementReturn,
-      ...pressReturn,
-      props: useMergedProps(pressProps, refProps, tagButton == 'button' ? buttonProps : divProps)
+      pressReturn,
+      props: useMergedProps(propsPress, propsRef, tagButton == 'button' ? buttonProps : divProps),
+      refElementReturn
     };
   }
 
@@ -9223,7 +9221,9 @@
     if (localStorageIndex != null) initialIndex = localStorageIndex;
     const {
       managedChildrenReturn,
-      context
+      context: {
+        managedChildContext
+      }
     } = useManagedChildren({
       managedChildrenParameters: {
         onChildrenMountChange: useStableCallback((m, u) => {
@@ -9295,22 +9295,25 @@
       setTabbableIndex: changeTabbedIndex
     });
     const {
-      typeaheadNavigationChildContext,
-      typeaheadNavigationReturn
+      context: {
+        typeaheadNavigationContext
+      },
+      typeaheadNavigationReturn,
+      propsStable: propsTN
     } = useTypeaheadNavigation({
       rovingTabIndexReturn,
       typeaheadNavigationParameters
     });
     return {
       context: useStableObject({
-        ...context,
-        ...typeaheadNavigationChildContext,
+        managedChildContext,
+        typeaheadNavigationContext,
         accordionSectionParameters: useStableObject({
           changeExpandedIndex,
           changeTabbedIndex,
           getExpandedIndex: getCurrentExpandedIndex,
           getTabbedIndex: getTabbedIndex,
-          stableTypeaheadProps: typeaheadNavigationReturn.propsStable
+          stableTypeaheadProps: propsTN
         }),
         linearNavigationParameters: useStableObject({
           disableArrowKeys,
@@ -9347,7 +9350,6 @@
         hidden
       },
       textContentParameters,
-      context,
       context: {
         accordionSectionParameters: {
           changeExpandedIndex,
@@ -9357,7 +9359,8 @@
         },
         linearNavigationParameters,
         rovingTabIndexReturn,
-        typeaheadNavigationChildParameters
+        managedChildContext,
+        typeaheadNavigationContext
       },
       refElementParameters
     } = _ref2;
@@ -9391,17 +9394,17 @@
     const open = (_ref3 = openFromUser !== null && openFromUser !== void 0 ? openFromUser : openFromParent) !== null && _ref3 !== void 0 ? _ref3 : false;
     const {
       refElementReturn: {
-        getElement: getHeaderElement,
-        propsStable: headerRefElementProps
-      }
+        getElement: getHeaderElement
+      },
+      propsStable: headerRefElementProps
     } = useRefElement({
       refElementParameters: {}
     });
     const {
       refElementReturn: {
-        getElement: _getBodyElement,
-        propsStable: bodyRefElementProps
-      }
+        getElement: _getBodyElement
+      },
+      propsStable: bodyRefElementProps
     } = useRefElement({
       refElementParameters: {}
     });
@@ -9409,7 +9412,9 @@
       getHeaderElement()?.focus();
     });
     useManagedChild({
-      context,
+      context: {
+        managedChildContext
+      },
       managedChildParameters: {
         index: index
       }
@@ -9428,7 +9433,10 @@
       if (getOpenFromParent()) changeExpandedIndex(null);else changeExpandedIndex(index);
       userOnPress?.(e);
     };
-    const linearReturnType = useLinearNavigation({
+    const {
+      propsStable: propsLN,
+      ...linearReturnType
+    } = useLinearNavigation({
       linearNavigationParameters,
       rovingTabIndexReturn
     });
@@ -9445,8 +9453,8 @@
         getElement: useStableCallback(() => refElementReturn.getElement())
       },
       textContentParameters,
-      typeaheadNavigationChildContext: {
-        typeaheadNavigationChildParameters
+      context: {
+        typeaheadNavigationContext
       }
     });
     const buttonReturn = useButton({
@@ -9467,12 +9475,8 @@
       props: buttonProps,
       refElementReturn
     } = buttonReturn;
-    const {
-      linearNavigationReturn: {
-        propsStable
-      }
-    } = linearReturnType;
-    const headerButtonProps = useMergedProps(buttonProps, headerRefElementProps, propsHeadReferencer, propsHeadSource, propsStable, stableTypeaheadProps, {
+    //const { linearNavigationReturn: { propsStable } } = linearReturnType;
+    const headerButtonProps = useMergedProps(buttonProps, headerRefElementProps, propsHeadReferencer, propsHeadSource, propsLN, stableTypeaheadProps, {
       "aria-expanded": (open !== null && open !== void 0 ? open : false).toString()
     });
     const bodyProps = useMergedProps(bodyRefElementProps, propsBodyReferencer, propsBodySource, {
@@ -9515,7 +9519,7 @@
       context,
       linearNavigationReturn,
       managedChildrenReturn,
-      props,
+      propsStable,
       rearrangeableChildrenReturn,
       rovingTabIndexReturn,
       singleSelectionReturn,
@@ -9622,7 +9626,7 @@
         })
       }),
       childrenHaveFocusReturn,
-      props,
+      propsStable,
       staggeredChildrenReturn,
       paginatedChildrenReturn,
       rearrangeableChildrenReturn,
@@ -9844,7 +9848,8 @@
       }
     });
     const {
-      refElementReturn
+      refElementReturn,
+      propsStable: propsRef
     } = useRefElement({
       refElementParameters: {}
     });
@@ -9855,7 +9860,8 @@
       propsLabel["for"] = undefined;
     }
     const {
-      pressReturn
+      pressReturn,
+      props: propsPress
     } = usePress({
       pressParameters: {
         excludeEnter: returnTrue,
@@ -9866,8 +9872,9 @@
       refElementReturn
     });
     return {
+      pressReturn,
       propsInput,
-      propsLabel: useMergedProps(propsLabel, refElementReturn.propsStable, pressReturn.propsUnstable),
+      propsLabel: useMergedProps(propsLabel, propsRef, propsPress),
       randomIdInputReturn,
       randomIdLabelReturn
     };
@@ -9952,7 +9959,8 @@
       randomIdInputReturn,
       randomIdLabelReturn,
       propsInput,
-      propsLabel
+      propsLabel,
+      pressReturn
     } = useLabel({
       labelParameters: {
         ...labelParameters,
@@ -9974,7 +9982,8 @@
     const onClickInputSync = labelPosition == "wrapping" ? undefined : onInputSync;
     const onClickLabelSync = onInputSync;
     const {
-      pressReturn: pressInputReturn
+      pressReturn: pressInputReturn,
+      props: propsPressInput
     } = usePress({
       pressParameters: {
         excludeSpace,
@@ -9984,7 +9993,8 @@
       refElementReturn: refElementInputReturn
     });
     const {
-      pressReturn: pressLabelReturn
+      pressReturn: pressLabelReturn,
+      props: propsPressLabel
     } = usePress({
       pressParameters: {
         excludeSpace,
@@ -10054,11 +10064,12 @@
       checkboxLikeLabelReturn: {
         propsUnstable: propsUnstableLabel
       },
-      propsInput: useMergedProps(propsInput, propsUnstableInput, pressInputReturn.propsUnstable, refElementInputReturn.propsStable),
-      propsLabel: useMergedProps(propsLabel, propsUnstableLabel, pressLabelReturn.propsUnstable, refElementLabelReturn.propsStable),
+      propsInput: useMergedProps(propsInput, propsUnstableInput, propsPressInput),
+      propsLabel: useMergedProps(propsLabel, propsUnstableLabel, propsPressLabel),
       checkboxLikeReturn: {
         focusSelf
-      }
+      },
+      pressReturn
     };
   }
 
@@ -10079,15 +10090,21 @@
       checked
     } = checkboxLikeParameters;
     const {
-      refElementReturn: refElementInputReturn
+      refElementReturn: refElementInputReturn,
+      propsStable: propsRefInput
     } = useRefElement({});
     const {
-      refElementReturn: refElementLabelReturn
+      refElementReturn: refElementLabelReturn,
+      propsStable: propsRefLabel
     } = useRefElement({});
     const onInputEnhanced = useStableCallback(e => onCheckedChange?.(enhanceEvent(e, {
       checked: !checked
     })));
-    const ret = useCheckboxLike({
+    const {
+      propsInput,
+      propsLabel,
+      ...ret
+    } = useCheckboxLike({
       randomIdInputParameters: {
         prefix: Prefices.checkboxLikeInput
       },
@@ -10112,6 +10129,8 @@
           type: tagInput == "input" && labelPosition != "wrapping" ? "checkbox" : undefined
         }
       },
+      propsInput: useMergedProps(propsInput, propsRefInput),
+      propsLabel: useMergedProps(propsLabel, propsRefLabel),
       ...ret
     };
   }
@@ -10126,8 +10145,8 @@
     const {
       focusTrapReturn,
       propsFocusContainer,
-      propsPopup,
-      propsSource,
+      propsStablePopup,
+      propsStableSource,
       refElementPopupReturn,
       refElementSourceReturn
     } = useModal({
@@ -10163,8 +10182,10 @@
     return {
       focusTrapReturn,
       propsFocusContainer,
-      propsDialog: useMergedProps(propsPopup, propsInput),
-      propsSource,
+      propsDialog: useMergedProps(propsStablePopup, propsInput),
+      propsSource: {
+        ...propsStableSource
+      },
       propsTitle: propsLabel,
       refElementPopupReturn,
       refElementSourceReturn
@@ -10181,8 +10202,8 @@
     const {
       focusTrapReturn,
       propsFocusContainer,
-      propsPopup,
-      propsSource,
+      propsStablePopup,
+      propsStableSource,
       refElementPopupReturn,
       refElementSourceReturn
     } = useModal({
@@ -10214,9 +10235,11 @@
     return {
       focusTrapReturn,
       propsFocusContainer,
-      propsDrawer: useMergedProps(propsPopup, propsInput),
+      propsDrawer: useMergedProps(propsStablePopup, propsInput),
       propsTitle: propsLabel,
-      propsSource,
+      propsSource: {
+        ...propsStableSource
+      },
       refElementPopupReturn,
       refElementSourceReturn
     };
@@ -10258,7 +10281,7 @@
     });
     const {
       context,
-      props,
+      propsStable,
       rovingTabIndexReturn,
       singleSelectionReturn,
       ...restRet
@@ -10275,7 +10298,7 @@
         selectedIndex
       }
     });
-    let propsGridlist = useMergedProps(props, propsLabelList, {
+    let propsGridlist = useMergedProps(propsStable, propsLabelList, {
       "aria-multiselectable": selectionLimit == "multi" ? "true" : undefined
     });
     let fullContext = useStableObject({
@@ -10306,44 +10329,70 @@
   }
   function useGridlistRow(_ref2) {
     let {
-      rowAsChildOfGridParameters: {
-        gridlistRowParameters: {
-          selected
-        },
-        ...rowAsChildOfGridParameters
+      gridlistRowParameters: {
+        selected
       },
-      rowAsParentOfCellsParameters: {
-        linearNavigationParameters,
-        ...rowAsParentOfCellsParameters
-      }
+      linearNavigationParameters,
+      completeGridNavigationRowParameters,
+      context: cx1,
+      managedChildParameters,
+      rovingTabIndexChildParameters,
+      rovingTabIndexParameters,
+      singleSelectionChildParameters,
+      sortableChildParameters,
+      textContentParameters,
+      typeaheadNavigationParameters
     } = _ref2;
     const {
       gridlistRowContext: {
         selectionLimit
       }
-    } = rowAsChildOfGridParameters.context;
+    } = cx1;
     const {
-      rowAsChildOfGridReturn,
-      rowAsParentOfCellsReturn,
       context: cx2,
+      hasCurrentFocusParameters,
       hasCurrentFocusReturn,
-      props
+      linearNavigationReturn,
+      managedChildReturn,
+      managedChildrenReturn,
+      paginatedChildReturn,
+      props,
+      rovingTabIndexChildReturn,
+      rovingTabIndexReturn,
+      singleSelectionChildReturn,
+      staggeredChildReturn,
+      textContentReturn,
+      typeaheadNavigationReturn
     } = useCompleteGridNavigationRow({
-      rowAsChildOfGridParameters,
-      rowAsParentOfCellsParameters: {
-        linearNavigationParameters: {
-          disableHomeEndKeys: true,
-          ...linearNavigationParameters
-        },
-        ...rowAsParentOfCellsParameters
-      }
+      linearNavigationParameters: {
+        disableHomeEndKeys: true,
+        ...linearNavigationParameters
+      },
+      completeGridNavigationRowParameters,
+      context: cx1,
+      managedChildParameters,
+      rovingTabIndexChildParameters,
+      rovingTabIndexParameters,
+      singleSelectionChildParameters,
+      sortableChildParameters,
+      textContentParameters,
+      typeaheadNavigationParameters
     });
     // `selected` should only be true/false for multi-selection
     if (selectionLimit != "multi") console.assert(selected == null);
     props.role = "option";
     return {
-      rowAsChildOfGridReturn,
-      rowAsParentOfCellsReturn,
+      hasCurrentFocusParameters,
+      linearNavigationReturn,
+      managedChildrenReturn,
+      managedChildReturn,
+      paginatedChildReturn,
+      rovingTabIndexChildReturn,
+      rovingTabIndexReturn,
+      singleSelectionChildReturn,
+      staggeredChildReturn,
+      textContentReturn,
+      typeaheadNavigationReturn,
       context: cx2,
       hasCurrentFocusReturn,
       props
@@ -10359,7 +10408,8 @@
       ...info
     } = useCompleteGridNavigationCell(p);
     const {
-      pressReturn
+      pressReturn,
+      props: propsPress
     } = usePress({
       pressParameters: {
         ...pressParameters,
@@ -10369,7 +10419,7 @@
     });
     return {
       ...info,
-      props: useMergedProps(props, pressReturn.propsUnstable),
+      props: useMergedProps(props, propsPress),
       pressReturn
     };
   }
@@ -10404,9 +10454,9 @@
     debugLog("useMenuSurface");
     const {
       refElementReturn: {
-        getElement: getButtonElement,
-        propsStable: propsRefTrigger
+        getElement: getButtonElement
       },
+      propsStable: propsRefTrigger,
       ...void4
     } = useRefElement({
       refElementParameters: {
@@ -10416,9 +10466,9 @@
     const {
       refElementReturn: {
         getElement: getMenuElement,
-        propsStable: propsRefSurface,
         ...void5
       },
+      propsStable: propsRefSurface,
       ...void6
     } = useRefElement({
       refElementParameters: {
@@ -10428,8 +10478,8 @@
     const {
       focusTrapReturn,
       propsFocusContainer,
-      propsPopup,
-      propsSource: ps2,
+      propsStablePopup: propsPopup,
+      propsStableSource: ps2,
       refElementPopupReturn,
       refElementSourceReturn
     } = useModal({
@@ -10547,7 +10597,7 @@
     } = _ref;
     const {
       context,
-      props,
+      propsStable,
       ...listNavReturn
     } = useCompleteListNavigation({
       ...listNavParameters,
@@ -10595,7 +10645,7 @@
       propsToolbar: useMergedProps({
         ...propsToolbar,
         role: role !== null && role !== void 0 ? role : undefined
-      }, props),
+      }, propsStable),
       randomIdInputReturn,
       randomIdLabelReturn,
       ...listNavReturn
@@ -10638,8 +10688,7 @@
     const focusSelf = T$2(e => e.focus?.(), []);
     const {
       pressParameters: {
-        excludeSpace,
-        onPressSync: ops
+        excludeSpace
       },
       props,
       ...restRet
@@ -10647,13 +10696,14 @@
       ...restParams
     });
     const {
-      pressReturn
+      pressReturn,
+      props: propsPress
     } = usePress({
       pressParameters: {
         focusSelf,
         excludeSpace,
         onPressSync: useStableCallback(e => {
-          ops?.(e);
+          restRet.singleSelectionChildReturn.setThisOneSelected?.(e);
           opu?.(e);
         })
       },
@@ -10662,7 +10712,7 @@
     props.role = role;
     return {
       pressReturn,
-      props: useMergedProps(props, pressReturn.propsUnstable),
+      props: useMergedProps(props, propsPress),
       ...restRet
     };
   }
@@ -10865,7 +10915,8 @@
       propsInput,
       propsLabel,
       randomIdInputReturn,
-      randomIdLabelReturn
+      randomIdLabelReturn,
+      pressReturn
     } = useLabelSynthetic({
       labelParameters: {
         ...labelParameters,
@@ -10914,7 +10965,8 @@
       propsLabel: useMergedProps(labelProps, propsLabel),
       propsRegion: regionProps,
       randomIdInputReturn,
-      randomIdLabelReturn
+      randomIdLabelReturn,
+      pressReturn
     };
   }
   function useProgressWithHandler(_ref2) {
@@ -10983,7 +11035,7 @@
     }, [selectedValue]);
     const {
       context,
-      props: propsGroup2,
+      propsStable: propsGroup2,
       singleSelectionReturn,
       managedChildrenReturn,
       rovingTabIndexReturn,
@@ -11070,14 +11122,9 @@
     const getValue = useStableGetter(value);
     const {
       props: listNavigationSingleSelectionChildProps,
-      hasCurrentFocusReturn,
-      managedChildReturn,
-      pressParameters,
-      rovingTabIndexChildReturn,
-      staggeredChildReturn,
       singleSelectionChildReturn,
-      refElementReturn,
-      paginatedChildReturn
+      pressParameters,
+      ...listNavRet
     } = useCompleteListNavigationChild({
       completeListNavigationChildParameters: {
         getValue2: getValue,
@@ -11098,25 +11145,21 @@
       selected: checked
     } = singleSelectionChildReturn;
     const {
-      refElementReturn: refElementInputReturn
+      refElementReturn: refElementInputReturn,
+      propsStable: propsRefInput
     } = useRefElement({
       refElementParameters: {}
     });
     const {
-      refElementReturn: refElementLabelReturn
+      refElementReturn: refElementLabelReturn,
+      propsStable: propsRefLabel
     } = useRefElement({
       refElementParameters: {}
     });
     const {
-      checkboxLikeInputReturn,
-      checkboxLikeLabelReturn,
-      pressInputReturn,
-      pressLabelReturn,
       propsInput,
       propsLabel,
-      randomIdInputReturn,
-      randomIdLabelReturn,
-      checkboxLikeReturn
+      ...checkboxLikeRet
     } = useCheckboxLike({
       checkboxLikeParameters: {
         checked: checked !== null && checked !== void 0 ? checked : false,
@@ -11149,26 +11192,15 @@
       propsInput["aria-checked"] = (checked !== null && checked !== void 0 ? checked : false).toString();
     }
     const propsIfInputHandlesFocus = useMergedProps(listNavigationSingleSelectionChildProps, propsInput);
-    const propsInput2 = labelPosition != "wrapping" ? propsIfInputHandlesFocus : propsInput;
+    const propsInput2 = useMergedProps(propsRefInput, labelPosition != "wrapping" ? propsIfInputHandlesFocus : propsInput);
     const propsIfLabelHandlesFocus = useMergedProps(listNavigationSingleSelectionChildProps, propsLabel);
-    const propsLabel2 = labelPosition == "wrapping" ? propsIfLabelHandlesFocus : propsLabel;
+    const propsLabel2 = useMergedProps(propsRefLabel, labelPosition == "wrapping" ? propsIfLabelHandlesFocus : propsLabel);
     return {
-      checkboxLikeInputReturn,
-      checkboxLikeLabelReturn,
-      managedChildReturn,
-      pressInputReturn,
-      pressLabelReturn,
       propsInput: propsInput2,
       propsLabel: propsLabel2,
-      randomIdInputReturn,
-      randomIdLabelReturn,
-      hasCurrentFocusReturn,
-      staggeredChildReturn,
-      rovingTabIndexChildReturn,
-      refElementReturn,
       singleSelectionChildReturn,
-      checkboxLikeReturn,
-      paginatedChildReturn
+      ...checkboxLikeRet,
+      ...listNavRet
     };
   }
 
@@ -11376,7 +11408,9 @@
       context,
       linearNavigationReturn,
       managedChildrenReturn,
-      props,
+      propsStable: {
+        ...props
+      },
       rovingTabIndexReturn,
       singleSelectionReturn,
       typeaheadNavigationReturn,
@@ -11434,55 +11468,49 @@
   }
   function useTableRow(_ref3) {
     let {
-      rowAsChildOfGridParameters: {
-        managedChildParameters,
-        singleSelectionChildParameters,
-        completeGridNavigationRowParameters,
-        rovingTabIndexChildParameters,
-        textContentParameters,
-        context: cx1
-      },
-      rowAsParentOfCellsParameters: {
-        linearNavigationParameters,
-        rovingTabIndexParameters
-      },
+      managedChildParameters,
+      singleSelectionChildParameters,
+      completeGridNavigationRowParameters,
+      rovingTabIndexChildParameters,
+      textContentParameters,
+      context: cx1,
       tableRowParameters: {
         selected
-      }
+      },
+      linearNavigationParameters,
+      rovingTabIndexParameters
     } = _ref3;
     const {
       context: cx2,
-      hasCurrentFocusReturn,
-      rowAsChildOfGridReturn,
-      rowAsParentOfCellsReturn,
-      props
-    } = useCompleteGridNavigationRow({
-      rowAsChildOfGridParameters: {
-        textContentParameters,
-        context: {
-          ...cx1
-        },
-        managedChildParameters,
-        singleSelectionChildParameters,
-        completeGridNavigationRowParameters,
-        rovingTabIndexChildParameters,
-        sortableChildParameters: {
-          getSortValue: useStableCallback(() => {
-            const currentColumn = cx1.tableContext.getCurrentSortColumn().column;
-            const currentChild = rowAsParentOfCellsReturn.managedChildrenReturn.getChildren().getAt(currentColumn !== null && currentColumn !== void 0 ? currentColumn : 0);
-            const sortValue = currentChild?.getSortValue();
-            return sortValue;
-          })
-        }
+      managedChildrenReturn,
+      props: {
+        ...props
       },
-      rowAsParentOfCellsParameters: {
-        linearNavigationParameters,
-        rovingTabIndexParameters,
-        typeaheadNavigationParameters: {
-          noTypeahead: true,
-          collator: null,
-          typeaheadTimeout: Infinity
-        }
+      ...restRet
+      // props
+    } = useCompleteGridNavigationRow({
+      textContentParameters,
+      context: {
+        ...cx1
+      },
+      managedChildParameters,
+      singleSelectionChildParameters,
+      completeGridNavigationRowParameters,
+      rovingTabIndexChildParameters,
+      sortableChildParameters: {
+        getSortValue: useStableCallback(() => {
+          const currentColumn = cx1.tableContext.getCurrentSortColumn().column;
+          const currentChild = managedChildrenReturn.getChildren().getAt(currentColumn !== null && currentColumn !== void 0 ? currentColumn : 0);
+          const sortValue = currentChild?.getSortValue();
+          return sortValue;
+        })
+      },
+      linearNavigationParameters,
+      rovingTabIndexParameters,
+      typeaheadNavigationParameters: {
+        noTypeahead: true,
+        collator: null,
+        typeaheadTimeout: Infinity
       }
     });
     props.role = "row";
@@ -11490,14 +11518,13 @@
     //if (selected)
     //    props[singleSelectionChildParameters.ariaPropName ?? "aria-selected"] = "true";
     return {
-      rowAsChildOfGridReturn,
-      rowAsParentOfCellsReturn,
-      context: {
+      context: useStableObject({
         ...cx2,
         tableContext: cx1.tableContext
-      },
-      hasCurrentFocusReturn,
-      props
+      }),
+      props,
+      managedChildrenReturn,
+      ...restRet
     };
   }
   function useTableCell(_ref4) {
@@ -11605,7 +11632,7 @@
       }
     });
     const {
-      props: listNavigationSingleSelectionProps,
+      propsStable: listNavigationSingleSelectionProps,
       context,
       ...listNavRet1
     } = useCompleteListNavigation({
@@ -11700,10 +11727,12 @@
       refElementReturn
     } = listNavRet2;
     const {
-      pressReturn
+      pressReturn,
+      props: propsPress
     } = usePress({
       pressParameters: {
         ...pressParameters,
+        onPressSync: useStableCallback(e => listNavRet2.singleSelectionChildReturn.setThisOneSelected(e)),
         focusSelf
       },
       refElementReturn
@@ -11724,7 +11753,7 @@
     const tabId = getTabId(managedChildParameters.index);
     debugLog("useTab", managedChildParameters.index, selected.toString());
     return {
-      props: useMergedProps(pressReturn.propsUnstable, listNavigationSingleSelectionChildProps, {
+      props: useMergedProps(propsPress, listNavigationSingleSelectionChildProps, {
         "data-tabbable": tabbable.toString(),
         "data-selected": selected.toString(),
         role: "tab",
@@ -11817,9 +11846,9 @@
     const nextIndexToStartAt = _$1(0);
     const {
       refElementReturn: {
-        getElement,
-        propsStable
-      }
+        getElement
+      },
+      propsStable
     } = useRefElement({
       refElementParameters: {}
     });
@@ -11980,9 +12009,9 @@
     });
     const {
       refElementReturn: {
-        getElement,
-        propsStable
-      }
+        getElement
+      },
+      propsStable
     } = useRefElement({
       refElementParameters: {}
     });
@@ -12044,17 +12073,17 @@
     });
     const {
       refElementReturn: {
-        getElement: getTriggerElement,
-        propsStable: triggerRefProps
-      }
+        getElement: getTriggerElement
+      },
+      propsStable: triggerRefProps
     } = useRefElement({
       refElementParameters: {}
     });
     const {
       refElementReturn: {
-        getElement: getPopupElement,
-        propsStable: popupRefProps
-      }
+        getElement: getPopupElement
+      },
+      propsStable: popupRefProps
     } = useRefElement({
       refElementParameters: {}
     });
@@ -12109,7 +12138,9 @@
     });
     const {
       refElementPopupReturn,
-      refElementSourceReturn
+      refElementSourceReturn,
+      propsStablePopup,
+      propsStableSource
     } = useDismiss({
       dismissParameters: {
         closeOnBackdrop: true,
@@ -12155,10 +12186,10 @@
     return {
       propsPopup: useMergedProps(popupRefProps, propsPopup, popupFocusReturn.propsStable, {
         role: "tooltip"
-      }, otherPopupProps, refElementPopupReturn.propsStable),
+      }, otherPopupProps, propsStablePopup),
       propsTrigger: useMergedProps(triggerRefProps, propsTrigger, triggerFocusReturn.propsStable, {
         onClick: useStableCallback(e => e.currentTarget?.focus?.())
-      }, otherTriggerProps, refElementSourceReturn.propsStable),
+      }, otherTriggerProps, propsStableSource),
       tooltipReturn: {
         getState,
         stateIsFocus,
@@ -12678,46 +12709,42 @@
     const context = q$1(GridlistContext);
     console.assert(context != null, `This GridlistRow is not contained within a Gridlist`);
     const info = useGridlistRow({
-      rowAsChildOfGridParameters: {
-        completeGridNavigationRowParameters: {
-          ...subInfo
-        },
-        context,
-        managedChildParameters: {
-          index
-        },
-        gridlistRowParameters: {
-          selected: selected !== null && selected !== void 0 ? selected : null
-        },
-        rovingTabIndexChildParameters: {
-          hidden: hidden !== null && hidden !== void 0 ? hidden : false
-        },
-        sortableChildParameters: {
-          getSortValue
-        },
-        singleSelectionChildParameters: {
-          disabled: disabled !== null && disabled !== void 0 ? disabled : false,
-          ariaPropName,
-          selectionMode: useDefault("selectionMode", selectionMode)
-        },
-        textContentParameters: {
-          getText: useDefault("getText", getText)
-        }
+      completeGridNavigationRowParameters: {
+        ...subInfo
       },
-      rowAsParentOfCellsParameters: {
-        linearNavigationParameters: {
-          disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
-          navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
-          navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap"
-        },
-        rovingTabIndexParameters: {
-          onTabbableIndexChange: onTabbableIndexChange !== null && onTabbableIndexChange !== void 0 ? onTabbableIndexChange : null
-        },
-        typeaheadNavigationParameters: {
-          collator: useDefault("collator", collator),
-          noTypeahead: useDefault("noTypeahead", noTypeahead),
-          typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
-        }
+      context,
+      managedChildParameters: {
+        index
+      },
+      gridlistRowParameters: {
+        selected: selected !== null && selected !== void 0 ? selected : null
+      },
+      rovingTabIndexChildParameters: {
+        hidden: hidden !== null && hidden !== void 0 ? hidden : false
+      },
+      sortableChildParameters: {
+        getSortValue
+      },
+      singleSelectionChildParameters: {
+        disabled: disabled !== null && disabled !== void 0 ? disabled : false,
+        ariaPropName,
+        selectionMode: useDefault("selectionMode", selectionMode)
+      },
+      textContentParameters: {
+        getText: useDefault("getText", getText)
+      },
+      linearNavigationParameters: {
+        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
+        navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
+        navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap"
+      },
+      rovingTabIndexParameters: {
+        onTabbableIndexChange: onTabbableIndexChange !== null && onTabbableIndexChange !== void 0 ? onTabbableIndexChange : null
+      },
+      typeaheadNavigationParameters: {
+        collator: useDefault("collator", collator),
+        noTypeahead: useDefault("noTypeahead", noTypeahead),
+        typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
       }
     });
     A$1(ref, () => info);
@@ -12854,7 +12881,9 @@
     });
     let {
       context,
-      props,
+      propsStable: {
+        ...props
+      },
       rovingTabIndexReturn,
       singleSelectionReturn,
       ...restRet
@@ -12918,8 +12947,7 @@
     } = _ref2;
     const {
       pressParameters: {
-        excludeSpace,
-        onPressSync: opsss
+        excludeSpace
       },
       props,
       refElementReturn,
@@ -12929,12 +12957,13 @@
       ...restParams
     });
     const {
-      pressReturn
+      pressReturn,
+      props: propsPress
     } = usePress({
       refElementReturn,
       pressParameters: {
         onPressSync: useStableCallback(e => {
-          if (selectionLimit == "single") opsss?.(e);
+          if (selectionLimit == "single") restRet.singleSelectionChildReturn.setThisOneSelected?.(e);
           opsu?.(e);
         }),
         excludeSpace,
@@ -12946,7 +12975,7 @@
     return {
       pressReturn,
       refElementReturn,
-      props: useMergedProps(props, pressReturn.propsUnstable),
+      props: useMergedProps(props, propsPress),
       ...restRet
     };
   }
@@ -13731,38 +13760,34 @@
     const cx1 = q$1(TableSectionContext);
     console.assert(cx1 != null, `This TableRow is not contained within a TableSection`);
     const info = useTableRow({
-      rowAsChildOfGridParameters: {
-        completeGridNavigationRowParameters: {},
-        context: cx1,
-        managedChildParameters: {
-          index
-        },
-        rovingTabIndexChildParameters: {
-          hidden: hidden !== null && hidden !== void 0 ? hidden : false
-        },
-        singleSelectionChildParameters: {
-          ariaPropName,
-          selectionMode: useDefault("selectionMode", selectionMode),
-          disabled: disabled !== null && disabled !== void 0 ? disabled : false
-        },
-        textContentParameters: {
-          getText: useDefault("getText", getText)
-        }
+      completeGridNavigationRowParameters: {},
+      context: cx1,
+      managedChildParameters: {
+        index
       },
-      rowAsParentOfCellsParameters: {
-        linearNavigationParameters: {
-          disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
-          disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
-          navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
-          navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap"
-        },
-        rovingTabIndexParameters: {
-          onTabbableIndexChange: onTabbableIndexChange !== null && onTabbableIndexChange !== void 0 ? onTabbableIndexChange : null
-        }
+      rovingTabIndexChildParameters: {
+        hidden: hidden !== null && hidden !== void 0 ? hidden : false
+      },
+      singleSelectionChildParameters: {
+        ariaPropName,
+        selectionMode: useDefault("selectionMode", selectionMode),
+        disabled: disabled !== null && disabled !== void 0 ? disabled : false
+      },
+      textContentParameters: {
+        getText: useDefault("getText", getText)
       },
       tableRowParameters: {
         selected: selected !== null && selected !== void 0 ? selected : null,
         tagTableRow
+      },
+      linearNavigationParameters: {
+        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
+        disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
+        navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
+        navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap"
+      },
+      rovingTabIndexParameters: {
+        onTabbableIndexChange: onTabbableIndexChange !== null && onTabbableIndexChange !== void 0 ? onTabbableIndexChange : null
       }
     });
     A$1(ref, () => info);
@@ -18801,7 +18826,7 @@
             children: footer
           });
           return o$2(d$2, {
-            children: [useClonedElement(anchor, useMergedProps(info.propsStableSource, props), ref), defaultRenderPortal({
+            children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
               portalId: usePortalId("dialog"),
               children: o$2("div", {
                 ...info.propsFocusContainer,
@@ -19816,7 +19841,7 @@
         closeOnEscape: true,
         render: info => {
           return o$2(d$2, {
-            children: [useClonedElement(anchor, useMergedProps(info.propsStableSource, props), ref), defaultRenderPortal({
+            children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
               portalId: usePortalId("offcanvas"),
               children: o$2("div", {
                 ...info.propsFocusContainer,

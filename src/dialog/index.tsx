@@ -54,7 +54,7 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
 
                     return (
                         <>
-                            {useClonedElement(anchor, useMergedProps(info.propsStableSource, props), ref)}
+                            {useClonedElement(anchor, useMergedProps(info.propsSource, props), ref)}
                             {defaultRenderPortal({
                                 portalId: usePortalId("dialog"),
                                 children: (
