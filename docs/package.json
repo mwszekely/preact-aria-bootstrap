@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "A small set of hooks and other functions related to modifying Preact props.",
     "main": "index.tsx",
-    "packageManager": "pnpm@7.28.0",
+    "packageManager": "pnpm@7.29.1",
     "browserslist": "defaults, iOS >= 12",
     "scripts": {
         "build": "npx npm-run-all --npm-path npm -sc build:js build:sass build:css",
@@ -44,7 +44,7 @@
         "bootstrap": "5.3.0-alpha1",
         "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
         "clsx": "^1.2.1",
-        "preact": "^10.13.0",
+        "preact": "^10.13.1",
         "preact-transition": "github:mwszekely/preact-transition#nodenext",
         "tslib": "^2.5.0"
     }

@@ -1,13 +1,13 @@
 (function () {
   'use strict';
 
-  var n$1,l$2,u$2,t$2,r$3,o$3,f$2,e$1={},c$2=[],s$2=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function a$2(n,l){for(var u in l)n[u]=l[u];return n}function h$2(n){var l=n.parentNode;l&&l.removeChild(n);}function v$2(l,u,i){var t,r,o,f={};for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];if(arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(o in l.defaultProps)void 0===f[o]&&(f[o]=l.defaultProps[o]);return y$2(l,f,t,r,null)}function y$2(n,i,t,r,o){var f={type:n,props:i,key:t,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++u$2:o};return null==o&&null!=l$2.vnode&&l$2.vnode(f),f}function d$2(n){return n.children}function _$3(n,l){this.props=n,this.context=l;}function k$3(n,l){if(null==l)return n.__?k$3(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?k$3(n):null}function b$2(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return b$2(n)}}function g$3(n){(!n.__d&&(n.__d=!0)&&t$2.push(n)&&!m$2.__r++||r$3!==l$2.debounceRendering)&&((r$3=l$2.debounceRendering)||o$3)(m$2);}function m$2(){var n,l,u,i,r,o,f,e;for(t$2.sort(function(n,l){return n.__v.__b-l.__v.__b});n=t$2.shift();)n.__d&&(l=t$2.length,i=void 0,r=void 0,f=(o=(u=n).__v).__e,(e=u.__P)&&(i=[],(r=a$2({},o)).__v=o.__v+1,z$3(e,o,r,u.__n,void 0!==e.ownerSVGElement,null!=o.__h?[f]:null,i,null==f?k$3(o):f,o.__h),L$3(i,o),o.__e!=f&&b$2(o)),t$2.length>l&&t$2.sort(function(n,l){return n.__v.__b-l.__v.__b}));m$2.__r=0;}function w$3(n,l,u,i,t,r,o,f,s,a){var h,v,p,_,b,g,m,w=i&&i.__k||c$2,A=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(_=u.__k[h]=null==(_=l[h])||"boolean"==typeof _?null:"string"==typeof _||"number"==typeof _||"bigint"==typeof _?y$2(null,_,null,null,_):Array.isArray(_)?y$2(d$2,{children:_},null,null,null):_.__b>0?y$2(_.type,_.props,_.key,_.ref?_.ref:null,_.__v):_)){if(_.__=u,_.__b=u.__b+1,null===(p=w[h])||p&&_.key==p.key&&_.type===p.type)w[h]=void 0;else for(v=0;v<A;v++){if((p=w[v])&&_.key==p.key&&_.type===p.type){w[v]=void 0;break}p=null;}z$3(n,_,p=p||e$1,t,r,o,f,s,a),b=_.__e,(v=_.ref)&&p.ref!=v&&(m||(m=[]),p.ref&&m.push(p.ref,null,_),m.push(v,_.__c||b,_)),null!=b?(null==g&&(g=b),"function"==typeof _.type&&_.__k===p.__k?_.__d=s=x$2(_,s,n):s=P$3(n,_,p,w,b,s),"function"==typeof u.type&&(u.__d=s)):s&&p.__e==s&&s.parentNode!=n&&(s=k$3(p));}for(u.__e=g,h=A;h--;)null!=w[h]&&("function"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=C$2(i).nextSibling),O$1(w[h],w[h]));if(m)for(h=0;h<m.length;h++)N$2(m[h],m[++h],m[++h]);}function x$2(n,l,u){for(var i,t=n.__k,r=0;t&&r<t.length;r++)(i=t[r])&&(i.__=n,l="function"==typeof i.type?x$2(i,l,u):P$3(u,i,i,t,i.__e,l));return l}function A$2(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){A$2(n,l);}):l.push(n)),l}function P$3(n,l,u,i,t,r){var o,f,e;if(void 0!==l.__d)o=l.__d,l.__d=void 0;else if(null==u||t!=r||null==t.parentNode)n:if(null==r||r.parentNode!==n)n.appendChild(t),o=null;else {for(f=r,e=0;(f=f.nextSibling)&&e<i.length;e+=1)if(f==t)break n;n.insertBefore(t,r),o=r;}return void 0!==o?o:t.nextSibling}function C$2(n){var l,u,i;if(null==n.type||"string"==typeof n.type)return n.__e;if(n.__k)for(l=n.__k.length-1;l>=0;l--)if((u=n.__k[l])&&(i=C$2(u)))return i;return null}function $$2(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||I$2(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||I$2(n,r,l[r],u[r],i);}function H$2(n,l,u){"-"===l[0]?n.setProperty(l,null==u?"":u):n[l]=null==u?"":"number"!=typeof u||s$2.test(l)?u:u+"px";}function I$2(n,l,u,i,t){var r;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else {if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||H$2(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||H$2(n.style,l,u[l]);}else if("o"===l[0]&&"n"===l[1])r=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+r]=u,u?i||n.addEventListener(l,r?j$3:T$3,r):n.removeEventListener(l,r?j$3:T$3,r);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("width"!==l&&"height"!==l&&"href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null==u||!1===u&&-1==l.indexOf("-")?n.removeAttribute(l):n.setAttribute(l,u));}}function T$3(n){return this.l[n.type+!1](l$2.event?l$2.event(n):n)}function j$3(n){return this.l[n.type+!0](l$2.event?l$2.event(n):n)}function z$3(n,u,i,t,r,o,f,e,c){var s,h,v,y,p,k,b,g,m,x,A,P,C,$,H,I=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,o=[e]),(s=l$2.__b)&&s(u);try{n:if("function"==typeof I){if(g=u.props,m=(s=I.contextType)&&t[s.__c],x=s?m?m.props.value:s.__:t,i.__c?b=(h=u.__c=i.__c).__=h.__E:("prototype"in I&&I.prototype.render?u.__c=h=new I(g,x):(u.__c=h=new _$3(g,x),h.constructor=I,h.render=S$1),m&&m.sub(h),h.props=g,h.state||(h.state={}),h.context=x,h.__n=t,v=h.__d=!0,h.__h=[],h._sb=[]),null==h.__s&&(h.__s=h.state),null!=I.getDerivedStateFromProps&&(h.__s==h.state&&(h.__s=a$2({},h.__s)),a$2(h.__s,I.getDerivedStateFromProps(g,h.__s))),y=h.props,p=h.state,h.__v=u,v)null==I.getDerivedStateFromProps&&null!=h.componentWillMount&&h.componentWillMount(),null!=h.componentDidMount&&h.__h.push(h.componentDidMount);else {if(null==I.getDerivedStateFromProps&&g!==y&&null!=h.componentWillReceiveProps&&h.componentWillReceiveProps(g,x),!h.__e&&null!=h.shouldComponentUpdate&&!1===h.shouldComponentUpdate(g,h.__s,x)||u.__v===i.__v){for(u.__v!==i.__v&&(h.props=g,h.state=h.__s,h.__d=!1),h.__e=!1,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u);}),A=0;A<h._sb.length;A++)h.__h.push(h._sb[A]);h._sb=[],h.__h.length&&f.push(h);break n}null!=h.componentWillUpdate&&h.componentWillUpdate(g,h.__s,x),null!=h.componentDidUpdate&&h.__h.push(function(){h.componentDidUpdate(y,p,k);});}if(h.context=x,h.props=g,h.__P=n,P=l$2.__r,C=0,"prototype"in I&&I.prototype.render){for(h.state=h.__s,h.__d=!1,P&&P(u),s=h.render(h.props,h.state,h.context),$=0;$<h._sb.length;$++)h.__h.push(h._sb[$]);h._sb=[];}else do{h.__d=!1,P&&P(u),s=h.render(h.props,h.state,h.context),h.state=h.__s;}while(h.__d&&++C<25);h.state=h.__s,null!=h.getChildContext&&(t=a$2(a$2({},t),h.getChildContext())),v||null==h.getSnapshotBeforeUpdate||(k=h.getSnapshotBeforeUpdate(y,p)),H=null!=s&&s.type===d$2&&null==s.key?s.props.children:s,w$3(n,Array.isArray(H)?H:[H],u,i,t,r,o,f,e,c),h.base=u.__e,u.__h=null,h.__h.length&&f.push(h),b&&(h.__E=h.__=null),h.__e=!1;}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=M$1(i.__e,u,i,t,r,o,f,c);(s=l$2.diffed)&&s(u);}catch(n){u.__v=null,(c||null!=o)&&(u.__e=e,u.__h=!!c,o[o.indexOf(e)]=null),l$2.__e(n,u,i);}}function L$3(n,u){l$2.__c&&l$2.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u);});}catch(n){l$2.__e(n,u.__v);}});}function M$1(l,u,i,t,r,o,f,c){var s,a,v,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(r=!0),null!=o)for(;_<o.length;_++)if((s=o[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,o[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=r?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),o=null,c=!1;}if(null===d)y===p||c&&l.data===p||(l.data=p);else {if(o=o&&n$1.call(l.childNodes),a=(y=i.props||e$1).dangerouslySetInnerHTML,v=p.dangerouslySetInnerHTML,!c){if(null!=o)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(v||a)&&(v&&(a&&v.__html==a.__html||v.__html===l.innerHTML)||(l.innerHTML=v&&v.__html||""));}if($$2(l,p,y,r,c),v)u.__k=[];else if(_=u.props.children,w$3(l,Array.isArray(_)?_:[_],u,i,t,r&&"foreignObject"!==d,o,f,o?o[0]:i.__k&&k$3(i,0),c),null!=o)for(_=o.length;_--;)null!=o[_]&&h$2(o[_]);c||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&I$2(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&I$2(l,"checked",_,y.checked,!1));}return l}function N$2(n,u,i){try{"function"==typeof n?n(u):n.current=u;}catch(n){l$2.__e(n,i);}}function O$1(n,u,i){var t,r;if(l$2.unmount&&l$2.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||N$2(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(n){l$2.__e(n,u);}t.base=t.__P=null,n.__c=void 0;}if(t=n.__k)for(r=0;r<t.length;r++)t[r]&&O$1(t[r],u,i||"function"!=typeof n.type);i||null==n.__e||h$2(n.__e),n.__=n.__e=n.__d=void 0;}function S$1(n,l,u){return this.constructor(n,u)}function q$2(u,i,t){var r,o,f;l$2.__&&l$2.__(u,i),o=(r="function"==typeof t)?null:t&&t.__k||i.__k,f=[],z$3(i,u=(!r&&t||i).__k=v$2(d$2,null,[u]),o||e$1,e$1,void 0!==i.ownerSVGElement,!r&&t?[t]:o?null:i.firstChild?n$1.call(i.childNodes):null,f,!r&&t?t:o?o.__e:i.firstChild,r),L$3(f,u);}function D$2(l,u,i){var t,r,o,f=a$2({},l.props);for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];return arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),y$2(l.type,f,t||l.key,r||l.ref,null)}function E$1(n,l){var u={__c:l="__cC"+f$2++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(function(n){n.__e=!0,g$3(n);});},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n$1=c$2.slice,l$2={__e:function(n,l,u,i){for(var t,r,o;l=l.__;)if((t=l.__c)&&!t.__)try{if((r=t.constructor)&&null!=r.getDerivedStateFromError&&(t.setState(r.getDerivedStateFromError(n)),o=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),o=t.__d),o)return t.__E=t}catch(l){n=l;}throw n}},u$2=0,_$3.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=a$2({},this.state),"function"==typeof n&&(n=n(a$2({},u),this.props)),n&&a$2(u,n),null!=n&&this.__v&&(l&&this._sb.push(l),g$3(this));},_$3.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),g$3(this));},_$3.prototype.render=d$2,t$2=[],o$3="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,m$2.__r=0,f$2=0;
+  var n$1,l$2,u$2,t$2,r$3,o$3,f$2,e$1,c$2={},s$2=[],a$2=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function h$2(n,l){for(var u in l)n[u]=l[u];return n}function v$2(n){var l=n.parentNode;l&&l.removeChild(n);}function y$2(l,u,i){var t,r,o,f={};for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];if(arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(o in l.defaultProps)void 0===f[o]&&(f[o]=l.defaultProps[o]);return p$2(l,f,t,r,null)}function p$2(n,i,t,r,o){var f={type:n,props:i,key:t,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++u$2:o};return null==o&&null!=l$2.vnode&&l$2.vnode(f),f}function _$3(n){return n.children}function k$3(n,l){this.props=n,this.context=l;}function b$2(n,l){if(null==l)return n.__?b$2(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?b$2(n):null}function g$3(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return g$3(n)}}function m$2(n){(!n.__d&&(n.__d=!0)&&t$2.push(n)&&!w$3.__r++||r$3!==l$2.debounceRendering)&&((r$3=l$2.debounceRendering)||o$3)(w$3);}function w$3(){var n,l,u,i,r,o,e,c;for(t$2.sort(f$2);n=t$2.shift();)n.__d&&(l=t$2.length,i=void 0,r=void 0,e=(o=(u=n).__v).__e,(c=u.__P)&&(i=[],(r=h$2({},o)).__v=o.__v+1,L$3(c,o,r,u.__n,void 0!==c.ownerSVGElement,null!=o.__h?[e]:null,i,null==e?b$2(o):e,o.__h),M$1(i,o),o.__e!=e&&g$3(o)),t$2.length>l&&t$2.sort(f$2));w$3.__r=0;}function x$2(n,l,u,i,t,r,o,f,e,a){var h,v,y,d,k,g,m,w=i&&i.__k||s$2,x=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(d=u.__k[h]=null==(d=l[h])||"boolean"==typeof d||"function"==typeof d?null:"string"==typeof d||"number"==typeof d||"bigint"==typeof d?p$2(null,d,null,null,d):Array.isArray(d)?p$2(_$3,{children:d},null,null,null):d.__b>0?p$2(d.type,d.props,d.key,d.ref?d.ref:null,d.__v):d)){if(d.__=u,d.__b=u.__b+1,null===(y=w[h])||y&&d.key==y.key&&d.type===y.type)w[h]=void 0;else for(v=0;v<x;v++){if((y=w[v])&&d.key==y.key&&d.type===y.type){w[v]=void 0;break}y=null;}L$3(n,d,y=y||c$2,t,r,o,f,e,a),k=d.__e,(v=d.ref)&&y.ref!=v&&(m||(m=[]),y.ref&&m.push(y.ref,null,d),m.push(v,d.__c||k,d)),null!=k?(null==g&&(g=k),"function"==typeof d.type&&d.__k===y.__k?d.__d=e=A$2(d,e,n):e=C$2(n,d,y,w,k,e),"function"==typeof u.type&&(u.__d=e)):e&&y.__e==e&&e.parentNode!=n&&(e=b$2(y));}for(u.__e=g,h=x;h--;)null!=w[h]&&("function"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=$$2(i).nextSibling),S$1(w[h],w[h]));if(m)for(h=0;h<m.length;h++)O$1(m[h],m[++h],m[++h]);}function A$2(n,l,u){for(var i,t=n.__k,r=0;t&&r<t.length;r++)(i=t[r])&&(i.__=n,l="function"==typeof i.type?A$2(i,l,u):C$2(u,i,i,t,i.__e,l));return l}function P$3(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){P$3(n,l);}):l.push(n)),l}function C$2(n,l,u,i,t,r){var o,f,e;if(void 0!==l.__d)o=l.__d,l.__d=void 0;else if(null==u||t!=r||null==t.parentNode)n:if(null==r||r.parentNode!==n)n.appendChild(t),o=null;else {for(f=r,e=0;(f=f.nextSibling)&&e<i.length;e+=1)if(f==t)break n;n.insertBefore(t,r),o=r;}return void 0!==o?o:t.nextSibling}function $$2(n){var l,u,i;if(null==n.type||"string"==typeof n.type)return n.__e;if(n.__k)for(l=n.__k.length-1;l>=0;l--)if((u=n.__k[l])&&(i=$$2(u)))return i;return null}function H$2(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||T$3(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||T$3(n,r,l[r],u[r],i);}function I$2(n,l,u){"-"===l[0]?n.setProperty(l,null==u?"":u):n[l]=null==u?"":"number"!=typeof u||a$2.test(l)?u:u+"px";}function T$3(n,l,u,i,t){var r;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else {if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||I$2(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||I$2(n.style,l,u[l]);}else if("o"===l[0]&&"n"===l[1])r=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+r]=u,u?i||n.addEventListener(l,r?z$3:j$3,r):n.removeEventListener(l,r?z$3:j$3,r);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("width"!==l&&"height"!==l&&"href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null==u||!1===u&&-1==l.indexOf("-")?n.removeAttribute(l):n.setAttribute(l,u));}}function j$3(n){return this.l[n.type+!1](l$2.event?l$2.event(n):n)}function z$3(n){return this.l[n.type+!0](l$2.event?l$2.event(n):n)}function L$3(n,u,i,t,r,o,f,e,c){var s,a,v,y,p,d,b,g,m,w,A,P,C,$,H,I=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,o=[e]),(s=l$2.__b)&&s(u);try{n:if("function"==typeof I){if(g=u.props,m=(s=I.contextType)&&t[s.__c],w=s?m?m.props.value:s.__:t,i.__c?b=(a=u.__c=i.__c).__=a.__E:("prototype"in I&&I.prototype.render?u.__c=a=new I(g,w):(u.__c=a=new k$3(g,w),a.constructor=I,a.render=q$3),m&&m.sub(a),a.props=g,a.state||(a.state={}),a.context=w,a.__n=t,v=a.__d=!0,a.__h=[],a._sb=[]),null==a.__s&&(a.__s=a.state),null!=I.getDerivedStateFromProps&&(a.__s==a.state&&(a.__s=h$2({},a.__s)),h$2(a.__s,I.getDerivedStateFromProps(g,a.__s))),y=a.props,p=a.state,a.__v=u,v)null==I.getDerivedStateFromProps&&null!=a.componentWillMount&&a.componentWillMount(),null!=a.componentDidMount&&a.__h.push(a.componentDidMount);else {if(null==I.getDerivedStateFromProps&&g!==y&&null!=a.componentWillReceiveProps&&a.componentWillReceiveProps(g,w),!a.__e&&null!=a.shouldComponentUpdate&&!1===a.shouldComponentUpdate(g,a.__s,w)||u.__v===i.__v){for(u.__v!==i.__v&&(a.props=g,a.state=a.__s,a.__d=!1),a.__e=!1,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u);}),A=0;A<a._sb.length;A++)a.__h.push(a._sb[A]);a._sb=[],a.__h.length&&f.push(a);break n}null!=a.componentWillUpdate&&a.componentWillUpdate(g,a.__s,w),null!=a.componentDidUpdate&&a.__h.push(function(){a.componentDidUpdate(y,p,d);});}if(a.context=w,a.props=g,a.__P=n,P=l$2.__r,C=0,"prototype"in I&&I.prototype.render){for(a.state=a.__s,a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),$=0;$<a._sb.length;$++)a.__h.push(a._sb[$]);a._sb=[];}else do{a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),a.state=a.__s;}while(a.__d&&++C<25);a.state=a.__s,null!=a.getChildContext&&(t=h$2(h$2({},t),a.getChildContext())),v||null==a.getSnapshotBeforeUpdate||(d=a.getSnapshotBeforeUpdate(y,p)),H=null!=s&&s.type===_$3&&null==s.key?s.props.children:s,x$2(n,Array.isArray(H)?H:[H],u,i,t,r,o,f,e,c),a.base=u.__e,u.__h=null,a.__h.length&&f.push(a),b&&(a.__E=a.__=null),a.__e=!1;}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=N$2(i.__e,u,i,t,r,o,f,c);(s=l$2.diffed)&&s(u);}catch(n){u.__v=null,(c||null!=o)&&(u.__e=e,u.__h=!!c,o[o.indexOf(e)]=null),l$2.__e(n,u,i);}}function M$1(n,u){l$2.__c&&l$2.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u);});}catch(n){l$2.__e(n,u.__v);}});}function N$2(l,u,i,t,r,o,f,e){var s,a,h,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(r=!0),null!=o)for(;_<o.length;_++)if((s=o[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,o[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=r?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),o=null,e=!1;}if(null===d)y===p||e&&l.data===p||(l.data=p);else {if(o=o&&n$1.call(l.childNodes),a=(y=i.props||c$2).dangerouslySetInnerHTML,h=p.dangerouslySetInnerHTML,!e){if(null!=o)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(h||a)&&(h&&(a&&h.__html==a.__html||h.__html===l.innerHTML)||(l.innerHTML=h&&h.__html||""));}if(H$2(l,p,y,r,e),h)u.__k=[];else if(_=u.props.children,x$2(l,Array.isArray(_)?_:[_],u,i,t,r&&"foreignObject"!==d,o,f,o?o[0]:i.__k&&b$2(i,0),e),null!=o)for(_=o.length;_--;)null!=o[_]&&v$2(o[_]);e||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&T$3(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&T$3(l,"checked",_,y.checked,!1));}return l}function O$1(n,u,i){try{"function"==typeof n?n(u):n.current=u;}catch(n){l$2.__e(n,i);}}function S$1(n,u,i){var t,r;if(l$2.unmount&&l$2.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||O$1(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(n){l$2.__e(n,u);}t.base=t.__P=null,n.__c=void 0;}if(t=n.__k)for(r=0;r<t.length;r++)t[r]&&S$1(t[r],u,i||"function"!=typeof n.type);i||null==n.__e||v$2(n.__e),n.__=n.__e=n.__d=void 0;}function q$3(n,l,u){return this.constructor(n,u)}function B$3(u,i,t){var r,o,f;l$2.__&&l$2.__(u,i),o=(r="function"==typeof t)?null:t&&t.__k||i.__k,f=[],L$3(i,u=(!r&&t||i).__k=y$2(_$3,null,[u]),o||c$2,c$2,void 0!==i.ownerSVGElement,!r&&t?[t]:o?null:i.firstChild?n$1.call(i.childNodes):null,f,!r&&t?t:o?o.__e:i.firstChild,r),M$1(f,u);}function E$1(l,u,i){var t,r,o,f=h$2({},l.props);for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];return arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),p$2(l.type,f,t||l.key,r||l.ref,null)}function F$3(n,l){var u={__c:l="__cC"+e$1++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(function(n){n.__e=!0,m$2(n);});},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n$1=s$2.slice,l$2={__e:function(n,l,u,i){for(var t,r,o;l=l.__;)if((t=l.__c)&&!t.__)try{if((r=t.constructor)&&null!=r.getDerivedStateFromError&&(t.setState(r.getDerivedStateFromError(n)),o=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),o=t.__d),o)return t.__E=t}catch(l){n=l;}throw n}},u$2=0,k$3.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=h$2({},this.state),"function"==typeof n&&(n=n(h$2({},u),this.props)),n&&h$2(u,n),null!=n&&this.__v&&(l&&this._sb.push(l),m$2(this));},k$3.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),m$2(this));},k$3.prototype.render=_$3,t$2=[],o$3="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,f$2=function(n,l){return n.__v.__b-l.__v.__b},w$3.__r=0,e$1=0;
 
   var _$2=0;function o$2(o,e,n,t,f,l){var s,u,a={};for(u in e)"ref"==u?s=e[u]:a[u]=e[u];var i={type:o,props:a,key:n,ref:s,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:--_$2,__source:f,__self:l};if("function"==typeof o&&(s=o.defaultProps))for(u in s)void 0===a[u]&&(a[u]=s[u]);return l$2.vnode&&l$2.vnode(i),i}
 
-  var t$1,r$2,u$1,i$1,o$1=0,f$1=[],c$1=[],e=l$2.__b,a$1=l$2.__r,v$1=l$2.diffed,l$1=l$2.__c,m$1=l$2.unmount;function d$1(t,u){l$2.__h&&l$2.__h(r$2,t,o$1||u),o$1=0;var i=r$2.__H||(r$2.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({__V:c$1}),i.__[t]}function p$1(n){return o$1=1,y$1(B$2,n)}function y$1(n,u,i){var o=d$1(t$1++,2);if(o.t=n,!o.__c&&(o.__=[i?i(u):B$2(void 0,u),function(n){var t=o.__N?o.__N[0]:o.__[0],r=o.t(t,n);t!==r&&(o.__N=[r,o.__[1]],o.__c.setState({}));}],o.__c=r$2,!r$2.u)){r$2.u=!0;var f=r$2.shouldComponentUpdate;r$2.shouldComponentUpdate=function(n,t,r){if(!o.__c.__H)return !0;var u=o.__c.__H.__.filter(function(n){return n.__c});if(u.every(function(n){return !n.__N}))return !f||f.call(this,n,t,r);var i=!1;return u.forEach(function(n){if(n.__N){var t=n.__[0];n.__=n.__N,n.__N=void 0,t!==n.__[0]&&(i=!0);}}),!(!i&&o.__c.props===n)&&(!f||f.call(this,n,t,r))};}return o.__N||o.__}function h$1(u,i){var o=d$1(t$1++,3);!l$2.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$2.__H.__h.push(o));}function s$1(u,i){var o=d$1(t$1++,4);!l$2.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$2.__h.push(o));}function _$1(n){return o$1=5,F$2(function(){return {current:n}},[])}function A$1(n,t,r){o$1=6,s$1(function(){return "function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==r?r:r.concat(n));}function F$2(n,r){var u=d$1(t$1++,7);return z$2(u.__H,r)?(u.__V=n(),u.i=r,u.__h=n,u.__V):u.__}function T$2(n,t){return o$1=8,F$2(function(){return n},t)}function q$1(n){var u=r$2.context[n.__c],i=d$1(t$1++,9);return i.c=n,u?(null==i.__&&(i.__=!0,u.sub(r$2)),u.props.value):n.__}function P$2(n){var u=d$1(t$1++,10),i=p$1();return u.__=n,r$2.componentDidCatch||(r$2.componentDidCatch=function(n,t){u.__&&u.__(n,t),i[1](n);}),[i[0],function(){i[1](void 0);}]}function V$2(){var n=d$1(t$1++,11);if(!n.__){for(var u=r$2.__v;null!==u&&!u.__m&&null!==u.__;)u=u.__;var i=u.__m||(u.__m=[0,0]);n.__="P"+i[0]+"-"+i[1]++;}return n.__}function b$1(){for(var t;t=f$1.shift();)if(t.__P&&t.__H)try{t.__H.__h.forEach(k$2),t.__H.__h.forEach(w$2),t.__H.__h=[];}catch(r){t.__H.__h=[],l$2.__e(r,t.__v);}}l$2.__b=function(n){r$2=null,e&&e(n);},l$2.__r=function(n){a$1&&a$1(n),t$1=0;var i=(r$2=n.__c).__H;i&&(u$1===r$2?(i.__h=[],r$2.__h=[],i.__.forEach(function(n){n.__N&&(n.__=n.__N),n.__V=c$1,n.__N=n.i=void 0;})):(i.__h.forEach(k$2),i.__h.forEach(w$2),i.__h=[])),u$1=r$2;},l$2.diffed=function(t){v$1&&v$1(t);var o=t.__c;o&&o.__H&&(o.__H.__h.length&&(1!==f$1.push(o)&&i$1===l$2.requestAnimationFrame||((i$1=l$2.requestAnimationFrame)||j$2)(b$1)),o.__H.__.forEach(function(n){n.i&&(n.__H=n.i),n.__V!==c$1&&(n.__=n.__V),n.i=void 0,n.__V=c$1;})),u$1=r$2=null;},l$2.__c=function(t,r){r.some(function(t){try{t.__h.forEach(k$2),t.__h=t.__h.filter(function(n){return !n.__||w$2(n)});}catch(u){r.some(function(n){n.__h&&(n.__h=[]);}),r=[],l$2.__e(u,t.__v);}}),l$1&&l$1(t,r);},l$2.unmount=function(t){m$1&&m$1(t);var r,u=t.__c;u&&u.__H&&(u.__H.__.forEach(function(n){try{k$2(n);}catch(n){r=n;}}),u.__H=void 0,r&&l$2.__e(r,u.__v));};var g$2="function"==typeof requestAnimationFrame;function j$2(n){var t,r=function(){clearTimeout(u),g$2&&cancelAnimationFrame(t),setTimeout(n);},u=setTimeout(r,100);g$2&&(t=requestAnimationFrame(r));}function k$2(n){var t=r$2,u=n.__c;"function"==typeof u&&(n.__c=void 0,u()),r$2=t;}function w$2(n){var t=r$2;n.__c=n.__(),r$2=t;}function z$2(n,t){return !n||n.length!==t.length||t.some(function(t,r){return t!==n[r]})}function B$2(n,t){return "function"==typeof t?t(n):t}
+  var t$1,r$2,u$1,i$1,o$1=0,f$1=[],c$1=[],e=l$2.__b,a$1=l$2.__r,v$1=l$2.diffed,l$1=l$2.__c,m$1=l$2.unmount;function d$1(t,u){l$2.__h&&l$2.__h(r$2,t,o$1||u),o$1=0;var i=r$2.__H||(r$2.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({__V:c$1}),i.__[t]}function h$1(n){return o$1=1,s$1(B$2,n)}function s$1(n,u,i){var o=d$1(t$1++,2);if(o.t=n,!o.__c&&(o.__=[i?i(u):B$2(void 0,u),function(n){var t=o.__N?o.__N[0]:o.__[0],r=o.t(t,n);t!==r&&(o.__N=[r,o.__[1]],o.__c.setState({}));}],o.__c=r$2,!r$2.u)){var f=function(n,t,r){if(!o.__c.__H)return !0;var u=o.__c.__H.__.filter(function(n){return n.__c});if(u.every(function(n){return !n.__N}))return !c||c.call(this,n,t,r);var i=!1;return u.forEach(function(n){if(n.__N){var t=n.__[0];n.__=n.__N,n.__N=void 0,t!==n.__[0]&&(i=!0);}}),!(!i&&o.__c.props===n)&&(!c||c.call(this,n,t,r))};r$2.u=!0;var c=r$2.shouldComponentUpdate,e=r$2.componentWillUpdate;r$2.componentWillUpdate=function(n,t,r){if(this.__e){var u=c;c=void 0,f(n,t,r),c=u;}e&&e.call(this,n,t,r);},r$2.shouldComponentUpdate=f;}return o.__N||o.__}function p$1(u,i){var o=d$1(t$1++,3);!l$2.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$2.__H.__h.push(o));}function y$1(u,i){var o=d$1(t$1++,4);!l$2.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$2.__h.push(o));}function _$1(n){return o$1=5,F$2(function(){return {current:n}},[])}function A$1(n,t,r){o$1=6,y$1(function(){return "function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==r?r:r.concat(n));}function F$2(n,r){var u=d$1(t$1++,7);return z$2(u.__H,r)?(u.__V=n(),u.i=r,u.__h=n,u.__V):u.__}function T$2(n,t){return o$1=8,F$2(function(){return n},t)}function q$2(n){var u=r$2.context[n.__c],i=d$1(t$1++,9);return i.c=n,u?(null==i.__&&(i.__=!0,u.sub(r$2)),u.props.value):n.__}function P$2(n){var u=d$1(t$1++,10),i=h$1();return u.__=n,r$2.componentDidCatch||(r$2.componentDidCatch=function(n,t){u.__&&u.__(n,t),i[1](n);}),[i[0],function(){i[1](void 0);}]}function V$2(){var n=d$1(t$1++,11);if(!n.__){for(var u=r$2.__v;null!==u&&!u.__m&&null!==u.__;)u=u.__;var i=u.__m||(u.__m=[0,0]);n.__="P"+i[0]+"-"+i[1]++;}return n.__}function b$1(){for(var t;t=f$1.shift();)if(t.__P&&t.__H)try{t.__H.__h.forEach(k$2),t.__H.__h.forEach(w$2),t.__H.__h=[];}catch(r){t.__H.__h=[],l$2.__e(r,t.__v);}}l$2.__b=function(n){r$2=null,e&&e(n);},l$2.__r=function(n){a$1&&a$1(n),t$1=0;var i=(r$2=n.__c).__H;i&&(u$1===r$2?(i.__h=[],r$2.__h=[],i.__.forEach(function(n){n.__N&&(n.__=n.__N),n.__V=c$1,n.__N=n.i=void 0;})):(i.__h.forEach(k$2),i.__h.forEach(w$2),i.__h=[])),u$1=r$2;},l$2.diffed=function(t){v$1&&v$1(t);var o=t.__c;o&&o.__H&&(o.__H.__h.length&&(1!==f$1.push(o)&&i$1===l$2.requestAnimationFrame||((i$1=l$2.requestAnimationFrame)||j$2)(b$1)),o.__H.__.forEach(function(n){n.i&&(n.__H=n.i),n.__V!==c$1&&(n.__=n.__V),n.i=void 0,n.__V=c$1;})),u$1=r$2=null;},l$2.__c=function(t,r){r.some(function(t){try{t.__h.forEach(k$2),t.__h=t.__h.filter(function(n){return !n.__||w$2(n)});}catch(u){r.some(function(n){n.__h&&(n.__h=[]);}),r=[],l$2.__e(u,t.__v);}}),l$1&&l$1(t,r);},l$2.unmount=function(t){m$1&&m$1(t);var r,u=t.__c;u&&u.__H&&(u.__H.__.forEach(function(n){try{k$2(n);}catch(n){r=n;}}),u.__H=void 0,r&&l$2.__e(r,u.__v));};var g$2="function"==typeof requestAnimationFrame;function j$2(n){var t,r=function(){clearTimeout(u),g$2&&cancelAnimationFrame(t),setTimeout(n);},u=setTimeout(r,100);g$2&&(t=requestAnimationFrame(r));}function k$2(n){var t=r$2,u=n.__c;"function"==typeof u&&(n.__c=void 0,u()),r$2=t;}function w$2(n){var t=r$2;n.__c=n.__(),r$2=t;}function z$2(n,t){return !n||n.length!==t.length||t.some(function(t,r){return t!==n[r]})}function B$2(n,t){return "function"==typeof t?t(n):t}
 
-  function g$1(n,t){for(var e in t)n[e]=t[e];return n}function C$1(n,t){for(var e in n)if("__source"!==e&&!(e in t))return !0;for(var r in t)if("__source"!==r&&n[r]!==t[r])return !0;return !1}function w$1(n){this.props=n;}function x$1(n,e){function r(n){var t=this.props.ref,r=t==n.ref;return !r&&t&&(t.call?t(null):t.current=null),e?!e(this.props,n)||!r:C$1(this.props,n)}function u(e){return this.shouldComponentUpdate=r,v$2(n,e)}return u.displayName="Memo("+(n.displayName||n.name)+")",u.prototype.isReactComponent=!0,u.__f=!0,u}(w$1.prototype=new _$3).isPureReactComponent=!0,w$1.prototype.shouldComponentUpdate=function(n,t){return C$1(this.props,n)||C$1(this.state,t)};var R$1=l$2.__b;l$2.__b=function(n){n.type&&n.type.__f&&n.ref&&(n.props.ref=n.ref,n.ref=null),R$1&&R$1(n);};var N$1="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function k$1(n){function t(t){var e=g$1({},t);return delete e.ref,n(e,t.ref||null)}return t.$$typeof=N$1,t.render=t,t.prototype.isReactComponent=t.__f=!0,t.displayName="ForwardRef("+(n.displayName||n.name)+")",t}var T$1=l$2.__e;l$2.__e=function(n,t,e,r){if(n.then)for(var u,o=t;o=o.__;)if((u=o.__c)&&u.__c)return null==t.__e&&(t.__e=e.__e,t.__k=e.__k),u.__c(n,t);T$1(n,t,e,r);};var I$1=l$2.unmount;function L$2(n,t,e){return n&&(n.__c&&n.__c.__H&&(n.__c.__H.__.forEach(function(n){"function"==typeof n.__c&&n.__c();}),n.__c.__H=null),null!=(n=g$1({},n)).__c&&(n.__c.__P===e&&(n.__c.__P=t),n.__c=null),n.__k=n.__k&&n.__k.map(function(n){return L$2(n,t,e)})),n}function U$1(n,t,e){return n&&(n.__v=null,n.__k=n.__k&&n.__k.map(function(n){return U$1(n,t,e)}),n.__c&&n.__c.__P===t&&(n.__e&&e.insertBefore(n.__e,n.__d),n.__c.__e=!0,n.__c.__P=e)),n}function D$1(){this.__u=0,this.t=null,this.__b=null;}function F$1(n){var t=n.__.__c;return t&&t.__a&&t.__a(n)}function V$1(){this.u=null,this.o=null;}l$2.unmount=function(n){var t=n.__c;t&&t.__R&&t.__R(),t&&!0===n.__h&&(n.type=null),I$1&&I$1(n);},(D$1.prototype=new _$3).__c=function(n,t){var e=t.__c,r=this;null==r.t&&(r.t=[]),r.t.push(e);var u=F$1(r.__v),o=!1,i=function(){o||(o=!0,e.__R=null,u?u(l):l());};e.__R=i;var l=function(){if(!--r.__u){if(r.state.__a){var n=r.state.__a;r.__v.__k[0]=U$1(n,n.__c.__P,n.__c.__O);}var t;for(r.setState({__a:r.__b=null});t=r.t.pop();)t.forceUpdate();}},c=!0===t.__h;r.__u++||c||r.setState({__a:r.__b=r.__v.__k[0]}),n.then(i,i);},D$1.prototype.componentWillUnmount=function(){this.t=[];},D$1.prototype.render=function(n,e){if(this.__b){if(this.__v.__k){var r=document.createElement("div"),o=this.__v.__k[0].__c;this.__v.__k[0]=L$2(this.__b,r,o.__O=o.__P);}this.__b=null;}var i=e.__a&&v$2(d$2,null,n.fallback);return i&&(i.__h=null),[v$2(d$2,null,e.__a?null:n.children),i]};var W$1=function(n,t,e){if(++e[1]===e[0]&&n.o.delete(t),n.props.revealOrder&&("t"!==n.props.revealOrder[0]||!n.o.size))for(e=n.u;e;){for(;e.length>3;)e.pop()();if(e[1]<e[0])break;n.u=e=e[2];}};function P$1(n){return this.getChildContext=function(){return n.context},n.children}function $$1(n){var e=this,r=n.i;e.componentWillUnmount=function(){q$2(null,e.l),e.l=null,e.i=null;},e.i&&e.i!==r&&e.componentWillUnmount(),n.__v?(e.l||(e.i=r,e.l={nodeType:1,parentNode:r,childNodes:[],appendChild:function(n){this.childNodes.push(n),e.i.appendChild(n);},insertBefore:function(n,t){this.childNodes.push(n),e.i.appendChild(n);},removeChild:function(n){this.childNodes.splice(this.childNodes.indexOf(n)>>>1,1),e.i.removeChild(n);}}),q$2(v$2(P$1,{context:e.context},n.__v),e.l)):e.l&&e.componentWillUnmount();}function j$1(n,e){var r=v$2($$1,{__v:n,i:e});return r.containerInfo=e,r}(V$1.prototype=new _$3).__a=function(n){var t=this,e=F$1(t.__v),r=t.o.get(n);return r[0]++,function(u){var o=function(){t.props.revealOrder?(r.push(u),W$1(t,n,r)):u();};e?e(o):o();}},V$1.prototype.render=function(n){this.u=null,this.o=new Map;var t=A$2(n.children);n.revealOrder&&"b"===n.revealOrder[0]&&t.reverse();for(var e=t.length;e--;)this.o.set(t[e],this.u=[1,0,this.u]);return n.children},V$1.prototype.componentDidUpdate=V$1.prototype.componentDidMount=function(){var n=this;this.o.forEach(function(t,e){W$1(n,e,t);});};var z$1="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,B$1=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,H$1="undefined"!=typeof document,Z$1=function(n){return ("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/i:/fil|che|ra/i).test(n)};_$3.prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach(function(t){Object.defineProperty(_$3.prototype,t,{configurable:!0,get:function(){return this["UNSAFE_"+t]},set:function(n){Object.defineProperty(this,t,{configurable:!0,writable:!0,value:n});}});});var G$1=l$2.event;function J$1(){}function K$1(){return this.cancelBubble}function Q$1(){return this.defaultPrevented}l$2.event=function(n){return G$1&&(n=G$1(n)),n.persist=J$1,n.isPropagationStopped=K$1,n.isDefaultPrevented=Q$1,n.nativeEvent=n};var nn={configurable:!0,get:function(){return this.class}},tn=l$2.vnode;l$2.vnode=function(n){var t=n.type,e=n.props,u=e;if("string"==typeof t){var o=-1===t.indexOf("-");for(var i in u={},e){var l=e[i];H$1&&"children"===i&&"noscript"===t||"value"===i&&"defaultValue"in e&&null==l||("defaultValue"===i&&"value"in e&&null==e.value?i="value":"download"===i&&!0===l?l="":/ondoubleclick/i.test(i)?i="ondblclick":/^onchange(textarea|input)/i.test(i+t)&&!Z$1(e.type)?i="oninput":/^onfocus$/i.test(i)?i="onfocusin":/^onblur$/i.test(i)?i="onfocusout":/^on(Ani|Tra|Tou|BeforeInp|Compo)/.test(i)?i=i.toLowerCase():o&&B$1.test(i)?i=i.replace(/[A-Z0-9]/g,"-$&").toLowerCase():null===l&&(l=void 0),/^oninput$/i.test(i)&&(i=i.toLowerCase(),u[i]&&(i="oninputCapture")),u[i]=l);}"select"==t&&u.multiple&&Array.isArray(u.value)&&(u.value=A$2(e.children).forEach(function(n){n.props.selected=-1!=u.value.indexOf(n.props.value);})),"select"==t&&null!=u.defaultValue&&(u.value=A$2(e.children).forEach(function(n){n.props.selected=u.multiple?-1!=u.defaultValue.indexOf(n.props.value):u.defaultValue==n.props.value;})),n.props=u,e.class!=e.className&&(nn.enumerable="className"in e,null!=e.className&&(u.class=e.className),Object.defineProperty(u,"className",nn));}n.$$typeof=z$1,tn&&tn(n);};var en=l$2.__r;l$2.__r=function(n){en&&en(n),n.__c;};var rn=l$2.diffed;l$2.diffed=function(n){rn&&rn(n);var t=n.props,e=n.__e;null!=e&&"textarea"===n.type&&"value"in t&&t.value!==e.value&&(e.value=null==t.value?"":t.value);};
+  function g$1(n,t){for(var e in t)n[e]=t[e];return n}function C$1(n,t){for(var e in n)if("__source"!==e&&!(e in t))return !0;for(var r in t)if("__source"!==r&&n[r]!==t[r])return !0;return !1}function w$1(n){this.props=n;}function x$1(n,e){function r(n){var t=this.props.ref,r=t==n.ref;return !r&&t&&(t.call?t(null):t.current=null),e?!e(this.props,n)||!r:C$1(this.props,n)}function u(e){return this.shouldComponentUpdate=r,y$2(n,e)}return u.displayName="Memo("+(n.displayName||n.name)+")",u.prototype.isReactComponent=!0,u.__f=!0,u}(w$1.prototype=new k$3).isPureReactComponent=!0,w$1.prototype.shouldComponentUpdate=function(n,t){return C$1(this.props,n)||C$1(this.state,t)};var R$1=l$2.__b;l$2.__b=function(n){n.type&&n.type.__f&&n.ref&&(n.props.ref=n.ref,n.ref=null),R$1&&R$1(n);};var N$1="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function k$1(n){function t(t){var e=g$1({},t);return delete e.ref,n(e,t.ref||null)}return t.$$typeof=N$1,t.render=t,t.prototype.isReactComponent=t.__f=!0,t.displayName="ForwardRef("+(n.displayName||n.name)+")",t}var T$1=l$2.__e;l$2.__e=function(n,t,e,r){if(n.then)for(var u,o=t;o=o.__;)if((u=o.__c)&&u.__c)return null==t.__e&&(t.__e=e.__e,t.__k=e.__k),u.__c(n,t);T$1(n,t,e,r);};var I$1=l$2.unmount;function L$2(n,t,e){return n&&(n.__c&&n.__c.__H&&(n.__c.__H.__.forEach(function(n){"function"==typeof n.__c&&n.__c();}),n.__c.__H=null),null!=(n=g$1({},n)).__c&&(n.__c.__P===e&&(n.__c.__P=t),n.__c=null),n.__k=n.__k&&n.__k.map(function(n){return L$2(n,t,e)})),n}function U$1(n,t,e){return n&&(n.__v=null,n.__k=n.__k&&n.__k.map(function(n){return U$1(n,t,e)}),n.__c&&n.__c.__P===t&&(n.__e&&e.insertBefore(n.__e,n.__d),n.__c.__e=!0,n.__c.__P=e)),n}function D$1(){this.__u=0,this.t=null,this.__b=null;}function F$1(n){var t=n.__.__c;return t&&t.__a&&t.__a(n)}function V$1(){this.u=null,this.o=null;}l$2.unmount=function(n){var t=n.__c;t&&t.__R&&t.__R(),t&&!0===n.__h&&(n.type=null),I$1&&I$1(n);},(D$1.prototype=new k$3).__c=function(n,t){var e=t.__c,r=this;null==r.t&&(r.t=[]),r.t.push(e);var u=F$1(r.__v),o=!1,i=function(){o||(o=!0,e.__R=null,u?u(l):l());};e.__R=i;var l=function(){if(!--r.__u){if(r.state.__a){var n=r.state.__a;r.__v.__k[0]=U$1(n,n.__c.__P,n.__c.__O);}var t;for(r.setState({__a:r.__b=null});t=r.t.pop();)t.forceUpdate();}},c=!0===t.__h;r.__u++||c||r.setState({__a:r.__b=r.__v.__k[0]}),n.then(i,i);},D$1.prototype.componentWillUnmount=function(){this.t=[];},D$1.prototype.render=function(n,e){if(this.__b){if(this.__v.__k){var r=document.createElement("div"),o=this.__v.__k[0].__c;this.__v.__k[0]=L$2(this.__b,r,o.__O=o.__P);}this.__b=null;}var i=e.__a&&y$2(_$3,null,n.fallback);return i&&(i.__h=null),[y$2(_$3,null,e.__a?null:n.children),i]};var W$1=function(n,t,e){if(++e[1]===e[0]&&n.o.delete(t),n.props.revealOrder&&("t"!==n.props.revealOrder[0]||!n.o.size))for(e=n.u;e;){for(;e.length>3;)e.pop()();if(e[1]<e[0])break;n.u=e=e[2];}};function P$1(n){return this.getChildContext=function(){return n.context},n.children}function j$1(n){var e=this,r=n.i;e.componentWillUnmount=function(){B$3(null,e.l),e.l=null,e.i=null;},e.i&&e.i!==r&&e.componentWillUnmount(),n.__v?(e.l||(e.i=r,e.l={nodeType:1,parentNode:r,childNodes:[],appendChild:function(n){this.childNodes.push(n),e.i.appendChild(n);},insertBefore:function(n,t){this.childNodes.push(n),e.i.appendChild(n);},removeChild:function(n){this.childNodes.splice(this.childNodes.indexOf(n)>>>1,1),e.i.removeChild(n);}}),B$3(y$2(P$1,{context:e.context},n.__v),e.l)):e.l&&e.componentWillUnmount();}function z$1(n,e){var r=y$2(j$1,{__v:n,i:e});return r.containerInfo=e,r}(V$1.prototype=new k$3).__a=function(n){var t=this,e=F$1(t.__v),r=t.o.get(n);return r[0]++,function(u){var o=function(){t.props.revealOrder?(r.push(u),W$1(t,n,r)):u();};e?e(o):o();}},V$1.prototype.render=function(n){this.u=null,this.o=new Map;var t=P$3(n.children);n.revealOrder&&"b"===n.revealOrder[0]&&t.reverse();for(var e=t.length;e--;)this.o.set(t[e],this.u=[1,0,this.u]);return n.children},V$1.prototype.componentDidUpdate=V$1.prototype.componentDidMount=function(){var n=this;this.o.forEach(function(t,e){W$1(n,e,t);});};var B$1="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,H$1=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,Z$1=/^on(Ani|Tra|Tou|BeforeInp|Compo)/,Y$1=/[A-Z0-9]/g,$$1="undefined"!=typeof document,q$1=function(n){return ("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/:/fil|che|ra/).test(n)};k$3.prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach(function(t){Object.defineProperty(k$3.prototype,t,{configurable:!0,get:function(){return this["UNSAFE_"+t]},set:function(n){Object.defineProperty(this,t,{configurable:!0,writable:!0,value:n});}});});var K$1=l$2.event;function Q$1(){}function X$1(){return this.cancelBubble}function nn(){return this.defaultPrevented}l$2.event=function(n){return K$1&&(n=K$1(n)),n.persist=Q$1,n.isPropagationStopped=X$1,n.isDefaultPrevented=nn,n.nativeEvent=n};var en={configurable:!0,get:function(){return this.class}},rn=l$2.vnode;l$2.vnode=function(n){var t=n.type,e=n.props,u=e;if("string"==typeof t){for(var o in u={},e){var i=e[o];if(!("value"===o&&"defaultValue"in e&&null==i||$$1&&"children"===o&&"noscript"===t)){var l=o.toLowerCase();"defaultValue"===o&&"value"in e&&null==e.value?o="value":"download"===o&&!0===i?i="":"ondoubleclick"===l?o="ondblclick":"onchange"!==l||"input"!==t&&"textarea"!==t||q$1(e.type)?"onfocus"===l?o="onfocusin":"onblur"===l?o="onfocusout":Z$1.test(o)?o=l:-1===t.indexOf("-")&&H$1.test(o)?o=o.replace(Y$1,"-$&").toLowerCase():null===i&&(i=void 0):l=o="oninput","oninput"===l&&u[o=l]&&(o="oninputCapture"),u[o]=i;}}"select"==t&&u.multiple&&Array.isArray(u.value)&&(u.value=P$3(e.children).forEach(function(n){n.props.selected=-1!=u.value.indexOf(n.props.value);})),"select"==t&&null!=u.defaultValue&&(u.value=P$3(e.children).forEach(function(n){n.props.selected=u.multiple?-1!=u.defaultValue.indexOf(n.props.value):u.defaultValue==n.props.value;})),n.props=u,e.class!=e.className&&(en.enumerable="className"in e,null!=e.className&&(u.class=e.className),Object.defineProperty(u,"className",en));}n.$$typeof=B$1,rn&&rn(n);};var un=l$2.__r;l$2.__r=function(n){un&&un(n),n.__c;};var on=l$2.diffed;l$2.diffed=function(n){on&&on(n);var t=n.props,e=n.__e;null!=e&&"textarea"===n.type&&"value"in t&&t.value!==e.value&&(e.value=null==t.value?"":t.value);};
 
   function r$1(e) {
     var t,
@@ -1776,13 +1776,36 @@
 
   function getBuildModeUnmemoized() {
     try {
-      if (process?.env?.NODE_ENV === 'development') return 'development';
-      return 'production';
+      if ("development" === "development") return "development";
+      return "production";
     } catch (_e) {
       return "production";
     }
   }
-  const getBuildMode = memoize(getBuildModeUnmemoized);
+  const getBuildMode = getBuildModeUnmemoized; //memoize(getBuildModeUnmemoized) as typeof getBuildModeUnmemoized;
+
+  let timeoutHandle = null;
+  function callCountU(hook) {
+    const name = hook.name;
+    if (filters.has(name)) return;
+    window._hookCallCount ??= {
+      callCountsMoment: {},
+      callCountsTotal: {}
+    };
+    window._hookCallCount.callCountsMoment[name] ??= 0;
+    window._hookCallCount.callCountsTotal[name] ??= 0;
+    window._hookCallCount.callCountsMoment[name] += 1;
+    window._hookCallCount.callCountsTotal[name] += 1;
+    if (timeoutHandle == null) {
+      timeoutHandle = requestIdleCallback(() => {
+        console.log(window._hookCallCount.callCountsMoment);
+        window._hookCallCount.callCountsMoment = {};
+        timeoutHandle = null;
+      });
+    }
+  }
+  const filters = new Set();
+  const monitorCallCount = getBuildMode() == "development" ? callCountU : noop$1;
 
   /**
    * Debug hook.
@@ -1839,6 +1862,7 @@
    * @returns
    */
   function usePassiveState(onChange, getInitialValue, customDebounceRendering) {
+    monitorCallCount(usePassiveState);
     const valueRef = _$1(Unset$2);
     const reasonRef = _$1(Unset$2);
     const warningRef = _$1(false);
@@ -1875,7 +1899,7 @@
       if (valueRef.current === Unset$2) tryEnsureValue();
       return valueRef.current === Unset$2 ? undefined : valueRef.current;
     }, []);
-    s$1(() => {
+    y$1(() => {
       // Make sure we've run our effect at least once on mount.
       // (If we have an initial value, of course)
       tryEnsureValue();
@@ -2011,13 +2035,14 @@
    * @param inputs
    */
   function useBeforeLayoutEffect(effect, inputs) {
-    const [id] = p$1(() => generateRandomId());
+    monitorCallCount(useBeforeLayoutEffect);
+    const [id] = h$1(() => generateRandomId());
     if (effect) toRun.set(id, {
       effect,
       inputs,
       cleanup: null
     });else toRun.delete(id);
-    h$1(() => {
+    p$1(() => {
       return () => {
         toRun.delete(id);
         previousInputs.delete(id);
@@ -2040,6 +2065,7 @@
    * @returns
    */
   function useStableGetter(value) {
+    monitorCallCount(useStableGetter);
     const ref = _$1(Unset$1);
     useBeforeLayoutEffect(() => {
       ref.current = value;
@@ -2091,6 +2117,7 @@
    * truly has no dependencies/only stable dependencies!!
    */
   function useStableCallback(fn, noDeps) {
+    monitorCallCount(useStableCallback);
     useEnsureStability("useStableCallback", noDeps == null, noDeps?.length, isStableGetter(fn));
     if (isStableGetter(fn)) return fn;
     if (noDeps == null) {
@@ -2105,6 +2132,7 @@
   }
 
   function useMergedChildren(lhs, rhs) {
+    monitorCallCount(useMergedChildren);
     if (lhs == null && rhs == null) {
       return undefined;
     } else if (lhs == null) {
@@ -2112,7 +2140,7 @@
     } else if (rhs == null) {
       return lhs;
     } else {
-      return v$2(d$2, {}, lhs, rhs);
+      return y$2(_$3, {}, lhs, rhs);
     }
   }
 
@@ -2125,6 +2153,7 @@
    * @returns A string representing all combined classes from both arguments.
    */
   function useMergedClasses(lhsClass, lhsClassName, rhsClass, rhsClassName) {
+    monitorCallCount(useMergedClasses);
     // Note: For the sake of forward compatibility, this function is labelled as
     // a hook, but as it uses no other hooks it technically isn't one.
     if (lhsClass || rhsClass || lhsClassName || rhsClassName) {
@@ -2155,6 +2184,7 @@
    * @returns
    */
   function useMergedRefs(rhs, lhs) {
+    monitorCallCount(useMergedRefs);
     // This *must* be stable in order to prevent repeated reset `null` calls after every render.
     const combined = useStableCallback(function combined(current) {
       processRef(current, lhs);
@@ -2183,6 +2213,7 @@
    * @returns A CSS object containing the properties of both objects.
    */
   function useMergedStyles(lhs, rhs) {
+    monitorCallCount(useMergedStyles);
     // Easy case, when there are no styles to merge return nothing.
     if (!lhs && !rhs) return undefined;
     if (typeof lhs != typeof rhs) {
@@ -2220,6 +2251,7 @@
    * @returns
    */
   function useMergedProps() {
+    monitorCallCount(useMergedProps);
     for (var _len = arguments.length, allProps = new Array(_len), _key = 0; _key < _len; _key++) {
       allProps[_key] = arguments[_key];
     }
@@ -2298,20 +2330,16 @@
   /**
    * Allows attaching an event handler to any *non-Preact* element, and removing it when the component using the hook unmounts. The callback does not need to be stable across renders.
    *
-   * Due to typing limitations, this function must be called like this:
+   * `"mode"` controls if there's one handler that calls all your functions (default), or one handler added per function (`"single"`).
    *
-   * `useEventHandler(element, "input")<InputEvent>(e => {})`
-   *
-   * The type argument is optional, but narrows down the type from "a union of all events" to whatever you specify, and errors if it doesn't exist.
-   *
-   * There is a separate version that attaches event handlers to a set of props.
-   * It takes different event string types (onEvent vs onevent).
+   * The default, `"grouped"`, is faster when you have, say, a button component, used hundreds of times on a page, that each installs a global event handler.
    *
    * @param target A *non-Preact* node to attach the event to.
    * @returns
    * *
    */
   function useGlobalHandler(target, type, handler, options, mode) {
+    monitorCallCount(useGlobalHandler);
     mode ||= "grouped";
     useEnsureStability("useGlobalHandler", mode);
     if (mode === "grouped") {
@@ -2361,7 +2389,7 @@
   function useGlobalHandlerGrouped(target, type, handler, options) {
     let stableHandler = useStableCallback(handler !== null && handler !== void 0 ? handler : () => {});
     if (handler == null) stableHandler = null;
-    h$1(() => {
+    p$1(() => {
       if (stableHandler) {
         addToMapThing(target, type, stableHandler, options);
         return () => removeFromMapThing(target, type, stableHandler, options);
@@ -2371,7 +2399,7 @@
   function useGlobalHandlerSingle(target, type, handler, options) {
     let stableHandler = useStableCallback(handler !== null && handler !== void 0 ? handler : () => {});
     if (handler == null) stableHandler = null;
-    h$1(() => {
+    p$1(() => {
       if (stableHandler) {
         target.addEventListener(type, stableHandler, options);
         return () => target.removeEventListener(type, stableHandler, options);
@@ -2393,6 +2421,7 @@
    * @returns The element, and the sub-hook that makes it retrievable.
    */
   function useRefElement(args) {
+    monitorCallCount(useRefElement);
     const {
       onElementChange,
       onMount,
@@ -2489,8 +2518,9 @@
         getWindow
       }
     } = _ref;
+    monitorCallCount(useActiveElement);
     useEnsureStability("useActiveElement", onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, getDocument, getWindow);
-    h$1(() => {
+    p$1(() => {
       var _getWindow, _activeElementUpdater, _activeElementUpdater2, _lastActiveElementUpd, _windowFocusedUpdater;
       const document = getDocument();
       const window = (_getWindow = getWindow?.(document)) !== null && _getWindow !== void 0 ? _getWindow : document?.defaultView;
@@ -2597,6 +2627,7 @@
         ...void2
       }
     } = _ref;
+    monitorCallCount(useEscapeDismiss);
     const stableOnClose = useStableCallback(onClose);
     const getWindow = useStableCallback(unstableGetWindow);
     const getDepth = useStableGetter(parentDepth + 1);
@@ -2610,7 +2641,7 @@
     // So all soft dismiss components listen for a keydown of Escape, 
     // then the first one to do so will wait for a microtask, 
     // then find the deepest element in the document tree to dismiss of all of those components currently open.
-    h$1(() => {
+    p$1(() => {
       const window = getWindow();
       window[MagicWindowKey] ??= {
         microtaskQueued: false,
@@ -2704,6 +2735,7 @@
       },
       ...void1
     } = _ref2;
+    monitorCallCount(useLostFocusDismiss);
     const {
       getElement: getSourceElement,
       ...void2
@@ -2742,6 +2774,7 @@
       },
       ...void2
     } = _ref3;
+    monitorCallCount(useBackdropDismiss);
     const getOpen = useStableGetter(open);
     const onClose = useStableCallback(onCloseUnstable);
     const onBackdropClick = T$2(function onBackdropClick(e) {
@@ -2783,6 +2816,7 @@
         parentDepth
       }
     } = _ref4;
+    monitorCallCount(useDismiss);
     const {
       refElementReturn: refElementSourceReturn,
       propsStable: propsStableSource
@@ -4274,6 +4308,7 @@
    * @param target
    */
   function useBlockingElement(enabled, getTarget) {
+    monitorCallCount(useBlockingElement);
     const stableGetTarget = useStableCallback(getTarget);
     const getDocument = useStableCallback(() => {
       var _getTarget$ownerDocum;
@@ -4295,7 +4330,7 @@
     /**
      * Push/pop the element from the blockingElements stack.
      */
-    s$1(() => {
+    y$1(() => {
       const target = stableGetTarget();
       if (enabled) {
         // Sometimes blockingElements will fail if, for example,
@@ -4332,9 +4367,10 @@
       },
       refElementReturn
     } = _ref;
+    monitorCallCount(useFocusTrap);
     const focusSelf = useStableCallback(focusSelfUnstable);
     const focusOpener = useStableCallback(focusOpenerUnstable);
-    h$1(() => {
+    p$1(() => {
       if (trapActive) {
         let top = getTop();
         getLastActiveWhenOpen();
@@ -4393,6 +4429,7 @@
       rovingTabIndexReturn,
       linearNavigationParameters
     } = _ref;
+    monitorCallCount(useLinearNavigation);
     const {
       getHighestIndex,
       indexDemangler,
@@ -4748,6 +4785,7 @@
    *
    */
   function useManagedChildren(parentParameters) {
+    monitorCallCount(useManagedChildren);
     const {
       managedChildrenParameters: {
         onAfterChildLayoutEffect,
@@ -4882,6 +4920,7 @@
   }
   function useManagedChild(info, managedChildParameters) {
     var _info$context;
+    monitorCallCount(useManagedChild);
     const {
       managedChildContext: {
         getChildren,
@@ -4897,7 +4936,7 @@
     // the parent if they need it.
     // The parent can listen for all updates and only act on the ones it cares about,
     // and multiple children updating in the same tick will all be sent at once.
-    s$1(() => {
+    y$1(() => {
       if (managedChildrenArray == null || remoteULEChildChanged == null) return;
       // Insert this information in-place
       if (typeof index == "number") {
@@ -4916,7 +4955,7 @@
     // Do the same on unmount.
     // Note: It's important that this comes AFTER remoteULEChildChanged
     // so that remoteULEChildMounted has access to all the info on mount.
-    s$1(() => {
+    y$1(() => {
       remoteULEChildMounted?.(index, true);
       return () => remoteULEChildMounted?.(index, false);
     }, [index]);
@@ -5034,7 +5073,7 @@
       }
     }, []);
     // Run once, on mount
-    s$1(() => {
+    y$1(() => {
       changeIndex(initialIndex !== null && initialIndex !== void 0 ? initialIndex : null, undefined);
     }, []);
     return {
@@ -5052,8 +5091,9 @@
    * @returns
    */
   function useState(initialState) {
+    monitorCallCount(useState);
     // We keep both, but overrride the `setState` functionality
-    const [state, setStateP] = p$1(initialState);
+    const [state, setStateP] = h$1(initialState);
     const ref = _$1(state);
     // Hijack the normal setter function 
     // to also set our ref to the new value
@@ -5117,6 +5157,7 @@
       },
       ..._void1
     } = _ref;
+    monitorCallCount(useRovingTabIndex);
     const getUntabbable = useStableGetter(untabbable);
     // Override the actual setter to include some extra logic related to avoiding hidden children, 
     // what to do when we're untabbable, what to do when we're tabbable but given `null`, etc.
@@ -5156,7 +5197,7 @@
     // So every time we change the index for any reason, record that change as a back up here that can be restored.
     const [getLastNonNullIndex, setLastNonNullIndex] = usePassiveState(null, T$2(() => initiallyTabbedIndex !== null && initiallyTabbedIndex !== void 0 ? initiallyTabbedIndex : 0, []));
     // Any time we switch to being untabbable, set the current tabbable index accordingly.
-    h$1(() => {
+    p$1(() => {
       if (untabbable) changeTabbableIndex(null, undefined);else {
         changeTabbableIndex(getLastNonNullIndex(), undefined);
       }
@@ -5229,12 +5270,13 @@
       rovingTabIndexChildParameters,
       ..._void3
     } = _ref2;
+    monitorCallCount(useRovingTabIndexChild);
     const {
       hidden,
       ..._void1
     } = rovingTabIndexChildParameters;
     const [tabbable, setTabbable, getTabbable] = useState(getInitiallyTabbedIndex() === index);
-    h$1(() => {
+    p$1(() => {
       reevaluateClosestFit();
     }, [!!hidden]);
     return {
@@ -5267,8 +5309,9 @@
         hidden
       }
     } = _ref;
+    monitorCallCount(useTextContent);
     const [getTextContent, setTextContent] = usePassiveState(onTextContentChange, returnNull, runImmediately);
-    h$1(() => {
+    p$1(() => {
       if (!hidden) {
         const element = getElement();
         if (element) {
@@ -5307,6 +5350,7 @@
       },
       ..._void2
     } = _ref;
+    monitorCallCount(useTypeaheadNavigation);
     // For typeahead, keep track of what our current "search" string is (if we have one)
     // and also clear it every 1000 ms since the last time it changed.
     // Next, keep a mapping of typeahead values to indices for faster searching.
@@ -5330,7 +5374,7 @@
     // (but within the same task, which, TODO, could be browser-dependent),
     // we can use this to keep track of which event we're listening for on the first keydown.
     const [nextTypeaheadChar, setNextTypeaheadChar] = useState(null);
-    s$1(() => {
+    y$1(() => {
       if (nextTypeaheadChar !== null) {
         setCurrentTypeahead(typeahead => (typeahead !== null && typeahead !== void 0 ? typeahead : "") + nextTypeaheadChar, undefined);
         setNextTypeaheadChar(null);
@@ -5505,6 +5549,7 @@
       },
       ...void4
     } = _ref2;
+    monitorCallCount(useTypeaheadNavigationChild);
     const {
       textContentReturn
     } = useTextContent({
@@ -5599,6 +5644,7 @@
       managedChildrenReturn,
       ..._void1
     } = _ref;
+    monitorCallCount(useListNavigation);
     const {
       context: {
         rovingTabIndexContext
@@ -5654,6 +5700,7 @@
       textContentParameters,
       ..._void2
     } = _ref2;
+    monitorCallCount(useListNavigationChild);
     const {
       props,
       ...rticr
@@ -5692,6 +5739,7 @@
       typeaheadNavigationParameters,
       ..._void2
     } = _ref;
+    monitorCallCount(useGridNavigation);
     const {
       getChildren
     } = managedChildrenReturn;
@@ -5772,6 +5820,7 @@
       typeaheadNavigationParameters,
       ..._void1
     } = _ref2;
+    monitorCallCount(useGridNavigationRow);
     const {
       getChildren
     } = managedChildrenReturn;
@@ -5892,6 +5941,7 @@
       },
       ..._void1
     } = _ref3;
+    monitorCallCount(useGridNavigationCell);
     const {
       index
     } = managedChildParameters;
@@ -5950,6 +6000,7 @@
         initiallySelectedIndex
       }
     } = _ref;
+    monitorCallCount(useSingleSelection);
     const onSelectedIndexChange = useStableCallback(onSelectedIndexChange_U !== null && onSelectedIndexChange_U !== void 0 ? onSelectedIndexChange_U : noop$1);
     const getSelectedAt = T$2(m => {
       return m.getSelected();
@@ -6002,6 +6053,7 @@
   }
   function useSingleSelectionChild(args) {
     var _ariaPropName$split;
+    monitorCallCount(useSingleSelectionChild);
     const {
       context: {
         singleSelectionContext: {
@@ -6067,7 +6119,7 @@
         selectedIndex
       }
     } = _ref2;
-    h$1(() => {
+    p$1(() => {
       changeSelectedIndex(selectedIndex);
     }, [selectedIndex]);
   }
@@ -6082,6 +6134,7 @@
       singleSelectionParameters,
       ..._void2
     } = _ref;
+    monitorCallCount(useGridNavigationSingleSelection);
     const {
       context: {
         gridNavigationRowContext,
@@ -6146,6 +6199,7 @@
       },
       ..._void1
     } = _ref2;
+    monitorCallCount(useGridNavigationSingleSelectionRow);
     const {
       hasCurrentFocusParameters: {
         onCurrentFocusedInnerChanged: ocfic1
@@ -6216,6 +6270,7 @@
   }
   // EZ
   function useGridNavigationSingleSelectionCell(p) {
+    monitorCallCount(useGridNavigationSingleSelectionCell);
     return useGridNavigationCell(p);
   }
 
@@ -6226,7 +6281,8 @@
    * It's a bit smelly, so best to use sparingly.
    */
   function useForceUpdate() {
-    const [, set] = p$1(0);
+    monitorCallCount(useForceUpdate);
+    const [, set] = h$1(0);
     return _$1(() => set(i => ++i)).current;
   }
 
@@ -6258,6 +6314,7 @@
         onRearranged
       }
     } = _ref;
+    monitorCallCount(useRearrangeableChildren);
     // These are used to keep track of a mapping between unsorted index <---> sorted index.
     // These are needed for navigation with the arrow keys.
     const mangleMap = _$1(new Map());
@@ -6304,9 +6361,10 @@
       getForceUpdate()?.();
     }, []);
     const useRearrangedChildren = T$2(children => {
+      monitorCallCount(useRearrangedChildren);
       console.assert(Array.isArray(children));
       const forceUpdate = useForceUpdate();
-      s$1(() => {
+      y$1(() => {
         setForceUpdate(_prev => forceUpdate);
       }, [forceUpdate]);
       return children.slice().map(child => ({
@@ -6321,7 +6379,7 @@
           mangledIndex,
           demangledIndex
         } = _ref2;
-        return v$2(child.type, {
+        return y$2(child.type, {
           ...child.props,
           key: demangledIndex,
           "data-mangled-index": mangledIndex,
@@ -6376,6 +6434,7 @@
         compare: userCompare
       }
     } = _ref3;
+    monitorCallCount(useSortableChildren);
     const getCompare = useStableGetter(userCompare !== null && userCompare !== void 0 ? userCompare : defaultCompare);
     const {
       rearrangeableChildrenReturn
@@ -6423,6 +6482,7 @@
       linearNavigationParameters,
       ...gridNavigationSingleSelectionParameters
     } = _ref;
+    monitorCallCount(useGridNavigationSingleSelectionSortable);
     const {
       ...scr
     } = useSortableChildren({
@@ -6458,6 +6518,7 @@
       managedChildrenReturn,
       ..._void3
     } = _ref;
+    monitorCallCount(useListNavigationSingleSelection);
     const {
       context: {
         rovingTabIndexContext,
@@ -6518,6 +6579,7 @@
       textContentParameters,
       ..._void1
     } = _ref2;
+    monitorCallCount(useListNavigationSingleSelectionChild);
     const {
       hasCurrentFocusParameters: {
         onCurrentFocusedInnerChanged: ocfic2,
@@ -6582,6 +6644,7 @@
       sortableChildrenParameters,
       ...void3
     } = _ref;
+    monitorCallCount(useListNavigationSingleSelectionSortable);
     const {
       rearrangeableChildrenReturn,
       sortableChildrenReturn,
@@ -6642,6 +6705,7 @@
         paginationMin
       }
     } = _ref;
+    monitorCallCount(usePaginatedChildren);
     const [childCount, setChildCount] = useState(null);
     const parentIsPaginated = paginationMin != null || paginationMax != null;
     const lastPagination = _$1({
@@ -6657,7 +6721,7 @@
         if (visible) getChildren().getAt(indexDemangler(i))?.setChildCountIfPaginated(getChildren().getHighestIndex() + 1);
       }
     }, [/* Must be empty */]);
-    s$1(() => {
+    y$1(() => {
       refreshPagination(paginationMin, paginationMax);
       lastPagination.current.paginationMax = paginationMax;
       lastPagination.current.paginationMin = paginationMin;
@@ -6712,6 +6776,7 @@
         }
       }
     } = _ref2;
+    monitorCallCount(usePaginatedChild);
     const [parentIsPaginated, setParentIsPaginated] = useState(getDefaultIsPaginated());
     const [childCountIfPaginated, setChildCountIfPaginated] = useState(null);
     const [paginatedVisible, setPaginatedVisible] = useState(getDefaultPaginationVisible(index));
@@ -6750,6 +6815,7 @@
         staggered
       }
     } = _ref;
+    monitorCallCount(useStaggeredChildren);
     // By default, when a child mounts, we tell the next child to mount and simply repeat.
     // If a child is missing, however, it will break that chain.
     // To guard against that, we also wait for 50ms, and if it hasn't loaded by then, we just continue as if it did.
@@ -6807,7 +6873,7 @@
         return Math.min((_getTargetStaggerInde2 = getTargetStaggerIndex()) !== null && _getTargetStaggerInde2 !== void 0 ? _getTargetStaggerInde2 : 0, 1 + Math.max(s !== null && s !== void 0 ? s : 0, index + 1));
       });
     }, []);
-    s$1(() => {
+    y$1(() => {
       getChildren().forEach(child => child.setParentIsStaggered(parentIsStaggered));
     }, [parentIsStaggered]);
     const childCallsThisToTellTheParentTheHighestIndex = T$2(mountedIndex => {
@@ -6862,12 +6928,13 @@
         }
       }
     } = _ref2;
+    monitorCallCount(useStaggeredChild);
     const [parentIsStaggered, setParentIsStaggered] = useState(getDefaultIsStaggered);
     const [staggeredVisible, setStaggeredVisible] = useState(getDefaultStaggeredVisible(index));
-    s$1(() => {
+    y$1(() => {
       childCallsThisToTellTheParentTheHighestIndex(index);
     }, [index]);
-    h$1(() => {
+    p$1(() => {
       if (parentIsStaggered && staggeredVisible) childCallsThisToTellTheParentToMountTheNextOne(index);
     }, [index, parentIsStaggered && staggeredVisible]);
     return {
@@ -6893,6 +6960,7 @@
    * I.E. you can use this without needing a parent `<div>` to listen for a `focusout` event.
    */
   function useChildrenHaveFocus(args) {
+    monitorCallCount(useChildrenHaveFocus);
     const {
       childrenHaveFocusParameters: {
         onCompositeFocusChange
@@ -6922,6 +6990,7 @@
         }
       }
     } = _ref;
+    monitorCallCount(useChildrenHaveFocusChild);
     return {
       hasCurrentFocusParameters: {
         onCurrentFocusedInnerChanged: useStableCallback((focused, prev, e) => {
@@ -6936,6 +7005,7 @@
   }
 
   function useHasCurrentFocus(args) {
+    monitorCallCount(useHasCurrentFocus);
     const {
       hasCurrentFocusParameters: {
         onCurrentFocusedChanged: onFocusedChanged,
@@ -6959,7 +7029,7 @@
       setFocusedInner(false, e);
       setFocused(false, e);
     }, []);
-    h$1(() => {
+    p$1(() => {
       return () => {
         setFocused(false);
         setFocusedInner(false);
@@ -6969,7 +7039,7 @@
       onfocusin: onFocusIn,
       onfocusout: onFocusOut
     });
-    h$1(() => {
+    p$1(() => {
       return () => {
         setFocused(false);
         setFocusedInner(false);
@@ -6996,6 +7066,7 @@
       paginatedChildrenParameters,
       staggeredChildrenParameters
     } = _ref;
+    monitorCallCount(useCompleteGridNavigation);
     const getChildren = T$2(() => managedChildrenReturn.getChildren(), []);
     const getHighestChildIndex = T$2(() => getChildren().getHighestIndex(), []);
     const isValid = T$2(i => {
@@ -7131,6 +7202,7 @@
       typeaheadNavigationParameters,
       sortableChildParameters
     } = _ref2;
+    monitorCallCount(useCompleteGridNavigationRow);
     const {
       index
     } = managedChildParameters;
@@ -7336,6 +7408,7 @@
         ...completeGridNavigationCellParameters
       }
     } = _ref3;
+    monitorCallCount(useCompleteGridNavigationCell);
     const {
       index
     } = managedChildParameters;
@@ -7431,6 +7504,7 @@
       staggeredChildrenParameters,
       ...completeListNavigationParameters
     } = _ref;
+    monitorCallCount(useCompleteListNavigation);
     const {
       initiallySelectedIndex
     } = singleSelectionParameters;
@@ -7583,6 +7657,7 @@
       },
       ..._void
     } = _ref2;
+    monitorCallCount(useCompleteListNavigationChild);
     const {
       index
     } = managedChildParameters;
@@ -7763,6 +7838,7 @@
         ...focusTrapParameters
       }
     } = _ref;
+    monitorCallCount(useModal);
     const {
       open
     } = dismissParameters;
@@ -7805,6 +7881,7 @@
       callback,
       triggerIndex
     } = _ref;
+    monitorCallCount(useTimeout);
     const stableCallback = useStableCallback(() => {
       startTimeRef.current = null;
       callback();
@@ -7817,7 +7894,7 @@
     // Any time the triggerIndex changes (including on mount)
     // restart the timeout.  The timeout does NOT reset
     // when the duration or callback changes, only triggerIndex.
-    h$1(() => {
+    p$1(() => {
       if (!timeoutIsNull) {
         const timeout = getTimeout();
         console.assert(timeoutIsNull == (timeout == null));
@@ -7866,6 +7943,7 @@
    * @param exclude Whether the polyfill shouldn't apply (can specify for specific interactions)
    */
   function usePress(args) {
+    monitorCallCount(usePress);
     const {
       refElementReturn: {
         getElement
@@ -8026,8 +8104,8 @@
     useTimeout({
       callback: () => {
         const element = getElement();
-        setLongPress(pointerDownStartedHere && hovering);
-        if (element && pointerDownStartedHere && hovering) {
+        setLongPress(pointerDownStartedHere && getHovering());
+        if (element && pointerDownStartedHere && getHovering()) {
           focusSelf(element);
           if (longPressThreshold) {
             setWaitingForSpaceUp(false);
@@ -8037,7 +8115,7 @@
         }
       },
       timeout: longPressThreshold !== null && longPressThreshold !== void 0 ? longPressThreshold : null,
-      triggerIndex: longPress ? true : pointerDownStartedHere && hovering
+      triggerIndex: longPress ? true : pointerDownStartedHere && getHovering()
     });
     const handlePress = useStableCallback(e => {
       setWaitingForSpaceUp(false);
@@ -8179,6 +8257,7 @@
         otherReferencerProp
       }
     } = _ref;
+    monitorCallCount(useRandomId);
     const id = prefix + V$2();
     useEnsureStability("useRandomId", prefix, id);
     const referencerElementProps = _$1(otherReferencerProp == null ? {} : {
@@ -8205,6 +8284,7 @@
       randomIdInputParameters,
       randomIdLabelParameters
     } = _ref;
+    monitorCallCount(useRandomDualIds);
     const {
       randomIdReturn: randomIdInputReturn,
       propsReferencer: propsLabelAsReferencer,
@@ -8406,6 +8486,7 @@
    *
    */
   function useAsync(asyncHandler2, options) {
+    monitorCallCount(useAsync);
     // Things related to current execution
     // Because we can both return and throw undefined, 
     // we need separate state to track their existance too.
@@ -8469,7 +8550,7 @@
         wait: options?.debounce
       });
     }, [throttle, debounce]);
-    h$1(() => {
+    p$1(() => {
       return () => cancelSyncDebounce();
     }, [cancelSyncDebounce]);
     return {
@@ -8555,6 +8636,7 @@
       capture: originalCapture,
       ...restAsyncOptions
     } = _ref;
+    monitorCallCount(useAsyncHandler);
     // We need to differentiate between "nothing captured yet" and "`undefined` was captured"
     const [currentCapture, setCurrentCapture, getCurrentCapture] = useState(undefined);
     const [hasCapture, setHasCapture] = useState(false);
@@ -8625,6 +8707,7 @@
         getElement
       }
     } = _ref;
+    monitorCallCount(useImperativeProps);
     const currentImperativeProps = _$1({
       className: new Set(),
       style: {},
@@ -8720,7 +8803,7 @@
       refElementReturn
     });
     A$1(handle, () => imperativeHandle);
-    return v$2(Tag, useMergedProps(propsStable, iprops, props, {
+    return y$2(Tag, useMergedProps(propsStable, iprops, props, {
       ref
     }));
   }
@@ -8821,6 +8904,7 @@
     let {
       target
     } = _ref;
+    monitorCallCount(usePortalChildren);
     const [pushChild, setPushChild] = useState(null);
     const [updateChild, setUpdateChild] = useState(null);
     const [removeChild, setRemoveChild] = useState(null);
@@ -8837,7 +8921,7 @@
     const element = F$2(() => {
       return target == null ? null : typeof target == "string" ? document.getElementById(target) : target;
     }, [target]);
-    const children = !element ? null : j$1(o$2(PortalChildren, {
+    const children = !element ? null : z$1(o$2(PortalChildren, {
       setPushChild: setPushChild,
       setUpdateChild: setUpdateChild,
       setRemoveChild: setRemoveChild
@@ -8863,7 +8947,7 @@
     const pushChild = T$2(child => {
       const randomKey = generateRandomId();
       let index = getChildren().length;
-      setChildren(prev => [...prev, D$2(child, {
+      setChildren(prev => [...prev, E$1(child, {
         key: randomKey,
         index
       })]);
@@ -8875,7 +8959,7 @@
       if (key) {
         setChildren(prev => {
           let newChildren = prev.slice();
-          newChildren.splice(index, 1, D$2(child, {
+          newChildren.splice(index, 1, E$1(child, {
             key: key,
             index
           }));
@@ -8896,16 +8980,16 @@
         return index;
       }
     }, []);
-    s$1(() => {
+    y$1(() => {
       setPushChild(_ => pushChild);
     }, [pushChild]);
-    s$1(() => {
+    y$1(() => {
       setUpdateChild(_ => updateChild);
     }, [updateChild]);
-    s$1(() => {
+    y$1(() => {
       setRemoveChild(_ => removeChild);
     }, [removeChild]);
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: children
     });
   }
@@ -8918,6 +9002,7 @@
       },
       refElementParameters
     } = _ref;
+    monitorCallCount(useElementSize);
     const {
       onElementChange,
       onMount,
@@ -8994,7 +9079,7 @@
     const {
       getElement
     } = refElementReturn;
-    h$1(() => {
+    p$1(() => {
       if (getObserveBox) {
         if (currentObserveBox.current !== getObserveBox()) needANewObserver(getElement(), getObserveBox());
       }
@@ -9052,13 +9137,14 @@
     let fromString = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : JSON.parse;
     let toString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : JSON.stringify;
     let storage = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : localStorage;
+    monitorCallCount(usePersistentState);
     const [localCopy, setLocalCopy, getLocalCopy] = useState(() => {
       var _ref;
       return (_ref = key ? getFromLocalStorage(key, fromString, storage) : null) !== null && _ref !== void 0 ? _ref : initialValue;
     });
     const getInitialValue = useStableGetter(initialValue);
     // Ensure that if our key changes, we also update `localCopy` to match.
-    s$1(() => {
+    y$1(() => {
       if (key) {
         const newCopy = getFromLocalStorage(key, fromString, storage);
         setLocalCopy(newCopy !== null && newCopy !== void 0 ? newCopy : getInitialValue());
@@ -9090,18 +9176,13 @@
     return [localCopy, setValueWrapper, getValue];
   }
 
-  E$1(null);
+  F$3(null);
 
   const EventDetail = Symbol("event-detail");
   function enhanceEvent(e, detail) {
     const event = e;
     event[EventDetail] = detail;
     return event;
-  }
-  function debugLog(who) {
-    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
   }
   function noop() {
     return;
@@ -9149,7 +9230,7 @@
       pressParameters,
       refElementParameters
     } = _ref;
-    debugLog("useButton");
+    monitorCallCount(useButton);
     const {
       refElementReturn,
       propsStable: propsRef
@@ -9216,7 +9297,7 @@
       },
       ...rest
     } = _ref;
-    debugLog("useAccordion");
+    monitorCallCount(useAccordion);
     const [localStorageIndex, setLocalStorageIndex] = usePersistentState(localStorageKey !== null && localStorageKey !== void 0 ? localStorageKey : null, (_initialIndex = initialIndex) !== null && _initialIndex !== void 0 ? _initialIndex : null);
     if (localStorageIndex != null) initialIndex = localStorageIndex;
     const {
@@ -9364,11 +9445,11 @@
       },
       refElementParameters
     } = _ref2;
+    monitorCallCount(useAccordionSection);
     const {
       disabled,
       onPress: userOnPress
     } = buttonParameters;
-    debugLog("useAccordionSection");
     const [openFromParent, setOpenFromParent, getOpenFromParent] = useState(null);
     const [mostRecentlyTabbed, setMostRecentlyTabbed, getMostRecentlyTabbed] = useState(null);
     const {
@@ -9513,7 +9594,7 @@
       typeaheadNavigationParameters,
       staggeredChildrenParameters
     } = _ref;
-    debugLog("useCheckboxGroup");
+    monitorCallCount(useCheckboxGroup);
     const {
       childrenHaveFocusReturn,
       context,
@@ -9681,12 +9762,12 @@
       }
     });
     const [ariaControls, setControls] = useState("");
-    s$1(() => {
+    y$1(() => {
       setSetter(() => setControls);
     }, [setControls]);
-    debugLog("useCheckboxGroupParent");
+    monitorCallCount(useCheckboxGroupParent);
     const [checked, setChecked] = useState(false);
-    h$1(() => {
+    p$1(() => {
       setSetParentCheckboxChecked(() => setChecked);
     }, []);
     const checkboxGroupParentReturn = {
@@ -9742,7 +9823,7 @@
         setTotalChecked
       }
     } = context;
-    debugLog("useCheckboxGroupChild", managedChildParameters.index);
+    monitorCallCount(useCheckboxGroupChild);
     const {
       checked,
       onChangeFromParent
@@ -9759,11 +9840,11 @@
         setUpdateIndex(i => (i !== null && i !== void 0 ? i : 0) + 1);
       }
     }, []);
-    h$1(() => {
+    p$1(() => {
       setTotalChildren(c => (c !== null && c !== void 0 ? c : 0) + 1);
       return () => setTotalChildren(c => (c !== null && c !== void 0 ? c : 0) - 1);
     }, []);
-    h$1(() => {
+    p$1(() => {
       if (checked) {
         setTotalChecked(c => (c !== null && c !== void 0 ? c : 0) + 1);
         return () => setTotalChecked(c => (c !== null && c !== void 0 ? c : 0) - 1);
@@ -9890,6 +9971,7 @@
       },
       ...rest
     } = _ref2;
+    monitorCallCount(useLabelSynthetic);
     return useLabel({
       labelParameters: {
         ariaLabel,
@@ -9932,6 +10014,7 @@
         excludeSpace
       }
     } = _ref;
+    monitorCallCount(useCheckboxLike);
     const {
       getElement: getInputElement
     } = refElementInputReturn;
@@ -9948,7 +10031,7 @@
     // after all the event dust settles.
     // See https://github.com/preactjs/preact/issues/2745,
     // and https://github.com/preactjs/preact/issues/1899#issuecomment-525690194
-    h$1(() => {
+    p$1(() => {
       const element = getInputElement();
       if (element && tagInput == "input") {
         element.indeterminate = checked === "mixed";
@@ -10081,7 +10164,7 @@
       checkboxLikeParameters,
       labelParameters
     } = _ref;
-    debugLog("useCheckbox");
+    monitorCallCount(useCheckbox);
     const {
       tagInput,
       labelPosition
@@ -10142,6 +10225,7 @@
       focusTrapParameters,
       labelParameters
     } = _ref;
+    monitorCallCount(useDialog);
     const {
       focusTrapReturn,
       propsFocusContainer,
@@ -10199,6 +10283,7 @@
       focusTrapParameters,
       labelParameters
     } = _ref;
+    monitorCallCount(useDrawer);
     const {
       focusTrapReturn,
       propsFocusContainer,
@@ -10256,6 +10341,7 @@
       },
       ...restParams
     } = _ref;
+    monitorCallCount(useGridlist);
     const {
       propsInput: propsLabelList,
       propsLabel: propsLabelLabel,
@@ -10343,6 +10429,7 @@
       textContentParameters,
       typeaheadNavigationParameters
     } = _ref2;
+    monitorCallCount(useGridlistRow);
     const {
       gridlistRowContext: {
         selectionLimit
@@ -10403,6 +10490,7 @@
       pressParameters,
       ...p
     } = _ref3;
+    monitorCallCount(useGridlistCell);
     const {
       props,
       ...info
@@ -10451,7 +10539,7 @@
         surfaceId
       }
     } = _ref;
-    debugLog("useMenuSurface");
+    monitorCallCount(useMenuSurface);
     const {
       refElementReturn: {
         getElement: getButtonElement
@@ -10549,7 +10637,7 @@
         sendFocusToMenu
       }
     } = _ref2;
-    debugLog("useFocusSentinel");
+    monitorCallCount(useFocusSentinel);
     const getSendFocusWithinMenu = useStableGetter(sendFocusToMenu);
     const stableOnClose = useStableCallback(onClose);
     const [sentinelIsActive, setSentinelIsActive] = useState(false);
@@ -10595,6 +10683,7 @@
       },
       ...listNavParameters
     } = _ref;
+    monitorCallCount(useToolbar);
     const {
       context,
       propsStable,
@@ -10652,6 +10741,7 @@
     };
   }
   function useToolbarChild(args) {
+    monitorCallCount(useToolbarChild);
     return useCompleteListNavigationChild(args);
   }
 
@@ -10666,7 +10756,7 @@
    * @returns
    */
   function useMenubar(args) {
-    debugLog("useMenubar");
+    monitorCallCount(useMenubar);
     const {
       propsToolbar: propsMenubar,
       ...restReturn
@@ -10684,7 +10774,7 @@
       },
       ...restParams
     } = _ref;
-    debugLog("useMenuItem", restParams.managedChildParameters.index);
+    monitorCallCount(useMenubarChild);
     const focusSelf = T$2(e => e.focus?.(), []);
     const {
       pressParameters: {
@@ -10739,7 +10829,7 @@
       toolbarParameters,
       ...restParams
     } = _ref;
-    debugLog("useMenu");
+    monitorCallCount(useMenu);
     const {
       context,
       propsLabel: propsButtonAsMenuLabel,
@@ -10840,6 +10930,7 @@
     };
   }
   function useMenuItem(p) {
+    monitorCallCount(useMenuItem);
     const ret = useMenubarChild(p);
     return {
       ...ret,
@@ -10849,7 +10940,7 @@
     };
   }
 
-  const NotificationProviderContext = E$1(null);
+  const NotificationProviderContext = F$3(null);
   /**
    * Allows children to send notifications to a screen reader or other assistive technology.
    *
@@ -10867,6 +10958,7 @@
       targetAssertive,
       targetPolite
     } = _ref;
+    monitorCallCount(useNotificationProvider);
     const {
       children: childrenPolite,
       pushChild: notifyPolite,
@@ -10891,13 +10983,14 @@
       context: F$2(() => ({
         notify
       }), [notify]),
-      children: o$2(d$2, {
+      children: o$2(_$3, {
         children: [childrenPolite, childrenAssertive]
       })
     };
   }
   function useNotify() {
-    return q$1(NotificationProviderContext).notify;
+    monitorCallCount(useNotify);
+    return q$2(NotificationProviderContext).notify;
   }
 
   function useProgress(_ref) {
@@ -10911,6 +11004,7 @@
         tagIndicator
       }
     } = _ref;
+    monitorCallCount(useProgress);
     const {
       propsInput,
       propsLabel,
@@ -10978,6 +11072,7 @@
         forciblyPending
       }
     } = _ref2;
+    monitorCallCount(useProgressWithHandler);
     const asyncInfo = useAsyncHandler(asyncHandlerParameters);
     const {
       propsIndicator,
@@ -11010,6 +11105,7 @@
       },
       ...restParams
     } = _ref;
+    monitorCallCount(useRadioGroup);
     const [selectedIndex, setSelectedIndex] = useState(null);
     const byName = _$1(new Map());
     const {
@@ -11029,7 +11125,7 @@
         prefix: Prefices.radioGroup
       }
     });
-    h$1(() => {
+    p$1(() => {
       var _byName$current$get;
       if (selectedValue != null) singleSelectionReturn.changeSelectedIndex((_byName$current$get = byName.current.get(selectedValue)) !== null && _byName$current$get !== void 0 ? _byName$current$get : null);else singleSelectionReturn.changeSelectedIndex(null);
     }, [selectedValue]);
@@ -11106,8 +11202,8 @@
       rovingTabIndexChildParameters,
       sortableChildParameters
     } = _ref2;
+    monitorCallCount(useRadio);
     const index = managedChildParameters.index;
-    debugLog("useRadio", index);
     const onInput = useStableCallback(e => {
       singleSelectionChildReturn.setThisOneSelected(e);
     });
@@ -11178,7 +11274,7 @@
       refElementInputReturn,
       refElementLabelReturn
     });
-    s$1(() => {
+    y$1(() => {
       byName.set(value, index);
       return () => {
         byName.delete(value);
@@ -11212,7 +11308,7 @@
       },
       managedChildrenParameters
     } = _ref;
-    debugLog("useSlider");
+    monitorCallCount(useSlider);
     const {
       context,
       managedChildrenReturn
@@ -11248,7 +11344,7 @@
     const {
       index
     } = managedChildParameters;
-    debugLog("useSliderThumb", managedChildParameters.index);
+    monitorCallCount(useSliderThumb);
     const {
       managedChildReturn
     } = useManagedChild({
@@ -11314,6 +11410,7 @@
         tagTable
       }
     } = _ref;
+    monitorCallCount(useTable);
     const [getSortBody, setSortBody] = usePassiveState(null, returnNull);
     const sortQueue = _$1([]);
     const [getSortColumn, setSortColumn] = usePassiveState(T$2(a => {
@@ -11403,6 +11500,7 @@
         tableContext
       }
     } = _ref2;
+    monitorCallCount(useTableSection);
     const {
       childrenHaveFocusReturn,
       context,
@@ -11440,7 +11538,7 @@
     if (!naturalSectionTypes.has(tagTableSection)) {
       props.role = "rowgroup";
     }
-    h$1(() => {
+    p$1(() => {
       if (location == "body") {
         tableContext.setSortBodyFunction(() => {
           const managedRows = managedChildrenReturn.getChildren();
@@ -11480,6 +11578,7 @@
       linearNavigationParameters,
       rovingTabIndexParameters
     } = _ref3;
+    monitorCallCount(useTableRow);
     const {
       context: cx2,
       managedChildrenReturn,
@@ -11534,6 +11633,7 @@
       },
       ...p
     } = _ref4;
+    monitorCallCount(useTableCell);
     const {
       props,
       ...ret
@@ -11567,7 +11667,7 @@
       },
       ...restParams
     } = _ref;
-    debugLog("useTabs");
+    monitorCallCount(useTabs);
     const [localStorageIndex, setLocalStorageIndex] = usePersistentState(localStorageKey !== null && localStorageKey !== void 0 ? localStorageKey : null, 0);
     if (localStorageIndex != null) singleSelectionParameters.initiallySelectedIndex = localStorageIndex;
     const baseId = generateRandomId("aria-tabs-");
@@ -11607,7 +11707,7 @@
       isValid: returnTrue,
       onIndexChange: null
     });
-    s$1(() => {
+    y$1(() => {
       changeVisiblePanel(singleSelectionParameters.initiallySelectedIndex);
     }, []);
     const {
@@ -11751,7 +11851,7 @@
     } = context.tabsContext;
     const panelId = getPanelId(managedChildParameters.index);
     const tabId = getTabId(managedChildParameters.index);
-    debugLog("useTab", managedChildParameters.index, selected.toString());
+    monitorCallCount(useTab);
     return {
       props: useMergedProps(propsPress, listNavigationSingleSelectionChildProps, {
         "data-tabbable": tabbable.toString(),
@@ -11772,7 +11872,7 @@
     const {
       index
     } = managedChildParameters;
-    debugLog("useTabPanel", index);
+    monitorCallCount(useTabPanel);
     const {
       tabPanelContext: {
         getVisibleIndex: g,
@@ -11835,7 +11935,7 @@
         visibleCount
       }
     } = _ref;
-    debugLog("useToasts");
+    monitorCallCount(useToasts);
     // Normally, this does just look like [0, 1, 2, 3], etc
     // so it could be just an index to the current toast,
     // but if we dismiss toasts out of order, it's [0, 2, 3] or something.
@@ -11950,7 +12050,7 @@
       onAnyToastDismissed,
       onAnyToastMounted
     } = context.toastContext;
-    debugLog("useToast", index);
+    monitorCallCount(useToast);
     const [numberOfToastsAheadOfUs, setNumberOfToastsAheadOfUs] = useState(Infinity);
     const getIndex = useStableGetter(index);
     const [dismissed2, setDismissed2, getDismissed2] = useState(false);
@@ -11968,7 +12068,7 @@
       }));
       setShowing2(true);
     });
-    h$1(() => {
+    p$1(() => {
       if (!getDismissed2() && !getShowing2()) {
         if (numberOfToastsAheadOfUs >= 0 && numberOfToastsAheadOfUs < getMaxVisibleCount()) {
           show();
@@ -11996,7 +12096,7 @@
     const resetDismissTimer = T$2(() => {
       setTriggerIndex(i => ++i);
     }, []);
-    h$1(() => {
+    p$1(() => {
       onAnyToastMounted(index);
     }, []);
     const dismissTimeoutKey = timeout == null || numberOfToastsAheadOfUs != 0 ? null : isFinite(timeout) ? timeout : timeout > 0 ? null : 0;
@@ -12036,6 +12136,7 @@
       },
       escapeDismissParameters
     } = _ref;
+    monitorCallCount(useTooltip);
     /**
      * Whether the hover/focus-popup/trigger state we have results in us showing this tooltip.
      *
@@ -12202,28 +12303,28 @@
     return x$1(k$1(fn));
   }
   const ContextDefaults = {
-    collator: E$1(null),
-    pageNavigationSize: E$1(0.1),
-    typeaheadTimeout: E$1(1000),
-    noTypeahead: E$1(false),
-    getIndex: E$1(v => v.props.index),
-    disableArrowKeys: E$1(false),
-    disableHomeEndKeys: E$1(false),
-    getWindow: E$1(() => globalThis.window),
-    focusOpener: E$1(e => e?.focus?.()),
-    getText: E$1(e => {
+    collator: F$3(null),
+    pageNavigationSize: F$3(0.1),
+    typeaheadTimeout: F$3(1000),
+    noTypeahead: F$3(false),
+    getIndex: F$3(v => v.props.index),
+    disableArrowKeys: F$3(false),
+    disableHomeEndKeys: F$3(false),
+    getWindow: F$3(() => globalThis.window),
+    focusOpener: F$3(e => e?.focus?.()),
+    getText: F$3(e => {
       var _e$textContent;
       return (_e$textContent = e?.textContent) !== null && _e$textContent !== void 0 ? _e$textContent : "";
     }),
-    selectionMode: E$1("activation")
+    selectionMode: F$3("activation")
   };
   function useDefault(context, userValue) {
-    const defaultValue = q$1(ContextDefaults[context]);
+    const defaultValue = q$2(ContextDefaults[context]);
     return userValue !== null && userValue !== void 0 ? userValue : defaultValue;
   }
-  const ParentDepthContext = E$1(0);
+  const ParentDepthContext = F$3(0);
 
-  const AccordionSectionContext = E$1(null);
+  const AccordionSectionContext = F$3(null);
   const Accordion$1 = x$1(function Accordion(_ref) {
     let {
       disableArrowKeys,
@@ -12289,7 +12390,7 @@
       render,
       ...rest
     } = _ref2;
-    const context = q$1(AccordionSectionContext);
+    const context = q$2(AccordionSectionContext);
     const info = useAccordionSection({
       buttonParameters: {
         disabled: disabled !== null && disabled !== void 0 ? disabled : false,
@@ -12352,7 +12453,7 @@
     return render(info);
   });
 
-  const UseCheckboxGroupChildContext = E$1(null);
+  const UseCheckboxGroupChildContext = F$3(null);
   const CheckboxGroup$1 = memoForwardRef(function CheckboxGroup(_ref, ref) {
     let {
       render,
@@ -12416,7 +12517,7 @@
       getSortValue,
       ..._rest
     } = _ref2;
-    const context = q$1(UseCheckboxGroupChildContext);
+    const context = q$2(UseCheckboxGroupChildContext);
     console.assert(context != null, `This CheckboxGroupParent is not contained within a CheckboxGroup`);
     const info = useCheckboxGroupParent({
       completeListNavigationChildParameters: {
@@ -12454,7 +12555,7 @@
       focusSelf,
       ..._rest
     } = _ref3;
-    const context = q$1(UseCheckboxGroupChildContext);
+    const context = q$2(UseCheckboxGroupChildContext);
     console.assert(context != null, `This CheckboxGroupChild is not contained within a CheckboxGroup`);
     const info = useCheckboxGroupChild({
       checkboxGroupChild: {
@@ -12522,7 +12623,7 @@
     } = _ref;
     const portalRef = _$1(null);
     portalRef.current ??= document.getElementById(portalId);
-    if (portalRef.current) return j$1(children, portalRef.current);else return children;
+    if (portalRef.current) return z$1(children, portalRef.current);else return children;
   }
   const Dialog$1 = memoForwardRef(function Dialog(_ref2, ref) {
     let {
@@ -12537,7 +12638,7 @@
       ariaLabel,
       render
     } = _ref2;
-    const defaultParentDepth = q$1(ParentDepthContext);
+    const defaultParentDepth = q$2(ParentDepthContext);
     let myDepth = (parentDepth !== null && parentDepth !== void 0 ? parentDepth : defaultParentDepth) + 1;
     const info = useDialog({
       dismissParameters: {
@@ -12580,7 +12681,7 @@
       trapActive,
       ariaLabel
     } = _ref;
-    const defaultParentDepth = q$1(ParentDepthContext);
+    const defaultParentDepth = q$2(ParentDepthContext);
     let myDepth = (parentDepth !== null && parentDepth !== void 0 ? parentDepth : defaultParentDepth) + 1;
     const info = useDrawer({
       dismissParameters: {
@@ -12610,8 +12711,8 @@
     });
   });
 
-  const GridlistContext = E$1(null);
-  const GridlistRowContext = E$1(null);
+  const GridlistContext = F$3(null);
+  const GridlistRowContext = F$3(null);
   const Gridlist = memoForwardRef(function GridlistU(_ref3, ref) {
     let {
       collator,
@@ -12706,7 +12807,7 @@
       render,
       subInfo
     } = _ref4;
-    const context = q$1(GridlistContext);
+    const context = q$2(GridlistContext);
     console.assert(context != null, `This GridlistRow is not contained within a Gridlist`);
     const info = useGridlistRow({
       completeGridNavigationRowParameters: {
@@ -12764,7 +12865,7 @@
       render,
       subInfo
     } = _ref5;
-    const context = q$1(GridlistRowContext);
+    const context = q$2(GridlistRowContext);
     console.assert(context != null, `This GridlistChild is not contained within a GridlistRow that is contained within a Gridlist`);
     const defaultFocusSelf = useStableCallback(e => {
       e.focus?.();
@@ -12795,7 +12896,7 @@
     return render(info);
   });
 
-  const HeadingLevelContext = E$1(0);
+  const HeadingLevelContext = F$3(0);
   /**
    * Utility component that creates a heading `h1`, `h2`, `h3`, etc.
    *
@@ -12812,7 +12913,7 @@
       tag,
       ...props
     } = _ref;
-    const headingLevelBeforeUs = q$1(HeadingLevelContext);
+    const headingLevelBeforeUs = q$2(HeadingLevelContext);
     const newHeadingLevel = headingLevelBeforeUs + 1;
     if (tag == null) {
       if (newHeadingLevel <= 6) {
@@ -12821,10 +12922,10 @@
         tag = 'div';
       }
     }
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: o$2(HeadingReset, {
         newLevel: headingLevelBeforeUs + 1,
-        children: [v$2(tag, props, heading), children]
+        children: [y$2(tag, props, heading), children]
       })
     });
   });
@@ -12855,6 +12956,7 @@
       },
       ...restParams
     } = _ref;
+    monitorCallCount(useListbox);
     useEnsureStability("useListbox", selectionLimit);
     const {
       propsInput: propsLabelList,
@@ -12945,6 +13047,7 @@
       },
       ...restParams
     } = _ref2;
+    monitorCallCount(useListboxItem);
     const {
       pressParameters: {
         excludeSpace
@@ -12980,8 +13083,8 @@
     };
   }
 
-  const ListboxContext = E$1(null);
-  const ListboxGroupContext = E$1(null);
+  const ListboxContext = F$3(null);
+  const ListboxGroupContext = F$3(null);
   x$1(function GroupedListbox(_ref) {
     let {
       ariaLabel,
@@ -13060,7 +13163,7 @@
       typeaheadTimeout,
       render
     } = _ref2;
-    const listboxGroupInfo = q$1(ListboxGroupContext);
+    const listboxGroupInfo = q$2(ListboxGroupContext);
     const info = useListbox({
       labelParameters: {
         ariaLabel
@@ -13122,7 +13225,7 @@
       getSortValue,
       ...subInfo
     } = _ref3;
-    const context = q$1(ListboxContext);
+    const context = q$2(ListboxContext);
     console.assert(context != null, `This ListboxItem is not contained within a Listbox`);
     const focusSelfDefault = T$2(e => {
       e?.focus();
@@ -13160,7 +13263,7 @@
     return render(info);
   });
 
-  const MenuItemContext = E$1(null);
+  const MenuItemContext = F$3(null);
   const Menu$1 = memoForwardRef(function Menu(_ref, ref) {
     let {
       collator,
@@ -13190,7 +13293,7 @@
       getWindow,
       render
     } = _ref;
-    const defaultParentDepth = q$1(ParentDepthContext);
+    const defaultParentDepth = q$2(ParentDepthContext);
     let myDepth = (parentDepth !== null && parentDepth !== void 0 ? parentDepth : defaultParentDepth) + 1;
     const info = useMenu({
       linearNavigationParameters: {
@@ -13266,7 +13369,7 @@
       render,
       subInfo
     } = _ref2;
-    const context = q$1(MenuItemContext);
+    const context = q$2(MenuItemContext);
     console.assert(context != null, `This MenuItem is not contained within a Menubar/Menu`);
     const defaultFocusSelf = T$2(e => e?.focus?.(), []);
     const info = useMenuItem({
@@ -13298,12 +13401,12 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: render(info)
     });
   });
 
-  const MenubarItemContext = E$1(null);
+  const MenubarItemContext = F$3(null);
   memoForwardRef(function MenubarU(_ref, ref) {
     let {
       render,
@@ -13385,7 +13488,7 @@
       role,
       subInfo
     } = _ref2;
-    const context = q$1(MenubarItemContext);
+    const context = q$2(MenubarItemContext);
     console.assert(context != null, `This MenuItem is not contained within a Menubar/Menu`);
     const defaultFocusSelf = T$2(e => e?.focus?.(), []);
     const info = useMenubarChild({
@@ -13417,7 +13520,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: render(info)
     });
   });
@@ -13477,7 +13580,7 @@
     return render(info);
   });
 
-  const RadioContext = E$1(null);
+  const RadioContext = F$3(null);
   const RadioGroup$1 = memoForwardRef(function RadioGroup(_ref, ref) {
     let {
       render,
@@ -13556,7 +13659,7 @@
       tagLabel,
       getText
     } = _ref2;
-    const context = q$1(RadioContext);
+    const context = q$2(RadioContext);
     console.assert(context != null, `This Radio is not contained within a RadioGroup`);
     const getValue = useStableGetter(value);
     const defaultFocusSelf = () => info.checkboxLikeReturn.focusSelf();
@@ -13597,7 +13700,7 @@
     return render(info);
   });
 
-  const SliderThumbContext = E$1(null);
+  const SliderThumbContext = F$3(null);
   memoForwardRef(function Slider(_ref, ref) {
     let {
       max,
@@ -13634,7 +13737,7 @@
       render,
       valueText
     } = _ref2;
-    const context = q$1(SliderThumbContext);
+    const context = q$2(SliderThumbContext);
     console.assert(context != null, `This SliderThumb is not contained within a Slider`);
     const info = useSliderThumb({
       context,
@@ -13655,9 +13758,9 @@
     return render(info);
   });
 
-  const TableContext$1 = E$1(null);
-  const TableSectionContext = E$1(null);
-  const TableRowContext = E$1(null);
+  const TableContext$1 = F$3(null);
+  const TableSectionContext = F$3(null);
+  const TableRowContext = F$3(null);
   const Table$1 = memoForwardRef(function TableU(_ref, ref) {
     let {
       ariaLabel,
@@ -13729,7 +13832,7 @@
         initiallySelectedIndex: initiallySelectedIndex !== null && initiallySelectedIndex !== void 0 ? initiallySelectedIndex : null,
         onSelectedIndexChange: onSelectedIndexChange !== null && onSelectedIndexChange !== void 0 ? onSelectedIndexChange : null
       },
-      context: q$1(TableContext$1),
+      context: q$2(TableContext$1),
       tableSectionParameters: {
         tagTableSection,
         location
@@ -13757,7 +13860,7 @@
       hidden,
       render
     } = _ref3;
-    const cx1 = q$1(TableSectionContext);
+    const cx1 = q$2(TableSectionContext);
     console.assert(cx1 != null, `This TableRow is not contained within a TableSection`);
     const info = useTableRow({
       completeGridNavigationRowParameters: {},
@@ -13807,7 +13910,7 @@
       colSpan,
       getSortValue
     } = _ref4;
-    const context = q$1(TableRowContext);
+    const context = q$2(TableRowContext);
     console.assert(context != null, `This TableCell is not contained within a TableRow`);
     const defaultFocusSelf = useStableCallback(e => {
       e.focus?.();
@@ -13838,8 +13941,8 @@
     return render(info);
   });
 
-  const TabsContext = E$1(null);
-  const TabPanelsContext = E$1(null);
+  const TabsContext = F$3(null);
+  const TabPanelsContext = F$3(null);
   const Tabs$1 = memoForwardRef(function Tabs(_ref, ref) {
     let {
       ariaLabel,
@@ -13928,7 +14031,7 @@
       selectionMode,
       subInfo
     } = _ref2;
-    const context = q$1(TabsContext);
+    const context = q$2(TabsContext);
     console.assert(context != null, `This Tab is not contained within a Tabs component`);
     const focusSelfDefault = T$2(e => {
       e?.focus();
@@ -13964,7 +14067,7 @@
       index,
       render
     } = _ref3;
-    const context = q$1(TabPanelsContext);
+    const context = q$2(TabPanelsContext);
     const info = useTabPanel({
       context,
       managedChildParameters: {
@@ -13974,7 +14077,7 @@
     return render(info);
   }
 
-  const ToastContext = E$1(null);
+  const ToastContext = F$3(null);
   const Toasts = memoForwardRef(function Toasts(_ref, ref) {
     let {
       onAfterChildLayoutEffect,
@@ -14005,7 +14108,7 @@
       politeness,
       children
     } = _ref2;
-    const context = q$1(ToastContext);
+    const context = q$2(ToastContext);
     console.assert(context != null, `This Toast was not rendered within a Toasts provider`);
     const info = useToast({
       managedChildParameters: {
@@ -14022,7 +14125,7 @@
     return render(info);
   });
 
-  const ToolbarContext = E$1(null);
+  const ToolbarContext = F$3(null);
   const Toolbar = memoForwardRef(function ToolbarU(_ref, ref) {
     let {
       render,
@@ -14102,7 +14205,7 @@
       getText,
       subInfo
     } = _ref2;
-    const context = q$1(ToolbarContext);
+    const context = q$2(ToolbarContext);
     console.assert(context != null, `This ToolbarChild is not contained within a Toolbar`);
     const focusSelfDefault = T$2(e => {
       e?.focus();
@@ -14132,7 +14235,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: render(info)
     });
   });
@@ -14146,7 +14249,7 @@
       render,
       tooltipSemanticType
     } = _ref;
-    const defaultParentDepth = q$1(ParentDepthContext);
+    const defaultParentDepth = q$2(ParentDepthContext);
     let myDepth = (parentDepth !== null && parentDepth !== void 0 ? parentDepth : defaultParentDepth) + 1;
     const info = useTooltip({
       escapeDismissParameters: {
@@ -14168,9 +14271,9 @@
 
   function getExclusiveTransitionContextPrememoization(exclusivityKey) {
     if (exclusivityKey == null) return null;
-    return E$1(null);
+    return F$3(null);
   }
-  const SwappableContext = E$1({
+  const SwappableContext = F$3({
     getAnimateOnMount: () => false
   });
   /**
@@ -14179,7 +14282,7 @@
    * If
    */
   const GetExclusiveTransitionContext = memoize(getExclusiveTransitionContextPrememoization);
-  const CssClassContext = E$1({
+  const CssClassContext = F$3({
     GetBaseClass: () => "ptl",
     GetEnterClass: () => "n",
     GetExitClass: () => "x",
@@ -14197,7 +14300,7 @@
       GetInitClass,
       GetTransitionClass,
       GetFinalizeClass
-    } = q$1(CssClassContext);
+    } = q$2(CssClassContext);
     const GetDirectionClass = T$2(direction => {
       switch (direction) {
         case "enter":
@@ -14317,7 +14420,7 @@
     } = _ref2;
     const c = GetExclusiveTransitionContext(exclusivityKey);
     useEnsureStability("useExclusiveTransition", c == null);
-    const context = c ? q$1(c) : null;
+    const context = c ? q$2(c) : null;
     const index = F$2(() => {
       globalCount += 1;
       return globalCount.toString();
@@ -14338,7 +14441,7 @@
     const onVisibilityChange = T$2(visible => {
       parentOnVisChange?.(index, visible == false ? "hidden" : "show");
     }, [parentOnVisChange, index]);
-    s$1(() => {
+    y$1(() => {
       if (show) parentOnVisChange?.(index, "show");
     }, [show, parentOnVisChange, index]);
     return {
@@ -14371,7 +14474,7 @@
    */
   function useLastNonNullValue(value) {
     const lastNonNullValue = _$1(null);
-    h$1(() => {
+    p$1(() => {
       if (value != null) lastNonNullValue.current = value;
     }, [value]);
     return value !== null && value !== void 0 ? value : lastNonNullValue.current;
@@ -14424,7 +14527,7 @@
     });
     const mergedWithChildren = useMergedProps(transitionProps, children.props);
     const animateOnMount = _$1(childrenAnimateOnMount !== null && childrenAnimateOnMount !== void 0 ? childrenAnimateOnMount : false);
-    h$1(() => {
+    p$1(() => {
       animateOnMount.current = true;
     }, []);
     const contextValue = _$1({
@@ -14432,7 +14535,7 @@
         return animateOnMount.current;
       }
     });
-    let ret = D$2(children, mergedWithChildren);
+    let ret = E$1(children, mergedWithChildren);
     ret = o$2(SwappableContext.Provider, {
       value: contextValue.current,
       children: ret
@@ -14490,7 +14593,7 @@
     useEnsureStability("useTransition", onVisibilityChange);
     const {
       getAnimateOnMount
-    } = q$1(SwappableContext);
+    } = q$2(SwappableContext);
     exitVisibility ||= "hidden";
     animateOnMount ??= getAnimateOnMount();
     measure ??= false;
@@ -14681,7 +14784,7 @@
     const [getState, setState] = usePassiveState(onStateChange, returnNull, runImmediately);
     // When we mount, and every time thereafter that `show` changes,
     // change our current state according to that `show` value.
-    s$1(() => internalOnShowChanged(show, measure), [measure, show]);
+    y$1(() => internalOnShowChanged(show, measure), [measure, show]);
     // This has no dependences and is relied on in two different areas
     function internalOnShowChanged(show, measure) {
       // If `show` is null, then we don't change anything.
@@ -14713,7 +14816,7 @@
     const definitelyShouldMountChildren = show || !delayMountUntilShown;
     const hasRenderedChildren = _$1(false);
     const renderChildren = definitelyShouldMountChildren || hasRenderedChildren.current;
-    h$1(() => {
+    p$1(() => {
       if (definitelyShouldMountChildren) hasRenderedChildren.current ||= true;
     }, [hasRenderedChildren.current ? false : definitelyShouldMountChildren]);
     const childrenIsVnode = children && children.type && children.props;
@@ -14731,7 +14834,7 @@
     if (childrenIsVnode) {
       modifiedChildren = o$2(SwappableContext.Provider, {
         value: resetContext,
-        children: D$2(children, finalProps)
+        children: E$1(children, finalProps)
       });
     } else {
       modifiedChildren = o$2(SwappableContext.Provider, {
@@ -15672,8 +15775,8 @@
     });
   }));
 
-  const DisabledContext$1 = E$1(false);
-  const DefaultDisabledType = E$1("soft");
+  const DisabledContext$1 = F$3(false);
+  const DefaultDisabledType = F$3("soft");
 
   function getAlignment(placement) {
     return placement.split('-')[1];
@@ -17255,7 +17358,7 @@
       }
     });
     const getOpen = useStableGetter(open);
-    s$1(() => {
+    y$1(() => {
       handleUpdate(true);
       if (open) {
         hasOpenedAtLeastOnce.current = true;
@@ -17304,7 +17407,7 @@
         };
       }
     }, [open]);
-    h$1(() => {
+    p$1(() => {
       if (open) {
         handleUpdate(true);
       }
@@ -17480,13 +17583,13 @@
     }
     maxWidth ??= "33vw";
     let [status, setStatus] = useState(null);
-    h$1(() => {
+    p$1(() => {
       if (forceOpen) setStatus("focus");
     }, [forceOpen]);
     const myClose = T$2(() => {
       setStatus(null);
     }, []);
-    h$1(() => {}, []);
+    p$1(() => {}, []);
     return o$2(Tooltip$1, {
       onStatus: setStatus,
       hoverDelay: hoverDelay,
@@ -17496,7 +17599,7 @@
         if (forceOpen) status = "focus";
         // Any time the tooltip is shown, make sure all other open tooltips close themselves.
         // ... (times like this I *really* appreciate JS is single-threaded)
-        h$1(() => {
+        p$1(() => {
           if (status != null) {
             otherTooltipCloses.forEach(close => close());
             otherTooltipCloses.add(myClose);
@@ -17565,15 +17668,15 @@
         if (forward) {
           const vnode = children;
           console.assert(!!vnode.type);
-          return o$2(d$2, {
-            children: [D$2(vnode, useMergedProps(propsData, vnode.props, tooltipInfo.propsTrigger, propsSource, props, {
+          return o$2(_$3, {
+            children: [E$1(vnode, useMergedProps(propsData, vnode.props, tooltipInfo.propsTrigger, propsSource, props, {
               ref
             }, {
               ref: vnode.ref
             })), portalJsx]
           });
         }
-        return o$2(d$2, {
+        return o$2(_$3, {
           children: o$2("span", {
             ...useMergedProps({
               ref
@@ -17596,14 +17699,14 @@
     const c = childrenIsVnode(children) ? children : o$2(Tag, {
       children: children
     });
-    return v$2(c.type, useMergedProps(c.props, {
+    return y$2(c.type, useMergedProps(c.props, {
       ref: c.ref
     }, props, {
       ref
     }));
   }
 
-  const KeyboardAssistContext = E$1(null);
+  const KeyboardAssistContext = F$3(null);
   const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(_ref, ref) {
     let {
       leftRight,
@@ -17634,7 +17737,7 @@
       removeTypeahead,
       removeUpDown,
       setHasStartedTypeahead
-    } = q$1(KeyboardAssistContext);
+    } = q$2(KeyboardAssistContext);
     const [randomId] = useState(() => generateRandomId());
     const [focusedInner, setFocusedInner] = useState(false);
     const {
@@ -17659,52 +17762,52 @@
     typeahead &&= focusedInner;
     leaveF2 &&= focusedInner;
     textF10 &&= focusedInner;
-    h$1(() => {
+    p$1(() => {
       if (typeaheadActive) setHasStartedTypeahead();
     }, [typeaheadActive]);
-    h$1(() => {
+    p$1(() => {
       if (leftRight) {
         addLeftRight(randomId);
         return () => removeLeftRight(randomId);
       }
     }, [leftRight]);
-    h$1(() => {
+    p$1(() => {
       if (upDown) {
         addUpDown(randomId);
         return () => removeUpDown(randomId);
       }
     }, [upDown]);
-    h$1(() => {
+    p$1(() => {
       if (pageKeys) {
         addPageKeys(randomId);
         return () => removePageKeys(randomId);
       }
     }, [pageKeys]);
-    h$1(() => {
+    p$1(() => {
       if (homeEnd) {
         addHomeEnd(randomId);
         return () => removeHomeEnd(randomId);
       }
     }, [homeEnd]);
-    h$1(() => {
+    p$1(() => {
       if (typeahead) {
         addTypeahead(randomId);
         return () => removeTypeahead(randomId);
       }
     }, [typeahead]);
-    h$1(() => {
+    p$1(() => {
       if (focusedInner && leaveF2) {
         addLeaveF2(randomId);
         return () => removeLeaveF2(randomId);
       }
     }, [focusedInner]);
-    h$1(() => {
+    p$1(() => {
       if (focusedInner && textF10) {
         addTextF10(randomId);
         return () => removeTextF10(randomId);
       }
     }, [focusedInner]);
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: useClonedElement(children, useMergedProps(propsStable, hasCurrentFocusReturn.propsStable, props), ref)
     });
   });
@@ -17735,7 +17838,7 @@
     const leaveF2Set = _$1(new Set());
     const textF10Set = _$1(new Set());
     const visible = leftRight2 || upDown2 || homeEnd2 || pageKeys2 || typeahead2;
-    s$1(() => {
+    y$1(() => {
       const visible = leftRight2 || upDown2 || homeEnd2 || pageKeys2 || typeahead2;
       if (visible) {
         setLeftRightDisplay(leftRight2);
@@ -17898,7 +18001,7 @@
     }
     label = `Navigate using ${label}. Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
     const show = heardTab && !userHasHidden && visible;
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2("div", {
         id: id,
         class: "visually-hidden",
@@ -18066,7 +18169,7 @@
     });
   });
 
-  const ButtonGroupContext = E$1(null);
+  const ButtonGroupContext = F$3(null);
   function ButtonGroup(_ref, ref) {
     let {
       children,
@@ -18115,7 +18218,7 @@
               ...info.propsLabel,
               children: label
             });
-            return o$2(d$2, {
+            return o$2(_$3, {
               children: [labelPosition == "before" && visibleLabel, o$2(KeyboardAssistIcon, {
                 leftRight: orientation == "horizontal",
                 upDown: orientation == "vertical",
@@ -18176,14 +18279,14 @@
     // * The user has specified the button is pressed.
     // * This button is contained in a single-select widget, and that widget is telling this button that it is the selected one among all its siblings.
     // * The onPress handler is an async handler that sets the button to pressed/unpressed, in which case we show it in that state until the handler completes.
-    const buttonGroupInfo = q$1(ButtonGroupContext);
+    const buttonGroupInfo = q$2(ButtonGroupContext);
     const {
       pendingIndex
     } = buttonGroupInfo !== null && buttonGroupInfo !== void 0 ? buttonGroupInfo : {};
     const isThePressedOne = (_ref2 = pendingIndex == null ? individualPending ? currentCapture : standaloneOrMultiSelectPressed : pendingIndex === buttonGroupIndex) !== null && _ref2 !== void 0 ? _ref2 : null;
     const singleSelectPending = pendingIndex != null && isThePressedOne;
-    const defaultDisabled = q$1(DisabledContext$1);
-    const disabledType = q$1(DefaultDisabledType);
+    const defaultDisabled = q$2(DisabledContext$1);
+    const disabledType = q$2(DefaultDisabledType);
     const pending = (_ref3 = individualPending || singleSelectPending) !== null && _ref3 !== void 0 ? _ref3 : false;
     //variantSize ??= "md";
     let disabled = userDisabled;
@@ -18191,7 +18294,7 @@
     //disabled ||= (pendingIndex != null);
     disabled ||= pending;
     const d = disabled ? disabledType : false;
-    children = o$2(d$2, {
+    children = o$2(_$3, {
       children: [children, badge]
     });
     if (buttonGroupInfo == null) {
@@ -18290,7 +18393,7 @@
             });
             if (pressed !== null) variantFill ??= pressed ? "fill" : "outline";
             const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
-            const ret = v$2(Tag, useMergedProps(otherProps, buttonInfo.props, {
+            const ret = y$2(Tag, useMergedProps(otherProps, buttonInfo.props, {
               className: buttonClass,
               ref
             }), children, loadingJsx);
@@ -18420,7 +18523,7 @@
             children,
             ...props
           } = p;
-          return v$2("span", props, children);
+          return y$2("span", props, children);
         }
     }
   }
@@ -18509,7 +18612,7 @@
     });
   }));
 
-  const WithinInputGroup = E$1(false);
+  const WithinInputGroup = F$3(false);
 
   function Checkbox(_ref, ref) {
     let {
@@ -18531,7 +18634,7 @@
     } = _ref;
     const isSwitch = props._isSwitch;
     if (isSwitch) delete props._isSwitch;
-    const w = q$1(WithinInputGroup);
+    const w = q$2(WithinInputGroup);
     return o$2(ProgressWithHandler, {
       ariaLabel: loadingLabel !== null && loadingLabel !== void 0 ? loadingLabel : "Please wait while the operation completes.",
       forciblyPending: forciblyPending,
@@ -18574,8 +18677,8 @@
             ...propsIndicator
           })
         });
-        const defaultDisabled = q$1(DisabledContext$1);
-        const disabledType = q$1(DefaultDisabledType);
+        const defaultDisabled = q$2(DisabledContext$1);
+        const disabledType = q$2(DefaultDisabledType);
         let disabled = userDisabled;
         disabled ||= defaultDisabled;
         //disabled ||= pending;
@@ -18615,7 +18718,7 @@
                 }) : inputJsx, labelPosition == "after" && visibleLabel]
               });
             } else {
-              return o$2(d$2, {
+              return o$2(_$3, {
                 children: [labelPosition == "before" && o$2("div", {
                   ...{
                     className: clsx("input-group-text", pending && "pending")
@@ -18738,7 +18841,7 @@
     } = _ref3;
     const imperativeHandle = _$1(null);
     ++index;
-    const [pendingFromParent, setPendingFromParent] = p$1(false);
+    const [pendingFromParent, setPendingFromParent] = h$1(false);
     return o$2(CheckboxGroupChild$1, {
       checked: checked,
       focusSelf: useStableCallback(() => {
@@ -18807,7 +18910,7 @@
         closeOnBackdrop: modal ? false : true,
         closeOnEscape: modal ? false : true,
         render: info => {
-          const headingJsx = o$2(d$2, {
+          const headingJsx = o$2(_$3, {
             children: [o$2("span", {
               class: "modal-title",
               children: header
@@ -18825,7 +18928,7 @@
             class: "modal-footer",
             children: footer
           });
-          return o$2(d$2, {
+          return o$2(_$3, {
             children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
               portalId: usePortalId("dialog"),
               children: o$2("div", {
@@ -18876,7 +18979,7 @@
         className: "figure",
         ref
       }, props),
-      children: [D$2(children, useMergedProps({
+      children: [E$1(children, useMergedProps({
         className: "figure-img",
         ref: children.props.ref
       }, children.props)), o$2("figcaption", {
@@ -18902,7 +19005,7 @@
       role: role || (label ? "img" : "presentation"),
       ref
     });
-    const iconElement = D$2(children, useMergedProps(children.props, iconProps));
+    const iconElement = E$1(children, useMergedProps(children.props, iconProps));
     return iconElement;
   }));
 
@@ -19162,7 +19265,7 @@
       label
     } = _ref;
     const [page, setPage] = useState(0);
-    h$1(() => {
+    p$1(() => {
       const start = (page + 0) * windowSize;
       const end = (page + 1) * windowSize;
       onChange?.(start, end);
@@ -19180,7 +19283,7 @@
           ...info.propsLabel,
           children: label
         });
-        return o$2(d$2, {
+        return o$2(_$3, {
           children: [labelPosition == "before" && labelJsx, o$2("nav", {
             ...info.propsToolbar,
             children: o$2("ul", {
@@ -19206,7 +19309,7 @@
     _$1(null);
     const centerFirstRef = _$1(null);
     const centerLastRef = _$1(null);
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2(PaginationButtonFirst, {
         index: firstIndex,
         onFocus: T$2(() => {
@@ -19332,13 +19435,13 @@
         setPaginationEnd(end);
       }
     });
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [paginationSize && paginationLocation == "before" && paginationJsx, children, paginationSize && paginationLocation == "after" && paginationJsx]
     });
   });
 
-  const RenderCounterValueContext = E$1(null);
-  const RenderCounterSetterContext = E$1(null);
+  const RenderCounterValueContext = F$3(null);
+  const RenderCounterSetterContext = F$3(null);
   function RenderCounterProvider(_ref) {
     let {
       children
@@ -19378,24 +19481,24 @@
     });
   }
   function useRenderCounters() {
-    return q$1(RenderCounterValueContext);
+    return q$2(RenderCounterValueContext);
   }
   function useUpdateRenderCounter(key) {
     let setter;
-    const context = q$1(RenderCounterSetterContext);
+    const context = q$2(RenderCounterSetterContext);
     // For performance purposes, we do this conditionally,
     // so this can't change, but I'm pretty sure that's how the diff algorithm remounts things anyway.
     useEnsureStability("useRenderContext", context);
     if (context) {
       //value = context[key];
       setter = context[`set${key}`];
-      h$1(() => {
+      p$1(() => {
         setter?.(s => ++s);
       });
     }
   }
 
-  const DefaultDisabled = E$1(false);
+  const DefaultDisabled = F$3(false);
   function List(_ref) {
     let {
       columns,
@@ -19448,7 +19551,7 @@
             ...info.propsGridlistLabel,
             children: label
           });
-          return o$2(d$2, {
+          return o$2(_$3, {
             children: [labelPosition == "before" && labelJsx, o$2(Paginated, {
               childCount: (_info$paginatedChildr = info.paginatedChildrenReturn.childCount) !== null && _info$paginatedChildr !== void 0 ? _info$paginatedChildr : 0,
               paginationLabel: paginationLabel,
@@ -19483,7 +19586,7 @@
       onSelectedChange,
       ...props
     } = _ref2;
-    const defaultDisabled = q$1(DefaultDisabled);
+    const defaultDisabled = q$2(DefaultDisabled);
     disabled ||= defaultDisabled;
     return o$2(ProgressWithHandler, {
       ariaLabel: loadingLabel !== null && loadingLabel !== void 0 ? loadingLabel : "Please wait while the operation completes.",
@@ -19556,7 +19659,7 @@
             }, {
               className: clsx(`gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.singleSelectionChildReturn.selected || selected) && `active`)
             });
-            const c = o$2(d$2, {
+            const c = o$2(_$3, {
               children: [o$2(ListItemStartEnd, {
                 index: 0,
                 hidden: iconStart == null,
@@ -19647,7 +19750,7 @@
           class: clsx("list-group-item-icon", `list-group-item-icon-${index === 0 ? "start" : "end"}`),
           children: useClonedElement(children, info.props, undefined)
         });
-        if (hidden) return o$2(d$2, {
+        if (hidden) return o$2(_$3, {
           children: null
         });else return ret;
       }
@@ -19712,7 +19815,7 @@
             alignMode: "element"
           }
         });
-        return o$2(d$2, {
+        return o$2(_$3, {
           children: [useClonedElement(anchor, useMergedProps({
             onPress: onAnchorPress,
             class: popperOpen ? "active" : ""
@@ -19840,7 +19943,7 @@
         closeOnBackdrop: true,
         closeOnEscape: true,
         render: info => {
-          return o$2(d$2, {
+          return o$2(_$3, {
             children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
               portalId: usePortalId("offcanvas"),
               children: o$2("div", {
@@ -19889,7 +19992,7 @@
     });
   }));
 
-  const RadioGroupContext = E$1(null);
+  const RadioGroupContext = F$3(null);
   function RadioGroup(_ref, ref) {
     let {
       onValueChange: onSelectedIndexChangeAsync,
@@ -19943,7 +20046,7 @@
               ...info.propsRadioGroupLabel,
               children: label
             });
-            return o$2(d$2, {
+            return o$2(_$3, {
               children: [labelPosition == "before" && visibleLabel, o$2(KeyboardAssistIcon, {
                 leftRight: !!inline,
                 upDown: !inline,
@@ -19978,7 +20081,7 @@
       disabled: userDisabled,
       ...props
     } = _ref2;
-    const radioGroupInfo = q$1(RadioGroupContext);
+    const radioGroupInfo = q$2(RadioGroupContext);
     const {
       pendingValue,
       inline
@@ -19999,8 +20102,8 @@
           ...propsIndicator
         });
         //const inButtonGroup = (useContext(ButtonGroupContext) ?? false);
-        const defaultDisabled = q$1(DisabledContext$1);
-        const disabledType = q$1(DefaultDisabledType);
+        const defaultDisabled = q$2(DisabledContext$1);
+        const disabledType = q$2(DefaultDisabledType);
         let disabled = userDisabled;
         disabled ||= defaultDisabled;
         disabled ||= pendingValue != null;
@@ -28377,7 +28480,7 @@
     } = useRefElement({
       refElementParameters: {}
     });
-    const withinInputGroup = q$1(WithinInputGroup);
+    const withinInputGroup = q$2(WithinInputGroup);
     const {
       propsInput: propsInput2,
       propsLabel: propsLabel2
@@ -28444,7 +28547,7 @@
         });
         // Always make sure that, when the value changes, so does the displayed input's value
         // except when it's currently being edited!
-        s$1(() => {
+        y$1(() => {
           if (!getCurrentFocusedInner() && !showSpinner) updateDOMValue(value);
         });
         const {
@@ -28486,7 +28589,7 @@
             }
           }
         });
-        const disabledType = q$1(DefaultDisabledType);
+        const disabledType = q$2(DefaultDisabledType);
         let baseInputClass = clsx("form-control", disabled && "disabled", readonly && "readonly", size && `form-control-${size !== null && size !== void 0 ? size : "md"}`, readonly == 'plaintext' && 'form-control-plaintext');
         if (disabled && disabledType == 'soft') {
           disabled = false;
@@ -28598,7 +28701,7 @@
             }), labelPosition == "after" && labelJsx]
           });
         } else {
-          return o$2(d$2, {
+          return o$2(_$3, {
             children: [labelPosition == "before" && labelJsx, iconStart && o$2("span", {
               class: clsx("input-group-text"),
               children: iconStart
@@ -28635,8 +28738,8 @@
     } = _ref9;
     if (invocationResult != "async") return null;
     let pendingDisplayType = debouncingAsync || debouncingSync ? 2 : p ? 1 : 0;
-    const withinInputGroup = q$1(WithinInputGroup);
-    const ret = o$2(d$2, {
+    const withinInputGroup = q$2(WithinInputGroup);
+    const ret = o$2(_$3, {
       children: [o$2(Fade, {
         show: pendingDisplayType == 1,
         animateOnMount: true,
@@ -28698,7 +28801,7 @@
     const getOnReady = useStableGetter(oru);
     const getValueHtml = useStableGetter(valueHtml);
     const ref = _$1(null);
-    h$1(() => {
+    p$1(() => {
       const editor = implementation.create(ref.current, getArgs()).then(editor => {
         editor.model.document.on("change:data", e => {
           const newData = editor.getData();
@@ -30545,16 +30648,16 @@
     });
   });
 
-  const RangeThumbContext = E$1(null);
-  const DebounceContext = E$1(false);
-  const ValueContext = E$1(null);
-  const GetValueTextContext = E$1(null);
-  const GetListContext = E$1("");
-  const StepContext = E$1(1);
-  const SnapContext = E$1("discrete");
-  const DisabledContext = E$1(false);
-  const OrientationContext = E$1("inline");
-  const OnValueChangeContext = E$1(null);
+  const RangeThumbContext = F$3(null);
+  const DebounceContext = F$3(false);
+  const ValueContext = F$3(null);
+  const GetValueTextContext = F$3(null);
+  const GetListContext = F$3("");
+  const StepContext = F$3(1);
+  const SnapContext = F$3("discrete");
+  const DisabledContext = F$3(false);
+  const OrientationContext = F$3("inline");
+  const OnValueChangeContext = F$3(null);
   const Range = x$1(forwardElementRef(function Range(_ref, ref) {
     var _ref2;
     let {
@@ -30609,7 +30712,7 @@
                       value: value !== null && value !== void 0 ? value : null,
                       children: o$2(OrientationContext.Provider, {
                         value: orientation !== null && orientation !== void 0 ? orientation : "inline",
-                        children: v$2(label ? "label" : "div", useMergedProps({
+                        children: y$2(label ? "label" : "div", useMergedProps({
                           class: clsx("form-range-container", orientation == "block" && "form-range-vertical"),
                           ref,
                           style: isFinite(tickCount) ? {
@@ -30659,10 +30762,10 @@
       id,
       hideTickValues
     } = _ref3;
-    const onValueChange = q$1(OnValueChangeContext);
+    const onValueChange = q$2(OnValueChangeContext);
     if (step == "any") return null;
     hideTickValues ??= false;
-    const getValueText = q$1(GetValueTextContext);
+    const getValueText = q$2(GetValueTextContext);
     let children = [];
     for (let i = min; i <= max; i += step) {
       const atEnds = i == min || i + step > max;
@@ -30698,9 +30801,9 @@
       disabled,
       label
     } = _ref4;
-    const parentOnValueChange = q$1(OnValueChangeContext);
-    const context = q$1(RangeThumbContext);
-    const debounceSetting = q$1(DebounceContext);
+    const parentOnValueChange = q$2(OnValueChangeContext);
+    const context = q$2(RangeThumbContext);
+    const debounceSetting = q$2(DebounceContext);
     console.assert(typeof label == "string");
     const {
       syncHandler,
@@ -30716,17 +30819,17 @@
       debounce: debounceSetting == true ? 1500 : debounceSetting != false ? debounceSetting : undefined
     });
     const onValueChangeSync = syncHandler; // as UseSliderThumbArguments<HTMLInputElement>["onValueChange"];
-    const valueFromParent = q$1(ValueContext);
+    const valueFromParent = q$2(ValueContext);
     value = (_ref5 = (_ref6 = valueFromParent !== null && valueFromParent !== void 0 ? valueFromParent : value) !== null && _ref6 !== void 0 ? _ref6 : currentCapture) !== null && _ref5 !== void 0 ? _ref5 : 0;
-    const getValueText = q$1(GetValueTextContext);
+    const getValueText = q$2(GetValueTextContext);
     const valueText = F$2(() => {
       var _getValueText;
       return (_getValueText = getValueText?.(value)) !== null && _getValueText !== void 0 ? _getValueText : value == null ? "" : `${value}`;
     }, [value, getValueText]);
-    const orientation = q$1(OrientationContext);
-    let parentDisabled = q$1(DisabledContext);
+    const orientation = q$2(OrientationContext);
+    let parentDisabled = q$2(DisabledContext);
     disabled ||= parentDisabled;
-    const [inputHasFocus, setInputHasFocus] = p$1(false);
+    const [inputHasFocus, setInputHasFocus] = h$1(false);
     const {
       refElementReturn,
       refElementReturn: {
@@ -30747,11 +30850,11 @@
       },
       refElementReturn
     });
-    let usedStep = (_useContext = q$1(StepContext)) !== null && _useContext !== void 0 ? _useContext : 1;
+    let usedStep = (_useContext = q$2(StepContext)) !== null && _useContext !== void 0 ? _useContext : 1;
     let userStep = usedStep;
-    const [lastSnappedValue, setLastSnappedValue] = p$1(null);
-    const [forceSnap, setForceSnap] = p$1(false);
-    const snap = q$1(SnapContext);
+    const [lastSnappedValue, setLastSnappedValue] = h$1(null);
+    const [forceSnap, setForceSnap] = h$1(false);
+    const snap = q$2(SnapContext);
     //const [snap, setSnap] = useState<boolean | null>(null);
     if (snap == "continuous" && !forceSnap) usedStep = "any";
     /*if (snap === false)
@@ -30821,11 +30924,11 @@
         children={}
     />
      */
-    h$1(() => {
+    p$1(() => {
       const element = getInputElement();
       if (element) element.value = `${value}`;
     }, [value]);
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2("input", {
         ...useMergedProps(propsSliderThumb, p1, p2, {
           ref,
@@ -30836,7 +30939,7 @@
           disabled,
           tabIndex: 0,
           step: usedStep,
-          list: q$1(GetListContext)
+          list: q$2(GetListContext)
         })
       }), o$2("div", {
         class: "form-range-track-fill-background",
@@ -30946,7 +31049,7 @@
     }
   }));
 
-  const TableContext = E$1({
+  const TableContext = F$3({
     setChildCount: null,
     paginationMax: null,
     paginationMin: null,
@@ -31061,7 +31164,7 @@
       paginationMin,
       staggered,
       setChildCount
-    } = q$1(TableContext);
+    } = q$2(TableContext);
     return o$2(IsTableHeadContext.Provider, {
       value: location == "head",
       children: o$2(TableSection$1, {
@@ -31074,7 +31177,7 @@
         render: info => {
           useUpdateRenderCounter("DataTableSection");
           if (location == "body") children = info.rearrangeableChildrenReturn.useRearrangedChildren(children);
-          s$1(() => {
+          y$1(() => {
             if (info.paginatedChildrenReturn.childCount != null) setChildCount?.(info.paginatedChildrenReturn.childCount);
           }, [setChildCount, info.paginatedChildrenReturn.childCount]);
           return o$2(KeyboardAssistIcon, {
@@ -31132,7 +31235,7 @@
       }
     });
   }));
-  const IsTableHeadContext = E$1(false);
+  const IsTableHeadContext = F$3(false);
   const DataTableCell = x$1(forwardElementRef(function DataTableCell(_ref4, ref) {
     let {
       column,
@@ -31155,7 +31258,7 @@
     });
     const [sortingByThisColumn, setSortingByThisColumn] = useState(false);
     const [sortDirection, setSortDirection] = useState(null);
-    const isTableHead = q$1(IsTableHeadContext);
+    const isTableHead = q$2(IsTableHeadContext);
     const focusSelf = e => {
       const actualElement = getElement();
       actualElement?.focus();
@@ -31357,14 +31460,14 @@
       timeout: 10,
       triggerIndex: visible
     });
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: delayedVisible && children
     });
   });
 
-  const PushToastContext = E$1(null);
-  const UpdateToastContext = E$1(null);
-  const DefaultToastTimeout = E$1(Infinity);
+  const PushToastContext = F$3(null);
+  const UpdateToastContext = F$3(null);
+  const DefaultToastTimeout = F$3(Infinity);
   function ToastsProvider(_ref) {
     let {
       children,
@@ -31389,7 +31492,7 @@
           children: o$2(Toasts, {
             visibleCount: visibleCount,
             render: info => {
-              return o$2(d$2, {
+              return o$2(_$3, {
                 children: [children, portalChildren]
               });
             }
@@ -31399,10 +31502,10 @@
     });
   }
   function usePushToast() {
-    const pushToast = q$1(PushToastContext);
+    const pushToast = q$2(PushToastContext);
     return pushToast;
   }
-  const ToastDismissContext = E$1(null);
+  const ToastDismissContext = F$3(null);
   function Toast(_ref2) {
     var _ref3, _;
     let {
@@ -31415,7 +31518,7 @@
       index,
       ...props
     } = p;
-    const defaultTimeout = q$1(DefaultToastTimeout);
+    const defaultTimeout = q$2(DefaultToastTimeout);
     // const { useToastProps, dismiss, status } = useToast<HTMLDivElement>({ timeout: timeout ?? defaultTimeout, politeness });
     return o$2(Toast$1, {
       index: index,
@@ -31473,7 +31576,7 @@
     } = _ref4;
     const pushToast = usePushToast();
     P$2(error => void pushToast((errorToToast !== null && errorToToast !== void 0 ? errorToToast : defaultErrorToToast)(error)));
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: children
     });
   }
@@ -31661,7 +31764,7 @@
   });
 
   function Blurb$4() {
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2("p", {
         children: [o$2("a", {
           href: "https://www.w3.org/WAI/ARIA/apg/patterns/button/",
@@ -31733,7 +31836,7 @@
       await new Promise(resolve => setTimeout(resolve, 1000 + 3000 * Math.random()));
       setSelectedIndexSync(index);
     }, []);
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2(Heading, {
         heading: "Button Props",
         children: o$2("ul", {
@@ -31943,7 +32046,7 @@
   }
 
   function Blurb$3() {
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2("ul", {
         children: [o$2("li", {
           children: [o$2("code", {
@@ -32007,7 +32110,7 @@
       await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 3000));
       setCheckedSync(checked);
     }, []);
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2(Blurb$3, {}), o$2(Code$3, {}), o$2(Checkbox, {
         checked: checked,
         onValueChange: setCheckedSync,
@@ -32070,7 +32173,7 @@
   }
 
   function Blurb$2() {
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: o$2("ul", {
         children: [o$2("li", {
           children: "As a composite component, standard keyboard navigation is supported"
@@ -32119,7 +32222,7 @@
       await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 3000));
       setValue(v);
     };
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2(Blurb$2, {}), o$2(Code$2, {}), o$2(RadioGroup, {
         name: "radio-demo",
         labelPosition: "before",
@@ -32141,7 +32244,7 @@
   }
 
   function Blurb$1() {
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: o$2("ul", {
         children: [o$2("li", {
           children: [o$2("code", {
@@ -32254,7 +32357,7 @@
       await new Promise(resolve => setTimeout(resolve, 1000 + 3000 * Math.random()));
       setTimeSync(value);
     });
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2(Blurb$1, {}), o$2(Code$1, {}), o$2("div", {
         children: ["Text: ", text, ", Number: ", number]
       }), o$2(TextField, {
@@ -32326,7 +32429,7 @@
   }
 
   function Blurb() {
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2("p", {
         children: [o$2("a", {
           href: "https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/",
@@ -32377,7 +32480,7 @@
   }
   function Demo() {
     const [mounted, setMounted] = useState(false);
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: [o$2(Blurb, {}), o$2(Code, {}), o$2("div", {
         children: ["This is text, ", o$2(Tooltip, {
           tooltip: "This is the tooltip content",
@@ -32416,9 +32519,9 @@
       return originalEvents?.(e, ...args) ?? e;
   }*/
   function ListDemo() {
-    let [count, setCount] = p$1(1000);
-    const [paginationWindow, setPaginationWindow] = p$1(10);
-    const [selectedIndex, setSelectedIndex] = p$1(null);
+    let [count, setCount] = h$1(1000);
+    const [paginationWindow, setPaginationWindow] = h$1(10);
+    const [selectedIndex, setSelectedIndex] = h$1(null);
     count ??= 0;
     return o$2("div", {
       children: [o$2(TextField, {
@@ -32454,7 +32557,7 @@
       count
     } = _ref;
     console.log("ListDemoContents");
-    return o$2(d$2, {
+    return o$2(_$3, {
       children: Array.from(function* () {
         for (let i = 0; i < count; ++i) {
           yield o$2(ListDemoItem, {
@@ -32524,7 +32627,7 @@
     });
   });
   function MenuDemo() {
-    const [selectedIndex, setSelectedIndex] = p$1(null);
+    const [selectedIndex, setSelectedIndex] = h$1(null);
     return o$2(Menu, {
       selectedIndex: selectedIndex,
       anchor: o$2(Button, {
@@ -32547,7 +32650,7 @@
     });
   }
   function DialogDemo() {
-    const [open, setOpen] = p$1(false);
+    const [open, setOpen] = h$1(false);
     return o$2(Dialog, {
       open: open,
       modal: true,
@@ -32565,7 +32668,7 @@
     });
   }
   function OffcanvasDemo() {
-    const [open, setOpen] = p$1(false);
+    const [open, setOpen] = h$1(false);
     return o$2(Offcanvas, {
       open: open,
       onClose: () => setOpen(false),
@@ -32582,7 +32685,7 @@
     });
   }
   function SliderDemo() {
-    const [value, setValue] = p$1(0);
+    const [value, setValue] = h$1(0);
     return o$2("div", {
       children: [o$2("p", {
         children: ["Value: ", value]
@@ -32633,7 +32736,7 @@
   }
   function ToastsDemo() {
     const pushToast = usePushToast();
-    const [mountError, setMountError] = p$1(false);
+    const [mountError, setMountError] = h$1(false);
     return o$2("div", {
       children: [o$2(Button, {
         onPress: () => {
@@ -32667,8 +32770,8 @@
   }
   const RandomWords = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.".split(" ");
   function TableDemo() {
-    let [count, setCount] = p$1(1000);
-    const [paginationWindow, setPaginationWindow] = p$1(10);
+    let [count, setCount] = h$1(1000);
+    const [paginationWindow, setPaginationWindow] = h$1(10);
     count ??= 0;
     return o$2("div", {
       children: [o$2(TextField, {
@@ -32735,7 +32838,7 @@
     const numeric = row;
     const word = RandomWords[row % RandomWords.length];
     const date = new Date(+baseDate + 1000 * 60 * 60 * 24 * row ** 2);
-    const [value, setValue] = p$1(0);
+    const [value, setValue] = h$1(0);
     console.log("Table row demo rendered");
     return o$2(DataTableRow, {
       row: numeric,
@@ -32783,7 +32886,7 @@
     return null;
   };
   const Component = () => {
-    p$1(0);
+    h$1(0);
     let i0 = 0;
     let i1 = 0;
     return o$2(AllProviders, {
@@ -32794,7 +32897,7 @@
         label: "Select the demo to view",
         labelPosition: "hidden",
         orientation: "horizontal",
-        tabs: o$2(d$2, {
+        tabs: o$2(_$3, {
           children: [o$2(Tab, {
             index: i0++,
             children: "Button"
@@ -32836,7 +32939,7 @@
             children: "Offcanvas"
           })]
         }),
-        panels: o$2(d$2, {
+        panels: o$2(_$3, {
           children: [o$2(TabPanel, {
             index: i1++,
             children: o$2(Demo$4, {})
@@ -32882,7 +32985,7 @@
     });
   };
   requestAnimationFrame(() => {
-    q$2(o$2(Component, {}), document.getElementById("root"));
+    B$3(o$2(Component, {}), document.getElementById("root"));
   });
 
 })();

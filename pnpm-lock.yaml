@@ -11,7 +11,7 @@ specifiers:
   clsx: ^1.2.1
   dompurify: ^3.0.0
   lodash-es: ^4.17.21
-  preact: ^10.13.0
+  preact: ^10.13.1
   preact-aria-widgets: github:mwszekely/preact-aria-widgets
   preact-prop-helpers: github:mwszekely/preact-prop-helpers
   preact-transition: github:mwszekely/preact-transition
@@ -28,9 +28,9 @@ dependencies:
   dompurify: 3.0.1
   lodash-es: 4.17.21
   preact: 10.13.1
-  preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/f35592cde20e524a1d21f821175149da93466728_preact@10.13.1
-  preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/e904c865fe8376f2198251f128d043bf83752124_preact@10.13.1
-  preact-transition: github.com/mwszekely/preact-transition/40596d35eb81b8df5c98e26fb30f551249a7a404_preact@10.13.1
+  preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/f37a3e4972347c4aba39c46b2a3d266ea5cbb41c_preact@10.13.1
+  preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535_preact@10.13.1
+  preact-transition: github.com/mwszekely/preact-transition/62e8164749919a522f45b651cca8fae5b0b627f0_preact@10.13.1
 
 devDependencies:
   '@types/dompurify': 2.4.0
@@ -272,9 +272,9 @@ packages:
       bootstrap: 5.3.0-alpha1_@popperjs+core@2.11.6
     dev: false
 
-  github.com/mwszekely/preact-aria-widgets/f35592cde20e524a1d21f821175149da93466728_preact@10.13.1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/f35592cde20e524a1d21f821175149da93466728}
-    id: github.com/mwszekely/preact-aria-widgets/f35592cde20e524a1d21f821175149da93466728
+  github.com/mwszekely/preact-aria-widgets/f37a3e4972347c4aba39c46b2a3d266ea5cbb41c_preact@10.13.1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/f37a3e4972347c4aba39c46b2a3d266ea5cbb41c}
+    id: github.com/mwszekely/preact-aria-widgets/f37a3e4972347c4aba39c46b2a3d266ea5cbb41c
     name: preact-aria-widgets
     version: 0.0.1
     peerDependencies:
@@ -283,12 +283,12 @@ packages:
       clsx: 1.2.1
       lodash-es: 4.17.21
       preact: 10.13.1
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/e904c865fe8376f2198251f128d043bf83752124_preact@10.13.1
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535_preact@10.13.1
     dev: false
 
-  github.com/mwszekely/preact-prop-helpers/e904c865fe8376f2198251f128d043bf83752124_preact@10.13.1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/e904c865fe8376f2198251f128d043bf83752124}
-    id: github.com/mwszekely/preact-prop-helpers/e904c865fe8376f2198251f128d043bf83752124
+  github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535_preact@10.13.1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/4eef67d281542795eef9d4b1d473bf585f2ec535}
+    id: github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535
     name: preact-prop-helpers
     version: 0.0.1
     peerDependencies:
@@ -302,15 +302,15 @@ packages:
       wicg-inert: 3.1.2
     dev: false
 
-  github.com/mwszekely/preact-transition/40596d35eb81b8df5c98e26fb30f551249a7a404_preact@10.13.1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/40596d35eb81b8df5c98e26fb30f551249a7a404}
-    id: github.com/mwszekely/preact-transition/40596d35eb81b8df5c98e26fb30f551249a7a404
+  github.com/mwszekely/preact-transition/62e8164749919a522f45b651cca8fae5b0b627f0_preact@10.13.1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/62e8164749919a522f45b651cca8fae5b0b627f0}
+    id: github.com/mwszekely/preact-transition/62e8164749919a522f45b651cca8fae5b0b627f0
     name: preact-transition
     version: 0.1.0
     peerDependencies:
-      preact: ^10.13.0
+      preact: ^10.13.1
     dependencies:
       clsx: 1.2.1
       preact: 10.13.1
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/e904c865fe8376f2198251f128d043bf83752124_preact@10.13.1
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535_preact@10.13.1
     dev: false

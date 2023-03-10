@@ -19,7 +19,7 @@ specifiers:
   postcss-mixins: ^9.0.4
   postcss-nesting: ^11.2.1
   postcss-preset-env: ^8.0.1
-  preact: ^10.13.0
+  preact: ^10.13.1
   preact-transition: github:mwszekely/preact-transition#nodenext
   rollup: ^3.17.3
   rollup-plugin-sourcemaps: ^0.6.3
@@ -30,10 +30,10 @@ specifiers:
 
 dependencies:
   bootstrap: 5.3.0-alpha1
-  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/3a4aa740916479581e9efdca9dbb07b0f3704e9a_bootstrap@5.3.0-alpha1
+  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/655072eeea7305e0c07a936ecdcbc7d5090e8c6e_bootstrap@5.3.0-alpha1
   clsx: 1.2.1
-  preact: 10.13.0
-  preact-transition: github.com/mwszekely/preact-transition/d2d44ec56f070b37c161741119e6f154a38d6310_preact@10.13.0
+  preact: 10.13.1
+  preact-transition: github.com/mwszekely/preact-transition/6f34ae3647aaadad0381a1eaea60f4410526ee83_preact@10.13.1
   tslib: 2.5.0
 
 devDependencies:
@@ -3101,8 +3101,8 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /preact/10.13.0:
-    resolution: {integrity: sha512-ERdIdUpR6doqdaSIh80hvzebHB7O6JxycOhyzAeLEchqOq/4yueslQbfnPwXaNhAYacFTyCclhwkEbOumT0tHw==}
+  /preact/10.13.1:
+    resolution: {integrity: sha512-KyoXVDU5OqTpG9LXlB3+y639JAGzl8JSBXLn1J9HTSB3gbKcuInga7bZnXLlxmK94ntTs1EFeZp0lrja2AuBYQ==}
     dev: false
 
   /pretty-hrtime/1.0.3:
@@ -3591,9 +3591,9 @@ packages:
       yargs-parser: 21.1.1
     dev: true
 
-  github.com/mwszekely/bootstrap-sass-variables/3a4aa740916479581e9efdca9dbb07b0f3704e9a_bootstrap@5.3.0-alpha1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/3a4aa740916479581e9efdca9dbb07b0f3704e9a}
-    id: github.com/mwszekely/bootstrap-sass-variables/3a4aa740916479581e9efdca9dbb07b0f3704e9a
+  github.com/mwszekely/bootstrap-sass-variables/655072eeea7305e0c07a936ecdcbc7d5090e8c6e_bootstrap@5.3.0-alpha1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/655072eeea7305e0c07a936ecdcbc7d5090e8c6e}
+    id: github.com/mwszekely/bootstrap-sass-variables/655072eeea7305e0c07a936ecdcbc7d5090e8c6e
     name: bootstrap-sass-variables
     version: 0.0.1
     peerDependencies:
@@ -3602,9 +3602,9 @@ packages:
       bootstrap: 5.3.0-alpha1
     dev: false
 
-  github.com/mwszekely/preact-prop-helpers/8645878aa28ade308a83ed21e85aee308d38ba12_preact@10.13.0:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/8645878aa28ade308a83ed21e85aee308d38ba12}
-    id: github.com/mwszekely/preact-prop-helpers/8645878aa28ade308a83ed21e85aee308d38ba12
+  github.com/mwszekely/preact-prop-helpers/49f247e0858711f86367a40613af6fb1b2d1b85f_preact@10.13.1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/49f247e0858711f86367a40613af6fb1b2d1b85f}
+    id: github.com/mwszekely/preact-prop-helpers/49f247e0858711f86367a40613af6fb1b2d1b85f
     name: preact-prop-helpers
     version: 0.0.1
     peerDependencies:
@@ -3613,14 +3613,14 @@ packages:
       blocking-elements: 0.1.1
       clsx: 1.2.1
       lodash-es: 4.17.21
-      preact: 10.13.0
+      preact: 10.13.1
       tabbable: 6.1.1
       wicg-inert: 3.1.2
     dev: false
 
-  github.com/mwszekely/preact-transition/d2d44ec56f070b37c161741119e6f154a38d6310_preact@10.13.0:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/d2d44ec56f070b37c161741119e6f154a38d6310}
-    id: github.com/mwszekely/preact-transition/d2d44ec56f070b37c161741119e6f154a38d6310
+  github.com/mwszekely/preact-transition/6f34ae3647aaadad0381a1eaea60f4410526ee83_preact@10.13.1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/6f34ae3647aaadad0381a1eaea60f4410526ee83}
+    id: github.com/mwszekely/preact-transition/6f34ae3647aaadad0381a1eaea60f4410526ee83
     name: preact-transition
     version: 0.1.0
     peerDependencies:
@@ -3628,6 +3628,6 @@ packages:
     dependencies:
       clsx: 1.2.1
       lodash-es: 4.17.21
-      preact: 10.13.0
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/8645878aa28ade308a83ed21e85aee308d38ba12_preact@10.13.0
+      preact: 10.13.1
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/49f247e0858711f86367a40613af6fb1b2d1b85f_preact@10.13.1
     dev: false
