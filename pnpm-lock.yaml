@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@floating-ui/dom': ^1.2.1
+  '@floating-ui/dom': ^1.2.4
   '@js-temporal/polyfill': ^0.4.3
   '@types/dompurify': ^2.4.0
   '@types/lodash-es': ^4.17.6
@@ -9,13 +9,13 @@ specifiers:
   bootstrap-icons: ^1.10.3
   bootstrap-sass-variables: github:mwszekely/bootstrap-sass-variables
   clsx: ^1.2.1
-  dompurify: ^3.0.0
+  dompurify: ^3.0.1
   lodash-es: ^4.17.21
   preact: ^10.13.1
   preact-aria-widgets: github:mwszekely/preact-aria-widgets
   preact-prop-helpers: github:mwszekely/preact-prop-helpers
   preact-transition: github:mwszekely/preact-transition
-  sass: ^1.58.3
+  sass: ^1.59.2
   typescript: 5.0.1-rc
 
 dependencies:
@@ -30,7 +30,7 @@ dependencies:
   preact: 10.13.1
   preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/f37a3e4972347c4aba39c46b2a3d266ea5cbb41c_preact@10.13.1
   preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535_preact@10.13.1
-  preact-transition: github.com/mwszekely/preact-transition/17a7de20ad80b00395017945b6b3639af43fa7b6_preact@10.13.1
+  preact-transition: github.com/mwszekely/preact-transition/839dce63e33b2cde06bb7d85544038a447ae3f85_preact@10.13.1
 
 devDependencies:
   '@types/dompurify': 2.4.0
@@ -302,9 +302,9 @@ packages:
       wicg-inert: 3.1.2
     dev: false
 
-  github.com/mwszekely/preact-transition/17a7de20ad80b00395017945b6b3639af43fa7b6_preact@10.13.1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/17a7de20ad80b00395017945b6b3639af43fa7b6}
-    id: github.com/mwszekely/preact-transition/17a7de20ad80b00395017945b6b3639af43fa7b6
+  github.com/mwszekely/preact-transition/839dce63e33b2cde06bb7d85544038a447ae3f85_preact@10.13.1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/839dce63e33b2cde06bb7d85544038a447ae3f85}
+    id: github.com/mwszekely/preact-transition/839dce63e33b2cde06bb7d85544038a447ae3f85
     name: preact-transition
     version: 0.1.0
     peerDependencies:

@@ -34,12 +34,12 @@
   },
   "typings": "./dist/index.d.ts",
   "dependencies": {
-    "@floating-ui/dom": "^1.2.1",
+    "@floating-ui/dom": "^1.2.4",
     "@js-temporal/polyfill": "^0.4.3",
     "bootstrap-icons": "^1.10.3",
     "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
     "clsx": "^1.2.1",
-    "dompurify": "^3.0.0",
+    "dompurify": "^3.0.1",
     "lodash-es": "^4.17.21",
     "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
     "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
@@ -48,7 +48,7 @@
   "devDependencies": {
     "@types/dompurify": "^2.4.0",
     "@types/lodash-es": "^4.17.6",
-    "sass": "^1.58.3",
+    "sass": "^1.59.2",
     "typescript": "5.0.1-rc"
   }
 }
