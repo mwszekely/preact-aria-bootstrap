@@ -14368,7 +14368,6 @@
       }, [])
     });
     const onVisibilityChange = T$2((index, visible) => {
-      console.log(`onVisibilityChange: Setting ${index} to ${visible}`);
       const nextInLine = getNextIndexInLine();
       const currentInLine = getCurrentIndex();
       if (visible == "show" && index != currentInLine) {
@@ -14379,11 +14378,8 @@
          * or wait until that aforementioned exit has finished.
          */
         if (currentInLine == null) {
-          console.log(`changeIndex(${index})`);
           changeIndex(index);
         } else {
-          console.log(`getChildren().getAt(${currentInLine})?.forceClose?.()`);
-          console.log(`setNextIndexInLine(${index})`);
           getChildren().getAt(currentInLine)?.forceClose?.();
           setNextIndexInLine(index);
         }
@@ -14394,8 +14390,6 @@
          * that we do so.
          */
         if (nextInLine != null) {
-          console.log(`changeIndex(${nextInLine})`);
-          console.log(`setNextIndexInLine(null)`);
           changeIndex(nextInLine);
           setNextIndexInLine(null);
         } else {
