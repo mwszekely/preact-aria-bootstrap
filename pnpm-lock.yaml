@@ -19,35 +19,35 @@ specifiers:
   typescript: 5.0.1-rc
 
 dependencies:
-  '@floating-ui/dom': 1.2.3
+  '@floating-ui/dom': 1.2.4
   '@js-temporal/polyfill': 0.4.3
   bootstrap: 5.3.0-alpha1_@popperjs+core@2.11.6
   bootstrap-icons: 1.10.3
-  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/655072eeea7305e0c07a936ecdcbc7d5090e8c6e_bootstrap@5.3.0-alpha1
+  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/f9d9e82395e574378ecf7e06a663ff4faf76f9c4_bootstrap@5.3.0-alpha1
   clsx: 1.2.1
   dompurify: 3.0.1
   lodash-es: 4.17.21
   preact: 10.13.1
   preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/f37a3e4972347c4aba39c46b2a3d266ea5cbb41c_preact@10.13.1
   preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535_preact@10.13.1
-  preact-transition: github.com/mwszekely/preact-transition/62e8164749919a522f45b651cca8fae5b0b627f0_preact@10.13.1
+  preact-transition: github.com/mwszekely/preact-transition/17a7de20ad80b00395017945b6b3639af43fa7b6_preact@10.13.1
 
 devDependencies:
   '@types/dompurify': 2.4.0
   '@types/lodash-es': 4.17.6
-  sass: 1.58.3
+  sass: 1.59.2
   typescript: 5.0.1-rc
 
 packages:
 
-  /@floating-ui/core/1.2.2:
-    resolution: {integrity: sha512-FaO9KVLFnxknZaGWGmNtjD2CVFuc0u4yeGEofoyXO2wgRA7fLtkngT6UB0vtWQWuhH3iMTZZ/Y89CMeyGfn8pA==}
+  /@floating-ui/core/1.2.3:
+    resolution: {integrity: sha512-upVRtrNZuYNsw+EoxkiBFRPROnU8UTy/u/dZ9U0W14BlemPYODwhhxYXSR2Y9xOnvr1XtptJRWx7gL8Te1qaog==}
     dev: false
 
-  /@floating-ui/dom/1.2.3:
-    resolution: {integrity: sha512-lK9cZUrHSJLMVAdCvDqs6Ug8gr0wmqksYiaoj/bxj2gweRQkSuhg2/V6Jswz2KiQ0RAULbqw1oQDJIMpQ5GfGA==}
+  /@floating-ui/dom/1.2.4:
+    resolution: {integrity: sha512-4+k+BLhtWj+peCU60gp0+rHeR8+Ohqx6kjJf/lHMnJ8JD5Qj6jytcq1+SZzRwD7rvHKRhR7TDiWWddrNrfwQLg==}
     dependencies:
-      '@floating-ui/core': 1.2.2
+      '@floating-ui/core': 1.2.3
     dev: false
 
   /@js-temporal/polyfill/0.4.3:
@@ -164,8 +164,8 @@ packages:
       is-glob: 4.0.3
     dev: true
 
-  /immutable/4.2.4:
-    resolution: {integrity: sha512-WDxL3Hheb1JkRN3sQkyujNlL/xRjAo3rJtaU5xeufUauG66JdMr32bLj4gF+vWl84DIA3Zxw7tiAjneYzRRw+w==}
+  /immutable/4.3.0:
+    resolution: {integrity: sha512-0AOCmOip+xgJwEVTQj1EfiDDOkPmuyllDuTuEX+DDXUgapLAsBIfkg3sxCYyCEA8mQqZrrxPUGjcOQ2JS3WLkg==}
     dev: true
 
   /is-binary-path/2.1.0:
@@ -221,13 +221,13 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /sass/1.58.3:
-    resolution: {integrity: sha512-Q7RaEtYf6BflYrQ+buPudKR26/lH+10EmO9bBqbmPh/KeLqv8bjpTNqxe71ocONqXq+jYiCbpPUmQMS+JJPk4A==}
+  /sass/1.59.2:
+    resolution: {integrity: sha512-jJyO6SmbzkJexF8MUorHx5tAilcgabioYxT/BHbY4+OvoqmbHxsYlrjZ8Adhqcgl6Zqwie0TgMXLCAmPFxXOuw==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
       chokidar: 3.5.3
-      immutable: 4.2.4
+      immutable: 4.3.0
       source-map-js: 1.0.2
     dev: true
 
@@ -261,9 +261,9 @@ packages:
     resolution: {integrity: sha512-Ba9tGNYxXwaqKEi9sJJvPMKuo063umUPsHN0JJsjrs2j8KDSzkWLMZGZ+MH1Jf1Fq4OWZ5HsESJID6nRza2ang==}
     dev: false
 
-  github.com/mwszekely/bootstrap-sass-variables/655072eeea7305e0c07a936ecdcbc7d5090e8c6e_bootstrap@5.3.0-alpha1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/655072eeea7305e0c07a936ecdcbc7d5090e8c6e}
-    id: github.com/mwszekely/bootstrap-sass-variables/655072eeea7305e0c07a936ecdcbc7d5090e8c6e
+  github.com/mwszekely/bootstrap-sass-variables/f9d9e82395e574378ecf7e06a663ff4faf76f9c4_bootstrap@5.3.0-alpha1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/f9d9e82395e574378ecf7e06a663ff4faf76f9c4}
+    id: github.com/mwszekely/bootstrap-sass-variables/f9d9e82395e574378ecf7e06a663ff4faf76f9c4
     name: bootstrap-sass-variables
     version: 0.0.1
     peerDependencies:
@@ -302,9 +302,9 @@ packages:
       wicg-inert: 3.1.2
     dev: false
 
-  github.com/mwszekely/preact-transition/62e8164749919a522f45b651cca8fae5b0b627f0_preact@10.13.1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/62e8164749919a522f45b651cca8fae5b0b627f0}
-    id: github.com/mwszekely/preact-transition/62e8164749919a522f45b651cca8fae5b0b627f0
+  github.com/mwszekely/preact-transition/17a7de20ad80b00395017945b6b3639af43fa7b6_preact@10.13.1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/17a7de20ad80b00395017945b6b3639af43fa7b6}
+    id: github.com/mwszekely/preact-transition/17a7de20ad80b00395017945b6b3639af43fa7b6
     name: preact-transition
     version: 0.1.0
     peerDependencies:

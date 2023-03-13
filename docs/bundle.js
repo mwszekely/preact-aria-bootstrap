@@ -14368,6 +14368,7 @@
       }, [])
     });
     const onVisibilityChange = T$2((index, visible) => {
+      console.log(`onVisibilityChange: Setting ${index} to ${visible}`);
       const nextInLine = getNextIndexInLine();
       const currentInLine = getCurrentIndex();
       if (visible == "show" && index != currentInLine) {
@@ -14378,8 +14379,11 @@
          * or wait until that aforementioned exit has finished.
          */
         if (currentInLine == null) {
+          console.log(`changeIndex(${index})`);
           changeIndex(index);
         } else {
+          console.log(`getChildren().getAt(${currentInLine})?.forceClose?.()`);
+          console.log(`setNextIndexInLine(${index})`);
           getChildren().getAt(currentInLine)?.forceClose?.();
           setNextIndexInLine(index);
         }
@@ -14390,8 +14394,12 @@
          * that we do so.
          */
         if (nextInLine != null) {
+          console.log(`changeIndex(${nextInLine})`);
+          console.log(`setNextIndexInLine(null)`);
           changeIndex(nextInLine);
           setNextIndexInLine(null);
+        } else {
+          changeIndex(null);
         }
       }
     }, []);
@@ -16626,28 +16634,9 @@
     return getWindow(element).getComputedStyle(element);
   }
 
-  const min = Math.min;
-  const max = Math.max;
-  const round = Math.round;
-
-  function getCssDimensions(element) {
-    const css = getComputedStyle$1(element);
-    let width = parseFloat(css.width);
-    let height = parseFloat(css.height);
-    const offsetWidth = element.offsetWidth;
-    const offsetHeight = element.offsetHeight;
-    const shouldFallback = round(width) !== offsetWidth || round(height) !== offsetHeight;
-    if (shouldFallback) {
-      width = offsetWidth;
-      height = offsetHeight;
-    }
-    return {
-      width,
-      height,
-      fallback: shouldFallback
-    };
+  function isNode(value) {
+    return value instanceof getWindow(value).Node;
   }
-
   function getNodeName(node) {
     return isNode(node) ? (node.nodeName || '').toLowerCase() : '';
   }
@@ -16670,9 +16659,6 @@
   }
   function isElement(value) {
     return value instanceof getWindow(value).Element;
-  }
-  function isNode(value) {
-    return value instanceof getWindow(value).Node;
   }
   function isShadowRoot(node) {
     // Browsers without `ShadowRoot` support.
@@ -16728,6 +16714,29 @@
   }
   function isLastTraversableNode(node) {
     return ['html', 'body', '#document'].includes(getNodeName(node));
+  }
+
+  const min = Math.min;
+  const max = Math.max;
+  const round = Math.round;
+
+  function getCssDimensions(element) {
+    const css = getComputedStyle$1(element);
+    let width = parseFloat(css.width);
+    let height = parseFloat(css.height);
+    const hasOffset = isHTMLElement(element);
+    const offsetWidth = hasOffset ? element.offsetWidth : width;
+    const offsetHeight = hasOffset ? element.offsetHeight : height;
+    const shouldFallback = round(width) !== offsetWidth || round(height) !== offsetHeight;
+    if (shouldFallback) {
+      width = offsetWidth;
+      height = offsetHeight;
+    }
+    return {
+      width,
+      height,
+      fallback: shouldFallback
+    };
   }
 
   function unwrapElement(element) {
@@ -17081,10 +17090,7 @@
   }
 
   function getDimensions(element) {
-    if (isHTMLElement(element)) {
-      return getCssDimensions(element);
-    }
-    return element.getBoundingClientRect();
+    return getCssDimensions(element);
   }
 
   function getTrueOffsetParent(element, polyfill) {
