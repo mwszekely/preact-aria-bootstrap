@@ -14,7 +14,7 @@ export const Badge = memo(forwardElementRef(function Badge({ children, position,
     position ??= "inline";
     return _jsx("span", { ...useMergedProps({
             ref,
-            className: clsx("badge", roundedPill && "rounded-pill", `text-bg-${variantTheme ?? "secondary"}`, position != "inline" && `position-absolute translate-middle top-0`, position == "top-end" && `start-100`, position == "top-start" && `start-0`)
+            className: clsx("badge", roundedPill && "rounded-pill", variantTheme !== null && `text-bg-${variantTheme ?? "secondary"}`, position != "inline" && `position-absolute translate-middle top-0`, position == "top-end" && `start-100`, position == "top-start" && `start-0`)
         }, props), children: children });
 }));
 //# sourceMappingURL=badge.js.map

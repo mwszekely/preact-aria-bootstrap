@@ -15771,7 +15771,7 @@
     return o$2("span", {
       ...useMergedProps({
         ref,
-        className: clsx("badge", roundedPill && "rounded-pill", `text-bg-${variantTheme !== null && variantTheme !== void 0 ? variantTheme : "secondary"}`, position != "inline" && `position-absolute translate-middle top-0`, position == "top-end" && `start-100`, position == "top-start" && `start-0`)
+        className: clsx("badge", roundedPill && "rounded-pill", variantTheme !== null && `text-bg-${variantTheme !== null && variantTheme !== void 0 ? variantTheme : "secondary"}`, position != "inline" && `position-absolute translate-middle top-0`, position == "top-end" && `start-100`, position == "top-start" && `start-0`)
       }, props),
       children: children
     });

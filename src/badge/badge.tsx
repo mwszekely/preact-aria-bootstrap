@@ -7,6 +7,7 @@ import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 
 export interface BadgeProps extends GlobalAttributes<HTMLSpanElement, "children"> {
+    /** Pass `null` to explicitly disable any theme and provide one yourself via the CSS `background` property */
     variantTheme?: ButtonThemes;
     roundedPill?: boolean;
     className?: string;
@@ -29,7 +30,7 @@ export const Badge = memo(forwardElementRef(function Badge({ children, position,
         className: clsx(
             "badge",
             roundedPill && "rounded-pill",
-            `text-bg-${variantTheme ?? "secondary"}`,
+            variantTheme !== null && `text-bg-${variantTheme ?? "secondary"}`,
             position != "inline" && `position-absolute translate-middle top-0`,
             position == "top-end" && `start-100`,
             position == "top-start" && `start-0`,
