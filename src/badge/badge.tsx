@@ -8,7 +8,7 @@ import { GlobalAttributes } from "../utility/types.js";
 
 export interface BadgeProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     /** Pass `null` to explicitly disable any theme and provide one yourself via the CSS `background` property */
-    variantTheme?: ButtonThemes;
+    variantTheme?: ButtonThemes | null;
     roundedPill?: boolean;
     className?: string;
 
