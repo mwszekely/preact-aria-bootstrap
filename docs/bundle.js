@@ -18894,6 +18894,7 @@
       anchor,
       modal,
       children,
+      propsPortal,
       ...props
     } = _ref;
     variantSize ??= "xl";
@@ -18901,69 +18902,67 @@
     if (headerPosition == "hidden") {
       console.assert(typeof header == "string", `A dialog whose label is hidden must provide the label to use as a string to the header`);
     }
-    return o$2("div", {
-      children: o$2(Dialog$1, {
-        ariaLabel: headerPosition == "hidden" ? header : null,
-        open: open,
-        onClose: onClose,
-        focusPopup: (e, f) => f()?.focus?.(),
-        closeOnBackdrop: modal ? false : true,
-        closeOnEscape: modal ? false : true,
-        render: info => {
-          const headingJsx = o$2(_$3, {
-            children: [o$2("span", {
-              class: "modal-title",
-              children: header
-            }), o$2(Button, {
-              class: "btn-close",
-              onPress: () => onClose("escape"),
-              "aria-label": "Close"
-            })]
-          });
-          const bodyJsx = o$2("span", {
-            class: "modal-body",
-            children: children
-          });
-          const footerJsx = o$2("span", {
-            class: "modal-footer",
-            children: footer
-          });
-          return o$2(_$3, {
-            children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
-              portalId: usePortalId("dialog"),
+    return o$2(Dialog$1, {
+      ariaLabel: headerPosition == "hidden" ? header : null,
+      open: open,
+      onClose: onClose,
+      focusPopup: (e, f) => f()?.focus?.(),
+      closeOnBackdrop: modal ? false : true,
+      closeOnEscape: modal ? false : true,
+      render: info => {
+        const headingJsx = o$2(_$3, {
+          children: [o$2("span", {
+            class: "modal-title",
+            children: header
+          }), o$2(Button, {
+            class: "btn-close",
+            onPress: () => onClose("escape"),
+            "aria-label": "Close"
+          })]
+        });
+        const bodyJsx = o$2("span", {
+          class: "modal-body",
+          children: children
+        });
+        const footerJsx = o$2("span", {
+          class: "modal-footer",
+          children: footer
+        });
+        return o$2(_$3, {
+          children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
+            portalId: usePortalId("dialog"),
+            children: o$2("div", {
+              ...useMergedProps(info.propsFocusContainer, propsPortal || {}),
               children: o$2("div", {
-                ...info.propsFocusContainer,
-                children: o$2("div", {
-                  ...useMergedProps(info.propsDialog, {
-                    tabIndex: -1,
-                    className: clsx("modal modal-dialog-scrollable overflow-hidden", open ? "d-block" : "d-hidden", variantSize && `modal-${variantSize}`, fullscreen && (fullscreen === true ? "modal-fullscreen" : `modal-fullscreen-${fullscreen}`))
-                  }),
-                  children: [o$2("div", {
-                    class: clsx("dialog-backdrop", open && "visible", modal && "dialog-backdrop-blur"),
-                    role: "presentation"
-                  }), o$2(SlideFade, {
-                    animateOnMount: true,
-                    delayMountUntilShown: true,
-                    show: open,
-                    slideTargetBlock: 0.125 * (open ? 1 : -1),
-                    children: o$2("div", {
-                      class: "modal-dialog",
-                      children: o$2("span", {
-                        class: "modal-content",
-                        children: [headerPosition == "start" ? o$2(Heading, {
-                          class: "modal-header",
-                          heading: headingJsx,
-                          children: bodyJsx
-                        }) : bodyJsx, footer && footerJsx]
-                      })
+                ...useMergedProps(info.propsDialog, {
+                  tabIndex: -1,
+                  className: clsx("modal modal-dialog-scrollable overflow-hidden", open ? "d-block" : "d-hidden", variantSize && `modal-${variantSize}`, fullscreen && (fullscreen === true ? "modal-fullscreen" : `modal-fullscreen-${fullscreen}`))
+                }),
+                children: [o$2("div", {
+                  class: clsx("dialog-backdrop", open && "visible", modal && "dialog-backdrop-blur"),
+                  role: "presentation"
+                }), o$2(SlideFade, {
+                  animateOnMount: true,
+                  delayMountUntilShown: true,
+                  show: open,
+                  slideTargetBlock: 0.125 * (open ? 1 : -1),
+                  children: o$2("div", {
+                    class: "modal-dialog",
+                    children: o$2("span", {
+                      class: "modal-content",
+                      children: [headerPosition == "start" ? o$2(Heading, {
+                        class: "modal-header",
+                        heading: headingJsx,
+                        children: bodyJsx
+                      }) : bodyJsx, footer && footerJsx]
                     })
-                  })]
-                })
+                  })
+                })]
               })
-            })]
-          });
-        }
-      })
+            })
+          })]
+        });
+      }
     });
   }));
 
@@ -19928,67 +19927,66 @@
       onClose,
       anchor,
       children,
+      propsPortal,
       ...props
     } = _ref;
     headerPosition ??= "start";
     if (headerPosition == "hidden") {
       console.assert(typeof header == "string", `An offcanvas whose label is hidden must provide the label to use as a string to the header`);
     }
-    return o$2("div", {
-      children: o$2(Dialog$1, {
-        ariaLabel: headerPosition == "hidden" ? header : null,
-        open: open,
-        onClose: onClose,
-        focusPopup: (e, f) => f()?.focus?.(),
-        closeOnBackdrop: true,
-        closeOnEscape: true,
-        render: info => {
-          return o$2(_$3, {
-            children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
-              portalId: usePortalId("offcanvas"),
-              children: o$2("div", {
-                ...info.propsFocusContainer,
-                children: [o$2(Slide, {
-                  show: open,
-                  slideTargetInline: -1,
-                  duration: 500,
-                  children: o$2("div", {
-                    ...useMergedProps(info.propsDialog, {
-                      class: clsx("offcanvas"),
-                      tabIndex: -1
+    return o$2(Dialog$1, {
+      ariaLabel: headerPosition == "hidden" ? header : null,
+      open: open,
+      onClose: onClose,
+      focusPopup: (e, f) => f()?.focus?.(),
+      closeOnBackdrop: true,
+      closeOnEscape: true,
+      render: info => {
+        return o$2(_$3, {
+          children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
+            portalId: usePortalId("offcanvas"),
+            children: o$2("div", {
+              ...useMergedProps(info.propsFocusContainer, propsPortal || {}),
+              children: [o$2(Slide, {
+                show: open,
+                slideTargetInline: -1,
+                duration: 500,
+                children: o$2("div", {
+                  ...useMergedProps(info.propsDialog, {
+                    class: clsx("offcanvas"),
+                    tabIndex: -1
+                  }),
+                  children: [o$2("div", {
+                    ...useMergedProps({
+                      class: "offcanvas-header"
                     }),
-                    children: [o$2("div", {
-                      ...useMergedProps({
-                        class: "offcanvas-header"
+                    children: [o$2("h5", {
+                      ...useMergedProps(info.propsTitle, {
+                        class: "offcanvas-title"
                       }),
-                      children: [o$2("h5", {
-                        ...useMergedProps(info.propsTitle, {
-                          class: "offcanvas-title"
-                        }),
-                        children: header
-                      }), o$2(Button, {
-                        class: "btn-close",
-                        "aria-label": "Close",
-                        onPress: () => onClose("escape")
-                      })]
-                    }), o$2("div", {
-                      class: "offcanvas-body",
-                      children: children
+                      children: header
+                    }), o$2(Button, {
+                      class: "btn-close",
+                      "aria-label": "Close",
+                      onPress: () => onClose("escape")
                     })]
-                  })
-                }), o$2(Fade, {
-                  show: open,
-                  fadeMax: 0.25,
-                  duration: 1000,
-                  children: o$2("div", {
-                    class: clsx("offcanvas-backdrop")
-                  })
-                })]
-              })
-            })]
-          });
-        }
-      })
+                  }), o$2("div", {
+                    class: "offcanvas-body",
+                    children: children
+                  })]
+                })
+              }), o$2(Fade, {
+                show: open,
+                fadeMax: 0.25,
+                duration: 1000,
+                children: o$2("div", {
+                  class: clsx("offcanvas-backdrop")
+                })
+              })]
+            })
+          })]
+        });
+      }
     });
   }));
 

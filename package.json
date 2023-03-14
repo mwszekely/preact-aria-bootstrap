@@ -46,8 +46,8 @@
     "preact-transition": "github:mwszekely/preact-transition"
   },
   "devDependencies": {
-    "@types/dompurify": "^2.4.0",
-    "@types/lodash-es": "^4.17.6",
+    "@types/dompurify": "^3.0.0",
+    "@types/lodash-es": "^4.17.7",
     "sass": "^1.59.2",
     "typescript": "5.0.1-rc"
   }

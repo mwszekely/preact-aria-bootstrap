@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { ComponentChildren, Ref, VNode } from "preact";
+import { ComponentChildren, h, Ref, VNode } from "preact";
 import { defaultRenderPortal, Dialog as AriaDialog, DialogProps as AriaDialogProps } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
 import { Fade, Slide } from "preact-transition";
@@ -17,57 +17,58 @@ export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "child
     header: ComponentChildren;
     anchor: VNode;
 
+    /** Props are spread to the anchor element. If you need to have a class name or style set on the dialog itself, pass those here. */
+    propsPortal?: h.JSX.HTMLAttributes<HTMLDivElement>;
+
     /**
      * If true, this dialog cannot be closed with the Escape key or by clicking the backdrop.
      */
     //modal?: boolean;
 }
 
-export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, header, headerPosition, onClose, anchor, children, ...props }: OffcanvasProps, ref?: Ref<HTMLSpanElement>) {
+export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }: OffcanvasProps, ref?: Ref<HTMLSpanElement>) {
     headerPosition ??= "start";
     if (headerPosition == "hidden") {
         console.assert(typeof header == "string", `An offcanvas whose label is hidden must provide the label to use as a string to the header`);
     }
     return (
-        <div>
-            <AriaDialog<HTMLDivElement, HTMLSpanElement, HTMLDivElement, HTMLHeadingElement>
+        <AriaDialog<HTMLDivElement, HTMLSpanElement, HTMLDivElement, HTMLHeadingElement>
 
-                ariaLabel={headerPosition == "hidden" ? header as string : null}
-                open={open}
-                onClose={onClose}
-                focusPopup={(e, f) => f()?.focus?.()}
-                closeOnBackdrop={true}
-                closeOnEscape={true}
+            ariaLabel={headerPosition == "hidden" ? header as string : null}
+            open={open}
+            onClose={onClose}
+            focusPopup={(e, f) => f()?.focus?.()}
+            closeOnBackdrop={true}
+            closeOnEscape={true}
 
-                render={info => {
+            render={info => {
 
-                    return (
-                        <>
-                            {useClonedElement(anchor, useMergedProps(info.propsSource, props), ref)}
-                            {defaultRenderPortal({
-                                portalId: usePortalId("offcanvas"),
-                                children: (
-                                    <div {...info.propsFocusContainer}>
-                                        <Slide show={open} slideTargetInline={-1} duration={500}>
-                                            <div {...useMergedProps(info.propsDialog, { class: clsx("offcanvas"), tabIndex: -1 })}>
-                                                <div {...useMergedProps({ class: "offcanvas-header" })}>
-                                                    <h5 {...useMergedProps(info.propsTitle, { class: "offcanvas-title" })}>{header}</h5>
-                                                    <Button class="btn-close" aria-label="Close" onPress={() => onClose("escape")} />
-                                                </div>
-                                                <div class="offcanvas-body">{children}</div>
+                return (
+                    <>
+                        {useClonedElement(anchor, useMergedProps(info.propsSource, props), ref)}
+                        {defaultRenderPortal({
+                            portalId: usePortalId("offcanvas"),
+                            children: (
+                                <div {...useMergedProps(info.propsFocusContainer, propsPortal || {})}>
+                                    <Slide show={open} slideTargetInline={-1} duration={500}>
+                                        <div {...useMergedProps(info.propsDialog, { class: clsx("offcanvas"), tabIndex: -1 })}>
+                                            <div {...useMergedProps({ class: "offcanvas-header" })}>
+                                                <h5 {...useMergedProps(info.propsTitle, { class: "offcanvas-title" })}>{header}</h5>
+                                                <Button class="btn-close" aria-label="Close" onPress={() => onClose("escape")} />
                                             </div>
-                                        </Slide>
-                                        <Fade show={open} fadeMax={0.25} duration={1000}>
-                                            <div class={clsx("offcanvas-backdrop")}></div>
-                                        </Fade>
-                                    </div>
-                                )
-                            })}
-                        </>
-                    )
-                }}
-            />
-        </div >
+                                            <div class="offcanvas-body">{children}</div>
+                                        </div>
+                                    </Slide>
+                                    <Fade show={open} fadeMax={0.25} duration={1000}>
+                                        <div class={clsx("offcanvas-backdrop")}></div>
+                                    </Fade>
+                                </div>
+                            )
+                        })}
+                    </>
+                )
+            }}
+        />
     )
 }))
 

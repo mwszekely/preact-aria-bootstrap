@@ -3,8 +3,8 @@ lockfileVersion: 5.4
 specifiers:
   '@floating-ui/dom': ^1.2.4
   '@js-temporal/polyfill': ^0.4.3
-  '@types/dompurify': ^2.4.0
-  '@types/lodash-es': ^4.17.6
+  '@types/dompurify': ^3.0.0
+  '@types/lodash-es': ^4.17.7
   bootstrap: 5.3.0-alpha1
   bootstrap-icons: ^1.10.3
   bootstrap-sass-variables: github:mwszekely/bootstrap-sass-variables
@@ -33,21 +33,21 @@ dependencies:
   preact-transition: github.com/mwszekely/preact-transition/e75dfc87b15d21bf72145bef28cd50e0a4e2fbab_preact@10.13.1
 
 devDependencies:
-  '@types/dompurify': 2.4.0
-  '@types/lodash-es': 4.17.6
+  '@types/dompurify': 3.0.0
+  '@types/lodash-es': 4.17.7
   sass: 1.59.2
   typescript: 5.0.1-rc
 
 packages:
 
-  /@floating-ui/core/1.2.3:
-    resolution: {integrity: sha512-upVRtrNZuYNsw+EoxkiBFRPROnU8UTy/u/dZ9U0W14BlemPYODwhhxYXSR2Y9xOnvr1XtptJRWx7gL8Te1qaog==}
+  /@floating-ui/core/1.2.4:
+    resolution: {integrity: sha512-SQOeVbMwb1di+mVWWJLpsUTToKfqVNioXys011beCAhyOIFtS+GQoW4EQSneuxzmQKddExDwQ+X0hLl4lJJaSQ==}
     dev: false
 
   /@floating-ui/dom/1.2.4:
     resolution: {integrity: sha512-4+k+BLhtWj+peCU60gp0+rHeR8+Ohqx6kjJf/lHMnJ8JD5Qj6jytcq1+SZzRwD7rvHKRhR7TDiWWddrNrfwQLg==}
     dependencies:
-      '@floating-ui/core': 1.2.3
+      '@floating-ui/core': 1.2.4
     dev: false
 
   /@js-temporal/polyfill/0.4.3:
@@ -62,14 +62,14 @@ packages:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
     dev: false
 
-  /@types/dompurify/2.4.0:
-    resolution: {integrity: sha512-IDBwO5IZhrKvHFUl+clZxgf3hn2b/lU6H1KaBShPkQyGJUQ0xwebezIPSuiyGwfz1UzJWQl4M7BDxtHtCCPlTg==}
+  /@types/dompurify/3.0.0:
+    resolution: {integrity: sha512-EcSqmgm/xJwH8CcJPy9AHNypp/j58CYga3nWdl93/wLxX6OH+rSD3aAj75NQazcZd1YKHJ/pjNZ9qmgVajggwQ==}
     dependencies:
       '@types/trusted-types': 2.0.3
     dev: true
 
-  /@types/lodash-es/4.17.6:
-    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
+  /@types/lodash-es/4.17.7:
+    resolution: {integrity: sha512-z0ptr6UI10VlU6l5MYhGwS4mC8DZyYer2mCoyysZtSF7p26zOX8UpbrV0YpNYLGS8K4PUFIyEr62IMFFjveSiQ==}
     dependencies:
       '@types/lodash': 4.14.191
     dev: true
