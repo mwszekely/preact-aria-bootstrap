@@ -55,7 +55,7 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ Tag, t
     return (_jsx(AriaButton, { tagButton: (Tag), disabled: disabled, onPress: onPress, pressed: pressed, render: buttonInfo => {
             return (_jsx(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagIndicator: "span", render: progressInfo => {
                     const { propsIndicator, propsRegion } = progressInfo;
-                    const loadingJsx = (_jsx(Fade, { show: pending, children: _jsx("span", { class: "spinner-border", ...propsIndicator }) }));
+                    const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border", ...propsIndicator }) }));
                     if (pressed !== null)
                         variantFill ??= (pressed ? "fill" : "outline");
                     const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");

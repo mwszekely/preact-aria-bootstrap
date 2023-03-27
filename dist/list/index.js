@@ -49,7 +49,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
     })*/
     const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
     const { propsIndicator, propsRegion } = progressInfo;
-    const loadingJsx = (_jsx(Fade, { show: progressInfo.asyncHandlerReturn.pending, children: _jsx("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsIndicator }) }));
+    const loadingJsx = (_jsx(Fade, { show: progressInfo.asyncHandlerReturn.pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsIndicator }) }));
     //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
     const finalPropsForText = useMergedProps(p1, p2);
     const finalPropsForDiv = useMergedProps(infoRow.props, { ...props, ref: ref2 }, {

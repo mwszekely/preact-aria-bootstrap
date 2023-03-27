@@ -298,7 +298,7 @@ export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSyn
         return null;
     let pendingDisplayType = ((debouncingAsync || debouncingSync) ? 2 : p ? 1 : 0);
     const withinInputGroup = useContext(WithinInputGroup);
-    const ret = (_jsxs(_Fragment, { children: [_jsx(Fade, { show: (pendingDisplayType == 1), animateOnMount: true, children: _jsx("span", { class: clsx(containerClass, `spinner-container`, "show"), children: _jsx("span", { class: clsx(`spinner spinner-border spinner-border-sm`), ...((pendingDisplayType == 1) ? propsIndicator : {}) }) }) }), _jsx(Fade, { show: (pendingDisplayType == 2), animateOnMount: true, children: _jsx("span", { class: clsx(containerClass, `spinner-container`, "show"), children: _jsx("span", { class: clsx(`spinner spinner-grow spinner-grow-sm`), ...((pendingDisplayType == 2) ? propsIndicator : {}) }) }) })] }));
+    const ret = (_jsxs(_Fragment, { children: [_jsx(Fade, { show: (pendingDisplayType == 1), animateOnMount: true, exitVisibility: "removed", children: _jsx("span", { class: clsx(containerClass, `spinner-container`, "show"), children: _jsx("span", { class: clsx(`spinner spinner-border spinner-border-sm`), ...((pendingDisplayType == 1) ? propsIndicator : {}) }) }) }), _jsx(Fade, { show: (pendingDisplayType == 2), animateOnMount: true, exitVisibility: "removed", children: _jsx("span", { class: clsx(containerClass, `spinner-container`, "show"), children: _jsx("span", { class: clsx(`spinner spinner-grow spinner-grow-sm`), ...((pendingDisplayType == 2) ? propsIndicator : {}) }) }) })] }));
     if (!withinInputGroup) {
         return ret;
     }

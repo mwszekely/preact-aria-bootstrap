@@ -4,7 +4,7 @@ import { h, Ref } from "preact";
 import { Checkbox as AriaCheckbox, CheckboxChangeEvent, EventDetail, ProgressWithHandler, UseCheckboxReturnType } from "preact-aria-widgets";
 import { UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { useContext, useImperativeHandle } from "preact/hooks";
+import { useContext } from "preact/hooks";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
@@ -82,7 +82,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                 const pending = (p || debouncingAsync || debouncingSync);
 
                 const loadingJsx = (
-                    <Fade show={p}><span class="spinner-border spinner-border-sm" {...propsIndicator} /></Fade>
+                    <Fade show={p} exitVisibility="removed"><span class="spinner-border spinner-border-sm" {...propsIndicator} /></Fade>
                 )
 
                 const defaultDisabled = useContext(DisabledContext);

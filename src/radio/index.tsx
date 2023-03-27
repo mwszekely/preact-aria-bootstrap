@@ -3,6 +3,7 @@ import { clsx } from "clsx";
 import { createContext, h, Ref } from "preact";
 import { LabelPosition, Progress, Radio as AriaRadio, RadioGroup as AriaRadioGroup, UseRadioGroupReturnType } from "preact-aria-widgets";
 import { useAsync, UseAsyncHandlerParameters, useMergedProps, useState } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { useContext, useMemo, useRef } from "preact/hooks";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
@@ -101,9 +102,6 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                 const { propsIndicator, propsRegion, propsLabel } = progressInfo;
 
 
-                const loadingJsx = (
-                    <span class="spinner-border" {...propsIndicator} />
-                )
 
 
                 //const inButtonGroup = (useContext(ButtonGroupContext) ?? false);
@@ -117,6 +115,10 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                 //const buttonClass = clsx(`btn`, `btn-${variantTheme ?? "primary"}`, asyncHandlerReturn.pending && "pending", disabled && "disabled");
 
                 const pending = singleSelectPending;//(pendingValue != null);
+
+                const loadingJsx = (
+                    <Fade show={pending} exitVisibility="removed"><span class="spinner-border" {...propsIndicator} /></Fade>
+                );
 
                 return (
                     <AriaRadio<LabelPosition, V, HTMLInputElement, HTMLLabelElement>

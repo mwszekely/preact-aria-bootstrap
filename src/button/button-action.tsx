@@ -152,7 +152,7 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extend
                         tagIndicator="span"
                         render={progressInfo => {
                             const { propsIndicator, propsRegion } = progressInfo;
-                            const loadingJsx = (<Fade show={pending}><span class="spinner-border" {...propsIndicator} /></Fade>)
+                            const loadingJsx = (<Fade show={pending} exitVisibility="removed"><span class="spinner-border" {...propsIndicator} /></Fade>)
                             if (pressed !== null)
                                 variantFill ??= (pressed ? "fill" : "outline");
 

@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
-import { Gridlist, GridlistCellInfo, GridlistChild, GridlistRow, GridlistRowInfo, ProgressWithHandler, UseGridlistRowReturnType, UseProgressReturnType, UseProgressWithHandlerReturnType } from "preact-aria-widgets";
+import { Gridlist, GridlistCellInfo, GridlistChild, GridlistRow, GridlistRowInfo, ProgressWithHandler, UseGridlistRowReturnType, UseProgressWithHandlerReturnType } from "preact-aria-widgets";
 import { AsyncHandler, returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
@@ -109,7 +109,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
     })*/
     const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
     const { propsIndicator, propsRegion } = progressInfo;
-    const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending}><span class="spinner-border spinner-border-sm text-secondary" {...propsIndicator} /></Fade>)
+    const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending} exitVisibility="removed"><span class="spinner-border spinner-border-sm text-secondary" {...propsIndicator} /></Fade>)
     //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
     const finalPropsForText = useMergedProps(p1, p2);
     const finalPropsForDiv = useMergedProps(

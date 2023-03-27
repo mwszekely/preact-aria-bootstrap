@@ -2,7 +2,7 @@ import { clsx } from "clsx";
 import { ComponentChildren, Ref, VNode } from "preact";
 import { defaultRenderPortal, Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenubarSubInfo, UseMenuItemReturnType, UseMenuReturnType } from "preact-aria-widgets";
 import { returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
-import { ZoomFade } from "preact-transition";
+import { Fade, ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useImperativeHandle, useRef } from "preact/hooks";
 import { usePopper } from "../popper/index.js";
@@ -152,7 +152,7 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                         onPress={progressInfo.asyncHandlerReturn.syncHandler}
                         render={menuInfo => {
 
-                            const spinnerJsx = (<div {...progressInfo.propsIndicator} class={clsx("spinner-border", "spinner-border-sm")} />)
+                            const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsIndicator} class={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
 
                             return (
                                 <div {...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props)}>

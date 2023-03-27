@@ -696,8 +696,8 @@ export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSyn
 
     const ret = (
         <>
-            <Fade show={(pendingDisplayType == 1)} animateOnMount><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-border spinner-border-sm`)} {...((pendingDisplayType == 1) ? propsIndicator : {})} /></span></Fade>
-            <Fade show={(pendingDisplayType == 2)} animateOnMount><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-grow spinner-grow-sm`)} {...((pendingDisplayType == 2) ? propsIndicator : {})} /></span></Fade>
+            <Fade show={(pendingDisplayType == 1)} animateOnMount exitVisibility="removed"><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-border spinner-border-sm`)} {...((pendingDisplayType == 1) ? propsIndicator : {})} /></span></Fade>
+            <Fade show={(pendingDisplayType == 2)} animateOnMount exitVisibility="removed"><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-grow spinner-grow-sm`)} {...((pendingDisplayType == 2) ? propsIndicator : {})} /></span></Fade>
         </>
     )
 
