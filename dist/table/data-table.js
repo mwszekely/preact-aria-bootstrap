@@ -46,6 +46,9 @@ export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, 
             const hideBecauseStaggered = info.staggeredChildReturn.hideBecauseStaggered;
             const hideBecausePaginated = info.paginatedChildReturn.hideBecausePaginated;
             //useWhatCausedRender("DataTableRow", { props: { ...props, variantTheme, children, row }, state: info })
+            if (hideBecausePaginated || hideBecauseStaggered) {
+                return _jsx("tr", {});
+            }
             return (_jsx(Fade, { show: !hideBecauseStaggered, animateOnMount: info.staggeredChildReturn.isStaggered, delayMountUntilShown: true, children: _jsx(TableRow, { ...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" }), children: /*hideBecausePaginated? null : */ children }) }));
         } }));
 }));

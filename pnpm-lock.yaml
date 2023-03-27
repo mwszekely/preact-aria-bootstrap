@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@floating-ui/dom': ^1.2.4
+  '@floating-ui/dom': ^1.2.5
   '@js-temporal/polyfill': ^0.4.3
   '@types/dompurify': ^3.0.0
   '@types/lodash-es': ^4.17.7
@@ -16,10 +16,10 @@ specifiers:
   preact-prop-helpers: github:mwszekely/preact-prop-helpers
   preact-transition: github:mwszekely/preact-transition
   sass: ^1.59.2
-  typescript: 5.0.1-rc
+  typescript: ^5.0.2
 
 dependencies:
-  '@floating-ui/dom': 1.2.4
+  '@floating-ui/dom': 1.2.5
   '@js-temporal/polyfill': 0.4.3
   bootstrap: 5.3.0-alpha1_@popperjs+core@2.11.6
   bootstrap-icons: 1.10.3
@@ -28,15 +28,15 @@ dependencies:
   dompurify: 3.0.1
   lodash-es: 4.17.21
   preact: 10.13.1
-  preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/f37a3e4972347c4aba39c46b2a3d266ea5cbb41c_preact@10.13.1
-  preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535_preact@10.13.1
-  preact-transition: github.com/mwszekely/preact-transition/e75dfc87b15d21bf72145bef28cd50e0a4e2fbab_preact@10.13.1
+  preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/59a8da63028427aa55cb12bf24909a92f1f5323e_preact@10.13.1
+  preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/f310ce61f1fee2bc133a9c01ca051ecb0f2e5b41_preact@10.13.1
+  preact-transition: github.com/mwszekely/preact-transition/39374ccf6188e5be55968cb8333cf7a61304f20c_preact@10.13.1
 
 devDependencies:
   '@types/dompurify': 3.0.0
   '@types/lodash-es': 4.17.7
-  sass: 1.59.2
-  typescript: 5.0.1-rc
+  sass: 1.59.3
+  typescript: 5.0.2
 
 packages:
 
@@ -44,8 +44,8 @@ packages:
     resolution: {integrity: sha512-SQOeVbMwb1di+mVWWJLpsUTToKfqVNioXys011beCAhyOIFtS+GQoW4EQSneuxzmQKddExDwQ+X0hLl4lJJaSQ==}
     dev: false
 
-  /@floating-ui/dom/1.2.4:
-    resolution: {integrity: sha512-4+k+BLhtWj+peCU60gp0+rHeR8+Ohqx6kjJf/lHMnJ8JD5Qj6jytcq1+SZzRwD7rvHKRhR7TDiWWddrNrfwQLg==}
+  /@floating-ui/dom/1.2.5:
+    resolution: {integrity: sha512-+sAUfpQ3Frz+VCbPCqj+cZzvEESy3fjSeT/pDWkYCWOBXYNNKZfuVsHuv8/JO2zze8+Eb/Q7a6hZVgzS81fLbQ==}
     dependencies:
       '@floating-ui/core': 1.2.4
     dev: false
@@ -221,8 +221,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /sass/1.59.2:
-    resolution: {integrity: sha512-jJyO6SmbzkJexF8MUorHx5tAilcgabioYxT/BHbY4+OvoqmbHxsYlrjZ8Adhqcgl6Zqwie0TgMXLCAmPFxXOuw==}
+  /sass/1.59.3:
+    resolution: {integrity: sha512-QCq98N3hX1jfTCoUAsF3eyGuXLsY7BCnCEg9qAact94Yc21npG2/mVOqoDvE0fCbWDqiM4WlcJQla0gWG2YlxQ==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
@@ -251,9 +251,9 @@ packages:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
     dev: false
 
-  /typescript/5.0.1-rc:
-    resolution: {integrity: sha512-zh75jY8gPo/y7fpmlTVN2bb2MigoLx4hGk+Cla9pY6lgSTvzJrmQQrRt5S80VTsEt6biWPZJgLK2nm6f0Ya+mA==}
-    engines: {node: '>=4.2.0'}
+  /typescript/5.0.2:
+    resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}
+    engines: {node: '>=12.20'}
     hasBin: true
     dev: true
 
@@ -272,9 +272,9 @@ packages:
       bootstrap: 5.3.0-alpha1_@popperjs+core@2.11.6
     dev: false
 
-  github.com/mwszekely/preact-aria-widgets/f37a3e4972347c4aba39c46b2a3d266ea5cbb41c_preact@10.13.1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/f37a3e4972347c4aba39c46b2a3d266ea5cbb41c}
-    id: github.com/mwszekely/preact-aria-widgets/f37a3e4972347c4aba39c46b2a3d266ea5cbb41c
+  github.com/mwszekely/preact-aria-widgets/59a8da63028427aa55cb12bf24909a92f1f5323e_preact@10.13.1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/59a8da63028427aa55cb12bf24909a92f1f5323e}
+    id: github.com/mwszekely/preact-aria-widgets/59a8da63028427aa55cb12bf24909a92f1f5323e
     name: preact-aria-widgets
     version: 0.0.1
     peerDependencies:
@@ -283,12 +283,12 @@ packages:
       clsx: 1.2.1
       lodash-es: 4.17.21
       preact: 10.13.1
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535_preact@10.13.1
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/f310ce61f1fee2bc133a9c01ca051ecb0f2e5b41_preact@10.13.1
     dev: false
 
-  github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535_preact@10.13.1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/4eef67d281542795eef9d4b1d473bf585f2ec535}
-    id: github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535
+  github.com/mwszekely/preact-prop-helpers/f310ce61f1fee2bc133a9c01ca051ecb0f2e5b41_preact@10.13.1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/f310ce61f1fee2bc133a9c01ca051ecb0f2e5b41}
+    id: github.com/mwszekely/preact-prop-helpers/f310ce61f1fee2bc133a9c01ca051ecb0f2e5b41
     name: preact-prop-helpers
     version: 0.0.1
     peerDependencies:
@@ -302,15 +302,16 @@ packages:
       wicg-inert: 3.1.2
     dev: false
 
-  github.com/mwszekely/preact-transition/e75dfc87b15d21bf72145bef28cd50e0a4e2fbab_preact@10.13.1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/e75dfc87b15d21bf72145bef28cd50e0a4e2fbab}
-    id: github.com/mwszekely/preact-transition/e75dfc87b15d21bf72145bef28cd50e0a4e2fbab
+  github.com/mwszekely/preact-transition/39374ccf6188e5be55968cb8333cf7a61304f20c_preact@10.13.1:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/39374ccf6188e5be55968cb8333cf7a61304f20c}
+    id: github.com/mwszekely/preact-transition/39374ccf6188e5be55968cb8333cf7a61304f20c
     name: preact-transition
     version: 0.1.0
     peerDependencies:
       preact: ^10.13.1
     dependencies:
       clsx: 1.2.1
+      lodash-es: 4.17.21
       preact: 10.13.1
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/4eef67d281542795eef9d4b1d473bf585f2ec535_preact@10.13.1
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/f310ce61f1fee2bc133a9c01ca051ecb0f2e5b41_preact@10.13.1
     dev: false

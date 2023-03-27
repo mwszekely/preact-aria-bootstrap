@@ -168,7 +168,14 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
     });
 
     const getOpen = useStableGetter(open);
-    useLayoutEffect(() => {
+
+    // This is useEffect, not useLayoutEffect, for performance reasons.
+    // E.G. A list with popup items -- we *really* don't want each individual useLayoutEffect
+    // to call handleUpdate (which causes a reflow one-by-one excruciatingly slowly!)
+    //
+    // If this needs to be useLayoutEffect for some other reason, there needs to be a 
+    // mechanism for delaying the very, very first update to useEffect (and all others can have useLayoutEffect)
+    useEffect(() => {
         handleUpdate(true);
         if (open) {
             hasOpenedAtLeastOnce.current = true;
@@ -207,15 +214,7 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
         if (open) {
             handleUpdate(true);
         }
-    }, [open, alignMode, requestedPlacement, absolutePositioning])
-
-    /*useEffect(() => {
-        handleUpdate();
-    }, [open])
-
-    useEffect(() => {
-        handleUpdate();
-    });*/
+    }, [open, alignMode, requestedPlacement, absolutePositioning]);
 
     const { refElementReturn: { getElement: getSourceElement }, propsStable: propsSource } = useRefElement<SourceElement>({ refElementParameters: {} });
     const { refElementReturn: { getElement: getPopupElement }, propsStable: propsPopup } = useRefElement<PopupElement>({ refElementParameters: {} });

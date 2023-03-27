@@ -6,7 +6,7 @@ import { CollapseFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 export const Accordion = memo(forwardElementRef(function Accordion({ children, ...props }, ref) {
-    return (_jsx(AriaAccordion, { navigationDirection: "vertical", render: info => {
+    return (_jsx(AriaAccordion, { orientation: "vertical", render: info => {
             return (_jsx("div", { ...useMergedProps({ class: "accordion" }, { children, ...props, ref }) }));
         } }));
 }));

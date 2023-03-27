@@ -129,6 +129,10 @@ export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, 
 
                 //useWhatCausedRender("DataTableRow", { props: { ...props, variantTheme, children, row }, state: info })
 
+                if (hideBecausePaginated || hideBecauseStaggered) {
+                    return <tr />;
+                }
+
                 return (
                     <Fade show={!hideBecauseStaggered} animateOnMount={info.staggeredChildReturn.isStaggered} delayMountUntilShown={true}>
                         <TableRow {...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" })}>

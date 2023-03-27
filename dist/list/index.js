@@ -26,46 +26,53 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
                 return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx(Paginated, { childCount: info.paginatedChildrenReturn.childCount ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: _jsx("div", { class: clsx(`list-group gridlist-group`), ...useMergedProps(props, propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist), children: children }) }), labelPosition == "after" && labelJsx] }));
             } }) }));
 }
+const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, iconEnd, iconStart, variantTheme, selected, children, props, ref2 }) => {
+    useUpdateRenderCounter("GridlistRow");
+    const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement({ refElementParameters: {} });
+    const { pressReturn: { longPress, pressing }, props: p1 } = usePress({
+        pressParameters: {
+            focusSelf: useCallback(() => {
+                return getElement()?.focus();
+            }, []),
+            onPressSync: useStableCallback((e) => infoRow.singleSelectionChildReturn.setThisOneSelected(e)),
+            //...infoRow.pressParameters
+        },
+        refElementReturn
+    });
+    // For performance reasons, we stagger rendering each row's child
+    // It does take maybe 1.5 times as long, but you can still interact with the page while it's happening at least.
+    /*let timeout = (Math.floor(index / 100) * 500)
+    const [show, setShow] = useState(timeout == 0);
+    useTimeout({
+        timeout,
+        callback: () => setShow(true)
+    })*/
+    const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
+    const { propsIndicator, propsRegion } = progressInfo;
+    const loadingJsx = (_jsx(Fade, { show: progressInfo.asyncHandlerReturn.pending, children: _jsx("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsIndicator }) }));
+    //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
+    const finalPropsForText = useMergedProps(p1, p2);
+    const finalPropsForDiv = useMergedProps(infoRow.props, { ...props, ref: ref2 }, {
+        className: clsx(`gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.singleSelectionChildReturn.selected || selected) && `active`)
+    });
+    const c = _jsxs(_Fragment, { children: [_jsx(ListItemStartEnd, { index: 0, hidden: iconStart == null, children: iconStart }), _jsxs(ListItemText, { onPress: progressInfo.asyncHandlerReturn.syncHandler, ...finalPropsForText, children: [_jsx("span", { children: children }), _jsxs("span", { class: "list-group-item-badge-and-spinner", children: [_jsx("div", { children: badge }), _jsx("div", { children: loadingJsx })] })] }), _jsx(ListItemStartEnd, { index: 2, hidden: iconEnd == null, children: iconEnd })] });
+    if (!show)
+        if (infoRow.paginatedChildReturn.isPaginated && !infoRow.paginatedChildReturn.paginatedVisible)
+            return null;
+        else
+            return _jsx("div", { "aria-busy": "true", class: "gridlist-item gridlist-item-placeholder", children: _jsx("span", { class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"), children: _jsx("span", { class: "placeholder w-100" }) }) });
+    return (_jsx(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: false, children: _jsx("div", { "aria-busy": (!show).toString(), ...finalPropsForDiv, children: show && c }) }));
+});
 export const ListItem = memo(forwardElementRef(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
     const defaultDisabled = useContext(DefaultDisabled);
     disabled ||= defaultDisabled;
     return (_jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onPress ?? null, capture: returnUndefined, tagIndicator: "span", render: progressInfo => {
             return (_jsx(GridlistRow, { index: index, ariaPropName: "aria-selected", getSortValue: getSortValue ?? returnZero, disabled: disabled, noTypeahead: true, getText: useCallback((e) => { return e?.querySelector(".gridlist-item-text")?.textContent || ""; }, []), render: infoRow => {
-                    useUpdateRenderCounter("GridlistRow");
-                    const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement({ refElementParameters: {} });
-                    const { pressReturn: { longPress, pressing }, props: p1 } = usePress({
-                        pressParameters: {
-                            focusSelf: useCallback(() => {
-                                return getElement()?.focus();
-                            }, []),
-                            onPressSync: useStableCallback((e) => infoRow.singleSelectionChildReturn.setThisOneSelected(e)),
-                            //...infoRow.pressParameters
-                        },
-                        refElementReturn
-                    });
-                    // For performance reasons, we stagger rendering each row's child
-                    // It does take maybe 1.5 times as long, but you can still interact with the page while it's happening at least.
-                    /*let timeout = (Math.floor(index / 100) * 500)
-                    const [show, setShow] = useState(timeout == 0);
-                    useTimeout({
-                        timeout,
-                        callback: () => setShow(true)
-                    })*/
-                    const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
-                    const { propsIndicator, propsRegion } = progressInfo;
-                    const loadingJsx = (_jsx(Fade, { show: progressInfo.asyncHandlerReturn.pending, children: _jsx("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsIndicator }) }));
-                    //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
-                    const finalPropsForText = useMergedProps(p1, p2);
-                    const finalPropsForDiv = useMergedProps(infoRow.props, { ...props, ref }, {
-                        className: clsx(`gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.singleSelectionChildReturn.selected || selected) && `active`)
-                    });
-                    const c = _jsxs(_Fragment, { children: [_jsx(ListItemStartEnd, { index: 0, hidden: iconStart == null, children: iconStart }), _jsxs(ListItemText, { onPress: progressInfo.asyncHandlerReturn.syncHandler, ...finalPropsForText, children: [_jsx("span", { children: children }), _jsxs("span", { class: "list-group-item-badge-and-spinner", children: [_jsx("div", { children: badge }), _jsx("div", { children: loadingJsx })] })] }), _jsx(ListItemStartEnd, { index: 2, hidden: iconEnd == null, children: iconEnd })] });
-                    if (!show)
-                        if (infoRow.paginatedChildReturn.isPaginated && !infoRow.paginatedChildReturn.paginatedVisible)
-                            return null;
-                        else
-                            return _jsx("div", { "aria-busy": "true", class: "gridlist-item gridlist-item-placeholder", children: _jsx("span", { class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"), children: _jsx("span", { class: "placeholder w-100" }) }) });
-                    return (_jsx(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: false, children: _jsx("div", { "aria-busy": (!show).toString(), ...finalPropsForDiv, children: show && c }) }));
+                    if (infoRow.paginatedChildReturn.hideBecausePaginated)
+                        return _jsx("div", {}); // This is orders of magnitude faster than null, for some reason?
+                    if (infoRow.staggeredChildReturn.hideBecauseStaggered)
+                        return _jsx("div", {});
+                    return _jsx(ListItemNonPaginated, { infoRow: infoRow, progressInfo: progressInfo, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: props, ref2: ref });
                 } }));
         } }));
 }));

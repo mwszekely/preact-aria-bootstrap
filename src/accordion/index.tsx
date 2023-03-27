@@ -8,7 +8,7 @@ import { memo } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 
-export interface AccordionProps extends Partial<Pick<AriaAccordionProps<HTMLButtonElement>, "navigationDirection" | "localStorageKey">>, GlobalAttributes<HTMLDivElement, "children"> {
+export interface AccordionProps extends Partial<Pick<AriaAccordionProps<HTMLButtonElement>, "orientation" | "localStorageKey">>, GlobalAttributes<HTMLDivElement, "children"> {
 
 }
 
@@ -19,7 +19,7 @@ export interface AccordionSectionProps extends Pick<AriaAccordionSectionProps<HT
 export const Accordion = memo(forwardElementRef(function Accordion({ children, ...props }: AccordionProps, ref: Ref<HTMLDivElement>) {
   return (
     <AriaAccordion
-      navigationDirection="vertical"
+      orientation="vertical"
       render={info => {
         return (
           <div {...useMergedProps({ class: "accordion" }, { children, ...props, ref })} />

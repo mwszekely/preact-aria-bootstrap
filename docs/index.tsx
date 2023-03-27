@@ -1,4 +1,4 @@
-
+import "preact/debug";
 import { ComponentChildren, h, render } from "preact";
 import { memo } from "preact/compat";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
@@ -31,7 +31,7 @@ function ListDemo() {
         <TextField type="number" value={count} onValueChange={setCount} label="# of children" labelPosition="floating" />
         <TextField type="number" value={paginationWindow} onValueChange={setPaginationWindow} label="Pagination window" labelPosition="floating" />
         <div>{selectedIndex}</div>
-        <List paginationLocation={paginationWindow == null ? null : "before"} paginationSize={paginationWindow ?? null} paginationLabel="Choose the selected page of 150 items to show" selectedIndex={selectedIndex} onSelectedIndexChange={setSelectedIndex} labelPosition="before" label="List (grid)">
+        <List paginationLocation={paginationWindow == null ? null : "before"} paginationSize={paginationWindow ?? null} paginationLabel="Choose the selected page of items to show" selectedIndex={selectedIndex} onSelectedIndexChange={setSelectedIndex} labelPosition="before" label="List (grid)">
             <ListDemoContents count={count} />
         </List>
     </div>)

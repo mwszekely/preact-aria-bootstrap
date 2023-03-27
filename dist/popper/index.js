@@ -1,7 +1,7 @@
 import { arrow, computePosition, flip, hide, offset, shift, size } from "@floating-ui/dom";
 import { identity } from "lodash-es";
 import { returnZero, runImmediately, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
-import { useCallback, useEffect, useLayoutEffect, useRef } from "preact/hooks";
+import { useCallback, useEffect, useRef } from "preact/hooks";
 const Map1 = {
     "data-popup-source-x": "popupSourceX",
     "data-popup-source-y": "popupSourceY",
@@ -122,7 +122,13 @@ export function usePopper({ popperParameters: { open, getElement, alignMode, pla
         }
     });
     const getOpen = useStableGetter(open);
-    useLayoutEffect(() => {
+    // This is useEffect, not useLayoutEffect, for performance reasons.
+    // E.G. A list with popup items -- we *really* don't want each individual useLayoutEffect
+    // to call handleUpdate (which causes a reflow one-by-one excruciatingly slowly!)
+    //
+    // If this needs to be useLayoutEffect for some other reason, there needs to be a 
+    // mechanism for delaying the very, very first update to useEffect (and all others can have useLayoutEffect)
+    useEffect(() => {
         handleUpdate(true);
         if (open) {
             hasOpenedAtLeastOnce.current = true;
@@ -161,13 +167,6 @@ export function usePopper({ popperParameters: { open, getElement, alignMode, pla
             handleUpdate(true);
         }
     }, [open, alignMode, requestedPlacement, absolutePositioning]);
-    /*useEffect(() => {
-        handleUpdate();
-    }, [open])
-
-    useEffect(() => {
-        handleUpdate();
-    });*/
     const { refElementReturn: { getElement: getSourceElement }, propsStable: propsSource } = useRefElement({ refElementParameters: {} });
     const { refElementReturn: { getElement: getPopupElement }, propsStable: propsPopup } = useRefElement({ refElementParameters: {} });
     const { refElementReturn: { getElement: getArrowElement }, propsStable: propsArrow } = useRefElement({ refElementParameters: {} });

@@ -4,7 +4,7 @@ import { returnZero, useMergedProps, useStableCallback } from "preact-prop-helpe
 import { useRef, useState } from "preact/hooks";
 import { Checkbox } from "../checkbox/index.js";
 export function CheckboxGroup({ orientation, children, label, labelPosition, debounce, loadingLabel, throttle, disabled, inline, getSortValue }) {
-    return (_jsx(AriaCheckboxGroup, { navigationDirection: orientation, render: info => {
+    return (_jsx(AriaCheckboxGroup, { orientation: orientation, render: info => {
             return (_jsxs("span", { ...info.propsStable, children: [_jsx(CheckboxGroupParent, { label: label, labelPosition: labelPosition, debounce: debounce, loadingLabel: loadingLabel, throttle: throttle, disabled: disabled, inline: inline, getSortValue: getSortValue }), children] }));
         } }));
 }

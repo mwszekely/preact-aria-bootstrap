@@ -53,7 +53,7 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
                     ref={imperativeHandle}
                     name={name}
                     onSelectedValueChange={onSelectedIndexChangeSync}
-                    navigationDirection={inline ? "horizontal" : "vertical"}
+                    arrowKeyDirection={inline ? "horizontal" : "vertical"}
                     render={info => {
                         const visibleLabel = <label {...info.propsRadioGroupLabel}>{label}</label>
                         return (

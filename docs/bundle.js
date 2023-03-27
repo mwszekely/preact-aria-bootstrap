@@ -1,13 +1,17 @@
 (function () {
   'use strict';
 
-  var n$1,l$2,u$2,t$2,r$3,o$3,f$2,e$1,c$2={},s$2=[],a$2=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function h$2(n,l){for(var u in l)n[u]=l[u];return n}function v$2(n){var l=n.parentNode;l&&l.removeChild(n);}function y$2(l,u,i){var t,r,o,f={};for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];if(arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(o in l.defaultProps)void 0===f[o]&&(f[o]=l.defaultProps[o]);return p$2(l,f,t,r,null)}function p$2(n,i,t,r,o){var f={type:n,props:i,key:t,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++u$2:o};return null==o&&null!=l$2.vnode&&l$2.vnode(f),f}function _$3(n){return n.children}function k$3(n,l){this.props=n,this.context=l;}function b$2(n,l){if(null==l)return n.__?b$2(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?b$2(n):null}function g$3(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return g$3(n)}}function m$2(n){(!n.__d&&(n.__d=!0)&&t$2.push(n)&&!w$3.__r++||r$3!==l$2.debounceRendering)&&((r$3=l$2.debounceRendering)||o$3)(w$3);}function w$3(){var n,l,u,i,r,o,e,c;for(t$2.sort(f$2);n=t$2.shift();)n.__d&&(l=t$2.length,i=void 0,r=void 0,e=(o=(u=n).__v).__e,(c=u.__P)&&(i=[],(r=h$2({},o)).__v=o.__v+1,L$3(c,o,r,u.__n,void 0!==c.ownerSVGElement,null!=o.__h?[e]:null,i,null==e?b$2(o):e,o.__h),M$1(i,o),o.__e!=e&&g$3(o)),t$2.length>l&&t$2.sort(f$2));w$3.__r=0;}function x$2(n,l,u,i,t,r,o,f,e,a){var h,v,y,d,k,g,m,w=i&&i.__k||s$2,x=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(d=u.__k[h]=null==(d=l[h])||"boolean"==typeof d||"function"==typeof d?null:"string"==typeof d||"number"==typeof d||"bigint"==typeof d?p$2(null,d,null,null,d):Array.isArray(d)?p$2(_$3,{children:d},null,null,null):d.__b>0?p$2(d.type,d.props,d.key,d.ref?d.ref:null,d.__v):d)){if(d.__=u,d.__b=u.__b+1,null===(y=w[h])||y&&d.key==y.key&&d.type===y.type)w[h]=void 0;else for(v=0;v<x;v++){if((y=w[v])&&d.key==y.key&&d.type===y.type){w[v]=void 0;break}y=null;}L$3(n,d,y=y||c$2,t,r,o,f,e,a),k=d.__e,(v=d.ref)&&y.ref!=v&&(m||(m=[]),y.ref&&m.push(y.ref,null,d),m.push(v,d.__c||k,d)),null!=k?(null==g&&(g=k),"function"==typeof d.type&&d.__k===y.__k?d.__d=e=A$2(d,e,n):e=C$2(n,d,y,w,k,e),"function"==typeof u.type&&(u.__d=e)):e&&y.__e==e&&e.parentNode!=n&&(e=b$2(y));}for(u.__e=g,h=x;h--;)null!=w[h]&&("function"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=$$2(i).nextSibling),S$1(w[h],w[h]));if(m)for(h=0;h<m.length;h++)O$1(m[h],m[++h],m[++h]);}function A$2(n,l,u){for(var i,t=n.__k,r=0;t&&r<t.length;r++)(i=t[r])&&(i.__=n,l="function"==typeof i.type?A$2(i,l,u):C$2(u,i,i,t,i.__e,l));return l}function P$3(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){P$3(n,l);}):l.push(n)),l}function C$2(n,l,u,i,t,r){var o,f,e;if(void 0!==l.__d)o=l.__d,l.__d=void 0;else if(null==u||t!=r||null==t.parentNode)n:if(null==r||r.parentNode!==n)n.appendChild(t),o=null;else {for(f=r,e=0;(f=f.nextSibling)&&e<i.length;e+=1)if(f==t)break n;n.insertBefore(t,r),o=r;}return void 0!==o?o:t.nextSibling}function $$2(n){var l,u,i;if(null==n.type||"string"==typeof n.type)return n.__e;if(n.__k)for(l=n.__k.length-1;l>=0;l--)if((u=n.__k[l])&&(i=$$2(u)))return i;return null}function H$2(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||T$3(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||T$3(n,r,l[r],u[r],i);}function I$2(n,l,u){"-"===l[0]?n.setProperty(l,null==u?"":u):n[l]=null==u?"":"number"!=typeof u||a$2.test(l)?u:u+"px";}function T$3(n,l,u,i,t){var r;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else {if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||I$2(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||I$2(n.style,l,u[l]);}else if("o"===l[0]&&"n"===l[1])r=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+r]=u,u?i||n.addEventListener(l,r?z$3:j$3,r):n.removeEventListener(l,r?z$3:j$3,r);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("width"!==l&&"height"!==l&&"href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null==u||!1===u&&-1==l.indexOf("-")?n.removeAttribute(l):n.setAttribute(l,u));}}function j$3(n){return this.l[n.type+!1](l$2.event?l$2.event(n):n)}function z$3(n){return this.l[n.type+!0](l$2.event?l$2.event(n):n)}function L$3(n,u,i,t,r,o,f,e,c){var s,a,v,y,p,d,b,g,m,w,A,P,C,$,H,I=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,o=[e]),(s=l$2.__b)&&s(u);try{n:if("function"==typeof I){if(g=u.props,m=(s=I.contextType)&&t[s.__c],w=s?m?m.props.value:s.__:t,i.__c?b=(a=u.__c=i.__c).__=a.__E:("prototype"in I&&I.prototype.render?u.__c=a=new I(g,w):(u.__c=a=new k$3(g,w),a.constructor=I,a.render=q$3),m&&m.sub(a),a.props=g,a.state||(a.state={}),a.context=w,a.__n=t,v=a.__d=!0,a.__h=[],a._sb=[]),null==a.__s&&(a.__s=a.state),null!=I.getDerivedStateFromProps&&(a.__s==a.state&&(a.__s=h$2({},a.__s)),h$2(a.__s,I.getDerivedStateFromProps(g,a.__s))),y=a.props,p=a.state,a.__v=u,v)null==I.getDerivedStateFromProps&&null!=a.componentWillMount&&a.componentWillMount(),null!=a.componentDidMount&&a.__h.push(a.componentDidMount);else {if(null==I.getDerivedStateFromProps&&g!==y&&null!=a.componentWillReceiveProps&&a.componentWillReceiveProps(g,w),!a.__e&&null!=a.shouldComponentUpdate&&!1===a.shouldComponentUpdate(g,a.__s,w)||u.__v===i.__v){for(u.__v!==i.__v&&(a.props=g,a.state=a.__s,a.__d=!1),a.__e=!1,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u);}),A=0;A<a._sb.length;A++)a.__h.push(a._sb[A]);a._sb=[],a.__h.length&&f.push(a);break n}null!=a.componentWillUpdate&&a.componentWillUpdate(g,a.__s,w),null!=a.componentDidUpdate&&a.__h.push(function(){a.componentDidUpdate(y,p,d);});}if(a.context=w,a.props=g,a.__P=n,P=l$2.__r,C=0,"prototype"in I&&I.prototype.render){for(a.state=a.__s,a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),$=0;$<a._sb.length;$++)a.__h.push(a._sb[$]);a._sb=[];}else do{a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),a.state=a.__s;}while(a.__d&&++C<25);a.state=a.__s,null!=a.getChildContext&&(t=h$2(h$2({},t),a.getChildContext())),v||null==a.getSnapshotBeforeUpdate||(d=a.getSnapshotBeforeUpdate(y,p)),H=null!=s&&s.type===_$3&&null==s.key?s.props.children:s,x$2(n,Array.isArray(H)?H:[H],u,i,t,r,o,f,e,c),a.base=u.__e,u.__h=null,a.__h.length&&f.push(a),b&&(a.__E=a.__=null),a.__e=!1;}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=N$2(i.__e,u,i,t,r,o,f,c);(s=l$2.diffed)&&s(u);}catch(n){u.__v=null,(c||null!=o)&&(u.__e=e,u.__h=!!c,o[o.indexOf(e)]=null),l$2.__e(n,u,i);}}function M$1(n,u){l$2.__c&&l$2.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u);});}catch(n){l$2.__e(n,u.__v);}});}function N$2(l,u,i,t,r,o,f,e){var s,a,h,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(r=!0),null!=o)for(;_<o.length;_++)if((s=o[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,o[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=r?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),o=null,e=!1;}if(null===d)y===p||e&&l.data===p||(l.data=p);else {if(o=o&&n$1.call(l.childNodes),a=(y=i.props||c$2).dangerouslySetInnerHTML,h=p.dangerouslySetInnerHTML,!e){if(null!=o)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(h||a)&&(h&&(a&&h.__html==a.__html||h.__html===l.innerHTML)||(l.innerHTML=h&&h.__html||""));}if(H$2(l,p,y,r,e),h)u.__k=[];else if(_=u.props.children,x$2(l,Array.isArray(_)?_:[_],u,i,t,r&&"foreignObject"!==d,o,f,o?o[0]:i.__k&&b$2(i,0),e),null!=o)for(_=o.length;_--;)null!=o[_]&&v$2(o[_]);e||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&T$3(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&T$3(l,"checked",_,y.checked,!1));}return l}function O$1(n,u,i){try{"function"==typeof n?n(u):n.current=u;}catch(n){l$2.__e(n,i);}}function S$1(n,u,i){var t,r;if(l$2.unmount&&l$2.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||O$1(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(n){l$2.__e(n,u);}t.base=t.__P=null,n.__c=void 0;}if(t=n.__k)for(r=0;r<t.length;r++)t[r]&&S$1(t[r],u,i||"function"!=typeof n.type);i||null==n.__e||v$2(n.__e),n.__=n.__e=n.__d=void 0;}function q$3(n,l,u){return this.constructor(n,u)}function B$3(u,i,t){var r,o,f;l$2.__&&l$2.__(u,i),o=(r="function"==typeof t)?null:t&&t.__k||i.__k,f=[],L$3(i,u=(!r&&t||i).__k=y$2(_$3,null,[u]),o||c$2,c$2,void 0!==i.ownerSVGElement,!r&&t?[t]:o?null:i.firstChild?n$1.call(i.childNodes):null,f,!r&&t?t:o?o.__e:i.firstChild,r),M$1(f,u);}function E$1(l,u,i){var t,r,o,f=h$2({},l.props);for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];return arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),p$2(l.type,f,t||l.key,r||l.ref,null)}function F$3(n,l){var u={__c:l="__cC"+e$1++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(function(n){n.__e=!0,m$2(n);});},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n$1=s$2.slice,l$2={__e:function(n,l,u,i){for(var t,r,o;l=l.__;)if((t=l.__c)&&!t.__)try{if((r=t.constructor)&&null!=r.getDerivedStateFromError&&(t.setState(r.getDerivedStateFromError(n)),o=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),o=t.__d),o)return t.__E=t}catch(l){n=l;}throw n}},u$2=0,k$3.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=h$2({},this.state),"function"==typeof n&&(n=n(h$2({},u),this.props)),n&&h$2(u,n),null!=n&&this.__v&&(l&&this._sb.push(l),m$2(this));},k$3.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),m$2(this));},k$3.prototype.render=_$3,t$2=[],o$3="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,f$2=function(n,l){return n.__v.__b-l.__v.__b},w$3.__r=0,e$1=0;
+  var n$1,l$3,u$3,t$2,r$3,o$4,f$3,e$1,c$3={},s$3=[],a$3=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function h$3(n,l){for(var u in l)n[u]=l[u];return n}function v$3(n){var l=n.parentNode;l&&l.removeChild(n);}function y$3(l,u,i){var t,r,o,f={};for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];if(arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(o in l.defaultProps)void 0===f[o]&&(f[o]=l.defaultProps[o]);return p$3(l,f,t,r,null)}function p$3(n,i,t,r,o){var f={type:n,props:i,key:t,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++u$3:o};return null==o&&null!=l$3.vnode&&l$3.vnode(f),f}function _$3(n){return n.children}function k$3(n,l){this.props=n,this.context=l;}function b$2(n,l){if(null==l)return n.__?b$2(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?b$2(n):null}function g$3(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return g$3(n)}}function m$2(n){(!n.__d&&(n.__d=!0)&&t$2.push(n)&&!w$3.__r++||r$3!==l$3.debounceRendering)&&((r$3=l$3.debounceRendering)||o$4)(w$3);}function w$3(){var n,l,u,i,r,o,e,c;for(t$2.sort(f$3);n=t$2.shift();)n.__d&&(l=t$2.length,i=void 0,r=void 0,e=(o=(u=n).__v).__e,(c=u.__P)&&(i=[],(r=h$3({},o)).__v=o.__v+1,L$3(c,o,r,u.__n,void 0!==c.ownerSVGElement,null!=o.__h?[e]:null,i,null==e?b$2(o):e,o.__h),M$1(i,o),o.__e!=e&&g$3(o)),t$2.length>l&&t$2.sort(f$3));w$3.__r=0;}function x$2(n,l,u,i,t,r,o,f,e,a){var h,v,y,d,k,g,m,w=i&&i.__k||s$3,x=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(d=u.__k[h]=null==(d=l[h])||"boolean"==typeof d||"function"==typeof d?null:"string"==typeof d||"number"==typeof d||"bigint"==typeof d?p$3(null,d,null,null,d):Array.isArray(d)?p$3(_$3,{children:d},null,null,null):d.__b>0?p$3(d.type,d.props,d.key,d.ref?d.ref:null,d.__v):d)){if(d.__=u,d.__b=u.__b+1,null===(y=w[h])||y&&d.key==y.key&&d.type===y.type)w[h]=void 0;else for(v=0;v<x;v++){if((y=w[v])&&d.key==y.key&&d.type===y.type){w[v]=void 0;break}y=null;}L$3(n,d,y=y||c$3,t,r,o,f,e,a),k=d.__e,(v=d.ref)&&y.ref!=v&&(m||(m=[]),y.ref&&m.push(y.ref,null,d),m.push(v,d.__c||k,d)),null!=k?(null==g&&(g=k),"function"==typeof d.type&&d.__k===y.__k?d.__d=e=A$2(d,e,n):e=C$2(n,d,y,w,k,e),"function"==typeof u.type&&(u.__d=e)):e&&y.__e==e&&e.parentNode!=n&&(e=b$2(y));}for(u.__e=g,h=x;h--;)null!=w[h]&&("function"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=$$2(i).nextSibling),S$1(w[h],w[h]));if(m)for(h=0;h<m.length;h++)O$1(m[h],m[++h],m[++h]);}function A$2(n,l,u){for(var i,t=n.__k,r=0;t&&r<t.length;r++)(i=t[r])&&(i.__=n,l="function"==typeof i.type?A$2(i,l,u):C$2(u,i,i,t,i.__e,l));return l}function P$3(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){P$3(n,l);}):l.push(n)),l}function C$2(n,l,u,i,t,r){var o,f,e;if(void 0!==l.__d)o=l.__d,l.__d=void 0;else if(null==u||t!=r||null==t.parentNode)n:if(null==r||r.parentNode!==n)n.appendChild(t),o=null;else {for(f=r,e=0;(f=f.nextSibling)&&e<i.length;e+=1)if(f==t)break n;n.insertBefore(t,r),o=r;}return void 0!==o?o:t.nextSibling}function $$2(n){var l,u,i;if(null==n.type||"string"==typeof n.type)return n.__e;if(n.__k)for(l=n.__k.length-1;l>=0;l--)if((u=n.__k[l])&&(i=$$2(u)))return i;return null}function H$2(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||T$3(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||T$3(n,r,l[r],u[r],i);}function I$2(n,l,u){"-"===l[0]?n.setProperty(l,null==u?"":u):n[l]=null==u?"":"number"!=typeof u||a$3.test(l)?u:u+"px";}function T$3(n,l,u,i,t){var r;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else {if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||I$2(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||I$2(n.style,l,u[l]);}else if("o"===l[0]&&"n"===l[1])r=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+r]=u,u?i||n.addEventListener(l,r?z$3:j$3,r):n.removeEventListener(l,r?z$3:j$3,r);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("width"!==l&&"height"!==l&&"href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null==u||!1===u&&-1==l.indexOf("-")?n.removeAttribute(l):n.setAttribute(l,u));}}function j$3(n){return this.l[n.type+!1](l$3.event?l$3.event(n):n)}function z$3(n){return this.l[n.type+!0](l$3.event?l$3.event(n):n)}function L$3(n,u,i,t,r,o,f,e,c){var s,a,v,y,p,d,b,g,m,w,A,P,C,$,H,I=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,o=[e]),(s=l$3.__b)&&s(u);try{n:if("function"==typeof I){if(g=u.props,m=(s=I.contextType)&&t[s.__c],w=s?m?m.props.value:s.__:t,i.__c?b=(a=u.__c=i.__c).__=a.__E:("prototype"in I&&I.prototype.render?u.__c=a=new I(g,w):(u.__c=a=new k$3(g,w),a.constructor=I,a.render=q$3),m&&m.sub(a),a.props=g,a.state||(a.state={}),a.context=w,a.__n=t,v=a.__d=!0,a.__h=[],a._sb=[]),null==a.__s&&(a.__s=a.state),null!=I.getDerivedStateFromProps&&(a.__s==a.state&&(a.__s=h$3({},a.__s)),h$3(a.__s,I.getDerivedStateFromProps(g,a.__s))),y=a.props,p=a.state,a.__v=u,v)null==I.getDerivedStateFromProps&&null!=a.componentWillMount&&a.componentWillMount(),null!=a.componentDidMount&&a.__h.push(a.componentDidMount);else {if(null==I.getDerivedStateFromProps&&g!==y&&null!=a.componentWillReceiveProps&&a.componentWillReceiveProps(g,w),!a.__e&&null!=a.shouldComponentUpdate&&!1===a.shouldComponentUpdate(g,a.__s,w)||u.__v===i.__v){for(u.__v!==i.__v&&(a.props=g,a.state=a.__s,a.__d=!1),a.__e=!1,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u);}),A=0;A<a._sb.length;A++)a.__h.push(a._sb[A]);a._sb=[],a.__h.length&&f.push(a);break n}null!=a.componentWillUpdate&&a.componentWillUpdate(g,a.__s,w),null!=a.componentDidUpdate&&a.__h.push(function(){a.componentDidUpdate(y,p,d);});}if(a.context=w,a.props=g,a.__P=n,P=l$3.__r,C=0,"prototype"in I&&I.prototype.render){for(a.state=a.__s,a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),$=0;$<a._sb.length;$++)a.__h.push(a._sb[$]);a._sb=[];}else do{a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),a.state=a.__s;}while(a.__d&&++C<25);a.state=a.__s,null!=a.getChildContext&&(t=h$3(h$3({},t),a.getChildContext())),v||null==a.getSnapshotBeforeUpdate||(d=a.getSnapshotBeforeUpdate(y,p)),H=null!=s&&s.type===_$3&&null==s.key?s.props.children:s,x$2(n,Array.isArray(H)?H:[H],u,i,t,r,o,f,e,c),a.base=u.__e,u.__h=null,a.__h.length&&f.push(a),b&&(a.__E=a.__=null),a.__e=!1;}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=N$2(i.__e,u,i,t,r,o,f,c);(s=l$3.diffed)&&s(u);}catch(n){u.__v=null,(c||null!=o)&&(u.__e=e,u.__h=!!c,o[o.indexOf(e)]=null),l$3.__e(n,u,i);}}function M$1(n,u){l$3.__c&&l$3.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u);});}catch(n){l$3.__e(n,u.__v);}});}function N$2(l,u,i,t,r,o,f,e){var s,a,h,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(r=!0),null!=o)for(;_<o.length;_++)if((s=o[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,o[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=r?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),o=null,e=!1;}if(null===d)y===p||e&&l.data===p||(l.data=p);else {if(o=o&&n$1.call(l.childNodes),a=(y=i.props||c$3).dangerouslySetInnerHTML,h=p.dangerouslySetInnerHTML,!e){if(null!=o)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(h||a)&&(h&&(a&&h.__html==a.__html||h.__html===l.innerHTML)||(l.innerHTML=h&&h.__html||""));}if(H$2(l,p,y,r,e),h)u.__k=[];else if(_=u.props.children,x$2(l,Array.isArray(_)?_:[_],u,i,t,r&&"foreignObject"!==d,o,f,o?o[0]:i.__k&&b$2(i,0),e),null!=o)for(_=o.length;_--;)null!=o[_]&&v$3(o[_]);e||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&T$3(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&T$3(l,"checked",_,y.checked,!1));}return l}function O$1(n,u,i){try{"function"==typeof n?n(u):n.current=u;}catch(n){l$3.__e(n,i);}}function S$1(n,u,i){var t,r;if(l$3.unmount&&l$3.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||O$1(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(n){l$3.__e(n,u);}t.base=t.__P=null,n.__c=void 0;}if(t=n.__k)for(r=0;r<t.length;r++)t[r]&&S$1(t[r],u,i||"function"!=typeof n.type);i||null==n.__e||v$3(n.__e),n.__=n.__e=n.__d=void 0;}function q$3(n,l,u){return this.constructor(n,u)}function B$3(u,i,t){var r,o,f;l$3.__&&l$3.__(u,i),o=(r="function"==typeof t)?null:t&&t.__k||i.__k,f=[],L$3(i,u=(!r&&t||i).__k=y$3(_$3,null,[u]),o||c$3,c$3,void 0!==i.ownerSVGElement,!r&&t?[t]:o?null:i.firstChild?n$1.call(i.childNodes):null,f,!r&&t?t:o?o.__e:i.firstChild,r),M$1(f,u);}function E$1(l,u,i){var t,r,o,f=h$3({},l.props);for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];return arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),p$3(l.type,f,t||l.key,r||l.ref,null)}function F$3(n,l){var u={__c:l="__cC"+e$1++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(function(n){n.__e=!0,m$2(n);});},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n$1=s$3.slice,l$3={__e:function(n,l,u,i){for(var t,r,o;l=l.__;)if((t=l.__c)&&!t.__)try{if((r=t.constructor)&&null!=r.getDerivedStateFromError&&(t.setState(r.getDerivedStateFromError(n)),o=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),o=t.__d),o)return t.__E=t}catch(l){n=l;}throw n}},u$3=0,k$3.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=h$3({},this.state),"function"==typeof n&&(n=n(h$3({},u),this.props)),n&&h$3(u,n),null!=n&&this.__v&&(l&&this._sb.push(l),m$2(this));},k$3.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),m$2(this));},k$3.prototype.render=_$3,t$2=[],o$4="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,f$3=function(n,l){return n.__v.__b-l.__v.__b},w$3.__r=0,e$1=0;
 
-  var _$2=0;function o$2(o,e,n,t,f,l){var s,u,a={};for(u in e)"ref"==u?s=e[u]:a[u]=e[u];var i={type:o,props:a,key:n,ref:s,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:--_$2,__source:f,__self:l};if("function"==typeof o&&(s=o.defaultProps))for(u in s)void 0===a[u]&&(a[u]=s[u]);return l$2.vnode&&l$2.vnode(i),i}
+  var _$2=0;function o$3(o,e,n,t,f,l){var s,u,a={};for(u in e)"ref"==u?s=e[u]:a[u]=e[u];var i={type:o,props:a,key:n,ref:s,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:--_$2,__source:f,__self:l};if("function"==typeof o&&(s=o.defaultProps))for(u in s)void 0===a[u]&&(a[u]=s[u]);return l$3.vnode&&l$3.vnode(i),i}
 
-  var t$1,r$2,u$1,i$1,o$1=0,f$1=[],c$1=[],e=l$2.__b,a$1=l$2.__r,v$1=l$2.diffed,l$1=l$2.__c,m$1=l$2.unmount;function d$1(t,u){l$2.__h&&l$2.__h(r$2,t,o$1||u),o$1=0;var i=r$2.__H||(r$2.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({__V:c$1}),i.__[t]}function h$1(n){return o$1=1,s$1(B$2,n)}function s$1(n,u,i){var o=d$1(t$1++,2);if(o.t=n,!o.__c&&(o.__=[i?i(u):B$2(void 0,u),function(n){var t=o.__N?o.__N[0]:o.__[0],r=o.t(t,n);t!==r&&(o.__N=[r,o.__[1]],o.__c.setState({}));}],o.__c=r$2,!r$2.u)){var f=function(n,t,r){if(!o.__c.__H)return !0;var u=o.__c.__H.__.filter(function(n){return n.__c});if(u.every(function(n){return !n.__N}))return !c||c.call(this,n,t,r);var i=!1;return u.forEach(function(n){if(n.__N){var t=n.__[0];n.__=n.__N,n.__N=void 0,t!==n.__[0]&&(i=!0);}}),!(!i&&o.__c.props===n)&&(!c||c.call(this,n,t,r))};r$2.u=!0;var c=r$2.shouldComponentUpdate,e=r$2.componentWillUpdate;r$2.componentWillUpdate=function(n,t,r){if(this.__e){var u=c;c=void 0,f(n,t,r),c=u;}e&&e.call(this,n,t,r);},r$2.shouldComponentUpdate=f;}return o.__N||o.__}function p$1(u,i){var o=d$1(t$1++,3);!l$2.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$2.__H.__h.push(o));}function y$1(u,i){var o=d$1(t$1++,4);!l$2.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$2.__h.push(o));}function _$1(n){return o$1=5,F$2(function(){return {current:n}},[])}function A$1(n,t,r){o$1=6,y$1(function(){return "function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==r?r:r.concat(n));}function F$2(n,r){var u=d$1(t$1++,7);return z$2(u.__H,r)?(u.__V=n(),u.i=r,u.__h=n,u.__V):u.__}function T$2(n,t){return o$1=8,F$2(function(){return n},t)}function q$2(n){var u=r$2.context[n.__c],i=d$1(t$1++,9);return i.c=n,u?(null==i.__&&(i.__=!0,u.sub(r$2)),u.props.value):n.__}function P$2(n){var u=d$1(t$1++,10),i=h$1();return u.__=n,r$2.componentDidCatch||(r$2.componentDidCatch=function(n,t){u.__&&u.__(n,t),i[1](n);}),[i[0],function(){i[1](void 0);}]}function V$2(){var n=d$1(t$1++,11);if(!n.__){for(var u=r$2.__v;null!==u&&!u.__m&&null!==u.__;)u=u.__;var i=u.__m||(u.__m=[0,0]);n.__="P"+i[0]+"-"+i[1]++;}return n.__}function b$1(){for(var t;t=f$1.shift();)if(t.__P&&t.__H)try{t.__H.__h.forEach(k$2),t.__H.__h.forEach(w$2),t.__H.__h=[];}catch(r){t.__H.__h=[],l$2.__e(r,t.__v);}}l$2.__b=function(n){r$2=null,e&&e(n);},l$2.__r=function(n){a$1&&a$1(n),t$1=0;var i=(r$2=n.__c).__H;i&&(u$1===r$2?(i.__h=[],r$2.__h=[],i.__.forEach(function(n){n.__N&&(n.__=n.__N),n.__V=c$1,n.__N=n.i=void 0;})):(i.__h.forEach(k$2),i.__h.forEach(w$2),i.__h=[])),u$1=r$2;},l$2.diffed=function(t){v$1&&v$1(t);var o=t.__c;o&&o.__H&&(o.__H.__h.length&&(1!==f$1.push(o)&&i$1===l$2.requestAnimationFrame||((i$1=l$2.requestAnimationFrame)||j$2)(b$1)),o.__H.__.forEach(function(n){n.i&&(n.__H=n.i),n.__V!==c$1&&(n.__=n.__V),n.i=void 0,n.__V=c$1;})),u$1=r$2=null;},l$2.__c=function(t,r){r.some(function(t){try{t.__h.forEach(k$2),t.__h=t.__h.filter(function(n){return !n.__||w$2(n)});}catch(u){r.some(function(n){n.__h&&(n.__h=[]);}),r=[],l$2.__e(u,t.__v);}}),l$1&&l$1(t,r);},l$2.unmount=function(t){m$1&&m$1(t);var r,u=t.__c;u&&u.__H&&(u.__H.__.forEach(function(n){try{k$2(n);}catch(n){r=n;}}),u.__H=void 0,r&&l$2.__e(r,u.__v));};var g$2="function"==typeof requestAnimationFrame;function j$2(n){var t,r=function(){clearTimeout(u),g$2&&cancelAnimationFrame(t),setTimeout(n);},u=setTimeout(r,100);g$2&&(t=requestAnimationFrame(r));}function k$2(n){var t=r$2,u=n.__c;"function"==typeof u&&(n.__c=void 0,u()),r$2=t;}function w$2(n){var t=r$2;n.__c=n.__(),r$2=t;}function z$2(n,t){return !n||n.length!==t.length||t.some(function(t,r){return t!==n[r]})}function B$2(n,t){return "function"==typeof t?t(n):t}
+  "undefined"!=typeof window&&window.__PREACT_DEVTOOLS__&&window.__PREACT_DEVTOOLS__.attachPreact("10.13.1",l$3,{Fragment:_$3,Component:k$3});
 
-  function g$1(n,t){for(var e in t)n[e]=t[e];return n}function C$1(n,t){for(var e in n)if("__source"!==e&&!(e in t))return !0;for(var r in t)if("__source"!==r&&n[r]!==t[r])return !0;return !1}function w$1(n){this.props=n;}function x$1(n,e){function r(n){var t=this.props.ref,r=t==n.ref;return !r&&t&&(t.call?t(null):t.current=null),e?!e(this.props,n)||!r:C$1(this.props,n)}function u(e){return this.shouldComponentUpdate=r,y$2(n,e)}return u.displayName="Memo("+(n.displayName||n.name)+")",u.prototype.isReactComponent=!0,u.__f=!0,u}(w$1.prototype=new k$3).isPureReactComponent=!0,w$1.prototype.shouldComponentUpdate=function(n,t){return C$1(this.props,n)||C$1(this.state,t)};var R$1=l$2.__b;l$2.__b=function(n){n.type&&n.type.__f&&n.ref&&(n.props.ref=n.ref,n.ref=null),R$1&&R$1(n);};var N$1="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function k$1(n){function t(t){var e=g$1({},t);return delete e.ref,n(e,t.ref||null)}return t.$$typeof=N$1,t.render=t,t.prototype.isReactComponent=t.__f=!0,t.displayName="ForwardRef("+(n.displayName||n.name)+")",t}var T$1=l$2.__e;l$2.__e=function(n,t,e,r){if(n.then)for(var u,o=t;o=o.__;)if((u=o.__c)&&u.__c)return null==t.__e&&(t.__e=e.__e,t.__k=e.__k),u.__c(n,t);T$1(n,t,e,r);};var I$1=l$2.unmount;function L$2(n,t,e){return n&&(n.__c&&n.__c.__H&&(n.__c.__H.__.forEach(function(n){"function"==typeof n.__c&&n.__c();}),n.__c.__H=null),null!=(n=g$1({},n)).__c&&(n.__c.__P===e&&(n.__c.__P=t),n.__c=null),n.__k=n.__k&&n.__k.map(function(n){return L$2(n,t,e)})),n}function U$1(n,t,e){return n&&(n.__v=null,n.__k=n.__k&&n.__k.map(function(n){return U$1(n,t,e)}),n.__c&&n.__c.__P===t&&(n.__e&&e.insertBefore(n.__e,n.__d),n.__c.__e=!0,n.__c.__P=e)),n}function D$1(){this.__u=0,this.t=null,this.__b=null;}function F$1(n){var t=n.__.__c;return t&&t.__a&&t.__a(n)}function V$1(){this.u=null,this.o=null;}l$2.unmount=function(n){var t=n.__c;t&&t.__R&&t.__R(),t&&!0===n.__h&&(n.type=null),I$1&&I$1(n);},(D$1.prototype=new k$3).__c=function(n,t){var e=t.__c,r=this;null==r.t&&(r.t=[]),r.t.push(e);var u=F$1(r.__v),o=!1,i=function(){o||(o=!0,e.__R=null,u?u(l):l());};e.__R=i;var l=function(){if(!--r.__u){if(r.state.__a){var n=r.state.__a;r.__v.__k[0]=U$1(n,n.__c.__P,n.__c.__O);}var t;for(r.setState({__a:r.__b=null});t=r.t.pop();)t.forceUpdate();}},c=!0===t.__h;r.__u++||c||r.setState({__a:r.__b=r.__v.__k[0]}),n.then(i,i);},D$1.prototype.componentWillUnmount=function(){this.t=[];},D$1.prototype.render=function(n,e){if(this.__b){if(this.__v.__k){var r=document.createElement("div"),o=this.__v.__k[0].__c;this.__v.__k[0]=L$2(this.__b,r,o.__O=o.__P);}this.__b=null;}var i=e.__a&&y$2(_$3,null,n.fallback);return i&&(i.__h=null),[y$2(_$3,null,e.__a?null:n.children),i]};var W$1=function(n,t,e){if(++e[1]===e[0]&&n.o.delete(t),n.props.revealOrder&&("t"!==n.props.revealOrder[0]||!n.o.size))for(e=n.u;e;){for(;e.length>3;)e.pop()();if(e[1]<e[0])break;n.u=e=e[2];}};function P$1(n){return this.getChildContext=function(){return n.context},n.children}function j$1(n){var e=this,r=n.i;e.componentWillUnmount=function(){B$3(null,e.l),e.l=null,e.i=null;},e.i&&e.i!==r&&e.componentWillUnmount(),n.__v?(e.l||(e.i=r,e.l={nodeType:1,parentNode:r,childNodes:[],appendChild:function(n){this.childNodes.push(n),e.i.appendChild(n);},insertBefore:function(n,t){this.childNodes.push(n),e.i.appendChild(n);},removeChild:function(n){this.childNodes.splice(this.childNodes.indexOf(n)>>>1,1),e.i.removeChild(n);}}),B$3(y$2(P$1,{context:e.context},n.__v),e.l)):e.l&&e.componentWillUnmount();}function z$1(n,e){var r=y$2(j$1,{__v:n,i:e});return r.containerInfo=e,r}(V$1.prototype=new k$3).__a=function(n){var t=this,e=F$1(t.__v),r=t.o.get(n);return r[0]++,function(u){var o=function(){t.props.revealOrder?(r.push(u),W$1(t,n,r)):u();};e?e(o):o();}},V$1.prototype.render=function(n){this.u=null,this.o=new Map;var t=P$3(n.children);n.revealOrder&&"b"===n.revealOrder[0]&&t.reverse();for(var e=t.length;e--;)this.o.set(t[e],this.u=[1,0,this.u]);return n.children},V$1.prototype.componentDidUpdate=V$1.prototype.componentDidMount=function(){var n=this;this.o.forEach(function(t,e){W$1(n,e,t);});};var B$1="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,H$1=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,Z$1=/^on(Ani|Tra|Tou|BeforeInp|Compo)/,Y$1=/[A-Z0-9]/g,$$1="undefined"!=typeof document,q$1=function(n){return ("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/:/fil|che|ra/).test(n)};k$3.prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach(function(t){Object.defineProperty(k$3.prototype,t,{configurable:!0,get:function(){return this["UNSAFE_"+t]},set:function(n){Object.defineProperty(this,t,{configurable:!0,writable:!0,value:n});}});});var K$1=l$2.event;function Q$1(){}function X$1(){return this.cancelBubble}function nn(){return this.defaultPrevented}l$2.event=function(n){return K$1&&(n=K$1(n)),n.persist=Q$1,n.isPropagationStopped=X$1,n.isDefaultPrevented=nn,n.nativeEvent=n};var en={configurable:!0,get:function(){return this.class}},rn=l$2.vnode;l$2.vnode=function(n){var t=n.type,e=n.props,u=e;if("string"==typeof t){for(var o in u={},e){var i=e[o];if(!("value"===o&&"defaultValue"in e&&null==i||$$1&&"children"===o&&"noscript"===t)){var l=o.toLowerCase();"defaultValue"===o&&"value"in e&&null==e.value?o="value":"download"===o&&!0===i?i="":"ondoubleclick"===l?o="ondblclick":"onchange"!==l||"input"!==t&&"textarea"!==t||q$1(e.type)?"onfocus"===l?o="onfocusin":"onblur"===l?o="onfocusout":Z$1.test(o)?o=l:-1===t.indexOf("-")&&H$1.test(o)?o=o.replace(Y$1,"-$&").toLowerCase():null===i&&(i=void 0):l=o="oninput","oninput"===l&&u[o=l]&&(o="oninputCapture"),u[o]=i;}}"select"==t&&u.multiple&&Array.isArray(u.value)&&(u.value=P$3(e.children).forEach(function(n){n.props.selected=-1!=u.value.indexOf(n.props.value);})),"select"==t&&null!=u.defaultValue&&(u.value=P$3(e.children).forEach(function(n){n.props.selected=u.multiple?-1!=u.defaultValue.indexOf(n.props.value):u.defaultValue==n.props.value;})),n.props=u,e.class!=e.className&&(en.enumerable="className"in e,null!=e.className&&(u.class=e.className),Object.defineProperty(u,"className",en));}n.$$typeof=B$1,rn&&rn(n);};var un=l$2.__r;l$2.__r=function(n){un&&un(n),n.__c;};var on=l$2.diffed;l$2.diffed=function(n){on&&on(n);var t=n.props,e=n.__e;null!=e&&"textarea"===n.type&&"value"in t&&t.value!==e.value&&(e.value=null==t.value?"":t.value);};
+  var o$2={};function a$2(e){return e.type===_$3?"Fragment":"function"==typeof e.type?e.type.displayName||e.type.name:"string"==typeof e.type?e.type:"#text"}var i$2=[],c$2=[];function s$2(){return i$2.length>0?i$2[i$2.length-1]:null}var u$2=!1;function l$2(e){return "function"==typeof e.type&&e.type!=_$3}function f$2(n){for(var e=[n],t=n;null!=t.__o;)e.push(t.__o),t=t.__o;return e.reduce(function(n,e){n+="  in "+a$2(e);var t=e.__source;return t?n+=" (at "+t.fileName+":"+t.lineNumber+")":u$2||(u$2=!0,console.warn("Add @babel/plugin-transform-react-jsx-source to get a more detailed component stack. Note that you should not add it to production builds of your App for bundle size reasons.")),n+"\n"},"")}var p$2="function"==typeof WeakMap;function d$2(n){return n?"function"==typeof n.type?d$2(n.__):n:{}}var h$2=k$3.prototype.setState;k$3.prototype.setState=function(n,e){return null==this.__v&&null==this.state&&console.warn('Calling "this.setState" inside the constructor of a component is a no-op and might be a bug in your application. Instead, set "this.state = {}" directly.\n\n'+f$2(s$2())),h$2.call(this,n,e)};var y$2=k$3.prototype.forceUpdate;function v$2(n){var e=n.props,t=a$2(n),o="";for(var r in e)if(e.hasOwnProperty(r)&&"children"!==r){var i=e[r];"function"==typeof i&&(i="function "+(i.displayName||i.name)+"() {}"),i=Object(i)!==i||i.toString?i+"":Object.prototype.toString.call(i),o+=" "+r+"="+JSON.stringify(i);}var c=e.children;return "<"+t+o+(c&&c.length?">..</"+t+">":" />")}k$3.prototype.forceUpdate=function(n){return null==this.__v?console.warn('Calling "this.forceUpdate" inside the constructor of a component is a no-op and might be a bug in your application.\n\n'+f$2(s$2())):null==this.__P&&console.warn('Can\'t call "this.forceUpdate" on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.\n\n'+f$2(this.__v)),y$2.call(this,n)},function(){!function(){var n=l$3.__b,t=l$3.diffed,o=l$3.__,r=l$3.vnode,a=l$3.__r;l$3.diffed=function(n){l$2(n)&&c$2.pop(),i$2.pop(),t&&t(n);},l$3.__b=function(e){l$2(e)&&i$2.push(e),n&&n(e);},l$3.__=function(n,e){c$2=[],o&&o(n,e);},l$3.vnode=function(n){n.__o=c$2.length>0?c$2[c$2.length-1]:null,r&&r(n);},l$3.__r=function(n){l$2(n)&&c$2.push(n),a&&a(n);};}();var n=!1,t=l$3.__b,r=l$3.diffed,s=l$3.vnode,u=l$3.__e,h=l$3.__,y=l$3.__h,m=p$2?{useEffect:new WeakMap,useLayoutEffect:new WeakMap,lazyPropTypes:new WeakMap}:null,b=[];l$3.__e=function(n,e,t,o){if(e&&e.__c&&"function"==typeof n.then){var r=n;n=new Error("Missing Suspense. The throwing component was: "+a$2(e));for(var i=e;i;i=i.__)if(i.__c&&i.__c.__c){n=r;break}if(n instanceof Error)throw n}try{(o=o||{}).componentStack=f$2(e),u(n,e,t,o),"function"!=typeof n.then&&setTimeout(function(){throw n});}catch(n){throw n}},l$3.__=function(n,e){if(!e)throw new Error("Undefined parent passed to render(), this is the second argument.\nCheck if the element is available in the DOM/has the correct id.");var t;switch(e.nodeType){case 1:case 11:case 9:t=!0;break;default:t=!1;}if(!t){var o=a$2(n);throw new Error("Expected a valid HTML node as a second argument to render.\tReceived "+e+" instead: render(<"+o+" />, "+e+");")}h&&h(n,e);},l$3.__b=function(e){var r=e.type,i=d$2(e.__);if(n=!0,void 0===r)throw new Error("Undefined component passed to createElement()\n\nYou likely forgot to export your component or might have mixed up default and named imports"+v$2(e)+"\n\n"+f$2(e));if(null!=r&&"object"==typeof r){if(void 0!==r.__k&&void 0!==r.__e)throw new Error("Invalid type passed to createElement(): "+r+"\n\nDid you accidentally pass a JSX literal as JSX twice?\n\n  let My"+a$2(e)+" = "+v$2(r)+";\n  let vnode = <My"+a$2(e)+" />;\n\nThis usually happens when you export a JSX literal and not the component.\n\n"+f$2(e));throw new Error("Invalid type passed to createElement(): "+(Array.isArray(r)?"array":r))}if("thead"!==r&&"tfoot"!==r&&"tbody"!==r||"table"===i.type?"tr"===r&&"thead"!==i.type&&"tfoot"!==i.type&&"tbody"!==i.type&&"table"!==i.type?console.error("Improper nesting of table. Your <tr> should have a <thead/tbody/tfoot/table> parent."+v$2(e)+"\n\n"+f$2(e)):"td"===r&&"tr"!==i.type?console.error("Improper nesting of table. Your <td> should have a <tr> parent."+v$2(e)+"\n\n"+f$2(e)):"th"===r&&"tr"!==i.type&&console.error("Improper nesting of table. Your <th> should have a <tr>."+v$2(e)+"\n\n"+f$2(e)):console.error("Improper nesting of table. Your <thead/tbody/tfoot> should have a <table> parent."+v$2(e)+"\n\n"+f$2(e)),void 0!==e.ref&&"function"!=typeof e.ref&&"object"!=typeof e.ref&&!("$$typeof"in e))throw new Error('Component\'s "ref" property should be a function, or an object created by createRef(), but got ['+typeof e.ref+"] instead\n"+v$2(e)+"\n\n"+f$2(e));if("string"==typeof e.type)for(var c in e.props)if("o"===c[0]&&"n"===c[1]&&"function"!=typeof e.props[c]&&null!=e.props[c])throw new Error("Component's \""+c+'" property should be a function, but got ['+typeof e.props[c]+"] instead\n"+v$2(e)+"\n\n"+f$2(e));if("function"==typeof e.type&&e.type.propTypes){if("Lazy"===e.type.displayName&&m&&!m.lazyPropTypes.has(e.type)){var s="PropTypes are not supported on lazy(). Use propTypes on the wrapped component itself. ";try{var u=e.type();m.lazyPropTypes.set(e.type,!0),console.warn(s+"Component wrapped in lazy() is "+a$2(u));}catch(n){console.warn(s+"We will log the wrapped component's name once it is loaded.");}}var l=e.props;e.type.__f&&delete(l=function(n,e){for(var t in e)n[t]=e[t];return n}({},l)).ref,function(n,e,t,r,a){Object.keys(n).forEach(function(t){var i;try{i=n[t](e,t,r,"prop",null,"SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");}catch(n){i=n;}i&&!(i.message in o$2)&&(o$2[i.message]=!0,console.error("Failed prop type: "+i.message+(a&&"\n"+a()||"")));});}(e.type.propTypes,l,0,a$2(e),function(){return f$2(e)});}t&&t(e);},l$3.__h=function(e,t,o){if(!e||!n)throw new Error("Hook can only be invoked from render methods.");y&&y(e,t,o);};var w=function(n,e){return {get:function(){var t="get"+n+e;b&&b.indexOf(t)<0&&(b.push(t),console.warn("getting vnode."+n+" is deprecated, "+e));},set:function(){var t="set"+n+e;b&&b.indexOf(t)<0&&(b.push(t),console.warn("setting vnode."+n+" is not allowed, "+e));}}},g={nodeName:w("nodeName","use vnode.type"),attributes:w("attributes","use vnode.props"),children:w("children","use vnode.props.children")},E=Object.create({},g);l$3.vnode=function(n){var e=n.props;if(null!==n.type&&null!=e&&("__source"in e||"__self"in e)){var t=n.props={};for(var o in e){var r=e[o];"__source"===o?n.__source=r:"__self"===o?n.__self=r:t[o]=r;}}n.__proto__=E,s&&s(n);},l$3.diffed=function(e){if(e.__k&&e.__k.forEach(function(n){if("object"==typeof n&&n&&void 0===n.type){var t=Object.keys(n).join(",");throw new Error("Objects are not valid as a child. Encountered an object with the keys {"+t+"}.\n\n"+f$2(e))}}),n=!1,r&&r(e),null!=e.__k)for(var t=[],o=0;o<e.__k.length;o++){var a=e.__k[o];if(a&&null!=a.key){var i=a.key;if(-1!==t.indexOf(i)){console.error('Following component has two or more children with the same key attribute: "'+i+'". This may cause glitches and misbehavior in rendering process. Component: \n\n'+v$2(e)+"\n\n"+f$2(e));break}t.push(i);}}};}();
+
+  var t$1,r$2,u$1,i$1,o$1=0,f$1=[],c$1=[],e=l$3.__b,a$1=l$3.__r,v$1=l$3.diffed,l$1=l$3.__c,m$1=l$3.unmount;function d$1(t,u){l$3.__h&&l$3.__h(r$2,t,o$1||u),o$1=0;var i=r$2.__H||(r$2.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({__V:c$1}),i.__[t]}function h$1(n){return o$1=1,s$1(B$2,n)}function s$1(n,u,i){var o=d$1(t$1++,2);if(o.t=n,!o.__c&&(o.__=[i?i(u):B$2(void 0,u),function(n){var t=o.__N?o.__N[0]:o.__[0],r=o.t(t,n);t!==r&&(o.__N=[r,o.__[1]],o.__c.setState({}));}],o.__c=r$2,!r$2.u)){var f=function(n,t,r){if(!o.__c.__H)return !0;var u=o.__c.__H.__.filter(function(n){return n.__c});if(u.every(function(n){return !n.__N}))return !c||c.call(this,n,t,r);var i=!1;return u.forEach(function(n){if(n.__N){var t=n.__[0];n.__=n.__N,n.__N=void 0,t!==n.__[0]&&(i=!0);}}),!(!i&&o.__c.props===n)&&(!c||c.call(this,n,t,r))};r$2.u=!0;var c=r$2.shouldComponentUpdate,e=r$2.componentWillUpdate;r$2.componentWillUpdate=function(n,t,r){if(this.__e){var u=c;c=void 0,f(n,t,r),c=u;}e&&e.call(this,n,t,r);},r$2.shouldComponentUpdate=f;}return o.__N||o.__}function p$1(u,i){var o=d$1(t$1++,3);!l$3.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$2.__H.__h.push(o));}function y$1(u,i){var o=d$1(t$1++,4);!l$3.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$2.__h.push(o));}function _$1(n){return o$1=5,F$2(function(){return {current:n}},[])}function A$1(n,t,r){o$1=6,y$1(function(){return "function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==r?r:r.concat(n));}function F$2(n,r){var u=d$1(t$1++,7);return z$2(u.__H,r)?(u.__V=n(),u.i=r,u.__h=n,u.__V):u.__}function T$2(n,t){return o$1=8,F$2(function(){return n},t)}function q$2(n){var u=r$2.context[n.__c],i=d$1(t$1++,9);return i.c=n,u?(null==i.__&&(i.__=!0,u.sub(r$2)),u.props.value):n.__}function P$2(n){var u=d$1(t$1++,10),i=h$1();return u.__=n,r$2.componentDidCatch||(r$2.componentDidCatch=function(n,t){u.__&&u.__(n,t),i[1](n);}),[i[0],function(){i[1](void 0);}]}function V$2(){var n=d$1(t$1++,11);if(!n.__){for(var u=r$2.__v;null!==u&&!u.__m&&null!==u.__;)u=u.__;var i=u.__m||(u.__m=[0,0]);n.__="P"+i[0]+"-"+i[1]++;}return n.__}function b$1(){for(var t;t=f$1.shift();)if(t.__P&&t.__H)try{t.__H.__h.forEach(k$2),t.__H.__h.forEach(w$2),t.__H.__h=[];}catch(r){t.__H.__h=[],l$3.__e(r,t.__v);}}l$3.__b=function(n){r$2=null,e&&e(n);},l$3.__r=function(n){a$1&&a$1(n),t$1=0;var i=(r$2=n.__c).__H;i&&(u$1===r$2?(i.__h=[],r$2.__h=[],i.__.forEach(function(n){n.__N&&(n.__=n.__N),n.__V=c$1,n.__N=n.i=void 0;})):(i.__h.forEach(k$2),i.__h.forEach(w$2),i.__h=[])),u$1=r$2;},l$3.diffed=function(t){v$1&&v$1(t);var o=t.__c;o&&o.__H&&(o.__H.__h.length&&(1!==f$1.push(o)&&i$1===l$3.requestAnimationFrame||((i$1=l$3.requestAnimationFrame)||j$2)(b$1)),o.__H.__.forEach(function(n){n.i&&(n.__H=n.i),n.__V!==c$1&&(n.__=n.__V),n.i=void 0,n.__V=c$1;})),u$1=r$2=null;},l$3.__c=function(t,r){r.some(function(t){try{t.__h.forEach(k$2),t.__h=t.__h.filter(function(n){return !n.__||w$2(n)});}catch(u){r.some(function(n){n.__h&&(n.__h=[]);}),r=[],l$3.__e(u,t.__v);}}),l$1&&l$1(t,r);},l$3.unmount=function(t){m$1&&m$1(t);var r,u=t.__c;u&&u.__H&&(u.__H.__.forEach(function(n){try{k$2(n);}catch(n){r=n;}}),u.__H=void 0,r&&l$3.__e(r,u.__v));};var g$2="function"==typeof requestAnimationFrame;function j$2(n){var t,r=function(){clearTimeout(u),g$2&&cancelAnimationFrame(t),setTimeout(n);},u=setTimeout(r,100);g$2&&(t=requestAnimationFrame(r));}function k$2(n){var t=r$2,u=n.__c;"function"==typeof u&&(n.__c=void 0,u()),r$2=t;}function w$2(n){var t=r$2;n.__c=n.__(),r$2=t;}function z$2(n,t){return !n||n.length!==t.length||t.some(function(t,r){return t!==n[r]})}function B$2(n,t){return "function"==typeof t?t(n):t}
+
+  function g$1(n,t){for(var e in t)n[e]=t[e];return n}function C$1(n,t){for(var e in n)if("__source"!==e&&!(e in t))return !0;for(var r in t)if("__source"!==r&&n[r]!==t[r])return !0;return !1}function w$1(n){this.props=n;}function x$1(n,e){function r(n){var t=this.props.ref,r=t==n.ref;return !r&&t&&(t.call?t(null):t.current=null),e?!e(this.props,n)||!r:C$1(this.props,n)}function u(e){return this.shouldComponentUpdate=r,y$3(n,e)}return u.displayName="Memo("+(n.displayName||n.name)+")",u.prototype.isReactComponent=!0,u.__f=!0,u}(w$1.prototype=new k$3).isPureReactComponent=!0,w$1.prototype.shouldComponentUpdate=function(n,t){return C$1(this.props,n)||C$1(this.state,t)};var R$1=l$3.__b;l$3.__b=function(n){n.type&&n.type.__f&&n.ref&&(n.props.ref=n.ref,n.ref=null),R$1&&R$1(n);};var N$1="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function k$1(n){function t(t){var e=g$1({},t);return delete e.ref,n(e,t.ref||null)}return t.$$typeof=N$1,t.render=t,t.prototype.isReactComponent=t.__f=!0,t.displayName="ForwardRef("+(n.displayName||n.name)+")",t}var T$1=l$3.__e;l$3.__e=function(n,t,e,r){if(n.then)for(var u,o=t;o=o.__;)if((u=o.__c)&&u.__c)return null==t.__e&&(t.__e=e.__e,t.__k=e.__k),u.__c(n,t);T$1(n,t,e,r);};var I$1=l$3.unmount;function L$2(n,t,e){return n&&(n.__c&&n.__c.__H&&(n.__c.__H.__.forEach(function(n){"function"==typeof n.__c&&n.__c();}),n.__c.__H=null),null!=(n=g$1({},n)).__c&&(n.__c.__P===e&&(n.__c.__P=t),n.__c=null),n.__k=n.__k&&n.__k.map(function(n){return L$2(n,t,e)})),n}function U$1(n,t,e){return n&&(n.__v=null,n.__k=n.__k&&n.__k.map(function(n){return U$1(n,t,e)}),n.__c&&n.__c.__P===t&&(n.__e&&e.insertBefore(n.__e,n.__d),n.__c.__e=!0,n.__c.__P=e)),n}function D$1(){this.__u=0,this.t=null,this.__b=null;}function F$1(n){var t=n.__.__c;return t&&t.__a&&t.__a(n)}function V$1(){this.u=null,this.o=null;}l$3.unmount=function(n){var t=n.__c;t&&t.__R&&t.__R(),t&&!0===n.__h&&(n.type=null),I$1&&I$1(n);},(D$1.prototype=new k$3).__c=function(n,t){var e=t.__c,r=this;null==r.t&&(r.t=[]),r.t.push(e);var u=F$1(r.__v),o=!1,i=function(){o||(o=!0,e.__R=null,u?u(l):l());};e.__R=i;var l=function(){if(!--r.__u){if(r.state.__a){var n=r.state.__a;r.__v.__k[0]=U$1(n,n.__c.__P,n.__c.__O);}var t;for(r.setState({__a:r.__b=null});t=r.t.pop();)t.forceUpdate();}},c=!0===t.__h;r.__u++||c||r.setState({__a:r.__b=r.__v.__k[0]}),n.then(i,i);},D$1.prototype.componentWillUnmount=function(){this.t=[];},D$1.prototype.render=function(n,e){if(this.__b){if(this.__v.__k){var r=document.createElement("div"),o=this.__v.__k[0].__c;this.__v.__k[0]=L$2(this.__b,r,o.__O=o.__P);}this.__b=null;}var i=e.__a&&y$3(_$3,null,n.fallback);return i&&(i.__h=null),[y$3(_$3,null,e.__a?null:n.children),i]};var W$1=function(n,t,e){if(++e[1]===e[0]&&n.o.delete(t),n.props.revealOrder&&("t"!==n.props.revealOrder[0]||!n.o.size))for(e=n.u;e;){for(;e.length>3;)e.pop()();if(e[1]<e[0])break;n.u=e=e[2];}};function P$1(n){return this.getChildContext=function(){return n.context},n.children}function j$1(n){var e=this,r=n.i;e.componentWillUnmount=function(){B$3(null,e.l),e.l=null,e.i=null;},e.i&&e.i!==r&&e.componentWillUnmount(),n.__v?(e.l||(e.i=r,e.l={nodeType:1,parentNode:r,childNodes:[],appendChild:function(n){this.childNodes.push(n),e.i.appendChild(n);},insertBefore:function(n,t){this.childNodes.push(n),e.i.appendChild(n);},removeChild:function(n){this.childNodes.splice(this.childNodes.indexOf(n)>>>1,1),e.i.removeChild(n);}}),B$3(y$3(P$1,{context:e.context},n.__v),e.l)):e.l&&e.componentWillUnmount();}function z$1(n,e){var r=y$3(j$1,{__v:n,i:e});return r.containerInfo=e,r}(V$1.prototype=new k$3).__a=function(n){var t=this,e=F$1(t.__v),r=t.o.get(n);return r[0]++,function(u){var o=function(){t.props.revealOrder?(r.push(u),W$1(t,n,r)):u();};e?e(o):o();}},V$1.prototype.render=function(n){this.u=null,this.o=new Map;var t=P$3(n.children);n.revealOrder&&"b"===n.revealOrder[0]&&t.reverse();for(var e=t.length;e--;)this.o.set(t[e],this.u=[1,0,this.u]);return n.children},V$1.prototype.componentDidUpdate=V$1.prototype.componentDidMount=function(){var n=this;this.o.forEach(function(t,e){W$1(n,e,t);});};var B$1="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,H$1=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,Z$1=/^on(Ani|Tra|Tou|BeforeInp|Compo)/,Y$1=/[A-Z0-9]/g,$$1="undefined"!=typeof document,q$1=function(n){return ("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/:/fil|che|ra/).test(n)};k$3.prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach(function(t){Object.defineProperty(k$3.prototype,t,{configurable:!0,get:function(){return this["UNSAFE_"+t]},set:function(n){Object.defineProperty(this,t,{configurable:!0,writable:!0,value:n});}});});var K$1=l$3.event;function Q$1(){}function X$1(){return this.cancelBubble}function nn(){return this.defaultPrevented}l$3.event=function(n){return K$1&&(n=K$1(n)),n.persist=Q$1,n.isPropagationStopped=X$1,n.isDefaultPrevented=nn,n.nativeEvent=n};var en={configurable:!0,get:function(){return this.class}},rn=l$3.vnode;l$3.vnode=function(n){var t=n.type,e=n.props,u=e;if("string"==typeof t){for(var o in u={},e){var i=e[o];if(!("value"===o&&"defaultValue"in e&&null==i||$$1&&"children"===o&&"noscript"===t)){var l=o.toLowerCase();"defaultValue"===o&&"value"in e&&null==e.value?o="value":"download"===o&&!0===i?i="":"ondoubleclick"===l?o="ondblclick":"onchange"!==l||"input"!==t&&"textarea"!==t||q$1(e.type)?"onfocus"===l?o="onfocusin":"onblur"===l?o="onfocusout":Z$1.test(o)?o=l:-1===t.indexOf("-")&&H$1.test(o)?o=o.replace(Y$1,"-$&").toLowerCase():null===i&&(i=void 0):l=o="oninput","oninput"===l&&u[o=l]&&(o="oninputCapture"),u[o]=i;}}"select"==t&&u.multiple&&Array.isArray(u.value)&&(u.value=P$3(e.children).forEach(function(n){n.props.selected=-1!=u.value.indexOf(n.props.value);})),"select"==t&&null!=u.defaultValue&&(u.value=P$3(e.children).forEach(function(n){n.props.selected=u.multiple?-1!=u.defaultValue.indexOf(n.props.value):u.defaultValue==n.props.value;})),n.props=u,e.class!=e.className&&(en.enumerable="className"in e,null!=e.className&&(u.class=e.className),Object.defineProperty(u,"className",en));}n.$$typeof=B$1,rn&&rn(n);};var un=l$3.__r;l$3.__r=function(n){un&&un(n),n.__c;};var on=l$3.diffed;l$3.diffed=function(n){on&&on(n);var t=n.props,e=n.__e;null!=e&&"textarea"===n.type&&"value"in t&&t.value!==e.value&&(e.value=null==t.value?"":t.value);};
 
   function r$1(e) {
     var t,
@@ -1788,18 +1792,49 @@
   function callCountU(hook) {
     const name = hook.name;
     if (filters.has(name)) return;
+    console.assert(name.length > 0);
     window._hookCallCount ??= {
-      callCountsMoment: {},
-      callCountsTotal: {}
+      callCounts: {}
     };
-    window._hookCallCount.callCountsMoment[name] ??= 0;
-    window._hookCallCount.callCountsTotal[name] ??= 0;
-    window._hookCallCount.callCountsMoment[name] += 1;
-    window._hookCallCount.callCountsTotal[name] += 1;
+    window._hookCallCount.callCounts[name] ??= {
+      moment: 0,
+      total: 0
+    };
+    window._hookCallCount.callCounts[name].moment += 1;
+    window._hookCallCount.callCounts[name].total += 1;
     if (timeoutHandle == null) {
       timeoutHandle = requestIdleCallback(() => {
-        console.log(window._hookCallCount.callCountsMoment);
-        window._hookCallCount.callCountsMoment = {};
+        //console.log((window as WindowWithHookCallCount)._hookCallCount.callCountsMoment);
+        //(window as WindowWithHookCallCount)._hookCallCount.callCountsMoment = {};
+        const o = Object.entries(window._hookCallCount.callCounts).map(_ref => {
+          let [hook, counts] = _ref;
+          return {
+            Hook: hook || "?",
+            Now: counts?.moment || 0,
+            Total: counts?.total || 0
+          };
+        }).filter(_ref2 => {
+          let {
+            Now
+          } = _ref2;
+          return !!Now;
+        }).sort((_ref3, _ref4) => {
+          let {
+            Now: lhsM
+          } = _ref3;
+          let {
+            Now: rhsM
+          } = _ref4;
+          if (!lhsM && !rhsM) return 0;
+          lhsM ||= Infinity;
+          rhsM ||= Infinity;
+          return lhsM - rhsM;
+        });
+        console.table(o, ['Hook', 'Now', 'Total']);
+        Object.entries(window._hookCallCount.callCounts).forEach(_ref5 => {
+          let [, counts] = _ref5;
+          counts.moment = 0;
+        });
         timeoutHandle = null;
       });
     }
@@ -1840,7 +1875,7 @@
   }
   function debounceRendering(f) {
     var _options$debounceRend;
-    ((_options$debounceRend = l$2.debounceRendering) !== null && _options$debounceRend !== void 0 ? _options$debounceRend : queueMicrotask)(f);
+    ((_options$debounceRend = l$3.debounceRendering) !== null && _options$debounceRend !== void 0 ? _options$debounceRend : queueMicrotask)(f);
   }
   /**
    * Similar to `useState`, but for values that aren't "render-important" &ndash; updates don't cause a re-render and so the value shouldn't be used during render (though it certainly can, at least by re-rendering again).
@@ -1969,6 +2004,41 @@
     f();
   }
 
+  function useMergedChildren(lhs, rhs) {
+    monitorCallCount(useMergedChildren);
+    if (lhs == null && rhs == null) {
+      return undefined;
+    } else if (lhs == null) {
+      return rhs;
+    } else if (rhs == null) {
+      return lhs;
+    } else {
+      return y$3(_$3, {}, lhs, rhs);
+    }
+  }
+
+  /**
+   * Given two sets of props, merges their `class` and `className` properties.
+   * Duplicate classes are removed (order doesn't matter anyway).
+   *
+   * @param lhs Classes of the first component
+   * @param rhs Classes of the second component
+   * @returns A string representing all combined classes from both arguments.
+   */
+  function useMergedClasses(lhsClass, lhsClassName, rhsClass, rhsClassName) {
+    monitorCallCount(useMergedClasses);
+    // Note: For the sake of forward compatibility, this function is labelled as
+    // a hook, but as it uses no other hooks it technically isn't one.
+    if (lhsClass || rhsClass || lhsClassName || rhsClassName) {
+      const lhsClasses = clsx(lhsClass, lhsClassName).split(" ");
+      const rhsClasses = clsx(rhsClass, rhsClassName).split(" ");
+      const allClasses = new Set([...Array.from(lhsClasses), ...Array.from(rhsClasses)]);
+      return Array.from(allClasses).join(" ");
+    } else {
+      return undefined;
+    }
+  }
+
   const Table$2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-";
   function base64(value) {
     return Table$2[value];
@@ -2008,7 +2078,7 @@
   // So for now we'll stick with diff to prevent any weirdness with
   // commit being private and all.
   const commitName = "diffed";
-  const originalCommit = l$2[commitName];
+  const originalCommit = l$3[commitName];
   const newCommit = function () {
     for (const [id, effectInfo] of toRun) {
       const oldInputs = previousInputs.get(id);
@@ -2024,7 +2094,7 @@
     }
     originalCommit?.(...args);
   };
-  l$2[commitName] = newCommit;
+  l$3[commitName] = newCommit;
   /**
    * Semi-private function to allow stable callbacks even within `useLayoutEffect` and ref assignment.
    *
@@ -2128,41 +2198,6 @@
     } else {
       console.assert(noDeps.length === 0);
       return setIsStableGetter(T$2(fn, []));
-    }
-  }
-
-  function useMergedChildren(lhs, rhs) {
-    monitorCallCount(useMergedChildren);
-    if (lhs == null && rhs == null) {
-      return undefined;
-    } else if (lhs == null) {
-      return rhs;
-    } else if (rhs == null) {
-      return lhs;
-    } else {
-      return y$2(_$3, {}, lhs, rhs);
-    }
-  }
-
-  /**
-   * Given two sets of props, merges their `class` and `className` properties.
-   * Duplicate classes are removed (order doesn't matter anyway).
-   *
-   * @param lhs Classes of the first component
-   * @param rhs Classes of the second component
-   * @returns A string representing all combined classes from both arguments.
-   */
-  function useMergedClasses(lhsClass, lhsClassName, rhsClass, rhsClassName) {
-    monitorCallCount(useMergedClasses);
-    // Note: For the sake of forward compatibility, this function is labelled as
-    // a hook, but as it uses no other hooks it technically isn't one.
-    if (lhsClass || rhsClass || lhsClassName || rhsClassName) {
-      const lhsClasses = clsx(lhsClass, lhsClassName).split(" ");
-      const rhsClasses = clsx(rhsClass, rhsClassName).split(" ");
-      const allClasses = new Set([...Array.from(lhsClasses), ...Array.from(rhsClasses)]);
-      return Array.from(allClasses).join(" ");
-    } else {
-      return undefined;
     }
   }
 
@@ -2324,6 +2359,2224 @@
       const lv = lhs(...arguments);
       const rv = rhs(...arguments);
       if (lv instanceof Promise || rv instanceof Promise) return Promise.all([lv, rv]);
+    };
+  }
+
+  /**
+   * When used in tandem with `useRovingTabIndex`, allows control of
+   * the tabbable index with the arrow keys.
+   *
+   * @see useListNavigation, which packages everything up together.
+   */
+  function useLinearNavigation(_ref) {
+    let {
+      rovingTabIndexReturn,
+      linearNavigationParameters
+    } = _ref;
+    monitorCallCount(useLinearNavigation);
+    const {
+      getHighestIndex,
+      indexDemangler,
+      indexMangler,
+      isValid,
+      navigatePastEnd,
+      navigatePastStart
+    } = linearNavigationParameters;
+    const {
+      getTabbableIndex,
+      setTabbableIndex
+    } = rovingTabIndexReturn;
+    const navigateAbsolute = T$2((requestedIndexMangled, searchDirection, e, fromUserInteraction, mode) => {
+      var _getTabbableIndex;
+      //const targetUnmangled = indexDemangler(requestedIndexMangled);
+      //const { valueUnmangled } = tryNavigateToIndex({ isValid, highestChildIndex: getHighestIndex(), indexDemangler, indexMangler, searchDirection: -1, targetUnmangled });
+      //setTabbableIndex(valueUnmangled, e, fromUserInteraction);
+      const highestChildIndex = getHighestIndex();
+      (_getTabbableIndex = getTabbableIndex()) !== null && _getTabbableIndex !== void 0 ? _getTabbableIndex : 0;
+      const targetUnmangled = indexDemangler(requestedIndexMangled);
+      const {
+        status,
+        valueUnmangled
+      } = tryNavigateToIndex({
+        isValid,
+        highestChildIndex,
+        indexDemangler,
+        indexMangler,
+        searchDirection,
+        targetUnmangled
+      });
+      if (status == "past-end") {
+        if (navigatePastEnd == "wrap") {
+          if (mode == "single") navigateToFirst(e, fromUserInteraction);else {
+            /* eslint-disable no-constant-condition */
+            // Uncomment to allow page up/down to wrap after hitting the top/bottom once.
+            // It works fine, the problem isn't that -- the problem is it just feels wrong. 
+            // Page Up/Down don't feel like they should wrap, even if normally requested. 
+            // That's the arrow keys' domain.
+            navigateToLast(e, fromUserInteraction);
+          }
+          return "stop";
+        } else if (navigatePastEnd == "passthrough") {
+          return "passthrough";
+        } else {
+          navigatePastEnd();
+          return "stop";
+        }
+      } else if (status == "past-start") {
+        if (navigatePastStart == "wrap") {
+          if (mode == "single") {
+            navigateToLast(e, fromUserInteraction);
+          } else {
+            /* eslint-disable no-constant-condition */
+            // See above. It works fine but just feels wrong to wrap on Page Up/Down.
+            navigateToFirst(e, fromUserInteraction);
+          }
+          return "stop";
+        } else if (navigatePastStart == "passthrough") {
+          return "passthrough";
+        } else {
+          navigatePastStart();
+          return "stop";
+        }
+      } else {
+        setTabbableIndex(valueUnmangled, e, fromUserInteraction);
+        return "stop";
+      }
+    }, []);
+    const navigateToFirst = useStableCallback((e, fromUserInteraction) => {
+      return navigateAbsolute(0, -1, e, fromUserInteraction, "single");
+    });
+    const navigateToLast = useStableCallback((e, fromUserInteraction) => {
+      return navigateAbsolute(getHighestIndex(), 1, e, fromUserInteraction, "single");
+    });
+    const navigateRelative2 = useStableCallback((e, offset, fromUserInteraction, mode) => {
+      var _getTabbableIndex2;
+      getHighestIndex();
+      const searchDirection = Math.sign(offset) || 1;
+      const original = (_getTabbableIndex2 = getTabbableIndex()) !== null && _getTabbableIndex2 !== void 0 ? _getTabbableIndex2 : 0;
+      /**
+       * To get the target, we need to add (or subtract) 1 to our current value,
+       * but it need to be relative to any sorting/rearranging that's happened.
+       *
+       * We mangle the index to get its "visual" position, add our offset,
+       * and then demangle it to get the child that corresponds to the next child "visually".
+       */
+      const targetMangled = indexMangler(original) + offset;
+      return navigateAbsolute(targetMangled, searchDirection, e, fromUserInteraction, mode);
+    });
+    const navigateToNext = useStableCallback((e, fromUserInteraction) => {
+      return navigateRelative2(e, 1, fromUserInteraction, "single");
+    });
+    const navigateToPrev = useStableCallback((e, fromUserInteraction) => {
+      return navigateRelative2(e, -1, fromUserInteraction, "single");
+    });
+    const getDisableHomeEndKeys = useStableGetter(linearNavigationParameters.disableHomeEndKeys);
+    const getArrowKeyDirection = useStableGetter(linearNavigationParameters.arrowKeyDirection);
+    const getPageNavigationSize = useStableGetter(linearNavigationParameters.pageNavigationSize);
+    const stableProps = _$1({
+      onKeyDown: e => {
+        // Not handled by typeahead (i.e. assume this is a keyboard shortcut)
+        if (e.ctrlKey || e.metaKey) return;
+        //const info = getLogicalDirectionInfo();
+        const arrowKeyDirection = getArrowKeyDirection();
+        const disableHomeEndKeys = getDisableHomeEndKeys();
+        const pageNavigationSize = getPageNavigationSize();
+        const allowsVerticalNavigation = arrowKeyDirection == "vertical" || arrowKeyDirection == "either";
+        const allowsHorizontalNavigation = arrowKeyDirection == "horizontal" || arrowKeyDirection == "either";
+        let truePageNavigationSize = pageNavigationSize;
+        if (truePageNavigationSize < 1) {
+          truePageNavigationSize = Math.round(pageNavigationSize * Math.max(100, getHighestIndex() + 1));
+        }
+        let result = "passthrough";
+        // Arrow keys only take effect for components oriented in that direction,
+        // so we want to make sure we only listen for left/right or up/down when appropriate.
+        let keyPressIsValidForOrientation = true;
+        switch (e.key) {
+          case "ArrowUp":
+          case "ArrowDown":
+            keyPressIsValidForOrientation = allowsVerticalNavigation;
+            break;
+          case "ArrowLeft":
+          case "ArrowRight":
+            keyPressIsValidForOrientation = allowsHorizontalNavigation;
+            break;
+        }
+        if (keyPressIsValidForOrientation) {
+          switch (e.key) {
+            case "ArrowUp":
+            case "ArrowLeft":
+              result = navigateToPrev(e, true);
+              break;
+            case "ArrowDown":
+            case "ArrowRight":
+              result = navigateToNext(e, true);
+              break;
+            case "PageUp":
+            case "PageDown":
+              if (truePageNavigationSize > 0) {
+                result = navigateRelative2(e, truePageNavigationSize * (e.key.endsWith('n') ? -1 : 1), true, "page");
+              }
+              break;
+            case "Home":
+            case "End":
+              if (!disableHomeEndKeys) {
+                if (e.key.endsWith('e')) navigateToFirst(e, true);else navigateToLast(e, true);
+                result = 'stop';
+              }
+              break;
+          }
+        }
+        if (result && result != 'passthrough') {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }
+    });
+    return {
+      linearNavigationReturn: {},
+      propsStable: stableProps.current
+    };
+  }
+  function tryNavigateToIndex(_ref2) {
+    let {
+      isValid,
+      highestChildIndex,
+      searchDirection,
+      indexDemangler,
+      indexMangler,
+      targetUnmangled
+    } = _ref2;
+    if (searchDirection === -1) {
+      let bestUpResult = undefined;
+      bestUpResult = tryNavigateUp({
+        isValid,
+        indexDemangler,
+        indexMangler,
+        targetUnmangled
+      });
+      bestUpResult ??= tryNavigateDown({
+        isValid,
+        indexDemangler,
+        indexMangler,
+        targetUnmangled,
+        highestChildIndex
+      });
+      return bestUpResult || {
+        valueUnmangled: targetUnmangled,
+        status: "normal"
+      };
+    } else {
+      let bestDownResult = undefined;
+      bestDownResult = tryNavigateDown({
+        isValid,
+        indexDemangler,
+        indexMangler,
+        targetUnmangled,
+        highestChildIndex
+      });
+      bestDownResult ??= tryNavigateUp({
+        isValid,
+        indexDemangler,
+        indexMangler,
+        targetUnmangled
+      });
+      return bestDownResult || {
+        valueUnmangled: targetUnmangled,
+        status: "normal"
+      };
+    }
+  }
+  function tryNavigateUp(_ref3) {
+    let {
+      isValid,
+      indexDemangler,
+      indexMangler,
+      targetUnmangled
+    } = _ref3;
+    const lower = 0;
+    while (targetUnmangled >= lower && !isValid(targetUnmangled)) {
+      targetUnmangled = indexDemangler(indexMangler(targetUnmangled) - 1);
+    }
+    if (!isValid(targetUnmangled)) {
+      return undefined;
+    }
+    if (targetUnmangled < lower) {
+      return {
+        valueUnmangled: indexDemangler(lower),
+        status: "past-start"
+      };
+    } else {
+      return {
+        valueUnmangled: targetUnmangled,
+        status: "normal"
+      };
+    }
+  }
+  function tryNavigateDown(_ref4) {
+    let {
+      isValid,
+      indexDemangler,
+      indexMangler,
+      targetUnmangled,
+      highestChildIndex: upper
+    } = _ref4;
+    while (targetUnmangled <= upper && !isValid(targetUnmangled)) {
+      targetUnmangled = indexDemangler(indexMangler(targetUnmangled) + 1);
+    }
+    if (!isValid(targetUnmangled)) {
+      return undefined;
+    }
+    if (targetUnmangled > upper) {
+      return {
+        valueUnmangled: indexDemangler(upper),
+        status: "past-end"
+      };
+    } else {
+      return {
+        valueUnmangled: targetUnmangled,
+        status: "normal"
+      };
+    }
+  }
+
+  /**
+   * Allows a parent component to access information about certain
+   * child components once they have rendered.
+   *
+   * This hook is designed to be lightweight, in that the parent keeps no state
+   * and runs no effects.  Each child *does* run an effect, but with no state
+   * changes unless you explicitly request them.
+   *
+   *
+   */
+  function useManagedChildren(parentParameters) {
+    monitorCallCount(useManagedChildren);
+    const {
+      managedChildrenParameters: {
+        onAfterChildLayoutEffect,
+        onChildrenMountChange,
+        onChildrenCountChange
+      },
+      ...rest
+    } = parentParameters;
+    useEnsureStability("useManagedChildren", onAfterChildLayoutEffect, onChildrenMountChange, onChildrenCountChange);
+    //const [getMountCount, setMountCount] = usePassiveState(onChildrenCountChange, returnZero, runImmediately);
+    const getHighestIndex = T$2(() => {
+      return managedChildrenArray.current.highestIndex;
+    }, []);
+    // All the information we have about our children is stored in this **stable** array.
+    // Any mutations to this array **DO NOT** trigger any sort of a re-render.
+    const managedChildrenArray = _$1({
+      arr: [],
+      rec: {},
+      highestIndex: 0,
+      lowestIndex: 0
+    });
+    // For indirect access to each child
+    // Compare getManagedChildInfo
+    // TODO: The primary use for this is flaggable closest fits
+    // which needs to search all children for that closest fit.
+    // It would be nice if there was something better for that.
+    const forEachChild = T$2(f => {
+      for (const child of managedChildrenArray.current.arr) {
+        if (child) {
+          if (f(child) == 'break') return;
+        }
+      }
+      for (const field in managedChildrenArray.current.rec) {
+        const child = managedChildrenArray.current.rec[field];
+        if (child) if (f(child) == 'break') return;
+      }
+    }, []);
+    // Retrieves the information associated with the child with the given index.
+    // `undefined` if not child there, or it's unmounted.
+    const getManagedChildInfo = T$2(index => {
+      if (typeof index == "number") return managedChildrenArray.current.arr[index];else return managedChildrenArray.current.rec[index];
+    }, []);
+    // tl;dr this is a way to have run useLayoutEffect once after all N children
+    // have mounted and run *their* useLayoutEffect, but also *without* re-rendering
+    // ourselves because of having a `childCount` state or anything similar.
+    //
+    // When the child count ref updates, we want the parent to also run an effect
+    // to maybe do something with all these children that just mounted.
+    // The easiest way would be useEffect(..., [childCount]) but
+    // that would require us having a childCount state, then calling
+    // setChildCount and re-rendering every time children mount
+    // (only one re-render at a time unless children are staggered, but still)
+    // 
+    // As an alternate solution, any time a child uses ULE on mount, it queues a microtask
+    // to emulate running ULE on the parent. Only the first child will actually queue
+    // the microtask (by checking hasRemoteULE first) so that the "effect" only
+    // runs once. When it's done, hasRemoteULE is reset so it can run again if
+    // more children mount/unmount.
+    const hasRemoteULEChildMounted = _$1(null);
+    const remoteULEChildChangedCausers = _$1(new Set());
+    const remoteULEChildChanged = T$2(index => {
+      if (remoteULEChildChangedCausers.current.size == 0) {
+        if (onAfterChildLayoutEffect != null) {
+          debounceRendering(() => {
+            onAfterChildLayoutEffect?.(remoteULEChildChangedCausers.current);
+            remoteULEChildChangedCausers.current.clear();
+          });
+        }
+      }
+      remoteULEChildChangedCausers.current.add(index);
+      return () => {};
+    }, [/* Must remain stable */]);
+    const remoteULEChildMounted = T$2((index, mounted) => {
+      if (!hasRemoteULEChildMounted.current) {
+        hasRemoteULEChildMounted.current = {
+          mounts: new Set(),
+          unmounts: new Set()
+        };
+        if (onChildrenCountChange || onChildrenMountChange) {
+          debounceRendering(() => {
+            onChildrenMountChange?.(hasRemoteULEChildMounted.current.mounts, hasRemoteULEChildMounted.current.unmounts);
+            onChildrenCountChange?.(getChildren().getHighestIndex() + 1);
+            hasRemoteULEChildMounted.current = null;
+          });
+        }
+      }
+      if (mounted) {
+        if (typeof index == "number") managedChildrenArray.current.highestIndex = Math.max(managedChildrenArray.current.highestIndex, index);
+      } else {
+        if (typeof index == "number") {
+          delete managedChildrenArray.current.arr[index];
+          let shave = 0;
+          while (shave <= managedChildrenArray.current.arr.length && managedChildrenArray.current.arr[managedChildrenArray.current.arr.length - 1 - shave] === undefined) {
+            ++shave;
+          }
+          managedChildrenArray.current.arr.splice(managedChildrenArray.current.arr.length - shave, shave);
+        } else delete managedChildrenArray.current.rec[index];
+        if (typeof index == "number") managedChildrenArray.current.highestIndex = managedChildrenArray.current.arr.length - 1;
+      }
+      hasRemoteULEChildMounted.current[mounted ? "mounts" : "unmounts"].add(index);
+    }, [/* Must remain stable */]);
+    const managedChildren = useStableObject({
+      ...{
+        _: managedChildrenArray.current
+      },
+      forEach: forEachChild,
+      getAt: getManagedChildInfo,
+      getHighestIndex: getHighestIndex,
+      arraySlice: T$2(() => {
+        let ret = managedChildrenArray.current.arr.slice();
+        const max = getHighestIndex();
+        for (let i = 0; i <= max; ++i) {
+          if (ret[i] == null) ret[i] = {
+            index: i
+          };
+        }
+        return ret;
+      }, [])
+    });
+    const getChildren = T$2(() => managedChildren, []);
+    return {
+      context: useStableObject({
+        managedChildContext: useStableObject({
+          managedChildrenArray: managedChildrenArray.current,
+          remoteULEChildMounted,
+          remoteULEChildChanged,
+          getChildren
+        })
+      }),
+      managedChildrenReturn: {
+        getChildren
+      }
+    };
+  }
+  function useManagedChild(_ref) {
+    let {
+      context,
+      info
+    } = _ref;
+    monitorCallCount(useManagedChild);
+    const {
+      managedChildContext: {
+        getChildren,
+        managedChildrenArray,
+        remoteULEChildMounted,
+        remoteULEChildChanged
+      }
+    } = context !== null && context !== void 0 ? context : {
+      managedChildContext: {}
+    };
+    const index = info.index;
+    // Any time our child props change, make that information available
+    // the parent if they need it.
+    // The parent can listen for all updates and only act on the ones it cares about,
+    // and multiple children updating in the same tick will all be sent at once.
+    y$1(() => {
+      if (managedChildrenArray == null || remoteULEChildChanged == null) return;
+      // Insert this information in-place
+      if (typeof index == "number") {
+        managedChildrenArray.arr[index] = {
+          ...info
+        };
+      } else {
+        managedChildrenArray.rec[index] = {
+          ...info
+        };
+      }
+      return remoteULEChildChanged(index);
+    }, [...Object.entries(info).flat(9)]); // 9 is infinity, right? Sure. Unrelated: TODO.
+    // When we mount, notify the parent via queueMicrotask
+    // (every child does this, so everything's coordinated to only queue a single microtask per tick)
+    // Do the same on unmount.
+    // Note: It's important that this comes AFTER remoteULEChildChanged
+    // so that remoteULEChildMounted has access to all the info on mount.
+    y$1(() => {
+      remoteULEChildMounted?.(index, true);
+      return () => remoteULEChildMounted?.(index, false);
+    }, [index]);
+    return {
+      managedChildReturn: {
+        getChildren: getChildren
+      }
+    };
+  }
+  /**
+   * An extension to useManagedChildren that handles the following common case:
+   * 1. You have a bunch of children
+   * 2. At any given time, only 1 of them is "selected", "activated", "focusable", whatever (or 0 of them, that's cool too, just 0 or 1 though).
+   * 3. The parent has control over who is "selected" via a numerical index.
+   *
+   * This hook allows for much easier control over selection management.
+   *
+   * Note that because you may want to use multiple flags with the same children, this hook *does not* use `useManagedChildren`!
+   * You need to pass it the existing children, and you must pass your invocation of `useManagedChildren` the returned `onChildrenMountChange` handler!
+   *
+   * Also because of that, the types of this function are rather odd.  It's better to start off using a hook that already uses a flag, such as `useRovingTabIndex`, as an example.
+   *
+   *
+   * @param param0
+   * @returns
+   */
+  function useChildrenFlag(_ref2) {
+    let {
+      getChildren,
+      initialIndex,
+      closestFit,
+      onIndexChange,
+      getAt,
+      setAt,
+      isValid
+    } = _ref2;
+    useEnsureStability("useChildrenFlag", onIndexChange, getAt, setAt, isValid);
+    // TODO (maybe?): Even if there is an initial index, it's not set until mount. Is that fine?
+    const [getCurrentIndex, setCurrentIndex] = usePassiveState(onIndexChange);
+    const [getRequestedIndex, setRequestedIndex] = usePassiveState(null);
+    // Shared between onChildrenMountChange and changeIndex, not public
+    // Only called when `closestFit` is false, naturally.
+    const getClosestFit = T$2(requestedIndex => {
+      const children = getChildren();
+      let closestDistance = Infinity;
+      let closestIndex = null;
+      children.forEach(child => {
+        if (child != null && isValid(child)) {
+          console.assert(typeof child.index == "number", "closestFit can only be used when each child has a numeric index, and cannot be used when children use string indices instead.");
+          const newDistance = Math.abs(child.index - requestedIndex);
+          if (newDistance < closestDistance || newDistance == closestDistance && child.index < requestedIndex) {
+            closestDistance = newDistance;
+            closestIndex = child.index;
+          }
+        }
+      });
+      return closestIndex;
+    }, [/* Must remain stable! */]);
+    // Any time a child mounts/unmounts, we need to double-check to see if that affects 
+    // the "currently selected" (or whatever) index.  The two cases we're looking for:
+    // 1. The currently selected child unmounted
+    // 2. A child mounted, and it mounts with the index we're looking for
+    const reevaluateClosestFit = useStableCallback(() => {
+      const children = getChildren();
+      const requestedIndex = getRequestedIndex();
+      const currentIndex = getCurrentIndex();
+      const currentChild = currentIndex == null ? null : children.getAt(currentIndex);
+      if (requestedIndex != null && closestFit && (requestedIndex != currentIndex || currentChild == null || !isValid(currentChild))) {
+        console.assert(typeof requestedIndex == "number", "closestFit can only be used when each child has a numeric index, and cannot be used when children use string indices instead.");
+        const closestFitIndex = getClosestFit(requestedIndex);
+        setCurrentIndex(closestFitIndex, undefined);
+        if (currentChild) setAt(currentChild, false, closestFitIndex, currentIndex);
+        if (closestFitIndex != null) {
+          const closestFitChild = children.getAt(closestFitIndex);
+          console.assert(closestFitChild != null, "Internal logic???");
+          setAt(closestFitChild, true, closestFitIndex, currentIndex);
+        }
+      }
+    });
+    const changeIndex = T$2((arg, reason) => {
+      const children = getChildren();
+      const requestedIndex = arg instanceof Function ? arg(getRequestedIndex()) : arg;
+      setRequestedIndex(requestedIndex, reason);
+      const currentIndex = getCurrentIndex();
+      if (currentIndex == requestedIndex) return requestedIndex;
+      let newMatchingChild = requestedIndex == null ? null : children.getAt(requestedIndex);
+      const oldMatchingChild = currentIndex == null ? null : children.getAt(currentIndex);
+      if (requestedIndex == null) {
+        // Easy case
+        setCurrentIndex(null, reason);
+        if (oldMatchingChild) setAt(oldMatchingChild, false, requestedIndex, currentIndex);
+        return null;
+      } else {
+        const childIsValid = newMatchingChild && isValid(newMatchingChild);
+        if (childIsValid || !closestFit) {
+          setCurrentIndex(requestedIndex, reason);
+          if (oldMatchingChild) setAt(oldMatchingChild, false, requestedIndex, currentIndex);
+          if (newMatchingChild) setAt(newMatchingChild, true, requestedIndex, currentIndex);
+          return requestedIndex;
+        } else {
+          console.assert(typeof requestedIndex == "number", "closestFit can only be used when each child has a numeric index, and cannot be used when children use string indices instead.");
+          const closestFitIndex = getClosestFit(requestedIndex);
+          setCurrentIndex(closestFitIndex, reason);
+          if (closestFitIndex != null) {
+            newMatchingChild = children.getAt(closestFitIndex);
+            console.assert(newMatchingChild != null, "Internal logic???");
+            if (oldMatchingChild) setAt(oldMatchingChild, false, closestFitIndex, currentIndex);
+            setAt(newMatchingChild, true, closestFitIndex, currentIndex);
+            return closestFitIndex;
+          } else {
+            if (oldMatchingChild) setAt(oldMatchingChild, false, closestFitIndex, currentIndex);
+            return null;
+          }
+        }
+      }
+    }, []);
+    // Run once, on mount
+    y$1(() => {
+      changeIndex(initialIndex !== null && initialIndex !== void 0 ? initialIndex : null, undefined);
+    }, []);
+    return {
+      changeIndex,
+      reevaluateClosestFit,
+      getCurrentIndex
+    };
+  }
+
+  /**
+   * Slightly enhanced version of `useState` that includes a getter that remains constant
+   * (i.e. you can use it in `useEffect` and friends without it being a dependency).
+   *
+   * @param initialState
+   * @returns
+   */
+  function useState(initialState) {
+    monitorCallCount(useState);
+    // We keep both, but overrride the `setState` functionality
+    const [state, setStateP] = h$1(initialState);
+    const ref = _$1(state);
+    // Hijack the normal setter function 
+    // to also set our ref to the new value
+    const setState = T$2(value => {
+      if (typeof value === "function") {
+        const callback = value;
+        setStateP(prevValue => {
+          const nextValue = callback(prevValue);
+          ref.current = nextValue;
+          return nextValue;
+        });
+      } else {
+        ref.current = value;
+        setStateP(value);
+      }
+    }, []);
+    const getState = T$2(() => {
+      return ref.current;
+    }, []);
+    return [state, setState, getState];
+  }
+
+  /**
+   * Implements a roving tabindex system where only one "focusable"
+   * component in a set is able to receive a tab focus. *Which*
+   * of those elements receives focus is determined by you, but it's
+   * recommended to offload that logic then to another hook, like
+   * `useLinearNavigation`, which lets you change the tabbable
+   * element with the arrow keys, `useTypeaheadNavigation`, which
+   * lets you change the tabbable index with typeahead, or
+   * `useListNavigation` if you just want everything bundled together.
+   *
+   * Note that the child hook returned by this function must be used
+   * by every child that uses this roving tabindex logic.  The
+   * prop-modifying hook *that* hook returns should then be used
+   * on the child's element, as well as any other elements you'd like
+   * to be explicitly made untabbable too.
+   *
+   * `shouldFocusOnChange` should return true if focus is
+   * contained within whatever element contains the roving tab index.
+   * Generally as simple as the following:
+   * ```
+   * const [focusedInner, setFocusedInner] = useState(false);
+   * const { useHasFocusProps } = useHasFocus<ParentElement>({ setFocusedInner });
+   * const focusOnChange = (focusedInner != false);
+   * ```
+   * It's not included here because `useRovingTabIndex` doesn't know
+   * anything about the container element, only children elements.
+   * And just as well! Children should be allowed at the root,
+   * regardless of if it's the whole app or just a given component.
+   */
+  function useRovingTabIndex(_ref) {
+    let {
+      managedChildrenReturn: {
+        getChildren
+      },
+      rovingTabIndexParameters: {
+        untabbable,
+        initiallyTabbedIndex,
+        onTabbableIndexChange
+      },
+      ..._void1
+    } = _ref;
+    monitorCallCount(useRovingTabIndex);
+    const getUntabbable = useStableGetter(untabbable);
+    // Override the actual setter to include some extra logic related to avoiding hidden children, 
+    // what to do when we're untabbable, what to do when we're tabbable but given `null`, etc.
+    const setTabbableIndex = useStableCallback((updater, reason, fromUserInteraction) => {
+      const children = getChildren();
+      // Notify the relevant children that they should become tabbable/untabbable,
+      // but also handle focus management when we changed due to user interaction
+      return changeTabbableIndex(function returnModifiedTabbableIndex(prevIndex) {
+        let nextIndex = typeof updater === "function" ? updater(prevIndex !== null && prevIndex !== void 0 ? prevIndex : null) : updater;
+        const untabbable = getUntabbable();
+        // Whether or not we're currently tabbable, make sure that when we switch from untabbable to tabbable,
+        // that we know which index to switch back to.
+        if (nextIndex != null) setLastNonNullIndex(nextIndex);
+        // If we're untabbable, then any attempt to set a new index simply fails and sets it to `null`.
+        if (untabbable) return null;
+        // If the requested index is hidden, then there's no need to focus any elements or run any extra logic.
+        if (nextIndex == null) return null;
+        // If we've made a change, and it was because the user clicked on it or something,
+        // then focus that element too
+        if (prevIndex != nextIndex) {
+          const nextChild = children.getAt(nextIndex);
+          console.assert(!nextChild?.hidden);
+          if (nextChild != null && fromUserInteraction) {
+            const element = nextChild.getElement();
+            if (element) {
+              if (document.activeElement == null || !element.contains(document.activeElement)) nextChild.focusSelf(element);
+            }
+          }
+        }
+        // TODO: Redundant?
+        if (nextIndex != null) setLastNonNullIndex(nextIndex);
+        // Finally, return the value the user requested the index be set to.
+        return nextIndex !== null && nextIndex !== void 0 ? nextIndex : 0;
+      }, reason);
+    }, []);
+    // When we switch from tabbable to non/tabbable, we really want to remember the last tabbable child.
+    // So every time we change the index for any reason, record that change as a back up here that can be restored.
+    const [getLastNonNullIndex, setLastNonNullIndex] = usePassiveState(null, T$2(() => initiallyTabbedIndex !== null && initiallyTabbedIndex !== void 0 ? initiallyTabbedIndex : 0, []));
+    // Any time we switch to being untabbable, set the current tabbable index accordingly.
+    p$1(() => {
+      if (untabbable) changeTabbableIndex(null, undefined);else {
+        changeTabbableIndex(getLastNonNullIndex(), undefined);
+      }
+    }, [untabbable]);
+    // Boilerplate related to notifying individual children when they become tabbable/untabbable
+    const getTabbableAt = T$2(m => {
+      return m.getLocallyTabbable();
+    }, []);
+    const setTabbableAt = T$2((m, t) => {
+      m.setLocallyTabbable(t);
+    }, []);
+    const isTabbableValid = T$2(m => {
+      return !m.hidden;
+    }, []);
+    const {
+      changeIndex: changeTabbableIndex,
+      getCurrentIndex: getTabbableIndex,
+      reevaluateClosestFit
+    } = useChildrenFlag({
+      initialIndex: initiallyTabbedIndex !== null && initiallyTabbedIndex !== void 0 ? initiallyTabbedIndex : untabbable ? null : 0,
+      onIndexChange: onTabbableIndexChange || null,
+      getChildren,
+      closestFit: true,
+      getAt: getTabbableAt,
+      isValid: isTabbableValid,
+      setAt: setTabbableAt
+    });
+    const focusSelf = T$2(reason => {
+      const children = getChildren();
+      const index = getTabbableIndex();
+      if (index != null) {
+        const element = children.getAt(index)?.getElement();
+        children.getAt(index)?.focusSelf?.(element);
+      } else setTabbableIndex(null, reason, true);
+    }, []);
+    const rovingTabIndexContext = useStableObject({
+      setTabbableIndex,
+      getInitiallyTabbedIndex: T$2(() => {
+        return initiallyTabbedIndex !== null && initiallyTabbedIndex !== void 0 ? initiallyTabbedIndex : untabbable ? null : 0;
+      }, []),
+      reevaluateClosestFit
+    });
+    return {
+      managedChildrenParameters: {
+        onChildrenMountChange: reevaluateClosestFit
+      },
+      rovingTabIndexReturn: {
+        setTabbableIndex,
+        getTabbableIndex,
+        focusSelf
+      },
+      context: useStableObject({
+        rovingTabIndexContext
+      })
+    };
+  }
+  function useRovingTabIndexChild(_ref2) {
+    let {
+      info: {
+        index,
+        ..._void2
+      },
+      context: {
+        rovingTabIndexContext: {
+          reevaluateClosestFit,
+          setTabbableIndex,
+          getInitiallyTabbedIndex
+        }
+      },
+      rovingTabIndexChildParameters,
+      ..._void3
+    } = _ref2;
+    monitorCallCount(useRovingTabIndexChild);
+    const {
+      hidden,
+      ..._void1
+    } = rovingTabIndexChildParameters;
+    const [tabbable, setTabbable, getTabbable] = useState(getInitiallyTabbedIndex() === index);
+    p$1(() => {
+      reevaluateClosestFit();
+    }, [!!hidden]);
+    return {
+      hasCurrentFocusParameters: {
+        onCurrentFocusedInnerChanged: useStableCallback((focused, _prevFocused, e) => {
+          if (focused) {
+            setTabbableIndex(index, e, false);
+          }
+        })
+      },
+      rovingTabIndexChildReturn: {
+        tabbable,
+        getTabbable
+        // setTabbable
+      },
+
+      info: {
+        setLocallyTabbable: setTabbable,
+        getLocallyTabbable: getTabbable,
+        tabbable
+      },
+      props: {
+        tabIndex: tabbable ? 0 : -1
+      }
+    };
+  }
+
+  function useTextContent(_ref) {
+    let {
+      refElementReturn: {
+        getElement
+      },
+      textContentParameters: {
+        getText,
+        onTextContentChange,
+        hidden
+      }
+    } = _ref;
+    monitorCallCount(useTextContent);
+    const [getTextContent, setTextContent] = usePassiveState(onTextContentChange, returnNull, runImmediately);
+    p$1(() => {
+      if (!hidden) {
+        const element = getElement();
+        if (element) {
+          const textContent = getText(element);
+          if (textContent) {
+            setTextContent(textContent);
+          }
+        }
+      }
+    });
+    return {
+      textContentReturn: {
+        getTextContent
+      }
+    };
+  }
+
+  /**
+   * Allows for the selection of a managed child by typing the given text associated with it.
+   *
+   * @see useListNavigation, which packages everything up together.
+   */
+  function useTypeaheadNavigation(_ref) {
+    let {
+      typeaheadNavigationParameters: {
+        collator,
+        typeaheadTimeout,
+        noTypeahead,
+        isValid,
+        ..._void3
+      },
+      rovingTabIndexReturn: {
+        getTabbableIndex: getIndex,
+        setTabbableIndex: setIndex,
+        ..._void1
+      },
+      ..._void2
+    } = _ref;
+    monitorCallCount(useTypeaheadNavigation);
+    // For typeahead, keep track of what our current "search" string is (if we have one)
+    // and also clear it every 1000 ms since the last time it changed.
+    // Next, keep a mapping of typeahead values to indices for faster searching.
+    // And, for the user's sake, let them know when their typeahead can't match anything anymore
+    const [getCurrentTypeahead, setCurrentTypeahead] = usePassiveState(useStableCallback((currentTypeahead, prev, reason) => {
+      const handle = setTimeout(() => {
+        setCurrentTypeahead(null, undefined);
+        setTypeaheadStatus("none");
+      }, typeaheadTimeout !== null && typeaheadTimeout !== void 0 ? typeaheadTimeout : 1000);
+      updateBasedOnTypeaheadChange(currentTypeahead, reason);
+      return () => clearTimeout(handle);
+    }));
+    //useTimeout({ timeout: typeaheadTimeout ?? 1000, callback: () => { setCurrentTypeahead(null); setInvalidTypeahead(null); }, triggerIndex: currentTypeahead });
+    const sortedTypeaheadInfo = _$1([]);
+    const [typeaheadStatus, setTypeaheadStatus] = useState("none");
+    // Handle typeahead for input method editors as well
+    // Essentially, when active, ignore further keys 
+    // because we're waiting for a CompositionEnd event
+    const [, setImeActive, getImeActive] = useState(false);
+    // Because composition events fire *after* keydown events 
+    // (but within the same task, which, TODO, could be browser-dependent),
+    // we can use this to keep track of which event we're listening for on the first keydown.
+    const [nextTypeaheadChar, setNextTypeaheadChar] = useState(null);
+    y$1(() => {
+      if (nextTypeaheadChar !== null) {
+        setCurrentTypeahead(typeahead => (typeahead !== null && typeahead !== void 0 ? typeahead : "") + nextTypeaheadChar, undefined);
+        setNextTypeaheadChar(null);
+      }
+    }, [nextTypeaheadChar]);
+    const comparatorShared = useStableCallback((safeLhs, safeRhs) => {
+      var _safeRhs$toLowerCase;
+      let compare;
+      // For the purposes of typeahead, only compare a string of the same size as our currently typed string.
+      // By normalizing them first, we ensure this byte-by-byte handling of raw character data works out okay.
+      safeLhs = safeLhs.normalize("NFD");
+      safeRhs = safeRhs.normalize("NFD");
+      if (collator) compare = collator.compare(safeLhs, safeRhs);else compare = safeLhs.toLowerCase().localeCompare((_safeRhs$toLowerCase = safeRhs.toLowerCase()) !== null && _safeRhs$toLowerCase !== void 0 ? _safeRhs$toLowerCase : "");
+      return compare;
+    });
+    const insertingComparator = useStableCallback((lhs, rhs) => {
+      if (typeof lhs === "string" && typeof rhs.text === "string") {
+        return comparatorShared(lhs, rhs.text);
+      }
+      return lhs - rhs;
+    });
+    const typeaheadComparator = useStableCallback((lhs, rhs) => {
+      if (typeof lhs === "string" && typeof rhs.text === "string") {
+        // During typeahead, all strings longer than ours should be truncated
+        // so that they're all considered equally by that point.
+        return comparatorShared(lhs, rhs.text.substring(0, lhs.length));
+      }
+      return lhs - rhs;
+    });
+    const isDisabled = useStableGetter(noTypeahead);
+    const propsStable = _$1({
+      onKeyDown: useStableCallback(e => {
+        if (isDisabled()) return;
+        const imeActive = getImeActive();
+        const key = e.key;
+        // Not handled by typeahead (i.e. assume this is a keyboard shortcut)
+        if (e.ctrlKey || e.metaKey) return;
+        if (!imeActive && e.key === "Backspace") {
+          // Remove the last character in a way that doesn't split UTF-16 surrogates.
+          setCurrentTypeahead(t => t == null ? null : [...t].reverse().slice(1).reverse().join(""), e);
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        // The key property represents the typed character OR the "named key attribute" of the key pressed.
+        // There's no definite way to tell the difference, but for all intents and purposes
+        // there are no one-character names, and there are no non-ASCII-alpha names.
+        // Thus, any one-character or non-ASCII value for `key` is *almost certainly* a typed character.
+        const isCharacterKey = key.length === 1 || !/^[A-Za-z]/.test(key);
+        if (isCharacterKey) {
+          var _getCurrentTypeahead;
+          if (key == " " && ((_getCurrentTypeahead = getCurrentTypeahead()) !== null && _getCurrentTypeahead !== void 0 ? _getCurrentTypeahead : "").trim().length == 0) ; else {
+            e.preventDefault();
+            e.stopPropagation();
+            // Note: Won't be true for the first keydown
+            // but will be overwritten before useLayoutEffect is called
+            // to actually apply the change
+            if (!imeActive) setNextTypeaheadChar(key);
+          }
+        }
+      }),
+      onCompositionStart: useStableCallback(e => {
+        setNextTypeaheadChar(e.data);
+        setImeActive(false);
+      }),
+      onCompositionEnd: useStableCallback(_e => {
+        setImeActive(true);
+      })
+    });
+    const excludeSpace = useStableCallback(() => {
+      return typeaheadStatus != "none";
+    });
+    return {
+      context: useStableObject({
+        typeaheadNavigationContext: useStableObject({
+          insertingComparator,
+          sortedTypeaheadInfo: sortedTypeaheadInfo.current,
+          excludeSpace
+        })
+      }),
+      typeaheadNavigationReturn: {
+        getCurrentTypeahead,
+        typeaheadStatus
+      },
+      propsStable: propsStable.current
+    };
+    function updateBasedOnTypeaheadChange(currentTypeahead, reason) {
+      if (currentTypeahead && sortedTypeaheadInfo.current.length) {
+        const sortedTypeaheadIndex = binarySearch(sortedTypeaheadInfo.current, currentTypeahead, typeaheadComparator);
+        if (sortedTypeaheadIndex < 0) {
+          // The user has typed an entry that doesn't exist in the list
+          // (or more specifically "for which there is no entry that starts with that input")
+          setTypeaheadStatus("invalid");
+        } else {
+          setTypeaheadStatus("valid");
+          /*
+            We know roughly where, in the sorted array of strings, our next typeahead location is.
+            But roughly isn't good enough if there are multiple matches.
+            To convert our sorted index to the unsorted index we need, we have to find the first
+            element that matches us *and* (if any such exist) is *after* our current selection.
+                 In other words, the only way typeahead moves backwards relative to our current
+            position is if the only other option is behind us.
+                 It's not specified in WAI-ARIA what to do in that case.  I suppose wrap back to the start?
+            Though there's also a case for just going upwards to the nearest to prevent jumpiness.
+            But if you're already doing typeahead on an unsorted list, like, jumpiness can't be avoided.
+            I dunno. Going back to the start is the simplist though.
+                 Basically what this does: Starting from where we found ourselves after our binary search,
+            scan backwards and forwards through all adjacent entries that also compare equally so that
+            we can find the one whose `unsortedIndex` is the lowest amongst all other equal strings
+            (and also the lowest `unsortedIndex` yadda yadda except that it comes after us).
+                 TODO: The binary search starts this off with a solid O(log n), but one-character
+            searches are, thanks to pigeonhole principal, eventually guaranteed to become
+            O(n*log n). This is annoying but probably not easily solvable? There could be an
+            exception for one-character strings, but that's just kicking the can down
+            the road. Maybe one or two characters would be good enough though.
+          */
+          // These are used to keep track of the candidates' positions in both our sorted array and the unsorted DOM.
+          let lowestUnsortedIndexAll = null;
+          let lowestSortedIndexAll = sortedTypeaheadIndex;
+          // These two are only set for elements that are ahead of us, but the principle's the same otherwise
+          let lowestUnsortedIndexNext = null;
+          let lowestSortedIndexNext = sortedTypeaheadIndex;
+          const updateBestFit = u => {
+            var _getIndex;
+            if (!isValid(u)) return;
+            if (lowestUnsortedIndexAll == null || u < lowestUnsortedIndexAll) {
+              lowestUnsortedIndexAll = u;
+              lowestSortedIndexAll = i;
+            }
+            if ((lowestUnsortedIndexNext == null || u < lowestUnsortedIndexNext) && u > ((_getIndex = getIndex()) !== null && _getIndex !== void 0 ? _getIndex : -Infinity)) {
+              lowestUnsortedIndexNext = u;
+              lowestSortedIndexNext = i;
+            }
+          };
+          let i = sortedTypeaheadIndex;
+          while (i >= 0 && typeaheadComparator(currentTypeahead, sortedTypeaheadInfo.current[i]) == 0) {
+            updateBestFit(sortedTypeaheadInfo.current[i].unsortedIndex);
+            --i;
+          }
+          i = sortedTypeaheadIndex;
+          while (i < sortedTypeaheadInfo.current.length && typeaheadComparator(currentTypeahead, sortedTypeaheadInfo.current[i]) == 0) {
+            updateBestFit(sortedTypeaheadInfo.current[i].unsortedIndex);
+            ++i;
+          }
+          if (lowestUnsortedIndexNext !== null) setIndex(sortedTypeaheadInfo.current[lowestSortedIndexNext].unsortedIndex, reason, true);else if (lowestUnsortedIndexAll !== null) setIndex(sortedTypeaheadInfo.current[lowestSortedIndexAll].unsortedIndex, reason, true);
+        }
+      }
+    }
+  }
+  function useTypeaheadNavigationChild(_ref2) {
+    let {
+      info: {
+        index,
+        ...void1
+      },
+      textContentParameters: {
+        getText,
+        hidden,
+        ...void5
+      },
+      context: {
+        typeaheadNavigationContext: {
+          sortedTypeaheadInfo,
+          insertingComparator,
+          excludeSpace,
+          ...void2
+        }
+      },
+      refElementReturn: {
+        getElement,
+        ...void3
+      },
+      ...void4
+    } = _ref2;
+    monitorCallCount(useTypeaheadNavigationChild);
+    const {
+      textContentReturn
+    } = useTextContent({
+      refElementReturn: {
+        getElement
+      },
+      textContentParameters: {
+        getText,
+        hidden,
+        onTextContentChange: T$2(text => {
+          if (text) {
+            // Find where to insert this item.
+            // Because all index values should be unique, the returned sortedIndex
+            // should always refer to a new location (i.e. be negative)                
+            const sortedIndex = binarySearch(sortedTypeaheadInfo, text, insertingComparator);
+            console.assert(sortedIndex < 0 || insertingComparator(sortedTypeaheadInfo[sortedIndex].text, {
+              unsortedIndex: index,
+              text
+            }) == 0);
+            if (sortedIndex < 0) {
+              sortedTypeaheadInfo.splice(-sortedIndex - 1, 0, {
+                text,
+                unsortedIndex: index
+              });
+            } else {
+              sortedTypeaheadInfo.splice(sortedIndex, 0, {
+                text,
+                unsortedIndex: index
+              });
+            }
+            return () => {
+              // When unmounting, find where we were and remove ourselves.
+              // Again, we should always find ourselves because there should be no duplicate values if each index is unique.
+              const sortedIndex = binarySearch(sortedTypeaheadInfo, text, insertingComparator);
+              console.assert(sortedIndex < 0 || insertingComparator(sortedTypeaheadInfo[sortedIndex].text, {
+                unsortedIndex: index,
+                text
+              }) == 0);
+              if (sortedIndex >= 0) {
+                sortedTypeaheadInfo.splice(sortedIndex, 1);
+              }
+            };
+          }
+        }, [])
+      }
+    });
+    return {
+      textContentReturn,
+      pressParameters: {
+        excludeSpace
+      }
+    };
+  }
+  /**
+   * Your usual binary search implementation.
+   *
+   * It's used here to quickly find a good spot to start searching for our next typeahead candidate.
+   * @param array The array to search through
+   * @param wanted The value you'd like to find
+   * @param comparator Compares `wanted` with the current value in `array`
+   * @returns A non-negative value if `wanted` was found, and a negative number if not.
+   * The absolute value of this number, minus one, is where `wanted` *would* be found if it *was* in `array`
+   */
+  function binarySearch(array, wanted, comparator) {
+    let firstIndex = 0;
+    let lastIndex = array.length - 1;
+    while (firstIndex <= lastIndex) {
+      const testIndex = lastIndex + firstIndex >> 1;
+      const comparisonResult = comparator(wanted, array[testIndex]);
+      if (comparisonResult > 0) {
+        firstIndex = testIndex + 1;
+      } else if (comparisonResult < 0) {
+        lastIndex = testIndex - 1;
+      } else {
+        return testIndex;
+      }
+    }
+    return -firstIndex - 1;
+  }
+
+  /**
+   * Implements proper keyboard navigation for components like listboxes, button groups, menus, etc.
+   *
+   * In the document order, there will be only one "focused" or "tabbable" element, making it act more like one complete unit in comparison to everything around it.
+   * Navigating forwards/backwards can be done with the arrow keys, Home/End keys, or any text for typeahead to focus the next item that matches.
+   */
+  function useListNavigation(_ref) {
+    let {
+      linearNavigationParameters,
+      typeaheadNavigationParameters,
+      rovingTabIndexParameters,
+      managedChildrenReturn,
+      ..._void1
+    } = _ref;
+    monitorCallCount(useListNavigation);
+    const {
+      context: {
+        rovingTabIndexContext
+      },
+      managedChildrenParameters,
+      rovingTabIndexReturn,
+      ..._void2
+    } = useRovingTabIndex({
+      managedChildrenReturn,
+      rovingTabIndexParameters
+    });
+    const {
+      context: {
+        typeaheadNavigationContext
+      },
+      propsStable: propsStableTN,
+      typeaheadNavigationReturn,
+      ..._void3
+    } = useTypeaheadNavigation({
+      rovingTabIndexReturn,
+      typeaheadNavigationParameters
+    });
+    const {
+      propsStable: propsStableLN,
+      linearNavigationReturn,
+      ..._void4
+    } = useLinearNavigation({
+      rovingTabIndexReturn,
+      linearNavigationParameters
+    });
+    // Merge the props while keeping them stable
+    // (TODO: We run this merge logic every render but only need the first render's result because it's stable)
+    const p = useMergedProps(propsStableTN, propsStableLN);
+    const propsStable = _$1(p);
+    return {
+      managedChildrenParameters,
+      rovingTabIndexReturn,
+      typeaheadNavigationReturn,
+      context: useStableObject({
+        rovingTabIndexContext,
+        typeaheadNavigationContext
+      }),
+      linearNavigationReturn,
+      propsStable: propsStable.current
+    };
+  }
+  function useListNavigationChild(_ref2) {
+    let {
+      rovingTabIndexChildParameters,
+      info,
+      context,
+      refElementReturn,
+      textContentParameters,
+      ..._void2
+    } = _ref2;
+    monitorCallCount(useListNavigationChild);
+    const {
+      props,
+      ...rticr
+    } = useRovingTabIndexChild({
+      rovingTabIndexChildParameters,
+      context,
+      info
+    });
+    const {
+      ...tncr
+    } = useTypeaheadNavigationChild({
+      refElementReturn,
+      textContentParameters,
+      context,
+      info
+    });
+    return {
+      props,
+      ...tncr,
+      ...rticr
+    };
+  }
+
+  function useGridNavigation(_ref) {
+    let {
+      gridNavigationParameters: {
+        onTabbableColumnChange,
+        ...void3
+      },
+      linearNavigationParameters,
+      rovingTabIndexParameters: {
+        onTabbableIndexChange,
+        ...rovingTabIndexParameters
+      },
+      managedChildrenReturn,
+      typeaheadNavigationParameters,
+      ..._void2
+    } = _ref;
+    monitorCallCount(useGridNavigation);
+    const {
+      getChildren
+    } = managedChildrenReturn;
+    const {
+      initiallyTabbedIndex
+    } = rovingTabIndexParameters;
+    const [getCurrentTabbableColumn, setCurrentTabbableColumn] = usePassiveState(onTabbableColumnChange, useStableCallback(() => {
+      return initiallyTabbedIndex !== null && initiallyTabbedIndex !== void 0 ? initiallyTabbedIndex : 0;
+    }));
+    const onTabbableIndexChangeOverride = useStableCallback((nextRow, previousRow, reason) => {
+      const children = getChildren();
+      onTabbableIndexChange?.(nextRow, previousRow, reason);
+      const nextColumn = getCurrentTabbableColumn();
+      if (previousRow != null) children.getAt(previousRow)?.setTabbableColumnIndex(nextColumn, reason, false);
+      if (nextRow != null) children.getAt(nextRow)?.setTabbableColumnIndex(nextColumn, reason, false);
+    });
+    const {
+      linearNavigationReturn,
+      rovingTabIndexReturn,
+      typeaheadNavigationReturn,
+      managedChildrenParameters,
+      context: {
+        rovingTabIndexContext,
+        typeaheadNavigationContext
+      },
+      propsStable,
+      ...void1
+    } = useListNavigation({
+      linearNavigationParameters: {
+        arrowKeyDirection: "vertical",
+        ...linearNavigationParameters
+      },
+      rovingTabIndexParameters: {
+        onTabbableIndexChange: onTabbableIndexChangeOverride,
+        ...rovingTabIndexParameters
+      },
+      managedChildrenReturn,
+      typeaheadNavigationParameters
+    });
+    const gridNavigationRowContext = useStableObject({
+      setTabbableRow: rovingTabIndexReturn.setTabbableIndex,
+      getCurrentTabbableColumn,
+      setCurrentTabbableColumn
+    });
+    return {
+      propsStable,
+      managedChildrenParameters,
+      context: useStableObject({
+        gridNavigationRowContext,
+        rovingTabIndexContext,
+        typeaheadNavigationContext
+      }),
+      linearNavigationReturn,
+      rovingTabIndexReturn,
+      typeaheadNavigationReturn
+    };
+  }
+  function useGridNavigationRow(_ref2) {
+    let {
+      context: {
+        rovingTabIndexContext: contextRTI,
+        typeaheadNavigationContext: contextTN,
+        gridNavigationRowContext: {
+          setTabbableRow,
+          getCurrentTabbableColumn,
+          setCurrentTabbableColumn
+        }
+      },
+      linearNavigationParameters,
+      rovingTabIndexParameters: {
+        ...rovingTabIndexParameters
+      },
+      info: managedChildParameters,
+      managedChildrenReturn,
+      refElementReturn,
+      rovingTabIndexChildParameters,
+      textContentParameters,
+      typeaheadNavigationParameters,
+      ..._void1
+    } = _ref2;
+    monitorCallCount(useGridNavigationRow);
+    const {
+      getChildren
+    } = managedChildrenReturn;
+    const getIndex = useStableCallback(() => {
+      return managedChildParameters.index;
+    });
+    const focusSelf = useStableCallback(e => {
+      var _getCurrentTabbableCo;
+      let index = (_getCurrentTabbableCo = getCurrentTabbableColumn()) !== null && _getCurrentTabbableCo !== void 0 ? _getCurrentTabbableCo : 0;
+      let child = getChildren().getAt(index);
+      let highestIndex = getChildren().getHighestIndex();
+      while ((!child || child.hidden) && index > 0) {
+        --index;
+        child = getChildren().getAt(index);
+      }
+      while ((!child || child.hidden) && index <= highestIndex) {
+        ++index;
+        child = getChildren().getAt(index);
+      }
+      if (child) {
+        const e = child.getElement();
+        child.focusSelf(e);
+      } else {
+        e?.focus?.();
+      }
+    }, []);
+    const {
+      hasCurrentFocusParameters,
+      pressParameters,
+      props: propsLNC,
+      rovingTabIndexChildReturn,
+      textContentReturn,
+      info,
+      ...void2
+    } = useListNavigationChild({
+      info: managedChildParameters,
+      refElementReturn,
+      rovingTabIndexChildParameters,
+      textContentParameters,
+      context: {
+        rovingTabIndexContext: contextRTI,
+        typeaheadNavigationContext: contextTN
+      }
+    });
+    const untabbable = !rovingTabIndexChildReturn.tabbable;
+    const {
+      linearNavigationReturn,
+      managedChildrenParameters,
+      propsStable: propsLN,
+      rovingTabIndexReturn,
+      typeaheadNavigationReturn,
+      context: {
+        rovingTabIndexContext: rtiContext,
+        typeaheadNavigationContext: tnContext
+      }
+    } = useListNavigation({
+      managedChildrenReturn,
+      typeaheadNavigationParameters,
+      rovingTabIndexParameters: {
+        untabbable,
+        ...rovingTabIndexParameters
+      },
+      linearNavigationParameters: {
+        arrowKeyDirection: "horizontal",
+        ...linearNavigationParameters
+      }
+    });
+    const {
+      setTabbableIndex
+    } = rovingTabIndexReturn;
+    const gridNavigationCellContext = useStableObject({
+      setTabbableRow,
+      getRowIndex: getIndex,
+      getCurrentTabbableColumn,
+      setCurrentTabbableColumn,
+      setTabbableCell: setTabbableIndex
+    });
+    const props = useMergedProps(propsLN, propsLNC);
+    props.tabIndex = -1;
+    return {
+      context: useStableObject({
+        rovingTabIndexContext: rtiContext,
+        gridNavigationCellContext,
+        typeaheadNavigationContext: tnContext
+      }),
+      info,
+      hasCurrentFocusParameters,
+      linearNavigationReturn,
+      managedChildrenParameters,
+      pressParameters,
+      props,
+      rovingTabIndexChildReturn,
+      rovingTabIndexReturn,
+      textContentReturn,
+      typeaheadNavigationReturn,
+      gridNavigationRowParameters: {
+        focusSelf,
+        setTabbableColumnIndex: setTabbableIndex
+      }
+    };
+  }
+  function useGridNavigationCell(_ref3) {
+    let {
+      context: {
+        gridNavigationCellContext: {
+          getRowIndex,
+          setTabbableRow,
+          getCurrentTabbableColumn: _getCurrentColumn,
+          setCurrentTabbableColumn,
+          setTabbableCell
+        },
+        rovingTabIndexContext,
+        typeaheadNavigationContext
+      },
+      rovingTabIndexChildParameters,
+      info: managedChildParameters,
+      refElementReturn,
+      textContentParameters,
+      gridNavigationCellParameters: {
+        colSpan
+      },
+      ..._void1
+    } = _ref3;
+    monitorCallCount(useGridNavigationCell);
+    const {
+      index
+    } = managedChildParameters;
+    const {
+      hasCurrentFocusParameters: {
+        onCurrentFocusedInnerChanged: ocfic1
+      },
+      rovingTabIndexChildReturn,
+      textContentReturn,
+      pressParameters,
+      props,
+      info,
+      ...void2
+    } = useListNavigationChild({
+      rovingTabIndexChildParameters,
+      info: managedChildParameters,
+      context: {
+        rovingTabIndexContext,
+        typeaheadNavigationContext
+      },
+      textContentParameters,
+      refElementReturn
+    });
+    return {
+      info,
+      props,
+      rovingTabIndexChildReturn,
+      textContentReturn,
+      pressParameters,
+      hasCurrentFocusParameters: {
+        onCurrentFocusedInnerChanged: useStableCallback((focused, prev, e) => {
+          ocfic1?.(focused, prev, e);
+          if (focused) {
+            setTabbableRow(getRowIndex(), e, false);
+            setCurrentTabbableColumn(index, e);
+            setTabbableCell(prev => {
+              if (prev != null && (prev < index || prev > index + colSpan)) {
+                return prev;
+              }
+              return index;
+            }, e, false);
+          }
+        })
+      }
+    };
+  }
+
+  function useSingleSelection(_ref) {
+    let {
+      managedChildrenReturn: {
+        getChildren
+      },
+      rovingTabIndexReturn: {
+        setTabbableIndex
+      },
+      singleSelectionParameters: {
+        onSelectedIndexChange: onSelectedIndexChange_U,
+        initiallySelectedIndex
+      }
+    } = _ref;
+    monitorCallCount(useSingleSelection);
+    const onSelectedIndexChange = useStableCallback(onSelectedIndexChange_U !== null && onSelectedIndexChange_U !== void 0 ? onSelectedIndexChange_U : noop$1);
+    const getSelectedAt = T$2(m => {
+      return m.getSelected();
+    }, []);
+    const setSelectedAt = T$2((m, t, newSelectedIndex, prevSelectedIndex) => {
+      if (m.hidden) {
+        console.assert(false);
+      }
+      const directionComparison = newSelectedIndex == m.index ? prevSelectedIndex : newSelectedIndex;
+      const direction = directionComparison == null ? null : m.index - directionComparison;
+      if (newSelectedIndex == null) console.assert(t == false);
+      if (t) console.assert(newSelectedIndex === m.index);
+      m.setLocalSelected(t, direction);
+    }, []);
+    const isSelectedValid = T$2(m => {
+      return !m.hidden;
+    }, []);
+    const {
+      changeIndex: changeSelectedIndex,
+      getCurrentIndex: getSelectedIndex
+    } = useChildrenFlag({
+      getChildren,
+      onIndexChange: null,
+      initialIndex: initiallySelectedIndex,
+      getAt: getSelectedAt,
+      setAt: setSelectedAt,
+      isValid: isSelectedValid,
+      closestFit: false
+    });
+    return {
+      singleSelectionReturn: useStableObject({
+        getSelectedIndex,
+        changeSelectedIndex
+      }),
+      context: useStableObject({
+        singleSelectionContext: useStableObject({
+          getSelectedIndex,
+          onSelectedIndexChange: onSelectedIndexChange
+        })
+      }),
+      childrenHaveFocusParameters: {
+        onCompositeFocusChange: useStableCallback((anyFocused, prev, reason) => {
+          if (!anyFocused) {
+            const selectedIndex = getSelectedIndex();
+            if (selectedIndex != null) setTabbableIndex(selectedIndex, reason, false);
+          }
+        })
+      }
+    };
+  }
+  function useSingleSelectionChild(args) {
+    var _ariaPropName$split;
+    monitorCallCount(useSingleSelectionChild);
+    const {
+      context: {
+        singleSelectionContext: {
+          getSelectedIndex,
+          onSelectedIndexChange
+        }
+      },
+      singleSelectionChildParameters: {
+        ariaPropName,
+        selectionMode,
+        disabled
+      },
+      info: {
+        index
+      }
+    } = args;
+    useEnsureStability("useSingleSelectionChild", getSelectedIndex, onSelectedIndexChange);
+    const getDisabled = useStableGetter(disabled);
+    const [localSelected, setLocalSelected, getLocalSelected] = useState(getSelectedIndex() == index);
+    const [direction, setDirection, getDirection] = useState(getSelectedIndex() == null ? null : getSelectedIndex() - index);
+    const onCurrentFocusedInnerChanged = useStableCallback((focused, _prev, e) => {
+      if (selectionMode == 'focus' && focused) {
+        onSelectedIndexChange?.(index, e);
+      }
+    });
+    const propParts = (_ariaPropName$split = ariaPropName?.split("-")) !== null && _ariaPropName$split !== void 0 ? _ariaPropName$split : [];
+    return {
+      info: {
+        setLocalSelected: useStableCallback((selected, direction) => {
+          setLocalSelected(selected);
+          setDirection(direction);
+        }),
+        getSelected: getLocalSelected,
+        selected: localSelected
+      },
+      singleSelectionChildReturn: {
+        selected: localSelected,
+        // This is the thing that's passed to onPress or onClick or whatever
+        setThisOneSelected: useStableCallback(event => {
+          console.assert(!getDisabled());
+          if (selectionMode == "disabled") return;
+          if (!disabled) onSelectedIndexChange?.(index, event);
+        }),
+        getSelectedOffset: getDirection,
+        selectedOffset: direction,
+        getSelected: getLocalSelected
+      },
+      props: ariaPropName == null || selectionMode == "disabled" ? {} : {
+        [`${propParts[0]}-${propParts[1]}`]: localSelected ? propParts[1] == "current" ? `${propParts[2]}` : `true` : "false"
+      },
+      hasCurrentFocusParameters: {
+        onCurrentFocusedInnerChanged
+      }
+    };
+  }
+  /**
+   * Let's face it, declarative is nicer to use than imperative, so this is a shortcut.
+   */
+  function useSingleSelectionDeclarative(_ref2) {
+    let {
+      singleSelectionReturn: {
+        changeSelectedIndex
+      },
+      singleSelectionDeclarativeParameters: {
+        selectedIndex,
+        setSelectedIndex
+      }
+    } = _ref2;
+    p$1(() => {
+      changeSelectedIndex(selectedIndex);
+    }, [selectedIndex]);
+    return {
+      singleSelectionParameters: {
+        onSelectedIndexChange: setSelectedIndex
+      }
+    };
+  }
+
+  function useGridNavigationSingleSelection(_ref) {
+    let {
+      gridNavigationParameters,
+      linearNavigationParameters,
+      rovingTabIndexParameters,
+      managedChildrenReturn,
+      typeaheadNavigationParameters,
+      singleSelectionParameters,
+      ..._void2
+    } = _ref;
+    monitorCallCount(useGridNavigationSingleSelection);
+    const {
+      context: {
+        gridNavigationRowContext,
+        rovingTabIndexContext,
+        typeaheadNavigationContext
+      },
+      linearNavigationReturn,
+      managedChildrenParameters,
+      propsStable,
+      rovingTabIndexReturn,
+      typeaheadNavigationReturn
+    } = useGridNavigation({
+      gridNavigationParameters,
+      linearNavigationParameters,
+      managedChildrenReturn,
+      rovingTabIndexParameters,
+      typeaheadNavigationParameters
+    });
+    const {
+      childrenHaveFocusParameters,
+      context: {
+        singleSelectionContext
+      },
+      singleSelectionReturn
+    } = useSingleSelection({
+      managedChildrenReturn,
+      rovingTabIndexReturn,
+      singleSelectionParameters
+    });
+    return {
+      context: useStableObject({
+        gridNavigationRowContext,
+        rovingTabIndexContext,
+        singleSelectionContext,
+        typeaheadNavigationContext
+      }),
+      childrenHaveFocusParameters,
+      linearNavigationReturn,
+      managedChildrenParameters,
+      propsStable,
+      rovingTabIndexReturn,
+      singleSelectionReturn,
+      typeaheadNavigationReturn
+    };
+  }
+  function useGridNavigationSingleSelectionRow(_ref2) {
+    let {
+      info: mcp1,
+      singleSelectionChildParameters,
+      linearNavigationParameters,
+      managedChildrenReturn,
+      refElementReturn,
+      rovingTabIndexChildParameters,
+      rovingTabIndexParameters,
+      textContentParameters,
+      typeaheadNavigationParameters,
+      context: {
+        gridNavigationRowContext,
+        rovingTabIndexContext,
+        singleSelectionContext,
+        typeaheadNavigationContext
+      },
+      ..._void1
+    } = _ref2;
+    monitorCallCount(useGridNavigationSingleSelectionRow);
+    const {
+      hasCurrentFocusParameters: {
+        onCurrentFocusedInnerChanged: ocfic1
+      },
+      info: mcp2,
+      props: propsSS,
+      singleSelectionChildReturn,
+      ...void2
+    } = useSingleSelectionChild({
+      info: mcp1,
+      singleSelectionChildParameters,
+      context: {
+        singleSelectionContext
+      }
+    });
+    const {
+      context,
+      gridNavigationRowParameters,
+      hasCurrentFocusParameters: {
+        onCurrentFocusedInnerChanged: ocfic2
+      },
+      linearNavigationReturn,
+      managedChildrenParameters,
+      pressParameters: {
+        excludeSpace
+      },
+      props: propsGN,
+      rovingTabIndexChildReturn,
+      rovingTabIndexReturn,
+      textContentReturn,
+      typeaheadNavigationReturn,
+      info: mcp3,
+      ...void3
+    } = useGridNavigationRow({
+      context: {
+        gridNavigationRowContext,
+        rovingTabIndexContext,
+        typeaheadNavigationContext
+      },
+      linearNavigationParameters,
+      info: mcp1,
+      managedChildrenReturn,
+      refElementReturn,
+      rovingTabIndexChildParameters,
+      rovingTabIndexParameters,
+      textContentParameters,
+      typeaheadNavigationParameters
+    });
+    return {
+      context,
+      gridNavigationRowParameters,
+      linearNavigationReturn,
+      info: {
+        ...mcp2,
+        ...mcp3
+      },
+      managedChildrenParameters,
+      pressParameters: {
+        excludeSpace
+      },
+      hasCurrentFocusParameters: {
+        onCurrentFocusedInnerChanged: useStableCallback((hasFocus, hadFocus) => {
+          ocfic1?.(hasFocus, hadFocus);
+          ocfic2?.(hasFocus, hadFocus);
+        })
+      },
+      props: useMergedProps(propsGN, propsSS),
+      rovingTabIndexChildReturn,
+      rovingTabIndexReturn,
+      singleSelectionChildReturn,
+      textContentReturn,
+      typeaheadNavigationReturn
+    };
+  }
+  // EZ
+  function useGridNavigationSingleSelectionCell(p) {
+    monitorCallCount(useGridNavigationSingleSelectionCell);
+    return useGridNavigationCell(p);
+  }
+
+  /**
+   * Returns a function that will, when called, force the component
+   * that uses this hook to re-render itself.
+   *
+   * It's a bit smelly, so best to use sparingly.
+   */
+  function useForceUpdate() {
+    monitorCallCount(useForceUpdate);
+    const [, set] = h$1(0);
+    return _$1(() => set(i => ++i)).current;
+  }
+
+  /**
+   * Hook that allows for the **direct descendant** children of this component to be re-ordered and sorted.
+   *
+   * *This is **separate** from "managed" children, which can be any level of child needed! Sortable/rearrangeable children must be **direct descendants** of the parent that uses this hook!*
+   *
+   * It's recommended to use this in conjunction with `useListNavigation`; it takes the same `indexMangler` and `indexDemangler`
+   * functions that this hook returns. `useListNavigation` does not directly use this hook because, as mentioned,
+   * this hook imposes serious restrictions on child structure, while `useListNavigation` allows anything.
+   *
+   * Besides the prop-modifying hook that's returned, the `sort` function that's returned will
+   * sort all children according to their value from the `getValue` argument you pass in.
+   *
+   * If you want to perform some re-ordering operation that's *not* a sort, you can manually
+   * re-map each child's position using `mangleMap` and `demangleMap`, which convert between
+   * sorted and unsorted index positions.
+   *
+   * Again, unlike some other hooks, **these children must be direct descendants**. This is because
+   * the prop-modifying hook inspects the given children, then re-creates them with new `key`s.
+   * Because keys are given special treatment and a child has no way of modifying its own key
+   * there's no other time or place this can happen other than exactly within the parent component's render function.
+   */
+  function useRearrangeableChildren(_ref) {
+    let {
+      rearrangeableChildrenParameters: {
+        getIndex,
+        onRearranged
+      },
+      managedChildrenReturn: {
+        getChildren
+      }
+    } = _ref;
+    monitorCallCount(useRearrangeableChildren);
+    useEnsureStability("useRearrangeableChildren", getIndex);
+    // These are used to keep track of a mapping between unsorted index <---> sorted index.
+    // These are needed for navigation with the arrow keys.
+    const mangleMap = _$1(new Map());
+    const demangleMap = _$1(new Map());
+    const indexMangler = T$2(n => {
+      var _mangleMap$current$ge;
+      return (_mangleMap$current$ge = mangleMap.current.get(n)) !== null && _mangleMap$current$ge !== void 0 ? _mangleMap$current$ge : n;
+    }, []);
+    const indexDemangler = T$2(n => {
+      var _demangleMap$current$;
+      return (_demangleMap$current$ = demangleMap.current.get(n)) !== null && _demangleMap$current$ !== void 0 ? _demangleMap$current$ : n;
+    }, []);
+    const onRearrangedGetter = useStableGetter(onRearranged);
+    //const { setTabbableIndex } = rovingTabIndexReturn;
+    const shuffle$1 = T$2(() => {
+      const managedRows = getChildren();
+      const originalRows = managedRows.arraySlice();
+      const shuffledRows = shuffle(originalRows);
+      return rearrange(originalRows, shuffledRows);
+    }, [/* Must remain stable */]);
+    const reverse = T$2(() => {
+      const managedRows = getChildren();
+      const originalRows = managedRows.arraySlice();
+      const reversedRows = managedRows.arraySlice().reverse();
+      return rearrange(originalRows, reversedRows);
+    }, [/* Must remain stable */]);
+    // The sort function needs to be able to update whoever has all the sortable children.
+    // Because that might not be the consumer of *this* hook directly (e.g. a table uses
+    // this hook, but it's tbody that actually needs updating), we need to remotely
+    // get and set a forceUpdate function.
+    //const [getForceUpdate, setForceUpdate] = usePassiveState<null | (() => void)>(null, returnNull);
+    const [getForceUpdate, setForceUpdate] = usePassiveState(null, returnNull);
+    const rearrange = T$2((originalRows, sortedRows) => {
+      mangleMap.current.clear();
+      demangleMap.current.clear();
+      // Update our sorted <--> unsorted indices map 
+      // and rerender the whole table, basically
+      for (let indexAsSorted = 0; indexAsSorted < sortedRows.length; ++indexAsSorted) {
+        if (sortedRows[indexAsSorted]) {
+          const indexAsUnsorted = sortedRows[indexAsSorted].index;
+          mangleMap.current.set(indexAsUnsorted, indexAsSorted);
+          demangleMap.current.set(indexAsSorted, indexAsUnsorted);
+        }
+      }
+      onRearrangedGetter()?.();
+      getForceUpdate()?.();
+    }, []);
+    const useRearrangedChildren = T$2(children => {
+      monitorCallCount(useRearrangedChildren);
+      console.assert(Array.isArray(children));
+      const forceUpdate = useForceUpdate();
+      y$1(() => {
+        setForceUpdate(_prev => forceUpdate);
+      }, [forceUpdate]);
+      return children.slice().map(child => ({
+        child,
+        mangledIndex: indexMangler(getIndex(child)),
+        demangledIndex: getIndex(child)
+      })).sort((lhs, rhs) => {
+        return lhs.mangledIndex - rhs.mangledIndex;
+      }).map(_ref2 => {
+        let {
+          child,
+          mangledIndex,
+          demangledIndex
+        } = _ref2;
+        return y$3(child.type, {
+          ...child.props,
+          key: demangledIndex,
+          "data-mangled-index": mangledIndex,
+          "data-unmangled-index": demangledIndex
+        });
+      });
+    }, []);
+    const toJsonArray = T$2(transform => {
+      const managedRows = getChildren();
+      return managedRows.arraySlice().map(child => {
+        if (transform) return transform(child);else return child.getSortValue();
+      });
+    }, []);
+    return {
+      rearrangeableChildrenReturn: {
+        indexMangler,
+        indexDemangler,
+        //mangleMap,
+        //demangleMap,
+        rearrange,
+        shuffle: shuffle$1,
+        reverse,
+        useRearrangedChildren,
+        toJsonArray
+      }
+    };
+  }
+  /**
+   * Hook that allows for the **direct descendant** children of this component to be re-ordered and sorted.
+   *
+   * *This is **separate** from "managed" children, which can be any level of child needed! Sortable/rearrangeable children must be **direct descendants** of the parent that uses this hook!*
+   *
+   * It's recommended to use this in conjunction with `useListNavigation`; it takes the same `indexMangler` and `indexDemangler`
+   * functions that this hook returns. `useListNavigation` does not directly use this hook because, as mentioned,
+   * this hook imposes serious restrictions on child structure, while `useListNavigation` allows anything.
+   *
+   * Besides the prop-modifying hook that's returned, the `sort` function that's returned will
+   * sort all children according to their value from the `getValue` argument you pass in.
+   *
+   * If you want to perform some re-ordering operation that's *not* a sort, you can manually
+   * re-map each child's position using `mangleMap` and `demangleMap`, which convert between
+   * sorted and unsorted index positions.
+   *
+   * Again, unlike some other hooks, **these children must be direct descendants**. This is because
+   * the prop-modifying hook inspects the given children, then re-creates them with new `key`s.
+   * Because keys are given special treatment and a child has no way of modifying its own key
+   * there's no other time or place this can happen other than exactly within the parent component's render function.
+   */
+  function useSortableChildren(_ref3) {
+    let {
+      rearrangeableChildrenParameters,
+      sortableChildrenParameters: {
+        compare: userCompare
+      },
+      managedChildrenReturn: {
+        getChildren
+      }
+    } = _ref3;
+    monitorCallCount(useSortableChildren);
+    const getCompare = useStableGetter(userCompare !== null && userCompare !== void 0 ? userCompare : defaultCompare);
+    const {
+      rearrangeableChildrenReturn
+    } = useRearrangeableChildren({
+      rearrangeableChildrenParameters,
+      managedChildrenReturn: {
+        getChildren
+      }
+    });
+    const {
+      rearrange
+    } = rearrangeableChildrenReturn;
+    // The actual sort function.
+    const sort = T$2(direction => {
+      const managedRows = getChildren();
+      const compare = getCompare();
+      const originalRows = managedRows.arraySlice();
+      const sortedRows = compare ? originalRows.sort((lhsRow, rhsRow) => {
+        const lhsValue = lhsRow;
+        const rhsValue = rhsRow;
+        const result = compare(lhsValue, rhsValue);
+        if (direction[0] == "d") return -result;
+        return result;
+      }) : managedRows.arraySlice();
+      return rearrange(originalRows, sortedRows);
+    }, [/* Must remain stable */]);
+    return {
+      sortableChildrenReturn: {
+        sort
+      },
+      rearrangeableChildrenReturn
+    };
+  }
+  function defaultCompare(lhs, rhs) {
+    return compare1(lhs?.getSortValue(), rhs?.getSortValue());
+    function compare1(lhs, rhs) {
+      if (lhs == null || rhs == null) {
+        if (lhs == null) return -1;
+        if (rhs == null) return 1;
+      }
+      return lhs - rhs;
+    }
+  }
+
+  function useGridNavigationSingleSelectionSortable(_ref) {
+    let {
+      rearrangeableChildrenParameters,
+      sortableChildrenParameters,
+      linearNavigationParameters,
+      managedChildrenReturn,
+      ...gridNavigationSingleSelectionParameters
+    } = _ref;
+    monitorCallCount(useGridNavigationSingleSelectionSortable);
+    const {
+      ...scr
+    } = useSortableChildren({
+      rearrangeableChildrenParameters,
+      sortableChildrenParameters,
+      managedChildrenReturn
+    });
+    const {
+      rearrangeableChildrenReturn: {
+        indexDemangler,
+        indexMangler
+      }
+    } = scr;
+    const gnr = useGridNavigationSingleSelection({
+      linearNavigationParameters: {
+        indexDemangler,
+        indexMangler,
+        ...linearNavigationParameters
+      },
+      managedChildrenReturn,
+      ...gridNavigationSingleSelectionParameters
+    });
+    return {
+      ...gnr,
+      ...scr
+    };
+  }
+
+  function useListNavigationSingleSelection(_ref) {
+    let {
+      linearNavigationParameters,
+      rovingTabIndexParameters,
+      typeaheadNavigationParameters,
+      singleSelectionParameters,
+      managedChildrenReturn,
+      ..._void3
+    } = _ref;
+    monitorCallCount(useListNavigationSingleSelection);
+    const {
+      context: contextLN,
+      propsStable,
+      rovingTabIndexReturn,
+      ...retLN
+    } = useListNavigation({
+      linearNavigationParameters,
+      rovingTabIndexParameters,
+      typeaheadNavigationParameters,
+      managedChildrenReturn
+    });
+    const {
+      context: contextSS,
+      ...retSS
+    } = useSingleSelection({
+      rovingTabIndexReturn,
+      managedChildrenReturn,
+      singleSelectionParameters
+    });
+    return {
+      rovingTabIndexReturn,
+      ...retSS,
+      ...retLN,
+      context: useStableObject({
+        ...contextLN,
+        ...contextSS
+      }),
+      propsStable
+    };
+  }
+  function useListNavigationSingleSelectionChild(_ref2) {
+    let {
+      info: {
+        index,
+        ...void5
+      },
+      rovingTabIndexChildParameters,
+      singleSelectionChildParameters,
+      context,
+      refElementReturn,
+      textContentParameters,
+      info,
+      ...void1
+    } = _ref2;
+    monitorCallCount(useListNavigationSingleSelectionChild);
+    const {
+      hasCurrentFocusParameters: {
+        onCurrentFocusedInnerChanged: ocfic2,
+        ...void3
+      },
+      info: info3,
+      singleSelectionChildReturn,
+      props: propsSS,
+      ...void9
+    } = useSingleSelectionChild({
+      info: {
+        index
+      },
+      singleSelectionChildParameters,
+      context
+    });
+    const {
+      hasCurrentFocusParameters: {
+        onCurrentFocusedInnerChanged: ocfic1,
+        ...void6
+      },
+      pressParameters,
+      rovingTabIndexChildReturn,
+      textContentReturn,
+      props: propsLN,
+      info: info2,
+      ...void8
+    } = useListNavigationChild({
+      info: {
+        index
+      },
+      rovingTabIndexChildParameters,
+      context,
+      refElementReturn,
+      textContentParameters
+    });
+    return {
+      hasCurrentFocusParameters: {
+        onCurrentFocusedInnerChanged: useStableCallback((focused, previouslyFocused, e) => {
+          ocfic1?.(focused, previouslyFocused, e);
+          ocfic2?.(focused, previouslyFocused, e);
+        })
+      },
+      pressParameters,
+      info: {
+        ...info3,
+        ...info2
+      },
+      rovingTabIndexChildReturn,
+      singleSelectionChildReturn,
+      textContentReturn,
+      props: useMergedProps(propsLN, propsSS)
+    };
+  }
+
+  function useListNavigationSingleSelectionSortable(_ref) {
+    let {
+      linearNavigationParameters,
+      rovingTabIndexParameters,
+      typeaheadNavigationParameters,
+      singleSelectionParameters,
+      managedChildrenReturn,
+      rearrangeableChildrenParameters,
+      sortableChildrenParameters,
+      ...void3
+    } = _ref;
+    monitorCallCount(useListNavigationSingleSelectionSortable);
+    const {
+      rearrangeableChildrenReturn,
+      sortableChildrenReturn,
+      ...void1
+    } = useSortableChildren({
+      rearrangeableChildrenParameters,
+      sortableChildrenParameters,
+      managedChildrenReturn
+    });
+    const {
+      indexDemangler,
+      indexMangler
+    } = rearrangeableChildrenReturn;
+    const {
+      propsStable,
+      context,
+      ...restLN
+    } = useListNavigationSingleSelection({
+      linearNavigationParameters: {
+        ...linearNavigationParameters,
+        indexDemangler,
+        indexMangler
+      },
+      rovingTabIndexParameters,
+      typeaheadNavigationParameters,
+      singleSelectionParameters,
+      managedChildrenReturn
+    });
+    return {
+      context,
+      propsStable,
+      rearrangeableChildrenReturn,
+      sortableChildrenReturn,
+      ...restLN
     };
   }
 
@@ -4418,2280 +6671,6 @@
     return firstFocusable;
   }
 
-  /**
-   * When used in tandem with `useRovingTabIndex`, allows control of
-   * the tabbable index with the arrow keys.
-   *
-   * @see useListNavigation, which packages everything up together.
-   */
-  function useLinearNavigation(_ref) {
-    let {
-      rovingTabIndexReturn,
-      linearNavigationParameters
-    } = _ref;
-    monitorCallCount(useLinearNavigation);
-    const {
-      getHighestIndex,
-      indexDemangler,
-      indexMangler,
-      isValid,
-      navigatePastEnd,
-      navigatePastStart
-    } = linearNavigationParameters;
-    const {
-      getTabbableIndex,
-      setTabbableIndex
-    } = rovingTabIndexReturn;
-    const navigateAbsolute = T$2((requestedIndexMangled, searchDirection, e, fromUserInteraction, mode) => {
-      var _getTabbableIndex;
-      //const targetUnmangled = indexDemangler(requestedIndexMangled);
-      //const { valueUnmangled } = tryNavigateToIndex({ isValid, highestChildIndex: getHighestIndex(), indexDemangler, indexMangler, searchDirection: -1, targetUnmangled });
-      //setTabbableIndex(valueUnmangled, e, fromUserInteraction);
-      const highestChildIndex = getHighestIndex();
-      (_getTabbableIndex = getTabbableIndex()) !== null && _getTabbableIndex !== void 0 ? _getTabbableIndex : 0;
-      const targetUnmangled = indexDemangler(requestedIndexMangled);
-      const {
-        status,
-        valueUnmangled
-      } = tryNavigateToIndex({
-        isValid,
-        highestChildIndex,
-        indexDemangler,
-        indexMangler,
-        searchDirection,
-        targetUnmangled
-      });
-      if (status == "past-end") {
-        if (navigatePastEnd == "wrap") {
-          if (mode == "single") navigateToFirst(e, fromUserInteraction);else {
-            /* eslint-disable no-constant-condition */
-            // Uncomment to allow page up/down to wrap after hitting the top/bottom once.
-            // It works fine, the problem isn't that -- the problem is it just feels wrong. 
-            // Page Up/Down don't feel like they should wrap, even if normally requested. 
-            // That's the arrow keys' domain.
-            navigateToLast(e, fromUserInteraction);
-          }
-          return "stop";
-        } else if (navigatePastEnd == "passthrough") {
-          return "passthrough";
-        } else {
-          navigatePastEnd();
-          return "stop";
-        }
-      } else if (status == "past-start") {
-        if (navigatePastStart == "wrap") {
-          if (mode == "single") {
-            navigateToLast(e, fromUserInteraction);
-          } else {
-            /* eslint-disable no-constant-condition */
-            // See above. It works fine but just feels wrong to wrap on Page Up/Down.
-            navigateToFirst(e, fromUserInteraction);
-          }
-          return "stop";
-        } else if (navigatePastStart == "passthrough") {
-          return "passthrough";
-        } else {
-          navigatePastStart();
-          return "stop";
-        }
-      } else {
-        setTabbableIndex(valueUnmangled, e, fromUserInteraction);
-        return "stop";
-      }
-    }, []);
-    const navigateToFirst = useStableCallback((e, fromUserInteraction) => {
-      return navigateAbsolute(0, -1, e, fromUserInteraction, "single");
-    });
-    const navigateToLast = useStableCallback((e, fromUserInteraction) => {
-      return navigateAbsolute(getHighestIndex(), 1, e, fromUserInteraction, "single");
-    });
-    const navigateRelative2 = useStableCallback((e, offset, fromUserInteraction, mode) => {
-      var _getTabbableIndex2;
-      getHighestIndex();
-      const searchDirection = Math.sign(offset) || 1;
-      const original = (_getTabbableIndex2 = getTabbableIndex()) !== null && _getTabbableIndex2 !== void 0 ? _getTabbableIndex2 : 0;
-      /**
-       * To get the target, we need to add (or subtract) 1 to our current value,
-       * but it need to be relative to any sorting/rearranging that's happened.
-       *
-       * We mangle the index to get its "visual" position, add our offset,
-       * and then demangle it to get the child that corresponds to the next child "visually".
-       */
-      const targetMangled = indexMangler(original) + offset;
-      return navigateAbsolute(targetMangled, searchDirection, e, fromUserInteraction, mode);
-    });
-    const navigateToNext = useStableCallback((e, fromUserInteraction) => {
-      return navigateRelative2(e, 1, fromUserInteraction, "single");
-    });
-    const navigateToPrev = useStableCallback((e, fromUserInteraction) => {
-      return navigateRelative2(e, -1, fromUserInteraction, "single");
-    });
-    const getDisableArrowKeys = useStableGetter(linearNavigationParameters.disableArrowKeys);
-    const getDisableHomeEndKeys = useStableGetter(linearNavigationParameters.disableHomeEndKeys);
-    const getNavigationDirection = useStableGetter(linearNavigationParameters.navigationDirection);
-    const getPageNavigationSize = useStableGetter(linearNavigationParameters.pageNavigationSize);
-    const stableProps = _$1({
-      onKeyDown: e => {
-        // Not handled by typeahead (i.e. assume this is a keyboard shortcut)
-        if (e.ctrlKey || e.metaKey) return;
-        //const info = getLogicalDirectionInfo();
-        const navigationDirection = getNavigationDirection();
-        const disableArrowKeys = getDisableArrowKeys();
-        const disableHomeEndKeys = getDisableHomeEndKeys();
-        const pageNavigationSize = getPageNavigationSize();
-        const allowsVerticalNavigation = navigationDirection == "vertical" || navigationDirection == "either";
-        const allowsHorizontalNavigation = navigationDirection == "horizontal" || navigationDirection == "either";
-        let truePageNavigationSize = pageNavigationSize;
-        if (truePageNavigationSize < 1) {
-          truePageNavigationSize = Math.round(pageNavigationSize * Math.max(100, getHighestIndex() + 1));
-        }
-        let result = "passthrough";
-        // Arrow keys only take effect for components oriented in that direction,
-        // so we want to make sure we only listen for left/right or up/down when appropriate.
-        let keyPressIsValidForOrientation = true;
-        switch (e.key) {
-          case "ArrowUp":
-          case "ArrowDown":
-            keyPressIsValidForOrientation = !disableArrowKeys && allowsVerticalNavigation;
-            break;
-          case "ArrowLeft":
-          case "ArrowRight":
-            keyPressIsValidForOrientation = !disableArrowKeys && allowsHorizontalNavigation;
-            break;
-        }
-        if (keyPressIsValidForOrientation) {
-          switch (e.key) {
-            case "ArrowUp":
-            case "ArrowLeft":
-              result = navigateToPrev(e, true);
-              break;
-            case "ArrowDown":
-            case "ArrowRight":
-              result = navigateToNext(e, true);
-              break;
-            case "PageUp":
-            case "PageDown":
-              if (truePageNavigationSize > 0) {
-                result = navigateRelative2(e, truePageNavigationSize * (e.key.endsWith('n') ? -1 : 1), true, "page");
-              }
-              break;
-            case "Home":
-            case "End":
-              if (!disableHomeEndKeys) {
-                if (e.key.endsWith('e')) navigateToFirst(e, true);else navigateToLast(e, true);
-                result = 'stop';
-              }
-              break;
-          }
-        }
-        if (result && result != 'passthrough') {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        /*switch (e.key) {
-            case "ArrowUp": {
-                const directionAllowed = (!disableArrowKeys && allowsVerticalNavigation);
-                if (directionAllowed) {
-                    const result = navigateToPrev(e, true);
-                    if (result != "passthrough") {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                }
-                break;
-            }
-            case "ArrowDown": {
-                const directionAllowed = (!disableArrowKeys && allowsVerticalNavigation);
-                if (directionAllowed) {
-                    const result = navigateToNext(e, true);
-                    if (result != "passthrough") {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                }
-                break;
-            }
-             case "ArrowLeft": {
-                const directionAllowed = (!disableArrowKeys && allowsHorizontalNavigation);
-                if (directionAllowed) {
-                    const result = navigateToPrev(e, true);
-                    if (result != "passthrough") {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                }
-                break;
-            }
-            case "ArrowRight": {
-                const directionAllowed = (!disableArrowKeys && allowsHorizontalNavigation);
-                if (directionAllowed) {
-                    const result = navigateToNext(e, true);
-                    if (result != "passthrough") {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                }
-                break;
-            }
-            case "PageUp": {
-                if (truePageNavigationSize > 0) {
-                    navigateRelative2(e, -truePageNavigationSize, true, "page");
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-                break;
-            }
-            case "PageDown": {
-                if (truePageNavigationSize > 0) {
-                    navigateRelative2(e, truePageNavigationSize, true, "page");
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-                break;
-            }
-            case "Home":
-                if (!disableHomeEndKeys) {
-                    navigateToFirst(e, true);
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-                break;
-             case "End":
-                if (!disableHomeEndKeys) {
-                    navigateToLast(e, true);
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-                break;
-        }*/
-      }
-    });
-
-    return {
-      linearNavigationReturn: {},
-      propsStable: stableProps.current
-    };
-  }
-  function tryNavigateToIndex(_ref2) {
-    let {
-      isValid,
-      highestChildIndex,
-      searchDirection,
-      indexDemangler,
-      indexMangler,
-      targetUnmangled
-    } = _ref2;
-    if (searchDirection === -1) {
-      let bestUpResult = undefined;
-      bestUpResult = tryNavigateUp({
-        isValid,
-        indexDemangler,
-        indexMangler,
-        targetUnmangled
-      });
-      bestUpResult ??= tryNavigateDown({
-        isValid,
-        indexDemangler,
-        indexMangler,
-        targetUnmangled,
-        highestChildIndex
-      });
-      return bestUpResult || {
-        valueUnmangled: targetUnmangled,
-        status: "normal"
-      };
-    } else {
-      let bestDownResult = undefined;
-      bestDownResult = tryNavigateDown({
-        isValid,
-        indexDemangler,
-        indexMangler,
-        targetUnmangled,
-        highestChildIndex
-      });
-      bestDownResult ??= tryNavigateUp({
-        isValid,
-        indexDemangler,
-        indexMangler,
-        targetUnmangled
-      });
-      return bestDownResult || {
-        valueUnmangled: targetUnmangled,
-        status: "normal"
-      };
-    }
-  }
-  function tryNavigateUp(_ref3) {
-    let {
-      isValid,
-      indexDemangler,
-      indexMangler,
-      targetUnmangled
-    } = _ref3;
-    const lower = 0;
-    while (targetUnmangled >= lower && !isValid(targetUnmangled)) {
-      targetUnmangled = indexDemangler(indexMangler(targetUnmangled) - 1);
-    }
-    if (!isValid(targetUnmangled)) {
-      return undefined;
-    }
-    if (targetUnmangled < lower) {
-      return {
-        valueUnmangled: indexDemangler(lower),
-        status: "past-start"
-      };
-    } else {
-      return {
-        valueUnmangled: targetUnmangled,
-        status: "normal"
-      };
-    }
-  }
-  function tryNavigateDown(_ref4) {
-    let {
-      isValid,
-      indexDemangler,
-      indexMangler,
-      targetUnmangled,
-      highestChildIndex: upper
-    } = _ref4;
-    while (targetUnmangled <= upper && !isValid(targetUnmangled)) {
-      targetUnmangled = indexDemangler(indexMangler(targetUnmangled) + 1);
-    }
-    if (!isValid(targetUnmangled)) {
-      return undefined;
-    }
-    if (targetUnmangled > upper) {
-      return {
-        valueUnmangled: indexDemangler(upper),
-        status: "past-end"
-      };
-    } else {
-      return {
-        valueUnmangled: targetUnmangled,
-        status: "normal"
-      };
-    }
-  }
-
-  /**
-   * Allows a parent component to access information about certain
-   * child components once they have rendered.
-   *
-   * This hook is designed to be lightweight, in that the parent keeps no state
-   * and runs no effects.  Each child *does* run an effect, but with no state
-   * changes unless you explicitly request them.
-   *
-   *
-   */
-  function useManagedChildren(parentParameters) {
-    monitorCallCount(useManagedChildren);
-    const {
-      managedChildrenParameters: {
-        onAfterChildLayoutEffect,
-        onChildrenMountChange,
-        onChildCountChange
-      },
-      ...rest
-    } = parentParameters;
-    useEnsureStability("useManagedChildren", onAfterChildLayoutEffect, onChildrenMountChange, onChildCountChange);
-    //const [getMountCount, setMountCount] = usePassiveState(onChildCountChange, returnZero, runImmediately);
-    const getHighestIndex = T$2(() => {
-      return managedChildrenArray.current.highestIndex;
-    }, []);
-    // All the information we have about our children is stored in this **stable** array.
-    // Any mutations to this array **DO NOT** trigger any sort of a re-render.
-    const managedChildrenArray = _$1({
-      arr: [],
-      rec: {},
-      highestIndex: 0,
-      lowestIndex: 0
-    });
-    // For indirect access to each child
-    // Compare getManagedChildInfo
-    // TODO: The primary use for this is flaggable closest fits
-    // which needs to search all children for that closest fit.
-    // It would be nice if there was something better for that.
-    const forEachChild = T$2(f => {
-      for (const child of managedChildrenArray.current.arr) {
-        if (child) f(child);
-      }
-      for (const field in managedChildrenArray.current.rec) {
-        const child = managedChildrenArray.current.rec[field];
-        if (child) f(child);
-      }
-    }, []);
-    // Retrieves the information associated with the child with the given index.
-    // `undefined` if not child there, or it's unmounted.
-    const getManagedChildInfo = T$2(index => {
-      if (typeof index == "number") return managedChildrenArray.current.arr[index];else return managedChildrenArray.current.rec[index];
-    }, []);
-    // tl;dr this is a way to have run useLayoutEffect once after all N children
-    // have mounted and run *their* useLayoutEffect, but also *without* re-rendering
-    // ourselves because of having a `childCount` state or anything similar.
-    //
-    // When the child count ref updates, we want the parent to also run an effect
-    // to maybe do something with all these children that just mounted.
-    // The easiest way would be useEffect(..., [childCount]) but
-    // that would require us having a childCount state, then calling
-    // setChildCount and re-rendering every time children mount
-    // (only one re-render at a time unless children are staggered, but still)
-    // 
-    // As an alternate solution, any time a child uses ULE on mount, it queues a microtask
-    // to emulate running ULE on the parent. Only the first child will actually queue
-    // the microtask (by checking hasRemoteULE first) so that the "effect" only
-    // runs once. When it's done, hasRemoteULE is reset so it can run again if
-    // more children mount/unmount.
-    const hasRemoteULEChildMounted = _$1(null);
-    const remoteULEChildChangedCausers = _$1(new Set());
-    const remoteULEChildChanged = T$2(index => {
-      if (remoteULEChildChangedCausers.current.size == 0) {
-        if (onAfterChildLayoutEffect != null) {
-          debounceRendering(() => {
-            onAfterChildLayoutEffect?.(remoteULEChildChangedCausers.current);
-            remoteULEChildChangedCausers.current.clear();
-          });
-        }
-      }
-      remoteULEChildChangedCausers.current.add(index);
-      return () => {};
-    }, [/* Must remain stable */]);
-    const remoteULEChildMounted = T$2((index, mounted) => {
-      if (!hasRemoteULEChildMounted.current) {
-        hasRemoteULEChildMounted.current = {
-          mounts: new Set(),
-          unmounts: new Set()
-        };
-        if (onChildCountChange || onChildrenMountChange) {
-          debounceRendering(() => {
-            onChildrenMountChange?.(hasRemoteULEChildMounted.current.mounts, hasRemoteULEChildMounted.current.unmounts);
-            onChildCountChange?.(getChildren().getHighestIndex() + 1);
-            hasRemoteULEChildMounted.current = null;
-          });
-        }
-      }
-      if (mounted) {
-        if (typeof index == "number") managedChildrenArray.current.highestIndex = Math.max(managedChildrenArray.current.highestIndex, index);
-      } else {
-        if (typeof index == "number") {
-          delete managedChildrenArray.current.arr[index];
-          let shave = 0;
-          while (shave <= managedChildrenArray.current.arr.length && managedChildrenArray.current.arr[managedChildrenArray.current.arr.length - 1 - shave] === undefined) {
-            ++shave;
-          }
-          managedChildrenArray.current.arr.splice(managedChildrenArray.current.arr.length - shave, shave);
-        } else delete managedChildrenArray.current.rec[index];
-        if (typeof index == "number") managedChildrenArray.current.highestIndex = managedChildrenArray.current.arr.length - 1;
-      }
-      hasRemoteULEChildMounted.current[mounted ? "mounts" : "unmounts"].add(index);
-    }, [/* Must remain stable */]);
-    const managedChildren = useStableObject({
-      ...{
-        _: managedChildrenArray.current
-      },
-      forEach: forEachChild,
-      getAt: getManagedChildInfo,
-      getHighestIndex: getHighestIndex,
-      arraySlice: T$2(() => {
-        let ret = managedChildrenArray.current.arr.slice();
-        const max = getHighestIndex();
-        for (let i = 0; i <= max; ++i) {
-          if (ret[i] == null) ret[i] = {
-            index: i
-          };
-        }
-        return ret;
-      }, [])
-    });
-    const getChildren = T$2(() => managedChildren, []);
-    return {
-      context: useStableObject({
-        managedChildContext: useStableObject({
-          managedChildrenArray: managedChildrenArray.current,
-          remoteULEChildMounted,
-          remoteULEChildChanged,
-          getChildren
-        })
-      }),
-      managedChildrenReturn: {
-        getChildren
-      }
-    };
-  }
-  function useManagedChild(info, managedChildParameters) {
-    var _info$context;
-    monitorCallCount(useManagedChild);
-    const {
-      managedChildContext: {
-        getChildren,
-        managedChildrenArray,
-        remoteULEChildMounted,
-        remoteULEChildChanged
-      }
-    } = (_info$context = info.context) !== null && _info$context !== void 0 ? _info$context : {
-      managedChildContext: {}
-    };
-    const index = managedChildParameters.index;
-    // Any time our child props change, make that information available
-    // the parent if they need it.
-    // The parent can listen for all updates and only act on the ones it cares about,
-    // and multiple children updating in the same tick will all be sent at once.
-    y$1(() => {
-      if (managedChildrenArray == null || remoteULEChildChanged == null) return;
-      // Insert this information in-place
-      if (typeof index == "number") {
-        managedChildrenArray.arr[index] = {
-          ...managedChildParameters
-        };
-      } else {
-        managedChildrenArray.rec[index] = {
-          ...managedChildParameters
-        };
-      }
-      return remoteULEChildChanged(index);
-    }, [...Object.entries(info).flat(9)]); // 9 is infinity, right? Sure. Unrelated: TODO.
-    // When we mount, notify the parent via queueMicrotask
-    // (every child does this, so everything's coordinated to only queue a single microtask per tick)
-    // Do the same on unmount.
-    // Note: It's important that this comes AFTER remoteULEChildChanged
-    // so that remoteULEChildMounted has access to all the info on mount.
-    y$1(() => {
-      remoteULEChildMounted?.(index, true);
-      return () => remoteULEChildMounted?.(index, false);
-    }, [index]);
-    return {
-      managedChildReturn: {
-        getChildren: getChildren
-      }
-    };
-  }
-  /**
-   * An extension to useManagedChildren that handles the following common case:
-   * 1. You have a bunch of children
-   * 2. At any given time, only 1 of them is "selected", "activated", "focusable", whatever (or 0 of them, that's cool too, just 0 or 1 though).
-   * 3. The parent has control over who is "selected" via a numerical index.
-   *
-   * This hook allows for much easier control over selection management.
-   *
-   * Note that because you may want to use multiple flags with the same children, this hook *does not* use `useManagedChildren`!
-   * You need to pass it the existing children, and you must pass your invocation of `useManagedChildren` the returned `onChildrenMountChange` handler!
-   *
-   * Also because of that, the types of this function are rather odd.  It's better to start off using a hook that already uses a flag, such as `useRovingTabIndex`, as an example.
-   *
-   *
-   * @param param0
-   * @returns
-   */
-  function useChildrenFlag(_ref) {
-    let {
-      getChildren,
-      initialIndex,
-      closestFit,
-      onIndexChange,
-      getAt,
-      setAt,
-      isValid
-    } = _ref;
-    useEnsureStability("useChildrenFlag", onIndexChange, getAt, setAt, isValid);
-    // TODO (maybe?): Even if there is an initial index, it's not set until mount. Is that fine?
-    const [getCurrentIndex, setCurrentIndex] = usePassiveState(onIndexChange);
-    const [getRequestedIndex, setRequestedIndex] = usePassiveState(null);
-    // Shared between onChildrenMountChange and changeIndex, not public
-    // Only called when `closestFit` is false, naturally.
-    const getClosestFit = T$2(requestedIndex => {
-      const children = getChildren();
-      let closestDistance = Infinity;
-      let closestIndex = null;
-      children.forEach(child => {
-        if (child != null && isValid(child)) {
-          console.assert(typeof child.index == "number", "closestFit can only be used when each child has a numeric index, and cannot be used when children use string indices instead.");
-          const newDistance = Math.abs(child.index - requestedIndex);
-          if (newDistance < closestDistance || newDistance == closestDistance && child.index < requestedIndex) {
-            closestDistance = newDistance;
-            closestIndex = child.index;
-          }
-        }
-      });
-      return closestIndex;
-    }, [/* Must remain stable! */]);
-    // Any time a child mounts/unmounts, we need to double-check to see if that affects 
-    // the "currently selected" (or whatever) index.  The two cases we're looking for:
-    // 1. The currently selected child unmounted
-    // 2. A child mounted, and it mounts with the index we're looking for
-    const reevaluateClosestFit = useStableCallback(() => {
-      const children = getChildren();
-      const requestedIndex = getRequestedIndex();
-      const currentIndex = getCurrentIndex();
-      const currentChild = currentIndex == null ? null : children.getAt(currentIndex);
-      if (requestedIndex != null && closestFit && (requestedIndex != currentIndex || currentChild == null || !isValid(currentChild))) {
-        console.assert(typeof requestedIndex == "number", "closestFit can only be used when each child has a numeric index, and cannot be used when children use string indices instead.");
-        const closestFitIndex = getClosestFit(requestedIndex);
-        setCurrentIndex(closestFitIndex, undefined);
-        if (currentChild) setAt(currentChild, false, closestFitIndex, currentIndex);
-        if (closestFitIndex != null) {
-          const closestFitChild = children.getAt(closestFitIndex);
-          console.assert(closestFitChild != null, "Internal logic???");
-          setAt(closestFitChild, true, closestFitIndex, currentIndex);
-        }
-      }
-    });
-    const changeIndex = T$2((arg, reason) => {
-      const children = getChildren();
-      const requestedIndex = arg instanceof Function ? arg(getRequestedIndex()) : arg;
-      setRequestedIndex(requestedIndex, reason);
-      const currentIndex = getCurrentIndex();
-      if (currentIndex == requestedIndex) return requestedIndex;
-      let newMatchingChild = requestedIndex == null ? null : children.getAt(requestedIndex);
-      const oldMatchingChild = currentIndex == null ? null : children.getAt(currentIndex);
-      if (requestedIndex == null) {
-        // Easy case
-        setCurrentIndex(null, reason);
-        if (oldMatchingChild) setAt(oldMatchingChild, false, requestedIndex, currentIndex);
-        return null;
-      } else {
-        const childIsValid = newMatchingChild && isValid(newMatchingChild);
-        if (childIsValid || !closestFit) {
-          setCurrentIndex(requestedIndex, reason);
-          if (oldMatchingChild) setAt(oldMatchingChild, false, requestedIndex, currentIndex);
-          if (newMatchingChild) setAt(newMatchingChild, true, requestedIndex, currentIndex);
-          return requestedIndex;
-        } else {
-          console.assert(typeof requestedIndex == "number", "closestFit can only be used when each child has a numeric index, and cannot be used when children use string indices instead.");
-          const closestFitIndex = getClosestFit(requestedIndex);
-          setCurrentIndex(closestFitIndex, reason);
-          if (closestFitIndex != null) {
-            newMatchingChild = children.getAt(closestFitIndex);
-            console.assert(newMatchingChild != null, "Internal logic???");
-            if (oldMatchingChild) setAt(oldMatchingChild, false, closestFitIndex, currentIndex);
-            setAt(newMatchingChild, true, closestFitIndex, currentIndex);
-            return closestFitIndex;
-          } else {
-            if (oldMatchingChild) setAt(oldMatchingChild, false, closestFitIndex, currentIndex);
-            return null;
-          }
-        }
-      }
-    }, []);
-    // Run once, on mount
-    y$1(() => {
-      changeIndex(initialIndex !== null && initialIndex !== void 0 ? initialIndex : null, undefined);
-    }, []);
-    return {
-      changeIndex,
-      reevaluateClosestFit,
-      getCurrentIndex
-    };
-  }
-
-  /**
-   * Slightly enhanced version of `useState` that includes a getter that remains constant
-   * (i.e. you can use it in `useEffect` and friends without it being a dependency).
-   *
-   * @param initialState
-   * @returns
-   */
-  function useState(initialState) {
-    monitorCallCount(useState);
-    // We keep both, but overrride the `setState` functionality
-    const [state, setStateP] = h$1(initialState);
-    const ref = _$1(state);
-    // Hijack the normal setter function 
-    // to also set our ref to the new value
-    const setState = T$2(value => {
-      if (typeof value === "function") {
-        const callback = value;
-        setStateP(prevValue => {
-          const nextValue = callback(prevValue);
-          ref.current = nextValue;
-          return nextValue;
-        });
-      } else {
-        ref.current = value;
-        setStateP(value);
-      }
-    }, []);
-    const getState = T$2(() => {
-      return ref.current;
-    }, []);
-    return [state, setState, getState];
-  }
-
-  /**
-   * Implements a roving tabindex system where only one "focusable"
-   * component in a set is able to receive a tab focus. *Which*
-   * of those elements receives focus is determined by you, but it's
-   * recommended to offload that logic then to another hook, like
-   * `useLinearNavigation`, which lets you change the tabbable
-   * element with the arrow keys, `useTypeaheadNavigation`, which
-   * lets you change the tabbable index with typeahead, or
-   * `useListNavigation` if you just want everything bundled together.
-   *
-   * Note that the child hook returned by this function must be used
-   * by every child that uses this roving tabindex logic.  The
-   * prop-modifying hook *that* hook returns should then be used
-   * on the child's element, as well as any other elements you'd like
-   * to be explicitly made untabbable too.
-   *
-   * `shouldFocusOnChange` should return true if focus is
-   * contained within whatever element contains the roving tab index.
-   * Generally as simple as the following:
-   * ```
-   * const [focusedInner, setFocusedInner] = useState(false);
-   * const { useHasFocusProps } = useHasFocus<ParentElement>({ setFocusedInner });
-   * const focusOnChange = (focusedInner != false);
-   * ```
-   * It's not included here because `useRovingTabIndex` doesn't know
-   * anything about the container element, only children elements.
-   * And just as well! Children should be allowed at the root,
-   * regardless of if it's the whole app or just a given component.
-   */
-  function useRovingTabIndex(_ref) {
-    let {
-      managedChildrenReturn: {
-        getChildren
-      },
-      rovingTabIndexParameters: {
-        untabbable,
-        initiallyTabbedIndex,
-        onTabbableIndexChange
-      },
-      ..._void1
-    } = _ref;
-    monitorCallCount(useRovingTabIndex);
-    const getUntabbable = useStableGetter(untabbable);
-    // Override the actual setter to include some extra logic related to avoiding hidden children, 
-    // what to do when we're untabbable, what to do when we're tabbable but given `null`, etc.
-    const setTabbableIndex = useStableCallback((updater, reason, fromUserInteraction) => {
-      const children = getChildren();
-      // Notify the relevant children that they should become tabbable/untabbable,
-      // but also handle focus management when we changed due to user interaction
-      return changeTabbableIndex(function returnModifiedTabbableIndex(prevIndex) {
-        let nextIndex = typeof updater === "function" ? updater(prevIndex !== null && prevIndex !== void 0 ? prevIndex : null) : updater;
-        const untabbable = getUntabbable();
-        // Whether or not we're currently tabbable, make sure that when we switch from untabbable to tabbable,
-        // that we know which index to switch back to.
-        if (nextIndex != null) setLastNonNullIndex(nextIndex);
-        // If we're untabbable, then any attempt to set a new index simply fails and sets it to `null`.
-        if (untabbable) return null;
-        // If the requested index is hidden, then there's no need to focus any elements or run any extra logic.
-        if (nextIndex == null) return null;
-        // If we've made a change, and it was because the user clicked on it or something,
-        // then focus that element too
-        if (prevIndex != nextIndex) {
-          const nextChild = children.getAt(nextIndex);
-          console.assert(!nextChild?.hidden);
-          if (nextChild != null && fromUserInteraction) {
-            const element = nextChild.getElement();
-            if (element) {
-              if (document.activeElement == null || !element.contains(document.activeElement)) nextChild.focusSelf(element);
-            }
-          }
-        }
-        // TODO: Redundant?
-        if (nextIndex != null) setLastNonNullIndex(nextIndex);
-        // Finally, return the value the user requested the index be set to.
-        return nextIndex !== null && nextIndex !== void 0 ? nextIndex : 0;
-      }, reason);
-    }, []);
-    // When we switch from tabbable to non/tabbable, we really want to remember the last tabbable child.
-    // So every time we change the index for any reason, record that change as a back up here that can be restored.
-    const [getLastNonNullIndex, setLastNonNullIndex] = usePassiveState(null, T$2(() => initiallyTabbedIndex !== null && initiallyTabbedIndex !== void 0 ? initiallyTabbedIndex : 0, []));
-    // Any time we switch to being untabbable, set the current tabbable index accordingly.
-    p$1(() => {
-      if (untabbable) changeTabbableIndex(null, undefined);else {
-        changeTabbableIndex(getLastNonNullIndex(), undefined);
-      }
-    }, [untabbable]);
-    // Boilerplate related to notifying individual children when they become tabbable/untabbable
-    const getTabbableAt = T$2(m => {
-      return m.getTabbable();
-    }, []);
-    const setTabbableAt = T$2((m, t) => {
-      m.setTabbable(t);
-    }, []);
-    const isTabbableValid = T$2(m => {
-      return !m.hidden;
-    }, []);
-    const {
-      changeIndex: changeTabbableIndex,
-      getCurrentIndex: getTabbableIndex,
-      reevaluateClosestFit
-    } = useChildrenFlag({
-      initialIndex: initiallyTabbedIndex !== null && initiallyTabbedIndex !== void 0 ? initiallyTabbedIndex : untabbable ? null : 0,
-      onIndexChange: onTabbableIndexChange,
-      getChildren,
-      closestFit: true,
-      getAt: getTabbableAt,
-      isValid: isTabbableValid,
-      setAt: setTabbableAt
-    });
-    const focusSelf = T$2(reason => {
-      const children = getChildren();
-      const index = getTabbableIndex();
-      if (index != null) {
-        const element = children.getAt(index)?.getElement();
-        children.getAt(index)?.focusSelf?.(element);
-      } else setTabbableIndex(null, reason, true);
-    }, []);
-    const rovingTabIndexContext = useStableObject({
-      setTabbableIndex,
-      getInitiallyTabbedIndex: T$2(() => {
-        return initiallyTabbedIndex !== null && initiallyTabbedIndex !== void 0 ? initiallyTabbedIndex : untabbable ? null : 0;
-      }, []),
-      reevaluateClosestFit
-    });
-    return {
-      managedChildrenParameters: {
-        onChildrenMountChange: reevaluateClosestFit
-      },
-      rovingTabIndexReturn: {
-        setTabbableIndex,
-        getTabbableIndex,
-        focusSelf
-      },
-      context: useStableObject({
-        rovingTabIndexContext
-      })
-    };
-  }
-  function useRovingTabIndexChild(_ref2) {
-    let {
-      managedChildParameters: {
-        index,
-        ..._void2
-      },
-      context: {
-        rovingTabIndexContext: {
-          reevaluateClosestFit,
-          setTabbableIndex,
-          getInitiallyTabbedIndex
-        }
-      },
-      rovingTabIndexChildParameters,
-      ..._void3
-    } = _ref2;
-    monitorCallCount(useRovingTabIndexChild);
-    const {
-      hidden,
-      ..._void1
-    } = rovingTabIndexChildParameters;
-    const [tabbable, setTabbable, getTabbable] = useState(getInitiallyTabbedIndex() === index);
-    p$1(() => {
-      reevaluateClosestFit();
-    }, [!!hidden]);
-    return {
-      hasCurrentFocusParameters: {
-        onCurrentFocusedInnerChanged: useStableCallback((focused, _prevFocused, e) => {
-          if (focused) {
-            setTabbableIndex(index, e, false);
-          }
-        })
-      },
-      rovingTabIndexChildReturn: {
-        tabbable,
-        getTabbable,
-        setTabbable
-      },
-      props: {
-        tabIndex: tabbable ? 0 : -1
-      }
-    };
-  }
-
-  function useTextContent(_ref) {
-    let {
-      refElementReturn: {
-        getElement
-      },
-      textContentParameters: {
-        getText,
-        onTextContentChange,
-        hidden
-      }
-    } = _ref;
-    monitorCallCount(useTextContent);
-    const [getTextContent, setTextContent] = usePassiveState(onTextContentChange, returnNull, runImmediately);
-    p$1(() => {
-      if (!hidden) {
-        const element = getElement();
-        if (element) {
-          const textContent = getText(element);
-          if (textContent) {
-            setTextContent(textContent);
-          }
-        }
-      }
-    });
-    return {
-      textContentReturn: {
-        getTextContent
-      }
-    };
-  }
-
-  /**
-   * Allows for the selection of a managed child by typing the given text associated with it.
-   *
-   * @see useListNavigation, which packages everything up together.
-   */
-  function useTypeaheadNavigation(_ref) {
-    let {
-      typeaheadNavigationParameters: {
-        collator,
-        typeaheadTimeout,
-        noTypeahead,
-        isValid,
-        ..._void3
-      },
-      rovingTabIndexReturn: {
-        getTabbableIndex: getIndex,
-        setTabbableIndex: setIndex,
-        ..._void1
-      },
-      ..._void2
-    } = _ref;
-    monitorCallCount(useTypeaheadNavigation);
-    // For typeahead, keep track of what our current "search" string is (if we have one)
-    // and also clear it every 1000 ms since the last time it changed.
-    // Next, keep a mapping of typeahead values to indices for faster searching.
-    // And, for the user's sake, let them know when their typeahead can't match anything anymore
-    const [getCurrentTypeahead, setCurrentTypeahead] = usePassiveState(useStableCallback((currentTypeahead, prev, reason) => {
-      const handle = setTimeout(() => {
-        setCurrentTypeahead(null, undefined);
-        setTypeaheadStatus("none");
-      }, typeaheadTimeout !== null && typeaheadTimeout !== void 0 ? typeaheadTimeout : 1000);
-      updateBasedOnTypeaheadChange(currentTypeahead, reason);
-      return () => clearTimeout(handle);
-    }));
-    //useTimeout({ timeout: typeaheadTimeout ?? 1000, callback: () => { setCurrentTypeahead(null); setInvalidTypeahead(null); }, triggerIndex: currentTypeahead });
-    const sortedTypeaheadInfo = _$1([]);
-    const [typeaheadStatus, setTypeaheadStatus] = useState("none");
-    // Handle typeahead for input method editors as well
-    // Essentially, when active, ignore further keys 
-    // because we're waiting for a CompositionEnd event
-    const [, setImeActive, getImeActive] = useState(false);
-    // Because composition events fire *after* keydown events 
-    // (but within the same task, which, TODO, could be browser-dependent),
-    // we can use this to keep track of which event we're listening for on the first keydown.
-    const [nextTypeaheadChar, setNextTypeaheadChar] = useState(null);
-    y$1(() => {
-      if (nextTypeaheadChar !== null) {
-        setCurrentTypeahead(typeahead => (typeahead !== null && typeahead !== void 0 ? typeahead : "") + nextTypeaheadChar, undefined);
-        setNextTypeaheadChar(null);
-      }
-    }, [nextTypeaheadChar]);
-    const comparatorShared = useStableCallback((safeLhs, safeRhs) => {
-      var _safeRhs$toLowerCase;
-      let compare;
-      // For the purposes of typeahead, only compare a string of the same size as our currently typed string.
-      // By normalizing them first, we ensure this byte-by-byte handling of raw character data works out okay.
-      safeLhs = safeLhs.normalize("NFD");
-      safeRhs = safeRhs.normalize("NFD");
-      if (collator) compare = collator.compare(safeLhs, safeRhs);else compare = safeLhs.toLowerCase().localeCompare((_safeRhs$toLowerCase = safeRhs.toLowerCase()) !== null && _safeRhs$toLowerCase !== void 0 ? _safeRhs$toLowerCase : "");
-      return compare;
-    });
-    const insertingComparator = useStableCallback((lhs, rhs) => {
-      if (typeof lhs === "string" && typeof rhs.text === "string") {
-        return comparatorShared(lhs, rhs.text);
-      }
-      return lhs - rhs;
-    });
-    const typeaheadComparator = useStableCallback((lhs, rhs) => {
-      if (typeof lhs === "string" && typeof rhs.text === "string") {
-        // During typeahead, all strings longer than ours should be truncated
-        // so that they're all considered equally by that point.
-        return comparatorShared(lhs, rhs.text.substring(0, lhs.length));
-      }
-      return lhs - rhs;
-    });
-    const isDisabled = useStableGetter(noTypeahead);
-    const propsStable = _$1({
-      onKeyDown: useStableCallback(e => {
-        if (isDisabled()) return;
-        const imeActive = getImeActive();
-        const key = e.key;
-        // Not handled by typeahead (i.e. assume this is a keyboard shortcut)
-        if (e.ctrlKey || e.metaKey) return;
-        if (!imeActive && e.key === "Backspace") {
-          // Remove the last character in a way that doesn't split UTF-16 surrogates.
-          setCurrentTypeahead(t => t == null ? null : [...t].reverse().slice(1).reverse().join(""), e);
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-        // The key property represents the typed character OR the "named key attribute" of the key pressed.
-        // There's no definite way to tell the difference, but for all intents and purposes
-        // there are no one-character names, and there are no non-ASCII-alpha names.
-        // Thus, any one-character or non-ASCII value for `key` is *almost certainly* a typed character.
-        const isCharacterKey = key.length === 1 || !/^[A-Za-z]/.test(key);
-        if (isCharacterKey) {
-          var _getCurrentTypeahead;
-          if (key == " " && ((_getCurrentTypeahead = getCurrentTypeahead()) !== null && _getCurrentTypeahead !== void 0 ? _getCurrentTypeahead : "").trim().length == 0) ; else {
-            e.preventDefault();
-            e.stopPropagation();
-            // Note: Won't be true for the first keydown
-            // but will be overwritten before useLayoutEffect is called
-            // to actually apply the change
-            if (!imeActive) setNextTypeaheadChar(key);
-          }
-        }
-      }),
-      onCompositionStart: useStableCallback(e => {
-        setNextTypeaheadChar(e.data);
-        setImeActive(false);
-      }),
-      onCompositionEnd: useStableCallback(_e => {
-        setImeActive(true);
-      })
-    });
-    const excludeSpace = useStableCallback(() => {
-      return typeaheadStatus != "none";
-    });
-    return {
-      context: useStableObject({
-        typeaheadNavigationContext: useStableObject({
-          insertingComparator,
-          sortedTypeaheadInfo: sortedTypeaheadInfo.current,
-          excludeSpace
-        })
-      }),
-      typeaheadNavigationReturn: {
-        getCurrentTypeahead,
-        typeaheadStatus
-      },
-      propsStable: propsStable.current
-    };
-    function updateBasedOnTypeaheadChange(currentTypeahead, reason) {
-      if (currentTypeahead && sortedTypeaheadInfo.current.length) {
-        const sortedTypeaheadIndex = binarySearch(sortedTypeaheadInfo.current, currentTypeahead, typeaheadComparator);
-        if (sortedTypeaheadIndex < 0) {
-          // The user has typed an entry that doesn't exist in the list
-          // (or more specifically "for which there is no entry that starts with that input")
-          setTypeaheadStatus("invalid");
-        } else {
-          setTypeaheadStatus("valid");
-          /*
-            We know roughly where, in the sorted array of strings, our next typeahead location is.
-            But roughly isn't good enough if there are multiple matches.
-            To convert our sorted index to the unsorted index we need, we have to find the first
-            element that matches us *and* (if any such exist) is *after* our current selection.
-                 In other words, the only way typeahead moves backwards relative to our current
-            position is if the only other option is behind us.
-                 It's not specified in WAI-ARIA what to do in that case.  I suppose wrap back to the start?
-            Though there's also a case for just going upwards to the nearest to prevent jumpiness.
-            But if you're already doing typeahead on an unsorted list, like, jumpiness can't be avoided.
-            I dunno. Going back to the start is the simplist though.
-                 Basically what this does: Starting from where we found ourselves after our binary search,
-            scan backwards and forwards through all adjacent entries that also compare equally so that
-            we can find the one whose `unsortedIndex` is the lowest amongst all other equal strings
-            (and also the lowest `unsortedIndex` yadda yadda except that it comes after us).
-                 TODO: The binary search starts this off with a solid O(log n), but one-character
-            searches are, thanks to pigeonhole principal, eventually guaranteed to become
-            O(n*log n). This is annoying but probably not easily solvable? There could be an
-            exception for one-character strings, but that's just kicking the can down
-            the road. Maybe one or two characters would be good enough though.
-          */
-          // These are used to keep track of the candidates' positions in both our sorted array and the unsorted DOM.
-          let lowestUnsortedIndexAll = null;
-          let lowestSortedIndexAll = sortedTypeaheadIndex;
-          // These two are only set for elements that are ahead of us, but the principle's the same otherwise
-          let lowestUnsortedIndexNext = null;
-          let lowestSortedIndexNext = sortedTypeaheadIndex;
-          const updateBestFit = u => {
-            var _getIndex;
-            if (!isValid(u)) return;
-            if (lowestUnsortedIndexAll == null || u < lowestUnsortedIndexAll) {
-              lowestUnsortedIndexAll = u;
-              lowestSortedIndexAll = i;
-            }
-            if ((lowestUnsortedIndexNext == null || u < lowestUnsortedIndexNext) && u > ((_getIndex = getIndex()) !== null && _getIndex !== void 0 ? _getIndex : -Infinity)) {
-              lowestUnsortedIndexNext = u;
-              lowestSortedIndexNext = i;
-            }
-          };
-          let i = sortedTypeaheadIndex;
-          while (i >= 0 && typeaheadComparator(currentTypeahead, sortedTypeaheadInfo.current[i]) == 0) {
-            updateBestFit(sortedTypeaheadInfo.current[i].unsortedIndex);
-            --i;
-          }
-          i = sortedTypeaheadIndex;
-          while (i < sortedTypeaheadInfo.current.length && typeaheadComparator(currentTypeahead, sortedTypeaheadInfo.current[i]) == 0) {
-            updateBestFit(sortedTypeaheadInfo.current[i].unsortedIndex);
-            ++i;
-          }
-          if (lowestUnsortedIndexNext !== null) setIndex(sortedTypeaheadInfo.current[lowestSortedIndexNext].unsortedIndex, reason, true);else if (lowestUnsortedIndexAll !== null) setIndex(sortedTypeaheadInfo.current[lowestSortedIndexAll].unsortedIndex, reason, true);
-        }
-      }
-    }
-  }
-  function useTypeaheadNavigationChild(_ref2) {
-    let {
-      managedChildParameters: {
-        index,
-        ...void1
-      },
-      textContentParameters: {
-        getText,
-        hidden,
-        ...void5
-      },
-      context: {
-        typeaheadNavigationContext: {
-          sortedTypeaheadInfo,
-          insertingComparator,
-          excludeSpace,
-          ...void2
-        }
-      },
-      refElementReturn: {
-        getElement,
-        ...void3
-      },
-      ...void4
-    } = _ref2;
-    monitorCallCount(useTypeaheadNavigationChild);
-    const {
-      textContentReturn
-    } = useTextContent({
-      refElementReturn: {
-        getElement
-      },
-      textContentParameters: {
-        getText,
-        hidden,
-        onTextContentChange: T$2(text => {
-          if (text) {
-            // Find where to insert this item.
-            // Because all index values should be unique, the returned sortedIndex
-            // should always refer to a new location (i.e. be negative)                
-            const sortedIndex = binarySearch(sortedTypeaheadInfo, text, insertingComparator);
-            console.assert(sortedIndex < 0 || insertingComparator(sortedTypeaheadInfo[sortedIndex].text, {
-              unsortedIndex: index,
-              text
-            }) == 0);
-            if (sortedIndex < 0) {
-              sortedTypeaheadInfo.splice(-sortedIndex - 1, 0, {
-                text,
-                unsortedIndex: index
-              });
-            } else {
-              sortedTypeaheadInfo.splice(sortedIndex, 0, {
-                text,
-                unsortedIndex: index
-              });
-            }
-            return () => {
-              // When unmounting, find where we were and remove ourselves.
-              // Again, we should always find ourselves because there should be no duplicate values if each index is unique.
-              const sortedIndex = binarySearch(sortedTypeaheadInfo, text, insertingComparator);
-              console.assert(sortedIndex < 0 || insertingComparator(sortedTypeaheadInfo[sortedIndex].text, {
-                unsortedIndex: index,
-                text
-              }) == 0);
-              if (sortedIndex >= 0) {
-                sortedTypeaheadInfo.splice(sortedIndex, 1);
-              }
-            };
-          }
-        }, [])
-      }
-    });
-    return {
-      textContentReturn,
-      pressParameters: {
-        excludeSpace
-      }
-    };
-  }
-  /**
-   * Your usual binary search implementation.
-   *
-   * It's used here to quickly find a good spot to start searching for our next typeahead candidate.
-   * @param array The array to search through
-   * @param wanted The value you'd like to find
-   * @param comparator Compares `wanted` with the current value in `array`
-   * @returns A non-negative value if `wanted` was found, and a negative number if not.
-   * The absolute value of this number, minus one, is where `wanted` *would* be found if it *was* in `array`
-   */
-  function binarySearch(array, wanted, comparator) {
-    let firstIndex = 0;
-    let lastIndex = array.length - 1;
-    while (firstIndex <= lastIndex) {
-      const testIndex = lastIndex + firstIndex >> 1;
-      const comparisonResult = comparator(wanted, array[testIndex]);
-      if (comparisonResult > 0) {
-        firstIndex = testIndex + 1;
-      } else if (comparisonResult < 0) {
-        lastIndex = testIndex - 1;
-      } else {
-        return testIndex;
-      }
-    }
-    return -firstIndex - 1;
-  }
-
-  /**
-   * Implements proper keyboard navigation for components like listboxes, button groups, menus, etc.
-   *
-   * In the document order, there will be only one "focused" or "tabbable" element, making it act more like one complete unit in comparison to everything around it.
-   * Navigating forwards/backwards can be done with the arrow keys, Home/End keys, or any text for typeahead to focus the next item that matches.
-   */
-  function useListNavigation(_ref) {
-    let {
-      linearNavigationParameters,
-      typeaheadNavigationParameters,
-      rovingTabIndexParameters,
-      managedChildrenReturn,
-      ..._void1
-    } = _ref;
-    monitorCallCount(useListNavigation);
-    const {
-      context: {
-        rovingTabIndexContext
-      },
-      managedChildrenParameters,
-      rovingTabIndexReturn,
-      ..._void2
-    } = useRovingTabIndex({
-      managedChildrenReturn,
-      rovingTabIndexParameters
-    });
-    const {
-      context: {
-        typeaheadNavigationContext
-      },
-      propsStable: propsStableTN,
-      typeaheadNavigationReturn,
-      ..._void3
-    } = useTypeaheadNavigation({
-      rovingTabIndexReturn,
-      typeaheadNavigationParameters
-    });
-    const {
-      propsStable: propsStableLN,
-      linearNavigationReturn,
-      ..._void4
-    } = useLinearNavigation({
-      rovingTabIndexReturn,
-      linearNavigationParameters
-    });
-    // Merge the props while keeping them stable
-    // (TODO: We run this merge logic every render but only need the first render's result because it's stable)
-    const p = useMergedProps(propsStableTN, propsStableLN);
-    const propsStable = _$1(p);
-    return {
-      managedChildrenParameters,
-      rovingTabIndexReturn,
-      typeaheadNavigationReturn,
-      context: useStableObject({
-        rovingTabIndexContext,
-        typeaheadNavigationContext
-      }),
-      linearNavigationReturn,
-      propsStable: propsStable.current
-    };
-  }
-  function useListNavigationChild(_ref2) {
-    let {
-      rovingTabIndexChildParameters,
-      context,
-      managedChildParameters,
-      refElementReturn,
-      textContentParameters,
-      ..._void2
-    } = _ref2;
-    monitorCallCount(useListNavigationChild);
-    const {
-      props,
-      ...rticr
-    } = useRovingTabIndexChild({
-      context,
-      rovingTabIndexChildParameters,
-      managedChildParameters
-    });
-    const {
-      ...tncr
-    } = useTypeaheadNavigationChild({
-      context,
-      refElementReturn,
-      managedChildParameters,
-      textContentParameters
-    });
-    return {
-      props,
-      ...tncr,
-      ...rticr
-    };
-  }
-
-  function useGridNavigation(_ref) {
-    let {
-      gridNavigationParameters: {
-        onTabbableColumnChange,
-        ...void3
-      },
-      linearNavigationParameters,
-      rovingTabIndexParameters: {
-        onTabbableIndexChange,
-        ...rovingTabIndexParameters
-      },
-      managedChildrenReturn,
-      typeaheadNavigationParameters,
-      ..._void2
-    } = _ref;
-    monitorCallCount(useGridNavigation);
-    const {
-      getChildren
-    } = managedChildrenReturn;
-    const {
-      initiallyTabbedIndex
-    } = rovingTabIndexParameters;
-    const [getCurrentTabbableColumn, setCurrentTabbableColumn] = usePassiveState(onTabbableColumnChange, useStableCallback(() => {
-      return initiallyTabbedIndex !== null && initiallyTabbedIndex !== void 0 ? initiallyTabbedIndex : 0;
-    }));
-    const onTabbableIndexChangeOverride = useStableCallback((nextRow, previousRow, reason) => {
-      const children = getChildren();
-      onTabbableIndexChange?.(nextRow, previousRow, reason);
-      const nextColumn = getCurrentTabbableColumn();
-      if (previousRow != null) children.getAt(previousRow)?.setTabbableColumnIndex(nextColumn, reason, false);
-      if (nextRow != null) children.getAt(nextRow)?.setTabbableColumnIndex(nextColumn, reason, false);
-    });
-    const {
-      linearNavigationReturn,
-      rovingTabIndexReturn,
-      typeaheadNavigationReturn,
-      managedChildrenParameters,
-      context: {
-        rovingTabIndexContext,
-        typeaheadNavigationContext
-      },
-      propsStable,
-      ...void1
-    } = useListNavigation({
-      linearNavigationParameters: {
-        navigationDirection: "vertical",
-        ...linearNavigationParameters
-      },
-      rovingTabIndexParameters: {
-        onTabbableIndexChange: onTabbableIndexChangeOverride,
-        ...rovingTabIndexParameters
-      },
-      managedChildrenReturn,
-      typeaheadNavigationParameters
-    });
-    const gridNavigationRowContext = useStableObject({
-      setTabbableRow: rovingTabIndexReturn.setTabbableIndex,
-      getCurrentTabbableColumn,
-      setCurrentTabbableColumn
-    });
-    return {
-      propsStable,
-      managedChildrenParameters,
-      context: useStableObject({
-        gridNavigationRowContext,
-        rovingTabIndexContext,
-        typeaheadNavigationContext
-      }),
-      linearNavigationReturn,
-      rovingTabIndexReturn,
-      typeaheadNavigationReturn
-    };
-  }
-  function useGridNavigationRow(_ref2) {
-    let {
-      context: {
-        rovingTabIndexContext: contextRTI,
-        typeaheadNavigationContext: contextTN,
-        gridNavigationRowContext: {
-          setTabbableRow,
-          getCurrentTabbableColumn,
-          setCurrentTabbableColumn
-        }
-      },
-      linearNavigationParameters,
-      rovingTabIndexParameters: {
-        ...rovingTabIndexParameters
-      },
-      managedChildParameters,
-      managedChildrenReturn,
-      refElementReturn,
-      rovingTabIndexChildParameters,
-      textContentParameters,
-      typeaheadNavigationParameters,
-      ..._void1
-    } = _ref2;
-    monitorCallCount(useGridNavigationRow);
-    const {
-      getChildren
-    } = managedChildrenReturn;
-    const getIndex = useStableCallback(() => {
-      return managedChildParameters.index;
-    });
-    const focusSelf = useStableCallback(e => {
-      var _getCurrentTabbableCo;
-      let index = (_getCurrentTabbableCo = getCurrentTabbableColumn()) !== null && _getCurrentTabbableCo !== void 0 ? _getCurrentTabbableCo : 0;
-      let child = getChildren().getAt(index);
-      let highestIndex = getChildren().getHighestIndex();
-      while ((!child || child.hidden) && index > 0) {
-        --index;
-        child = getChildren().getAt(index);
-      }
-      while ((!child || child.hidden) && index <= highestIndex) {
-        ++index;
-        child = getChildren().getAt(index);
-      }
-      if (child) {
-        const e = child.getElement();
-        child.focusSelf(e);
-      } else {
-        e?.focus?.();
-      }
-    }, []);
-    const {
-      hasCurrentFocusParameters,
-      pressParameters,
-      props: propsLNC,
-      rovingTabIndexChildReturn,
-      textContentReturn
-    } = useListNavigationChild({
-      managedChildParameters,
-      refElementReturn,
-      rovingTabIndexChildParameters,
-      textContentParameters,
-      context: {
-        rovingTabIndexContext: contextRTI,
-        typeaheadNavigationContext: contextTN
-      }
-    });
-    const untabbable = !rovingTabIndexChildReturn.tabbable;
-    const {
-      linearNavigationReturn,
-      managedChildrenParameters,
-      propsStable: propsLN,
-      rovingTabIndexReturn,
-      typeaheadNavigationReturn,
-      context: {
-        rovingTabIndexContext: rtiContext,
-        typeaheadNavigationContext: tnContext
-      }
-    } = useListNavigation({
-      managedChildrenReturn,
-      typeaheadNavigationParameters,
-      rovingTabIndexParameters: {
-        untabbable,
-        ...rovingTabIndexParameters
-      },
-      linearNavigationParameters: {
-        navigationDirection: "horizontal",
-        ...linearNavigationParameters
-      }
-    });
-    const {
-      setTabbableIndex
-    } = rovingTabIndexReturn;
-    const gridNavigationCellContext = useStableObject({
-      setTabbableRow,
-      getRowIndex: getIndex,
-      getCurrentTabbableColumn,
-      setCurrentTabbableColumn,
-      setTabbableCell: setTabbableIndex
-    });
-    const props = useMergedProps(propsLN, propsLNC);
-    props.tabIndex = -1;
-    return {
-      context: useStableObject({
-        rovingTabIndexContext: rtiContext,
-        gridNavigationCellContext,
-        typeaheadNavigationContext: tnContext
-      }),
-      hasCurrentFocusParameters,
-      linearNavigationReturn,
-      managedChildrenParameters,
-      pressParameters,
-      props,
-      rovingTabIndexChildReturn,
-      rovingTabIndexReturn,
-      textContentReturn,
-      typeaheadNavigationReturn,
-      gridNavigationRowParameters: {
-        focusSelf,
-        setTabbableColumnIndex: setTabbableIndex
-      }
-    };
-  }
-  function useGridNavigationCell(_ref3) {
-    let {
-      context: {
-        gridNavigationCellContext: {
-          getRowIndex,
-          setTabbableRow,
-          getCurrentTabbableColumn: _getCurrentColumn,
-          setCurrentTabbableColumn,
-          setTabbableCell
-        },
-        rovingTabIndexContext,
-        typeaheadNavigationContext
-      },
-      rovingTabIndexChildParameters,
-      managedChildParameters,
-      refElementReturn,
-      textContentParameters,
-      gridNavigationCellParameters: {
-        colSpan
-      },
-      ..._void1
-    } = _ref3;
-    monitorCallCount(useGridNavigationCell);
-    const {
-      index
-    } = managedChildParameters;
-    const {
-      hasCurrentFocusParameters: {
-        onCurrentFocusedInnerChanged: ocfic1
-      },
-      rovingTabIndexChildReturn,
-      textContentReturn,
-      pressParameters,
-      props,
-      ...void2
-    } = useListNavigationChild({
-      rovingTabIndexChildParameters,
-      managedChildParameters,
-      context: {
-        rovingTabIndexContext,
-        typeaheadNavigationContext
-      },
-      textContentParameters,
-      refElementReturn
-    });
-    return {
-      props,
-      rovingTabIndexChildReturn,
-      textContentReturn,
-      pressParameters,
-      hasCurrentFocusParameters: {
-        onCurrentFocusedInnerChanged: useStableCallback((focused, prev, e) => {
-          ocfic1?.(focused, prev, e);
-          if (focused) {
-            setTabbableRow(getRowIndex(), e, false);
-            setCurrentTabbableColumn(index, e);
-            setTabbableCell(prev => {
-              if (prev != null && (prev < index || prev > index + colSpan)) {
-                return prev;
-              }
-              return index;
-            }, e, false);
-          }
-        })
-      }
-    };
-  }
-
-  function useSingleSelection(_ref) {
-    let {
-      managedChildrenReturn: {
-        getChildren
-      },
-      rovingTabIndexReturn: {
-        setTabbableIndex
-      },
-      singleSelectionParameters: {
-        onSelectedIndexChange: onSelectedIndexChange_U,
-        initiallySelectedIndex
-      }
-    } = _ref;
-    monitorCallCount(useSingleSelection);
-    const onSelectedIndexChange = useStableCallback(onSelectedIndexChange_U !== null && onSelectedIndexChange_U !== void 0 ? onSelectedIndexChange_U : noop$1);
-    const getSelectedAt = T$2(m => {
-      return m.getSelected();
-    }, []);
-    const setSelectedAt = T$2((m, t, newSelectedIndex, prevSelectedIndex) => {
-      if (m.hidden) {
-        console.assert(false);
-      }
-      const directionComparison = newSelectedIndex == m.index ? prevSelectedIndex : newSelectedIndex;
-      const direction = directionComparison == null ? null : m.index - directionComparison;
-      if (newSelectedIndex == null) console.assert(t == false);
-      if (t) console.assert(newSelectedIndex === m.index);
-      m.setLocalSelected(t, direction);
-    }, []);
-    const isSelectedValid = T$2(m => {
-      return !m.hidden;
-    }, []);
-    const {
-      changeIndex: changeSelectedIndex,
-      getCurrentIndex: getSelectedIndex
-    } = useChildrenFlag({
-      getChildren,
-      onIndexChange: null,
-      initialIndex: initiallySelectedIndex,
-      getAt: getSelectedAt,
-      setAt: setSelectedAt,
-      isValid: isSelectedValid,
-      closestFit: false
-    });
-    return {
-      singleSelectionReturn: useStableObject({
-        getSelectedIndex,
-        changeSelectedIndex
-      }),
-      context: useStableObject({
-        singleSelectionContext: useStableObject({
-          getSelectedIndex,
-          onSelectedIndexChange: onSelectedIndexChange
-        })
-      }),
-      childrenHaveFocusParameters: {
-        onCompositeFocusChange: useStableCallback((anyFocused, prev, reason) => {
-          if (!anyFocused) {
-            const selectedIndex = getSelectedIndex();
-            if (selectedIndex != null) setTabbableIndex(selectedIndex, reason, false);
-          }
-        })
-      }
-    };
-  }
-  function useSingleSelectionChild(args) {
-    var _ariaPropName$split;
-    monitorCallCount(useSingleSelectionChild);
-    const {
-      context: {
-        singleSelectionContext: {
-          getSelectedIndex,
-          onSelectedIndexChange
-        }
-      },
-      singleSelectionChildParameters: {
-        ariaPropName,
-        selectionMode,
-        disabled
-      },
-      managedChildParameters: {
-        index
-      }
-    } = args;
-    useEnsureStability("useSingleSelectionChild", getSelectedIndex, onSelectedIndexChange);
-    const getDisabled = useStableGetter(disabled);
-    const [localSelected, setLocalSelected, getLocalSelected] = useState(getSelectedIndex() == index);
-    const [direction, setDirection, getDirection] = useState(getSelectedIndex() == null ? null : getSelectedIndex() - index);
-    const onCurrentFocusedInnerChanged = useStableCallback((focused, _prev, e) => {
-      if (selectionMode == 'focus' && focused) {
-        onSelectedIndexChange?.(index, e);
-      }
-    });
-    const propParts = (_ariaPropName$split = ariaPropName?.split("-")) !== null && _ariaPropName$split !== void 0 ? _ariaPropName$split : [];
-    return {
-      managedChildParameters: {
-        setLocalSelected: useStableCallback((selected, direction) => {
-          setLocalSelected(selected);
-          setDirection(direction);
-        })
-      },
-      singleSelectionChildReturn: {
-        selected: localSelected,
-        // This is the thing that's passed to onPress or onClick or whatever
-        setThisOneSelected: useStableCallback(event => {
-          console.assert(!getDisabled());
-          if (selectionMode == "disabled") return;
-          if (!disabled) onSelectedIndexChange?.(index, event);
-        }),
-        getSelectedOffset: getDirection,
-        selectedOffset: direction,
-        getSelected: getLocalSelected
-      },
-      props: ariaPropName == null || selectionMode == "disabled" ? {} : {
-        [`${propParts[0]}-${propParts[1]}`]: localSelected ? propParts[1] == "current" ? `${propParts[2]}` : `true` : "false"
-      },
-      hasCurrentFocusParameters: {
-        onCurrentFocusedInnerChanged
-      }
-    };
-  }
-  /**
-   * Let's face it, declarative is nicer to use than imperative, so this is a shortcut.
-   */
-  function useSingleSelectionDeclarative(_ref2) {
-    let {
-      singleSelectionReturn: {
-        changeSelectedIndex
-      },
-      singleSelectionDeclarativeParameters: {
-        selectedIndex
-      }
-    } = _ref2;
-    p$1(() => {
-      changeSelectedIndex(selectedIndex);
-    }, [selectedIndex]);
-  }
-
-  function useGridNavigationSingleSelection(_ref) {
-    let {
-      gridNavigationParameters,
-      linearNavigationParameters,
-      rovingTabIndexParameters,
-      managedChildrenReturn,
-      typeaheadNavigationParameters,
-      singleSelectionParameters,
-      ..._void2
-    } = _ref;
-    monitorCallCount(useGridNavigationSingleSelection);
-    const {
-      context: {
-        gridNavigationRowContext,
-        rovingTabIndexContext,
-        typeaheadNavigationContext
-      },
-      linearNavigationReturn,
-      managedChildrenParameters,
-      propsStable,
-      rovingTabIndexReturn,
-      typeaheadNavigationReturn
-    } = useGridNavigation({
-      gridNavigationParameters,
-      linearNavigationParameters,
-      managedChildrenReturn,
-      rovingTabIndexParameters,
-      typeaheadNavigationParameters
-    });
-    const {
-      childrenHaveFocusParameters,
-      context: {
-        singleSelectionContext
-      },
-      singleSelectionReturn
-    } = useSingleSelection({
-      managedChildrenReturn,
-      rovingTabIndexReturn,
-      singleSelectionParameters
-    });
-    return {
-      context: useStableObject({
-        gridNavigationRowContext,
-        rovingTabIndexContext,
-        singleSelectionContext,
-        typeaheadNavigationContext
-      }),
-      childrenHaveFocusParameters,
-      linearNavigationReturn,
-      managedChildrenParameters,
-      propsStable,
-      rovingTabIndexReturn,
-      singleSelectionReturn,
-      typeaheadNavigationReturn
-    };
-  }
-  function useGridNavigationSingleSelectionRow(_ref2) {
-    let {
-      managedChildParameters: mcp1,
-      singleSelectionChildParameters,
-      linearNavigationParameters,
-      managedChildrenReturn,
-      refElementReturn,
-      rovingTabIndexChildParameters,
-      rovingTabIndexParameters,
-      textContentParameters,
-      typeaheadNavigationParameters,
-      context: {
-        gridNavigationRowContext,
-        rovingTabIndexContext,
-        singleSelectionContext,
-        typeaheadNavigationContext
-      },
-      ..._void1
-    } = _ref2;
-    monitorCallCount(useGridNavigationSingleSelectionRow);
-    const {
-      hasCurrentFocusParameters: {
-        onCurrentFocusedInnerChanged: ocfic1
-      },
-      managedChildParameters: mcp2,
-      props: propsSS,
-      singleSelectionChildReturn
-    } = useSingleSelectionChild({
-      managedChildParameters: mcp1,
-      singleSelectionChildParameters,
-      context: {
-        singleSelectionContext
-      }
-    });
-    const {
-      context,
-      gridNavigationRowParameters,
-      hasCurrentFocusParameters: {
-        onCurrentFocusedInnerChanged: ocfic2
-      },
-      linearNavigationReturn,
-      managedChildrenParameters,
-      pressParameters: {
-        excludeSpace
-      },
-      props: propsGN,
-      rovingTabIndexChildReturn,
-      rovingTabIndexReturn,
-      textContentReturn,
-      typeaheadNavigationReturn
-    } = useGridNavigationRow({
-      context: {
-        gridNavigationRowContext,
-        rovingTabIndexContext,
-        typeaheadNavigationContext
-      },
-      linearNavigationParameters,
-      managedChildParameters: mcp1,
-      managedChildrenReturn,
-      refElementReturn,
-      rovingTabIndexChildParameters,
-      rovingTabIndexParameters,
-      textContentParameters,
-      typeaheadNavigationParameters
-    });
-    return {
-      context,
-      gridNavigationRowParameters,
-      linearNavigationReturn,
-      managedChildParameters: mcp2,
-      managedChildrenParameters,
-      pressParameters: {
-        excludeSpace
-      },
-      hasCurrentFocusParameters: {
-        onCurrentFocusedInnerChanged: useStableCallback((hasFocus, hadFocus) => {
-          ocfic1?.(hasFocus, hadFocus);
-          ocfic2?.(hasFocus, hadFocus);
-        })
-      },
-      props: useMergedProps(propsGN, propsSS),
-      rovingTabIndexChildReturn,
-      rovingTabIndexReturn,
-      singleSelectionChildReturn,
-      textContentReturn,
-      typeaheadNavigationReturn
-    };
-  }
-  // EZ
-  function useGridNavigationSingleSelectionCell(p) {
-    monitorCallCount(useGridNavigationSingleSelectionCell);
-    return useGridNavigationCell(p);
-  }
-
-  /**
-   * Returns a function that will, when called, force the component
-   * that uses this hook to re-render itself.
-   *
-   * It's a bit smelly, so best to use sparingly.
-   */
-  function useForceUpdate() {
-    monitorCallCount(useForceUpdate);
-    const [, set] = h$1(0);
-    return _$1(() => set(i => ++i)).current;
-  }
-
-  /**
-   * Hook that allows for the **direct descendant** children of this component to be re-ordered and sorted.
-   *
-   * *This is **separate** from "managed" children, which can be any level of child needed! Sortable/rearrangeable children must be **direct descendants** of the parent that uses this hook!*
-   *
-   * It's recommended to use this in conjunction with `useListNavigation`; it takes the same `indexMangler` and `indexDemangler`
-   * functions that this hook returns. `useListNavigation` does not directly use this hook because, as mentioned,
-   * this hook imposes serious restrictions on child structure, while `useListNavigation` allows anything.
-   *
-   * Besides the prop-modifying hook that's returned, the `sort` function that's returned will
-   * sort all children according to their value from the `getValue` argument you pass in.
-   *
-   * If you want to perform some re-ordering operation that's *not* a sort, you can manually
-   * re-map each child's position using `mangleMap` and `demangleMap`, which convert between
-   * sorted and unsorted index positions.
-   *
-   * Again, unlike some other hooks, **these children must be direct descendants**. This is because
-   * the prop-modifying hook inspects the given children, then re-creates them with new `key`s.
-   * Because keys are given special treatment and a child has no way of modifying its own key
-   * there's no other time or place this can happen other than exactly within the parent component's render function.
-   */
-  function useRearrangeableChildren(_ref) {
-    let {
-      rearrangeableChildrenParameters: {
-        getIndex,
-        onRearranged
-      }
-    } = _ref;
-    monitorCallCount(useRearrangeableChildren);
-    // These are used to keep track of a mapping between unsorted index <---> sorted index.
-    // These are needed for navigation with the arrow keys.
-    const mangleMap = _$1(new Map());
-    const demangleMap = _$1(new Map());
-    const indexMangler = T$2(n => {
-      var _mangleMap$current$ge;
-      return (_mangleMap$current$ge = mangleMap.current.get(n)) !== null && _mangleMap$current$ge !== void 0 ? _mangleMap$current$ge : n;
-    }, []);
-    const indexDemangler = T$2(n => {
-      var _demangleMap$current$;
-      return (_demangleMap$current$ = demangleMap.current.get(n)) !== null && _demangleMap$current$ !== void 0 ? _demangleMap$current$ : n;
-    }, []);
-    const onRearrangedGetter = useStableGetter(onRearranged);
-    //const { setTabbableIndex } = rovingTabIndexReturn;
-    const shuffle$1 = T$2(managedRows => {
-      const originalRows = managedRows.arraySlice();
-      const shuffledRows = shuffle(originalRows);
-      return rearrange(originalRows, shuffledRows);
-    }, [/* Must remain stable */]);
-    const reverse = T$2(managedRows => {
-      const originalRows = managedRows.arraySlice();
-      const reversedRows = managedRows.arraySlice().reverse();
-      return rearrange(originalRows, reversedRows);
-    }, [/* Must remain stable */]);
-    // The sort function needs to be able to update whoever has all the sortable children.
-    // Because that might not be the consumer of *this* hook directly (e.g. a table uses
-    // this hook, but it's tbody that actually needs updating), we need to remotely
-    // get and set a forceUpdate function.
-    //const [getForceUpdate, setForceUpdate] = usePassiveState<null | (() => void)>(null, returnNull);
-    const [getForceUpdate, setForceUpdate] = usePassiveState(null, returnNull);
-    const rearrange = T$2((originalRows, sortedRows) => {
-      mangleMap.current.clear();
-      demangleMap.current.clear();
-      // Update our sorted <--> unsorted indices map 
-      // and rerender the whole table, basically
-      for (let indexAsSorted = 0; indexAsSorted < sortedRows.length; ++indexAsSorted) {
-        if (sortedRows[indexAsSorted]) {
-          const indexAsUnsorted = sortedRows[indexAsSorted].index;
-          mangleMap.current.set(indexAsUnsorted, indexAsSorted);
-          demangleMap.current.set(indexAsSorted, indexAsUnsorted);
-        }
-      }
-      onRearrangedGetter()?.();
-      getForceUpdate()?.();
-    }, []);
-    const useRearrangedChildren = T$2(children => {
-      monitorCallCount(useRearrangedChildren);
-      console.assert(Array.isArray(children));
-      const forceUpdate = useForceUpdate();
-      y$1(() => {
-        setForceUpdate(_prev => forceUpdate);
-      }, [forceUpdate]);
-      return children.slice().map(child => ({
-        child,
-        mangledIndex: indexMangler(getIndex(child)),
-        demangledIndex: getIndex(child)
-      })).sort((lhs, rhs) => {
-        return lhs.mangledIndex - rhs.mangledIndex;
-      }).map(_ref2 => {
-        let {
-          child,
-          mangledIndex,
-          demangledIndex
-        } = _ref2;
-        return y$2(child.type, {
-          ...child.props,
-          key: demangledIndex,
-          "data-mangled-index": mangledIndex,
-          "data-unmangled-index": demangledIndex
-        });
-      });
-    }, []);
-    const toJsonArray = T$2((managedRows, transform) => {
-      return managedRows.arraySlice().map(child => {
-        if (transform) return transform(child);else return child.getSortValue();
-      });
-    }, []);
-    return {
-      rearrangeableChildrenReturn: {
-        indexMangler,
-        indexDemangler,
-        mangleMap,
-        demangleMap,
-        rearrange,
-        shuffle: shuffle$1,
-        reverse,
-        useRearrangedChildren,
-        toJsonArray
-      }
-    };
-  }
-  /**
-   * Hook that allows for the **direct descendant** children of this component to be re-ordered and sorted.
-   *
-   * *This is **separate** from "managed" children, which can be any level of child needed! Sortable/rearrangeable children must be **direct descendants** of the parent that uses this hook!*
-   *
-   * It's recommended to use this in conjunction with `useListNavigation`; it takes the same `indexMangler` and `indexDemangler`
-   * functions that this hook returns. `useListNavigation` does not directly use this hook because, as mentioned,
-   * this hook imposes serious restrictions on child structure, while `useListNavigation` allows anything.
-   *
-   * Besides the prop-modifying hook that's returned, the `sort` function that's returned will
-   * sort all children according to their value from the `getValue` argument you pass in.
-   *
-   * If you want to perform some re-ordering operation that's *not* a sort, you can manually
-   * re-map each child's position using `mangleMap` and `demangleMap`, which convert between
-   * sorted and unsorted index positions.
-   *
-   * Again, unlike some other hooks, **these children must be direct descendants**. This is because
-   * the prop-modifying hook inspects the given children, then re-creates them with new `key`s.
-   * Because keys are given special treatment and a child has no way of modifying its own key
-   * there's no other time or place this can happen other than exactly within the parent component's render function.
-   */
-  function useSortableChildren(_ref3) {
-    let {
-      rearrangeableChildrenParameters,
-      sortableChildrenParameters: {
-        compare: userCompare
-      }
-    } = _ref3;
-    monitorCallCount(useSortableChildren);
-    const getCompare = useStableGetter(userCompare !== null && userCompare !== void 0 ? userCompare : defaultCompare);
-    const {
-      rearrangeableChildrenReturn
-    } = useRearrangeableChildren({
-      rearrangeableChildrenParameters
-    });
-    const {
-      rearrange
-    } = rearrangeableChildrenReturn;
-    // The actual sort function.
-    const sort = T$2((managedRows, direction) => {
-      const compare = getCompare();
-      const originalRows = managedRows.arraySlice();
-      const sortedRows = compare ? originalRows.sort((lhsRow, rhsRow) => {
-        const lhsValue = lhsRow;
-        const rhsValue = rhsRow;
-        const result = compare(lhsValue, rhsValue);
-        if (direction[0] == "d") return -result;
-        return result;
-      }) : managedRows.arraySlice();
-      return rearrange(originalRows, sortedRows);
-    }, [/* Must remain stable */]);
-    return {
-      sortableChildrenReturn: {
-        sort
-      },
-      rearrangeableChildrenReturn
-    };
-  }
-  function defaultCompare(lhs, rhs) {
-    return compare1(lhs?.getSortValue(), rhs?.getSortValue());
-    function compare1(lhs, rhs) {
-      if (lhs == null || rhs == null) {
-        if (lhs == null) return -1;
-        if (rhs == null) return 1;
-      }
-      return lhs - rhs;
-    }
-  }
-
-  function useGridNavigationSingleSelectionSortable(_ref) {
-    let {
-      rearrangeableChildrenParameters,
-      sortableChildrenParameters,
-      linearNavigationParameters,
-      ...gridNavigationSingleSelectionParameters
-    } = _ref;
-    monitorCallCount(useGridNavigationSingleSelectionSortable);
-    const {
-      ...scr
-    } = useSortableChildren({
-      rearrangeableChildrenParameters,
-      sortableChildrenParameters
-    });
-    const {
-      rearrangeableChildrenReturn: {
-        indexDemangler,
-        indexMangler
-      }
-    } = scr;
-    const gnr = useGridNavigationSingleSelection({
-      linearNavigationParameters: {
-        indexDemangler,
-        indexMangler,
-        ...linearNavigationParameters
-      },
-      ...gridNavigationSingleSelectionParameters
-    });
-    return {
-      ...gnr,
-      ...scr
-    };
-  }
-
-  function useListNavigationSingleSelection(_ref) {
-    let {
-      linearNavigationParameters,
-      rovingTabIndexParameters,
-      typeaheadNavigationParameters,
-      singleSelectionParameters,
-      managedChildrenReturn,
-      ..._void3
-    } = _ref;
-    monitorCallCount(useListNavigationSingleSelection);
-    const {
-      context: {
-        rovingTabIndexContext,
-        typeaheadNavigationContext
-      },
-      propsStable,
-      rovingTabIndexReturn,
-      typeaheadNavigationReturn,
-      managedChildrenParameters,
-      linearNavigationReturn,
-      ...void1
-    } = useListNavigation({
-      linearNavigationParameters,
-      rovingTabIndexParameters,
-      typeaheadNavigationParameters,
-      managedChildrenReturn
-    });
-    const {
-      context: {
-        singleSelectionContext
-      },
-      childrenHaveFocusParameters,
-      singleSelectionReturn,
-      ...void2
-    } = useSingleSelection({
-      rovingTabIndexReturn,
-      managedChildrenReturn,
-      singleSelectionParameters
-    });
-    return {
-      childrenHaveFocusParameters,
-      rovingTabIndexReturn,
-      singleSelectionReturn,
-      typeaheadNavigationReturn,
-      linearNavigationReturn,
-      managedChildrenParameters,
-      context: useStableObject({
-        rovingTabIndexContext,
-        singleSelectionContext,
-        typeaheadNavigationContext
-      }),
-      propsStable
-    };
-  }
-  function useListNavigationSingleSelectionChild(_ref2) {
-    let {
-      managedChildParameters: {
-        index,
-        ..._void5
-      },
-      rovingTabIndexChildParameters: {
-        hidden,
-        ...void7
-      },
-      singleSelectionChildParameters,
-      context,
-      refElementReturn,
-      textContentParameters,
-      ..._void1
-    } = _ref2;
-    monitorCallCount(useListNavigationSingleSelectionChild);
-    const {
-      hasCurrentFocusParameters: {
-        onCurrentFocusedInnerChanged: ocfic2,
-        ..._void3
-      },
-      managedChildParameters,
-      singleSelectionChildReturn,
-      props: propsSS,
-      ...void9
-    } = useSingleSelectionChild({
-      managedChildParameters: {
-        index
-      },
-      singleSelectionChildParameters,
-      context
-    });
-    const {
-      hasCurrentFocusParameters: {
-        onCurrentFocusedInnerChanged: ocfic1,
-        ..._void6
-      },
-      pressParameters,
-      rovingTabIndexChildReturn,
-      textContentReturn,
-      props: propsLN,
-      ...void8
-    } = useListNavigationChild({
-      managedChildParameters: {
-        index
-      },
-      rovingTabIndexChildParameters: {
-        hidden
-      },
-      context,
-      refElementReturn,
-      textContentParameters
-    });
-    return {
-      hasCurrentFocusParameters: {
-        onCurrentFocusedInnerChanged: useStableCallback((focused, previouslyFocused, e) => {
-          ocfic1?.(focused, previouslyFocused, e);
-          ocfic2?.(focused, previouslyFocused, e);
-        })
-      },
-      pressParameters,
-      managedChildParameters,
-      rovingTabIndexChildReturn,
-      singleSelectionChildReturn,
-      textContentReturn,
-      props: useMergedProps(propsLN, propsSS)
-    };
-  }
-
-  function useListNavigationSingleSelectionSortable(_ref) {
-    let {
-      linearNavigationParameters,
-      rovingTabIndexParameters,
-      typeaheadNavigationParameters,
-      singleSelectionParameters,
-      managedChildrenReturn,
-      rearrangeableChildrenParameters,
-      sortableChildrenParameters,
-      ...void3
-    } = _ref;
-    monitorCallCount(useListNavigationSingleSelectionSortable);
-    const {
-      rearrangeableChildrenReturn,
-      sortableChildrenReturn,
-      ...void1
-    } = useSortableChildren({
-      rearrangeableChildrenParameters,
-      sortableChildrenParameters
-    });
-    const {
-      indexDemangler,
-      indexMangler
-    } = rearrangeableChildrenReturn;
-    const {
-      propsStable,
-      childrenHaveFocusParameters,
-      context,
-      linearNavigationReturn,
-      managedChildrenParameters,
-      rovingTabIndexReturn,
-      singleSelectionReturn,
-      typeaheadNavigationReturn,
-      ...void2
-    } = useListNavigationSingleSelection({
-      linearNavigationParameters: {
-        ...linearNavigationParameters,
-        indexDemangler,
-        indexMangler
-      },
-      rovingTabIndexParameters,
-      typeaheadNavigationParameters,
-      singleSelectionParameters,
-      managedChildrenReturn
-    });
-    return {
-      context,
-      propsStable,
-      childrenHaveFocusParameters,
-      linearNavigationReturn,
-      managedChildrenParameters,
-      rearrangeableChildrenReturn,
-      rovingTabIndexReturn,
-      singleSelectionReturn,
-      sortableChildrenReturn,
-      typeaheadNavigationReturn
-    };
-  }
-
   function usePaginatedChildren(_ref) {
     let {
       managedChildrenReturn: {
@@ -6743,7 +6722,7 @@
         })
       }),
       managedChildrenParameters: {
-        onChildCountChange: useStableCallback(count => {
+        onChildrenCountChange: useStableCallback(count => {
           if (paginationMax != null || paginationMin != null) {
             setChildCount(count);
             const min = paginationMin !== null && paginationMin !== void 0 ? paginationMin : 0;
@@ -6766,7 +6745,7 @@
   }
   function usePaginatedChild(_ref2) {
     let {
-      managedChildParameters: {
+      info: {
         index
       },
       context: {
@@ -6790,7 +6769,7 @@
         isPaginated: parentIsPaginated,
         hideBecausePaginated: parentIsPaginated ? !paginatedVisible : false
       },
-      managedChildParameters: {
+      info: {
         setPaginationVisible: setPaginatedVisible,
         setChildCountIfPaginated,
         setParentIsPaginated
@@ -6916,7 +6895,7 @@
   }
   function useStaggeredChild(_ref2) {
     let {
-      managedChildParameters: {
+      info: {
         index
       },
       context: {
@@ -6945,7 +6924,7 @@
         isStaggered: parentIsStaggered,
         hideBecauseStaggered: parentIsStaggered ? !staggeredVisible : false
       },
-      managedChildParameters: {
+      info: {
         setStaggeredVisible: setStaggeredVisible,
         setParentIsStaggered
       }
@@ -7127,7 +7106,7 @@
     });
     const mcr = useManagedChildren({
       managedChildrenParameters: {
-        onChildCountChange: useStableCallback(c => onChildCountChange(c)),
+        onChildrenCountChange: useStableCallback(c => onChildrenCountChange(c)),
         ...managedChildrenParameters
       }
     });
@@ -7143,7 +7122,7 @@
         refreshPagination
       },
       managedChildrenParameters: {
-        onChildCountChange
+        onChildrenCountChange
       },
       context: {
         paginatedChildContext
@@ -7188,9 +7167,11 @@
   }
   function useCompleteGridNavigationRow(_ref2) {
     let {
-      managedChildParameters,
+      info: {
+        index,
+        ...info5
+      },
       context: contextIncomingForRowAsChildOfTable,
-      completeGridNavigationRowParameters,
       singleSelectionChildParameters,
       rovingTabIndexChildParameters,
       rovingTabIndexChildParameters: {
@@ -7204,14 +7185,7 @@
     } = _ref2;
     monitorCallCount(useCompleteGridNavigationRow);
     const {
-      index
-    } = managedChildParameters;
-    const {
-      managedChildParameters: {
-        setChildCountIfPaginated,
-        setPaginationVisible,
-        setParentIsPaginated
-      },
+      info: info3,
       paginatedChildReturn: {
         paginatedVisible,
         isPaginated,
@@ -7219,23 +7193,21 @@
       },
       props: paginationProps
     } = usePaginatedChild({
-      managedChildParameters: {
+      info: {
         index
       },
       context: contextIncomingForRowAsChildOfTable
     });
     const {
-      managedChildParameters: {
-        setParentIsStaggered,
-        setStaggeredVisible
-      },
+      info: info4,
+      // { setParentIsStaggered, setStaggeredVisible },
       staggeredChildReturn: {
         isStaggered,
         hideBecauseStaggered
       },
       props: staggeredProps
     } = useStaggeredChild({
-      managedChildParameters: {
+      info: {
         index
       },
       context: contextIncomingForRowAsChildOfTable
@@ -7280,7 +7252,10 @@
       rovingTabIndexChildParameters,
       context: contextIncomingForRowAsChildOfTable,
       singleSelectionChildParameters,
-      managedChildParameters,
+      info: {
+        index,
+        ...info5
+      },
       textContentParameters: {
         hidden,
         ...textContentParameters
@@ -7293,13 +7268,17 @@
       },
       linearNavigationReturn,
       managedChildrenParameters,
-      pressParameters,
+      pressParameters: {
+        excludeSpace
+      },
+      // TODO: Pass this through context?
       rovingTabIndexChildReturn,
       rovingTabIndexReturn,
       singleSelectionChildReturn,
       textContentReturn,
       typeaheadNavigationReturn,
-      context: contextGNR
+      context: contextGNR,
+      info: info2
     } = r;
     //const { rowAsChildOfGridReturn: { props: propsRowAsChild, ...rowAsChildOfGridReturn }, rowAsParentOfCellsReturn: { propsStable: propsParentOfCells, ...rowAsParentOfCellsReturn } } = r;
     const {
@@ -7308,39 +7287,26 @@
     } = useManagedChildren({
       managedChildrenParameters
     });
-    const {
-      getElement
-    } = refElementReturn;
     const baseInfo = {
-      getElement,
-      setTabbable: rovingTabIndexChildReturn.setTabbable,
-      getTabbable: rovingTabIndexChildReturn.getTabbable,
-      tabbable: rovingTabIndexChildReturn.tabbable,
-      index: managedChildParameters.index,
+      getElement: refElementReturn.getElement,
+      index,
       hidden: rovingTabIndexChildParameters.hidden,
-      selected: singleSelectionChildReturn.selected,
       focusSelf,
-      getSelected: singleSelectionChildReturn.getSelected,
-      setLocalSelected: r.managedChildParameters.setLocalSelected,
       disabled: singleSelectionChildParameters.disabled,
       setTabbableColumnIndex,
       getSortValue: sortableChildParameters.getSortValue,
-      setPaginationVisible,
-      setChildCountIfPaginated: setChildCountIfPaginated,
-      setParentIsPaginated,
-      setParentIsStaggered,
-      setStaggeredVisible
+      ...info2,
+      ...info3,
+      ...info4
     };
     const {
       managedChildReturn
     } = useManagedChild({
       context: contextIncomingForRowAsChildOfTable,
-      managedChildParameters: {
-        index
+      info: {
+        ...baseInfo,
+        ...info5
       }
-    }, {
-      ...baseInfo,
-      ...completeGridNavigationRowParameters
     });
     const context = useStableObject({
       ...contextGNR,
@@ -7391,7 +7357,6 @@
   function useCompleteGridNavigationCell(_ref3) {
     let {
       gridNavigationCellParameters,
-      managedChildParameters,
       context: {
         gridNavigationCellContext,
         managedChildContext,
@@ -7403,15 +7368,13 @@
       },
       rovingTabIndexChildParameters,
       textContentParameters,
-      completeGridNavigationCellParameters: {
+      info: {
         focusSelf,
-        ...completeGridNavigationCellParameters
+        index,
+        ...info
       }
     } = _ref3;
     monitorCallCount(useCompleteGridNavigationCell);
-    const {
-      index
-    } = managedChildParameters;
     const {
       refElementReturn,
       propsStable
@@ -7423,10 +7386,14 @@
       rovingTabIndexChildReturn,
       textContentReturn,
       pressParameters,
-      props: propsRti
+      props: propsRti,
+      info: info2
     } = useGridNavigationSingleSelectionCell({
       gridNavigationCellParameters,
-      managedChildParameters,
+      info: {
+        index,
+        ...info
+      },
       context: {
         gridNavigationCellContext,
         rovingTabIndexContext,
@@ -7452,9 +7419,9 @@
       focusSelf,
       getElement: refElementReturn.getElement,
       hidden: rovingTabIndexChildParameters.hidden,
-      index: managedChildParameters.index,
-      getTabbable: rovingTabIndexChildReturn.getTabbable,
-      setTabbable: rovingTabIndexChildReturn.setTabbable,
+      index,
+      getLocallyTabbable: rovingTabIndexChildReturn.getTabbable,
+      setLocallyTabbable: info2.setLocallyTabbable,
       tabbable: rovingTabIndexChildReturn.tabbable
     };
     const {
@@ -7463,12 +7430,10 @@
       context: {
         managedChildContext
       },
-      managedChildParameters: {
-        index
+      info: {
+        ...baseInfo,
+        ...info
       }
-    }, {
-      ...baseInfo,
-      ...completeGridNavigationCellParameters
     });
     const props = useMergedProps(propsStable, propsRti, hasCurrentFocusReturn.propsStable);
     return {
@@ -7479,6 +7444,53 @@
       hasCurrentFocusReturn,
       managedChildReturn,
       textContentReturn
+    };
+  }
+  function useCompleteGridNavigationDeclarative(_ref4) {
+    let {
+      gridNavigationParameters,
+      linearNavigationParameters,
+      paginatedChildrenParameters,
+      rearrangeableChildrenParameters,
+      rovingTabIndexParameters,
+      singleSelectionDeclarativeParameters,
+      sortableChildrenParameters,
+      staggeredChildrenParameters,
+      typeaheadNavigationParameters
+    } = _ref4;
+    const ret = useCompleteGridNavigation({
+      linearNavigationParameters,
+      paginatedChildrenParameters,
+      rearrangeableChildrenParameters,
+      rovingTabIndexParameters,
+      singleSelectionParameters: {
+        initiallySelectedIndex: singleSelectionDeclarativeParameters.selectedIndex,
+        onSelectedIndexChange: useStableCallback((a, e) => onSelectedIndexChange?.(a, e))
+      },
+      sortableChildrenParameters,
+      staggeredChildrenParameters,
+      typeaheadNavigationParameters,
+      gridNavigationParameters
+    });
+    const {
+      singleSelectionParameters: {
+        onSelectedIndexChange
+      }
+    } = useSingleSelectionDeclarative({
+      singleSelectionDeclarativeParameters,
+      singleSelectionReturn: ret.singleSelectionReturn
+    });
+    const {
+      singleSelectionReturn: {
+        getSelectedIndex
+      },
+      ...ret2
+    } = ret;
+    return {
+      ...ret2,
+      singleSelectionReturn: {
+        getSelectedIndex
+      }
     };
   }
 
@@ -7509,7 +7521,7 @@
       initiallySelectedIndex
     } = singleSelectionParameters;
     const getChildren = T$2(() => managedChildrenReturn.getChildren(), []);
-    const getHighestChildIndex = T$2(() => getChildren().getHighestIndex(), []);
+    const getHighestIndex = T$2(() => getChildren().getHighestIndex(), []);
     const isValid = T$2(i => {
       const child = getChildren().getAt(i);
       if (!child) return false;
@@ -7518,7 +7530,10 @@
     }, []);
     const {
       childrenHaveFocusParameters,
-      managedChildrenParameters,
+      managedChildrenParameters: {
+        onChildrenMountChange,
+        ...managedChildrenParameters
+      },
       context: {
         rovingTabIndexContext,
         singleSelectionContext,
@@ -7536,7 +7551,7 @@
         getChildren
       },
       linearNavigationParameters: {
-        getHighestIndex: getHighestChildIndex,
+        getHighestIndex,
         isValid,
         ...linearNavigationParameters
       },
@@ -7567,31 +7582,20 @@
       childrenHaveFocusParameters
     });
     const {
-      context: {
-        managedChildContext
-      },
-      managedChildrenReturn
-    } = useManagedChildren({
-      managedChildrenParameters: {
-        onChildCountChange: useStableCallback(c => {
-          onChildCountChange(c);
-        }),
-        ...managedChildrenParameters
-      }
-    });
-    const {
       paginatedChildrenReturn,
       paginatedChildrenReturn: {
         refreshPagination
       },
       managedChildrenParameters: {
-        onChildCountChange
+        onChildrenCountChange
       },
       context: {
         paginatedChildContext
       }
     } = usePaginatedChildren({
-      managedChildrenReturn,
+      managedChildrenReturn: {
+        getChildren: useStableCallback(() => managedChildrenReturn.getChildren())
+      },
       paginatedChildrenParameters,
       linearNavigationParameters: {
         indexDemangler: rearrangeableChildrenReturn.indexDemangler
@@ -7603,8 +7607,24 @@
       },
       staggeredChildrenReturn
     } = useStaggeredChildren({
-      managedChildrenReturn,
+      managedChildrenReturn: {
+        getChildren: useStableCallback(() => managedChildrenReturn.getChildren())
+      },
       staggeredChildrenParameters
+    });
+    const {
+      context: {
+        managedChildContext
+      },
+      managedChildrenReturn
+    } = useManagedChildren({
+      managedChildrenParameters: {
+        onChildrenCountChange: useStableCallback(c => {
+          onChildrenCountChange(c);
+        }),
+        onChildrenMountChange,
+        ...managedChildrenParameters
+      }
     });
     const context = useStableObject(useStableObject({
       childrenHaveFocusChildContext,
@@ -7632,16 +7652,12 @@
   }
   function useCompleteListNavigationChild(_ref2) {
     let {
-      //managedChildParameters: { hidden, disabled, index, getSortValue },
-      completeListNavigationChildParameters: {
-        focusSelf,
-        ...completeListNavigationChildParameters
-      },
+      //completeListNavigationChildParameters: { focusSelf, ...completeListNavigationChildParameters },
       singleSelectionChildParameters,
       rovingTabIndexChildParameters: {
         hidden
       },
-      managedChildParameters,
+      info,
       textContentParameters,
       context: {
         childrenHaveFocusChildContext,
@@ -7652,28 +7668,23 @@
         singleSelectionContext,
         typeaheadNavigationContext
       },
-      sortableChildParameters: {
-        getSortValue
-      },
+      sortableChildParameters,
       ..._void
     } = _ref2;
     monitorCallCount(useCompleteListNavigationChild);
     const {
-      index
-    } = managedChildParameters;
+      index,
+      focusSelf
+    } = info;
     const {
-      managedChildParameters: {
-        setChildCountIfPaginated,
-        setPaginationVisible,
-        setParentIsPaginated
-      },
+      info: mcp3,
       paginatedChildReturn,
       paginatedChildReturn: {
         hideBecausePaginated
       },
       props: paginationProps
     } = usePaginatedChild({
-      managedChildParameters: {
+      info: {
         index
       },
       context: {
@@ -7681,17 +7692,14 @@
       }
     });
     const {
-      managedChildParameters: {
-        setParentIsStaggered,
-        setStaggeredVisible
-      },
+      info: mcp4,
       staggeredChildReturn,
       staggeredChildReturn: {
         hideBecauseStaggered
       },
       props: staggeredProps
     } = useStaggeredChild({
-      managedChildParameters,
+      info,
       context: {
         staggeredChildContext
       }
@@ -7708,21 +7716,17 @@
       refElementParameters: {}
     });
     const {
-      getElement
-    } = refElementReturn;
-    const {
       hasCurrentFocusParameters: {
         onCurrentFocusedInnerChanged: ocfic1
       },
       pressParameters,
-      rovingTabIndexChildReturn,
+      textContentReturn,
       singleSelectionChildReturn,
-      managedChildParameters: {
-        setLocalSelected
-      },
-      props: propsLs
+      info: mcp5,
+      props: propsLs,
+      rovingTabIndexChildReturn
     } = useListNavigationSingleSelectionChild({
-      managedChildParameters: {
+      info: {
         index
       },
       rovingTabIndexChildParameters: {
@@ -7742,33 +7746,16 @@
         ...textContentParameters
       }
     });
-    const {
-      getTabbable,
-      setTabbable,
-      tabbable
-    } = rovingTabIndexChildReturn;
-    const {
-      getSelected,
-      selected
-    } = singleSelectionChildReturn;
     const mcp1 = {
-      disabled,
-      focusSelf,
-      getElement,
-      getSelected,
-      getTabbable,
-      hidden,
       index,
-      selected,
-      setLocalSelected,
-      setTabbable,
-      tabbable,
-      getSortValue,
-      setChildCountIfPaginated,
-      setPaginationVisible,
-      setParentIsPaginated,
-      setParentIsStaggered,
-      setStaggeredVisible
+      focusSelf,
+      getElement: refElementReturn.getElement,
+      getSortValue: sortableChildParameters.getSortValue,
+      disabled,
+      hidden,
+      ...mcp4,
+      ...mcp3,
+      ...mcp5
     };
     const {
       managedChildReturn
@@ -7776,12 +7763,10 @@
       context: {
         managedChildContext
       },
-      managedChildParameters: {
-        index
+      info: {
+        ...mcp1,
+        ...info
       }
-    }, {
-      ...mcp1,
-      ...completeListNavigationChildParameters
     });
     const {
       hasCurrentFocusParameters: {
@@ -7808,14 +7793,60 @@
     const props = useMergedProps(propsStable, hasCurrentFocusReturn.propsStable, propsLs, paginationProps, staggeredProps);
     return {
       props,
+      textContentReturn,
       pressParameters,
       refElementReturn,
-      rovingTabIndexChildReturn,
       singleSelectionChildReturn,
       hasCurrentFocusReturn,
       managedChildReturn,
       paginatedChildReturn,
-      staggeredChildReturn
+      staggeredChildReturn,
+      rovingTabIndexChildReturn
+    };
+  }
+  function useCompleteListNavigationDeclarative(_ref3) {
+    let {
+      linearNavigationParameters,
+      paginatedChildrenParameters,
+      rearrangeableChildrenParameters,
+      rovingTabIndexParameters,
+      singleSelectionDeclarativeParameters,
+      sortableChildrenParameters,
+      staggeredChildrenParameters,
+      typeaheadNavigationParameters
+    } = _ref3;
+    const ret = useCompleteListNavigation({
+      linearNavigationParameters,
+      paginatedChildrenParameters,
+      rearrangeableChildrenParameters,
+      rovingTabIndexParameters,
+      singleSelectionParameters: {
+        initiallySelectedIndex: singleSelectionDeclarativeParameters.selectedIndex,
+        onSelectedIndexChange: useStableCallback((a, e) => onSelectedIndexChange?.(a, e))
+      },
+      sortableChildrenParameters,
+      staggeredChildrenParameters,
+      typeaheadNavigationParameters
+    });
+    const {
+      singleSelectionParameters: {
+        onSelectedIndexChange
+      }
+    } = useSingleSelectionDeclarative({
+      singleSelectionDeclarativeParameters,
+      singleSelectionReturn: ret.singleSelectionReturn
+    });
+    const {
+      singleSelectionReturn: {
+        getSelectedIndex
+      },
+      ...ret2
+    } = ret;
+    return {
+      ...ret2,
+      singleSelectionReturn: {
+        getSelectedIndex
+      }
     };
   }
 
@@ -8803,7 +8834,7 @@
       refElementReturn
     });
     A$1(handle, () => imperativeHandle);
-    return y$2(Tag, useMergedProps(propsStable, iprops, props, {
+    return y$3(Tag, useMergedProps(propsStable, iprops, props, {
       ref
     }));
   }
@@ -8921,7 +8952,7 @@
     const element = F$2(() => {
       return target == null ? null : typeof target == "string" ? document.getElementById(target) : target;
     }, [target]);
-    const children = !element ? null : z$1(o$2(PortalChildren, {
+    const children = !element ? null : z$1(o$3(PortalChildren, {
       setPushChild: setPushChild,
       setUpdateChild: setUpdateChild,
       setRemoveChild: setRemoveChild
@@ -8989,7 +9020,7 @@
     y$1(() => {
       setRemoveChild(_ => removeChild);
     }, [removeChild]);
-    return o$2(_$3, {
+    return o$3(_$3, {
       children: children
     });
   }
@@ -9280,13 +9311,12 @@
     let {
       accordionParameters: {
         initialIndex,
-        localStorageKey
+        localStorageKey,
+        orientation
       },
       typeaheadNavigationParameters,
       linearNavigationParameters: {
-        disableArrowKeys,
         disableHomeEndKeys,
-        navigationDirection,
         navigatePastEnd,
         navigatePastStart,
         pageNavigationSize
@@ -9397,12 +9427,11 @@
           stableTypeaheadProps: propsTN
         }),
         linearNavigationParameters: useStableObject({
-          disableArrowKeys,
           disableHomeEndKeys,
           getHighestIndex: T$2(() => getChildren().getHighestIndex(), []),
           indexMangler: identity,
           indexDemangler: identity,
-          navigationDirection,
+          arrowKeyDirection: orientation !== null && orientation !== void 0 ? orientation : "vertical",
           isValid: isValidByIndex,
           navigatePastEnd,
           navigatePastStart,
@@ -9424,7 +9453,7 @@
         open: openFromUser,
         bodyRole
       },
-      managedChildParameters: {
+      info: {
         index
       },
       rovingTabIndexChildParameters: {
@@ -9496,18 +9525,16 @@
       context: {
         managedChildContext
       },
-      managedChildParameters: {
-        index: index
+      info: {
+        index,
+        disabled,
+        focusSelf,
+        getMostRecentlyTabbed,
+        getOpenFromParent,
+        hidden,
+        setMostRecentlyTabbed,
+        setOpenFromParent
       }
-    }, {
-      index,
-      disabled,
-      focusSelf,
-      getMostRecentlyTabbed,
-      getOpenFromParent,
-      hidden,
-      setMostRecentlyTabbed,
-      setOpenFromParent
     });
     const onPress = e => {
       setCurrentFocusedIndex(index);
@@ -9527,7 +9554,7 @@
       },
       textContentReturn
     } = useTypeaheadNavigationChild({
-      managedChildParameters: {
+      info: {
         index
       },
       refElementReturn: {
@@ -9592,7 +9619,10 @@
       sortableChildrenParameters,
       rovingTabIndexParameters,
       typeaheadNavigationParameters,
-      staggeredChildrenParameters
+      staggeredChildrenParameters,
+      checkboxGroupParameters: {
+        orientation
+      }
     } = _ref;
     monitorCallCount(useCheckboxGroup);
     const {
@@ -9609,7 +9639,10 @@
       sortableChildrenReturn,
       typeaheadNavigationReturn
     } = useCompleteListNavigation({
-      linearNavigationParameters,
+      linearNavigationParameters: {
+        arrowKeyDirection: orientation,
+        ...linearNavigationParameters
+      },
       staggeredChildrenParameters,
       rearrangeableChildrenParameters,
       rovingTabIndexParameters,
@@ -9720,9 +9753,8 @@
   }
   function useCheckboxGroupParent(_ref2) {
     let {
-      completeListNavigationChildParameters,
       context,
-      managedChildParameters,
+      info,
       rovingTabIndexChildParameters,
       textContentParameters,
       sortableChildParameters
@@ -9741,6 +9773,7 @@
       hasCurrentFocusReturn,
       managedChildReturn,
       pressParameters,
+      textContentReturn,
       refElementReturn,
       props,
       paginatedChildReturn,
@@ -9748,9 +9781,8 @@
       staggeredChildReturn,
       singleSelectionChildReturn
     } = useCompleteListNavigationChild({
-      completeListNavigationChildParameters,
       context,
-      managedChildParameters,
+      info,
       rovingTabIndexChildParameters,
       sortableChildParameters,
       textContentParameters,
@@ -9781,6 +9813,7 @@
       checkboxGroupParentReturn,
       hasCurrentFocusReturn,
       managedChildReturn,
+      textContentReturn,
       staggeredChildReturn,
       refElementReturn,
       props: useMergedProps({
@@ -9808,9 +9841,8 @@
   function useCheckboxGroupChild(_ref3) {
     let {
       checkboxGroupChild,
-      completeListNavigationChildParameters,
       context,
-      managedChildParameters,
+      info,
       textContentParameters,
       rovingTabIndexChildParameters,
       sortableChildParameters
@@ -9855,25 +9887,23 @@
       managedChildReturn,
       pressParameters,
       refElementReturn,
+      textContentReturn,
       props,
       singleSelectionChildReturn: _singleSelectionChildReturn,
       staggeredChildReturn,
       paginatedChildReturn,
       rovingTabIndexChildReturn
     } = useCompleteListNavigationChild({
-      completeListNavigationChildParameters: {
+      info: {
         checkboxInfo: {
           checkboxChildType: "child",
           getLastUserChecked,
           getChecked,
           setCheckedFromParentInput: onChangeFromParent
         },
-        ...completeListNavigationChildParameters
+        ...info
       },
       context,
-      managedChildParameters: {
-        ...managedChildParameters
-      },
       rovingTabIndexChildParameters,
       textContentParameters,
       sortableChildParameters,
@@ -9888,6 +9918,7 @@
         onChildCheckedChange,
         onControlIdChanged
       },
+      textContentReturn,
       hasCurrentFocusReturn,
       managedChildReturn,
       staggeredChildReturn,
@@ -10371,18 +10402,12 @@
       rovingTabIndexReturn,
       singleSelectionReturn,
       ...restRet
-    } = useCompleteGridNavigation({
-      singleSelectionParameters: {
-        initiallySelectedIndex: selectedIndex,
-        onSelectedIndexChange
+    } = useCompleteGridNavigationDeclarative({
+      singleSelectionDeclarativeParameters: {
+        selectedIndex: selectedIndex,
+        setSelectedIndex: onSelectedIndexChange
       },
       ...restParams
-    });
-    useSingleSelectionDeclarative({
-      singleSelectionReturn,
-      singleSelectionDeclarativeParameters: {
-        selectedIndex
-      }
     });
     let propsGridlist = useMergedProps(propsStable, propsLabelList, {
       "aria-multiselectable": selectionLimit == "multi" ? "true" : undefined
@@ -10407,7 +10432,6 @@
     return {
       context: fullContext,
       rovingTabIndexReturn,
-      singleSelectionReturn,
       propsGridlist,
       propsGridlistLabel: propsLabelLabel,
       ...restRet
@@ -10419,9 +10443,8 @@
         selected
       },
       linearNavigationParameters,
-      completeGridNavigationRowParameters,
       context: cx1,
-      managedChildParameters,
+      info,
       rovingTabIndexChildParameters,
       rovingTabIndexParameters,
       singleSelectionChildParameters,
@@ -10455,9 +10478,8 @@
         disableHomeEndKeys: true,
         ...linearNavigationParameters
       },
-      completeGridNavigationRowParameters,
+      info,
       context: cx1,
-      managedChildParameters,
       rovingTabIndexChildParameters,
       rovingTabIndexParameters,
       singleSelectionChildParameters,
@@ -10501,7 +10523,7 @@
     } = usePress({
       pressParameters: {
         ...pressParameters,
-        focusSelf: p.completeGridNavigationCellParameters.focusSelf
+        focusSelf: p.info.focusSelf
       },
       refElementReturn: info.refElementReturn
     });
@@ -10675,12 +10697,10 @@
       toolbarParameters: {
         orientation,
         role,
+        selectedIndex,
         onSelectedIndexChange
       },
       labelParameters,
-      singleSelectionDeclarativeParameters: {
-        selectedIndex
-      },
       ...listNavParameters
     } = _ref;
     monitorCallCount(useToolbar);
@@ -10688,11 +10708,11 @@
       context,
       propsStable,
       ...listNavReturn
-    } = useCompleteListNavigation({
+    } = useCompleteListNavigationDeclarative({
       ...listNavParameters,
-      singleSelectionParameters: {
-        initiallySelectedIndex: selectedIndex,
-        onSelectedIndexChange: onSelectedIndexChange !== null && onSelectedIndexChange !== void 0 ? onSelectedIndexChange : null
+      singleSelectionDeclarativeParameters: {
+        selectedIndex,
+        setSelectedIndex: onSelectedIndexChange
       },
       paginatedChildrenParameters: {
         paginationMax: null,
@@ -10700,17 +10720,11 @@
       },
       linearNavigationParameters: {
         ...linearNavigationParameters,
-        navigationDirection: orientation
+        arrowKeyDirection: orientation
       }
     });
-    useSingleSelectionDeclarative({
-      singleSelectionDeclarativeParameters: {
-        selectedIndex
-      },
-      singleSelectionReturn: {
-        changeSelectedIndex: listNavReturn.singleSelectionReturn.changeSelectedIndex
-      }
-    });
+    //const _v: void = useSingleSelectionDeclarative({
+    //})
     const {
       propsInput: propsToolbar,
       propsLabel,
@@ -10983,7 +10997,7 @@
       context: F$2(() => ({
         notify
       }), [notify]),
-      children: o$2(_$3, {
+      children: o$3(_$3, {
         children: [childrenPolite, childrenAssertive]
       })
     };
@@ -11107,7 +11121,8 @@
     } = _ref;
     monitorCallCount(useRadioGroup);
     const [selectedIndex, setSelectedIndex] = useState(null);
-    const byName = _$1(new Map());
+    const nameToIndex = _$1(new Map());
+    const indexToName = _$1(new Map());
     const {
       propsInput: propsGroup1,
       propsLabel
@@ -11125,9 +11140,9 @@
         prefix: Prefices.radioGroup
       }
     });
-    p$1(() => {
-      var _byName$current$get;
-      if (selectedValue != null) singleSelectionReturn.changeSelectedIndex((_byName$current$get = byName.current.get(selectedValue)) !== null && _byName$current$get !== void 0 ? _byName$current$get : null);else singleSelectionReturn.changeSelectedIndex(null);
+    y$1(() => {
+      var _nameToIndex$current$;
+      if (selectedValue != null) singleSelectionReturn.changeSelectedIndex((_nameToIndex$current$ = nameToIndex.current.get(selectedValue)) !== null && _nameToIndex$current$ !== void 0 ? _nameToIndex$current$ : null);else singleSelectionReturn.changeSelectedIndex(null);
     }, [selectedValue]);
     const {
       context,
@@ -11139,7 +11154,10 @@
     } = useCompleteListNavigation({
       singleSelectionParameters: {
         initiallySelectedIndex: selectedIndex,
-        onSelectedIndexChange: setSelectedIndex
+        onSelectedIndexChange: useStableCallback((i, e) => {
+          setSelectedIndex(i);
+          onSelectedIndexChange?.(i, e);
+        })
       },
       paginatedChildrenParameters: {
         paginationMin: null,
@@ -11147,20 +11165,31 @@
       },
       ...restParams
     });
-    useSingleSelectionDeclarative({
+    const {
+      singleSelectionParameters: {
+        onSelectedIndexChange
+      }
+    } = useSingleSelectionDeclarative({
       singleSelectionReturn: {
         changeSelectedIndex: useStableCallback((s, r) => {
-          let next = typeof s == "function" ? s(selectedIndex) : s;
+          singleSelectionReturn.changeSelectedIndex(s, r);
+          /*let next = typeof s == "function" ? s(selectedIndex) : s;
           if (next != null) {
-            const nextValue = managedChildrenReturn.getChildren().getAt(next)?.getValue2();
-            onSelectedValueChange(nextValue, r);
-          } else {
-            onSelectedValueChange(null, r);
+              const nextValue = indexToName.current.get(next); //managedChildrenReturn.getChildren().getAt(next)?.getValue2();
+              onSelectedValueChange(nextValue as V, r);
           }
+          else {
+              onSelectedValueChange(null, r);
+          }*/
         })
       },
+
       singleSelectionDeclarativeParameters: {
-        selectedIndex
+        selectedIndex,
+        setSelectedIndex: useStableCallback((i, e) => {
+          let value = i == null ? null : indexToName.current.get(i);
+          onSelectedValueChange?.(value !== null && value !== void 0 ? value : null, e);
+        })
       }
     });
     const propsRadioGroup = useMergedProps(propsGroup1, propsGroup2, {
@@ -11174,7 +11203,8 @@
         ...context,
         radioContext: {
           name,
-          byName: byName.current
+          indexToName: indexToName.current,
+          nameToIndex: nameToIndex.current
         }
       }), [name]),
       managedChildrenReturn,
@@ -11193,9 +11223,8 @@
       checkboxLikeParameters: {
         disabled
       },
-      completeListNavigationChildParameters,
       labelParameters,
-      managedChildParameters,
+      info,
       singleSelectionChildParameters,
       context,
       textContentParameters,
@@ -11203,30 +11232,27 @@
       sortableChildParameters
     } = _ref2;
     monitorCallCount(useRadio);
-    const index = managedChildParameters.index;
+    const index = info.index;
     const onInput = useStableCallback(e => {
       singleSelectionChildReturn.setThisOneSelected(e);
     });
     const {
       name,
-      byName
+      indexToName,
+      nameToIndex
     } = context.radioContext;
     const {
       tagInput,
       labelPosition
     } = labelParameters;
-    const getValue = useStableGetter(value);
+    useStableGetter(value);
     const {
       props: listNavigationSingleSelectionChildProps,
       singleSelectionChildReturn,
       pressParameters,
       ...listNavRet
     } = useCompleteListNavigationChild({
-      completeListNavigationChildParameters: {
-        getValue2: getValue,
-        ...completeListNavigationChildParameters
-      },
-      managedChildParameters,
+      info,
       context,
       rovingTabIndexChildParameters,
       sortableChildParameters,
@@ -11275,9 +11301,11 @@
       refElementLabelReturn
     });
     y$1(() => {
-      byName.set(value, index);
+      nameToIndex.set(value, index);
+      indexToName.set(index, value);
       return () => {
-        byName.delete(value);
+        nameToIndex.delete(value);
+        indexToName.delete(index);
       };
     }, [value, index]);
     if (tagInput == "input") {
@@ -11331,7 +11359,7 @@
   }
   function useSliderThumb(_ref2) {
     let {
-      managedChildParameters,
+      info,
       context: {
         sliderContext: {
           max: maxParent,
@@ -11341,17 +11369,12 @@
       },
       sliderThumbParameters
     } = _ref2;
-    const {
-      index
-    } = managedChildParameters;
     monitorCallCount(useSliderThumb);
     const {
       managedChildReturn
     } = useManagedChild({
-      managedChildParameters,
+      info,
       context
-    }, {
-      index
     });
     const {
       tag,
@@ -11541,8 +11564,7 @@
     p$1(() => {
       if (location == "body") {
         tableContext.setSortBodyFunction(() => {
-          const managedRows = managedChildrenReturn.getChildren();
-          return () => sortableChildrenReturn.sort(managedRows, tableContext.getCurrentSortColumn().direction);
+          return () => sortableChildrenReturn.sort(tableContext.getCurrentSortColumn().direction);
         });
       }
     });
@@ -11566,9 +11588,8 @@
   }
   function useTableRow(_ref3) {
     let {
-      managedChildParameters,
+      info,
       singleSelectionChildParameters,
-      completeGridNavigationRowParameters,
       rovingTabIndexChildParameters,
       textContentParameters,
       context: cx1,
@@ -11592,9 +11613,8 @@
       context: {
         ...cx1
       },
-      managedChildParameters,
       singleSelectionChildParameters,
-      completeGridNavigationRowParameters,
+      info,
       rovingTabIndexChildParameters,
       sortableChildParameters: {
         getSortValue: useStableCallback(() => {
@@ -11646,7 +11666,7 @@
       ...ret,
       tableCellReturn: {
         sortByThisColumn: useStableCallback(() => {
-          return p.context.tableContext.sortByColumn(p.managedChildParameters.index);
+          return p.context.tableContext.sortByColumn(p.info.index);
         }, [])
       }
     };
@@ -11737,7 +11757,7 @@
       ...listNavRet1
     } = useCompleteListNavigation({
       linearNavigationParameters: {
-        navigationDirection: orientation,
+        arrowKeyDirection: orientation,
         ...linearNavigationParameters
       },
       singleSelectionParameters: {
@@ -11789,11 +11809,10 @@
   }
   function useTab(_ref2) {
     let {
-      completeListNavigationChildParameters: {
+      info: {
         focusSelf,
-        ...completeListNavigationChildParameters
+        ...info
       },
-      managedChildParameters,
       textContentParameters,
       singleSelectionChildParameters: {
         selectionMode,
@@ -11807,12 +11826,11 @@
       props: listNavigationSingleSelectionChildProps,
       ...listNavRet2
     } = useCompleteListNavigationChild({
-      completeListNavigationChildParameters: {
-        focusSelf,
-        ...completeListNavigationChildParameters
-      },
       context,
-      managedChildParameters,
+      info: {
+        focusSelf,
+        ...info
+      },
       rovingTabIndexChildParameters,
       sortableChildParameters,
       textContentParameters,
@@ -11849,8 +11867,8 @@
       getPanelId,
       getTabId
     } = context.tabsContext;
-    const panelId = getPanelId(managedChildParameters.index);
-    const tabId = getTabId(managedChildParameters.index);
+    const panelId = getPanelId(info.index);
+    const tabId = getTabId(info.index);
     monitorCallCount(useTab);
     return {
       props: useMergedProps(propsPress, listNavigationSingleSelectionChildProps, {
@@ -11866,12 +11884,12 @@
   }
   function useTabPanel(_ref3) {
     let {
-      managedChildParameters,
+      info,
       context
     } = _ref3;
     const {
       index
-    } = managedChildParameters;
+    } = info;
     monitorCallCount(useTabPanel);
     const {
       tabPanelContext: {
@@ -11886,27 +11904,25 @@
     //const visibleRef = useRef<ChildFlagOperations>({ get: getIsVisible, set: setIsVisible, isValid: returnTrue });
     useManagedChild({
       context,
-      managedChildParameters: {
-        index
+      info: {
+        getVisible: useStableCallback(() => {
+          return getLastKnownVisibleIndex() == index;
+        }),
+        setVisibleIndex: useStableCallback((newIndex, prevIndex) => {
+          // Similar logic is in singleSelection, but we need to duplicate it here
+          let changeIndex = newIndex == index ? prevIndex : newIndex;
+          if (changeIndex != null) setLastKnownVisibleIndex(changeIndex);
+          if (newIndex == index) {
+            setIsVisible(true);
+          } else {
+            setIsVisible(false);
+          }
+        }),
+        ...info
       }
-    }, {
-      getVisible: useStableCallback(() => {
-        return getLastKnownVisibleIndex() == index;
-      }),
-      setVisibleIndex: useStableCallback((newIndex, prevIndex) => {
-        // Similar logic is in singleSelection, but we need to duplicate it here
-        let changeIndex = newIndex == index ? prevIndex : newIndex;
-        if (changeIndex != null) setLastKnownVisibleIndex(changeIndex);
-        if (newIndex == index) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
-      }),
-      ...managedChildParameters
     });
-    const panelId = getPanelId(managedChildParameters.index);
-    const tabId = getTabId(managedChildParameters.index);
+    const panelId = getPanelId(info.index);
+    const tabId = getTabId(info.index);
     //const isVisible = (lastKnownVisibleIndex === index);
     return {
       props: useMergedProps({
@@ -12039,9 +12055,9 @@
         timeout,
         children
       },
-      managedChildParameters: {
+      info: {
         index,
-        ..._managedChildParameters
+        ...info
       },
       context
     } = _ref2;
@@ -12063,7 +12079,7 @@
       setShowing2(false);
     }, []);
     const show = useStableCallback(() => {
-      notify("polite", o$2("p", {
+      notify("polite", o$3("p", {
         children: children
       }));
       setShowing2(true);
@@ -12083,15 +12099,13 @@
       }
     }, []);
     useManagedChild({
-      managedChildParameters: {
-        index
+      info: {
+        index,
+        focus,
+        setNumberAheadOfMe: setNumberOfToastsAheadOfUs,
+        show
       },
       context
-    }, {
-      index,
-      focus,
-      setNumberAheadOfMe: setNumberOfToastsAheadOfUs,
-      show
     });
     const resetDismissTimer = T$2(() => {
       setTriggerIndex(i => ++i);
@@ -12327,10 +12341,8 @@
   const AccordionSectionContext = F$3(null);
   const Accordion$1 = x$1(function Accordion(_ref) {
     let {
-      disableArrowKeys,
       disableHomeEndKeys,
       initialIndex,
-      navigationDirection,
       onAfterChildLayoutEffect,
       onChildrenMountChange,
       navigatePastEnd,
@@ -12340,14 +12352,16 @@
       collator,
       noTypeahead,
       typeaheadTimeout,
-      onChildCountChange,
+      onChildrenCountChange,
       isValid,
       render,
       imperativeHandle,
+      orientation,
       ...rest
     } = _ref;
     const info = useAccordion({
       accordionParameters: {
+        orientation,
         initialIndex,
         localStorageKey: localStorageKey !== null && localStorageKey !== void 0 ? localStorageKey : null
       },
@@ -12358,9 +12372,7 @@
         typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
       },
       linearNavigationParameters: {
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
-        navigationDirection,
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap",
         pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
@@ -12371,7 +12383,7 @@
       }
     });
     A$1(imperativeHandle, () => info);
-    return o$2(AccordionSectionContext.Provider, {
+    return o$3(AccordionSectionContext.Provider, {
       value: info.context,
       children: render(info)
     });
@@ -12401,11 +12413,11 @@
         open,
         bodyRole: bodyRole !== null && bodyRole !== void 0 ? bodyRole : "region"
       },
-      managedChildParameters: {
-        index
-      },
       rovingTabIndexChildParameters: {
         hidden: hidden !== null && hidden !== void 0 ? hidden : false
+      },
+      info: {
+        index
       },
       refElementParameters: {},
       context,
@@ -12458,9 +12470,7 @@
     let {
       render,
       collator,
-      disableArrowKeys,
       disableHomeEndKeys,
-      navigationDirection,
       noTypeahead,
       typeaheadTimeout,
       onTabbableIndexChange,
@@ -12471,16 +12481,18 @@
       navigatePastEnd,
       navigatePastStart,
       pageNavigationSize,
+      orientation,
       ..._rest
     } = _ref;
     const info = useCheckboxGroup({
       linearNavigationParameters: {
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap",
-        navigationDirection,
         pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
+      },
+      checkboxGroupParameters: {
+        orientation: orientation !== null && orientation !== void 0 ? orientation : "vertical"
       },
       staggeredChildrenParameters: {
         staggered: staggered || false
@@ -12502,7 +12514,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(UseCheckboxGroupChildContext.Provider, {
+    return o$3(UseCheckboxGroupChildContext.Provider, {
       value: info.context,
       children: render(info)
     });
@@ -12520,16 +12532,14 @@
     const context = q$2(UseCheckboxGroupChildContext);
     console.assert(context != null, `This CheckboxGroupParent is not contained within a CheckboxGroup`);
     const info = useCheckboxGroupParent({
-      completeListNavigationChildParameters: {
+      info: {
+        index,
         focusSelf,
         checkboxInfo: {
           checkboxChildType: "parent"
         }
       },
       context,
-      managedChildParameters: {
-        index
-      },
       rovingTabIndexChildParameters: {
         hidden: hidden !== null && hidden !== void 0 ? hidden : false
       },
@@ -12562,16 +12572,14 @@
         checked,
         onChangeFromParent
       },
-      completeListNavigationChildParameters: {
+      info: {
+        index,
         focusSelf
       },
       textContentParameters: {
         getText: useDefault("getText", getText)
       },
       context,
-      managedChildParameters: {
-        index
-      },
       rovingTabIndexChildParameters: {
         hidden: hidden !== null && hidden !== void 0 ? hidden : false
       },
@@ -12660,7 +12668,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(ParentDepthContext.Provider, {
+    return o$3(ParentDepthContext.Provider, {
       value: myDepth,
       children: render(info)
     });
@@ -12705,7 +12713,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(ParentDepthContext.Provider, {
+    return o$3(ParentDepthContext.Provider, {
       value: myDepth,
       children: render(info)
     });
@@ -12716,7 +12724,6 @@
   const Gridlist = memoForwardRef(function GridlistU(_ref3, ref) {
     let {
       collator,
-      disableArrowKeys,
       disableHomeEndKeys,
       noTypeahead,
       onTabbableIndexChange,
@@ -12736,11 +12743,11 @@
       getIndex,
       onTabbableColumnChange,
       ariaLabel,
+      orientation,
       render
     } = _ref3;
     const info = useGridlist({
       linearNavigationParameters: {
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap",
@@ -12762,7 +12769,8 @@
         selectionLimit,
         groupingType,
         selectedIndex,
-        onSelectedIndexChange: onSelectedIndexChange !== null && onSelectedIndexChange !== void 0 ? onSelectedIndexChange : null
+        onSelectedIndexChange: onSelectedIndexChange !== null && onSelectedIndexChange !== void 0 ? onSelectedIndexChange : null,
+        orientation: orientation !== null && orientation !== void 0 ? orientation : "vertical"
       },
       gridNavigationParameters: {
         onTabbableColumnChange: onTabbableColumnChange !== null && onTabbableColumnChange !== void 0 ? onTabbableColumnChange : null
@@ -12782,7 +12790,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(GridlistContext.Provider, {
+    return o$3(GridlistContext.Provider, {
       value: info.context,
       children: render(info)
     });
@@ -12791,7 +12799,6 @@
     let {
       index,
       collator,
-      disableArrowKeys,
       ariaPropName,
       disabled,
       hidden,
@@ -12805,18 +12812,16 @@
       getSortValue,
       getText,
       render,
-      subInfo
+      info: uinfo
     } = _ref4;
     const context = q$2(GridlistContext);
     console.assert(context != null, `This GridlistRow is not contained within a Gridlist`);
     const info = useGridlistRow({
-      completeGridNavigationRowParameters: {
-        ...subInfo
+      info: {
+        index,
+        ...uinfo
       },
       context,
-      managedChildParameters: {
-        index
-      },
       gridlistRowParameters: {
         selected: selected !== null && selected !== void 0 ? selected : null
       },
@@ -12835,7 +12840,6 @@
         getText: useDefault("getText", getText)
       },
       linearNavigationParameters: {
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap"
       },
@@ -12849,7 +12853,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(GridlistRowContext.Provider, {
+    return o$3(GridlistRowContext.Provider, {
       value: info.context,
       children: render(info)
     });
@@ -12863,7 +12867,7 @@
       getText,
       onPressSync,
       render,
-      subInfo
+      info: subInfo
     } = _ref5;
     const context = q$2(GridlistRowContext);
     console.assert(context != null, `This GridlistChild is not contained within a GridlistRow that is contained within a Gridlist`);
@@ -12871,7 +12875,8 @@
       e.focus?.();
     }, []);
     const info = useGridlistCell({
-      completeGridNavigationCellParameters: {
+      info: {
+        index,
         focusSelf: focusSelf !== null && focusSelf !== void 0 ? focusSelf : defaultFocusSelf,
         ...subInfo
       },
@@ -12881,9 +12886,6 @@
       },
       textContentParameters: {
         getText: useDefault("getText", getText)
-      },
-      managedChildParameters: {
-        index
       },
       pressParameters: {
         onPressSync
@@ -12922,10 +12924,10 @@
         tag = 'div';
       }
     }
-    return o$2(_$3, {
-      children: o$2(HeadingReset, {
+    return o$3(_$3, {
+      children: o$3(HeadingReset, {
         newLevel: headingLevelBeforeUs + 1,
-        children: [y$2(tag, props, heading), children]
+        children: [y$3(tag, props, heading), children]
       })
     });
   });
@@ -12939,7 +12941,7 @@
       newLevel,
       children
     } = _ref2;
-    return o$2(HeadingLevelContext.Provider, {
+    return o$3(HeadingLevelContext.Provider, {
       value: newLevel - 1,
       children: children
     });
@@ -12952,8 +12954,10 @@
         selectionLimit,
         groupingType,
         selectedIndex,
-        onSelectedIndexChange
+        onSelectedIndexChange,
+        orientation
       },
+      linearNavigationParameters,
       ...restParams
     } = _ref;
     monitorCallCount(useListbox);
@@ -12989,20 +12993,16 @@
       rovingTabIndexReturn,
       singleSelectionReturn,
       ...restRet
-    } = useCompleteListNavigation({
-      singleSelectionParameters: {
-        initiallySelectedIndex: selectedIndex,
-        onSelectedIndexChange
+    } = useCompleteListNavigationDeclarative({
+      singleSelectionDeclarativeParameters: {
+        selectedIndex,
+        setSelectedIndex: onSelectedIndexChange
+      },
+      linearNavigationParameters: {
+        arrowKeyDirection: orientation,
+        ...linearNavigationParameters
       },
       ...restParams
-    });
-    useSingleSelectionDeclarative({
-      singleSelectionDeclarativeParameters: {
-        selectedIndex
-      },
-      singleSelectionReturn: {
-        changeSelectedIndex: singleSelectionReturn.changeSelectedIndex
-      }
     });
     if (groupingType == "group") props.role = "group";else if (groupingType == "with-groups") {
       // Intentionally clobbering all the list navigation stuff.
@@ -13024,7 +13024,6 @@
         })
       }),
       rovingTabIndexReturn,
-      singleSelectionReturn,
       propsListbox: useMergedProps(props, propsLabelList, {
         "aria-multiselectable": selectionLimit == "multi" ? "true" : undefined
       }),
@@ -13089,7 +13088,7 @@
     let {
       ariaLabel,
       selectionLimit,
-      navigationDirection,
+      orientation,
       render
     } = _ref;
     const info = useListbox({
@@ -13099,8 +13098,6 @@
       linearNavigationParameters: {
         navigatePastEnd: "passthrough",
         navigatePastStart: "passthrough",
-        navigationDirection,
-        disableArrowKeys: false,
         disableHomeEndKeys: true,
         pageNavigationSize: 1
       },
@@ -13115,7 +13112,8 @@
         selectionLimit,
         groupingType: "with-groups",
         selectedIndex: null,
-        onSelectedIndexChange: null
+        onSelectedIndexChange: null,
+        orientation: orientation !== null && orientation !== void 0 ? orientation : "vertical"
       },
       rearrangeableChildrenParameters: {
         getIndex: useDefault("getIndex", undefined)
@@ -13134,7 +13132,7 @@
       }
     });
     info.context;
-    return o$2(ListboxGroupContext.Provider, {
+    return o$3(ListboxGroupContext.Provider, {
       value: info,
       children: render(info)
     });
@@ -13144,13 +13142,11 @@
       ariaLabel,
       collator,
       compare,
-      disableArrowKeys,
       disableHomeEndKeys,
       getIndex,
       selectedIndex,
       navigatePastEnd,
       navigatePastStart,
-      navigationDirection,
       noTypeahead,
       onSelectedIndexChange,
       onTabbableIndexChange,
@@ -13161,6 +13157,7 @@
       selectionLimit,
       untabbable,
       typeaheadTimeout,
+      orientation,
       render
     } = _ref2;
     const listboxGroupInfo = q$2(ListboxGroupContext);
@@ -13174,8 +13171,6 @@
       linearNavigationParameters: {
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap",
-        navigationDirection,
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
         pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
       },
@@ -13187,7 +13182,8 @@
         selectionLimit,
         groupingType: listboxGroupInfo == null ? "without-groups" : "group",
         selectedIndex,
-        onSelectedIndexChange: onSelectedIndexChange !== null && onSelectedIndexChange !== void 0 ? onSelectedIndexChange : null
+        onSelectedIndexChange: onSelectedIndexChange !== null && onSelectedIndexChange !== void 0 ? onSelectedIndexChange : null,
+        orientation: orientation !== null && orientation !== void 0 ? orientation : "vertical"
       },
       rearrangeableChildrenParameters: {
         getIndex: useDefault("getIndex", getIndex)
@@ -13205,7 +13201,7 @@
         typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
       }
     });
-    return o$2(ListboxContext.Provider, {
+    return o$3(ListboxContext.Provider, {
       value: info.context,
       children: render(info)
     });
@@ -13231,7 +13227,8 @@
       e?.focus();
     }, []);
     const info = useListboxItem({
-      completeListNavigationChildParameters: {
+      info: {
+        index,
         focusSelf: focusSelf !== null && focusSelf !== void 0 ? focusSelf : focusSelfDefault,
         ...subInfo
       },
@@ -13241,9 +13238,6 @@
       },
       pressParameters: {
         onPressSync
-      },
-      managedChildParameters: {
-        index
       },
       rovingTabIndexChildParameters: {
         hidden: hidden !== null && hidden !== void 0 ? hidden : false
@@ -13267,7 +13261,6 @@
   const Menu$1 = memoForwardRef(function Menu(_ref, ref) {
     let {
       collator,
-      disableArrowKeys,
       disableHomeEndKeys,
       noTypeahead,
       typeaheadTimeout,
@@ -13297,7 +13290,6 @@
     let myDepth = (parentDepth !== null && parentDepth !== void 0 ? parentDepth : defaultParentDepth) + 1;
     const info = useMenu({
       linearNavigationParameters: {
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
         pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize),
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
@@ -13337,18 +13329,16 @@
         noTypeahead: useDefault("noTypeahead", noTypeahead),
         typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
       },
-      singleSelectionDeclarativeParameters: {
-        selectedIndex: selectedIndex !== null && selectedIndex !== void 0 ? selectedIndex : null
-      },
       toolbarParameters: {
         orientation,
+        selectedIndex: selectedIndex !== null && selectedIndex !== void 0 ? selectedIndex : null,
         onSelectedIndexChange: onSelectedIndexChange !== null && onSelectedIndexChange !== void 0 ? onSelectedIndexChange : null
       }
     });
     A$1(ref, () => info);
-    return o$2(ParentDepthContext.Provider, {
+    return o$3(ParentDepthContext.Provider, {
       value: myDepth,
-      children: o$2(MenuItemContext.Provider, {
+      children: o$3(MenuItemContext.Provider, {
         value: info.context,
         children: render(info)
       })
@@ -13367,20 +13357,18 @@
       selectionMode,
       disabled,
       render,
-      subInfo
+      info: uinfo
     } = _ref2;
     const context = q$2(MenuItemContext);
     console.assert(context != null, `This MenuItem is not contained within a Menubar/Menu`);
     const defaultFocusSelf = T$2(e => e?.focus?.(), []);
     const info = useMenuItem({
-      completeListNavigationChildParameters: {
+      info: {
+        index,
         focusSelf: focusSelf !== null && focusSelf !== void 0 ? focusSelf : defaultFocusSelf,
-        ...subInfo
+        ...uinfo
       },
       context,
-      managedChildParameters: {
-        index
-      },
       rovingTabIndexChildParameters: {
         hidden: hidden !== null && hidden !== void 0 ? hidden : false
       },
@@ -13401,7 +13389,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(_$3, {
+    return o$3(_$3, {
       children: render(info)
     });
   });
@@ -13411,7 +13399,6 @@
     let {
       render,
       collator,
-      disableArrowKeys,
       disableHomeEndKeys,
       navigatePastEnd,
       navigatePastStart,
@@ -13431,7 +13418,6 @@
     } = _ref;
     const info = useMenubar({
       linearNavigationParameters: {
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap",
@@ -13439,6 +13425,7 @@
       },
       toolbarParameters: {
         orientation,
+        selectedIndex: selectedIndex !== null && selectedIndex !== void 0 ? selectedIndex : null,
         onSelectedIndexChange: onSelectedIndexChange !== null && onSelectedIndexChange !== void 0 ? onSelectedIndexChange : null,
         role: role !== null && role !== void 0 ? role : "menubar"
       },
@@ -13457,9 +13444,6 @@
       staggeredChildrenParameters: {
         staggered: staggered || false
       },
-      singleSelectionDeclarativeParameters: {
-        selectedIndex: selectedIndex !== null && selectedIndex !== void 0 ? selectedIndex : null
-      },
       sortableChildrenParameters: {
         compare: compare !== null && compare !== void 0 ? compare : null
       },
@@ -13468,7 +13452,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(MenubarItemContext.Provider, {
+    return o$3(MenubarItemContext.Provider, {
       value: info.context,
       children: render(info)
     });
@@ -13486,20 +13470,18 @@
       onPress,
       getSortValue,
       role,
-      subInfo
+      info: uinfo
     } = _ref2;
     const context = q$2(MenubarItemContext);
     console.assert(context != null, `This MenuItem is not contained within a Menubar/Menu`);
     const defaultFocusSelf = T$2(e => e?.focus?.(), []);
     const info = useMenubarChild({
-      completeListNavigationChildParameters: {
+      info: {
+        index,
         focusSelf: focusSelf !== null && focusSelf !== void 0 ? focusSelf : defaultFocusSelf,
-        ...subInfo
+        ...uinfo
       },
       context,
-      managedChildParameters: {
-        index
-      },
       rovingTabIndexChildParameters: {
         hidden: hidden !== null && hidden !== void 0 ? hidden : false
       },
@@ -13520,7 +13502,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(_$3, {
+    return o$3(_$3, {
       children: render(info)
     });
   });
@@ -13587,9 +13569,8 @@
       name,
       onSelectedValueChange,
       collator,
-      disableArrowKeys,
       disableHomeEndKeys,
-      navigationDirection,
+      arrowKeyDirection,
       noTypeahead,
       typeaheadTimeout,
       ariaLabel,
@@ -13605,10 +13586,9 @@
     } = _ref;
     const info = useRadioGroup({
       linearNavigationParameters: {
-        navigationDirection,
+        arrowKeyDirection: arrowKeyDirection !== null && arrowKeyDirection !== void 0 ? arrowKeyDirection : "either",
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap",
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
         pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
       },
@@ -13640,7 +13620,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(RadioContext.Provider, {
+    return o$3(RadioContext.Provider, {
       value: info.context,
       children: render(info)
     });
@@ -13664,9 +13644,6 @@
     const getValue = useStableGetter(value);
     const defaultFocusSelf = () => info.checkboxLikeReturn.focusSelf();
     const info = useRadio({
-      managedChildParameters: {
-        index
-      },
       rovingTabIndexChildParameters: {
         hidden: hidden !== null && hidden !== void 0 ? hidden : false
       },
@@ -13679,7 +13656,8 @@
       checkboxLikeParameters: {
         disabled: disabled !== null && disabled !== void 0 ? disabled : false
       },
-      completeListNavigationChildParameters: {
+      info: {
+        index,
         focusSelf: focusSelf !== null && focusSelf !== void 0 ? focusSelf : defaultFocusSelf
       },
       context,
@@ -13720,7 +13698,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(SliderThumbContext.Provider, {
+    return o$3(SliderThumbContext.Provider, {
       value: info.context,
       children: children
     });
@@ -13741,7 +13719,7 @@
     console.assert(context != null, `This SliderThumb is not contained within a Slider`);
     const info = useSliderThumb({
       context,
-      managedChildParameters: {
+      info: {
         index
       },
       sliderThumbParameters: {
@@ -13778,14 +13756,13 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(TableContext$1.Provider, {
+    return o$3(TableContext$1.Provider, {
       value: info.context,
       children: render(info)
     });
   });
   const TableSection$1 = memoForwardRef(function TableSection(_ref2) {
     let {
-      disableArrowKeys,
       disableHomeEndKeys,
       getIndex,
       initiallySelectedIndex,
@@ -13811,7 +13788,6 @@
         staggered: staggered || false
       },
       linearNavigationParameters: {
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap",
@@ -13838,7 +13814,7 @@
         location
       }
     });
-    return o$2(TableSectionContext.Provider, {
+    return o$3(TableSectionContext.Provider, {
       value: info.context,
       children: render(info)
     });
@@ -13848,7 +13824,6 @@
       index,
       getText,
       tagTableRow,
-      disableArrowKeys,
       disableHomeEndKeys,
       onTabbableIndexChange,
       ariaPropName,
@@ -13863,11 +13838,10 @@
     const cx1 = q$2(TableSectionContext);
     console.assert(cx1 != null, `This TableRow is not contained within a TableSection`);
     const info = useTableRow({
-      completeGridNavigationRowParameters: {},
-      context: cx1,
-      managedChildParameters: {
+      info: {
         index
       },
+      context: cx1,
       rovingTabIndexChildParameters: {
         hidden: hidden !== null && hidden !== void 0 ? hidden : false
       },
@@ -13884,7 +13858,6 @@
         tagTableRow
       },
       linearNavigationParameters: {
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap"
@@ -13894,7 +13867,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(TableRowContext.Provider, {
+    return o$3(TableRowContext.Provider, {
       value: info.context,
       children: render(info)
     });
@@ -13916,16 +13889,14 @@
       e.focus?.();
     }, []);
     const info = useTableCell({
-      completeGridNavigationCellParameters: {
+      info: {
+        index,
         getSortValue,
         focusSelf: focusSelf !== null && focusSelf !== void 0 ? focusSelf : defaultFocusSelf
       },
       context,
       gridNavigationCellParameters: {
         colSpan: colSpan !== null && colSpan !== void 0 ? colSpan : 1
-      },
-      managedChildParameters: {
-        index
       },
       rovingTabIndexChildParameters: {
         hidden: hidden !== null && hidden !== void 0 ? hidden : false
@@ -13948,7 +13919,6 @@
       ariaLabel,
       collator,
       compare,
-      disableArrowKeys,
       disableHomeEndKeys,
       getIndex,
       initiallySelectedIndex,
@@ -13975,7 +13945,6 @@
         staggered: staggered || false
       },
       linearNavigationParameters: {
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap",
@@ -14011,9 +13980,9 @@
       contextTabs
     } = info;
     A$1(ref, () => info);
-    return o$2(TabsContext.Provider, {
+    return o$3(TabsContext.Provider, {
       value: contextTabs,
-      children: o$2(TabPanelsContext.Provider, {
+      children: o$3(TabPanelsContext.Provider, {
         value: contextPanels,
         children: render(info)
       })
@@ -14029,7 +13998,7 @@
       getSortValue,
       render,
       selectionMode,
-      subInfo
+      info: uinfo
     } = _ref2;
     const context = q$2(TabsContext);
     console.assert(context != null, `This Tab is not contained within a Tabs component`);
@@ -14037,9 +14006,10 @@
       e?.focus();
     }, []);
     const info = useTab({
-      completeListNavigationChildParameters: {
+      info: {
+        index,
         focusSelf: focusSelf !== null && focusSelf !== void 0 ? focusSelf : focusSelfDefault,
-        ...subInfo
+        ...uinfo
       },
       context,
       rovingTabIndexChildParameters: {
@@ -14047,9 +14017,6 @@
       },
       sortableChildParameters: {
         getSortValue
-      },
-      managedChildParameters: {
-        index
       },
       singleSelectionChildParameters: {
         disabled: disabled !== null && disabled !== void 0 ? disabled : false,
@@ -14065,13 +14032,15 @@
   function TabPanel$1(_ref3) {
     let {
       index,
-      render
+      render,
+      info: uinfo
     } = _ref3;
     const context = q$2(TabPanelsContext);
     const info = useTabPanel({
       context,
-      managedChildParameters: {
-        index
+      info: {
+        index,
+        ...uinfo
       }
     });
     return render(info);
@@ -14095,7 +14064,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(ToastContext.Provider, {
+    return o$3(ToastContext.Provider, {
       value: info.context,
       children: render(info)
     });
@@ -14111,7 +14080,7 @@
     const context = q$2(ToastContext);
     console.assert(context != null, `This Toast was not rendered within a Toasts provider`);
     const info = useToast({
-      managedChildParameters: {
+      info: {
         index
       },
       toastParameters: {
@@ -14131,7 +14100,6 @@
       render,
       role,
       collator,
-      disableArrowKeys,
       disableHomeEndKeys,
       untabbable,
       compare,
@@ -14152,14 +14120,11 @@
       rearrangeableChildrenParameters: {
         getIndex: useDefault("getIndex", getIndex)
       },
-      singleSelectionDeclarativeParameters: {
-        selectedIndex: selectedIndex !== null && selectedIndex !== void 0 ? selectedIndex : null
-      },
       sortableChildrenParameters: {
         compare: compare !== null && compare !== void 0 ? compare : null
       },
       linearNavigationParameters: {
-        disableArrowKeys: useDefault("disableArrowKeys", disableArrowKeys),
+        //: useDefault("disableArrowKeys", disableArrowKeys),
         disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
         navigatePastEnd: navigatePastEnd !== null && navigatePastEnd !== void 0 ? navigatePastEnd : "wrap",
         navigatePastStart: navigatePastStart !== null && navigatePastStart !== void 0 ? navigatePastStart : "wrap",
@@ -14168,6 +14133,7 @@
       toolbarParameters: {
         orientation,
         role: role !== null && role !== void 0 ? role : "toolbar",
+        selectedIndex: selectedIndex !== null && selectedIndex !== void 0 ? selectedIndex : null,
         onSelectedIndexChange: onSelectedIndexChange !== null && onSelectedIndexChange !== void 0 ? onSelectedIndexChange : null
       },
       staggeredChildrenParameters: {
@@ -14187,7 +14153,7 @@
       }
     });
     A$1(ref, () => listboxReturnType);
-    return o$2(ToolbarContext.Provider, {
+    return o$3(ToolbarContext.Provider, {
       value: listboxReturnType.context,
       children: render(listboxReturnType)
     });
@@ -14203,7 +14169,7 @@
       getSortValue,
       hidden,
       getText,
-      subInfo
+      info: uinfo
     } = _ref2;
     const context = q$2(ToolbarContext);
     console.assert(context != null, `This ToolbarChild is not contained within a Toolbar`);
@@ -14212,12 +14178,10 @@
     }, []);
     const info = useToolbarChild({
       context,
-      completeListNavigationChildParameters: {
+      info: {
+        index,
         focusSelf: focusSelf !== null && focusSelf !== void 0 ? focusSelf : focusSelfDefault,
-        ...subInfo
-      },
-      managedChildParameters: {
-        index
+        ...uinfo
       },
       rovingTabIndexChildParameters: {
         hidden: hidden !== null && hidden !== void 0 ? hidden : false
@@ -14235,7 +14199,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(_$3, {
+    return o$3(_$3, {
       children: render(info)
     });
   });
@@ -14263,7 +14227,7 @@
       }
     });
     A$1(ref, () => info);
-    return o$2(ParentDepthContext.Provider, {
+    return o$3(ParentDepthContext.Provider, {
       value: myDepth,
       children: render(info)
     });
@@ -14405,7 +14369,7 @@
       })
     });
     const ExclusiveTransitionContext = GetExclusiveTransitionContext(exclusivityKey);
-    return ExclusiveTransitionContext == null ? children !== null && children !== void 0 ? children : null : o$2(ExclusiveTransitionContext.Provider, {
+    return ExclusiveTransitionContext == null ? children !== null && children !== void 0 ? children : null : o$3(ExclusiveTransitionContext.Provider, {
       value: context2,
       children: children
     });
@@ -14430,14 +14394,12 @@
     const [exclusivelyOpen, setExclusivelyOpen, getExclusivelyOpen] = useState(!!show);
     useManagedChild({
       context,
-      managedChildParameters: {
-        index
+      info: {
+        index,
+        getExclusivelyOpen,
+        setExclusivelyOpen,
+        forceClose
       }
-    }, {
-      index,
-      getExclusivelyOpen,
-      setExclusivelyOpen,
-      forceClose
     });
     const parentOnVisChange = context?.exclusiveTransitionContext.onVisibilityChange;
     const onVisibilityChange = T$2(visible => {
@@ -14515,9 +14477,9 @@
       ...p
     } = _ref2;
     let children = c;
-    if (!children.type) children = !inline ? o$2("div", {
+    if (!children.type) children = !inline ? o$3("div", {
       children: children
-    }) : o$2("span", {
+    }) : o$3("span", {
       children: children
     });
     inline ??= typeof children.type === "string" && inlineElements.has(children.type);
@@ -14538,12 +14500,12 @@
       }
     });
     let ret = E$1(children, mergedWithChildren);
-    ret = o$2(SwappableContext.Provider, {
+    ret = o$3(SwappableContext.Provider, {
       value: contextValue.current,
       children: ret
     });
     if (exclusivityKey) {
-      ret = o$2(ExclusiveTransitionProvider, {
+      ret = o$3(ExclusiveTransitionProvider, {
         exclusivityKey: exclusivityKey,
         children: ret
       }, exclusivityKey);
@@ -14834,14 +14796,14 @@
     }).current;
     let modifiedChildren;
     if (childrenIsVnode) {
-      modifiedChildren = o$2(SwappableContext.Provider, {
+      modifiedChildren = o$3(SwappableContext.Provider, {
         value: resetContext,
         children: E$1(children, finalProps)
       });
     } else {
-      modifiedChildren = o$2(SwappableContext.Provider, {
+      modifiedChildren = o$3(SwappableContext.Provider, {
         value: resetContext,
-        children: o$2("span", {
+        children: o$3("span", {
           ...finalProps,
           children: children
         })
@@ -15683,10 +15645,10 @@
       children,
       ...props
     } = _ref;
-    return o$2(Accordion$1, {
-      navigationDirection: "vertical",
+    return o$3(Accordion$1, {
+      orientation: "vertical",
       render: info => {
-        return o$2("div", {
+        return o$3("div", {
           ...useMergedProps({
             class: "accordion"
           }, {
@@ -15709,7 +15671,7 @@
       open,
       ...props
     } = _ref2;
-    return o$2(AccordionSection$1, {
+    return o$3(AccordionSection$1, {
       index: index,
       tagButton: "button",
       bodyRole: bodyRole,
@@ -15717,31 +15679,31 @@
       hidden: hidden,
       open: open,
       render: info => {
-        return o$2("div", {
+        return o$3("div", {
           ...useMergedProps({
             class: "accordion-item"
           }, {
             ...props,
             ref
           }),
-          children: [o$2("h2", {
+          children: [o$3("h2", {
             ...useMergedProps(info.propsHeader, {
               class: "accordion-header"
             }),
-            children: o$2("button", {
+            children: o$3("button", {
               ...useMergedProps(info.propsHeaderButton, {
                 class: clsx("accordion-button", !info.accordionSectionReturn.expanded && "collapsed"),
                 type: "button"
               }),
               children: header
             })
-          }), o$2(CollapseFade, {
+          }), o$3(CollapseFade, {
             show: info.accordionSectionReturn.expanded,
-            children: o$2("div", {
+            children: o$3("div", {
               ...useMergedProps(info.propsBody, {
                 class: clsx("accordion-collapse", info.accordionSectionReturn.expanded && "show")
               }),
-              children: o$2("div", {
+              children: o$3("div", {
                 class: "accordion-body",
                 children: children
               })
@@ -15768,7 +15730,7 @@
       ...props
     } = _ref;
     position ??= "inline";
-    return o$2("span", {
+    return o$3("span", {
       ...useMergedProps({
         ref,
         className: clsx("badge", roundedPill && "rounded-pill", variantTheme !== null && `text-bg-${variantTheme !== null && variantTheme !== void 0 ? variantTheme : "secondary"}`, position != "inline" && `position-absolute translate-middle top-0`, position == "top-end" && `start-100`, position == "top-start" && `start-0`)
@@ -17358,7 +17320,13 @@
       }
     });
     const getOpen = useStableGetter(open);
-    y$1(() => {
+    // This is useEffect, not useLayoutEffect, for performance reasons.
+    // E.G. A list with popup items -- we *really* don't want each individual useLayoutEffect
+    // to call handleUpdate (which causes a reflow one-by-one excruciatingly slowly!)
+    //
+    // If this needs to be useLayoutEffect for some other reason, there needs to be a 
+    // mechanism for delaying the very, very first update to useEffect (and all others can have useLayoutEffect)
+    p$1(() => {
       handleUpdate(true);
       if (open) {
         hasOpenedAtLeastOnce.current = true;
@@ -17412,12 +17380,6 @@
         handleUpdate(true);
       }
     }, [open, alignMode, requestedPlacement, absolutePositioning]);
-    /*useEffect(() => {
-        handleUpdate();
-    }, [open])
-     useEffect(() => {
-        handleUpdate();
-    });*/
     const {
       refElementReturn: {
         getElement: getSourceElement
@@ -17590,7 +17552,7 @@
       setStatus(null);
     }, []);
     p$1(() => {}, []);
-    return o$2(Tooltip$1, {
+    return o$3(Tooltip$1, {
       onStatus: setStatus,
       hoverDelay: hoverDelay,
       tooltipSemanticType: semanticType || (forward ? "label" : "description"),
@@ -17634,27 +17596,27 @@
         // IMPORTANT:
         // The tooltip must remain non-hidden to assistive technologies even when closed.
         // Don't set hidden or inert or anything like that when is's closed!
-        const tooltipContent = o$2("div", {
+        const tooltipContent = o$3("div", {
           ...useMergedProps(propsPopup, {}),
-          children: o$2(SlideFade, {
+          children: o$3(SlideFade, {
             exitVisibility: "visible",
             exclusivityKey: "tooltip",
             duration: transitionDuration,
             show: hidden ? false : tooltip == null ? false : status != null,
             slideTargetBlock: slideTargetBlock,
             slideTargetInline: slideTargetInline,
-            children: o$2("div", {
+            children: o$3("div", {
               ...useMergedProps(propsData, {
                 style: maxWidth ? {
                   "--bs-tooltip-max-width": maxWidth
                 } : {},
                 className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child")
               }, tooltipInfo.propsPopup),
-              children: [o$2("div", {
+              children: [o$3("div", {
                 ...useMergedProps(propsArrow, {
                   className: "tooltip-arrow"
                 })
-              }), o$2("div", {
+              }), o$3("div", {
                 class: "tooltip-inner",
                 children: tooltip
               })]
@@ -17668,7 +17630,7 @@
         if (forward) {
           const vnode = children;
           console.assert(!!vnode.type);
-          return o$2(_$3, {
+          return o$3(_$3, {
             children: [E$1(vnode, useMergedProps(propsData, vnode.props, tooltipInfo.propsTrigger, propsSource, props, {
               ref
             }, {
@@ -17676,8 +17638,8 @@
             })), portalJsx]
           });
         }
-        return o$2(_$3, {
-          children: o$2("span", {
+        return o$3(_$3, {
+          children: o$3("span", {
             ...useMergedProps({
               ref
             }, propsData, tooltipInfo.propsTrigger, propsSource, props, {
@@ -17696,10 +17658,10 @@
   }
   function useClonedElement(children, props, ref) {
     let Tag = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'span';
-    const c = childrenIsVnode(children) ? children : o$2(Tag, {
+    const c = childrenIsVnode(children) ? children : o$3(Tag, {
       children: children
     });
-    return y$2(c.type, useMergedProps(c.props, {
+    return y$3(c.type, useMergedProps(c.props, {
       ref: c.ref
     }, props, {
       ref
@@ -17807,7 +17769,7 @@
         return () => removeTextF10(randomId);
       }
     }, [focusedInner]);
-    return o$2(_$3, {
+    return o$3(_$3, {
       children: useClonedElement(children, useMergedProps(propsStable, hasCurrentFocusReturn.propsStable, props), ref)
     });
   });
@@ -17958,9 +17920,9 @@
     }, {
       capture: true
     });
-    return o$2(KeyboardAssistContext.Provider, {
+    return o$3(KeyboardAssistContext.Provider, {
       value: context.current,
-      children: [o$2(KeyboardAssistIconDisplay, {
+      children: [o$3(KeyboardAssistIconDisplay, {
         id: id,
         heardTab: heardTab,
         userHasHidden: userHasHidden,
@@ -18001,43 +17963,43 @@
     }
     label = `Navigate using ${label}. Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
     const show = heardTab && !userHasHidden && visible;
-    return o$2(_$3, {
-      children: [o$2("div", {
+    return o$3(_$3, {
+      children: [o$3("div", {
         id: id,
         class: "visually-hidden",
         children: label
-      }), o$2(SlideZoomFade, {
+      }), o$3(SlideZoomFade, {
         show: show,
         zoomMin: 0.875,
         zoomOriginInline: 1,
         zoomOriginBlock: 1,
         slideTargetBlock: 0.125,
         slideTargetInline: 0.125,
-        children: o$2("div", {
+        children: o$3("div", {
           class: "keyboard-assist-icon-container",
           role: "figure",
           "aria-labelledby": id,
-          children: [o$2("div", {
+          children: [o$3("div", {
             class: "keyboard-assist-instructions",
             children: "Keyboard controls available:"
-          }), o$2(KeyboardAssistIconArrowKeys, {
+          }), o$3(KeyboardAssistIconArrowKeys, {
             leftRight: leftRight,
             upDown: upDown
-          }), o$2(KeyboardAssistIconHomeEnd, {
+          }), o$3(KeyboardAssistIconHomeEnd, {
             enabled: homeEnd
-          }), o$2(KeyboardAssistIconPageKeys, {
+          }), o$3(KeyboardAssistIconPageKeys, {
             enabled: pageKeys
-          }), o$2(KeyboardAssistIconTypeahead, {
+          }), o$3(KeyboardAssistIconTypeahead, {
             enabled: typeahead
-          }), o$2(KeyboardAssistIconLeaveF2, {
+          }), o$3(KeyboardAssistIconLeaveF2, {
             enabled: leaveF2 || false
-          }), o$2(KeyboardAssistIconRichTextF10, {
+          }), o$3(KeyboardAssistIconRichTextF10, {
             enabled: textF10 || false
-          }), o$2("div", {
+          }), o$3("div", {
             class: "keyboard-assist-dismiss-message",
-            children: ["Press ", o$2("kbd", {
+            children: ["Press ", o$3("kbd", {
               children: "F7"
-            }), " to dismiss these instructions.", o$2("br", {}), "To show again, press ", o$2("kbd", {
+            }), " to dismiss these instructions.", o$3("br", {}), "To show again, press ", o$3("kbd", {
               children: "Shift+F7"
             }), "."]
           })]
@@ -18050,21 +18012,21 @@
       leftRight,
       upDown
     } = _ref4;
-    return o$2("div", {
+    return o$3("div", {
       class: "keyboard-assist-arrow-keys",
-      children: [o$2(KeyboardAssistIconKey, {
+      children: [o$3(KeyboardAssistIconKey, {
         enabled: upDown,
         className: "keyboard-assist-key-arrow-up",
         children: "\u2191"
-      }), o$2(KeyboardAssistIconKey, {
+      }), o$3(KeyboardAssistIconKey, {
         enabled: leftRight,
         className: "keyboard-assist-key-arrow-left",
         children: "\u2190"
-      }), o$2(KeyboardAssistIconKey, {
+      }), o$3(KeyboardAssistIconKey, {
         enabled: upDown,
         className: "keyboard-assist-key-arrow-down",
         children: "\u2193"
-      }), o$2(KeyboardAssistIconKey, {
+      }), o$3(KeyboardAssistIconKey, {
         enabled: leftRight,
         className: "keyboard-assist-key-arrow-right",
         children: "\u2192"
@@ -18075,13 +18037,13 @@
     let {
       enabled
     } = _ref5;
-    return o$2("div", {
+    return o$3("div", {
       class: "keyboard-assist-page-keys",
-      children: [o$2(KeyboardAssistIconKey, {
+      children: [o$3(KeyboardAssistIconKey, {
         enabled: enabled,
         className: "keyboard-assist-key-page-up",
         children: "Pg Up"
-      }), o$2(KeyboardAssistIconKey, {
+      }), o$3(KeyboardAssistIconKey, {
         enabled: enabled,
         className: "keyboard-assist-key-page-down",
         children: "Pg Dn"
@@ -18092,13 +18054,13 @@
     let {
       enabled
     } = _ref6;
-    return o$2("div", {
+    return o$3("div", {
       class: "keyboard-assist-home-end",
-      children: [o$2(KeyboardAssistIconKey, {
+      children: [o$3(KeyboardAssistIconKey, {
         enabled: enabled,
         className: "keyboard-assist-key-home",
         children: "Home"
-      }), o$2(KeyboardAssistIconKey, {
+      }), o$3(KeyboardAssistIconKey, {
         enabled: enabled,
         className: "keyboard-assist-key-end",
         children: "End"
@@ -18109,12 +18071,12 @@
     let {
       enabled
     } = _ref7;
-    return o$2(CollapseFade, {
+    return o$3(CollapseFade, {
       show: enabled,
       exitVisibility: "hidden",
-      children: o$2("div", {
+      children: o$3("div", {
         class: "keyboard-assist-typeahead",
-        children: o$2("div", {
+        children: o$3("div", {
           className: "keyboard-assist-typeahead-message",
           children: "(or start typing to search)"
         })
@@ -18125,14 +18087,14 @@
     let {
       enabled
     } = _ref8;
-    return o$2(CollapseFade, {
+    return o$3(CollapseFade, {
       show: enabled,
       exitVisibility: "hidden",
-      children: o$2("div", {
+      children: o$3("div", {
         class: "keyboard-assist-leave-f2",
-        children: o$2("div", {
+        children: o$3("div", {
           className: "keyboard-assist-leave-f2-message",
-          children: ["Press ", o$2("kbd", {
+          children: ["Press ", o$3("kbd", {
             children: "F2"
           }), " to return"]
         })
@@ -18143,14 +18105,14 @@
     let {
       enabled
     } = _ref9;
-    return o$2(CollapseFade, {
+    return o$3(CollapseFade, {
       show: enabled,
       exitVisibility: "hidden",
-      children: o$2("div", {
+      children: o$3("div", {
         class: "keyboard-assist-rich-text-f10",
-        children: o$2("div", {
+        children: o$3("div", {
           className: "keyboard-assist-rich-text-f10-message",
-          children: ["Press ", o$2("kbd", {
+          children: ["Press ", o$3("kbd", {
             children: "Alt+F10"
           }), " to focus the toolbar"]
         })
@@ -18163,7 +18125,7 @@
       className,
       enabled
     } = _ref10;
-    return o$2("div", {
+    return o$3("div", {
       class: "keyboard-assist-key " + className + (!enabled ? " keyboard-assist-key-disabled" : ""),
       children: children
     });
@@ -18198,13 +18160,13 @@
     });
     const pendingIndex = pending ? capturedIndex : null;
     const classBase = separated ? "btn-toolbar" : "btn-group";
-    return o$2(DisabledContext$1.Provider, {
+    return o$3(DisabledContext$1.Provider, {
       value: disabled !== null && disabled !== void 0 ? disabled : false,
-      children: o$2(ButtonGroupContext.Provider, {
+      children: o$3(ButtonGroupContext.Provider, {
         value: F$2(() => ({
           pendingIndex
         }), [pendingIndex]),
-        children: o$2(Toolbar, {
+        children: o$3(Toolbar, {
           onSelectedIndexChange: onSelectedIndexChangeSync,
           ref: imperativeHandle,
           role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
@@ -18214,19 +18176,19 @@
           ariaLabel: labelPosition == 'hidden' ? label : null,
           selectedIndex: pendingIndex !== null && pendingIndex !== void 0 ? pendingIndex : selectedIndex,
           render: info => {
-            const visibleLabel = o$2("label", {
+            const visibleLabel = o$3("label", {
               ...info.propsLabel,
               children: label
             });
-            return o$2(_$3, {
-              children: [labelPosition == "before" && visibleLabel, o$2(KeyboardAssistIcon, {
+            return o$3(_$3, {
+              children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, {
                 leftRight: orientation == "horizontal",
                 upDown: orientation == "vertical",
                 homeEnd: true,
                 pageKeys: false,
                 typeahead: false,
                 typeaheadActive: false,
-                children: o$2("span", {
+                children: o$3("span", {
                   ...useMergedProps({
                     className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`)
                   }, info.propsToolbar, props, {
@@ -18294,11 +18256,11 @@
     //disabled ||= (pendingIndex != null);
     disabled ||= pending;
     const d = disabled ? disabledType : false;
-    children = o$2(_$3, {
+    children = o$3(_$3, {
       children: [children, badge]
     });
     if (buttonGroupInfo == null) {
-      return o$2(ButtonStructure, {
+      return o$3(ButtonStructure, {
         ref: ref,
         Tag: Tag,
         tooltip: tooltip,
@@ -18317,13 +18279,13 @@
         variantFill: variantFill !== null && variantFill !== void 0 ? variantFill : null
       });
     } else {
-      return o$2(ToolbarChild, {
+      return o$3(ToolbarChild, {
         index: buttonGroupIndex !== null && buttonGroupIndex !== void 0 ? buttonGroupIndex : 0,
         ariaPropName: "aria-pressed",
         selectionMode: "disabled",
         getSortValue: returnZero,
         render: toolbarChildInfo => {
-          return o$2(ButtonStructure, {
+          return o$3(ButtonStructure, {
             ref: ref,
             Tag: Tag,
             tooltip: tooltip,
@@ -18369,13 +18331,13 @@
       children,
       callCount
     } = _ref4;
-    return o$2(Button$1, {
+    return o$3(Button$1, {
       tagButton: Tag,
       disabled: disabled,
       onPress: onPress,
       pressed: pressed,
       render: buttonInfo => {
-        return o$2(Progress, {
+        return o$3(Progress, {
           ariaLabel: loadingLabel !== null && loadingLabel !== void 0 ? loadingLabel : "Please wait while the operation completes.",
           value: pending ? "indeterminate" : "disabled",
           tagIndicator: "span",
@@ -18384,21 +18346,21 @@
               propsIndicator,
               propsRegion
             } = progressInfo;
-            const loadingJsx = o$2(Fade, {
+            const loadingJsx = o$3(Fade, {
               show: pending,
-              children: o$2("span", {
+              children: o$3("span", {
                 class: "spinner-border",
                 ...propsIndicator
               })
             });
             if (pressed !== null) variantFill ??= pressed ? "fill" : "outline";
             const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
-            const ret = y$2(Tag, useMergedProps(otherProps, buttonInfo.props, {
+            const ret = y$3(Tag, useMergedProps(otherProps, buttonInfo.props, {
               className: buttonClass,
               ref
             }), children, loadingJsx);
             if (tooltip) {
-              return o$2(Tooltip, {
+              return o$3(Tooltip, {
                 forward: true,
                 alignMode: "element",
                 semanticType: "label",
@@ -18424,17 +18386,17 @@
       variantTheme,
       ...props
     } = p;
-    if (subtitle) children = o$2(CardSubtitle, {
+    if (subtitle) children = o$3(CardSubtitle, {
       subtitle: subtitle,
       class: title ? "pt-0" : "",
       children: children
     });
-    if (title) children = o$2(CardTitle, {
+    if (title) children = o$3(CardTitle, {
       title: title,
       class: subtitle ? "pb-0" : "",
       children: children
     });
-    return o$2("div", {
+    return o$3("div", {
       ...useMergedProps({
         ref,
         className: clsx("card", variantTheme && `text-bg-${variantTheme}`)
@@ -18455,10 +18417,10 @@
             children,
             ...props
           } = p;
-          return o$2(CardBody, {
+          return o$3(CardBody, {
             ...props,
             ref: ref,
-            children: o$2(CardText, {
+            children: o$3(CardText, {
               children: children
             })
           });
@@ -18469,7 +18431,7 @@
             children,
             ...props
           } = p;
-          return o$2(CardFooter, {
+          return o$3(CardFooter, {
             ...props,
             ref: ref,
             children: children
@@ -18482,7 +18444,7 @@
             subtitle,
             ...props
           } = p;
-          return o$2(CardSubtitle, {
+          return o$3(CardSubtitle, {
             subtitle: subtitle,
             ...props,
             ref: ref,
@@ -18496,7 +18458,7 @@
             title,
             ...props
           } = p;
-          return o$2(CardTitle, {
+          return o$3(CardTitle, {
             title: title,
             ...props,
             ref: ref,
@@ -18510,7 +18472,7 @@
             position,
             ...props
           } = p;
-          return o$2(CardImage, {
+          return o$3(CardImage, {
             src: src,
             position: position,
             ...props,
@@ -18523,7 +18485,7 @@
             children,
             ...props
           } = p;
-          return y$2("span", props, children);
+          return y$3("span", props, children);
         }
     }
   }
@@ -18534,7 +18496,7 @@
       src,
       ...props
     } = p;
-    return o$2("img", {
+    return o$3("img", {
       ...useMergedProps(props, {
         ref,
         className: `card-img${position == "both" ? "" : `-${position}`}`
@@ -18542,7 +18504,7 @@
     });
   }));
   const CardBody = x$1(forwardElementRef(function CardBody(props, ref) {
-    return o$2("div", {
+    return o$3("div", {
       ...useMergedProps(props, {
         ref,
         className: "card-body"
@@ -18553,7 +18515,7 @@
     const {
       ...props
     } = p;
-    return o$2("div", {
+    return o$3("div", {
       ...useMergedProps(props, {
         ref,
         className: "card-footer"
@@ -18568,7 +18530,7 @@
       ...props
     } = p;
     console.assert(ref == unused || unused == null);
-    return o$2(Heading, {
+    return o$3(Heading, {
       heading: title,
       ...useMergedProps(props, {
         ref,
@@ -18585,7 +18547,7 @@
       ...props
     } = p;
     console.assert(ref == unused || unused == null);
-    return o$2(Heading, {
+    return o$3(Heading, {
       heading: subtitle,
       ...useMergedProps(props, {
         ref,
@@ -18595,7 +18557,7 @@
     });
   }));
   const CardText = x$1(forwardElementRef(function CardText(props, ref) {
-    return o$2("div", {
+    return o$3("div", {
       ...useMergedProps(props, {
         ref,
         className: "card-text"
@@ -18604,7 +18566,7 @@
   }));
 
   x$1(forwardElementRef(function CardGroup(props, ref) {
-    return o$2("div", {
+    return o$3("div", {
       ...useMergedProps(props, {
         ref,
         className: "card-group"
@@ -18635,7 +18597,7 @@
     const isSwitch = props._isSwitch;
     if (isSwitch) delete props._isSwitch;
     const w = q$2(WithinInputGroup);
-    return o$2(ProgressWithHandler, {
+    return o$3(ProgressWithHandler, {
       ariaLabel: loadingLabel !== null && loadingLabel !== void 0 ? loadingLabel : "Please wait while the operation completes.",
       forciblyPending: forciblyPending,
       asyncHandler: (next, event) => {
@@ -18670,9 +18632,9 @@
           syncHandler
         } = asyncHandlerReturn;
         const pending = p || debouncingAsync || debouncingSync;
-        const loadingJsx = o$2(Fade, {
+        const loadingJsx = o$3(Fade, {
           show: p,
-          children: o$2("span", {
+          children: o$3("span", {
             class: "spinner-border spinner-border-sm",
             ...propsIndicator
           })
@@ -18683,7 +18645,7 @@
         disabled ||= defaultDisabled;
         //disabled ||= pending;
         const d = disabled ? disabledType : false;
-        return o$2(Checkbox$1, {
+        return o$3(Checkbox$1, {
           ariaLabel: labelPosition == 'hidden' ? label : null,
           checked: (_ref2 = pending ? currentCapture : null) !== null && _ref2 !== void 0 ? _ref2 : checked,
           onCheckedChange: syncHandler,
@@ -18693,23 +18655,23 @@
           disabled: d,
           ref: imperativeHandle,
           render: info => {
-            const inputJsx = o$2("input", {
+            const inputJsx = o$3("input", {
               class: clsx("form-check-input", w && "mt-0"),
               ...useMergedProps(info.propsInput, propsInput || {})
             });
-            const visibleLabel = o$2("label", {
+            const visibleLabel = o$3("label", {
               class: "form-check-label",
               ...useMergedProps(info.propsLabel, propsLabel || {}),
               children: label
             });
             if (!w) {
-              return o$2("div", {
+              return o$3("div", {
                 ...useMergedProps({
                   className: clsx("form-check", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse")
                 }, props, {
                   ref
                 }),
-                children: [loadingJsx, labelPosition == "before" && visibleLabel, labelPosition == "tooltip" ? o$2(Tooltip, {
+                children: [loadingJsx, labelPosition == "before" && visibleLabel, labelPosition == "tooltip" ? o$3(Tooltip, {
                   forward: true,
                   tooltip: label,
                   alignMode: "element",
@@ -18718,26 +18680,26 @@
                 }) : inputJsx, labelPosition == "after" && visibleLabel]
               });
             } else {
-              return o$2(_$3, {
-                children: [labelPosition == "before" && o$2("div", {
+              return o$3(_$3, {
+                children: [labelPosition == "before" && o$3("div", {
                   ...{
                     className: clsx("input-group-text", pending && "pending")
                   },
                   children: visibleLabel
-                }), o$2("div", {
+                }), o$3("div", {
                   ...useMergedProps({
                     className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline")
                   }, props, {
                     ref
                   }),
-                  children: labelPosition == "tooltip" ? o$2(Tooltip, {
+                  children: labelPosition == "tooltip" ? o$3(Tooltip, {
                     forward: true,
                     tooltip: label,
                     alignMode: "element",
                     absolutePositioning: true,
                     children: inputJsx
                   }) : inputJsx
-                }), labelPosition == "after" && o$2("div", {
+                }), labelPosition == "after" && o$3("div", {
                   ...{
                     className: clsx("input-group-text", pending && "pending")
                   },
@@ -18764,12 +18726,12 @@
       inline,
       getSortValue
     } = _ref;
-    return o$2(CheckboxGroup$1, {
-      navigationDirection: orientation,
+    return o$3(CheckboxGroup$1, {
+      orientation: orientation,
       render: info => {
-        return o$2("span", {
+        return o$3("span", {
           ...info.propsStable,
-          children: [o$2(CheckboxGroupParent, {
+          children: [o$3(CheckboxGroupParent, {
             label: label,
             labelPosition: labelPosition,
             debounce: debounce,
@@ -18796,14 +18758,14 @@
       ...props
     } = _ref2;
     const imperativeHandle = _$1(null);
-    return o$2(CheckboxGroupParent$1, {
+    return o$3(CheckboxGroupParent$1, {
       focusSelf: useStableCallback(() => {
         if (imperativeHandle.current) imperativeHandle.current.checkboxLikeReturn.focusSelf();
       }),
       index: 0,
       getSortValue: getSortValue !== null && getSortValue !== void 0 ? getSortValue : returnZero,
       render: info => {
-        return o$2(Checkbox, {
+        return o$3(Checkbox, {
           labelPosition: labelPosition,
           label: label,
           throttle: throttle,
@@ -18842,7 +18804,7 @@
     const imperativeHandle = _$1(null);
     ++index;
     const [pendingFromParent, setPendingFromParent] = h$1(false);
-    return o$2(CheckboxGroupChild$1, {
+    return o$3(CheckboxGroupChild$1, {
       checked: checked,
       focusSelf: useStableCallback(() => {
         if (imperativeHandle.current) imperativeHandle.current.checkboxLikeReturn.focusSelf();
@@ -18861,7 +18823,7 @@
       }),
       hidden: hidden,
       render: info => {
-        return o$2(Checkbox, {
+        return o$3(Checkbox, {
           checked: checked,
           label: label,
           inline: inline,
@@ -18902,7 +18864,7 @@
     if (headerPosition == "hidden") {
       console.assert(typeof header == "string", `A dialog whose label is hidden must provide the label to use as a string to the header`);
     }
-    return o$2(Dialog$1, {
+    return o$3(Dialog$1, {
       ariaLabel: headerPosition == "hidden" ? header : null,
       open: open,
       onClose: onClose,
@@ -18910,47 +18872,47 @@
       closeOnBackdrop: modal ? false : true,
       closeOnEscape: modal ? false : true,
       render: info => {
-        const headingJsx = o$2(_$3, {
-          children: [o$2("span", {
+        const headingJsx = o$3(_$3, {
+          children: [o$3("span", {
             class: "modal-title",
             children: header
-          }), o$2(Button, {
+          }), o$3(Button, {
             class: "btn-close",
             onPress: () => onClose("escape"),
             "aria-label": "Close"
           })]
         });
-        const bodyJsx = o$2("span", {
+        const bodyJsx = o$3("span", {
           class: "modal-body",
           children: children
         });
-        const footerJsx = o$2("span", {
+        const footerJsx = o$3("span", {
           class: "modal-footer",
           children: footer
         });
-        return o$2(_$3, {
+        return o$3(_$3, {
           children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
             portalId: usePortalId("dialog"),
-            children: o$2("div", {
+            children: o$3("div", {
               ...useMergedProps(info.propsFocusContainer, propsPortal || {}),
-              children: o$2("div", {
+              children: o$3("div", {
                 ...useMergedProps(info.propsDialog, {
                   tabIndex: -1,
                   className: clsx("modal modal-dialog-scrollable overflow-hidden", open ? "d-block" : "d-hidden", variantSize && `modal-${variantSize}`, fullscreen && (fullscreen === true ? "modal-fullscreen" : `modal-fullscreen-${fullscreen}`))
                 }),
-                children: [o$2("div", {
+                children: [o$3("div", {
                   class: clsx("dialog-backdrop", open && "visible", modal && "dialog-backdrop-blur"),
                   role: "presentation"
-                }), o$2(SlideFade, {
+                }), o$3(SlideFade, {
                   animateOnMount: true,
                   delayMountUntilShown: true,
                   show: open,
                   slideTargetBlock: 0.125 * (open ? 1 : -1),
-                  children: o$2("div", {
+                  children: o$3("div", {
                     class: "modal-dialog",
-                    children: o$2("span", {
+                    children: o$3("span", {
                       class: "modal-content",
-                      children: [headerPosition == "start" ? o$2(Heading, {
+                      children: [headerPosition == "start" ? o$3(Heading, {
                         class: "modal-header",
                         heading: headingJsx,
                         children: bodyJsx
@@ -18973,7 +18935,7 @@
       align,
       ...props
     } = _ref;
-    return o$2("figure", {
+    return o$3("figure", {
       ...useMergedProps({
         className: "figure",
         ref
@@ -18981,7 +18943,7 @@
       children: [E$1(children, useMergedProps({
         className: "figure-img",
         ref: children.props.ref
-      }, children.props)), o$2("figcaption", {
+      }, children.props)), o$3("figcaption", {
         className: clsx("figure", align === "end" && "text-end", align == "center" && "text-center"),
         children: caption
       })]
@@ -19014,10 +18976,10 @@
    *
    */
   const FontIcon = x$1(forwardElementRef(function FontIcon(props, ref) {
-    return o$2(Icon, {
+    return o$3(Icon, {
       ...props,
       ref: ref,
-      children: o$2("i", {
+      children: o$3("i", {
         class: "font-icon"
       })
     });
@@ -19037,7 +18999,7 @@
       class: `bi bi-${icon}`
     }, props);
     // Render the actual FontIcon
-    return o$2(FontIcon, {
+    return o$3(FontIcon, {
       ...mergedProps,
       label: label,
       ref: ref
@@ -19045,20 +19007,20 @@
   }));
 
   x$1(forwardElementRef(function SvgIcon(props, ref) {
-    return o$2(Icon, {
+    return o$3(Icon, {
       ...props,
       ref: ref,
-      children: o$2("svg", {
+      children: o$3("svg", {
         class: "svg-icon"
       })
     });
   }));
 
   x$1(forwardElementRef(function ImageIcon(props, ref) {
-    return o$2(Icon, {
+    return o$3(Icon, {
       ...props,
       ref: ref,
-      children: o$2("img", {
+      children: o$3("img", {
         class: "image-icon"
       })
     });
@@ -19071,9 +19033,9 @@
       children,
       ...props
     } = _ref;
-    return o$2(WithinInputGroup.Provider, {
+    return o$3(WithinInputGroup.Provider, {
       value: true,
-      children: o$2("div", {
+      children: o$3("div", {
         ...useMergedProps({
           class: clsx("input-group", !wrap && "flex-nowrap", size && `input-group-${size}`),
           ref,
@@ -19083,7 +19045,7 @@
     });
   }));
   x$1(forwardElementRef(function InputGroupText(props, ref) {
-    return o$2("div", {
+    return o$3("div", {
       ...useMergedProps({
         className: "input-group-text"
       }, props),
@@ -19270,7 +19232,7 @@
       onChange?.(start, end);
       return () => onChange(null, null);
     }, [page, windowSize]);
-    return o$2(Toolbar, {
+    return o$3(Toolbar, {
       ariaLabel: labelPosition == "hidden" ? label : null,
       selectedIndex: page,
       onSelectedIndexChange: T$2(page => {
@@ -19278,16 +19240,16 @@
       }, []),
       orientation: "horizontal",
       render: info => {
-        const labelJsx = o$2("label", {
+        const labelJsx = o$3("label", {
           ...info.propsLabel,
           children: label
         });
-        return o$2(_$3, {
-          children: [labelPosition == "before" && labelJsx, o$2("nav", {
+        return o$3(_$3, {
+          children: [labelPosition == "before" && labelJsx, o$3("nav", {
             ...info.propsToolbar,
-            children: o$2("ul", {
+            children: o$3("ul", {
               class: "pagination",
-              children: o$2(PaginationChildren, {
+              children: o$3(PaginationChildren, {
                 childCount: childCount,
                 windowSize: windowSize
               })
@@ -19308,28 +19270,28 @@
     _$1(null);
     const centerFirstRef = _$1(null);
     const centerLastRef = _$1(null);
-    return o$2(_$3, {
-      children: [o$2(PaginationButtonFirst, {
+    return o$3(_$3, {
+      children: [o$3(PaginationButtonFirst, {
         index: firstIndex,
         onFocus: T$2(() => {
           centerFirstRef.current?.scrollIntoView({
             behavior: "smooth"
           });
         }, [])
-      }), o$2("span", {
+      }), o$3("span", {
         class: "pagination-center scroll-shadows scroll-shadows-x",
         children: Array.from(function* () {
           for (let page = 1; page < lastIndex - 1; ++page) {
             const start = (page + 0) * windowSize;
             const end = (page + 1) * windowSize;
-            yield o$2(PaginationButton, {
+            yield o$3(PaginationButton, {
               index: page,
               ref: page == 1 ? centerFirstRef : page == lastIndex - 1 - 1 ? centerLastRef : undefined,
               children: page + 1
             }, `${start}-${end}`);
           }
         }())
-      }), o$2(PaginationButtonLast, {
+      }), o$3(PaginationButtonLast, {
         index: lastIndex,
         onFocus: T$2(() => {
           centerLastRef.current?.scrollIntoView({
@@ -19344,11 +19306,11 @@
       index,
       onFocus
     } = _ref3;
-    return o$2(PaginationButton, {
+    return o$3(PaginationButton, {
       index: index,
       onFocus: onFocus,
       ref: ref,
-      children: [o$2(BootstrapIcon, {
+      children: [o$3(BootstrapIcon, {
         icon: "chevron-bar-left",
         label: null
       }), " First"]
@@ -19359,11 +19321,11 @@
       index,
       onFocus
     } = _ref4;
-    return o$2(PaginationButton, {
+    return o$3(PaginationButton, {
       index: index,
       onFocus: onFocus,
       ref: ref,
-      children: ["Last ", o$2(BootstrapIcon, {
+      children: ["Last ", o$3(BootstrapIcon, {
         icon: "chevron-bar-right",
         label: null
       })]
@@ -19375,7 +19337,7 @@
       children,
       onFocus
     } = _ref5;
-    return o$2(ToolbarChild, {
+    return o$3(ToolbarChild, {
       index: index,
       ariaPropName: "aria-current-page",
       getSortValue: useStableGetter(index),
@@ -19400,9 +19362,9 @@
           },
           refElementReturn
         });
-        return o$2("li", {
+        return o$3("li", {
           class: "page-item",
-          children: o$2("button", {
+          children: o$3("button", {
             ...useMergedProps(info.props, propsStable, propsPress, {
               class: "page-link",
               ref,
@@ -19424,7 +19386,7 @@
       paginationSize,
       children
     } = _ref6;
-    const paginationJsx = o$2(Pagination, {
+    const paginationJsx = o$3(Pagination, {
       windowSize: paginationSize || 500,
       labelPosition: "hidden",
       label: paginationLabel,
@@ -19434,7 +19396,7 @@
         setPaginationEnd(end);
       }
     });
-    return o$2(_$3, {
+    return o$3(_$3, {
       children: [paginationSize && paginationLocation == "before" && paginationJsx, children, paginationSize && paginationLocation == "after" && paginationJsx]
     });
   });
@@ -19453,7 +19415,7 @@
     const [GridlistSection, setGridlistSection] = useState(0);
     const [GridlistRow, setGridlistRow] = useState(0);
     const [GridlistCell, setGridlistCell] = useState(0);
-    return o$2(RenderCounterSetterContext.Provider, {
+    return o$3(RenderCounterSetterContext.Provider, {
       value: _$1({
         setDataTable,
         setDataTableSection,
@@ -19464,7 +19426,7 @@
         setGridlistRow,
         setGridlistCell
       }).current,
-      children: o$2(RenderCounterValueContext.Provider, {
+      children: o$3(RenderCounterValueContext.Provider, {
         value: {
           DataTable,
           DataTableSection,
@@ -19532,9 +19494,9 @@
     const [paginationStart, setPaginationStart] = useState(paginationSize == null ? null : 0);
     const [paginationEnd, setPaginationEnd] = useState(paginationSize !== null && paginationSize !== void 0 ? paginationSize : null);
     if (paginationSize) paginationLocation ||= "before";
-    return o$2(DefaultDisabled.Provider, {
+    return o$3(DefaultDisabled.Provider, {
       value: disabled !== null && disabled !== void 0 ? disabled : false,
-      children: o$2(Gridlist, {
+      children: o$3(Gridlist, {
         selectedIndex: selectedIndex !== null && selectedIndex !== void 0 ? selectedIndex : null,
         onSelectedIndexChange: onSelectedIndexChange,
         paginationMin: paginationStart,
@@ -19546,19 +19508,19 @@
         render: info => {
           var _info$paginatedChildr;
           useUpdateRenderCounter("Gridlist");
-          const labelJsx = o$2("label", {
+          const labelJsx = o$3("label", {
             ...info.propsGridlistLabel,
             children: label
           });
-          return o$2(_$3, {
-            children: [labelPosition == "before" && labelJsx, o$2(Paginated, {
+          return o$3(_$3, {
+            children: [labelPosition == "before" && labelJsx, o$3(Paginated, {
               childCount: (_info$paginatedChildr = info.paginatedChildrenReturn.childCount) !== null && _info$paginatedChildr !== void 0 ? _info$paginatedChildr : 0,
               paginationLabel: paginationLabel,
               paginationLocation: paginationLocation,
               paginationSize: paginationSize,
               setPaginationEnd: setPaginationEnd,
               setPaginationStart: setPaginationStart,
-              children: o$2("div", {
+              children: o$3("div", {
                 class: clsx(`list-group gridlist-group`),
                 ...useMergedProps(props, propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist),
                 children: children
@@ -19569,7 +19531,124 @@
       })
     });
   }
-  const ListItem = x$1(forwardElementRef(function ListItem(_ref2, ref) {
+  const ListItemNonPaginated = x$1(_ref2 => {
+    let {
+      infoRow,
+      progressInfo,
+      badge,
+      disabled,
+      iconEnd,
+      iconStart,
+      variantTheme,
+      selected,
+      children,
+      props,
+      ref2
+    } = _ref2;
+    useUpdateRenderCounter("GridlistRow");
+    const {
+      refElementReturn: {
+        getElement
+      },
+      refElementReturn,
+      propsStable: p2
+    } = useRefElement({
+      refElementParameters: {}
+    });
+    const {
+      pressReturn: {
+        longPress,
+        pressing
+      },
+      props: p1
+    } = usePress({
+      pressParameters: {
+        focusSelf: T$2(() => {
+          return getElement()?.focus();
+        }, []),
+        onPressSync: useStableCallback(e => infoRow.singleSelectionChildReturn.setThisOneSelected(e))
+        //...infoRow.pressParameters
+      },
+
+      refElementReturn
+    });
+    // For performance reasons, we stagger rendering each row's child
+    // It does take maybe 1.5 times as long, but you can still interact with the page while it's happening at least.
+    /*let timeout = (Math.floor(index / 100) * 500)
+    const [show, setShow] = useState(timeout == 0);
+    useTimeout({
+        timeout,
+        callback: () => setShow(true)
+    })*/
+    const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
+    const {
+      propsIndicator,
+      propsRegion
+    } = progressInfo;
+    const loadingJsx = o$3(Fade, {
+      show: progressInfo.asyncHandlerReturn.pending,
+      children: o$3("span", {
+        class: "spinner-border spinner-border-sm text-secondary",
+        ...propsIndicator
+      })
+    });
+    //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
+    const finalPropsForText = useMergedProps(p1, p2);
+    const finalPropsForDiv = useMergedProps(infoRow.props, {
+      ...props,
+      ref: ref2
+    }, {
+      className: clsx(`gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.singleSelectionChildReturn.selected || selected) && `active`)
+    });
+    const c = o$3(_$3, {
+      children: [o$3(ListItemStartEnd, {
+        index: 0,
+        hidden: iconStart == null,
+        children: iconStart
+      }), o$3(ListItemText, {
+        onPress: progressInfo.asyncHandlerReturn.syncHandler,
+        ...finalPropsForText,
+        children: [o$3("span", {
+          children: children
+        }), o$3("span", {
+          class: "list-group-item-badge-and-spinner",
+          children: [o$3("div", {
+            children: badge
+          }), o$3("div", {
+            children: loadingJsx
+          })]
+        })]
+      }), o$3(ListItemStartEnd, {
+        index: 2,
+        hidden: iconEnd == null,
+        children: iconEnd
+      })]
+    });
+    if (!show) if (infoRow.paginatedChildReturn.isPaginated && !infoRow.paginatedChildReturn.paginatedVisible) return null;else return o$3("div", {
+      "aria-busy": "true",
+      class: "gridlist-item gridlist-item-placeholder",
+      children: o$3("span", {
+        class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"),
+        children: o$3("span", {
+          class: "placeholder w-100"
+        })
+      })
+    });
+    return o$3(KeyboardAssistIcon, {
+      leftRight: !!iconStart || !!iconEnd,
+      upDown: true,
+      homeEnd: true,
+      pageKeys: true,
+      typeahead: true,
+      typeaheadActive: false,
+      children: o$3("div", {
+        "aria-busy": (!show).toString(),
+        ...finalPropsForDiv,
+        children: show && c
+      })
+    });
+  });
+  const ListItem = x$1(forwardElementRef(function ListItem(_ref3, ref) {
     let {
       index,
       variantTheme,
@@ -19584,16 +19663,16 @@
       loadingLabel,
       onSelectedChange,
       ...props
-    } = _ref2;
+    } = _ref3;
     const defaultDisabled = q$2(DefaultDisabled);
     disabled ||= defaultDisabled;
-    return o$2(ProgressWithHandler, {
+    return o$3(ProgressWithHandler, {
       ariaLabel: loadingLabel !== null && loadingLabel !== void 0 ? loadingLabel : "Please wait while the operation completes.",
       asyncHandler: onPress !== null && onPress !== void 0 ? onPress : null,
       capture: returnUndefined,
       tagIndicator: "span",
       render: progressInfo => {
-        return o$2(GridlistRow, {
+        return o$3(GridlistRow, {
           index: index,
           ariaPropName: "aria-selected",
           getSortValue: getSortValue !== null && getSortValue !== void 0 ? getSortValue : returnZero,
@@ -19603,125 +19682,38 @@
             return e?.querySelector(".gridlist-item-text")?.textContent || "";
           }, []),
           render: infoRow => {
-            useUpdateRenderCounter("GridlistRow");
-            const {
-              refElementReturn: {
-                getElement
-              },
-              refElementReturn,
-              propsStable: p2
-            } = useRefElement({
-              refElementParameters: {}
-            });
-            const {
-              pressReturn: {
-                longPress,
-                pressing
-              },
-              props: p1
-            } = usePress({
-              pressParameters: {
-                focusSelf: T$2(() => {
-                  return getElement()?.focus();
-                }, []),
-                onPressSync: useStableCallback(e => infoRow.singleSelectionChildReturn.setThisOneSelected(e))
-                //...infoRow.pressParameters
-              },
-
-              refElementReturn
-            });
-            // For performance reasons, we stagger rendering each row's child
-            // It does take maybe 1.5 times as long, but you can still interact with the page while it's happening at least.
-            /*let timeout = (Math.floor(index / 100) * 500)
-            const [show, setShow] = useState(timeout == 0);
-            useTimeout({
-                timeout,
-                callback: () => setShow(true)
-            })*/
-            const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
-            const {
-              propsIndicator,
-              propsRegion
-            } = progressInfo;
-            const loadingJsx = o$2(Fade, {
-              show: progressInfo.asyncHandlerReturn.pending,
-              children: o$2("span", {
-                class: "spinner-border spinner-border-sm text-secondary",
-                ...propsIndicator
-              })
-            });
-            //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
-            const finalPropsForText = useMergedProps(p1, p2);
-            const finalPropsForDiv = useMergedProps(infoRow.props, {
-              ...props,
-              ref
-            }, {
-              className: clsx(`gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.singleSelectionChildReturn.selected || selected) && `active`)
-            });
-            const c = o$2(_$3, {
-              children: [o$2(ListItemStartEnd, {
-                index: 0,
-                hidden: iconStart == null,
-                children: iconStart
-              }), o$2(ListItemText, {
-                onPress: progressInfo.asyncHandlerReturn.syncHandler,
-                ...finalPropsForText,
-                children: [o$2("span", {
-                  children: children
-                }), o$2("span", {
-                  class: "list-group-item-badge-and-spinner",
-                  children: [o$2("div", {
-                    children: badge
-                  }), o$2("div", {
-                    children: loadingJsx
-                  })]
-                })]
-              }), o$2(ListItemStartEnd, {
-                index: 2,
-                hidden: iconEnd == null,
-                children: iconEnd
-              })]
-            });
-            if (!show) if (infoRow.paginatedChildReturn.isPaginated && !infoRow.paginatedChildReturn.paginatedVisible) return null;else return o$2("div", {
-              "aria-busy": "true",
-              class: "gridlist-item gridlist-item-placeholder",
-              children: o$2("span", {
-                class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"),
-                children: o$2("span", {
-                  class: "placeholder w-100"
-                })
-              })
-            });
-            return o$2(KeyboardAssistIcon, {
-              leftRight: !!iconStart || !!iconEnd,
-              upDown: true,
-              homeEnd: true,
-              pageKeys: true,
-              typeahead: true,
-              typeaheadActive: false,
-              children: o$2("div", {
-                "aria-busy": (!show).toString(),
-                ...finalPropsForDiv,
-                children: show && c
-              })
+            if (infoRow.paginatedChildReturn.hideBecausePaginated) return o$3("div", {}); // This is orders of magnitude faster than null, for some reason?
+            if (infoRow.staggeredChildReturn.hideBecauseStaggered) return o$3("div", {});
+            return o$3(ListItemNonPaginated, {
+              infoRow: infoRow,
+              progressInfo: progressInfo,
+              badge: badge,
+              children: children,
+              disabled: disabled,
+              iconEnd: iconEnd,
+              iconStart: iconStart,
+              selected: selected,
+              variantTheme: variantTheme,
+              props: props,
+              ref2: ref
             });
           }
         });
       }
     });
   }));
-  const ListItemText = x$1(forwardElementRef(function ListItemText(_ref3, ref) {
+  const ListItemText = x$1(forwardElementRef(function ListItemText(_ref4, ref) {
     let {
       onPress,
       children,
       ...props
-    } = _ref3;
-    return o$2(GridlistChild, {
+    } = _ref4;
+    return o$3(GridlistChild, {
       index: 1,
       onPressSync: onPress,
       render: infoCell => {
         useUpdateRenderCounter("GridlistCell");
-        return o$2("div", {
+        return o$3("div", {
           ...useMergedProps(infoCell.props, props, {
             ref
           }),
@@ -19731,13 +19723,13 @@
       }
     });
   }));
-  const ListItemStartEnd = x$1(function ListItemStartEnd(_ref4) {
+  const ListItemStartEnd = x$1(function ListItemStartEnd(_ref5) {
     let {
       hidden,
       index,
       children
-    } = _ref4;
-    return o$2(GridlistChild, {
+    } = _ref5;
+    return o$3(GridlistChild, {
       index: index,
       hidden: hidden,
       focusSelf: useStableCallback(e => {
@@ -19745,11 +19737,11 @@
       }),
       render: info => {
         useUpdateRenderCounter("GridlistCell");
-        const ret = o$2("div", {
+        const ret = o$3("div", {
           class: clsx("list-group-item-icon", `list-group-item-icon-${index === 0 ? "start" : "end"}`),
           children: useClonedElement(children, info.props, undefined)
         });
-        if (hidden) return o$2(_$3, {
+        if (hidden) return o$3(_$3, {
           children: null
         });else return ret;
       }
@@ -19791,7 +19783,7 @@
       callback: () => setMenuOpen(popperOpen),
       triggerIndex: popperOpen
     });
-    return o$2(Menu$1, {
+    return o$3(Menu$1, {
       onOpen: onOpen,
       onClose: onClose,
       open: menuOpen,
@@ -19814,19 +19806,19 @@
             alignMode: "element"
           }
         });
-        return o$2(_$3, {
+        return o$3(_$3, {
           children: [useClonedElement(anchor, useMergedProps({
             onPress: onAnchorPress,
             class: popperOpen ? "active" : ""
           }, props, info.propsTrigger, propsSource), ref), defaultRenderPortal({
             portalId,
-            children: o$2("div", {
+            children: o$3("div", {
               ...useMergedProps(propsPopup, {
                 className: "popper-menu"
               }),
-              children: [o$2("div", {
+              children: [o$3("div", {
                 ...propsArrow
-              }), o$2(ZoomFade, {
+              }), o$3(ZoomFade, {
                 show: popperOpen,
                 delayMountUntilShown: true,
                 exitVisibility: "removed",
@@ -19834,25 +19826,25 @@
                 zoomOriginBlock: 0,
                 zoomMinInline: 0.85,
                 zoomMinBlock: 0.85,
-                children: o$2(KeyboardAssistIcon, {
+                children: o$3(KeyboardAssistIcon, {
                   leftRight: false,
                   upDown: true,
                   homeEnd: true,
                   pageKeys: true,
                   typeahead: true,
                   typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none",
-                  children: o$2("div", {
+                  children: o$3("div", {
                     ...useMergedProps(info.propsSurface, {
                       className: clsx("dropdown-menu shadow show")
                     }),
-                    children: [o$2("div", {
+                    children: [o$3("div", {
                       ...info.propsSentinel
-                    }), o$2("div", {
+                    }), o$3("div", {
                       ...useMergedProps(info.propsTarget, {
                         className: "dropdown-menu-list"
                       }),
                       children: children
-                    }), o$2("div", {
+                    }), o$3("div", {
                       ...info.propsSentinel
                     })]
                   })
@@ -19880,7 +19872,7 @@
          }
     })*/
     const imperativeHandle = _$1(null);
-    return o$2(ProgressWithHandler, {
+    return o$3(ProgressWithHandler, {
       asyncHandler: () => {
         console.assert(!!imperativeHandle.current);
         return onPressWithoutClose?.(imperativeHandle.current.menuItemReturn.closeMenu);
@@ -19890,7 +19882,7 @@
       tagIndicator: "div",
       render: progressInfo => {
         const showSpinner = progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync;
-        return o$2(MenuItem$1, {
+        return o$3(MenuItem$1, {
           ref: imperativeHandle,
           index: index,
           selectionMode: "activation",
@@ -19898,16 +19890,16 @@
           disabled: disabled || showSpinner,
           onPress: progressInfo.asyncHandlerReturn.syncHandler,
           render: menuInfo => {
-            const spinnerJsx = o$2("div", {
+            const spinnerJsx = o$3("div", {
               ...progressInfo.propsIndicator,
               class: clsx("spinner-border", "spinner-border-sm")
             });
-            return o$2("div", {
+            return o$3("div", {
               ...useMergedProps(menuInfo.props, {
                 ref,
                 className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active")
               }, props),
-              children: [children, o$2("div", {
+              children: [children, o$3("div", {
                 class: "dropdown-item-icon dropdown-item-icon-end",
                 children: spinnerJsx
               })]
@@ -19934,7 +19926,7 @@
     if (headerPosition == "hidden") {
       console.assert(typeof header == "string", `An offcanvas whose label is hidden must provide the label to use as a string to the header`);
     }
-    return o$2(Dialog$1, {
+    return o$3(Dialog$1, {
       ariaLabel: headerPosition == "hidden" ? header : null,
       open: open,
       onClose: onClose,
@@ -19942,44 +19934,44 @@
       closeOnBackdrop: true,
       closeOnEscape: true,
       render: info => {
-        return o$2(_$3, {
+        return o$3(_$3, {
           children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
             portalId: usePortalId("offcanvas"),
-            children: o$2("div", {
+            children: o$3("div", {
               ...useMergedProps(info.propsFocusContainer, propsPortal || {}),
-              children: [o$2(Slide, {
+              children: [o$3(Slide, {
                 show: open,
                 slideTargetInline: -1,
                 duration: 500,
-                children: o$2("div", {
+                children: o$3("div", {
                   ...useMergedProps(info.propsDialog, {
                     class: clsx("offcanvas"),
                     tabIndex: -1
                   }),
-                  children: [o$2("div", {
+                  children: [o$3("div", {
                     ...useMergedProps({
                       class: "offcanvas-header"
                     }),
-                    children: [o$2("h5", {
+                    children: [o$3("h5", {
                       ...useMergedProps(info.propsTitle, {
                         class: "offcanvas-title"
                       }),
                       children: header
-                    }), o$2(Button, {
+                    }), o$3(Button, {
                       class: "btn-close",
                       "aria-label": "Close",
                       onPress: () => onClose("escape")
                     })]
-                  }), o$2("div", {
+                  }), o$3("div", {
                     class: "offcanvas-body",
                     children: children
                   })]
                 })
-              }), o$2(Fade, {
+              }), o$3(Fade, {
                 show: open,
                 fadeMax: 0.25,
                 duration: 1000,
-                children: o$2("div", {
+                children: o$3("div", {
                   class: clsx("offcanvas-backdrop")
                 })
               })]
@@ -20025,34 +20017,34 @@
     });
     const pendingValue = pending ? capturedValue : null;
     inline ??= false;
-    return o$2(DisabledContext$1.Provider, {
+    return o$3(DisabledContext$1.Provider, {
       value: disabled !== null && disabled !== void 0 ? disabled : false,
-      children: o$2(RadioGroupContext.Provider, {
+      children: o$3(RadioGroupContext.Provider, {
         value: F$2(() => ({
           pendingValue,
           inline: inline
         }), [pendingValue, inline]),
-        children: o$2(RadioGroup$1, {
+        children: o$3(RadioGroup$1, {
           ariaLabel: labelPosition == 'hidden' ? label : null,
           selectedValue: pendingValue !== null && pendingValue !== void 0 ? pendingValue : selectedValue,
           ref: imperativeHandle,
           name: name,
           onSelectedValueChange: onSelectedIndexChangeSync,
-          navigationDirection: inline ? "horizontal" : "vertical",
+          arrowKeyDirection: inline ? "horizontal" : "vertical",
           render: info => {
-            const visibleLabel = o$2("label", {
+            const visibleLabel = o$3("label", {
               ...info.propsRadioGroupLabel,
               children: label
             });
-            return o$2(_$3, {
-              children: [labelPosition == "before" && visibleLabel, o$2(KeyboardAssistIcon, {
+            return o$3(_$3, {
+              children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, {
                 leftRight: !!inline,
                 upDown: !inline,
                 homeEnd: true,
                 pageKeys: true,
                 typeahead: true,
                 typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none",
-                children: o$2("span", {
+                children: o$3("span", {
                   ...useMergedProps({
                     className: clsx("radio-group"),
                     ref,
@@ -20085,7 +20077,7 @@
       inline
     } = radioGroupInfo !== null && radioGroupInfo !== void 0 ? radioGroupInfo : {};
     const singleSelectPending = pendingValue != null && pendingValue === value;
-    return o$2(Progress, {
+    return o$3(Progress, {
       ariaLabel: loadingLabel !== null && loadingLabel !== void 0 ? loadingLabel : "Please wait while the operation completes.",
       value: singleSelectPending ? "indeterminate" : "disabled",
       tagIndicator: "span",
@@ -20095,7 +20087,7 @@
           propsRegion,
           propsLabel
         } = progressInfo;
-        const loadingJsx = o$2("span", {
+        const loadingJsx = o$3("span", {
           class: "spinner-border",
           ...propsIndicator
         });
@@ -20109,7 +20101,7 @@
         const d = disabled ? disabledType : false;
         //const buttonClass = clsx(`btn`, `btn-${variantTheme ?? "primary"}`, asyncHandlerReturn.pending && "pending", disabled && "disabled");
         const pending = singleSelectPending; //(pendingValue != null);
-        return o$2(Radio$1, {
+        return o$3(Radio$1, {
           ariaLabel: labelPosition == 'hidden' ? label : null,
           value: value,
           index: index,
@@ -20118,20 +20110,20 @@
           tagLabel: "label",
           disabled: d,
           render: info => {
-            const inputJsx = o$2("input", {
+            const inputJsx = o$3("input", {
               class: "form-check-input",
               ...useMergedProps(info.propsInput, props, {
                 ref
               })
             });
-            return o$2("span", {
+            return o$3("span", {
               ...useMergedProps({
                 className: clsx(labelPosition == "after" && ".form-check-reverse", "form-check", pending && "pending", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse")
               }),
-              children: [loadingJsx, o$2("label", {
+              children: [loadingJsx, o$3("label", {
                 class: "form-check-label",
                 ...info.propsLabel,
-                children: [labelPosition == "before" && label, labelPosition == "tooltip" ? o$2(Tooltip, {
+                children: [labelPosition == "before" && label, labelPosition == "tooltip" ? o$3(Tooltip, {
                   forward: true,
                   tooltip: label,
                   alignMode: "element",
@@ -27976,31 +27968,31 @@
     } = _ref;
     switch (type) {
       case "bigint":
-        return o$2(TextFieldBigInt, {
+        return o$3(TextFieldBigInt, {
           ref: ref,
           type: type,
           ...props
         });
       case "number":
-        return o$2(TextFieldNumber, {
+        return o$3(TextFieldNumber, {
           ref: ref,
           type: type,
           ...props
         });
       case "date":
-        return o$2(TextFieldDate, {
+        return o$3(TextFieldDate, {
           ref: ref,
           type: type,
           ...props
         });
       case "datetime-local":
-        return o$2(TextFieldDateTime, {
+        return o$3(TextFieldDateTime, {
           ref: ref,
           type: type,
           ...props
         });
       case "time":
-        return o$2(TextFieldTime, {
+        return o$3(TextFieldTime, {
           ref: ref,
           type: type,
           ...props
@@ -28009,7 +28001,7 @@
       case "search":
       case "email":
       default:
-        return o$2(TextFieldText, {
+        return o$3(TextFieldText, {
           ref: ref,
           type: type,
           ...props
@@ -28045,7 +28037,7 @@
       console.assert(value2.endsWith("Z"));
       value2 = value2.substring(0, value2.length - 1);
     }
-    return o$2(TextFieldBase, {
+    return o$3(TextFieldBase, {
       ref: ref,
       capture: e => {
         if (e.currentTarget.valueAsDate) return wt.Instant.fromEpochMilliseconds(+e.currentTarget.valueAsDate);
@@ -28099,7 +28091,7 @@
       ...props
     } = _ref3;
     let value2 = value ? value.toString({}) : null;
-    return o$2(TextFieldBase, {
+    return o$3(TextFieldBase, {
       ref: ref,
       capture: e => {
         //if (e.currentTarget.valueAsDate)
@@ -28156,7 +28148,7 @@
       ...props
     } = _ref4;
     let value2 = value ? `${value.hour.toString().padStart(2, "0")}:${value.minute.toString().padStart(2, "0")}${seconds ? `:${value.second.toString().padStart(2, "0")}` : ``}` : null;
-    return o$2(TextFieldBase, {
+    return o$3(TextFieldBase, {
       ref: ref,
       capture: e => {
         if (e.currentTarget.value) {
@@ -28228,7 +28220,7 @@
     } = _ref5;
     if (value != null && max != null && value > max) value = max;
     if (value != null && min != null && value < min) value = min;
-    return o$2(TextFieldBase, {
+    return o$3(TextFieldBase, {
       ref: ref,
       capture: e => Math.max(Math.min(e.currentTarget.valueAsNumber, max !== null && max !== void 0 ? max : Infinity), min !== null && min !== void 0 ? min : -Infinity),
       iconEnd: iconEnd,
@@ -28289,7 +28281,7 @@
       enterKeyHint,
       ...props
     } = _ref6;
-    return o$2(TextFieldBase, {
+    return o$3(TextFieldBase, {
       ref: ref,
       marginBottom: marginBottom,
       capture: e => BigInt(e.currentTarget.value),
@@ -28385,7 +28377,7 @@
       resizeable,
       ...props
     } = allProps;
-    return o$2(TextFieldBase, {
+    return o$3(TextFieldBase, {
       ref: ref,
       iconEnd: iconEnd,
       iconStart: iconStart,
@@ -28513,7 +28505,7 @@
         throttle: throttle ?? undefined
     });*/
     const isTextArea = resizeable || (rows || 0) > 1;
-    return o$2(ProgressWithHandler, {
+    return o$3(ProgressWithHandler, {
       ariaLabel: loadingLabel !== null && loadingLabel !== void 0 ? loadingLabel : "Please wait while the operation completes.",
       asyncHandler: onValueChange,
       capture: capture,
@@ -28639,12 +28631,12 @@
           "data-async-settle-count": progressInfo.asyncHandlerReturn.settleCount,
           "data-async-has-error": progressInfo.asyncHandlerReturn.hasError
         };
-        const labelJsx = o$2("label", {
+        const labelJsx = o$3("label", {
           class: clsx(!withinInputGroup ? "form-label" : "input-group-text"),
           ...useMergedProps(propsLabel1, propsLabel2, propsLabel),
           children: label
         });
-        const inputJsx = o$2("input", {
+        const inputJsx = o$3("input", {
           ...dataProps,
           inputMode: inputMode || undefined,
           autocomplete: autocomplete || undefined,
@@ -28657,7 +28649,7 @@
             className: clsx(baseInputClass)
           }, propsInput)
         });
-        const textAreaJsx = o$2("textarea", {
+        const textAreaJsx = o$3("textarea", {
           ...dataProps,
           placeholder: (_placeholder2 = placeholder) !== null && _placeholder2 !== void 0 ? _placeholder2 : undefined,
           readonly: readonly,
@@ -28671,23 +28663,23 @@
         });
         const finalInputJsx = isTextArea ? textAreaJsx : inputJsx;
         if (!withinInputGroup) {
-          return o$2("div", {
+          return o$3("div", {
             ...useMergedProps({
               className: clsx("form-text-field", otherClasses, `mb-${marginBottom !== null && marginBottom !== void 0 ? marginBottom : 3}`, `form-text-field-type-${propsInput.type}`, !!iconStart && "form-text-field-with-icon-start", (!!iconEnd || showSpinner) && "form-text-field-with-icon-end", showSpinner && "pending")
             }, otherProps || {}),
-            children: [labelPosition == "before" && labelJsx, o$2("div", {
+            children: [labelPosition == "before" && labelJsx, o$3("div", {
               class: clsx("form-text-field-control-container", labelPosition == "floating" && "form-floating"),
-              children: [iconStart && o$2("span", {
+              children: [iconStart && o$3("span", {
                 class: clsx("form-control-icon-start form-control-icon show"),
                 children: iconStart
-              }), labelPosition == "tooltip" ? o$2(Tooltip, {
+              }), labelPosition == "tooltip" ? o$3(Tooltip, {
                 tooltip: label,
                 absolutePositioning: true,
                 children: finalInputJsx
-              }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && o$2("span", {
+              }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && o$3("span", {
                 class: clsx("form-control-icon-end form-control-icon", !showSpinner && "show"),
                 children: iconEnd
-              }), o$2(TextFieldSpinner, {
+              }), o$3(TextFieldSpinner, {
                 callCount: callCount,
                 containerClass: "form-control-icon-end form-control-icon",
                 invocationResult: invocationResult,
@@ -28699,18 +28691,18 @@
             }), labelPosition == "after" && labelJsx]
           });
         } else {
-          return o$2(_$3, {
-            children: [labelPosition == "before" && labelJsx, iconStart && o$2("span", {
+          return o$3(_$3, {
+            children: [labelPosition == "before" && labelJsx, iconStart && o$3("span", {
               class: clsx("input-group-text"),
               children: iconStart
-            }), labelPosition == "tooltip" ? o$2(Tooltip, {
+            }), labelPosition == "tooltip" ? o$3(Tooltip, {
               tooltip: label,
               absolutePositioning: true,
               children: finalInputJsx
-            }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && o$2("span", {
+            }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && o$3("span", {
               class: clsx("input-group-text", !showSpinner && "show"),
               children: iconEnd
-            }), o$2(TextFieldSpinner, {
+            }), o$3(TextFieldSpinner, {
               callCount: callCount,
               containerClass: "",
               invocationResult: invocationResult,
@@ -28737,23 +28729,23 @@
     if (invocationResult != "async") return null;
     let pendingDisplayType = debouncingAsync || debouncingSync ? 2 : p ? 1 : 0;
     const withinInputGroup = q$2(WithinInputGroup);
-    const ret = o$2(_$3, {
-      children: [o$2(Fade, {
+    const ret = o$3(_$3, {
+      children: [o$3(Fade, {
         show: pendingDisplayType == 1,
         animateOnMount: true,
-        children: o$2("span", {
+        children: o$3("span", {
           class: clsx(containerClass, `spinner-container`, "show"),
-          children: o$2("span", {
+          children: o$3("span", {
             class: clsx(`spinner spinner-border spinner-border-sm`),
             ...(pendingDisplayType == 1 ? propsIndicator : {})
           })
         })
-      }), o$2(Fade, {
+      }), o$3(Fade, {
         show: pendingDisplayType == 2,
         animateOnMount: true,
-        children: o$2("span", {
+        children: o$3("span", {
           class: clsx(containerClass, `spinner-container`, "show"),
-          children: o$2("span", {
+          children: o$3("span", {
             class: clsx(`spinner spinner-grow spinner-grow-sm`),
             ...(pendingDisplayType == 2 ? propsIndicator : {})
           })
@@ -28763,7 +28755,7 @@
     if (!withinInputGroup) {
       return ret;
     } else {
-      return o$2("div", {
+      return o$3("div", {
         class: "input-group-text input-group-text-field-spinners",
         children: ret
       });
@@ -28910,7 +28902,7 @@
       }
     }, []);
     // dangerouslySetInnerHTML={{__html: valueHtml}}
-    return o$2(KeyboardAssistIcon, {
+    return o$3(KeyboardAssistIcon, {
       homeEnd: true,
       leftRight: true,
       upDown: true,
@@ -28918,7 +28910,7 @@
       textF10: true,
       typeahead: false,
       typeaheadActive: false,
-      children: o$2("div", {
+      children: o$3("div", {
         class: "ck-editor-wrapper",
         children: useClonedElement(children, {
           ...props,
@@ -28938,7 +28930,7 @@
       valueHtml,
       ...props
     } = _ref;
-    return o$2(ProgressWithHandler, {
+    return o$3(ProgressWithHandler, {
       ariaLabel: "Saving...",
       asyncHandler: onValueChange,
       capture: identity,
@@ -28973,9 +28965,9 @@
           value: valueHtml
         });
         const editorHandle = _$1(null);
-        return o$2("div", {
+        return o$3("div", {
           class: clsx("rich-text-field", pending && "pending"),
-          children: [o$2(TextFieldSpinner, {
+          children: [o$3(TextFieldSpinner, {
             callCount: callCount,
             containerClass: "",
             invocationResult: invocationResult,
@@ -28983,7 +28975,7 @@
             debouncingSync: debouncingSync,
             pending: p,
             propsIndicator: propsIndicator
-          }), o$2(CkEditorWrapper, {
+          }), o$3(CkEditorWrapper, {
             editorHandle: editorHandle,
             implementation: (_ref2 = implementation !== null && implementation !== void 0 ? implementation : globalThis.CKEDITOR?.ClassicEditor) !== null && _ref2 !== void 0 ? _ref2 : globalThis.ClassicEditor,
             toolbarItems: toolbarItems !== null && toolbarItems !== void 0 ? toolbarItems : RTFDefaultItems,
@@ -28993,7 +28985,7 @@
             },
             valueHtml: (pending ? currentCapture : valueHtml) || "",
             ...props,
-            children: o$2("textarea", {})
+            children: o$3("textarea", {})
           })]
         });
       }
@@ -29007,7 +28999,7 @@
       valueHtml,
       ...props
     } = _ref3;
-    return o$2(ProgressWithHandler, {
+    return o$3(ProgressWithHandler, {
       ariaLabel: "Saving...",
       asyncHandler: onValueChange,
       capture: identity,
@@ -29042,9 +29034,9 @@
           value: valueHtml
         });
         const editorHandle = _$1(null);
-        return o$2("div", {
+        return o$3("div", {
           class: clsx("document-field shadow-sm", pending && "pending"),
-          children: [o$2(TextFieldSpinner, {
+          children: [o$3(TextFieldSpinner, {
             callCount: callCount,
             containerClass: "",
             invocationResult: invocationResult,
@@ -29052,11 +29044,11 @@
             debouncingSync: debouncingSync,
             pending: p,
             propsIndicator: propsIndicator
-          }), o$2("div", {
+          }), o$3("div", {
             class: "document-field__toolbar shadow-sm"
-          }), o$2("div", {
+          }), o$3("div", {
             class: "document-field__editable-container",
-            children: o$2(CkEditorWrapper, {
+            children: o$3(CkEditorWrapper, {
               implementation: (_ref4 = implementation !== null && implementation !== void 0 ? implementation : globalThis.CKEDITOR?.DecoupledEditor) !== null && _ref4 !== void 0 ? _ref4 : globalThis.DecoupledEditor,
               toolbarItems: toolbarItems !== null && toolbarItems !== void 0 ? toolbarItems : DFDefaultItems,
               editorHandle: editorHandle,
@@ -29070,7 +29062,7 @@
                 toolbarContainer?.appendChild(editor.ui.view.toolbar.element);
               },
               ...props,
-              children: o$2("div", {
+              children: o$3("div", {
                 class: "document-field__editable"
               })
             })
@@ -30638,7 +30630,7 @@
       valueHtml
     } = _ref;
     const sanitized = DOMPurify.sanitize(valueHtml);
-    return o$2("span", {
+    return o$3("span", {
       class: "rich-text-view",
       dangerouslySetInnerHTML: {
         __html: sanitized
@@ -30690,47 +30682,47 @@
     id ??= "";
     step ??= "any";
     let tickCount = step == "any" ? Infinity : Math.ceil(1 + (max - min) / step);
-    return o$2(OnValueChangeContext.Provider, {
+    return o$3(OnValueChangeContext.Provider, {
       value: onValueChange,
-      children: o$2(RangeThumbContext.Provider, {
+      children: o$3(RangeThumbContext.Provider, {
         value: context,
-        children: o$2(DebounceContext.Provider, {
+        children: o$3(DebounceContext.Provider, {
           value: debounce !== null && debounce !== void 0 ? debounce : false,
-          children: o$2(GetValueTextContext.Provider, {
+          children: o$3(GetValueTextContext.Provider, {
             value: (_ref2 = getTooltipText !== null && getTooltipText !== void 0 ? getTooltipText : getValueText) !== null && _ref2 !== void 0 ? _ref2 : defaultGetValueText,
-            children: o$2(GetListContext.Provider, {
+            children: o$3(GetListContext.Provider, {
               value: id,
-              children: o$2(StepContext.Provider, {
+              children: o$3(StepContext.Provider, {
                 value: step,
-                children: o$2(SnapContext.Provider, {
+                children: o$3(SnapContext.Provider, {
                   value: snap !== null && snap !== void 0 ? snap : "discrete",
-                  children: o$2(DisabledContext.Provider, {
+                  children: o$3(DisabledContext.Provider, {
                     value: disabled !== null && disabled !== void 0 ? disabled : false,
-                    children: o$2(ValueContext.Provider, {
+                    children: o$3(ValueContext.Provider, {
                       value: value !== null && value !== void 0 ? value : null,
-                      children: o$2(OrientationContext.Provider, {
+                      children: o$3(OrientationContext.Provider, {
                         value: orientation !== null && orientation !== void 0 ? orientation : "inline",
-                        children: y$2(label ? "label" : "div", useMergedProps({
+                        children: y$3(label ? "label" : "div", useMergedProps({
                           class: clsx("form-range-container", orientation == "block" && "form-range-vertical"),
                           ref,
                           style: isFinite(tickCount) ? {
                             "--form-range-tick-count": tickCount
                           } : undefined
-                        }, rest), label && o$2("div", {
+                        }, rest), label && o$3("div", {
                           class: "form-range-label",
                           children: label
-                        }), children !== null && children !== void 0 ? children : o$2(RangeThumb, {
+                        }), children !== null && children !== void 0 ? children : o$3(RangeThumb, {
                           index: 0,
                           min: min,
                           max: max,
                           value: value !== null && value !== void 0 ? value : 0,
                           onValueChange: onValueChange,
                           label: label !== null && label !== void 0 ? label : ""
-                        }), o$2("div", {
+                        }), o$3("div", {
                           class: "form-range-track-background"
-                        }), o$2(GetValueTextContext.Provider, {
+                        }), o$3(GetValueTextContext.Provider, {
                           value: getValueText !== null && getValueText !== void 0 ? getValueText : defaultGetValueText,
-                          children: o$2(RangeTicks, {
+                          children: o$3(RangeTicks, {
                             min: min,
                             max: max,
                             step: step,
@@ -30768,9 +30760,9 @@
     for (let i = min; i <= max; i += step) {
       const atEnds = i == min || i + step > max;
       let shouldHide = hideTickValues == "auto" ? !atEnds : hideTickValues;
-      children.push(o$2("div", {
+      children.push(o$3("div", {
         class: clsx("form-range-tick", "form-range-tick-line", onValueChange && "form-range-tick-selectable"),
-        children: o$2("option", {
+        children: o$3("option", {
           onClick: () => {
             onValueChange?.(i);
           },
@@ -30782,7 +30774,7 @@
     /*for (let i = min; i <= max; i += step) {
         children.push(<option value={i} class={clsx("form-range-tick")}>{getValueText(i)}</option>)
     }*/
-    return o$2("datalist", {
+    return o$3("datalist", {
       id: id,
       class: clsx("form-range-ticks"),
       children: [...children]
@@ -30890,7 +30882,7 @@
         max: usedMax
       }
     } = useSliderThumb({
-      managedChildParameters: {
+      info: {
         index
       },
       sliderThumbParameters: {
@@ -30926,8 +30918,8 @@
       const element = getInputElement();
       if (element) element.value = `${value}`;
     }, [value]);
-    return o$2(_$3, {
-      children: [o$2("input", {
+    return o$3(_$3, {
+      children: [o$3("input", {
         ...useMergedProps(propsSliderThumb, p1, p2, {
           ref,
           ...{
@@ -30939,7 +30931,7 @@
           step: usedStep,
           list: q$2(GetListContext)
         })
-      }), o$2("div", {
+      }), o$3("div", {
         class: "form-range-track-fill-background",
         style: {
           "--form-range-value-percent": clampedValuePercent
@@ -30965,11 +30957,11 @@
       verticalAlign,
       ...props
     } = _ref;
-    return o$2("div", {
+    return o$3("div", {
       ...useMergedProps({
         class: clsx("table-container", "table-responsive")
       }, propsContainer || {}),
-      children: o$2("table", {
+      children: o$3("table", {
         ...useMergedProps({
           class: clsx("table", striped && "table-striped", stripedColumns && "table-striped-columns", hover && "table-hover", dark && "table-dark", variantTheme && `table-${variantTheme}`, variantSize && `table-${variantSize}`, verticalAlign && `align-${verticalAlign}`, bordered && `table-bordered`, variantBorder && `border-${variantBorder}`),
           ref
@@ -30985,7 +30977,7 @@
       ...props
     } = _ref2;
     const TS = location == "head" ? "thead" : location == "foot" ? "tfoot" : "tbody";
-    return o$2(TS, {
+    return o$3(TS, {
       ...useMergedProps(props, {
         ref,
         className: clsx(variantTheme && `table-${variantTheme}`)
@@ -30999,7 +30991,7 @@
       ...props
     } = _ref3;
     //useWhatCausedRender("TableRow", { props: { ...props, children, variantTheme, ref }, state: {} })
-    return o$2("tr", {
+    return o$3("tr", {
       ...useMergedProps({
         ref,
         className: clsx(variantTheme && `table-${variantTheme}`)
@@ -31029,18 +31021,18 @@
         className: "sort-button"
       };
       const buttonPropsIfSortable = useMergedProps(props, buttonPropsIfUnsortable);
-      return o$2("th", {
+      return o$3("th", {
         ...(tableHeadType == "unsortable" ? thPropsIfUnsortable : thPropsIfSortable),
-        children: tableHeadType == "unsortable" ? children : o$2("button", {
+        children: tableHeadType == "unsortable" ? children : o$3("button", {
           ...buttonPropsIfSortable,
-          children: o$2("span", {
+          children: o$3("span", {
             children: children
           })
         })
       });
     } else {
       children = useClonedElement(children, props, ref);
-      return o$2("td", {
+      return o$3("td", {
         class: clsx(fillY && "py-0"),
         children: children
       });
@@ -31078,32 +31070,32 @@
     const [childCount, setChildCount] = useState(0);
     const [paginationStart, setPaginationStart] = useState(0);
     const [paginationEnd, setPaginationEnd] = useState(paginationSize !== null && paginationSize !== void 0 ? paginationSize : null);
-    return o$2(TableContext.Provider, {
+    return o$3(TableContext.Provider, {
       value: F$2(() => ({
         setChildCount,
         paginationMax: paginationEnd,
         paginationMin: paginationStart,
         staggered: staggered
       }), [setChildCount, paginationStart, paginationEnd, staggered]),
-      children: o$2(Table$1, {
+      children: o$3(Table$1, {
         ariaLabel: captionPosition == "hidden" ? caption : null,
         selectionLimit: "single",
         tagTable: "table",
         render: info => {
           useUpdateRenderCounter("DataTable");
-          return o$2(Paginated, {
+          return o$3(Paginated, {
             childCount: childCount,
             setPaginationEnd: setPaginationEnd,
             setPaginationStart: setPaginationStart,
             paginationLabel: paginationLabel,
             paginationLocation: paginationLocation,
             paginationSize: paginationSize,
-            children: [caption && captionPosition != "hidden" && o$2("caption", {
+            children: [caption && captionPosition != "hidden" && o$3("caption", {
               ...useMergedProps(info.propsLabel, {
                 className: clsx(captionPosition == "before" && "caption-top")
               }),
               children: caption
-            }), o$2(Table, {
+            }), o$3(Table, {
               bordered: bordered,
               dark: dark,
               hover: hover,
@@ -31128,21 +31120,21 @@
     });
   }));
   const DataTableHead = x$1(forwardElementRef(function DataTableHead(props, ref) {
-    return o$2(DataTableSection, {
+    return o$3(DataTableSection, {
       ref: ref,
       location: "head",
       ...props
     });
   }));
   const DataTableBody = x$1(forwardElementRef(function DataTableBody(props, ref) {
-    return o$2(DataTableSection, {
+    return o$3(DataTableSection, {
       ref: ref,
       location: "body",
       ...props
     });
   }));
   x$1(forwardElementRef(function DataTableFoot(props, ref) {
-    return o$2(DataTableSection, {
+    return o$3(DataTableSection, {
       ref: ref,
       location: "head",
       ...props
@@ -31163,9 +31155,9 @@
       staggered,
       setChildCount
     } = q$2(TableContext);
-    return o$2(IsTableHeadContext.Provider, {
+    return o$3(IsTableHeadContext.Provider, {
       value: location == "head",
-      children: o$2(TableSection$1, {
+      children: o$3(TableSection$1, {
         staggered: location == "body" && staggered,
         location: location,
         getIndex: vnode => vnode.props.row,
@@ -31178,14 +31170,14 @@
           y$1(() => {
             if (info.paginatedChildrenReturn.childCount != null) setChildCount?.(info.paginatedChildrenReturn.childCount);
           }, [setChildCount, info.paginatedChildrenReturn.childCount]);
-          return o$2(KeyboardAssistIcon, {
+          return o$3(KeyboardAssistIcon, {
             homeEnd: true,
             leftRight: true,
             upDown: location == "body",
             pageKeys: true,
             typeahead: false,
             typeaheadActive: false,
-            children: o$2(TableSection, {
+            children: o$3(TableSection, {
               location: location,
               variantTheme: variantTheme,
               divider: divider,
@@ -31207,7 +31199,7 @@
       variantTheme,
       ...props
     } = _ref3;
-    return o$2(TableRow$1, {
+    return o$3(TableRow$1, {
       index: row,
       ariaPropName: "aria-selected",
       tagTableRow: "tr",
@@ -31216,11 +31208,14 @@
         const hideBecauseStaggered = info.staggeredChildReturn.hideBecauseStaggered;
         const hideBecausePaginated = info.paginatedChildReturn.hideBecausePaginated;
         //useWhatCausedRender("DataTableRow", { props: { ...props, variantTheme, children, row }, state: info })
-        return o$2(Fade, {
+        if (hideBecausePaginated || hideBecauseStaggered) {
+          return o$3("tr", {});
+        }
+        return o$3(Fade, {
           show: !hideBecauseStaggered,
           animateOnMount: info.staggeredChildReturn.isStaggered,
           delayMountUntilShown: true,
-          children: o$2(TableRow, {
+          children: o$3(TableRow, {
             ...useMergedProps(info.props, {
               ref,
               ...props
@@ -31262,7 +31257,7 @@
       actualElement?.focus();
       if (document.activeElement != actualElement) e?.focus();
     };
-    return o$2(TableCell$1, {
+    return o$3(TableCell$1, {
       index: column,
       tagTableCell: isTableHead ? "th" : "td",
       focusSelf: focusSelf,
@@ -31294,7 +31289,7 @@
         });
         children ??= value;
         children = useClonedElement(children, info.propsFocus, ref);
-        return o$2(TableCell, {
+        return o$3(TableCell, {
           ...p,
           tableHeadType: isTableHead ? unsortable ? "unsortable" : "sortable" : null,
           fillY: fillY,
@@ -31336,38 +31331,38 @@
       propsTabsContainer,
       ...props
     } = _ref;
-    return o$2(Tabs$1, {
+    return o$3(Tabs$1, {
       localStorageKey: localStorageKey,
       orientation: orientation !== null && orientation !== void 0 ? orientation : "horizontal",
       ariaLabel: labelPosition == "hidden" ? label : null,
       pageNavigationSize: 0,
       render: info => {
-        const labelJsx = o$2("label", {
+        const labelJsx = o$3("label", {
           ...info.propsLabel,
           children: label
         });
-        return o$2("div", {
+        return o$3("div", {
           ...useMergedProps({
             class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical")
           }, {
             ...props,
             ref
           }),
-          children: [labelPosition == "before" && labelJsx, o$2(KeyboardAssistIcon, {
+          children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, {
             leftRight: orientation == "horizontal",
             upDown: orientation == "vertical",
             homeEnd: true,
             pageKeys: false,
             typeahead: true,
             typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none",
-            children: o$2("ul", {
+            children: o$3("ul", {
               ...useMergedProps(info.propsContainer, propsTabsContainer !== null && propsTabsContainer !== void 0 ? propsTabsContainer : {}, {
                 className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`)
               }),
               children: tabs
             })
-          }), labelPosition == "before" && labelJsx, o$2(Swappable, {
-            children: o$2("div", {
+          }), labelPosition == "before" && labelJsx, o$3(Swappable, {
+            children: o$3("div", {
               ...useMergedProps({
                 class: "tab-panels-container"
               }, propsPanelsContainer !== null && propsPanelsContainer !== void 0 ? propsPanelsContainer : {}),
@@ -31385,16 +31380,16 @@
       children,
       ...props
     } = _ref2;
-    return o$2(Tab$1, {
+    return o$3(Tab$1, {
       index: index,
       getSortValue: getSortValue || returnZero,
       render: info => {
-        return o$2("li", {
+        return o$3("li", {
           ...useMergedProps(props, {
             ref,
             className: `nav-item`
           }),
-          children: o$2("span", {
+          children: o$3("span", {
             ...useMergedProps(info.props, {
               className: clsx(`nav-link`, info.singleSelectionChildReturn.selected && "active")
             }),
@@ -31410,14 +31405,14 @@
       children,
       ...props
     } = _ref3;
-    return o$2(TabPanel$1, {
+    return o$3(TabPanel$1, {
       index: index,
       render: info => {
         var _info$tabPanelReturn$;
         // IMPORTANT: exitVisibility is "removed" instead of "hidden"
         // because "hidden" can still cause a lot of layout stuff to happen on hidden tabs,
         // which is bad if one tab is heavier than others -- it'll still affect them even when closed.
-        return o$2(SlideZoomFade, {
+        return o$3(SlideZoomFade, {
           ...{
             "data-index": index
           },
@@ -31430,12 +31425,12 @@
           zoomMin: 11 / 12,
           zoomOriginBlock: 0,
           zoomOriginInline: 0.5,
-          children: o$2("div", {
+          children: o$3("div", {
             ...useMergedProps(info.props, props, {
               ref,
               className: clsx("tab-panel scroll-shadows scroll-shadows-y")
             }),
-            children: o$2(TabPanelChildren, {
+            children: o$3(TabPanelChildren, {
               visible: info.tabPanelReturn.visible || false,
               children: children
             })
@@ -31458,7 +31453,7 @@
       timeout: 10,
       triggerIndex: visible
     });
-    return o$2(_$3, {
+    return o$3(_$3, {
       children: delayedVisible && children
     });
   });
@@ -31481,16 +31476,16 @@
     } = usePortalChildren({
       target: usePortalId("toast")
     });
-    return o$2(DefaultToastTimeout.Provider, {
+    return o$3(DefaultToastTimeout.Provider, {
       value: defaultTimeout !== null && defaultTimeout !== void 0 ? defaultTimeout : Infinity,
-      children: o$2(PushToastContext.Provider, {
+      children: o$3(PushToastContext.Provider, {
         value: pushChild,
-        children: o$2(UpdateToastContext.Provider, {
+        children: o$3(UpdateToastContext.Provider, {
           value: updateChild,
-          children: o$2(Toasts, {
+          children: o$3(Toasts, {
             visibleCount: visibleCount,
             render: info => {
-              return o$2(_$3, {
+              return o$3(_$3, {
                 children: [children, portalChildren]
               });
             }
@@ -31518,29 +31513,29 @@
     } = p;
     const defaultTimeout = q$2(DefaultToastTimeout);
     // const { useToastProps, dismiss, status } = useToast<HTMLDivElement>({ timeout: timeout ?? defaultTimeout, politeness });
-    return o$2(Toast$1, {
+    return o$3(Toast$1, {
       index: index,
       timeout: (_ref3 = (_ = 10000000) !== null && _ !== void 0 ? _ : timeout) !== null && _ref3 !== void 0 ? _ref3 : defaultTimeout,
       children: children,
       render: info => {
         const show = info.toastReturn.showing;
-        return o$2(ToastDismissContext.Provider, {
+        return o$3(ToastDismissContext.Provider, {
           value: info.toastReturn.dismiss,
-          children: o$2(SlideFade, {
+          children: o$3(SlideFade, {
             show: show,
             slideTargetInline: 1,
             animateOnMount: show,
             exitVisibility: "removed",
-            children: o$2("div", {
+            children: o$3("div", {
               ...useMergedProps(info.props, props, {
                 class: clsx("toast show" /*, colorVariant && `text-bg-${colorVariant}`*/)
               }),
-              children: o$2("div", {
+              children: o$3("div", {
                 class: "d-flex",
-                children: [o$2("div", {
+                children: [o$3("div", {
                   class: "toast-body",
                   children: children
-                }), o$2(Button, {
+                }), o$3(Button, {
                   class: "btn-close me-2 m-auto",
                   "aria-label": "Dismiss alert",
                   onPress: info.toastReturn.dismiss
@@ -31553,7 +31548,7 @@
     });
   }
   function defaultErrorToToast(error) {
-    return o$2(Toast, {
+    return o$3(Toast, {
       timeout: Infinity,
       children: error instanceof Error ? error.message : JSON.stringify(error)
     });
@@ -31574,7 +31569,7 @@
     } = _ref4;
     const pushToast = usePushToast();
     P$2(error => void pushToast((errorToToast !== null && errorToToast !== void 0 ? errorToToast : defaultErrorToToast)(error)));
-    return o$2(_$3, {
+    return o$3(_$3, {
       children: children
     });
   }
@@ -31586,37 +31581,37 @@
     } = _ref;
     switch (type) {
       case 'lead':
-        return o$2(TypeLead, {
+        return o$3(TypeLead, {
           ...rest,
           ref: ref
         });
       case 'bold':
-        return o$2(TypeBold, {
+        return o$3(TypeBold, {
           ...rest,
           ref: ref
         });
       case 'italics':
-        return o$2(TypeItalics, {
+        return o$3(TypeItalics, {
           ...rest,
           ref: ref
         });
       case 'small':
-        return o$2(TypeSmall, {
+        return o$3(TypeSmall, {
           ...rest,
           ref: ref
         });
       case 'strike':
-        return o$2(TypeStrike, {
+        return o$3(TypeStrike, {
           ...rest,
           ref: ref
         });
       case 'highlighted':
-        return o$2(TypeHighlighted, {
+        return o$3(TypeHighlighted, {
           ...rest,
           ref: ref
         });
       case 'underline':
-        return o$2(TypeUnderline, {
+        return o$3(TypeUnderline, {
           ...rest,
           ref: ref
         });
@@ -31640,7 +31635,7 @@
     } = _ref3;
     if (semantics == 'none') return useClonedElement(children, useMergedProps({
       class: "mark"
-    }, rest), ref, 'span');else return o$2("mark", {
+    }, rest), ref, 'span');else return o$3("mark", {
       ...rest,
       ref: ref,
       children: children
@@ -31652,11 +31647,11 @@
       semantics,
       ...rest
     } = _ref4;
-    if (semantics == 'deleted') return o$2("del", {
+    if (semantics == 'deleted') return o$3("del", {
       ...rest,
       ref: ref,
       children: children
-    });else if (semantics == 'inaccurate') return o$2("del", {
+    });else if (semantics == 'inaccurate') return o$3("del", {
       ...rest,
       ref: ref,
       children: children
@@ -31670,11 +31665,11 @@
       semantics,
       ...rest
     } = _ref5;
-    if (semantics == 'inserted') return o$2("ins", {
+    if (semantics == 'inserted') return o$3("ins", {
       ...rest,
       ref: ref,
       children: children
-    });else if (semantics == 'annotated') return o$2("u", {
+    });else if (semantics == 'annotated') return o$3("u", {
       ...rest,
       ref: ref,
       children: children
@@ -31688,7 +31683,7 @@
       semantics,
       ...rest
     } = _ref6;
-    if (semantics == 'fine') return o$2("small", {
+    if (semantics == 'fine') return o$3("small", {
       ...rest,
       ref: ref,
       children: children
@@ -31702,11 +31697,11 @@
       semantics,
       ...rest
     } = _ref7;
-    if (semantics == 'important') return o$2("strong", {
+    if (semantics == 'important') return o$3("strong", {
       ...rest,
       ref: ref,
       children: children
-    });else if (semantics == 'noticeable') return o$2("b", {
+    });else if (semantics == 'noticeable') return o$3("b", {
       ...rest,
       ref: ref,
       children: children
@@ -31718,11 +31713,11 @@
       semantics,
       ...rest
     } = _ref8;
-    if (semantics == 'emphasized') return o$2("em", {
+    if (semantics == 'emphasized') return o$3("em", {
       ...rest,
       ref: ref,
       children: children
-    });else if (semantics == 'idiomatic') return o$2("i", {
+    });else if (semantics == 'idiomatic') return o$3("i", {
       ...rest,
       ref: ref,
       children: children
@@ -31743,15 +31738,15 @@
       targetAssertive,
       targetPolite
     });
-    return o$2(RenderCounterProvider, {
-      children: o$2(NotificationProviderContext.Provider, {
+    return o$3(RenderCounterProvider, {
+      children: o$3(NotificationProviderContext.Provider, {
         value: context,
-        children: o$2(ToastsProvider, {
+        children: o$3(ToastsProvider, {
           visibleCount: toastsVisibleCount !== null && toastsVisibleCount !== void 0 ? toastsVisibleCount : 4,
-          children: o$2(ToastErrorBoundary, {
-            children: o$2(ExclusiveTransitionProvider, {
+          children: o$3(ToastErrorBoundary, {
+            children: o$3(ExclusiveTransitionProvider, {
               exclusivityKey: "tooltip",
-              children: o$2(KeyboardAssistProvider, {
+              children: o$3(KeyboardAssistProvider, {
                 children: [children, portalChildren]
               })
             })
@@ -31762,43 +31757,43 @@
   });
 
   function Blurb$4() {
-    return o$2(_$3, {
-      children: [o$2("p", {
-        children: [o$2("a", {
+    return o$3(_$3, {
+      children: [o$3("p", {
+        children: [o$3("a", {
           href: "https://www.w3.org/WAI/ARIA/apg/patterns/button/",
           children: "In accordance with the ARIA guidelines for Button patterns,"
         }), " this widget supports the following:"]
-      }), o$2("ul", {
-        children: [o$2("li", {
-          children: ["Whether using an actual ", o$2("code", {
+      }), o$3("ul", {
+        children: [o$3("li", {
+          children: ["Whether using an actual ", o$3("code", {
             children: "<button>"
-          }), ", or something else like a ", o$2("code", {
+          }), ", or something else like a ", o$3("code", {
             children: "<div>"
           }), ", the proper roles and event handlers will be applied."]
-        }), o$2("li", {
+        }), o$3("li", {
           children: "Buttons can be toggled (pressed or unpressed)."
-        }), o$2("li", {
-          children: ["The button responds to keyboard, mouse, touch, etc. events, regardless of the element used.", o$2("ul", {
-            children: [o$2("li", {
+        }), o$3("li", {
+          children: ["The button responds to keyboard, mouse, touch, etc. events, regardless of the element used.", o$3("ul", {
+            children: [o$3("li", {
               children: "Double-clicks do not select text, but text is still selectable without it counting as a press/click"
-            }), o$2("li", {
+            }), o$3("li", {
               children: "When Enter is pressed, the button is immediately activated"
-            }), o$2("li", {
+            }), o$3("li", {
               children: "When Space is pressed, the button is activated once released"
-            }), o$2("li", {
+            }), o$3("li", {
               children: "iOS Safari properly focuses the button"
             })]
           })]
         })]
-      }), o$2("p", {
-        children: o$2("strong", {
-          children: ["Things ", o$2("em", {
+      }), o$3("p", {
+        children: o$3("strong", {
+          children: ["Things ", o$3("em", {
             children: "not"
           }), " handled:"]
         })
-      }), o$2("ul", {
-        children: o$2("li", {
-          children: ["If your button contains only an icon (or other non-descriptive content, etc.), you must provide an ", o$2("code", {
+      }), o$3("ul", {
+        children: o$3("li", {
+          children: ["If your button contains only an icon (or other non-descriptive content, etc.), you must provide an ", o$3("code", {
             children: "aria-label"
           }), " manually stating what happens when the button is pressed."]
         })
@@ -31806,7 +31801,7 @@
     });
   }
   function Code$4() {
-    return o$2("code", {
+    return o$3("code", {
       children: `<Button tag="button">Button</Button>
     <Button tag="div">Div</Button>`
     });
@@ -31834,171 +31829,171 @@
       await new Promise(resolve => setTimeout(resolve, 1000 + 3000 * Math.random()));
       setSelectedIndexSync(index);
     }, []);
-    return o$2(_$3, {
-      children: [o$2(Heading, {
+    return o$3(_$3, {
+      children: [o$3(Heading, {
         heading: "Button Props",
-        children: o$2("ul", {
-          children: [o$2("li", {
-            children: [o$2("code", {
+        children: o$3("ul", {
+          children: [o$3("li", {
+            children: [o$3("code", {
               children: "variantTheme"
             }), " controls the color of a the background/border (primary, secondary, success, etc.)"]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "variantOutline"
             }), " controls whether the style is filled (default) or outlined."]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "variantSize"
             }), " Can be \"sm\", \"md\" (default), or \"lg\""]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "variantDropdown"
             }), " Styles a button to have a dropdown menu icon"]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "pressed"
-            }), " Can be ", o$2("code", {
+            }), " Can be ", o$3("code", {
               children: "null"
-            }), " (default), but if a ", o$2("code", {
+            }), " (default), but if a ", o$3("code", {
               children: "boolean"
-            }), ", then this button is pressed. This shouldn't be used in single-select ", o$2("code", {
+            }), ", then this button is pressed. This shouldn't be used in single-select ", o$3("code", {
               children: "ButtonGroups"
             }), ", because that handles this prop for you."]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "onPress"
-            }), " ", o$2("em", {
-              children: [o$2("code", {
+            }), " ", o$3("em", {
+              children: [o$3("code", {
                 children: "async"
               }), " compatible."]
             }), " Controls what happens when the button is clicked (or activated in others ways)."]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "wrap"
             }), " Allows the text of a button to wrap, which is disallowed by default"]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "index"
-            }), " Only used if contained within a ", o$2("code", {
+            }), " Only used if contained within a ", o$3("code", {
               children: "ButtonGroup"
             }), ", in which case this is the 0-based index of this child in that group."]
           })]
         })
-      }), o$2(Heading, {
+      }), o$3(Heading, {
         heading: "ButtonGroup Props",
-        children: o$2("ul", {
-          children: [o$2("li", {
-            children: [o$2("code", {
+        children: o$3("ul", {
+          children: [o$3("li", {
+            children: [o$3("code", {
               children: "orientation"
             }), ": Whether this group is horizontal (default) or vertical. Affects both visuals and keyboard navigation"]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "selectedIndex"
-            }), ": If non-", o$2("code", {
+            }), ": If non-", o$3("code", {
               children: "null"
-            }), ", this controls which button in the group is currently pressed. Mutually exclusive with giving a ", o$2("code", {
+            }), ", this controls which button in the group is currently pressed. Mutually exclusive with giving a ", o$3("code", {
               children: "Button"
-            }), " its own ", o$2("code", {
+            }), " its own ", o$3("code", {
               children: "pressed"
             }), " prop."]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "onSelectedIndexChange"
-            }), ": When a ", o$2("code", {
+            }), ": When a ", o$3("code", {
               children: "Button"
             }), " is pressed, that request is sent here."]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "label"
-            }), ": Button groups must be labelled, even with a hidden one \u2014 this is will be placed in the label, and what will be announced to assistive technologies even if ", o$2("code", {
+            }), ": Button groups must be labelled, even with a hidden one \u2014 this is will be placed in the label, and what will be announced to assistive technologies even if ", o$3("code", {
               children: "labelPosition"
             }), " is \"hidden\"."]
-          }), o$2("li", {
-            children: [o$2("code", {
+          }), o$3("li", {
+            children: [o$3("code", {
               children: "labelPosition"
-            }), ": Controls where ", o$2("code", {
+            }), ": Controls where ", o$3("code", {
               children: "label"
-            }), " is placed relative to the checkbox itself. If \"hidden\", ", o$2("code", {
+            }), " is placed relative to the checkbox itself. If \"hidden\", ", o$3("code", {
               children: "label"
-            }), " ", o$2("em", {
+            }), " ", o$3("em", {
               children: "must"
             }), " be a simple string."]
           })]
         })
-      }), o$2(Blurb$4, {}), o$2(Code$4, {}), o$2("div", {
+      }), o$3(Blurb$4, {}), o$3(Code$4, {}), o$3("div", {
         children: ["# of times pressed: ", pressCount]
-      }), o$2(Button, {
+      }), o$3(Button, {
         variantTheme: "secondary",
         onPress: onPressSync,
-        badge: o$2(Badge, {
+        badge: o$3(Badge, {
           position: "top-end",
           children: "(sync)"
         }),
         children: "Press me"
-      }), o$2(Button, {
+      }), o$3(Button, {
         variantTheme: "info",
         onPress: onPressAsync,
-        badge: o$2(Badge, {
+        badge: o$3(Badge, {
           position: "top-end",
           children: "(sync)"
         }),
         children: "Press me"
-      }), o$2(Button, {
+      }), o$3(Button, {
         variantFill: "outline",
         onPress: onPressSync,
-        children: o$2(BootstrapIcon, {
+        children: o$3(BootstrapIcon, {
           label: "Press me (icon demo)",
           icon: "plus-circle"
         })
-      }), o$2(Button, {
+      }), o$3(Button, {
         variantFill: "fill",
         onPress: onPressSync,
         tooltip: "Press me (w/ tooltip)",
-        children: o$2(BootstrapIcon, {
+        children: o$3(BootstrapIcon, {
           label: null,
           icon: "plus-circle"
         })
-      }), o$2(Button, {
+      }), o$3(Button, {
         variantSize: "sm",
         onPress: onPressAsync,
         disabled: true,
         children: "Press me (disabled)"
-      }), o$2(Button, {
+      }), o$3(Button, {
         variantSize: "lg",
         onPress: onToggleSync,
         pressed: pressed,
         children: "Toggle me (sync)"
-      }), o$2(Button, {
+      }), o$3(Button, {
         variantSize: "md",
         onPress: onToggleAsync,
         pressed: pressed,
         children: "Toggle me (async)"
-      }), o$2(ButtonGroup, {
+      }), o$3(ButtonGroup, {
         label: "Multi-select button group example",
         orientation: "horizontal",
         labelPosition: "before",
-        children: [o$2(MSB, {
+        children: [o$3(MSB, {
           index: 0
-        }), o$2(MSB, {
+        }), o$3(MSB, {
           index: 1
-        }), o$2(MSB, {
+        }), o$3(MSB, {
           index: 2
-        }), o$2(MSB, {
+        }), o$3(MSB, {
           index: 3
         })]
-      }), o$2(ButtonGroup, {
+      }), o$3(ButtonGroup, {
         label: `Single-select button group example (selected index: ${selectedIndex !== null && selectedIndex !== void 0 ? selectedIndex : "null"})`,
         selectedIndex: selectedIndex,
         onSelectedIndexChange: setSelectedIndexAsync,
         orientation: "horizontal",
         labelPosition: "before",
-        children: [o$2(SSB, {
+        children: [o$3(SSB, {
           index: 0
-        }), o$2(SSB, {
+        }), o$3(SSB, {
           index: 1
-        }), o$2(SSB, {
+        }), o$3(SSB, {
           index: 2
-        }), o$2(SSB, {
+        }), o$3(SSB, {
           index: 3
         })]
       })]
@@ -32016,7 +32011,7 @@
       await new Promise(resolve => setTimeout(resolve, 1000 + 3000 * Math.random()));
       onToggleSync(pressed);
     }, []);
-    return o$2(Button, {
+    return o$3(Button, {
       buttonGroupIndex: index,
       onPress: index % 2 == 0 ? onToggleAsync : onToggleSync,
       pressed: pressed,
@@ -32036,7 +32031,7 @@
         await setSelectedIndexAsync(pressed ? index : null);
         //onToggleSync(pressed);
     })*/
-    return o$2(Button, {
+    return o$3(Button, {
       buttonGroupIndex: index,
       onPress: null,
       children: "Toggle me"
@@ -32044,60 +32039,60 @@
   }
 
   function Blurb$3() {
-    return o$2(_$3, {
-      children: [o$2("ul", {
-        children: [o$2("li", {
-          children: [o$2("code", {
+    return o$3(_$3, {
+      children: [o$3("ul", {
+        children: [o$3("li", {
+          children: [o$3("code", {
             children: "checked"
-          }), ": Can be a ", o$2("code", {
+          }), ": Can be a ", o$3("code", {
             children: "boolean"
           }), " or the string \"mixed\"."]
-        }), o$2("li", {
-          children: [o$2("code", {
+        }), o$3("li", {
+          children: [o$3("code", {
             children: "onValueChange"
-          }), ": ", o$2("em", {
-            children: [o$2("code", {
+          }), ": ", o$3("em", {
+            children: [o$3("code", {
               children: "async"
             }), " compatible"]
           }), ". Called when the user has requested to change the checkbox state."]
-        }), o$2("li", {
-          children: [o$2("code", {
+        }), o$3("li", {
+          children: [o$3("code", {
             children: "label"
-          }), ": What will be placed in the label, and what will be announced to assistive technologies even if ", o$2("code", {
+          }), ": What will be placed in the label, and what will be announced to assistive technologies even if ", o$3("code", {
             children: "labelPosition"
           }), " is \"hidden\"."]
-        }), o$2("li", {
-          children: [o$2("code", {
+        }), o$3("li", {
+          children: [o$3("code", {
             children: "labelPosition"
-          }), ": Controls where ", o$2("code", {
+          }), ": Controls where ", o$3("code", {
             children: "label"
-          }), " is placed relative to the checkbox itself. If \"hidden\", ", o$2("code", {
+          }), " is placed relative to the checkbox itself. If \"hidden\", ", o$3("code", {
             children: "label"
-          }), " ", o$2("em", {
+          }), " ", o$3("em", {
             children: "must"
           }), " be a simple string. \"tooltip\" is valid here as well."]
-        }), o$2("li", {
-          children: [o$2("code", {
+        }), o$3("li", {
+          children: [o$3("code", {
             children: "inline"
-          }), ": By default, checkboxes are ", o$2("code", {
+          }), ": By default, checkboxes are ", o$3("code", {
             children: "display: block"
           }), "."]
         })]
-      }), o$2("p", {
+      }), o$3("p", {
         children: "Buttons-as-checkboxes are not currently supported, but toggle buttons are."
-      }), o$2("p", {
-        children: ["In addition, Checkbox Groups are supported. These are separate from normal ", o$2("code", {
+      }), o$3("p", {
+        children: ["In addition, Checkbox Groups are supported. These are separate from normal ", o$3("code", {
           children: "Checkbox"
-        }), " components (e.g. ", o$2("code", {
+        }), " components (e.g. ", o$3("code", {
           children: "CheckboxGroup"
-        }), " and ", o$2("code", {
+        }), " and ", o$3("code", {
           children: "CheckboxGroupChild"
         }), "), but take largely the same props, with the addition of the list navigation-related props used in things like Lists."]
       })]
     });
   }
   function Code$3() {
-    return o$2("code", {
+    return o$3("code", {
       children: `<Button tag="button">Button</Button>
     <Button tag="div">Div</Button>`
     });
@@ -32108,44 +32103,44 @@
       await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 3000));
       setCheckedSync(checked);
     }, []);
-    return o$2(_$3, {
-      children: [o$2(Blurb$3, {}), o$2(Code$3, {}), o$2(Checkbox, {
+    return o$3(_$3, {
+      children: [o$3(Blurb$3, {}), o$3(Code$3, {}), o$3(Checkbox, {
         checked: checked,
         onValueChange: setCheckedSync,
         label: "Sync checkbox",
         labelPosition: "after"
-      }), o$2(Checkbox, {
+      }), o$3(Checkbox, {
         checked: checked,
         onValueChange: setCheckedAsync,
         label: "Async checkbox",
         labelPosition: "after"
-      }), o$2(Checkbox, {
+      }), o$3(Checkbox, {
         checked: checked,
         tristate: true,
         onValueChange: setCheckedAsync,
         label: "Async tristate checkbox",
         labelPosition: "after"
-      }), o$2(InputGroup, {
-        children: [o$2(Checkbox, {
+      }), o$3(InputGroup, {
+        children: [o$3(Checkbox, {
           checked: checked,
           onValueChange: setCheckedSync,
           label: "Input group",
           labelPosition: "after"
-        }), o$2(Checkbox, {
+        }), o$3(Checkbox, {
           checked: checked,
           onValueChange: setCheckedSync,
           label: "Input group (tooltip)",
           labelPosition: "tooltip"
         })]
-      }), o$2("p", {
+      }), o$3("p", {
         children: "In the following Checkbox Group Demo, each checkbox takes a random amount of time to update its value, including when the reason is because of the parent checkbox."
-      }), o$2(CheckboxGroup, {
+      }), o$3(CheckboxGroup, {
         orientation: "vertical",
         label: "Checkbox Group parent",
         labelPosition: "after",
         children: Array.from(function* () {
           for (let i = 0; i < 10; ++i) {
-            yield o$2(DemoGroupChild, {
+            yield o$3(DemoGroupChild, {
               index: i
             }, i);
           }
@@ -32158,7 +32153,7 @@
       index: i
     } = _ref;
     const [checked, setChecked] = useState(false);
-    return o$2(CheckboxGroupChild, {
+    return o$3(CheckboxGroupChild, {
       index: i,
       labelPosition: "after",
       label: `Child #${i}`,
@@ -32171,36 +32166,36 @@
   }
 
   function Blurb$2() {
-    return o$2(_$3, {
-      children: o$2("ul", {
-        children: [o$2("li", {
+    return o$3(_$3, {
+      children: o$3("ul", {
+        children: [o$3("li", {
           children: "As a composite component, standard keyboard navigation is supported"
-        }), o$2("li", {
-          children: ["Individual ", o$2("code", {
+        }), o$3("li", {
+          children: ["Individual ", o$3("code", {
             children: "Radio"
-          }), " components don't have a ", o$2("code", {
+          }), " components don't have a ", o$3("code", {
             children: "checked"
-          }), " prop, instead the parent ", o$2("code", {
+          }), " prop, instead the parent ", o$3("code", {
             children: "RadioGroup"
-          }), " has a ", o$2("code", {
+          }), " has a ", o$3("code", {
             children: "value"
           }), " prop"]
-        }), o$2("li", {
-          children: [o$2("code", {
+        }), o$3("li", {
+          children: [o$3("code", {
             children: "onValueChange"
-          }), ": ", o$2("em", {
-            children: [o$2("code", {
+          }), ": ", o$3("em", {
+            children: [o$3("code", {
               children: "async"
             }), " compatible"]
           }), ". Called when a new radio button (different from one previously pressed) is pressed with its value."]
-        }), o$2("li", {
-          children: [o$2("code", {
+        }), o$3("li", {
+          children: [o$3("code", {
             children: "label"
-          }), ",", o$2("code", {
+          }), ",", o$3("code", {
             children: "labelPosition"
-          }), ", and ", o$2("code", {
+          }), ", and ", o$3("code", {
             children: "inline"
-          }), " are identical to ", o$2("code", {
+          }), " are identical to ", o$3("code", {
             children: "Checkbox"
           })]
         })]
@@ -32208,7 +32203,7 @@
     });
   }
   function Code$2() {
-    return o$2("code", {
+    return o$3("code", {
       children: `<Button tag="button">Button</Button>
     <Button tag="div">Div</Button>`
     });
@@ -32220,8 +32215,8 @@
       await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 3000));
       setValue(v);
     };
-    return o$2(_$3, {
-      children: [o$2(Blurb$2, {}), o$2(Code$2, {}), o$2(RadioGroup, {
+    return o$3(_$3, {
+      children: [o$3(Blurb$2, {}), o$3(Code$2, {}), o$3(RadioGroup, {
         name: "radio-demo",
         labelPosition: "before",
         label: "Radio group demo",
@@ -32230,7 +32225,7 @@
         onValueChange: setValueAsync,
         children: Array.from(function* () {
           let i = 0;
-          for (const lp of L) yield o$2(Radio, {
+          for (const lp of L) yield o$3(Radio, {
             index: i++,
             value: lp,
             label: lp,
@@ -32242,75 +32237,75 @@
   }
 
   function Blurb$1() {
-    return o$2(_$3, {
-      children: o$2("ul", {
-        children: [o$2("li", {
-          children: [o$2("code", {
+    return o$3(_$3, {
+      children: o$3("ul", {
+        children: [o$3("li", {
+          children: [o$3("code", {
             children: "onValueChange"
-          }), ": ", o$2("em", {
-            children: [o$2("code", {
+          }), ": ", o$3("em", {
+            children: [o$3("code", {
               children: "async"
             }), " compatible"]
-          }), ". Called with a type appropriate to the input't ", o$2("code", {
+          }), ". Called with a type appropriate to the input't ", o$3("code", {
             children: "type"
-          }), ":", o$2("ul", {
-            children: [o$2("li", {
-              children: [o$2("code", {
+          }), ":", o$3("ul", {
+            children: [o$3("li", {
+              children: [o$3("code", {
                 children: "text"
-              }), ": ", o$2("code", {
+              }), ": ", o$3("code", {
                 children: "string"
               })]
-            }), o$2("li", {
-              children: [o$2("code", {
+            }), o$3("li", {
+              children: [o$3("code", {
                 children: "number"
-              }), ": ", o$2("code", {
+              }), ": ", o$3("code", {
                 children: "number"
               })]
-            }), o$2("li", {
-              children: [o$2("code", {
+            }), o$3("li", {
+              children: [o$3("code", {
                 children: "bigint"
-              }), ": ", o$2("code", {
+              }), ": ", o$3("code", {
                 children: "bigint"
               })]
-            }), o$2("li", {
-              children: [o$2("code", {
+            }), o$3("li", {
+              children: [o$3("code", {
                 children: "datetime-local"
-              }), ": ", o$2("code", {
+              }), ": ", o$3("code", {
                 children: "Temporal.Instant"
               })]
-            }), o$2("li", {
-              children: [o$2("code", {
+            }), o$3("li", {
+              children: [o$3("code", {
                 children: "date"
-              }), ": ", o$2("code", {
+              }), ": ", o$3("code", {
                 children: "Temporal.PlainDate"
               })]
-            }), o$2("li", {
-              children: [o$2("code", {
+            }), o$3("li", {
+              children: [o$3("code", {
                 children: "time"
-              }), ": ", o$2("code", {
+              }), ": ", o$3("code", {
                 children: "Temporal.PlainTime"
               })]
             })]
           })]
-        }), o$2("li", {
+        }), o$3("li", {
           children: "Text fields can automatically be given a width that corresponds to their type, especially with date/time types, and optionally with number types."
-        }), o$2("li", {
-          children: ["Whether using an actual ", o$2("code", {
+        }), o$3("li", {
+          children: ["Whether using an actual ", o$3("code", {
             children: "<textfield>"
-          }), ", or something else like a ", o$2("code", {
+          }), ", or something else like a ", o$3("code", {
             children: "<div>"
           }), ", the proper roles and event handlers will be applied."]
-        }), o$2("li", {
+        }), o$3("li", {
           children: "TextFields can be toggled (pressed or unpressed)."
-        }), o$2("li", {
-          children: ["The textfield responds to keyboard, mouse, touch, etc. events, regardless of the element used.", o$2("ul", {
-            children: [o$2("li", {
+        }), o$3("li", {
+          children: ["The textfield responds to keyboard, mouse, touch, etc. events, regardless of the element used.", o$3("ul", {
+            children: [o$3("li", {
               children: "Double-clicks do not select text, but text is still selectable without it counting as a press/click"
-            }), o$2("li", {
+            }), o$3("li", {
               children: "When Enter is pressed, the textfield is immediately activated"
-            }), o$2("li", {
+            }), o$3("li", {
               children: "When Space is pressed, the textfield is activated once released"
-            }), o$2("li", {
+            }), o$3("li", {
               children: "iOS Safari properly focuses the textfield"
             })]
           })]
@@ -32319,7 +32314,7 @@
     });
   }
   function Code$1() {
-    return o$2("code", {
+    return o$3("code", {
       children: `<TextField tag="textfield">TextField</TextField>
     <TextField tag="div">Div</TextField>`
     });
@@ -32355,12 +32350,12 @@
       await new Promise(resolve => setTimeout(resolve, 1000 + 3000 * Math.random()));
       setTimeSync(value);
     });
-    return o$2(_$3, {
-      children: [o$2(Blurb$1, {}), o$2(Code$1, {}), o$2("div", {
+    return o$3(_$3, {
+      children: [o$3(Blurb$1, {}), o$3(Code$1, {}), o$3("div", {
         children: ["Text: ", text, ", Number: ", number]
-      }), o$2(TextField, {
+      }), o$3(TextField, {
         label: "Text field",
-        iconStart: o$2(BootstrapIcon, {
+        iconStart: o$3(BootstrapIcon, {
           icon: "plus-circle",
           label: null
         }),
@@ -32368,9 +32363,9 @@
         onValueChange: setTextAsync,
         value: text,
         type: "text"
-      }), o$2(TextField, {
+      }), o$3(TextField, {
         label: "Number field",
-        iconEnd: o$2(BootstrapIcon, {
+        iconEnd: o$3(BootstrapIcon, {
           icon: "pencil-fill",
           label: null
         }),
@@ -32381,45 +32376,45 @@
         min: 0,
         max: 100,
         digitDisplay: 3
-      }), o$2(InputGroup, {
-        children: o$2(TextField, {
+      }), o$3(InputGroup, {
+        children: o$3(TextField, {
           label: "Datetime field",
           labelPosition: "before",
           onValueChange: setDateTimeAsync,
           value: dateTime,
           type: "datetime-local"
         })
-      }), o$2(TextField, {
+      }), o$3(TextField, {
         label: "Date field",
         labelPosition: "before",
         onValueChange: setDateAsync,
         value: date,
         type: "date"
-      }), o$2(TextField, {
+      }), o$3(TextField, {
         label: "Time field",
         labelPosition: "before",
         onValueChange: setTimeAsync,
         value: time,
         type: "time"
-      }), o$2(TextField, {
+      }), o$3(TextField, {
         label: "Time field (seconds)",
         labelPosition: "before",
         onValueChange: setTimeAsync,
         value: time,
         type: "time",
         seconds: true
-      }), o$2(RichTextField, {
+      }), o$3(RichTextField, {
         valueHtml: richText,
         onValueChange: setRichTextAsync
-      }), o$2("pre", {
-        children: o$2("code", {
+      }), o$3("pre", {
+        children: o$3("code", {
           children: richText
         })
-      }), o$2("div", {
-        children: o$2(RichTextView, {
+      }), o$3("div", {
+        children: o$3(RichTextView, {
           valueHtml: richText
         })
-      }), o$2(DocumentField, {
+      }), o$3(DocumentField, {
         valueHtml: richText,
         onValueChange: setRichTextAsync
       })]
@@ -32427,43 +32422,43 @@
   }
 
   function Blurb() {
-    return o$2(_$3, {
-      children: [o$2("p", {
-        children: [o$2("a", {
+    return o$3(_$3, {
+      children: [o$3("p", {
+        children: [o$3("a", {
           href: "https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/",
           children: "In accordance with the ARIA guidelines for Tooltip patterns,"
         }), " this widget supports the following:"]
-      }), o$2("ul", {
-        children: [o$2("li", {
-          children: ["Whether using an actual ", o$2("code", {
+      }), o$3("ul", {
+        children: [o$3("li", {
+          children: ["Whether using an actual ", o$3("code", {
             children: "<tooltip>"
-          }), ", or something else like a ", o$2("code", {
+          }), ", or something else like a ", o$3("code", {
             children: "<div>"
           }), ", the proper roles and event handlers will be applied."]
-        }), o$2("li", {
+        }), o$3("li", {
           children: "Tooltips can be toggled (pressed or unpressed)."
-        }), o$2("li", {
-          children: ["The tooltip responds to keyboard, mouse, touch, etc. events, regardless of the element used.", o$2("ul", {
-            children: [o$2("li", {
+        }), o$3("li", {
+          children: ["The tooltip responds to keyboard, mouse, touch, etc. events, regardless of the element used.", o$3("ul", {
+            children: [o$3("li", {
               children: "Double-clicks do not select text, but text is still selectable without it counting as a press/click"
-            }), o$2("li", {
+            }), o$3("li", {
               children: "When Enter is pressed, the tooltip is immediately activated"
-            }), o$2("li", {
+            }), o$3("li", {
               children: "When Space is pressed, the tooltip is activated once released"
-            }), o$2("li", {
+            }), o$3("li", {
               children: "iOS Safari properly focuses the tooltip"
             })]
           })]
         })]
-      }), o$2("p", {
-        children: o$2("strong", {
-          children: ["Things ", o$2("em", {
+      }), o$3("p", {
+        children: o$3("strong", {
+          children: ["Things ", o$3("em", {
             children: "not"
           }), " handled:"]
         })
-      }), o$2("ul", {
-        children: o$2("li", {
-          children: ["If your tooltip contains only an icon (or other non-descriptive content, etc.), you must provide an ", o$2("code", {
+      }), o$3("ul", {
+        children: o$3("li", {
+          children: ["If your tooltip contains only an icon (or other non-descriptive content, etc.), you must provide an ", o$3("code", {
             children: "aria-label"
           }), " manually stating what happens when the tooltip is pressed."]
         })
@@ -32471,37 +32466,37 @@
     });
   }
   function Code() {
-    return o$2("code", {
+    return o$3("code", {
       children: `<Tooltip tag="tooltip">Tooltip</Tooltip>
     <Tooltip tag="div">Div</Tooltip>`
     });
   }
   function Demo() {
     const [mounted, setMounted] = useState(false);
-    return o$2(_$3, {
-      children: [o$2(Blurb, {}), o$2(Code, {}), o$2("div", {
-        children: ["This is text, ", o$2(Tooltip, {
+    return o$3(_$3, {
+      children: [o$3(Blurb, {}), o$3(Code, {}), o$3("div", {
+        children: ["This is text, ", o$3(Tooltip, {
           tooltip: "This is the tooltip content",
           children: "and this is text that triggers a tooltip."
         })]
-      }), o$2(Checkbox, {
+      }), o$3(Checkbox, {
         checked: mounted,
         onValueChange: setMounted,
         label: "Mount lots of tooltips",
         labelPosition: "after"
-      }), o$2("div", {
+      }), o$3("div", {
         style: "border: 1px solid black; min-width: 100px; min-height: 100px;",
-        children: mounted && o$2(LotsOfTooltips, {})
+        children: mounted && o$3(LotsOfTooltips, {})
       })]
     });
   }
   const LotsOfTooltips = x$1(function LotsOfTooltips() {
-    return o$2("div", {
+    return o$3("div", {
       children: Array.from(function* () {
         for (let i = 0; i < 1000; ++i) {
-          yield o$2(Tooltip, {
+          yield o$3(Tooltip, {
             tooltip: i.toString(),
-            children: o$2("span", {
+            children: o$3("span", {
               children: i
             })
           });
@@ -32521,30 +32516,30 @@
     const [paginationWindow, setPaginationWindow] = h$1(10);
     const [selectedIndex, setSelectedIndex] = h$1(null);
     count ??= 0;
-    return o$2("div", {
-      children: [o$2(TextField, {
+    return o$3("div", {
+      children: [o$3(TextField, {
         type: "number",
         value: count,
         onValueChange: setCount,
         label: "# of children",
         labelPosition: "floating"
-      }), o$2(TextField, {
+      }), o$3(TextField, {
         type: "number",
         value: paginationWindow,
         onValueChange: setPaginationWindow,
         label: "Pagination window",
         labelPosition: "floating"
-      }), o$2("div", {
+      }), o$3("div", {
         children: selectedIndex
-      }), o$2(List, {
+      }), o$3(List, {
         paginationLocation: paginationWindow == null ? null : "before",
         paginationSize: paginationWindow !== null && paginationWindow !== void 0 ? paginationWindow : null,
-        paginationLabel: "Choose the selected page of 150 items to show",
+        paginationLabel: "Choose the selected page of items to show",
         selectedIndex: selectedIndex,
         onSelectedIndexChange: setSelectedIndex,
         labelPosition: "before",
         label: "List (grid)",
-        children: o$2(ListDemoContents, {
+        children: o$3(ListDemoContents, {
           count: count
         })
       })]
@@ -32555,10 +32550,10 @@
       count
     } = _ref;
     console.log("ListDemoContents");
-    return o$2(_$3, {
+    return o$3(_$3, {
       children: Array.from(function* () {
         for (let i = 0; i < count; ++i) {
-          yield o$2(ListDemoItem, {
+          yield o$3(ListDemoItem, {
             i: i
           }, i);
         }
@@ -32576,20 +32571,20 @@
      });
      if (!visible)
          return null;*/
-    const iconStart = o$2(Menu, {
-      anchor: o$2(Button, {
+    const iconStart = o$3(Menu, {
+      anchor: o$3(Button, {
         variantSize: "sm",
         variantFill: "fill",
         variantTheme: "light",
         onPress: null,
-        children: o$2(BootstrapIcon, {
+        children: o$3(BootstrapIcon, {
           icon: "menu-app",
           label: "Open dropdown menu"
         })
       }),
       children: Array.from(function* () {
         for (let i = 0; i < 10; ++i) {
-          yield o$2(MenuItem, {
+          yield o$3(MenuItem, {
             index: i,
             onPress: async c => {
               await new Promise(resolve => setTimeout(resolve, 1000));
@@ -32601,22 +32596,22 @@
         }
       }())
     });
-    return o$2(ListItem, {
+    return o$3(ListItem, {
       index: i,
       onPress: async () => {
         return new Promise(resolve => setTimeout(resolve, 2000));
       },
-      badge: o$2(Badge, {
+      badge: o$3(Badge, {
         variantTheme: "info",
         children: "10"
       }),
       iconStart: i & 0b01 ? iconStart : null,
-      iconEnd: i & 0b10 ? o$2(Button, {
+      iconEnd: i & 0b10 ? o$3(Button, {
         variantSize: "sm",
         variantFill: "fill",
         variantTheme: "light",
         onPress: () => alert("Delete button clicked"),
-        children: o$2(BootstrapIcon, {
+        children: o$3(BootstrapIcon, {
           icon: "trash-fill",
           label: "Delete"
         })
@@ -32626,9 +32621,9 @@
   });
   function MenuDemo() {
     const [selectedIndex, setSelectedIndex] = h$1(null);
-    return o$2(Menu, {
+    return o$3(Menu, {
       selectedIndex: selectedIndex,
-      anchor: o$2(Button, {
+      anchor: o$3(Button, {
         variantDropdown: "joined",
         onPress: null,
         children: "Open Dropdown Menu"
@@ -32636,7 +32631,7 @@
       onSelectedIndexChange: setSelectedIndex,
       children: Array.from(function* () {
         for (let i = 0; i < 10; ++i) {
-          yield o$2(MenuItem, {
+          yield o$3(MenuItem, {
             index: i,
             onPress: async () => {
               return new Promise(resolve => setTimeout(resolve, 2000));
@@ -32649,79 +32644,79 @@
   }
   function DialogDemo() {
     const [open, setOpen] = h$1(false);
-    return o$2(Dialog, {
+    return o$3(Dialog, {
       open: open,
       modal: true,
       onClose: () => setOpen(false),
-      header: o$2("span", {
+      header: o$3("span", {
         children: "Dialog title"
       }),
-      anchor: o$2(Button, {
+      anchor: o$3(Button, {
         onPress: () => setOpen(true),
         children: "Open dialog"
       }),
-      children: o$2("div", {
+      children: o$3("div", {
         children: "This is the dialog content"
       })
     });
   }
   function OffcanvasDemo() {
     const [open, setOpen] = h$1(false);
-    return o$2(Offcanvas, {
+    return o$3(Offcanvas, {
       open: open,
       onClose: () => setOpen(false),
-      header: o$2("span", {
+      header: o$3("span", {
         children: "Dialog title"
       }),
-      anchor: o$2(Button, {
+      anchor: o$3(Button, {
         onPress: () => setOpen(true),
         children: "Open offcanvas"
       }),
-      children: o$2("div", {
+      children: o$3("div", {
         children: "This is the offcanvas content"
       })
     });
   }
   function SliderDemo() {
     const [value, setValue] = h$1(0);
-    return o$2("div", {
-      children: [o$2("p", {
+    return o$3("div", {
+      children: [o$3("p", {
         children: ["Value: ", value]
-      }), o$2("p", {
+      }), o$3("p", {
         children: "This slider is continuous:"
-      }), o$2(Range, {
+      }), o$3(Range, {
         onValueChange: setValue,
         value: value,
         min: 0,
         max: 10,
         step: 1,
         snap: "continuous",
-        children: o$2(RangeThumb, {
+        children: o$3(RangeThumb, {
           index: 0,
           label: "Slider example #0"
         })
-      }), o$2("p", {
+      }), o$3("p", {
         children: "This slider is discrete:"
-      }), o$2(Range, {
+      }), o$3(Range, {
         onValueChange: setValue,
         value: value,
         min: 0,
         max: 10,
         step: 1,
         snap: "discrete",
-        children: o$2(RangeThumb, {
+        children: o$3(RangeThumb, {
           index: 0,
           label: "Slider example #0"
         })
-      }), o$2("p", {
-        children: ["This shows its values as ", o$2("code", {
-          children: ["10", o$2("sup", {
+      }), o$3("p", {
+        children: ["This shows its values as ", o$3("code", {
+          children: ["10", o$3("sup", {
             children: "value"
           })]
-        }), ", instead of ", o$2("code", {
+        }), ", instead of ", o$3("code", {
           children: "value"
         }), ":"]
-      }), o$2(Range, {
+      }), o$3(Range, {
         onValueChange: setValue,
         value: value,
         min: 0,
@@ -32735,32 +32730,32 @@
   function ToastsDemo() {
     const pushToast = usePushToast();
     const [mountError, setMountError] = h$1(false);
-    return o$2("div", {
-      children: [o$2(Button, {
+    return o$3("div", {
+      children: [o$3(Button, {
         onPress: () => {
-          pushToast(o$2(Toast, {
+          pushToast(o$3(Toast, {
             timeout: 2000,
             children: "This is a toast"
           }));
         },
         children: "Push toast"
-      }), o$2(Button, {
+      }), o$3(Button, {
         onPress: () => {
           setMountError(true);
         },
         children: "Mount a component that errors"
-      }), o$2(Button, {
+      }), o$3(Button, {
         onPress: () => {
           throw new Error("Demo error was thrown");
         },
         children: "onPress throws"
-      }), o$2(Button, {
+      }), o$3(Button, {
         onPress: async () => {
           await new Promise(resolve => setTimeout(resolve, 500));
           throw new Error("Demo error was thrown");
         },
         children: "onPress throws (async)"
-      }), mountError && o$2(ErrorComponent, {})]
+      }), mountError && o$3(ErrorComponent, {})]
     });
   }
   function ErrorComponent() {
@@ -32771,42 +32766,42 @@
     let [count, setCount] = h$1(1000);
     const [paginationWindow, setPaginationWindow] = h$1(10);
     count ??= 0;
-    return o$2("div", {
-      children: [o$2(TextField, {
+    return o$3("div", {
+      children: [o$3(TextField, {
         type: "number",
         value: count,
         onValueChange: setCount,
         label: "# of children",
         labelPosition: "floating"
-      }), o$2(TextField, {
+      }), o$3(TextField, {
         type: "number",
         value: paginationWindow,
         onValueChange: setPaginationWindow,
         label: "Pagination window",
         labelPosition: "floating"
-      }), o$2(DataTable, {
+      }), o$3(DataTable, {
         captionPosition: "before",
         caption: "Table demo",
         paginationSize: paginationWindow,
         paginationLocation: "before",
-        children: [o$2(DataTableHead, {
-          children: o$2(DataTableRow, {
+        children: [o$3(DataTableHead, {
+          children: o$3(DataTableRow, {
             row: 0,
-            children: [o$2(DataTableCell, {
+            children: [o$3(DataTableCell, {
               column: 0,
               children: "Numeric"
-            }), o$2(DataTableCell, {
+            }), o$3(DataTableCell, {
               column: 1,
               children: "String"
-            }), o$2(DataTableCell, {
+            }), o$3(DataTableCell, {
               column: 2,
               children: "Date"
-            }), o$2(DataTableCell, {
+            }), o$3(DataTableCell, {
               column: 3,
               children: "Input"
             })]
           })
-        }), o$2(TableDemoBody, {
+        }), o$3(TableDemoBody, {
           count: count
         })]
       })]
@@ -32819,12 +32814,12 @@
     console.log("Table body demo rendered");
     const children = F$2(() => Array.from(function* () {
       for (let i = 0; i < count; ++i) {
-        yield o$2(TableDemoRow, {
+        yield o$3(TableDemoRow, {
           row: i
         }, i);
       }
     }()), [count]);
-    return o$2(DataTableBody, {
+    return o$3(DataTableBody, {
       children: children
     });
   });
@@ -32838,22 +32833,22 @@
     const date = new Date(+baseDate + 1000 * 60 * 60 * 24 * row ** 2);
     const [value, setValue] = h$1(0);
     console.log("Table row demo rendered");
-    return o$2(DataTableRow, {
+    return o$3(DataTableRow, {
       row: numeric,
-      children: [o$2(DataTableCell, {
+      children: [o$3(DataTableCell, {
         column: 0,
         value: row
-      }), o$2(DataTableCell, {
+      }), o$3(DataTableCell, {
         column: 1,
         value: word
-      }), o$2(DataTableCell, {
+      }), o$3(DataTableCell, {
         column: 2,
         value: date,
         children: date.toLocaleString()
-      }), o$2(DataTableCell, {
+      }), o$3(DataTableCell, {
         column: 3,
         fillY: true,
-        children: o$2(TextField, {
+        children: o$3(TextField, {
           type: "number",
           marginBottom: 0,
           value: value,
@@ -32867,10 +32862,10 @@
     });
   });
   function AccordionDemo() {
-    return o$2(Accordion, {
+    return o$3(Accordion, {
       children: Array.from(function* () {
         for (let i = 0; i < 5; ++i) {
-          yield o$2(AccordionSection, {
+          yield o$3(AccordionSection, {
             index: i,
             header: "Section #" + i,
             children: ["Accordion body content for section #", i]
@@ -32887,103 +32882,103 @@
     h$1(0);
     let i0 = 0;
     let i1 = 0;
-    return o$2(AllProviders, {
+    return o$3(AllProviders, {
       targetAssertive: "aria-notifications-assertive",
       targetPolite: "aria-notifications-polite",
-      children: [o$2(RenderCounterDisplay, {}), o$2(Tabs, {
+      children: [o$3(RenderCounterDisplay, {}), o$3(Tabs, {
         localStorageKey: "main-demo-page-selected-tab-index",
         label: "Select the demo to view",
         labelPosition: "hidden",
         orientation: "horizontal",
-        tabs: o$2(_$3, {
-          children: [o$2(Tab, {
+        tabs: o$3(_$3, {
+          children: [o$3(Tab, {
             index: i0++,
             children: "Button"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Checkbox"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Menu"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Tooltip"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Radio"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Text field"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Gridlist demo"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Dialog"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Slider"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Toasts"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Data Table"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Accordion"
-          }), o$2(Tab, {
+          }), o$3(Tab, {
             index: i0++,
             children: "Offcanvas"
           })]
         }),
-        panels: o$2(_$3, {
-          children: [o$2(TabPanel, {
+        panels: o$3(_$3, {
+          children: [o$3(TabPanel, {
             index: i1++,
-            children: o$2(Demo$4, {})
-          }), o$2(TabPanel, {
+            children: o$3(Demo$4, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(Demo$3, {})
-          }), o$2(TabPanel, {
+            children: o$3(Demo$3, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(MenuDemo, {})
-          }), o$2(TabPanel, {
+            children: o$3(MenuDemo, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(Demo, {})
-          }), o$2(TabPanel, {
+            children: o$3(Demo, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(Demo$2, {})
-          }), o$2(TabPanel, {
+            children: o$3(Demo$2, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(Demo$1, {})
-          }), o$2(TabPanel, {
+            children: o$3(Demo$1, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(ListDemo, {})
-          }), o$2(TabPanel, {
+            children: o$3(ListDemo, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(DialogDemo, {})
-          }), o$2(TabPanel, {
+            children: o$3(DialogDemo, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(SliderDemo, {})
-          }), o$2(TabPanel, {
+            children: o$3(SliderDemo, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(ToastsDemo, {})
-          }), o$2(TabPanel, {
+            children: o$3(ToastsDemo, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(TableDemo, {})
-          }), o$2(TabPanel, {
+            children: o$3(TableDemo, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(AccordionDemo, {})
-          }), o$2(TabPanel, {
+            children: o$3(AccordionDemo, {})
+          }), o$3(TabPanel, {
             index: i1++,
-            children: o$2(OffcanvasDemo, {})
+            children: o$3(OffcanvasDemo, {})
           })]
         })
       })]
     });
   };
   requestAnimationFrame(() => {
-    B$3(o$2(Component, {}), document.getElementById("root"));
+    B$3(o$3(Component, {}), document.getElementById("root"));
   });
 
 })();

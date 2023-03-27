@@ -11,7 +11,7 @@ export interface CheckboxGroupProps extends GlobalAttributes<HTMLSpanElement, "c
 export function CheckboxGroup({ orientation, children, label, labelPosition, debounce, loadingLabel, throttle, disabled, inline, getSortValue }: CheckboxGroupProps) {
     return (
         <AriaCheckboxGroup<HTMLSpanElement, HTMLInputElement>
-            navigationDirection={orientation}
+            orientation={orientation}
 
             render={info => {
                 return (

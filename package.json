@@ -6,7 +6,7 @@
   "source": "src/index.tsx",
   "module": "/dist/index.js",
   "types": "/dist/index.d.ts",
-  "packageManager": "pnpm@7.29.1",
+  "packageManager": "pnpm@7.30.0",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -34,7 +34,7 @@
   },
   "typings": "./dist/index.d.ts",
   "dependencies": {
-    "@floating-ui/dom": "^1.2.4",
+    "@floating-ui/dom": "^1.2.5",
     "@js-temporal/polyfill": "^0.4.3",
     "bootstrap-icons": "^1.10.3",
     "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
@@ -49,6 +49,6 @@
     "@types/dompurify": "^3.0.0",
     "@types/lodash-es": "^4.17.7",
     "sass": "^1.59.2",
-    "typescript": "5.0.1-rc"
+    "typescript": "^5.0.2"
   }
 }
