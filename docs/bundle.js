@@ -1778,15 +1778,27 @@
     return func(collection);
   }
 
+  let cached = null;
   function getBuildModeUnmemoized() {
     try {
       if ("development" === "development") return "development";
       return "production";
     } catch (_e) {
-      return "production";
+      // As long as we're returning "production" due to it being unspecified, 
+      // try to make sure anyone else who tries does too for consistency.
+      // TODO: Good/bad idea?
+      try {
+        globalThis["process"] ??= {};
+        globalThis["process"]["env"] ??= {};
+        globalThis["process"]["env"]["NODE_ENV"] ??= "production";
+      } finally {
+        return "production";
+      }
     }
   }
-  const getBuildMode = getBuildModeUnmemoized; //memoize(getBuildModeUnmemoized) as typeof getBuildModeUnmemoized;
+  function getBuildMode() {
+    return cached ??= getBuildModeUnmemoized();
+  }
 
   let timeoutHandle = null;
   function callCountU(hook) {
@@ -2062,7 +2074,6 @@
     return `${prefix !== null && prefix !== void 0 ? prefix : "id-"}${random64Bits().map(n => base64(n)).join("")}`;
   }
 
-  const previousInputs = new Map();
   const toRun = new Map();
   // TODO: Whether this goes in options.diffed or options._commit
   // is a post-suspense question.
@@ -2077,23 +2088,26 @@
   // which is cool and means we won't need this at all soon.
   // So for now we'll stick with diff to prevent any weirdness with
   // commit being private and all.
+  //
+  // Also, in theory this could be replaced with `useInsertionEffect`,
+  // but that probably won't be available in Preact for awhile.
   const commitName = "diffed";
-  const originalCommit = l$3[commitName];
-  const newCommit = function () {
+  const newCommit = function (vnode) {
     for (const [id, effectInfo] of toRun) {
-      const oldInputs = previousInputs.get(id);
+      const oldInputs = effectInfo.prevInputs;
       if (argsChanged(oldInputs, effectInfo.inputs)) {
         effectInfo.cleanup?.();
         effectInfo.cleanup = effectInfo.effect();
-        previousInputs.set(id, effectInfo.inputs);
+        effectInfo.prevInputs = effectInfo.inputs;
       }
     }
     toRun.clear();
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
     }
-    originalCommit?.(...args);
+    originalCommit?.(vnode, ...args);
   };
+  const originalCommit = l$3[commitName];
   l$3[commitName] = newCommit;
   /**
    * Semi-private function to allow stable callbacks even within `useLayoutEffect` and ref assignment.
@@ -2115,7 +2129,6 @@
     p$1(() => {
       return () => {
         toRun.delete(id);
-        previousInputs.delete(id);
       };
     }, [id]);
   }
@@ -4261,7 +4274,7 @@
       onRearrangedGetter()?.();
       getForceUpdate()?.();
     }, []);
-    const useRearrangedChildren = T$2(children => {
+    const useRearrangedChildren = T$2(function useRearrangedChildren(children) {
       monitorCallCount(useRearrangedChildren);
       console.assert(Array.isArray(children));
       const forceUpdate = useForceUpdate();
@@ -4661,7 +4674,7 @@
   }
 
   /*
-  export function useRefElementProps<E extends Element>(r: UseRefElementReturnType<E>, ...otherProps: h.JSX.HTMLAttributes<E>[]): h.JSX.HTMLAttributes<E>[] {
+  export function useRefElementProps<E extends Element>(r: UseRefElementReturnType<E>, ...otherProps: ElementProps<E>[]): ElementProps<E>[] {
       return [r.refElementReturn.propsStable, ...otherProps];
   }*/
   /**
@@ -15829,22 +15842,6 @@
     } = config;
     const validMiddleware = middleware.filter(Boolean);
     const rtl = await (platform.isRTL == null ? void 0 : platform.isRTL(floating));
-    {
-      if (platform == null) {
-        console.error(['Floating UI: `platform` property was not passed to config. If you', 'want to use Floating UI on the web, install @floating-ui/dom', 'instead of the /core package. Otherwise, you can create your own', '`platform`: https://floating-ui.com/docs/platform'].join(' '));
-      }
-      if (validMiddleware.filter(_ref => {
-        let {
-          name
-        } = _ref;
-        return name === 'autoPlacement' || name === 'flip';
-      }).length > 1) {
-        throw new Error(['Floating UI: duplicate `flip` and/or `autoPlacement` middleware', 'detected. This will lead to an infinite loop. Ensure only one of', 'either has been passed to the `middleware` array.'].join(' '));
-      }
-      if (!reference || !floating) {
-        console.error(['Floating UI: The reference and/or floating element was not defined', 'when `computePosition()` was called. Ensure that both elements have', 'been created and can be measured.'].join(' '));
-      }
-    }
     let rects = await platform.getElementRects({
       reference,
       floating,
@@ -15890,11 +15887,6 @@
           ...data
         }
       };
-      {
-        if (resetCount > 50) {
-          console.warn(['Floating UI: The middleware lifecycle appears to be running in an', 'infinite loop. This is usually caused by a `reset` continually', 'being returned without a break condition.'].join(' '));
-        }
-      }
       if (reset && resetCount <= 50) {
         resetCount++;
         if (typeof reset === 'object') {
@@ -16048,9 +16040,6 @@
         elements
       } = state;
       if (element == null) {
-        {
-          console.warn('Floating UI: No `element` was passed to the `arrow` middleware.');
-        }
         return {};
       }
       const paddingObject = getSideObjectFromPadding(padding);
