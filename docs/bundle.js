@@ -15643,7 +15643,7 @@
       ...props
     } = _ref;
     return o$2(Accordion$1, {
-      navigationDirection: "vertical",
+      orientation: "vertical",
       render: info => {
         return o$2("div", {
           ...useMergedProps({
@@ -18700,7 +18700,7 @@
       getSortValue
     } = _ref;
     return o$2(CheckboxGroup$1, {
-      navigationDirection: orientation,
+      orientation: orientation,
       render: info => {
         return o$2("span", {
           ...info.propsStable,
@@ -19973,7 +19973,7 @@
           ref: imperativeHandle,
           name: name,
           onSelectedValueChange: onSelectedIndexChangeSync,
-          navigationDirection: inline ? "horizontal" : "vertical",
+          arrowKeyDirection: inline ? "horizontal" : "vertical",
           render: info => {
             const visibleLabel = o$2("label", {
               ...info.propsRadioGroupLabel,
@@ -30825,7 +30825,7 @@
         max: usedMax
       }
     } = useSliderThumb({
-      managedChildParameters: {
+      info: {
         index
       },
       sliderThumbParameters: {

@@ -41,7 +41,7 @@ export interface RangeThumbProps {
     onValueChange?: (value: number) => (void | Promise<void>);
     label: string;
     disabled?: boolean;
-    index: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["managedChildParameters"]["index"];
+    index: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["info"]["index"];
     value?: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["sliderThumbParameters"]["value"];
     valueText?: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["sliderThumbParameters"]["valueText"];
     max?: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["sliderThumbParameters"]["max"];
@@ -205,7 +205,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
     }
 
     const { propsSliderThumb, managedChildReturn, sliderThumbReturn: { min: usedMin, max: usedMax } } = useSliderThumb<HTMLInputElement, SliderThumbInfo>({
-        managedChildParameters: {
+        info: {
             index,
         },
         sliderThumbParameters: {

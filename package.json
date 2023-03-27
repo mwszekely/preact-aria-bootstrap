@@ -49,6 +49,6 @@
     "@types/dompurify": "^3.0.0",
     "@types/lodash-es": "^4.17.7",
     "sass": "^1.59.2",
-    "typescript": "5.0.2"
+    "typescript": "^5.0.2"
   }
 }

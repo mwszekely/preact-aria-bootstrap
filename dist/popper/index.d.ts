@@ -19,7 +19,7 @@ export interface UsePopperProps {
     };
 }
 export declare function usePopper<SourceElement extends Element, PopupElement extends HTMLElement, ArrowElement extends HTMLElement>({ popperParameters: { open, getElement, alignMode, placement: requestedPlacement, absolutePositioning } }: UsePopperProps): {
-    propsSource: import("preact").JSX.HTMLAttributes<SourceElement>;
+    propsSource: import("preact-prop-helpers").ElementProps<SourceElement>;
     propsPopup: import("preact").JSX.HTMLAttributes<PopupElement>;
     propsArrow: import("preact").JSX.HTMLAttributes<ArrowElement>;
     propsData: {

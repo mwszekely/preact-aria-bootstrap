@@ -103,7 +103,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
         return onValueChangeSync?.(e);
     }
     const { propsSliderThumb, managedChildReturn, sliderThumbReturn: { min: usedMin, max: usedMax } } = useSliderThumb({
-        managedChildParameters: {
+        info: {
             index,
         },
         sliderThumbParameters: {
