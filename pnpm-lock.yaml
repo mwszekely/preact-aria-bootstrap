@@ -5,7 +5,7 @@ specifiers:
   '@js-temporal/polyfill': ^0.4.3
   '@types/dompurify': ^3.0.0
   '@types/lodash-es': ^4.17.7
-  bootstrap: 5.3.0-alpha1
+  bootstrap: 5.3.0-alpha2
   bootstrap-icons: ^1.10.3
   bootstrap-sass-variables: github:mwszekely/bootstrap-sass-variables
   clsx: ^1.2.1
@@ -16,14 +16,14 @@ specifiers:
   preact-prop-helpers: github:mwszekely/preact-prop-helpers
   preact-transition: github:mwszekely/preact-transition
   sass: ^1.59.2
-  typescript: 5.0.1-rc
+  typescript: 5.0.2
 
 dependencies:
   '@floating-ui/dom': 1.2.5
   '@js-temporal/polyfill': 0.4.3
-  bootstrap: 5.3.0-alpha1_@popperjs+core@2.11.7
+  bootstrap: 5.3.0-alpha2_@popperjs+core@2.11.7
   bootstrap-icons: 1.10.3
-  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/f9d9e82395e574378ecf7e06a663ff4faf76f9c4_bootstrap@5.3.0-alpha1
+  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/8f1f6876f6953984e280b7e5941d576967fffda9_bootstrap@5.3.0-alpha2
   clsx: 1.2.1
   dompurify: 3.0.1
   lodash-es: 4.17.21
@@ -36,7 +36,7 @@ devDependencies:
   '@types/dompurify': 3.0.0
   '@types/lodash-es': 4.17.7
   sass: 1.60.0
-  typescript: 5.0.1-rc
+  typescript: 5.0.2
 
 packages:
 
@@ -103,8 +103,8 @@ packages:
     resolution: {integrity: sha512-7Qvj0j0idEm/DdX9Q0CpxAnJYqBCFCiUI6qzSPYfERMcokVuV9Mdm/AJiVZI8+Gawe4h/l6zFcOzvV7oXCZArw==}
     dev: false
 
-  /bootstrap/5.3.0-alpha1_@popperjs+core@2.11.7:
-    resolution: {integrity: sha512-ABZpKK4ObS3kKlIqH+ZVDqoy5t/bhFG0oHTAzByUdon7YIom0lpCeTqRniDzJmbtcWkNe800VVPBiJgxSYTYew==}
+  /bootstrap/5.3.0-alpha2_@popperjs+core@2.11.7:
+    resolution: {integrity: sha512-r1ayh5d56rhwrezVjhM8bt8tiUcdQ8J9JeCwCTAeKSpOrCWH5V5S6XiJ26DqbX7o5QSH5HIKm7W88CKxVjhCVQ==}
     peerDependencies:
       '@popperjs/core': ^2.11.6
     dependencies:
@@ -251,9 +251,9 @@ packages:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
     dev: false
 
-  /typescript/5.0.1-rc:
-    resolution: {integrity: sha512-zh75jY8gPo/y7fpmlTVN2bb2MigoLx4hGk+Cla9pY6lgSTvzJrmQQrRt5S80VTsEt6biWPZJgLK2nm6f0Ya+mA==}
-    engines: {node: '>=4.2.0'}
+  /typescript/5.0.2:
+    resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}
+    engines: {node: '>=12.20'}
     hasBin: true
     dev: true
 
@@ -261,15 +261,15 @@ packages:
     resolution: {integrity: sha512-Ba9tGNYxXwaqKEi9sJJvPMKuo063umUPsHN0JJsjrs2j8KDSzkWLMZGZ+MH1Jf1Fq4OWZ5HsESJID6nRza2ang==}
     dev: false
 
-  github.com/mwszekely/bootstrap-sass-variables/f9d9e82395e574378ecf7e06a663ff4faf76f9c4_bootstrap@5.3.0-alpha1:
-    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/f9d9e82395e574378ecf7e06a663ff4faf76f9c4}
-    id: github.com/mwszekely/bootstrap-sass-variables/f9d9e82395e574378ecf7e06a663ff4faf76f9c4
+  github.com/mwszekely/bootstrap-sass-variables/8f1f6876f6953984e280b7e5941d576967fffda9_bootstrap@5.3.0-alpha2:
+    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/8f1f6876f6953984e280b7e5941d576967fffda9}
+    id: github.com/mwszekely/bootstrap-sass-variables/8f1f6876f6953984e280b7e5941d576967fffda9
     name: bootstrap-sass-variables
     version: 0.0.1
     peerDependencies:
-      bootstrap: ^5.3.0-alpha1
+      bootstrap: ^5.3.0-alpha2
     dependencies:
-      bootstrap: 5.3.0-alpha1_@popperjs+core@2.11.7
+      bootstrap: 5.3.0-alpha2_@popperjs+core@2.11.7
     dev: false
 
   github.com/mwszekely/preact-aria-widgets/ab450afedd91686d96a6c64249a0f40b395c0835_preact@10.13.1:
