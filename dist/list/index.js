@@ -5,7 +5,7 @@ import { Gridlist, GridlistChild, GridlistRow, ProgressWithHandler } from "preac
 import { returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
-import { useCallback, useContext } from "preact/hooks";
+import { useCallback, useContext, useRef } from "preact/hooks";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -39,21 +39,13 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
         },
         refElementReturn
     });
-    // For performance reasons, we stagger rendering each row's child
-    // It does take maybe 1.5 times as long, but you can still interact with the page while it's happening at least.
-    /*let timeout = (Math.floor(index / 100) * 500)
-    const [show, setShow] = useState(timeout == 0);
-    useTimeout({
-        timeout,
-        callback: () => setShow(true)
-    })*/
     const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
     const { propsIndicator, propsRegion } = progressInfo;
     const loadingJsx = (_jsx(Fade, { show: progressInfo.asyncHandlerReturn.pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsIndicator }) }));
     //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
     const finalPropsForText = useMergedProps(p1, p2);
     const finalPropsForDiv = useMergedProps(infoRow.props, { ...props, ref: ref2 }, {
-        className: clsx(`gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.singleSelectionChildReturn.selected || selected) && `active`)
+        className: clsx(infoRow.paginatedChildReturn.hideBecausePaginated ? "d-none" : "", `gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.singleSelectionChildReturn.selected || selected) && `active`)
     });
     const c = _jsxs(_Fragment, { children: [_jsx(ListItemStartEnd, { index: 0, hidden: iconStart == null, children: iconStart }), _jsxs(ListItemText, { onPress: progressInfo.asyncHandlerReturn.syncHandler, ...finalPropsForText, children: [_jsx("span", { children: children }), _jsxs("span", { class: "list-group-item-badge-and-spinner", children: [_jsx("div", { children: badge }), _jsx("div", { children: loadingJsx })] })] }), _jsx(ListItemStartEnd, { index: 2, hidden: iconEnd == null, children: iconEnd })] });
     if (!show)
@@ -66,13 +58,16 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
 export const ListItem = memo(forwardElementRef(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
     const defaultDisabled = useContext(DefaultDisabled);
     disabled ||= defaultDisabled;
+    let everShownPaginated = useRef(false);
     return (_jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onPress ?? null, capture: returnUndefined, tagIndicator: "span", render: progressInfo => {
             return (_jsx(GridlistRow, { index: index, ariaPropName: "aria-selected", getSortValue: getSortValue ?? returnZero, disabled: disabled, noTypeahead: true, getText: useCallback((e) => { return e?.querySelector(".gridlist-item-text")?.textContent || ""; }, []), render: infoRow => {
-                    if (infoRow.paginatedChildReturn.hideBecausePaginated)
-                        return _jsx("div", {}); // This is orders of magnitude faster than null, for some reason?
+                    if (infoRow.paginatedChildReturn.hideBecausePaginated && everShownPaginated.current == false)
+                        return _jsx("div", {}, "hide-because-paginated");
+                    everShownPaginated.current = true;
+                    // TODO: Get a better placeholder system
                     if (infoRow.staggeredChildReturn.hideBecauseStaggered)
-                        return _jsx("div", {});
-                    return _jsx(ListItemNonPaginated, { infoRow: infoRow, progressInfo: progressInfo, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: props, ref2: ref });
+                        return _jsx("div", { class: `gridlist-item gridlist-item-placeholder list-group-item`, role: "option", "aria-busy": "true" }, "hide-because-staggered"); // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
+                    return _jsx(ListItemNonPaginated, { infoRow: infoRow, progressInfo: progressInfo, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: props, ref2: ref }, "show");
                 } }));
         } }));
 }));

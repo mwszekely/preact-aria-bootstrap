@@ -1,16 +1,19 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
+import { createContext } from "preact";
 import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets";
 import { returnZero, useMergedProps, useState, useTimeout } from "preact-prop-helpers";
 import { SlideZoomFade, Swappable } from "preact-transition";
-import { memo } from "preact/compat";
+import { memo, useContext } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
+const OrientationContext = createContext("horizontal");
 export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }, ref) {
-    return (_jsx(AriaTabs, { localStorageKey: localStorageKey, orientation: orientation ?? "horizontal", ariaLabel: labelPosition == "hidden" ? label : null, pageNavigationSize: 0, render: info => {
-            const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
-            return (_jsxs("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: [labelPosition == "before" && labelJsx, _jsx(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: _jsx("ul", { ...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) }), children: tabs }) }), labelPosition == "before" && labelJsx, _jsx(Swappable, { children: _jsx("div", { ...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {}), children: panels }) })] }));
-        } }));
+    orientation ??= "horizontal";
+    return (_jsx(OrientationContext.Provider, { value: orientation, children: _jsx(AriaTabs, { localStorageKey: localStorageKey, orientation: orientation, ariaLabel: labelPosition == "hidden" ? label : null, pageNavigationSize: 0, render: info => {
+                const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
+                return (_jsxs("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: [labelPosition == "before" && labelJsx, _jsx(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: _jsx("ul", { ...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) }), children: tabs }) }), labelPosition == "before" && labelJsx, _jsx(Swappable, { children: _jsx("div", { ...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {}), children: panels }) })] }));
+            } }) }));
 }));
 export const Tab = memo(forwardElementRef(function Tab({ index, getSortValue, children, ...props }, ref) {
     return (_jsx(AriaTab, { index: index, getSortValue: getSortValue || returnZero, render: info => {
@@ -18,11 +21,25 @@ export const Tab = memo(forwardElementRef(function Tab({ index, getSortValue, ch
         } }));
 }));
 export const TabPanel = memo(forwardElementRef(function TabPanel({ index, children, ...props }, ref) {
+    const orientation = useContext(OrientationContext);
+    // Get the names of the properties on the transition that are correct for the `orientation` the parent uses.
+    // (i.e. if make the transition slide on the X axis for "horizontal" and the Y axis for "vertical")
+    const zeroValued = (orientation == "horizontal" ? "slideTargetBlock" : "slideTargetInline");
+    const offsetted = (orientation == "horizontal" ? "slideTargetInline" : "slideTargetBlock");
+    const originZero = (orientation == "horizontal" ? "zoomOriginBlock" : "zoomOriginInline");
+    const originOffset = (orientation == "horizontal" ? "zoomOriginInline" : "zoomOriginBlock");
     return (_jsx(AriaTabPanel, { index: index, render: info => {
+            // These use the 
+            const transitionProps = {
+                [zeroValued]: 0,
+                [offsetted]: Math.sign(info.tabPanelReturn.visibleOffset ?? 0) * (1 / 24),
+                [originZero]: 0,
+                [originOffset]: 0.5
+            };
             // IMPORTANT: exitVisibility is "removed" instead of "hidden"
             // because "hidden" can still cause a lot of layout stuff to happen on hidden tabs,
             // which is bad if one tab is heavier than others -- it'll still affect them even when closed.
-            return (_jsx(SlideZoomFade, { ...{ "data-index": index }, exitVisibility: "removed", delayMountUntilShown: true, duration: 500, show: info.tabPanelReturn.visible, slideTargetBlock: 0, slideTargetInline: Math.sign(info.tabPanelReturn.visibleOffset ?? 0) * (1 / 24), zoomMin: (11 / 12), zoomOriginBlock: 0, zoomOriginInline: 0.5, children: _jsx("div", { ...useMergedProps(info.props, props, { ref, className: clsx("tab-panel scroll-shadows scroll-shadows-y") }), children: _jsx(TabPanelChildren, { visible: info.tabPanelReturn.visible || false, children: children }) }) }));
+            return (_jsx(SlideZoomFade, { ...{ "data-index": index }, exitVisibility: "removed", delayMountUntilShown: true, duration: 500, show: info.tabPanelReturn.visible, zoomMin: (11 / 12), ...transitionProps, children: _jsx("div", { ...useMergedProps(info.props, props, { ref, className: clsx("tab-panel scroll-shadows scroll-shadows-y") }), children: _jsx(TabPanelChildren, { visible: info.tabPanelReturn.visible || false, children: children }) }) }));
         } }));
 }));
 const TabPanelChildren = memo(function TabPanelChildren({ children, visible }) {

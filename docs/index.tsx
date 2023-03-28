@@ -1,16 +1,13 @@
-import "preact/debug";
-import { ComponentChildren, h, render } from "preact";
+import { render } from "preact";
 import { memo } from "preact/compat";
-import { useEffect, useMemo, useRef, useState } from "preact/hooks";
-import { NotificationProviderContext, useNotificationProvider } from "preact-aria-widgets"
-import { Accordion, AccordionSection, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, RichTextField, Tab, TabPanel, Tabs, TextField, Toast, ToastErrorBoundary, ToastsProvider, usePushToast } from "../dist/index.js";
-import { RenderCounterProvider, useRenderCounters } from "../dist/index.js";
+import "preact/debug";
+import { useCallback, useMemo, useState } from "preact/hooks";
+import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast, useRenderCounters } from "../dist/index.js";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
 import * as Radio from "./demos/radio";
 import * as TextFieldD from "./demos/text-field";
 import * as Tooltip from "./demos/tooltip";
-import { AllProviders } from "../dist/index.js";
 
 
 
@@ -50,15 +47,8 @@ const ListDemoContents = memo(({ count }: { count: number }) => {
     )
 })
 
-const ListDemoItem = memo(({ i }: { i: number }) => {
-    /* const [visible, setVisible] = useState(false);
-     useTimeout({
-         callback: () => setVisible(true),
-         timeout: i * 10
-     });
-     if (!visible)
-         return null;*/
-    const iconStart = (
+const ListDemoMenu = memo(() => {
+    return (
         <Menu anchor={<Button variantSize="sm" variantFill="fill" variantTheme="light" onPress={null}><BootstrapIcon icon="menu-app" label="Open dropdown menu" /></Button>}>
             {Array.from(function* () {
                 for (let i = 0; i < 10; ++i) {
@@ -75,13 +65,29 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
             }())}
         </Menu>
     )
+})
+
+const ListDemoButton = memo(() => {
+    return (
+        <ButtonAction variantSize="sm" variantFill="fill" variantTheme="light" onPress={() => alert("Delete button clicked")}><BootstrapIcon icon="trash-fill" label="Delete" /></ButtonAction>
+    )
+})
+
+const ListDemoItem = memo(({ i }: { i: number }) => {
+    /* const [visible, setVisible] = useState(false);
+     useTimeout({
+         callback: () => setVisible(true),
+         timeout: i * 10
+     });
+     if (!visible)
+         return null;*/
     return (
         <ListItem
             index={i}
-            onPress={async () => { return new Promise(resolve => setTimeout(resolve, 2000)) }}
+            onPress={useCallback(async () => { return new Promise<void>(resolve => setTimeout(resolve, 2000)) }, [])}
             badge={<Badge variantTheme="info">10</Badge>}
-            iconStart={(i & 0b01) ? iconStart : null}
-            iconEnd={(i & 0b10) ? <ButtonAction variantSize="sm" variantFill="fill" variantTheme="light" onPress={() => alert("Delete button clicked")}><BootstrapIcon icon="trash-fill" label="Delete" /></ButtonAction> : null}>
+            iconStart={(i & 0b01) ? <ListDemoMenu /> : null}
+            iconEnd={(i & 0b10) ? <ListDemoButton /> : null}>
             List item #{i}
         </ListItem>
     );
@@ -140,7 +146,7 @@ function SliderDemo() {
             </Range>
 
             <p>This shows its values as <code>10<sup>value</sup></code>, instead of <code>value</code>:</p>
-            <Range onValueChange={setValue} value={value} min={0} max={10} step={1} snap="continuous" getValueText={value => `${10**value}`} />
+            <Range onValueChange={setValue} value={value} min={0} max={10} step={1} snap="continuous" getValueText={value => `${10 ** value}`} />
         </div>
     )
 }

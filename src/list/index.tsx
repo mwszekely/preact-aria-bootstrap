@@ -4,7 +4,7 @@ import { Gridlist, GridlistCellInfo, GridlistChild, GridlistRow, GridlistRowInfo
 import { AsyncHandler, returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
-import { useCallback, useContext } from "preact/hooks";
+import { useCallback, useContext, useRef } from "preact/hooks";
 import { ButtonThemes } from "../context.js";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
@@ -99,14 +99,6 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
         refElementReturn
     });
 
-    // For performance reasons, we stagger rendering each row's child
-    // It does take maybe 1.5 times as long, but you can still interact with the page while it's happening at least.
-    /*let timeout = (Math.floor(index / 100) * 500)
-    const [show, setShow] = useState(timeout == 0);
-    useTimeout({
-        timeout,
-        callback: () => setShow(true)
-    })*/
     const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
     const { propsIndicator, propsRegion } = progressInfo;
     const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending} exitVisibility="removed"><span class="spinner-border spinner-border-sm text-secondary" {...propsIndicator} /></Fade>)
@@ -117,6 +109,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
         { ...props, ref: ref2 },
         {
             className: clsx(
+                infoRow.paginatedChildReturn.hideBecausePaginated? "d-none" : "",
                 `gridlist-item`,
                 variantTheme && `list-group-item-${variantTheme}`,
                 infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "",
@@ -163,6 +156,8 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
     const defaultDisabled = useContext(DefaultDisabled);
     disabled ||= defaultDisabled;
 
+    let everShownPaginated = useRef(false);
+
     return (
         <ProgressWithHandler<h.JSX.TargetedEvent<any, Event>, void, HTMLSpanElement, HTMLLabelElement>
             ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
@@ -182,14 +177,17 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
 
                         render={infoRow => {
 
-                            
-                            if (infoRow.paginatedChildReturn.hideBecausePaginated)
-                                return <div /> // This is orders of magnitude faster than null, for some reason?
 
+                            if (infoRow.paginatedChildReturn.hideBecausePaginated && everShownPaginated.current == false)
+                                return <div key="hide-because-paginated" />
+
+                            everShownPaginated.current = true;
+
+                            // TODO: Get a better placeholder system
                             if (infoRow.staggeredChildReturn.hideBecauseStaggered)
-                                return <div />
+                                return <div key="hide-because-staggered" class={`gridlist-item gridlist-item-placeholder list-group-item`} role="option" aria-busy="true" /> // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
 
-                            return <ListItemNonPaginated infoRow={infoRow} progressInfo={progressInfo} badge={badge} children={children} disabled={disabled} iconEnd={iconEnd} iconStart={iconStart} selected={selected} variantTheme={variantTheme} props={props} ref2={ref!} />;
+                            return <ListItemNonPaginated key="show" infoRow={infoRow} progressInfo={progressInfo} badge={badge} children={children} disabled={disabled} iconEnd={iconEnd} iconStart={iconStart} selected={selected} variantTheme={variantTheme} props={props} ref2={ref!} />;
                         }} />)
             }}
         />
