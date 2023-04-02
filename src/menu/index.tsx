@@ -61,6 +61,8 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
             open={menuOpen}
             openDirection="down"
             orientation="vertical"
+            selectionMode="activation"
+            ariaPropName="aria-selected"
             selectedIndex={selectedIndex}
             onSelectedIndexChange={onSelectedIndexChange}
 
@@ -71,7 +73,8 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
                     popperParameters: {
                         open: popperOpen,
                         placement: `bottom-${align || "start"}`,
-                        alignMode: "element"
+                        alignMode: "element",
+                        absolutePositioning: false
                     }
                 })
 
@@ -146,7 +149,6 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                     <AriaMenuItem<HTMLDivElement>
                         ref={imperativeHandle}
                         index={index}
-                        selectionMode="activation"
                         getSortValue={getSortValue ?? returnZero}
                         disabled={disabled || showSpinner}
                         onPress={progressInfo.asyncHandlerReturn.syncHandler}
@@ -161,7 +163,6 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                                 </div>
                             )
                         }}
-                        ariaPropName="aria-selected"
                     />
                 )
             }}

@@ -102,8 +102,6 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
         return (
             <ToolbarChild<E>
                 index={buttonGroupIndex ?? 0}
-                ariaPropName="aria-pressed"
-                selectionMode="disabled"
                 getSortValue={returnZero}
                 render={toolbarChildInfo => {
                     return (<ButtonStructure<E>

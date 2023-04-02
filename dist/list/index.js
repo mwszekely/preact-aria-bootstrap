@@ -20,7 +20,7 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
     const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
     if (paginationSize)
         paginationLocation ||= "before";
-    return (_jsx(DefaultDisabled.Provider, { value: disabled ?? false, children: _jsx(Gridlist, { selectedIndex: selectedIndex ?? null, onSelectedIndexChange: onSelectedIndexChange, paginationMin: paginationStart, paginationMax: paginationEnd, staggered: staggered || false, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", selectionLimit: selectedIndex === undefined ? "multi" : "single", render: info => {
+    return (_jsx(DefaultDisabled.Provider, { value: disabled ?? false, children: _jsx(Gridlist, { selectedIndex: selectedIndex ?? null, ariaPropName: "aria-selected", onSelectedIndexChange: onSelectedIndexChange, paginationMin: paginationStart, paginationMax: paginationEnd, staggered: staggered || false, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", selectionLimit: selectedIndex === undefined ? "multi" : "single", render: info => {
                 useUpdateRenderCounter("Gridlist");
                 const labelJsx = _jsx("label", { ...info.propsGridlistLabel, children: label });
                 return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx(Paginated, { childCount: info.paginatedChildrenReturn.childCount ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: _jsx("div", { class: clsx(`list-group gridlist-group`), ...useMergedProps(props, propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist), children: children }) }), labelPosition == "after" && labelJsx] }));
@@ -60,7 +60,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
     disabled ||= defaultDisabled;
     let everShownPaginated = useRef(false);
     return (_jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onPress ?? null, capture: returnUndefined, tagIndicator: "span", render: progressInfo => {
-            return (_jsx(GridlistRow, { index: index, ariaPropName: "aria-selected", getSortValue: getSortValue ?? returnZero, disabled: disabled, noTypeahead: true, getText: useCallback((e) => { return e?.querySelector(".gridlist-item-text")?.textContent || ""; }, []), render: infoRow => {
+            return (_jsx(GridlistRow, { index: index, getSortValue: getSortValue ?? returnZero, disabled: disabled, noTypeahead: true, getText: useCallback((e) => { return e?.querySelector(".gridlist-item-text")?.textContent || ""; }, []), render: infoRow => {
                     if (infoRow.paginatedChildReturn.hideBecausePaginated && everShownPaginated.current == false)
                         return _jsx("div", {}, "hide-because-paginated");
                     everShownPaginated.current = true;

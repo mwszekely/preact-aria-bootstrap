@@ -66,7 +66,7 @@ export function usePopper({ popperParameters: { open, getElement, alignMode, pla
             if (sourceElement && popupElement && arrowElement) {
                 //const [staticSide2, staticAlignment2] = requestedPlacement.split('-') as [Side, Alignment?];
                 // (staticAlignment2 == 'start' ? 1 : -1)
-                const elementContext = (absolutePositioning ? "floating" : "reference");
+                const elementContext = "floating"; // (absolutePositioning ? "floating" : "reference")
                 const middleware = [
                     //offset({}),
                     offset( /*(alignMode == "mouse" && staticAlignment2) ? { crossAxis: (popupElement.clientWidth / 2) * (0.75) * 0 } : undefined*/),

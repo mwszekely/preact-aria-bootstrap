@@ -20,6 +20,8 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
     return (
         <Toolbar<HTMLElement, HTMLButtonElement, HTMLLabelElement>
             ariaLabel={labelPosition == "hidden" ? label : null}
+            ariaPropName="aria-current-page"
+            selectionMode="focus"
             selectedIndex={page}
             onSelectedIndexChange={useCallback((page: number | null) => { setPage(page || 0); }, [])}
             orientation="horizontal"
@@ -79,9 +81,7 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
     return (
         <ToolbarChild<HTMLButtonElement>
             index={index}
-            ariaPropName="aria-current-page"
             getSortValue={useStableGetter(index)}
-            selectionMode="focus"
 
             render={info => {
                 const { refElementReturn, propsStable } = useRefElement<HTMLButtonElement>({ refElementParameters: {} })

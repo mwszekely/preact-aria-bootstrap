@@ -54,6 +54,7 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
         <DefaultDisabled.Provider value={disabled ?? false}>
             <Gridlist<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLLabelElement>
                 selectedIndex={selectedIndex ?? null}
+                ariaPropName="aria-selected"
                 onSelectedIndexChange={onSelectedIndexChange}
                 paginationMin={paginationStart}
                 paginationMax={paginationEnd}
@@ -169,7 +170,6 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                 return (
                     <GridlistRow<HTMLDivElement, HTMLDivElement>
                         index={index}
-                        ariaPropName="aria-selected"
                         getSortValue={getSortValue ?? returnZero}
                         disabled={disabled}
                         noTypeahead={true}

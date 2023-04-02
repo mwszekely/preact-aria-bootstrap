@@ -42,7 +42,7 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
                 popperParameters: {
                     open: status != null,
                     getElement,
-                    absolutePositioning,
+                    absolutePositioning: absolutePositioning || false,
                     placement: placement ?? "top",
                     alignMode: isFocusOverride ? "element" : alignMode ?? (`mouse`)
                 }

@@ -41,7 +41,7 @@ const DataTableSection = memo(forwardElementRef(function DataTableSection({ chil
             } }) }));
 }));
 export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, children, variantTheme, ...props }, ref) {
-    return (_jsx(AriaTableRow, { index: row, ariaPropName: "aria-selected", tagTableRow: "tr", render: info => {
+    return (_jsx(AriaTableRow, { index: row, tagTableRow: "tr", render: info => {
             useUpdateRenderCounter("DataTableRow");
             const hideBecauseStaggered = info.staggeredChildReturn.hideBecauseStaggered;
             const hideBecausePaginated = info.paginatedChildReturn.hideBecausePaginated;

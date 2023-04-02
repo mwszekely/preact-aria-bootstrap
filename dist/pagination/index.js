@@ -13,7 +13,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
         onChange?.(start, end);
         return () => onChange(null, null);
     }, [page, windowSize]);
-    return (_jsx(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, selectedIndex: page, onSelectedIndexChange: useCallback((page) => { setPage(page || 0); }, []), orientation: "horizontal", render: info => {
+    return (_jsx(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "focus", selectedIndex: page, onSelectedIndexChange: useCallback((page) => { setPage(page || 0); }, []), orientation: "horizontal", render: info => {
             const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
             return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx("nav", { ...info.propsToolbar, children: _jsx("ul", { class: "pagination", children: _jsx(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }), labelPosition == "after" && labelJsx] }));
         } }));
@@ -40,7 +40,7 @@ const PaginationButtonLast = memo(forwardElementRef(({ index, onFocus }, ref) =>
     return (_jsxs(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: ["Last ", _jsx(BootstrapIcon, { icon: "chevron-bar-right", label: null })] }));
 }));
 const PaginationButton = memo(forwardElementRef(function PaginationButton({ index, children, onFocus }, ref) {
-    return (_jsx(ToolbarChild, { index: index, ariaPropName: "aria-current-page", getSortValue: useStableGetter(index), selectionMode: "focus", render: info => {
+    return (_jsx(ToolbarChild, { index: index, getSortValue: useStableGetter(index), render: info => {
             const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
             const { pressReturn, props: propsPress } = usePress({ pressParameters: { onPressSync: null, focusSelf: useCallback((e) => { e.focus(); }, []), ...info.pressParameters }, refElementReturn });
             return (_jsx("li", { class: "page-item", children: _jsx("button", { ...useMergedProps(info.props, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {}), children: children }) }));

@@ -3,7 +3,7 @@ import { identity } from "lodash-es";
 import { h } from "preact";
 import { returnZero, runImmediately, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 import { CSSProperties } from "preact/compat";
-import { useCallback, useEffect, useLayoutEffect, useRef } from "preact/hooks";
+import { useCallback, useEffect, useRef } from "preact/hooks";
 
 export interface UsePopperProps {
     popperParameters: {
@@ -103,7 +103,7 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
             if (sourceElement && popupElement && arrowElement) {
                 //const [staticSide2, staticAlignment2] = requestedPlacement.split('-') as [Side, Alignment?];
                 // (staticAlignment2 == 'start' ? 1 : -1)
-                const elementContext = (absolutePositioning ? "floating" : "reference")
+                const elementContext = "floating"; // (absolutePositioning ? "floating" : "reference")
                 const middleware: Middleware[] = [
                     //offset({}),
                     offset( /*(alignMode == "mouse" && staticAlignment2) ? { crossAxis: (popupElement.clientWidth / 2) * (0.75) * 0 } : undefined*/),

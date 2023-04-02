@@ -120,7 +120,6 @@ export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, 
     return (
         <AriaTableRow<HTMLTableRowElement, HTMLTableCellElement>
             index={row}
-            ariaPropName="aria-selected"
             tagTableRow="tr"
             render={info => {
                 useUpdateRenderCounter("DataTableRow");
