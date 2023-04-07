@@ -29,26 +29,26 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "bootstrap": "5.3.0-alpha2",
+    "bootstrap": "5.3.0-alpha3",
     "preact": "^10.13.2"
   },
   "typings": "./dist/index.d.ts",
   "dependencies": {
+    "@js-temporal/polyfill": "^0.4.3",
+    "@floating-ui/dom": "^1.2.6",
+    "clsx": "^1.2.1",
+    "dompurify": "^3.0.1",
+    "bootstrap-icons": "^1.10.4",
+    "lodash-es": "^4.17.21",
     "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
     "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
     "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
     "preact-transition": "github:mwszekely/preact-transition"
   },
   "devDependencies": {
-    "@floating-ui/dom": "^1.2.5",
-    "@js-temporal/polyfill": "^0.4.3",
-    "@types/dompurify": "^3.0.0",
+    "@types/dompurify": "^3.0.1",
     "@types/lodash-es": "^4.17.7",
-    "bootstrap-icons": "^1.10.3",
-    "clsx": "^1.2.1",
-    "dompurify": "^3.0.1",
-    "lodash-es": "^4.17.21",
-    "sass": "^1.59.2",
-    "typescript": "^5.0.2"
+    "sass": "^1.61.0",
+    "typescript": "^5.0.4"
   }
 }

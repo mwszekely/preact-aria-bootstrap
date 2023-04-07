@@ -90,7 +90,7 @@ export declare function useCommitTextField<C>({ getFocused, commit, currentCaptu
     commit: (value: C | undefined) => void;
     getFocused: () => boolean;
 }): void;
-declare const TextFieldBase: <E extends HTMLInputElement | HTMLTextAreaElement, V>({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }: LabelledProps<TFB<E, V>, "tooltip" | "floating">, ref?: Ref<any>) => import("preact").JSX.Element;
+declare const TextFieldBase: <E extends HTMLInputElement | HTMLTextAreaElement, V>({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }: LabelledProps<TFB<E, V>, "floating" | "tooltip">, ref?: Ref<any>) => import("preact").JSX.Element;
 export declare const TextFieldSpinner: import("preact").FunctionComponent<{
     callCount: number;
     containerClass: string;

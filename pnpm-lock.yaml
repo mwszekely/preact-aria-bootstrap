@@ -1,12 +1,12 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@floating-ui/dom': ^1.2.5
+  '@floating-ui/dom': ^1.2.6
   '@js-temporal/polyfill': ^0.4.3
-  '@types/dompurify': ^3.0.0
+  '@types/dompurify': ^3.0.1
   '@types/lodash-es': ^4.17.7
-  bootstrap: 5.3.0-alpha2
-  bootstrap-icons: ^1.10.3
+  bootstrap: 5.3.0-alpha3
+  bootstrap-icons: ^1.10.4
   bootstrap-sass-variables: github:mwszekely/bootstrap-sass-variables
   clsx: ^1.2.1
   dompurify: ^3.0.1
@@ -15,40 +15,40 @@ specifiers:
   preact-aria-widgets: github:mwszekely/preact-aria-widgets
   preact-prop-helpers: github:mwszekely/preact-prop-helpers
   preact-transition: github:mwszekely/preact-transition
-  sass: ^1.59.2
-  typescript: ^5.0.2
+  sass: ^1.61.0
+  typescript: ^5.0.4
 
 dependencies:
-  bootstrap: 5.3.0-alpha2_@popperjs+core@2.11.7
-  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/8f1f6876f6953984e280b7e5941d576967fffda9_bootstrap@5.3.0-alpha2
-  preact: 10.13.2
-  preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/8a6a2ccd42fd32d7ac60c26fb53c3e354114ea72_preact@10.13.2
-  preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/68495acb9afa8fdaeaf4e88c32b7d9bb28ac0b1d_preact@10.13.2
-  preact-transition: github.com/mwszekely/preact-transition/29d5f9e112b62e5638ab0e6a5993d540c20a1a8c_preact@10.13.2
-
-devDependencies:
-  '@floating-ui/dom': 1.2.5
+  '@floating-ui/dom': 1.2.6
   '@js-temporal/polyfill': 0.4.3
-  '@types/dompurify': 3.0.0
-  '@types/lodash-es': 4.17.7
-  bootstrap-icons: 1.10.3
+  bootstrap: 5.3.0-alpha3_@popperjs+core@2.11.7
+  bootstrap-icons: 1.10.4
+  bootstrap-sass-variables: github.com/mwszekely/bootstrap-sass-variables/dd87245c8e0661a45012ff7075c7f6c122051c21_bootstrap@5.3.0-alpha3
   clsx: 1.2.1
   dompurify: 3.0.1
   lodash-es: 4.17.21
-  sass: 1.60.0
-  typescript: 5.0.3
+  preact: 10.13.2
+  preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/8a6a2ccd42fd32d7ac60c26fb53c3e354114ea72_preact@10.13.2
+  preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/3c11775e0886cc02da18f646298d6e657c705c34_preact@10.13.2
+  preact-transition: github.com/mwszekely/preact-transition/29d5f9e112b62e5638ab0e6a5993d540c20a1a8c_preact@10.13.2
+
+devDependencies:
+  '@types/dompurify': 3.0.1
+  '@types/lodash-es': 4.17.7
+  sass: 1.61.0
+  typescript: 5.0.4
 
 packages:
 
-  /@floating-ui/core/1.2.5:
-    resolution: {integrity: sha512-qrcbyfnRVziRlB6IYwjCopYhO7Vud750JlJyuljruIXcPxr22y8zdckcJGsuOdnQ639uVD1tTXddrcH3t3QYIQ==}
-    dev: true
+  /@floating-ui/core/1.2.6:
+    resolution: {integrity: sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg==}
+    dev: false
 
-  /@floating-ui/dom/1.2.5:
-    resolution: {integrity: sha512-+sAUfpQ3Frz+VCbPCqj+cZzvEESy3fjSeT/pDWkYCWOBXYNNKZfuVsHuv8/JO2zze8+Eb/Q7a6hZVgzS81fLbQ==}
+  /@floating-ui/dom/1.2.6:
+    resolution: {integrity: sha512-02vxFDuvuVPs22iJICacezYJyf7zwwOCWkPNkWNBr1U0Qt1cKFYzWvxts0AmqcOQGwt/3KJWcWIgtbUU38keyw==}
     dependencies:
-      '@floating-ui/core': 1.2.5
-    dev: true
+      '@floating-ui/core': 1.2.6
+    dev: false
 
   /@js-temporal/polyfill/0.4.3:
     resolution: {integrity: sha512-6Fmjo/HlkyVCmJzAPnvtEWlcbQUSRhi8qlN9EtJA/wP7FqXsevLLrlojR44kzNzrRkpf7eDJ+z7b4xQD/Ycypw==}
@@ -56,16 +56,25 @@ packages:
     dependencies:
       jsbi: 4.3.0
       tslib: 2.5.0
-    dev: true
+    dev: false
 
   /@popperjs/core/2.11.7:
     resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
     dev: false
 
-  /@types/dompurify/3.0.0:
-    resolution: {integrity: sha512-EcSqmgm/xJwH8CcJPy9AHNypp/j58CYga3nWdl93/wLxX6OH+rSD3aAj75NQazcZd1YKHJ/pjNZ9qmgVajggwQ==}
+  /@types/dompurify/3.0.1:
+    resolution: {integrity: sha512-ubq8VKmf8W+U48jUOiZO4BoSGS7NnbITPMvrF+7HgMN4L+eezCKv8QBPB8p3o4YPicLMmNeTyDkE5X4c2ViHJQ==}
     dependencies:
+      '@types/jsdom': 21.1.1
       '@types/trusted-types': 2.0.3
+    dev: true
+
+  /@types/jsdom/21.1.1:
+    resolution: {integrity: sha512-cZFuoVLtzKP3gmq9eNosUL1R50U+USkbLtUQ1bYVgl/lKp0FZM7Cq4aIHAL8oIvQ17uSHi7jXPtfDOdjPwBE7A==}
+    dependencies:
+      '@types/node': 18.15.11
+      '@types/tough-cookie': 4.0.2
+      parse5: 7.1.2
     dev: true
 
   /@types/lodash-es/4.17.7:
@@ -76,6 +85,14 @@ packages:
 
   /@types/lodash/4.14.192:
     resolution: {integrity: sha512-km+Vyn3BYm5ytMO13k9KTp27O75rbQ0NFw+U//g+PX7VZyjCioXaRFisqSIJRECljcTv73G3i6BpglNGHgUQ5A==}
+    dev: true
+
+  /@types/node/18.15.11:
+    resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
+    dev: true
+
+  /@types/tough-cookie/4.0.2:
+    resolution: {integrity: sha512-Q5vtl1W5ue16D+nIaW8JWebSSraJVlK+EthKn7e7UcD4KWsaSJ8BqGPXNaPghgtcn/fhvrN17Tv8ksUsQpiplw==}
     dev: true
 
   /@types/trusted-types/2.0.3:
@@ -99,14 +116,14 @@ packages:
     resolution: {integrity: sha512-/SLWbEzMoVIMZACCyhD/4Ya2M1PWP1qMKuiymowPcI+PdWDARqeARBjhj73kbUBCxEmTZCUu5TAqxtwUO9C1Ig==}
     dev: false
 
-  /bootstrap-icons/1.10.3:
-    resolution: {integrity: sha512-7Qvj0j0idEm/DdX9Q0CpxAnJYqBCFCiUI6qzSPYfERMcokVuV9Mdm/AJiVZI8+Gawe4h/l6zFcOzvV7oXCZArw==}
-    dev: true
+  /bootstrap-icons/1.10.4:
+    resolution: {integrity: sha512-eI3HyIUmpGKRiRv15FCZccV+2sreGE2NnmH8mtxV/nPOzQVu0sPEj8HhF1MwjJ31IhjF0rgMvtYOX5VqIzcb/A==}
+    dev: false
 
-  /bootstrap/5.3.0-alpha2_@popperjs+core@2.11.7:
-    resolution: {integrity: sha512-r1ayh5d56rhwrezVjhM8bt8tiUcdQ8J9JeCwCTAeKSpOrCWH5V5S6XiJ26DqbX7o5QSH5HIKm7W88CKxVjhCVQ==}
+  /bootstrap/5.3.0-alpha3_@popperjs+core@2.11.7:
+    resolution: {integrity: sha512-FBhOWMxkCFr74hesJdchLXhqagPTXS+kRNU3gE0FR5Ki/AdPSz32Ik96Z28+yBluCnE/pc9st7l1yPwKgbtfSA==}
     peerDependencies:
-      '@popperjs/core': ^2.11.6
+      '@popperjs/core': ^2.11.7
     dependencies:
       '@popperjs/core': 2.11.7
     dev: false
@@ -136,9 +153,15 @@ packages:
   /clsx/1.2.1:
     resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
     engines: {node: '>=6'}
+    dev: false
 
   /dompurify/3.0.1:
     resolution: {integrity: sha512-60tsgvPKwItxZZdfLmamp0MTcecCta3avOhsLgPZ0qcWt96OasFfhkeIRbJ6br5i0fQawT1/RBGB5L58/Jpwuw==}
+    dev: false
+
+  /entities/4.4.0:
+    resolution: {integrity: sha512-oYp7156SP8LkeGD0GF85ad1X9Ai79WtRsZ2gxJqtBuzH+98YUV6jkHEKlZkMbcrjJjIVJNIDP/3WL9wQkoPbWA==}
+    engines: {node: '>=0.12'}
     dev: true
 
   /fill-range/7.0.1:
@@ -193,14 +216,21 @@ packages:
 
   /jsbi/4.3.0:
     resolution: {integrity: sha512-SnZNcinB4RIcnEyZqFPdGPVgrg2AcnykiBy0sHVJQKHYeaLUvi3Exj+iaPpLnFVkDPZIV4U0yvgC9/R4uEAZ9g==}
-    dev: true
+    dev: false
 
   /lodash-es/4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
 
   /normalize-path/3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /parse5/7.1.2:
+    resolution: {integrity: sha512-Czj1WaSVpaoj0wbhMzLmWD69anp2WH7FXMB9n1Sy8/ZFF9jolSQVMu1Ij5WIyGmcBmhk7EOndpO4mIpihVqAXw==}
+    dependencies:
+      entities: 4.4.0
     dev: true
 
   /picomatch/2.3.1:
@@ -219,9 +249,9 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /sass/1.60.0:
-    resolution: {integrity: sha512-updbwW6fNb5gGm8qMXzVO7V4sWf7LMXnMly/JEyfbfERbVH46Fn6q02BX7/eHTdKpE7d+oTkMMQpFWNUMfFbgQ==}
-    engines: {node: '>=12.0.0'}
+  /sass/1.61.0:
+    resolution: {integrity: sha512-PDsN7BrVkNZK2+dj/dpKQAWZavbAQ87IXqVvw2+oEYI+GwlTWkvbQtL7F2cCNbMqJEYKPh1EcjSxsnqIb/kyaQ==}
+    engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
       chokidar: 3.5.3
@@ -247,10 +277,10 @@ packages:
 
   /tslib/2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
-    dev: true
+    dev: false
 
-  /typescript/5.0.3:
-    resolution: {integrity: sha512-xv8mOEDnigb/tN9PSMTwSEqAnUvkoXMQlicOb0IUVDBSQCgBSaAAROUZYy2IcUy5qU6XajK5jjjO7TMWqBTKZA==}
+  /typescript/5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
     engines: {node: '>=12.20'}
     hasBin: true
     dev: true
@@ -259,15 +289,15 @@ packages:
     resolution: {integrity: sha512-Ba9tGNYxXwaqKEi9sJJvPMKuo063umUPsHN0JJsjrs2j8KDSzkWLMZGZ+MH1Jf1Fq4OWZ5HsESJID6nRza2ang==}
     dev: false
 
-  github.com/mwszekely/bootstrap-sass-variables/8f1f6876f6953984e280b7e5941d576967fffda9_bootstrap@5.3.0-alpha2:
-    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/8f1f6876f6953984e280b7e5941d576967fffda9}
-    id: github.com/mwszekely/bootstrap-sass-variables/8f1f6876f6953984e280b7e5941d576967fffda9
+  github.com/mwszekely/bootstrap-sass-variables/dd87245c8e0661a45012ff7075c7f6c122051c21_bootstrap@5.3.0-alpha3:
+    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/dd87245c8e0661a45012ff7075c7f6c122051c21}
+    id: github.com/mwszekely/bootstrap-sass-variables/dd87245c8e0661a45012ff7075c7f6c122051c21
     name: bootstrap-sass-variables
     version: 0.0.1
     peerDependencies:
-      bootstrap: ^5.3.0-alpha2
+      bootstrap: 5.3.0-alpha3
     dependencies:
-      bootstrap: 5.3.0-alpha2_@popperjs+core@2.11.7
+      bootstrap: 5.3.0-alpha3_@popperjs+core@2.11.7
     dev: false
 
   github.com/mwszekely/preact-aria-widgets/8a6a2ccd42fd32d7ac60c26fb53c3e354114ea72_preact@10.13.2:
@@ -281,12 +311,12 @@ packages:
       clsx: 1.2.1
       lodash-es: 4.17.21
       preact: 10.13.2
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/68495acb9afa8fdaeaf4e88c32b7d9bb28ac0b1d_preact@10.13.2
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/3c11775e0886cc02da18f646298d6e657c705c34_preact@10.13.2
     dev: false
 
-  github.com/mwszekely/preact-prop-helpers/68495acb9afa8fdaeaf4e88c32b7d9bb28ac0b1d_preact@10.13.2:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/68495acb9afa8fdaeaf4e88c32b7d9bb28ac0b1d}
-    id: github.com/mwszekely/preact-prop-helpers/68495acb9afa8fdaeaf4e88c32b7d9bb28ac0b1d
+  github.com/mwszekely/preact-prop-helpers/3c11775e0886cc02da18f646298d6e657c705c34_preact@10.13.2:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/3c11775e0886cc02da18f646298d6e657c705c34}
+    id: github.com/mwszekely/preact-prop-helpers/3c11775e0886cc02da18f646298d6e657c705c34
     name: preact-prop-helpers
     version: 0.0.1
     peerDependencies:
@@ -311,5 +341,5 @@ packages:
       clsx: 1.2.1
       lodash-es: 4.17.21
       preact: 10.13.2
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/68495acb9afa8fdaeaf4e88c32b7d9bb28ac0b1d_preact@10.13.2
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/3c11775e0886cc02da18f646298d6e657c705c34_preact@10.13.2
     dev: false
