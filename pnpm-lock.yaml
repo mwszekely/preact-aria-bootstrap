@@ -29,9 +29,9 @@ dependencies:
   dompurify: 3.0.1
   lodash-es: 4.17.21
   preact: 10.13.2
-  preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/6a4fb5ea1b1b32549f828f400dd415356089faa3_preact@10.13.2
+  preact-aria-widgets: github.com/mwszekely/preact-aria-widgets/417bea67f2e19cc09f3e2ed183d46a54e0b32e36_preact@10.13.2
   preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/3c11775e0886cc02da18f646298d6e657c705c34_preact@10.13.2
-  preact-transition: github.com/mwszekely/preact-transition/29d5f9e112b62e5638ab0e6a5993d540c20a1a8c_preact@10.13.2
+  preact-transition: github.com/mwszekely/preact-transition/e5a0c6272c991f4ed2bec030d689f8f355f2e4e1_preact@10.13.2
 
 devDependencies:
   '@types/dompurify': 3.0.1
@@ -962,9 +962,9 @@ packages:
       bootstrap: 5.3.0-alpha3_@popperjs+core@2.11.7
     dev: false
 
-  github.com/mwszekely/preact-aria-widgets/6a4fb5ea1b1b32549f828f400dd415356089faa3_preact@10.13.2:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/6a4fb5ea1b1b32549f828f400dd415356089faa3}
-    id: github.com/mwszekely/preact-aria-widgets/6a4fb5ea1b1b32549f828f400dd415356089faa3
+  github.com/mwszekely/preact-aria-widgets/417bea67f2e19cc09f3e2ed183d46a54e0b32e36_preact@10.13.2:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/417bea67f2e19cc09f3e2ed183d46a54e0b32e36}
+    id: github.com/mwszekely/preact-aria-widgets/417bea67f2e19cc09f3e2ed183d46a54e0b32e36
     name: preact-aria-widgets
     version: 0.0.1
     peerDependencies:
@@ -992,9 +992,9 @@ packages:
       wicg-inert: 3.1.2
     dev: false
 
-  github.com/mwszekely/preact-transition/29d5f9e112b62e5638ab0e6a5993d540c20a1a8c_preact@10.13.2:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/29d5f9e112b62e5638ab0e6a5993d540c20a1a8c}
-    id: github.com/mwszekely/preact-transition/29d5f9e112b62e5638ab0e6a5993d540c20a1a8c
+  github.com/mwszekely/preact-transition/e5a0c6272c991f4ed2bec030d689f8f355f2e4e1_preact@10.13.2:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/e5a0c6272c991f4ed2bec030d689f8f355f2e4e1}
+    id: github.com/mwszekely/preact-transition/e5a0c6272c991f4ed2bec030d689f8f355f2e4e1
     name: preact-transition
     version: 0.1.0
     peerDependencies:
