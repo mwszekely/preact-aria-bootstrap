@@ -34,22 +34,22 @@
   },
   "typings": "./dist/index.d.ts",
   "dependencies": {
-    "@floating-ui/dom": "^1.2.6",
+    "@floating-ui/dom": "^1.2.7",
     "@js-temporal/polyfill": "^0.4.3",
-    "bootstrap-icons": "^1.10.4",
+    "bootstrap-icons": "^1.10.5",
     "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
     "clsx": "^1.2.1",
-    "dompurify": "^3.0.1",
+    "dompurify": "^3.0.2",
     "lodash-es": "^4.17.21",
     "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
     "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
     "preact-transition": "github:mwszekely/preact-transition"
   },
   "devDependencies": {
-    "@types/dompurify": "^3.0.1",
+    "@types/dompurify": "^3.0.2",
     "@types/lodash-es": "^4.17.7",
     "npm-run-all": "^4.1.5",
-    "sass": "^1.61.0",
+    "sass": "^1.62.1",
     "typescript": "^5.0.4"
   }
 }
