@@ -3,7 +3,7 @@ import { ComponentChildren, h, Ref } from "preact";
 import { UseAsyncReturnType } from "preact-prop-helpers";
 import { LabelledProps } from "../utility/types.js";
 interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<h.JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
-    value: T | null;
+    value: T;
     marginBottom?: number;
     onValueChange: null | ((value: T | null, event: h.JSX.TargetedEvent<E>) => void | Promise<void>);
     iconStart?: ComponentChildren | null | undefined;
@@ -19,7 +19,7 @@ interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> ext
     enterKeyHint?: null | 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
     autocomplete?: null | 'off' | 'on' | 'name' | 'honorific-prefix' | 'given-name' | 'additional-name' | 'family-name' | 'nickname' | 'email' | 'username' | 'new-password' | 'current-password' | 'one-time-code' | 'organization-title' | 'organization' | 'street-address' | 'address-line1' | 'address-line2' | 'address-line3' | 'address-line4' | 'country' | 'country-name' | 'postal-code' | 'cc-name' | 'cc-given-name' | 'cc-additional-name' | 'cc-family-name' | 'cc-number' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-csc' | 'cc-type' | 'transaction-currency' | 'transaction-amount' | 'language' | 'bday-day' | 'bday-month' | 'bday-year' | 'sex' | 'tel-country-code' | 'tel-national' | 'tel-area-code' | 'tel-local' | 'tel-extention' | 'impp' | 'url' | 'photo';
 }
-interface TextFieldNumericBase<T extends number | bigint> extends TextFieldBase<HTMLInputElement, T> {
+interface TextFieldNumericBase<T extends number | bigint> extends TextFieldBase<HTMLInputElement, T | null> {
     min?: number;
     max?: number;
     step?: number;
@@ -35,13 +35,13 @@ interface TextFieldNumberProps extends TextFieldNumericBase<number> {
 interface TextFieldBigIntProps extends TextFieldNumericBase<bigint> {
     type: "bigint";
 }
-interface TextFieldDateTimeProps extends TextFieldBase<HTMLInputElement, Temporal.Instant> {
+interface TextFieldDateTimeProps extends TextFieldBase<HTMLInputElement, Temporal.Instant | null> {
     type: "datetime-local";
 }
-interface TextFieldDateProps extends TextFieldBase<HTMLInputElement, Temporal.PlainDate> {
+interface TextFieldDateProps extends TextFieldBase<HTMLInputElement, Temporal.PlainDate | null> {
     type: "date";
 }
-interface TextFieldTimeProps extends TextFieldBase<HTMLInputElement, Temporal.PlainTime> {
+interface TextFieldTimeProps extends TextFieldBase<HTMLInputElement, Temporal.PlainTime | null> {
     type: "time";
     /**
      * **IMPORTANT**: Does not work on iOS Safari, which ignores the `step` attribute. An alternate solution must be used if this is important.

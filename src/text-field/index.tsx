@@ -13,7 +13,7 @@ import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { LabelledProps } from "../utility/types.js";
 
 interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<h.JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
-    value: T | null;
+    value: T;
     marginBottom?: number;
     onValueChange: null | ((value: T | null, event: h.JSX.TargetedEvent<E>) => void | Promise<void>);
     iconStart?: ComponentChildren | null | undefined;
@@ -30,7 +30,7 @@ interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> ext
     autocomplete?: null | 'off' | 'on' | 'name' | 'honorific-prefix' | 'given-name' | 'additional-name' | 'family-name' | 'nickname' | 'email' | 'username' | 'new-password' | 'current-password' | 'one-time-code' | 'organization-title' | 'organization' | 'street-address' | 'address-line1' | 'address-line2' | 'address-line3' | 'address-line4' | 'country' | 'country-name' | 'postal-code' | 'cc-name' | 'cc-given-name' | 'cc-additional-name' | 'cc-family-name' | 'cc-number' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-csc' | 'cc-type' | 'transaction-currency' | 'transaction-amount' | 'language' | 'bday-day' | 'bday-month' | 'bday-year' | 'sex' | 'tel-country-code' | 'tel-national' | 'tel-area-code' | 'tel-local' | 'tel-extention' | 'impp' | 'url' | 'photo'
 }
 
-interface TextFieldNumericBase<T extends number | bigint> extends TextFieldBase<HTMLInputElement, T> {
+interface TextFieldNumericBase<T extends number | bigint> extends TextFieldBase<HTMLInputElement, T | null> {
     min?: number; // not T
     max?: number; // not T
     step?: number; // not T
@@ -48,9 +48,9 @@ interface TextFieldNumberProps extends TextFieldNumericBase<number> { type: "num
 interface TextFieldBigIntProps extends TextFieldNumericBase<bigint> { type: "bigint" }
 type TextFieldNumeric = TextFieldNumberProps | TextFieldBigIntProps;
 
-interface TextFieldDateTimeProps extends TextFieldBase<HTMLInputElement, Temporal.Instant> { type: "datetime-local" }
-interface TextFieldDateProps extends TextFieldBase<HTMLInputElement, Temporal.PlainDate> { type: "date" }
-interface TextFieldTimeProps extends TextFieldBase<HTMLInputElement, Temporal.PlainTime> {
+interface TextFieldDateTimeProps extends TextFieldBase<HTMLInputElement, Temporal.Instant | null> { type: "datetime-local" }
+interface TextFieldDateProps extends TextFieldBase<HTMLInputElement, Temporal.PlainDate | null> { type: "date" }
+interface TextFieldTimeProps extends TextFieldBase<HTMLInputElement, Temporal.PlainTime | null> {
     type: "time";
 
     /**
