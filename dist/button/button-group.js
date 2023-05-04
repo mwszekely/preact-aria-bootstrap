@@ -8,6 +8,7 @@ import { DisabledContext } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 export const ButtonGroupContext = createContext(null);
 export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, ...props }, ref) {
+    labelPosition ??= "before";
     const imperativeHandle = useRef(null);
     const [capturedIndex, setCapturedIndex] = useState(null);
     const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((e) => { return onSelectedIndexChangeAsync?.(e); }, {

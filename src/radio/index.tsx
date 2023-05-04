@@ -27,7 +27,8 @@ export interface RadioGroupContext<V extends string | number> {
 export const RadioGroupContext = createContext<RadioGroupContext<string | number> | null>(null);
 
 export function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
-
+    labelPosition ??= "after";
+    
     const imperativeHandle = useRef<UseRadioGroupReturnType<V, HTMLSpanElement, HTMLLabelElement, HTMLInputElement>>(null);
 
     // Note: We use useAsync, instead of useAsyncHandler, because the actual event handler isn't here.

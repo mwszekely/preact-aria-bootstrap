@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef } from "preact/hooks";
 import { BootstrapIcon } from "../icon/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 export function Pagination({ childCount, windowSize, onChange, labelPosition, label }) {
+    labelPosition ??= "before";
     const [page, setPage] = useState(0);
     useEffect(() => {
         const start = ((page + 0) * windowSize);

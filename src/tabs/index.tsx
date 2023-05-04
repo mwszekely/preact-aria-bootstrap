@@ -33,6 +33,7 @@ const OrientationContext = createContext<"horizontal" | "vertical">("horizontal"
 
 export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }: LabelledProps<TabsProps, never>, ref: Ref<HTMLDivElement>) {
     orientation ??= "horizontal"
+    labelPosition ??= "before";
     return (
         <OrientationContext.Provider value={orientation}>
             <AriaTabs<HTMLUListElement, HTMLLIElement, HTMLLabelElement>

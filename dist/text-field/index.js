@@ -152,6 +152,7 @@ export function useCommitTextField({ getFocused, commit, currentCapture, showSpi
     });
 }
 const TextFieldBase = memo(forwardElementRef(function TextFieldBase({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }, ref) {
+    labelPosition ??= "before";
     const { refElementReturn: { getElement: getInputElement }, propsStable: propsInput1 } = useRefElement({ refElementParameters: {} });
     const { refElementReturn: { getElement: getLabelElement }, propsStable: propsLabel1 } = useRefElement({ refElementParameters: {} });
     const withinInputGroup = useContext(WithinInputGroup);

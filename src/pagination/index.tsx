@@ -8,6 +8,7 @@ import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { LabelledProps, PaginatedProps } from "../utility/types.js";
 
 export function Pagination({ childCount, windowSize, onChange, labelPosition, label }: LabelledProps<{ childCount: number, windowSize: number, onChange: (start: number | null, end: number | null) => void }, never>) {
+    labelPosition ??= "before";
     const [page, setPage] = useState(0);
 
     useEffect(() => {

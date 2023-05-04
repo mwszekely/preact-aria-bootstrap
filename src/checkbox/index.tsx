@@ -35,6 +35,7 @@ export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children
 }
 
 export function Checkbox({ label, labelPosition, checked, tristate, onValueChange, loadingLabel, debounce, forciblyPending, throttle, inline, disabled: userDisabled, imperativeHandle, propsInput, propsLabel, ...props }: LabelledProps<CheckboxProps, "tooltip">, ref?: Ref<any>) {
+    labelPosition ??= "after"
     const isSwitch = (props as { _isSwitch: boolean })._isSwitch;
     if (isSwitch)
         delete (props as any)._isSwitch;

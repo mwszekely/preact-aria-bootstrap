@@ -42,6 +42,8 @@ export interface ButtonGroupChildProps {
 export interface ButtonGroupContext { pendingIndex: number | null }
 export const ButtonGroupContext = createContext<ButtonGroupContext | null>(null);
 export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>) {
+    labelPosition ??= "before";
+    
     const imperativeHandle = useRef<UseToolbarReturnType<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>>(null);
     type OSSI = UseToolbarParameters<HTMLSpanElement, HTMLButtonElement, UseToolbarSubInfo<HTMLButtonElement>>["toolbarParameters"]["onSelectedIndexChange"];
     const [capturedIndex, setCapturedIndex] = useState(null as number | null);

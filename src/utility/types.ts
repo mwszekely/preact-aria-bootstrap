@@ -8,7 +8,7 @@ interface LabelledComponent1 {
 }
 
 interface LabelledComponent2<W extends "within" | "floating" | "tooltip"> {
-    labelPosition: "before" | "after" | W;
+    labelPosition?: "before" | "after" | W;
     label: ComponentChildren;
 }
 export type LabelledProps<P, W extends "within" | "floating" | "tooltip"> = P & (LabelledComponent1 | LabelledComponent2<W>);

@@ -13,6 +13,7 @@ import { useUpdateRenderCounter } from "../utility/render-counter.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 const DefaultDisabled = createContext(false);
 export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }) {
+    labelPosition ??= "before";
     const [focusedInner, setFocusedInner] = useState(false);
     const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
     const { hasCurrentFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn });

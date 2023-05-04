@@ -463,6 +463,8 @@ export function useCommitTextField<C>({ getFocused, commit, currentCapture, show
 }
 
 const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, V>({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }: LabelledProps<TFB<E, V>, "floating" | "tooltip">, ref?: Ref<any>) {
+    labelPosition ??= "before";
+    
     const { refElementReturn: { getElement: getInputElement }, propsStable: propsInput1 } = useRefElement<HTMLInputElement>({ refElementParameters: {} });
     const { refElementReturn: { getElement: getLabelElement }, propsStable: propsLabel1 } = useRefElement<HTMLLabelElement>({ refElementParameters: {} });
     const withinInputGroup = useContext(WithinInputGroup);

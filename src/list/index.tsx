@@ -40,7 +40,7 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
 const DefaultDisabled = createContext(false);
 
 export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
-
+    labelPosition ??= "before";
     const [focusedInner, setFocusedInner] = useState(false);
     const { refElementReturn, propsStable } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
     const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLDivElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn })

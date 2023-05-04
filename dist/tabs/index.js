@@ -10,6 +10,7 @@ import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 const OrientationContext = createContext("horizontal");
 export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }, ref) {
     orientation ??= "horizontal";
+    labelPosition ??= "before";
     return (_jsx(OrientationContext.Provider, { value: orientation, children: _jsx(AriaTabs, { localStorageKey: localStorageKey, orientation: orientation, ariaLabel: labelPosition == "hidden" ? label : null, pageNavigationSize: 0, render: info => {
                 const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
                 return (_jsxs("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: [labelPosition == "before" && labelJsx, _jsx(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: _jsx("ul", { ...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) }), children: tabs }) }), labelPosition == "before" && labelJsx, _jsx(Swappable, { children: _jsx("div", { ...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {}), children: panels }) })] }));

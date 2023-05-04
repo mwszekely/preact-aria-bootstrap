@@ -10,6 +10,7 @@ import { Tooltip } from "../tooltip/index.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 export const RadioGroupContext = createContext(null);
 export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
+    labelPosition ??= "after";
     const imperativeHandle = useRef(null);
     // Note: We use useAsync, instead of useAsyncHandler, because the actual event handler isn't here.
     // If we were listening for the individual radios' onInput events, we would do that, but
