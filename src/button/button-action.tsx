@@ -5,7 +5,7 @@ import { returnZero, useAsyncHandler, UseAsyncHandlerParameters, useMergedProps 
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext } from "preact/hooks";
-import { ButtonThemes, DefaultDisabledType, DisabledContext } from "../context.js";
+import { ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip, TooltipProps } from "../tooltip/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { ButtonGroupChildProps, ButtonGroupContext } from "./button-group.js";
@@ -47,6 +47,11 @@ export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttri
 
 export const Button = memo(forwardElementRef(function Button<E extends HTMLElement>({ tag: Tag, tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps<E>, ref?: Ref<E>) {
     Tag ??= "button" as never;
+
+    let defaultTheme = useContext(DefaultButtonTheme);
+    let defaultSize = useContext(DefaultButtonSize);
+    variantTheme ??= defaultTheme ?? undefined;
+    variantSize ??= defaultSize ?? undefined;
 
     const { currentCapture, pending: individualPending, syncHandler, callCount } = useAsyncHandler({
         asyncHandler: onPressAsync,

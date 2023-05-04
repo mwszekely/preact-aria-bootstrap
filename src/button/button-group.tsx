@@ -3,7 +3,7 @@ import { createContext, h, Ref } from "preact";
 import { Toolbar, ToolbarProps, useLabelSynthetic, UseToolbarParameters, UseToolbarReturnType, UseToolbarSubInfo } from "preact-aria-widgets";
 import { useAsync, useMergedProps, useState } from "preact-prop-helpers";
 import { useMemo, useRef } from "preact/hooks";
-import { DisabledContext } from "../context.js";
+import { ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DisabledContext } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { LabelledProps } from "../utility/types.js";
 import { ButtonProps } from "./button-action.js";
@@ -13,6 +13,7 @@ export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElem
     selectedIndex?: number | null;
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
     variantSize?: ButtonProps<any>["variantSize"];
+    variantTheme?: ButtonThemes;
     orientation?: ToolbarProps<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>["orientation"];
 
     /**
@@ -41,9 +42,9 @@ export interface ButtonGroupChildProps {
 }
 export interface ButtonGroupContext { pendingIndex: number | null }
 export const ButtonGroupContext = createContext<ButtonGroupContext | null>(null);
-export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>) {
+export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>) {
     labelPosition ??= "before";
-    
+
     const imperativeHandle = useRef<UseToolbarReturnType<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>>(null);
     type OSSI = UseToolbarParameters<HTMLSpanElement, HTMLButtonElement, UseToolbarSubInfo<HTMLButtonElement>>["toolbarParameters"]["onSelectedIndexChange"];
     const [capturedIndex, setCapturedIndex] = useState(null as number | null);
@@ -58,36 +59,39 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     const classBase = (separated ? "btn-toolbar" : "btn-group")
 
     return (
-
-        <DisabledContext.Provider value={disabled ?? false}>
-            <ButtonGroupContext.Provider value={useMemo(() => ({ pendingIndex }), [pendingIndex])}>
-                <Toolbar<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement>
-                    onSelectedIndexChange={onSelectedIndexChangeSync}
-                    ref={imperativeHandle}
-                    ariaPropName="aria-pressed"
-                    selectionMode="disabled"
-                    role="toolbar"  // TODO: Was group, but that doesn't count as an application, I think?
-                    pageNavigationSize={0}
-                    orientation={orientation || "horizontal"}
-                    ariaLabel={labelPosition == 'hidden' ? label : null}
-                    selectedIndex={pendingIndex ?? selectedIndex}
-                    render={info => {
-                        const visibleLabel = <label {...info.propsLabel}>{label}</label>
-                        return (
-                            <>
-                                {labelPosition == "before" && visibleLabel}
-                                <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={false} typeaheadActive={false}>
-                                    <span {...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref })}>
-                                        {labelPosition == "within" && visibleLabel}
-                                        {children}
-                                    </span>
-                                </KeyboardAssistIcon>
-                                {labelPosition == "after" && visibleLabel}
-                            </>
-                        )
-                    }} />
-            </ButtonGroupContext.Provider>
-        </DisabledContext.Provider>
+        <DefaultButtonSize.Provider value={variantSize ?? null}>
+            <DefaultButtonTheme.Provider value={variantTheme ?? null}>
+                <DisabledContext.Provider value={disabled ?? false}>
+                    <ButtonGroupContext.Provider value={useMemo(() => ({ pendingIndex }), [pendingIndex])}>
+                        <Toolbar<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement>
+                            onSelectedIndexChange={onSelectedIndexChangeSync}
+                            ref={imperativeHandle}
+                            ariaPropName="aria-pressed"
+                            selectionMode="disabled"
+                            role="toolbar"  // TODO: Was group, but that doesn't count as an application, I think?
+                            pageNavigationSize={0}
+                            orientation={orientation || "horizontal"}
+                            ariaLabel={labelPosition == 'hidden' ? label : null}
+                            selectedIndex={pendingIndex ?? selectedIndex}
+                            render={info => {
+                                const visibleLabel = <label {...info.propsLabel}>{label}</label>
+                                return (
+                                    <>
+                                        {labelPosition == "before" && visibleLabel}
+                                        <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={false} typeaheadActive={false}>
+                                            <span {...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref })}>
+                                                {labelPosition == "within" && visibleLabel}
+                                                {children}
+                                            </span>
+                                        </KeyboardAssistIcon>
+                                        {labelPosition == "after" && visibleLabel}
+                                    </>
+                                )
+                            }} />
+                    </ButtonGroupContext.Provider>
+                </DisabledContext.Provider>
+            </DefaultButtonTheme.Provider>
+        </DefaultButtonSize.Provider>
     )
 }
 
