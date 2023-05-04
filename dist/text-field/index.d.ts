@@ -5,7 +5,7 @@ import { LabelledProps } from "../utility/types.js";
 interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<h.JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
     value: T;
     marginBottom?: number;
-    onValueChange: null | ((value: T | null, event: h.JSX.TargetedEvent<E>) => void | Promise<void>);
+    onValueChange: null | ((value: T, event: h.JSX.TargetedEvent<E>) => void | Promise<void>);
     iconStart?: ComponentChildren | null | undefined;
     iconEnd?: ComponentChildren | null | undefined;
     size?: "lg" | "sm" | "md" | null;
