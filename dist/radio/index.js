@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { createContext } from "preact";
-import { Progress, Radio as AriaRadio, RadioGroup as AriaRadioGroup } from "preact-aria-widgets";
+import { Progress, Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail } from "preact-aria-widgets";
 import { useAsync, useMergedProps, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { useContext, useMemo, useRef } from "preact/hooks";
@@ -16,8 +16,8 @@ export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, name, ch
     // If we were listening for the individual radios' onInput events, we would do that, but
     // we're just listening for a regular ol' function.
     const [capturedValue, setCapturedValue] = useState(null);
-    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((value, event) => { return onSelectedIndexChangeAsync?.(value, event); }, {
-        capture: (value, event) => { setCapturedValue(value); return [value, event]; },
+    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((event) => { return onSelectedIndexChangeAsync?.(event[EventDetail].selectedValue, event); }, {
+        capture: (event) => { setCapturedValue(event[EventDetail].selectedValue); return [event]; },
         throttle,
         debounce
     });

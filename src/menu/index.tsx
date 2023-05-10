@@ -122,21 +122,14 @@ export interface MenuItemProps extends GlobalAttributes<HTMLDivElement> {
     loadingLabel?: string;
 }
 
-export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress: onPressWithoutClose, children, ...props }: MenuItemProps, ref?: Ref<HTMLDivElement>) {
-    /*const onClose = useStableCallback<typeof onPressWithoutClose>((e) => {
-        const ret = onPressWithoutClose?.(e);
-        if (ret && (typeof ret == "object") && (ret instanceof Promise)) {
-
-        }
-    })*/
-
+export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }: MenuItemProps, ref?: Ref<HTMLDivElement>) {
     const imperativeHandle = useRef<UseMenuItemReturnType<HTMLDivElement, any>>(null);
 
     return (
         <ProgressWithHandler<Event, undefined, HTMLDivElement, HTMLDivElement>
             asyncHandler={() => {
                 console.assert(!!imperativeHandle.current);
-                return onPressWithoutClose?.(imperativeHandle.current!.menuItemReturn.closeMenu);
+                return onPress?.(imperativeHandle.current!.menuItemReturn.closeMenu);
             }}
             ariaLabel={loadingLabel || "The operation is in progress"}
             capture={returnUndefined}

@@ -1,5 +1,5 @@
 import { ComponentChildren, h, Ref, VNode } from "preact";
-import { ButtonPressEvent, ElementToTag } from "preact-aria-widgets";
+import { TargetedButtonPressEvent, ElementToTag } from "preact-aria-widgets";
 import { UseAsyncHandlerParameters } from "preact-prop-helpers";
 import { ButtonThemes } from "../context.js";
 import { TooltipProps } from "../tooltip/index.js";
@@ -10,7 +10,7 @@ export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttri
     loadingLabel?: string;
     tooltip?: ComponentChildren;
     tooltipPlacement?: TooltipProps["placement"];
-    onPress: null | ((pressed: boolean | null, event: ButtonPressEvent<E>) => (void | Promise<void>));
+    onPress: null | ((pressed: boolean | null, event: TargetedButtonPressEvent<E>) => (void | Promise<void>));
     tag?: ElementToTag<E>;
     badge?: VNode;
     variantTheme?: ButtonThemes;

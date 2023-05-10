@@ -41,7 +41,7 @@ const PaginationButtonLast = memo(forwardElementRef(({ index, onFocus }, ref) =>
     return (_jsxs(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: ["Last ", _jsx(BootstrapIcon, { icon: "chevron-bar-right", label: null })] }));
 }));
 const PaginationButton = memo(forwardElementRef(function PaginationButton({ index, children, onFocus }, ref) {
-    return (_jsx(ToolbarChild, { index: index, getSortValue: useStableGetter(index), render: info => {
+    return (_jsx(ToolbarChild, { index: index, disabledProp: "disabled", getSortValue: useStableGetter(index), render: info => {
             const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
             const { pressReturn, props: propsPress } = usePress({ pressParameters: { onPressSync: null, focusSelf: useCallback((e) => { e.focus(); }, []), ...info.pressParameters }, refElementReturn });
             return (_jsx("li", { class: "page-item", children: _jsx("button", { ...useMergedProps(info.props, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {}), children: children }) }));

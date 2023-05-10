@@ -82,6 +82,7 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
     return (
         <ToolbarChild<HTMLButtonElement>
             index={index}
+            disabledProp="disabled"
             getSortValue={useStableGetter(index)}
 
             render={info => {

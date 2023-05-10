@@ -1,4 +1,4 @@
-import { CheckboxChangeEvent, CheckboxGroup as AriaCheckboxGroup, CheckboxGroupChild as AriaCheckboxGroupChild, CheckboxGroupParent as AriaCheckboxGroupParent, UseCheckboxReturnType } from "preact-aria-widgets"
+import { TargetedCheckboxChangeEvent, CheckboxGroup as AriaCheckboxGroup, CheckboxGroupChild as AriaCheckboxGroupChild, CheckboxGroupParent as AriaCheckboxGroupParent, UseCheckboxReturnType } from "preact-aria-widgets"
 import { returnZero, useMergedProps, useStableCallback } from "preact-prop-helpers"
 import { useRef, useState } from "preact/hooks"
 import { Checkbox, CheckboxProps } from "../checkbox/index.js"
@@ -92,7 +92,7 @@ export function CheckboxGroupChild({ checked, label, labelPosition, onValueChang
             onChangeFromParent={useStableCallback(async (c, e) => {
                 try {
                     setPendingFromParent(true);
-                    await onValueChange?.(c as boolean, e as CheckboxChangeEvent<HTMLInputElement>);
+                    await onValueChange?.(c as boolean, e as TargetedCheckboxChangeEvent<HTMLInputElement>);
                 }
                 catch (ex) {
                     throw ex;

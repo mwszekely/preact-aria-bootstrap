@@ -96,7 +96,6 @@ export const TextField = memo(forwardElementRef(function TextField({ type, ...pr
             return (<TextFieldTime ref={ref} type={type} {...props as any} />)
         case "email":
         case "search":
-        case "email":
         default:
             return (<TextFieldText ref={ref} type={type} {...props as any} />)
     }

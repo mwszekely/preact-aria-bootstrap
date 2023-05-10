@@ -1,11 +1,11 @@
 import { h, Ref } from "preact";
-import { CheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets";
+import { TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets";
 import { UseAsyncHandlerParameters } from "preact-prop-helpers";
 import { LabelledProps } from "../utility/types.js";
 export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
     inline?: boolean;
     checked: boolean | "mixed";
-    onValueChange(checked: boolean, event: CheckboxChangeEvent<HTMLInputElement>): void | Promise<void>;
+    onValueChange(checked: boolean, event: TargetedCheckboxChangeEvent<HTMLInputElement>): void | Promise<void>;
     loadingLabel?: string;
     disabled?: boolean;
     forciblyPending?: boolean;

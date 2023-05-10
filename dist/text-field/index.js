@@ -24,7 +24,6 @@ export const TextField = memo(forwardElementRef(function TextField({ type, ...pr
             return (_jsx(TextFieldTime, { ref: ref, type: type, ...props }));
         case "email":
         case "search":
-        case "email":
         default:
             return (_jsx(TextFieldText, { ref: ref, type: type, ...props }));
     }

@@ -22,5 +22,5 @@ export interface MenuItemProps extends GlobalAttributes<HTMLDivElement> {
     getSortValue?: () => unknown;
     loadingLabel?: string;
 }
-export declare const MenuItem: ({ index, getSortValue, disabled, loadingLabel, onPress: onPressWithoutClose, children, ...props }: MenuItemProps, ref?: Ref<HTMLDivElement>) => import("preact").JSX.Element;
+export declare const MenuItem: ({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }: MenuItemProps, ref?: Ref<HTMLDivElement>) => import("preact").JSX.Element;
 //# sourceMappingURL=index.d.ts.map

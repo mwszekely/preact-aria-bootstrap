@@ -54,17 +54,11 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
                     })] }));
         } }));
 }));
-export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress: onPressWithoutClose, children, ...props }, ref) {
-    /*const onClose = useStableCallback<typeof onPressWithoutClose>((e) => {
-        const ret = onPressWithoutClose?.(e);
-        if (ret && (typeof ret == "object") && (ret instanceof Promise)) {
-
-        }
-    })*/
+export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }, ref) {
     const imperativeHandle = useRef(null);
     return (_jsx(ProgressWithHandler, { asyncHandler: () => {
             console.assert(!!imperativeHandle.current);
-            return onPressWithoutClose?.(imperativeHandle.current.menuItemReturn.closeMenu);
+            return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu);
         }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagIndicator: "div", render: progressInfo => {
             const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
             return (_jsx(AriaMenuItem, { ref: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, disabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
