@@ -23,10 +23,10 @@ export default {
         replace({ 'process.env.NODE_ENV': JSON.stringify('development'), preventAssignment: true }),
         commonjs({ extensions, sourceMap: true, transformMixedEsModules: true }),
         resolve({ extensions, dedupe: ['preact', "preact/compat", "preact/hooks"] }),   // TODO: Why, exactly, is dedupe needed? It doesn't not make sense, but specifically. Why.
-        getBabelOutputPlugin({  // Used instead of babel because babel generates incorrect source maps for our code (but not Preact's)
+        /*getBabelOutputPlugin({  // Used instead of babel because babel generates incorrect source maps for our code (but not Preact's)
             allowAllFormats: true,                  // Needed because we output in iife for this demo
             configFile: path.resolve(".babelrc"),   // getBabelOutputPlugin doesn't use the default config file                  
-        }),
+        }),*/
         sourcemaps(),    // TODO: This is deprecated but needed for both Preact's and our own TS source maps.
     ],
 }
