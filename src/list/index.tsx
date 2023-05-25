@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
 import { Gridlist, GridlistCellInfo, GridlistChild, GridlistRow, GridlistRowInfo, ProgressWithHandler, UseGridlistRowReturnType, UseProgressWithHandlerReturnType } from "preact-aria-widgets";
-import { AsyncHandler, returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
+import { AsyncHandler, EventDetail, returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useContext, useRef } from "preact/hooks";
@@ -12,6 +12,8 @@ import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { useUpdateRenderCounter } from "../utility/render-counter.js";
 import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
+export { ListboxSingle, ListboxSingleItem, ListboxSingleItemProps, ListboxSingleProps } from "./listbox-single.js";
+
 
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /** Used to determine if left/right arrow key navigation is shown as an option */
@@ -55,7 +57,7 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
             <Gridlist<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLLabelElement>
                 selectedIndex={selectedIndex ?? null}
                 ariaPropName="aria-selected"
-                onSelectedIndexChange={onSelectedIndexChange}
+                onSelectedIndexChange={useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex))}
                 paginationMin={paginationStart}
                 paginationMax={paginationEnd}
                 staggered={staggered || false}
@@ -110,7 +112,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
         { ...props, ref: ref2 },
         {
             className: clsx(
-                infoRow.paginatedChildReturn.hideBecausePaginated? "d-none" : "",
+                infoRow.paginatedChildReturn.hideBecausePaginated ? "d-none" : "",
                 `gridlist-item`,
                 variantTheme && `list-group-item-${variantTheme}`,
                 infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "",
@@ -171,7 +173,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                     <GridlistRow<HTMLDivElement, HTMLDivElement>
                         index={index}
                         getSortValue={getSortValue ?? returnZero}
-                        disabled={disabled}
+                        unselectable={disabled}
                         noTypeahead={true}
                         getText={useCallback((e: HTMLDivElement) => { return e?.querySelector(".gridlist-item-text")?.textContent || "" }, [])}
 
@@ -221,7 +223,7 @@ const ListItemStartEnd = memo(function ListItemStartEnd({ hidden, index, childre
     return (
         <GridlistChild<HTMLDivElement>
             index={index}
-            hidden={hidden}
+            untabbable={hidden}
             focusSelf={useStableCallback(e => {
                 e.focus();
             })}

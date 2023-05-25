@@ -2,10 +2,33 @@
 .pagination {
     max-width: 100%;
     white-space: nowrap;
+    &>.page-item {
+        // This is the same padding that's used to account for the focus outline below.
+        padding-bottom: 0.25rem;
+        padding-top: 0.25rem;
+
+        // TODO: Detect RTL
+        &:first-child>button {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+        &:last-child>button {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
 }
+
 .pagination-center {
     display: inline-flex;
-    overflow-x: auto;
+    overflow-x: auto; 
+
+    // Add some padding to ensure that the focus outline is always visible,
+    // even while we have overflow hiding on.
+    // It's the same width as the box-shadow value -- is there a variable for that?
+    padding-bottom: 0.25rem;
+    padding-top: 0.25rem;
 
     &>.page-item {
 

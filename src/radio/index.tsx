@@ -35,7 +35,7 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
     // If we were listening for the individual radios' onInput events, we would do that, but
     // we're just listening for a regular ol' function.
     const [capturedValue, setCapturedValue] = useState(null as V | null);
-    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync<[TargetedRadioChangeEvent<HTMLInputElement, V>], void | Promise<void>>(
+    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync<[TargetedRadioChangeEvent<V>], void | Promise<void>>(
         (event) => { return onSelectedIndexChangeAsync?.(event[EventDetail].selectedValue!, event); },
         {
             capture: (event) => { setCapturedValue(event[EventDetail].selectedValue!); return [event]; },

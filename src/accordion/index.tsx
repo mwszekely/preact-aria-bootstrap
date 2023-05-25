@@ -12,7 +12,7 @@ export interface AccordionProps extends Partial<Pick<AriaAccordionProps<HTMLButt
 
 }
 
-export interface AccordionSectionProps extends Pick<AriaAccordionSectionProps<HTMLDivElement, HTMLDivElement, HTMLDivElement>, "open" | "index" | "hidden" | "disabled" | "bodyRole">, GlobalAttributes<HTMLDivElement, "children"> {
+export interface AccordionSectionProps extends Pick<AriaAccordionSectionProps<HTMLDivElement, HTMLDivElement, HTMLDivElement>, "open" | "index" | "untabbable" | "disabled" | "bodyRole">, GlobalAttributes<HTMLDivElement, "children"> {
   header: ComponentChildren;
 }
 
@@ -28,14 +28,14 @@ export const Accordion = memo(forwardElementRef(function Accordion({ children, .
   )
 }))
 
-export const AccordionSection = memo(forwardElementRef(function AccordionSection({ index, children, header, bodyRole, disabled, hidden, open, ...props }: AccordionSectionProps, ref: Ref<HTMLDivElement>) {
+export const AccordionSection = memo(forwardElementRef(function AccordionSection({ index, children, header, bodyRole, disabled, untabbable, open, ...props }: AccordionSectionProps, ref: Ref<HTMLDivElement>) {
   return (
     <AriaAccordionSection<HTMLDivElement, HTMLButtonElement, HTMLDivElement>
       index={index}
       tagButton="button"
       bodyRole={bodyRole}
       disabled={disabled}
-      hidden={hidden}
+      untabbable={untabbable}
       open={open}
       render={info => {
 

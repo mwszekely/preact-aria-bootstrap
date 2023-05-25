@@ -1,8 +1,8 @@
-import { render } from "preact";
-import { memo } from "preact/compat";
+import { Ref, render } from "preact";
+import { forwardRef, memo } from "preact/compat";
 import "preact/debug";
 import { useCallback, useMemo, useState } from "preact/hooks";
-import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast, useRenderCounters } from "../dist/index.js";
+import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, ListboxSingle as List, ListboxSingleItem as ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast, useRenderCounters } from "../dist/index.js";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
 import * as Radio from "./demos/radio";
@@ -20,11 +20,12 @@ options.event = (e, ...args) => {
 }*/
 
 function ListDemo() {
-    let [count, setCount] = useState(1000 as number | null);
+    let [count, setCount] = useState(100 as number | null);
     const [paginationWindow, setPaginationWindow] = useState(10 as number | null);
     const [selectedIndex, setSelectedIndex] = useState(null as null | number);
     count ??= 0;
     return (<div>
+        <strong>(The gridlist demo is currently down for maintenance &mdash; please enjoy this listbox demo instead.)</strong>
         <TextField type="number" value={count} onValueChange={setCount} label="# of children" labelPosition="floating" />
         <TextField type="number" value={paginationWindow} onValueChange={setPaginationWindow} label="Pagination window" labelPosition="floating" />
         <div>{selectedIndex}</div>
@@ -47,9 +48,9 @@ const ListDemoContents = memo(({ count }: { count: number }) => {
     )
 })
 
-const ListDemoMenu = memo(() => {
+const ListDemoMenu = memo(forwardRef((props, ref: Ref<HTMLButtonElement>) => {
     return (
-        <Menu anchor={<Button variantSize="sm" variantFill="fill" variantTheme="light" onPress={null}><BootstrapIcon icon="menu-app" label="Open dropdown menu" /></Button>}>
+        <Menu ref={ref} {...props} anchor={<Button variantSize="sm" variantFill="fill" variantTheme="light" onPress={null}><BootstrapIcon icon="menu-app" label="Open dropdown menu" /></Button>}>
             {Array.from(function* () {
                 for (let i = 0; i < 10; ++i) {
                     yield (
@@ -65,15 +66,18 @@ const ListDemoMenu = memo(() => {
             }())}
         </Menu>
     )
-})
+}))
 
-const ListDemoButton = memo(() => {
+const ListDemoButton = memo(forwardRef((props, ref: Ref<HTMLButtonElement>) => {
     return (
-        <ButtonAction variantSize="sm" variantFill="fill" variantTheme="light" onPress={() => alert("Delete button clicked")}><BootstrapIcon icon="trash-fill" label="Delete" /></ButtonAction>
+        <ButtonAction ref={ref} {...props} variantSize="sm" variantFill="fill" variantTheme="light" onPress={() => alert("Delete button clicked")}><BootstrapIcon icon="trash-fill" label="Delete" /></ButtonAction>
     )
-})
+}))
 
 const ListDemoItem = memo(({ i }: { i: number }) => {
+    return (
+        <ListItem index={i}>List item #{i}</ListItem>
+    )
     /* const [visible, setVisible] = useState(false);
      useTimeout({
          callback: () => setVisible(true),
@@ -81,7 +85,7 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
      });
      if (!visible)
          return null;*/
-    return (
+    /*return (
         <ListItem
             index={i}
             onPress={useCallback(async () => { return new Promise<void>(resolve => setTimeout(resolve, 2000)) }, [])}
@@ -90,7 +94,7 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
             iconEnd={(i & 0b10) ? <ListDemoButton /> : null}>
             List item #{i}
         </ListItem>
-    );
+    );*/
 })
 
 function MenuDemo() {
@@ -174,7 +178,7 @@ const RandomWords = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 
 
 function TableDemo() {
-    let [count, setCount] = useState(1000 as number | null);
+    let [count, setCount] = useState(100 as number | null);
     const [paginationWindow, setPaginationWindow] = useState(10 as number | null);
     count ??= 0;
     return (

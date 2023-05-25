@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { createContext, h, Ref } from "preact";
 import { Toolbar, ToolbarProps, useLabelSynthetic, UseToolbarParameters, UseToolbarReturnType, UseToolbarSubInfo } from "preact-aria-widgets";
-import { useAsync, useMergedProps, useState } from "preact-prop-helpers";
+import { EventDetail, useAsync, useMergedProps, useState } from "preact-prop-helpers";
 import { useMemo, useRef } from "preact/hooks";
 import { ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DisabledContext } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -49,9 +49,9 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     type OSSI = UseToolbarParameters<HTMLSpanElement, HTMLButtonElement, UseToolbarSubInfo<HTMLButtonElement>>["toolbarParameters"]["onSelectedIndexChange"];
     const [capturedIndex, setCapturedIndex] = useState(null as number | null);
     const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync<Parameters<NonNullable<OSSI>>, void | Promise<void>>(
-        (e) => { return onSelectedIndexChangeAsync?.(e); },
+        (e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); },
         {
-            capture: (e, r) => { setCapturedIndex(e); return [e, r]; }
+            capture: (e) => { setCapturedIndex(e[EventDetail].selectedIndex); return [e]; }
         });
 
     const pendingIndex = (pending ? capturedIndex : null);

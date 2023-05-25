@@ -13,7 +13,7 @@ import { LabelledProps } from "../utility/types.js";
 export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
     inline?: boolean;
     checked: boolean | "mixed";
-    onValueChange(checked: boolean, event: TargetedCheckboxChangeEvent<HTMLInputElement>): void | Promise<void>;
+    onValueChange(checked: boolean, event: TargetedCheckboxChangeEvent): void | Promise<void>;
     loadingLabel?: string;
     disabled?: boolean;
 
@@ -43,7 +43,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
     const w = useContext(WithinInputGroup);
 
     return (
-        <ProgressWithHandler<TargetedCheckboxChangeEvent<HTMLInputElement>, boolean, HTMLSpanElement, HTMLLabelElement>
+        <ProgressWithHandler<TargetedCheckboxChangeEvent, boolean, HTMLSpanElement, HTMLLabelElement>
             ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
             forciblyPending={forciblyPending}
             asyncHandler={(next, event) => {

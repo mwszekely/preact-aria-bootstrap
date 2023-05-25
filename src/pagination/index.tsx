@@ -1,6 +1,6 @@
 import { ComponentChildren, Ref } from "preact";
 import { Toolbar, ToolbarChild } from "preact-aria-widgets";
-import { useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
+import { EventDetail, useMergedProps, usePress, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import { BootstrapIcon } from "../icon/index.js";
@@ -19,20 +19,20 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
     }, [page, windowSize])
 
     return (
-        <Toolbar<HTMLElement, HTMLButtonElement, HTMLLabelElement>
+        <Toolbar<HTMLUListElement, HTMLButtonElement, HTMLLabelElement>
             ariaLabel={labelPosition == "hidden" ? label : null}
             ariaPropName="aria-current-page"
             selectionMode="focus"
             selectedIndex={page}
-            onSelectedIndexChange={useCallback((page: number | null) => { setPage(page || 0); }, [])}
+            onSelectedIndexChange={useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, [])}
             orientation="horizontal"
             render={info => {
                 const labelJsx = <label {...info.propsLabel}>{label}</label>
                 return (
                     <>
                         {labelPosition == "before" && labelJsx}
-                        <nav {...info.propsToolbar}>
-                            <ul class="pagination">
+                        <nav aria-label={labelPosition == 'hidden'? label : undefined}>
+                            <ul class="pagination" {...info.propsToolbar}>
                                 <PaginationChildren childCount={childCount} windowSize={windowSize} />
                             </ul>
                         </nav>
@@ -87,7 +87,7 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
 
             render={info => {
                 const { refElementReturn, propsStable } = useRefElement<HTMLButtonElement>({ refElementParameters: {} })
-                const { pressReturn, props: propsPress } = usePress<HTMLButtonElement>({ pressParameters: { onPressSync: null, focusSelf: useCallback((e) => { e.focus(); }, []), ...info.pressParameters }, refElementReturn })
+                const { pressReturn, props: propsPress } = usePress<HTMLButtonElement>({ pressParameters: { onPressSync: null, focusSelf: useCallback((e) => { e.focus(); }, []) }, refElementReturn })
                 return (
                     <li class="page-item">
                         <button {...useMergedProps(info.props, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {})}>{children}</button>

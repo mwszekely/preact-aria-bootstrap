@@ -1,6 +1,6 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-runtime";
 import { Toolbar, ToolbarChild } from "preact-aria-widgets";
-import { useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
+import { EventDetail, useMergedProps, usePress, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import { BootstrapIcon } from "../icon/index.js";
@@ -14,7 +14,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
         onChange?.(start, end);
         return () => onChange(null, null);
     }, [page, windowSize]);
-    return (_jsx(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "focus", selectedIndex: page, onSelectedIndexChange: useCallback((page) => { setPage(page || 0); }, []), orientation: "horizontal", render: info => {
+    return (_jsx(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "focus", selectedIndex: page, onSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
             const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
             return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx("nav", { ...info.propsToolbar, children: _jsx("ul", { class: "pagination", children: _jsx(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }), labelPosition == "after" && labelJsx] }));
         } }));
@@ -43,7 +43,7 @@ const PaginationButtonLast = memo(forwardElementRef(({ index, onFocus }, ref) =>
 const PaginationButton = memo(forwardElementRef(function PaginationButton({ index, children, onFocus }, ref) {
     return (_jsx(ToolbarChild, { index: index, disabledProp: "disabled", getSortValue: useStableGetter(index), render: info => {
             const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
-            const { pressReturn, props: propsPress } = usePress({ pressParameters: { onPressSync: null, focusSelf: useCallback((e) => { e.focus(); }, []), ...info.pressParameters }, refElementReturn });
+            const { pressReturn, props: propsPress } = usePress({ pressParameters: { onPressSync: null, focusSelf: useCallback((e) => { e.focus(); }, []) }, refElementReturn });
             return (_jsx("li", { class: "page-item", children: _jsx("button", { ...useMergedProps(info.props, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {}), children: children }) }));
         } }));
 }));

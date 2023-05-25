@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { ComponentChildren, Ref, VNode } from "preact";
 import { defaultRenderPortal, Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenubarSubInfo, UseMenuItemReturnType, UseMenuReturnType } from "preact-aria-widgets";
-import { returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
+import { EventDetail, returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { Fade, ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useImperativeHandle, useRef } from "preact/hooks";
@@ -64,7 +64,7 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
             selectionMode="activation"
             ariaPropName="aria-selected"
             selectedIndex={selectedIndex}
-            onSelectedIndexChange={onSelectedIndexChange}
+            onSelectedIndexChange={useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex))}
 
             render={(info) => {
                 useImperativeHandle(imperativeHandle!, () => info);
@@ -143,7 +143,7 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                         ref={imperativeHandle}
                         index={index}
                         getSortValue={getSortValue ?? returnZero}
-                        disabled={disabled || showSpinner}
+                        unselectable={disabled || showSpinner}
                         onPress={progressInfo.asyncHandlerReturn.syncHandler}
                         render={menuInfo => {
 

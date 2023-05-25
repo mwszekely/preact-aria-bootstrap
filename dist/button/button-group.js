@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-ru
 import { clsx } from "clsx";
 import { createContext } from "preact";
 import { Toolbar, useLabelSynthetic } from "preact-aria-widgets";
-import { useAsync, useMergedProps, useState } from "preact-prop-helpers";
+import { EventDetail, useAsync, useMergedProps, useState } from "preact-prop-helpers";
 import { useMemo, useRef } from "preact/hooks";
 import { DefaultButtonSize, DefaultButtonTheme, DisabledContext } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -11,8 +11,8 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     labelPosition ??= "before";
     const imperativeHandle = useRef(null);
     const [capturedIndex, setCapturedIndex] = useState(null);
-    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((e) => { return onSelectedIndexChangeAsync?.(e); }, {
-        capture: (e, r) => { setCapturedIndex(e); return [e, r]; }
+    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); }, {
+        capture: (e) => { setCapturedIndex(e[EventDetail].selectedIndex); return [e]; }
     });
     const pendingIndex = (pending ? capturedIndex : null);
     const classBase = (separated ? "btn-toolbar" : "btn-group");

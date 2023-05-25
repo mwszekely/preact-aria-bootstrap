@@ -15,7 +15,7 @@ export function CheckboxGroup({ orientation, children, label, labelPosition, deb
 
             render={info => {
                 return (
-                    <span {...info.propsStable}>
+                    <span {...info.props}>
                         <CheckboxGroupParent label={label} labelPosition={labelPosition} debounce={debounce} loadingLabel={loadingLabel} throttle={throttle} disabled={disabled} inline={inline} getSortValue={getSortValue} />
                         {children}
                     </span>
@@ -66,7 +66,7 @@ function CheckboxGroupParent({ label, labelPosition, debounce, loadingLabel, thr
 
 export interface CheckboxGroupChildProps extends OmitStrong<LabelledProps<CheckboxProps, "tooltip">, "imperativeHandle"> {
     getSortValue?(): unknown;
-    hidden?: boolean;
+    untabbable?: boolean;
 
     /**
      * This is 0-indexed (and auto-adjusted to be 1-indexed, aligned with the parent *technically* being the 0th index)
@@ -74,7 +74,7 @@ export interface CheckboxGroupChildProps extends OmitStrong<LabelledProps<Checkb
     index: number;
 }
 
-export function CheckboxGroupChild({ checked, label, labelPosition, onValueChange, debounce, throttle, disabled, inline, loadingLabel, tristate, getSortValue, hidden, index, ...props }: CheckboxGroupChildProps) {
+export function CheckboxGroupChild({ checked, label, labelPosition, onValueChange, debounce, throttle, disabled, inline, loadingLabel, tristate, getSortValue, untabbable, index, ...props }: CheckboxGroupChildProps) {
     const imperativeHandle = useRef<UseCheckboxReturnType<HTMLInputElement, HTMLLabelElement>>(null);
     ++index;
     const [pendingFromParent, setPendingFromParent] = useState(false);
@@ -92,7 +92,7 @@ export function CheckboxGroupChild({ checked, label, labelPosition, onValueChang
             onChangeFromParent={useStableCallback(async (c, e) => {
                 try {
                     setPendingFromParent(true);
-                    await onValueChange?.(c as boolean, e as TargetedCheckboxChangeEvent<HTMLInputElement>);
+                    await onValueChange?.(c as boolean, e as TargetedCheckboxChangeEvent);
                 }
                 catch (ex) {
                     throw ex;
@@ -101,7 +101,7 @@ export function CheckboxGroupChild({ checked, label, labelPosition, onValueChang
                     setPendingFromParent(false);
                 }
             })}
-            hidden={hidden}
+            untabbable={untabbable}
             render={info => {
                 return (
                     <Checkbox

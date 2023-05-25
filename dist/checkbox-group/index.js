@@ -5,7 +5,7 @@ import { useRef, useState } from "preact/hooks";
 import { Checkbox } from "../checkbox/index.js";
 export function CheckboxGroup({ orientation, children, label, labelPosition, debounce, loadingLabel, throttle, disabled, inline, getSortValue }) {
     return (_jsx(AriaCheckboxGroup, { orientation: orientation, render: info => {
-            return (_jsxs("span", { ...info.propsStable, children: [_jsx(CheckboxGroupParent, { label: label, labelPosition: labelPosition, debounce: debounce, loadingLabel: loadingLabel, throttle: throttle, disabled: disabled, inline: inline, getSortValue: getSortValue }), children] }));
+            return (_jsxs("span", { ...info.props, children: [_jsx(CheckboxGroupParent, { label: label, labelPosition: labelPosition, debounce: debounce, loadingLabel: loadingLabel, throttle: throttle, disabled: disabled, inline: inline, getSortValue: getSortValue }), children] }));
         } }));
 }
 function CheckboxGroupParent({ label, labelPosition, debounce, loadingLabel, throttle, disabled, inline, getSortValue, ...props }) {
@@ -17,7 +17,7 @@ function CheckboxGroupParent({ label, labelPosition, debounce, loadingLabel, thr
             return (_jsx(Checkbox, { labelPosition: labelPosition, label: label, throttle: throttle, disabled: disabled, inline: true, tristate: true, debounce: debounce, loadingLabel: loadingLabel, imperativeHandle: imperativeHandle, checked: info.checkboxGroupParentReturn.checked, onValueChange: useStableCallback(async (c, e) => { await info.checkboxGroupParentReturn.onParentCheckedChange(e); }), propsInput: useMergedProps(props, info.props) }));
         } }));
 }
-export function CheckboxGroupChild({ checked, label, labelPosition, onValueChange, debounce, throttle, disabled, inline, loadingLabel, tristate, getSortValue, hidden, index, ...props }) {
+export function CheckboxGroupChild({ checked, label, labelPosition, onValueChange, debounce, throttle, disabled, inline, loadingLabel, tristate, getSortValue, untabbable, index, ...props }) {
     const imperativeHandle = useRef(null);
     ++index;
     const [pendingFromParent, setPendingFromParent] = useState(false);
@@ -35,7 +35,7 @@ export function CheckboxGroupChild({ checked, label, labelPosition, onValueChang
             finally {
                 setPendingFromParent(false);
             }
-        }), hidden: hidden, render: info => {
+        }), untabbable: untabbable, render: info => {
             return (_jsx(Checkbox, { checked: checked, label: label, inline: inline, loadingLabel: loadingLabel, tristate: tristate, debounce: debounce, throttle: throttle, disabled: pendingFromParent || disabled, labelPosition: labelPosition, imperativeHandle: imperativeHandle, onValueChange: useStableCallback(async (checked, event) => {
                     await onValueChange?.(checked, event);
                     info.checkboxGroupChild.onChildCheckedChange(checked);

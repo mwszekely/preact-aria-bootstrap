@@ -9,12 +9,12 @@ interface CheckboxGroupParentProps extends OmitStrong<LabelledProps<CheckboxProp
 }
 export interface CheckboxGroupChildProps extends OmitStrong<LabelledProps<CheckboxProps, "tooltip">, "imperativeHandle"> {
     getSortValue?(): unknown;
-    hidden?: boolean;
+    untabbable?: boolean;
     /**
      * This is 0-indexed (and auto-adjusted to be 1-indexed, aligned with the parent *technically* being the 0th index)
      */
     index: number;
 }
-export declare function CheckboxGroupChild({ checked, label, labelPosition, onValueChange, debounce, throttle, disabled, inline, loadingLabel, tristate, getSortValue, hidden, index, ...props }: CheckboxGroupChildProps): import("preact").JSX.Element;
+export declare function CheckboxGroupChild({ checked, label, labelPosition, onValueChange, debounce, throttle, disabled, inline, loadingLabel, tristate, getSortValue, untabbable, index, ...props }: CheckboxGroupChildProps): import("preact").JSX.Element;
 export {};
 //# sourceMappingURL=index.d.ts.map
