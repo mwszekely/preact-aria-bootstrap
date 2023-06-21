@@ -1872,7 +1872,7 @@
       }
   }
   function getBuildMode() {
-      return cached ??= (getBuildModeUnmemoized());
+      return cached ||= (getBuildModeUnmemoized());
   }
 
   // TODO: This shouldn't be in every build, I don't think it's in core-js? I think?
@@ -2401,11 +2401,35 @@
       };
   }
 
+  function generateStack() {
+      if (getBuildMode() === 'development') {
+          try {
+              throw new Error();
+          }
+          catch (e) {
+              return e.stack;
+          }
+      }
+      return undefined;
+  }
+  /**
+   * @returns A function that retrieves the stack at the time this hook was called (in development mode only).
+   */
+  function useStack() {
+      const stack = F$2(generateStack, []);
+      const getStack = T$2(() => stack, []);
+      return getStack;
+  }
+
   /**
    * If you want a single place to put a debugger for tracking focus,
    * here:
    */
   function focus(e) {
+      if (getBuildMode() === 'development' && window.LOG_FOCUS_CHANGES === true) {
+          console.log(`Focus changed to ${(e?.tagName || "").toLowerCase().padStart(6)}:`, e);
+          console.log(generateStack());
+      }
       e?.focus?.();
   }
 
@@ -2900,25 +2924,41 @@
    * Slightly enhanced version of `useState` that includes a getter that remains constant
    * (i.e. you can use it in `useEffect` and friends without it being a dependency).
    *
+   * If `getBuildMode()` returns `"development"`, then any calls to `setState` will also
+   * take the stack at the time the hook was called and save it to `window._setState_stack`.
+   * Useful if you want to trace whose state is being updated.
+   *
    * @param initialState
    * @returns
    */
   function useState(initialState) {
+      const getStack = useStack();
       // We keep both, but overrride the `setState` functionality
       const [state, setStateP] = h$2(initialState);
       const ref = _$1(state);
       // Hijack the normal setter function 
       // to also set our ref to the new value
       const setState = T$2(value => {
+          if (getBuildMode() === 'development') {
+              window._setState_stack = getStack();
+          }
           if (typeof value === "function") {
               const callback = value;
               setStateP(prevValue => {
                   const nextValue = callback(prevValue);
+                  if (ref.current !== nextValue) {
+                      // put a breakpoint here if you want
+                      ref.current = nextValue;
+                  }
                   ref.current = nextValue;
                   return nextValue;
               });
           }
           else {
+              if (ref.current !== value) {
+                  // put a breakpoint here if you want
+                  ref.current = value;
+              }
               ref.current = value;
               setStateP(value);
           }
@@ -2956,7 +2996,9 @@
    * And just as well! Children should be allowed at the root,
    * regardless of if it's the whole app or just a given component.
    */
-  function useRovingTabIndex({ managedChildrenReturn: { getChildren }, rovingTabIndexParameters: { untabbable, initiallyTabbedIndex, onTabbableIndexChange }, refElementReturn: { getElement }, ...void1 }) {
+  function useRovingTabIndex({ managedChildrenReturn: { getChildren }, rovingTabIndexParameters: { focusSelfParent: focusSelfParentUnstable, untabbable, untabbableBehavior, initiallyTabbedIndex, onTabbableIndexChange }, refElementReturn: { getElement }, ...void1 }) {
+      const focusSelfParent = useStableCallback(focusSelfParentUnstable);
+      untabbableBehavior ||= "focus-parent";
       const getInitiallyTabbedIndex = useStableGetter(initiallyTabbedIndex);
       const getUntabbable = useStableGetter(untabbable);
       // Override the actual setter to include some extra logic related to avoiding hidden children, 
@@ -2981,8 +3023,8 @@
                   //
                   // Also TODO: Should these take fromUserInteraction into consideration?
                   // Do we always move focus when we become untabbable?
-                  if (!parentElement.contains(document.activeElement))
-                      focus(getElement());
+                  if (!parentElement.contains(document.activeElement) && untabbableBehavior != 'leave-child-focused')
+                      focusSelfParent(getElement());
                   return null;
               }
               // If the requested index is hidden, then there's no need to focus any elements or run any extra logic.
@@ -2991,8 +3033,8 @@
                   // TODO: Find the next/prev element and focus that instead,
                   // doable with the `tabbable` library, but it doesn't have a next() function or anything,
                   // so that needs to be manually done with a TreeWalker or something?
-                  if (!parentElement.contains(document.activeElement))
-                      focus(getElement());
+                  if (!parentElement.contains(document.activeElement) && untabbableBehavior != 'leave-child-focused')
+                      focusSelfParent(getElement());
                   return null;
               }
               // If we've made a change, and it was because the user clicked on it or something,
@@ -3051,8 +3093,9 @@
               index ??= getInitiallyTabbedIndex() ?? (children.getHighestIndex() >= 0 ? 0 : null);
           }
           if (untabbable) {
-              if (document.activeElement != getElement())
-                  focus(getElement());
+              if (document.activeElement != getElement() && untabbableBehavior != 'leave-child-focused') {
+                  focusSelfParent(getElement());
+              }
           }
           else if (!untabbable && index != null) {
               const element = children.getAt(index)?.getElement();
@@ -3065,7 +3108,9 @@
           setTabbableIndex,
           parentFocusSelf: focusSelf,
           getInitiallyTabbedIndex: T$2(() => { return initiallyTabbedIndex ?? (untabbable ? null : 0); }, []),
-          reevaluateClosestFit
+          reevaluateClosestFit,
+          untabbable,
+          untabbableBehavior
       });
       return {
           managedChildrenParameters: { onChildrenMountChange: reevaluateClosestFit, },
@@ -3081,7 +3126,7 @@
           }
       };
   }
-  function useRovingTabIndexChild({ info: { index, untabbable: iAmUntabbable, ...void2 }, context: { rovingTabIndexContext: { reevaluateClosestFit, setTabbableIndex, getInitiallyTabbedIndex, parentFocusSelf } }, rovingTabIndexParameters: { untabbable: parentIsUntabbable }, ...void3 }) {
+  function useRovingTabIndexChild({ info: { index, untabbable: iAmUntabbable, ...void2 }, context: { rovingTabIndexContext: { untabbable: parentIsUntabbable, untabbableBehavior, reevaluateClosestFit, setTabbableIndex, getInitiallyTabbedIndex, parentFocusSelf } }, ...void3 }) {
       const [tabbable, setTabbable, getTabbable] = useState(getInitiallyTabbedIndex() === index);
       p$2(() => {
           reevaluateClosestFit();
@@ -3090,7 +3135,7 @@
           hasCurrentFocusParameters: {
               onCurrentFocusedInnerChanged: useStableCallback((focused, _prevFocused, e) => {
                   if (focused) {
-                      if (!parentIsUntabbable && !iAmUntabbable)
+                      if ((!parentIsUntabbable && !iAmUntabbable) || untabbableBehavior != "focus-parent")
                           setTabbableIndex(index, e, false);
                       else
                           parentFocusSelf();
@@ -3400,8 +3445,8 @@
           propsParent: propsRTI
       };
   }
-  function useListNavigationChild({ info, context, refElementReturn, textContentParameters, rovingTabIndexParameters, ...void2 }) {
-      const { props, ...rticr } = useRovingTabIndexChild({ rovingTabIndexParameters, context, info });
+  function useListNavigationChild({ info, context, refElementReturn, textContentParameters, ...void2 }) {
+      const { props, ...rticr } = useRovingTabIndexChild({ context, info });
       const { ...tncr } = useTypeaheadNavigationChild({ refElementReturn, textContentParameters, context, info });
       return {
           props,
@@ -3431,7 +3476,7 @@
           typeaheadNavigationParameters
       });
       const gridNavigationRowContext = useMemoObject({
-          rowIsUntabbableBecauseOfGrid: !!untabbable,
+          //rowIsUntabbableBecauseOfGrid: !!untabbable,
           setTabbableRow: rovingTabIndexReturn.setTabbableIndex,
           getCurrentTabbableColumn,
           setCurrentTabbableColumn
@@ -3450,7 +3495,7 @@
           typeaheadNavigationReturn
       };
   }
-  function useGridNavigationRow({ context: { rovingTabIndexContext: contextRTI, typeaheadNavigationContext: contextTN, gridNavigationRowContext: { setTabbableRow, getCurrentTabbableColumn, setCurrentTabbableColumn, rowIsUntabbableBecauseOfGrid } }, linearNavigationParameters, rovingTabIndexParameters: { untabbable: rowIsUntabbableAndSoAreCells, initiallyTabbedIndex, onTabbableIndexChange, ...void4 }, info: managedChildParameters, managedChildrenReturn, refElementReturn, textContentParameters, typeaheadNavigationParameters, ...void1 }) {
+  function useGridNavigationRow({ context: { rovingTabIndexContext: contextRTI, typeaheadNavigationContext: contextTN, gridNavigationRowContext: { setTabbableRow, getCurrentTabbableColumn, setCurrentTabbableColumn } }, linearNavigationParameters, rovingTabIndexParameters: { untabbable: rowIsUntabbableAndSoAreCells, initiallyTabbedIndex, onTabbableIndexChange, ...void4 }, info: managedChildParameters, managedChildrenReturn, refElementReturn, textContentParameters, typeaheadNavigationParameters, ...void1 }) {
       const { getChildren } = managedChildrenReturn;
       const getIndex = useStableCallback(() => { return managedChildParameters.index; });
       const whenThisRowIsFocused = useStableCallback((e) => {
@@ -3474,11 +3519,18 @@
           }
       }, []);
       const focusSelf = whenThisRowIsFocused;
-      const { hasCurrentFocusParameters, pressParameters, props: propsLNC, rovingTabIndexChildReturn, textContentReturn, info, ...void2 } = useListNavigationChild({ info: managedChildParameters, refElementReturn, textContentParameters, context: { rovingTabIndexContext: contextRTI, typeaheadNavigationContext: contextTN }, rovingTabIndexParameters: { untabbable: rowIsUntabbableBecauseOfGrid } });
+      const { hasCurrentFocusParameters, pressParameters, props: propsLNC, rovingTabIndexChildReturn, textContentReturn, info, ...void2 } = useListNavigationChild({ info: managedChildParameters, refElementReturn, textContentParameters, context: { rovingTabIndexContext: contextRTI, typeaheadNavigationContext: contextTN } });
       const allChildCellsAreUntabbable = !rovingTabIndexChildReturn.tabbable;
-      const { linearNavigationReturn, managedChildrenParameters, propsStableParentOrChild: propsLN, propsParent: propsLN2, rovingTabIndexReturn, typeaheadNavigationReturn, context: { rovingTabIndexContext: rtiContext, typeaheadNavigationContext: tnContext } } = useListNavigation({ managedChildrenReturn, refElementReturn, typeaheadNavigationParameters, rovingTabIndexParameters: { untabbable: allChildCellsAreUntabbable || rowIsUntabbableAndSoAreCells, initiallyTabbedIndex, onTabbableIndexChange }, linearNavigationParameters: { arrowKeyDirection: "horizontal", ...linearNavigationParameters } });
+      const { linearNavigationReturn, managedChildrenParameters, propsStableParentOrChild: propsLN, propsParent: propsLN2, rovingTabIndexReturn, typeaheadNavigationReturn, context: { rovingTabIndexContext: rtiContext, typeaheadNavigationContext: tnContext } } = useListNavigation({
+          managedChildrenReturn,
+          refElementReturn,
+          typeaheadNavigationParameters,
+          rovingTabIndexParameters: { untabbableBehavior: "leave-child-focused", focusSelfParent: whenThisRowIsFocused, untabbable: allChildCellsAreUntabbable || rowIsUntabbableAndSoAreCells, initiallyTabbedIndex, onTabbableIndexChange },
+          linearNavigationParameters: { arrowKeyDirection: "horizontal", ...linearNavigationParameters }
+      });
       const { setTabbableIndex } = rovingTabIndexReturn;
       const gridNavigationCellContext = useMemoObject({
+          allChildCellsAreUntabbable,
           setTabbableRow,
           getRowIndex: getIndex,
           getCurrentTabbableColumn,
@@ -3512,14 +3564,13 @@
           gridNavigationRowParameters: { focusSelf, setTabbableColumnIndex: setTabbableIndex },
       };
   }
-  function useGridNavigationCell({ context: { gridNavigationCellContext: { getRowIndex, setTabbableRow, getCurrentTabbableColumn: _getCurrentColumn, setCurrentTabbableColumn, setTabbableCell }, rovingTabIndexContext, typeaheadNavigationContext }, info, refElementReturn, textContentParameters, gridNavigationCellParameters: { colSpan }, rovingTabIndexParameters, ...void1 }) {
+  function useGridNavigationCell({ context: { gridNavigationCellContext: { getRowIndex, setTabbableRow, getCurrentTabbableColumn: _getCurrentColumn, setCurrentTabbableColumn, setTabbableCell }, rovingTabIndexContext, typeaheadNavigationContext }, info, refElementReturn, textContentParameters, gridNavigationCellParameters: { colSpan }, ...void1 }) {
       const { index } = info;
       const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1, ...void3 }, rovingTabIndexChildReturn, textContentReturn, pressParameters, props, info: infoLs, ...void2 } = useListNavigationChild({
           info,
           context: { rovingTabIndexContext, typeaheadNavigationContext },
           textContentParameters,
           refElementReturn,
-          rovingTabIndexParameters
       });
       return {
           info: infoLs,
@@ -3593,6 +3644,8 @@
               singleSelectionContext: useMemoObject({
                   getSelectedIndex,
                   onSelectedIndexChange: onSelectedIndexChange,
+                  ariaPropName,
+                  selectionMode
               }),
           }),
           childrenHaveFocusParameters: {
@@ -3607,7 +3660,7 @@
       };
   }
   function useSingleSelectionChild(args) {
-      const { context: { singleSelectionContext: { getSelectedIndex, onSelectedIndexChange } }, info: { index, unselectable }, singleSelectionParameters: { ariaPropName, selectionMode }, } = args;
+      const { context: { singleSelectionContext: { getSelectedIndex, onSelectedIndexChange, ariaPropName, selectionMode } }, info: { index, unselectable }, } = args;
       useEnsureStability("useSingleSelectionChild", getSelectedIndex, onSelectedIndexChange);
       const getUnselectable = useStableGetter(unselectable);
       const [localSelected, setLocalSelected, getLocalSelected] = useState(getSelectedIndex() == index);
@@ -3688,8 +3741,8 @@
           typeaheadNavigationReturn
       };
   }
-  function useGridNavigationSingleSelectionRow({ info: mcp1, linearNavigationParameters, managedChildrenReturn, refElementReturn, rovingTabIndexParameters, textContentParameters, typeaheadNavigationParameters, context: { gridNavigationRowContext, rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext }, singleSelectionParameters, ...void1 }) {
-      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1 }, info: mcp2, props: propsSS, singleSelectionChildReturn, ...void2 } = useSingleSelectionChild({ info: mcp1, context: { singleSelectionContext }, singleSelectionParameters });
+  function useGridNavigationSingleSelectionRow({ info: mcp1, linearNavigationParameters, managedChildrenReturn, refElementReturn, rovingTabIndexParameters, textContentParameters, typeaheadNavigationParameters, context: { gridNavigationRowContext, rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext }, ...void1 }) {
+      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1 }, info: mcp2, props: propsSS, singleSelectionChildReturn, ...void2 } = useSingleSelectionChild({ info: mcp1, context: { singleSelectionContext } });
       const { context, gridNavigationRowParameters, hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic2 }, linearNavigationReturn, managedChildrenParameters, pressParameters: { excludeSpace }, props: propsGN, rovingTabIndexChildReturn, rovingTabIndexReturn, textContentReturn, typeaheadNavigationReturn, info: mcp3, ...void3 } = useGridNavigationRow({ context: { gridNavigationRowContext, rovingTabIndexContext, typeaheadNavigationContext }, linearNavigationParameters, info: mcp1, managedChildrenReturn, refElementReturn, rovingTabIndexParameters, textContentParameters, typeaheadNavigationParameters });
       return {
           context,
@@ -3906,18 +3959,16 @@
           propsStableParentOrChild
       };
   }
-  function useListNavigationSingleSelectionChild({ info, context, refElementReturn, textContentParameters, rovingTabIndexParameters, singleSelectionParameters, ...void1 }) {
+  function useListNavigationSingleSelectionChild({ info, context, refElementReturn, textContentParameters, ...void1 }) {
       const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic2, ...void3 }, info: infoSS, singleSelectionChildReturn, props: propsSS, ...void9 } = useSingleSelectionChild({
           info,
           context,
-          singleSelectionParameters
       });
       const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1, ...void6 }, pressParameters, rovingTabIndexChildReturn, textContentReturn, props: propsLN, info: infoLN, ...void8 } = useListNavigationChild({
           info,
           context,
           refElementReturn,
           textContentParameters,
-          rovingTabIndexParameters
       });
       return {
           hasCurrentFocusParameters: {
@@ -5907,23 +5958,30 @@
           for (let i = 0; i <= childMax; ++i) {
               const visible = (i >= (paginationMin ?? -Infinity) && i < (paginationMax ?? Infinity));
               getChildren().getAt(indexDemangler(i))?.setPaginationVisible(visible);
-              if (visible)
+              if (visible && (paginationMax != null || paginationMin != null))
                   getChildren().getAt(indexDemangler(i))?.setChildCountIfPaginated(getChildren().getHighestIndex() + 1);
           }
       }, [ /* Must be empty */]);
-      y$2(() => {
+      p$2(() => {
+          // At this point, the children have not yet updated themselves to match the pagination.
+          // We need to tell them to update, but also handle where the focus is.
+          // If a current list item is focused, then we need to move focus to a paginated one
+          // but we can't do it until they all re-render...
+          // TODO: Something better than setTimeout for this, please...
           let tabbableIndex = getTabbableIndex();
           if (tabbableIndex != null) {
-              let shouldFocus = getElement()?.contains(document.activeElement) || document.activeElement == null || (document.activeElement === document.body);
-              if (paginationMin != null && tabbableIndex < paginationMin) {
-                  setTabbableIndex(paginationMin, undefined, shouldFocus); // TODO: This isn't a user interaction, but we need to ensure the old element doesn't remain focused, yeesh.
-              }
-              else if (paginationMax != null && tabbableIndex >= paginationMax) {
-                  let next = paginationMax - 1;
-                  if (next == -1)
-                      next = null;
-                  setTabbableIndex(next, undefined, shouldFocus); // TODO: This isn't a user interaction, but we need to ensure the old element doesn't remain focused, yeesh.
-              }
+              let shouldFocus = getElement()?.contains(document.activeElement) || false;
+              setTimeout(() => {
+                  if (paginationMin != null && tabbableIndex < paginationMin) {
+                      setTabbableIndex(paginationMin, undefined, shouldFocus); // TODO: This isn't a user interaction, but we need to ensure the old element doesn't remain focused, yeesh.
+                  }
+                  else if (paginationMax != null && tabbableIndex >= paginationMax) {
+                      let next = paginationMax - 1;
+                      if (next == -1)
+                          next = null;
+                      setTabbableIndex(next, undefined, shouldFocus); // TODO: This isn't a user interaction, but we need to ensure the old element doesn't remain focused, yeesh.
+                  }
+              }, 1);
           }
           refreshPagination(paginationMin, paginationMax);
           lastPagination.current.paginationMax = paginationMax ?? null;
@@ -6013,7 +6071,7 @@
           }
       }, [ /* Must be empty */]), returnNull);
       const [getDisplayedStaggerIndex, setDisplayedStaggerIndex] = usePassiveState(T$2((newIndex, prevIndex) => {
-          if (newIndex == null) {
+          if (newIndex == null || !s.current) {
               return;
           }
           setCurrentlyStaggering(newIndex < (getTargetStaggerIndex() ?? 0));
@@ -6155,7 +6213,7 @@
       };
   }
 
-  function useCompleteGridNavigation({ gridNavigationParameters, linearNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, typeaheadNavigationParameters, sortableChildrenParameters, rearrangeableChildrenParameters, paginatedChildrenParameters, staggeredChildrenParameters }) {
+  function useCompleteGridNavigation({ gridNavigationParameters, linearNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, typeaheadNavigationParameters, sortableChildrenParameters, rearrangeableChildrenParameters, paginatedChildrenParameters, staggeredChildrenParameters, ...void1 }) {
       const getChildren = T$2(() => managedChildrenReturn.getChildren(), []);
       const getHighestChildIndex = T$2(() => getChildren().getHighestIndex(), []);
       const isValid = T$2((i) => {
@@ -6171,7 +6229,7 @@
           gridNavigationParameters,
           linearNavigationParameters: { getHighestIndex: getHighestChildIndex, isValid, ...linearNavigationParameters },
           managedChildrenReturn: { getChildren },
-          rovingTabIndexParameters: { initiallyTabbedIndex: singleSelectionParameters.initiallySelectedIndex, ...rovingTabIndexParameters },
+          rovingTabIndexParameters: { initiallyTabbedIndex: singleSelectionParameters.initiallySelectedIndex, untabbableBehavior: "focus-parent", ...rovingTabIndexParameters },
           singleSelectionParameters,
           typeaheadNavigationParameters: { isValid, ...typeaheadNavigationParameters },
           refElementReturn,
@@ -6210,7 +6268,7 @@
           ...gridNavigationSingleSelectionReturn,
       };
   }
-  function useCompleteGridNavigationRow({ info, context: contextIncomingForRowAsChildOfTable, textContentParameters, linearNavigationParameters, rovingTabIndexParameters, typeaheadNavigationParameters, sortableChildParameters, singleSelectionParameters }) {
+  function useCompleteGridNavigationRow({ info, context: contextIncomingForRowAsChildOfTable, textContentParameters, linearNavigationParameters, rovingTabIndexParameters, typeaheadNavigationParameters, sortableChildParameters, ...void1 }) {
       const { info: infoPaginatedChild, paginatedChildReturn: { paginatedVisible, isPaginated, hideBecausePaginated }, props: paginationProps } = usePaginatedChild({ info, context: contextIncomingForRowAsChildOfTable });
       const { info: infoStaggeredChild, // { setParentIsStaggered, setStaggeredVisible },
       staggeredChildReturn: { isStaggered, hideBecauseStaggered }, props: staggeredProps } = useStaggeredChild({ info, context: contextIncomingForRowAsChildOfTable });
@@ -6235,8 +6293,7 @@
           refElementReturn,
           context: contextIncomingForRowAsChildOfTable,
           info,
-          textContentParameters,
-          singleSelectionParameters
+          textContentParameters
       });
       const { gridNavigationRowParameters: { focusSelf, setTabbableColumnIndex }, linearNavigationReturn, managedChildrenParameters, pressParameters: { excludeSpace }, // TODO: Pass this through context? (this is for children, so it doesn't actually matter, but for completeness...)
       rovingTabIndexChildReturn, rovingTabIndexReturn, singleSelectionChildReturn, textContentReturn, typeaheadNavigationReturn, context: contextGNR, info: infoRowReturn, } = r;
@@ -6280,15 +6337,14 @@
           props,
       };
   }
-  function useCompleteGridNavigationCell({ gridNavigationCellParameters, context: { gridNavigationCellContext, managedChildContext, rovingTabIndexContext, typeaheadNavigationContext }, textContentParameters, rovingTabIndexParameters, info, ...void1 }) {
+  function useCompleteGridNavigationCell({ gridNavigationCellParameters, context: { gridNavigationCellContext, managedChildContext, rovingTabIndexContext, typeaheadNavigationContext }, textContentParameters, info, ...void1 }) {
       const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
-      const { hasCurrentFocusParameters, rovingTabIndexChildReturn, textContentReturn, pressParameters, props: propsRti, info: info2 } = useGridNavigationSingleSelectionCell({
+      const { hasCurrentFocusParameters, rovingTabIndexChildReturn, textContentReturn, pressParameters, props: propsRti, info: info2, ...void2 } = useGridNavigationSingleSelectionCell({
           gridNavigationCellParameters,
           info,
           context: { gridNavigationCellContext, rovingTabIndexContext, typeaheadNavigationContext },
           refElementReturn,
           textContentParameters,
-          rovingTabIndexParameters,
       });
       const { hasCurrentFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, ...hasCurrentFocusParameters }, refElementReturn });
       const baseInfo = {
@@ -6712,7 +6768,7 @@
           managedChildrenReturn: { getChildren },
           linearNavigationParameters: { getHighestIndex, isValid, ...linearNavigationParameters },
           typeaheadNavigationParameters: { isValid, ...typeaheadNavigationParameters },
-          rovingTabIndexParameters: { initiallyTabbedIndex: initiallySelectedIndex, ...rovingTabIndexParameters },
+          rovingTabIndexParameters: { initiallyTabbedIndex: initiallySelectedIndex, untabbableBehavior: "focus-parent", ...rovingTabIndexParameters },
           singleSelectionParameters,
           rearrangeableChildrenParameters: {
               onRearranged: useStableCallback(() => { refreshPagination(paginatedChildrenParameters.paginationMin, paginatedChildrenParameters.paginationMax); }),
@@ -6757,7 +6813,7 @@
       };
   }
   function useCompleteListNavigationChild({ info: { index, focusSelf, unselectable, untabbable, ...info }, // The "...info" is empty if M is the same as UCLNCI<ChildElement>.
-  textContentParameters, context: { childrenHaveFocusChildContext, managedChildContext, rovingTabIndexContext, paginatedChildContext, staggeredChildContext, singleSelectionContext, typeaheadNavigationContext }, sortableChildParameters, pressParameters, rovingTabIndexParameters, singleSelectionParameters, ...void1 }) {
+  textContentParameters, context: { childrenHaveFocusChildContext, managedChildContext, rovingTabIndexContext, paginatedChildContext, staggeredChildContext, singleSelectionContext, typeaheadNavigationContext }, sortableChildParameters, pressParameters, ...void1 }) {
       const { onPressSync, ...pressParameters1 } = (pressParameters ?? {});
       const { info: mcp3, paginatedChildReturn, paginatedChildReturn: { hideBecausePaginated }, props: paginationProps } = usePaginatedChild({ info: { index }, context: { paginatedChildContext } });
       const { info: mcp4, staggeredChildReturn, staggeredChildReturn: { hideBecauseStaggered }, props: staggeredProps } = useStaggeredChild({ info: { index }, context: { staggeredChildContext } });
@@ -6770,12 +6826,10 @@
           info: { index, unselectable, untabbable },
           context: { rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext },
           refElementReturn,
-          textContentParameters,
-          rovingTabIndexParameters,
-          singleSelectionParameters
+          textContentParameters
       });
       const onPress = useStableCallback((e) => {
-          if (singleSelectionParameters.selectionMode == "activation")
+          if (singleSelectionContext.selectionMode == "activation")
               singleSelectionContext.onSelectedIndexChange?.(enhanceEvent(e, { selectedIndex: index }));
           onPressSync?.(e);
       });
@@ -6786,7 +6840,7 @@
               focusSelf,
               ...pressParameters1,
               ...pressParameters2,
-              onPressSync: (rovingTabIndexParameters.untabbable || unselectable || untabbable) ? null : onPress,
+              onPressSync: (rovingTabIndexContext.untabbable || unselectable || untabbable) ? null : onPress,
               excludeSpace: useStableCallback(() => { return excludeSpace?.() || false; }),
           }
       });
@@ -7826,7 +7880,7 @@
       });
       const { pressReturn, props: buttonProps, refElementReturn } = buttonReturn;
       //const { linearNavigationReturn: { propsStable } } = linearReturnType;
-      const headerButtonProps = useMergedProps(buttonProps, headerRefElementProps, propsHeadReferencer, propsHeadSource, propsLN, stableTypeaheadProps, { "aria-expanded": (open ?? false).toString(), });
+      const headerButtonProps = useMergedProps(buttonProps, headerRefElementProps, propsHeadReferencer, propsHeadSource, propsLN, stableTypeaheadProps, { "aria-expanded": (open ?? false), });
       const bodyProps = useMergedProps(bodyRefElementProps, propsBodyReferencer, propsBodySource, {
           role: bodyRole,
           tabIndex: -1
@@ -7857,7 +7911,7 @@
           linearNavigationParameters: { arrowKeyDirection: orientation, ...linearNavigationParameters },
           staggeredChildrenParameters,
           rearrangeableChildrenParameters,
-          rovingTabIndexParameters,
+          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
           singleSelectionParameters: { initiallySelectedIndex: null, onSelectedIndexChange: null, ariaPropName: null, selectionMode: "disabled" },
           sortableChildrenParameters,
           paginatedChildrenParameters: { paginationMax: null, paginationMin: null },
@@ -7951,7 +8005,7 @@
           typeaheadNavigationReturn
       };
   }
-  function useCheckboxGroupParent({ context, info, textContentParameters, sortableChildParameters, pressParameters, rovingTabIndexParameters }) {
+  function useCheckboxGroupParent({ context, info, textContentParameters, sortableChildParameters, pressParameters }) {
       const { checkboxGroupParentContext: { setSetter, setSetParentCheckboxChecked, getPercentChecked, getTotalChecked, getTotalChildren, onCheckboxGroupParentInput } } = context;
       const { hasCurrentFocusReturn, managedChildReturn, pressReturn, propsPressStable, textContentReturn, refElementReturn, props, paginatedChildReturn, rovingTabIndexChildReturn, staggeredChildReturn, singleSelectionChildReturn, } = useCompleteListNavigationChild({
           context,
@@ -7959,8 +8013,6 @@
           sortableChildParameters,
           textContentParameters,
           pressParameters,
-          rovingTabIndexParameters,
-          singleSelectionParameters: { ariaPropName: null, selectionMode: "disabled" }
       });
       const [ariaControls, setControls] = useState("");
       y$2(() => {
@@ -8000,7 +8052,7 @@
    * @param param0
    * @returns
    */
-  function useCheckboxGroupChild({ checkboxGroupChild, context, info, textContentParameters, sortableChildParameters, pressParameters, rovingTabIndexParameters, }) {
+  function useCheckboxGroupChild({ checkboxGroupChild, context, info, textContentParameters, sortableChildParameters, pressParameters, }) {
       const { checkboxGroupChildrenContext: { allIds, setUpdateIndex, setTotalChildren, setTotalChecked, } } = context;
       const { checked, onChangeFromParent } = checkboxGroupChild;
       const getChecked = useStableGetter(checked);
@@ -8032,9 +8084,7 @@
           context,
           textContentParameters,
           sortableChildParameters,
-          pressParameters,
-          rovingTabIndexParameters,
-          singleSelectionParameters: { ariaPropName: null, selectionMode: "disabled" }
+          pressParameters
       });
       return {
           checkboxGroupChild: {
@@ -8171,8 +8221,8 @@
                   // div inputs need their various ARIA roles and properties
                   propsUnstableInput.role = role;
                   propsUnstableInput.tabIndex = 0;
-                  propsUnstableInput["aria-checked"] = (checked ?? false).toString();
-                  propsUnstableInput["aria-disabled"] = (!!disabled).toString();
+                  propsUnstableInput["aria-checked"] = (checked ?? false);
+                  propsUnstableInput["aria-disabled"] = (!!disabled);
               }
               break;
           }
@@ -8194,8 +8244,8 @@
               // And are very similar conceptually to div inputs when separated
               propsUnstableLabel.role = role;
               propsUnstableLabel.tabIndex = 0;
-              propsUnstableLabel["aria-checked"] = (checked ?? false).toString();
-              propsUnstableLabel["aria-disabled"] = (!!disabled).toString();
+              propsUnstableLabel["aria-checked"] = (checked ?? false);
+              propsUnstableLabel["aria-disabled"] = (!!disabled);
               break;
           }
       }
@@ -8290,7 +8340,7 @@
       };
   }
 
-  function useGridlist({ labelParameters, gridlistParameters: { selectionLimit, groupingType, selectedIndex, onSelectedIndexChange }, ...restParams }) {
+  function useGridlist({ labelParameters, gridlistParameters: { selectionLimit, groupingType, selectedIndex, onSelectedIndexChange }, rovingTabIndexParameters, ...restParams }) {
       const { propsInput: propsLabelList, propsLabel: propsLabelLabel, randomIdInputReturn: { id: _gridlistId }, randomIdLabelReturn: { id: _labelId } } = useLabelSynthetic({
           labelParameters: {
               ...labelParameters,
@@ -8303,6 +8353,7 @@
       });
       const { context, props, rovingTabIndexReturn, singleSelectionReturn, ...restRet } = useCompleteGridNavigationDeclarative({
           singleSelectionDeclarativeParameters: { selectedIndex: selectedIndex, onSelectedIndexChange },
+          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
           ...restParams
       });
       let propsGridlist = useMergedProps(props, propsLabelList, { "aria-multiselectable": (selectionLimit == "multi" ? "true" : undefined) });
@@ -8333,17 +8384,16 @@
           ...restRet
       };
   }
-  function useGridlistRow({ gridlistRowParameters: { selected }, linearNavigationParameters, context: cx1, info, rovingTabIndexParameters, sortableChildParameters, textContentParameters, typeaheadNavigationParameters, singleSelectionParameters, ...void1 }) {
+  function useGridlistRow({ gridlistRowParameters: { selected }, linearNavigationParameters, context: cx1, info, rovingTabIndexParameters, sortableChildParameters, textContentParameters, typeaheadNavigationParameters, ...void1 }) {
       const { gridlistRowContext: { selectionLimit } } = cx1;
       const { context: cx2, hasCurrentFocusParameters, hasCurrentFocusReturn, linearNavigationReturn, managedChildReturn, managedChildrenReturn, paginatedChildReturn, props, rovingTabIndexChildReturn, rovingTabIndexReturn, singleSelectionChildReturn, staggeredChildReturn, textContentReturn, typeaheadNavigationReturn } = useCompleteGridNavigationRow({
           linearNavigationParameters: { disableHomeEndKeys: true, ...linearNavigationParameters },
           info,
           context: cx1,
-          rovingTabIndexParameters,
+          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
           sortableChildParameters,
           textContentParameters,
           typeaheadNavigationParameters,
-          singleSelectionParameters
       });
       // `selected` should only be true/false for multi-selection
       if (selectionLimit != "multi")
@@ -8374,7 +8424,7 @@
       });
       return {
           ...info,
-          props: useMergedProps(props, propsPress),
+          props: useMergedProps(props, propsPress, { role: "gridcell" }),
           pressReturn
       };
   }
@@ -8419,7 +8469,7 @@
           id: surfaceId
       });
       const propsTrigger = useMergedProps({
-          "aria-expanded": (dismissParameters.open).toString(),
+          "aria-expanded": (dismissParameters.open),
           "aria-haspopup": role,
       }, propsRefTrigger, ps2, { "aria-controls": surfaceId });
       const propsSentinel = useFocusSentinel({
@@ -8482,7 +8532,7 @@
   function useToolbar({ linearNavigationParameters, toolbarParameters: { orientation, role, selectedIndex, onSelectedIndexChange, disabled }, labelParameters, rovingTabIndexParameters, ...listNavParameters }) {
       const { context, props, ...listNavReturn } = useCompleteListNavigationDeclarative({
           ...listNavParameters,
-          rovingTabIndexParameters: { ...rovingTabIndexParameters, untabbable: disabled },
+          rovingTabIndexParameters: { ...rovingTabIndexParameters, untabbable: disabled, focusSelfParent: focus },
           singleSelectionDeclarativeParameters: { selectedIndex, onSelectedIndexChange: disabled ? null : onSelectedIndexChange },
           paginatedChildrenParameters: { paginationMax: null, paginationMin: null },
           linearNavigationParameters: { ...linearNavigationParameters, arrowKeyDirection: orientation },
@@ -8700,25 +8750,25 @@
           {
               max,
               value: (value ?? undefined),
-              "aria-valuemin": "0",
-              "aria-valuenow": value == null ? undefined : `${value}`,
+              "aria-valuemin": 0,
+              "aria-valuenow": value == null ? undefined : value,
           }
           :
               {
-                  "aria-valuemin": "0",
-                  "aria-valuemax": max == null ? undefined : `${max}`,
+                  "aria-valuemin": 0,
+                  "aria-valuemax": max == null ? undefined : max,
                   "aria-valuetext": valueText == null ? undefined : `${valueText}`,
-                  "aria-valuenow": value == null ? undefined : `${value}`,
+                  "aria-valuenow": value == null ? undefined : value,
                   role: "progressbar"
               };
       if (disabled) {
-          indicatorProps["aria-hidden"] = "true";
+          indicatorProps["aria-hidden"] = true;
       }
       const labelProps = {
           "aria-hidden": (!busy ? "true" : undefined)
       };
       const regionProps = {
-          "aria-busy": (busy).toString(),
+          "aria-busy": !!(busy),
           "aria-describedby": randomIdInputReturn.id
       };
       return {
@@ -8749,7 +8799,7 @@
       };
   }
 
-  function useRadioGroup({ labelParameters, radioGroupParameters: { name, onSelectedValueChange, selectedValue }, ...restParams }) {
+  function useRadioGroup({ labelParameters, radioGroupParameters: { name, onSelectedValueChange, selectedValue }, rovingTabIndexParameters, ...restParams }) {
       const [selectedIndex, setSelectedIndex] = useState(null);
       const nameToIndex = _$1(new Map());
       const indexToName = _$1(new Map());
@@ -8772,6 +8822,7 @@
       const { context, props: propsGroup2, singleSelectionReturn, managedChildrenReturn, rovingTabIndexReturn, ...restRet } = useCompleteListNavigation({
           singleSelectionParameters: { initiallySelectedIndex: selectedIndex, onSelectedIndexChange: useStableCallback((e) => { setSelectedIndex(e[EventDetail].selectedIndex); onSelectedIndexChange?.(e); }), selectionMode: "focus", ariaPropName: null },
           paginatedChildrenParameters: { paginationMin: null, paginationMax: null },
+          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
           ...restParams
       });
       const { singleSelectionParameters: { onSelectedIndexChange } } = useSingleSelectionDeclarative({
@@ -8812,7 +8863,7 @@
           ...restRet,
       };
   }
-  function useRadio({ radioParameters: { value }, checkboxLikeParameters: { disabled }, labelParameters, info, context, textContentParameters, sortableChildParameters, pressParameters, rovingTabIndexParameters, ...void1 }) {
+  function useRadio({ radioParameters: { value }, checkboxLikeParameters: { disabled }, labelParameters, info, context, textContentParameters, sortableChildParameters, pressParameters, ...void1 }) {
       const index = info.index;
       const onInput = useStableCallback((e) => {
           singleSelectionChildReturn.setThisOneSelected(e);
@@ -8825,9 +8876,7 @@
           context,
           sortableChildParameters,
           textContentParameters,
-          pressParameters,
-          rovingTabIndexParameters,
-          singleSelectionParameters: { selectionMode: "focus", ariaPropName: null }
+          pressParameters
       });
       const { selected: checked } = singleSelectionChildReturn;
       const { refElementReturn: refElementInputReturn, propsStable: propsRefInput } = useRefElement({ refElementParameters: {} });
@@ -8860,7 +8909,7 @@
           propsInput.type = "radio";
       }
       else {
-          propsInput["aria-checked"] = (checked ?? false).toString();
+          propsInput["aria-checked"] = (checked ?? false);
       }
       const propsIfInputHandlesFocus = useMergedProps(listNavigationSingleSelectionChildProps, propsInput);
       const propsInput2 = useMergedProps(propsRefInput, labelPosition != "wrapping" ? propsIfInputHandlesFocus : propsInput);
@@ -8899,7 +8948,7 @@
       const max = (maxOverride ?? maxParent);
       let newProps = (tag == "input" ?
           { min, max, value, type: "range" } :
-          { "aria-valuemax": `${max}`, "aria-valuemin": `${min}`, "aria-valuenow": `${value}` });
+          { "aria-valuemax": max, "aria-valuemin": min, "aria-valuenow": value });
       newProps = { ...newProps, "aria-label": label, "aria-valuetext": valueText, style: { "--range-value": `${value}`, "--range-value-text": `${valueText}` } };
       if (tag == "input") {
           newProps.onInput = e => {
@@ -8971,7 +9020,7 @@
   function useTableSection({ linearNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, gridNavigationParameters, rearrangeableChildrenParameters, paginatedChildrenParameters, staggeredChildrenParameters, tableSectionParameters: { tagTableSection, location }, context: { tableContext } }) {
       const { childrenHaveFocusReturn, context, linearNavigationReturn, managedChildrenReturn, props: { ...props }, rovingTabIndexReturn, singleSelectionReturn, typeaheadNavigationReturn, staggeredChildrenReturn, rearrangeableChildrenReturn, paginatedChildrenReturn, sortableChildrenReturn } = useCompleteGridNavigation({
           linearNavigationParameters,
-          rovingTabIndexParameters,
+          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
           singleSelectionParameters,
           paginatedChildrenParameters,
           staggeredChildrenParameters,
@@ -9012,13 +9061,12 @@
           propsTableSection: props
       };
   }
-  function useTableRow({ info, textContentParameters, context: cx1, tableRowParameters: { selected }, linearNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, }) {
+  function useTableRow({ info, textContentParameters, context: cx1, tableRowParameters: { selected }, linearNavigationParameters, rovingTabIndexParameters, ...void1 }) {
       const { context: cx2, managedChildrenReturn, props: { ...props }, ...restRet
       // props
        } = useCompleteGridNavigationRow({
           textContentParameters,
           context: { ...cx1 },
-          singleSelectionParameters,
           info,
           sortableChildParameters: {
               getSortValue: useStableCallback(() => {
@@ -9029,19 +9077,19 @@
               })
           },
           linearNavigationParameters,
-          rovingTabIndexParameters,
+          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
           typeaheadNavigationParameters: { noTypeahead: true, collator: null, typeaheadTimeout: Infinity }
       });
       props.role = "row";
       // TODO: Unneeded?
       if (selected) {
-          switch (singleSelectionParameters.ariaPropName) {
+          switch (cx1.singleSelectionContext.ariaPropName) {
               case "aria-checked":
               case "aria-pressed":
               case "aria-selected":
-                  props[singleSelectionParameters.ariaPropName ?? "aria-selected"] = "true";
+                  props[cx1.singleSelectionContext.ariaPropName ?? "aria-selected"] = "true";
               default: {
-                  console.assert(false, singleSelectionParameters.ariaPropName + " is not valid for multi-select -- prefer checked, selected, or pressed");
+                  console.assert(false, cx1.singleSelectionContext.ariaPropName + " is not valid for multi-select -- prefer checked, selected, or pressed");
               }
           }
       }
@@ -9069,7 +9117,7 @@
       };
   }
 
-  function useTabs({ labelParameters, linearNavigationParameters, singleSelectionParameters: { initiallySelectedIndex, onSelectedIndexChange: ssi, selectionMode, ...singleSelectionParameters }, tabsParameters: { orientation, role, localStorageKey }, ...restParams }) {
+  function useTabs({ labelParameters, linearNavigationParameters, singleSelectionParameters: { initiallySelectedIndex, onSelectedIndexChange: ssi, selectionMode, ...singleSelectionParameters }, tabsParameters: { orientation, role, localStorageKey }, rovingTabIndexParameters, ...restParams }) {
       const [localStorageIndex, setLocalStorageIndex] = usePersistentState(localStorageKey ?? null, 0);
       if (localStorageIndex != null)
           initiallySelectedIndex = localStorageIndex;
@@ -9102,6 +9150,7 @@
       });
       const { props: listNavigationSingleSelectionProps, context, ...listNavRet1 } = useCompleteListNavigation({
           linearNavigationParameters: { arrowKeyDirection: orientation, ...linearNavigationParameters },
+          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
           singleSelectionParameters: {
               onSelectedIndexChange: useStableCallback((e) => {
                   ssi?.(e);
@@ -9140,15 +9189,13 @@
           ...listNavRet1
       };
   }
-  function useTab({ info: { focusSelf, ...info }, textContentParameters, sortableChildParameters, pressParameters, rovingTabIndexParameters, singleSelectionParameters, context }) {
+  function useTab({ info: { focusSelf, ...info }, textContentParameters, sortableChildParameters, pressParameters, context }) {
       const { props: listNavigationSingleSelectionChildProps, propsPressStable, ...listNavRet2 } = useCompleteListNavigationChild({
           context,
           info: { focusSelf, ...info },
           sortableChildParameters,
           textContentParameters,
-          pressParameters,
-          rovingTabIndexParameters,
-          singleSelectionParameters: { ariaPropName: "aria-selected", ...singleSelectionParameters },
+          pressParameters
       });
       //const { pressParameters, refElementReturn } = listNavRet2
       //const { pressReturn, props: propsPress } = usePress<TabElement>({ pressParameters: { ...pressParameters, onPressSync: useStableCallback((e) => listNavRet2.singleSelectionChildReturn.setThisOneSelected(e)), focusSelf }, refElementReturn })
@@ -9532,7 +9579,6 @@
       return render(info);
   });
 
-  const UntabbableContext$6 = F$3(false);
   const UseCheckboxGroupChildContext = F$3(null);
   const CheckboxGroup$1 = memoForwardRef(function CheckboxGroup({ render, collator, disableHomeEndKeys, noTypeahead, typeaheadTimeout, onTabbableIndexChange, compare, staggered, getIndex, untabbable, navigatePastEnd, navigatePastStart, pageNavigationSize, orientation, ..._rest }, ref) {
       untabbable ||= false;
@@ -9555,14 +9601,13 @@
           }
       });
       A$1(ref, () => info);
-      return (o$3(UntabbableContext$6.Provider, { value: untabbable, children: o$3(UseCheckboxGroupChildContext.Provider, { value: info.context, children: render(info) }) }));
+      return (o$3(UseCheckboxGroupChildContext.Provider, { value: info.context, children: render(info) }));
   });
   const CheckboxGroupParent$1 = memoForwardRef(function CheckboxGroupParent({ render, index, focusSelf, untabbable, getText, getSortValue, unselectable, ..._rest }, ref) {
       const context = q$2(UseCheckboxGroupChildContext);
       console.assert(context != null, `This CheckboxGroupParent is not contained within a CheckboxGroup`);
       const info = useCheckboxGroupParent({
           pressParameters: { focusSelf, onPressSync: null },
-          rovingTabIndexParameters: { untabbable: q$2(UntabbableContext$6) },
           info: { index, unselectable: unselectable || false, untabbable: untabbable || false, focusSelf, checkboxInfo: { checkboxChildType: "parent" } },
           context,
           sortableChildParameters: { getSortValue },
@@ -9581,7 +9626,6 @@
           context,
           sortableChildParameters: { getSortValue },
           pressParameters: { focusSelf, onPressSync: null },
-          rovingTabIndexParameters: { untabbable: q$2(UntabbableContext$6) },
       });
       A$1(ref, () => info);
       return render(info);
@@ -9656,13 +9700,9 @@
       return (o$3(ParentDepthContext.Provider, { value: myDepth, children: render(info) }));
   });
 
-  const GridlistUntabbableContext = F$3(false);
-  const GridlistAriaPropNameContext = F$3("aria-selected");
-  const GridlistSelectionModeContext = F$3("activation");
-  const GridlistRowUntabbableContext = F$3(false);
   const GridlistContext = F$3(null);
   const GridlistRowContext = F$3(null);
-  memoForwardRef(function GridlistU({ collator, disableHomeEndKeys, noTypeahead, onTabbableIndexChange, groupingType, typeaheadTimeout, selectedIndex, navigatePastEnd, navigatePastStart, onSelectedIndexChange, pageNavigationSize, selectionLimit, untabbable, paginationMax, paginationMin, staggered, compare, getIndex, onTabbableColumnChange, ariaLabel, orientation, ariaPropName, selectionMode, render }, ref) {
+  const Gridlist = memoForwardRef(function GridlistU({ collator, disableHomeEndKeys, noTypeahead, onTabbableIndexChange, groupingType, typeaheadTimeout, selectedIndex, navigatePastEnd, navigatePastStart, onSelectedIndexChange, pageNavigationSize, selectionLimit, untabbable, paginationMax, paginationMin, staggered, compare, getIndex, onTabbableColumnChange, ariaLabel, orientation, ariaPropName, selectionMode, render }, ref) {
       untabbable ??= false;
       ariaPropName ??= "aria-selected";
       selectionMode ??= "activation";
@@ -9675,7 +9715,7 @@
           },
           rovingTabIndexParameters: {
               onTabbableIndexChange: onTabbableIndexChange ?? null,
-              untabbable,
+              untabbable
           },
           staggeredChildrenParameters: { staggered: staggered || false },
           typeaheadNavigationParameters: {
@@ -9709,7 +9749,7 @@
           singleSelectionParameters: { ariaPropName, selectionMode }
       });
       A$1(ref, () => info);
-      return (o$3(GridlistUntabbableContext.Provider, { value: untabbable, children: o$3(GridlistAriaPropNameContext.Provider, { value: ariaPropName, children: o$3(GridlistSelectionModeContext.Provider, { value: selectionMode, children: o$3(GridlistContext.Provider, { value: info.context, children: render(info) }) }) }) }));
+      return (o$3(GridlistContext.Provider, { value: info.context, children: render(info) }));
   });
   const GridlistRow = memoForwardRef(function GridlistRowU({ index, collator, unselectable, untabbable, navigatePastEnd, navigatePastStart, noTypeahead, onTabbableIndexChange, selected, typeaheadTimeout, getSortValue, getText, render, initiallyTabbedIndex, info: uinfo }, ref) {
       const context = q$2(GridlistContext);
@@ -9726,7 +9766,6 @@
               navigatePastStart: navigatePastStart ?? "wrap"
           },
           rovingTabIndexParameters: { onTabbableIndexChange: onTabbableIndexChange ?? null, initiallyTabbedIndex: initiallyTabbedIndex ?? null, untabbable },
-          singleSelectionParameters: { ariaPropName: q$2(GridlistAriaPropNameContext), selectionMode: q$2(GridlistSelectionModeContext) },
           typeaheadNavigationParameters: {
               collator: useDefault("collator", collator),
               noTypeahead: useDefault("noTypeahead", noTypeahead),
@@ -9745,8 +9784,7 @@
           context,
           gridNavigationCellParameters: { colSpan: colSpan ?? 1 },
           textContentParameters: { getText: useDefault("getText", getText) },
-          pressParameters: { onPressSync },
-          rovingTabIndexParameters: { untabbable: q$2(GridlistRowUntabbableContext) }
+          pressParameters: { onPressSync }
       });
       A$1(ref, () => info);
       return render(info);
@@ -9784,7 +9822,7 @@
       return (o$3(HeadingLevelContext.Provider, { value: newLevel - 1, children: children }));
   });
 
-  function useListbox({ labelParameters, listboxParameters: { selectionLimit, groupingType, selectedIndex, onSelectedIndexChange, orientation }, linearNavigationParameters, singleSelectionParameters: { ariaPropName, selectionMode }, ...restParams }) {
+  function useListbox({ labelParameters, listboxParameters: { selectionLimit, groupingType, selectedIndex, onSelectedIndexChange, orientation }, linearNavigationParameters, singleSelectionParameters: { ariaPropName, selectionMode }, rovingTabIndexParameters, ...restParams }) {
       useEnsureStability("useListbox", selectionLimit);
       const { propsInput: propsLabelList, propsLabel: propsLabelLabel, randomIdInputReturn: { id: _inputId }, randomIdLabelReturn: { id: _labelId } } = useLabelSynthetic({
           labelParameters: {
@@ -9797,6 +9835,7 @@
           randomIdLabelParameters: { prefix: Prefices.listboxLabel }
       });
       let { context, props: { ...props }, rovingTabIndexReturn, singleSelectionReturn, ...restRet } = useCompleteListNavigationDeclarative({
+          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
           singleSelectionDeclarativeParameters: { selectedIndex, onSelectedIndexChange },
           singleSelectionParameters: { ariaPropName: ariaPropName || "aria-selected", selectionMode: selectionMode },
           linearNavigationParameters: { arrowKeyDirection: orientation, ...linearNavigationParameters },
@@ -9828,11 +9867,9 @@
           propsListboxLabel: propsLabelLabel
       };
   }
-  function useListboxItem({ context: { listboxContext: { selectionLimit }, ...context }, listboxParameters: { selected }, rovingTabIndexParameters, singleSelectionParameters, pressParameters, ...restParams }) {
+  function useListboxItem({ context: { listboxContext: { selectionLimit }, ...context }, listboxParameters: { selected }, pressParameters, ...restParams }) {
       const { props, refElementReturn, ...restRet } = useCompleteListNavigationChild({
           context,
-          rovingTabIndexParameters,
-          singleSelectionParameters,
           pressParameters,
           ...restParams
       });
@@ -9848,9 +9885,6 @@
       };
   }
 
-  const UntabbableContext$5 = F$3(false);
-  const AriaPropNameContext$3 = F$3("aria-selected");
-  const SelectionModeContext$4 = F$3("focus");
   const ListboxContext = F$3(null);
   const ListboxGroupContext = F$3(null);
   x$1(function GroupedListbox({ ariaLabel, selectionLimit, orientation, render }) {
@@ -9878,7 +9912,7 @@
       info.context;
       return (o$3(ListboxGroupContext.Provider, { value: info, children: render(info) }));
   });
-  const Listbox = memoForwardRef(function Listbox({ ariaLabel, collator, compare, disableHomeEndKeys, getIndex, selectedIndex, navigatePastEnd, navigatePastStart, noTypeahead, onSelectedIndexChange, onTabbableIndexChange, staggered, pageNavigationSize, paginationMax, paginationMin, selectionLimit, untabbable, typeaheadTimeout, orientation, ariaPropName, selectionMode, render }) {
+  memoForwardRef(function Listbox({ ariaLabel, collator, compare, disableHomeEndKeys, getIndex, selectedIndex, navigatePastEnd, navigatePastStart, noTypeahead, onSelectedIndexChange, onTabbableIndexChange, staggered, pageNavigationSize, paginationMax, paginationMin, selectionLimit, untabbable, typeaheadTimeout, orientation, ariaPropName, selectionMode, render }) {
       const listboxGroupInfo = q$2(ListboxGroupContext);
       ariaPropName ||= "aria-selected";
       selectionMode ||= "activation";
@@ -9909,7 +9943,7 @@
           },
           singleSelectionParameters: { ariaPropName, selectionMode }
       });
-      return (o$3(AriaPropNameContext$3.Provider, { value: ariaPropName, children: o$3(SelectionModeContext$4.Provider, { value: selectionMode, children: o$3(UntabbableContext$5.Provider, { value: untabbable, children: o$3(ListboxContext.Provider, { value: info.context, children: render(info) }) }) }) }));
+      return (o$3(ListboxContext.Provider, { value: info.context, children: render(info) }));
   });
   const ListboxItem = memoForwardRef(function ListboxItem({ unselectable, focusSelf, getText, untabbable, index, render, selected, getSortValue, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressSync, onPressingChange, ...subInfo }) {
       const context = q$2(ListboxContext);
@@ -9923,15 +9957,13 @@
           pressParameters: { onPressSync, focusSelf, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange },
           sortableChildParameters: { getSortValue: getSortValue },
           textContentParameters: { getText: useDefault("getText", getText) },
-          rovingTabIndexParameters: { untabbable: q$2(UntabbableContext$5) },
-          singleSelectionParameters: { ariaPropName: q$2(AriaPropNameContext$3), selectionMode: q$2(SelectionModeContext$4) }
       });
       return render(info);
   });
 
-  const UntabbableContext$4 = F$3(false);
-  const AriaPropNameContext$2 = F$3("aria-selected");
-  const SelectionModeContext$3 = F$3("focus");
+  const UntabbableContext$2 = F$3(false);
+  const AriaPropNameContext$1 = F$3("aria-selected");
+  const SelectionModeContext$2 = F$3("focus");
   const MenuItemContext = F$3(null);
   const Menu$1 = memoForwardRef(function Menu({ collator, disableHomeEndKeys, noTypeahead, typeaheadTimeout, orientation, ariaPropName, selectionMode, untabbable, onClose, open, openDirection, onTabbableIndexChange, closeOnBackdrop, closeOnEscape, closeOnLostFocus, compare, getIndex, selectedIndex, navigatePastEnd, navigatePastStart, onSelectedIndexChange, pageNavigationSize, parentDepth, disabled, staggered, onOpen, getWindow, render }, ref) {
       const defaultParentDepth = q$2(ParentDepthContext);
@@ -9977,7 +10009,7 @@
           singleSelectionParameters: { ariaPropName: ariaPropName || "aria-selected", selectionMode: selectionMode || "activation" }
       });
       A$1(ref, () => info);
-      return (o$3(AriaPropNameContext$2.Provider, { value: ariaPropName, children: o$3(SelectionModeContext$3.Provider, { value: selectionMode, children: o$3(UntabbableContext$4.Provider, { value: untabbable, children: o$3(ParentDepthContext.Provider, { value: myDepth, children: o$3(MenuItemContext.Provider, { value: info.context, children: render(info) }) }) }) }) }));
+      return (o$3(AriaPropNameContext$1.Provider, { value: ariaPropName, children: o$3(SelectionModeContext$2.Provider, { value: selectionMode, children: o$3(UntabbableContext$2.Provider, { value: untabbable, children: o$3(ParentDepthContext.Provider, { value: myDepth, children: o$3(MenuItemContext.Provider, { value: info.context, children: render(info) }) }) }) }) }));
   });
   const MenuItem$1 = memoForwardRef(function MenuItem({ index, untabbable, getSortValue, onPress, getText, role, focusSelf, unselectable, render, info: uinfo }, ref) {
       const context = q$2(MenuItemContext);
@@ -9988,17 +10020,12 @@
           context,
           sortableChildParameters: { getSortValue },
           textContentParameters: { getText: useDefault("getText", getText) },
-          menuItemParameters: { onPress: onPress ?? null, role: role ?? "menuitem" },
-          rovingTabIndexParameters: { untabbable: q$2(UntabbableContext$4) },
-          singleSelectionParameters: { ariaPropName: q$2(AriaPropNameContext$2), selectionMode: q$2(SelectionModeContext$3) }
+          menuItemParameters: { onPress: onPress ?? null, role: role ?? "menuitem" }
       });
       A$1(ref, () => info);
       return (o$3(_$3, { children: render(info) }));
   });
 
-  const UntabbableContext$3 = F$3(false);
-  const AriaPropNameContext$1 = F$3("aria-selected");
-  const SelectionModeContext$2 = F$3("focus");
   const MenubarItemContext = F$3(null);
   memoForwardRef(function MenubarU({ render, collator, disableHomeEndKeys, navigatePastEnd, navigatePastStart, pageNavigationSize, orientation, staggered, noTypeahead, untabbable, onTabbableIndexChange, compare, getIndex, disabled, selectedIndex, onSelectedIndexChange, typeaheadTimeout, role, ariaLabel, ariaPropName, selectionMode }, ref) {
       ariaPropName ||= "aria-selected";
@@ -10025,7 +10052,7 @@
           singleSelectionParameters: { ariaPropName, selectionMode }
       });
       A$1(ref, () => info);
-      return (o$3(AriaPropNameContext$1.Provider, { value: ariaPropName, children: o$3(SelectionModeContext$2.Provider, { value: selectionMode, children: o$3(UntabbableContext$3.Provider, { value: untabbable, children: o$3(MenubarItemContext.Provider, { value: info.context, children: render(info) }) }) }) }));
+      return (o$3(MenubarItemContext.Provider, { value: info.context, children: render(info) }));
   });
   memoForwardRef(function MenuItemU({ index, render, focusSelf, untabbable, getText, unselectable, onPress, getSortValue, role, info: uinfo }, ref) {
       const context = (q$2(MenubarItemContext));
@@ -10036,9 +10063,7 @@
           context,
           sortableChildParameters: { getSortValue },
           textContentParameters: { getText: useDefault("getText", getText) },
-          menuItemParameters: { onPress: onPress ?? null, role: role ?? "menuitem" },
-          rovingTabIndexParameters: { untabbable: q$2(UntabbableContext$3) },
-          singleSelectionParameters: { ariaPropName: q$2(AriaPropNameContext$1), selectionMode: q$2(SelectionModeContext$2) }
+          menuItemParameters: { onPress: onPress ?? null, role: role ?? "menuitem" }
       });
       A$1(ref, () => info);
       return (o$3(_$3, { children: render(info) }));
@@ -10068,9 +10093,6 @@
       return (render(info));
   });
 
-  const UntabbableContext$2 = F$3(false);
-  //const AriaPropNameContext = createContext<UseRadioParameters<any, any, any, any, any>["singleSelectionParameters"]["ariaPropName"]>("aria-checked");
-  //const SelectionModeContext = createContext<UseRadioParameters<any, any, any, any, any>["singleSelectionParameters"]["selectionMode"]>("activation");
   const RadioContext = F$3(null);
   const RadioGroup$1 = memoForwardRef(function RadioGroup({ render, name, onSelectedValueChange, collator, disableHomeEndKeys, arrowKeyDirection, noTypeahead, typeaheadTimeout, ariaLabel, compare, staggered, getIndex, navigatePastEnd, navigatePastStart, selectedValue, untabbable, onTabbableIndexChange, pageNavigationSize, }, ref) {
       untabbable ??= false;
@@ -10098,7 +10120,7 @@
           },
       });
       A$1(ref, () => info);
-      return (o$3(UntabbableContext$2.Provider, { value: untabbable, children: o$3(RadioContext.Provider, { value: info.context, children: render(info) }) }));
+      return (o$3(RadioContext.Provider, { value: info.context, children: render(info) }));
   });
   const Radio$1 = memoForwardRef(function Radio({ unselectable, disabled, index, render, value, ariaLabel, focusSelf, labelPosition, untabbable, tagInput, tagLabel, getText }, ref) {
       const defaultFocusSelf = () => info.checkboxLikeReturn.focusSelf();
@@ -10114,8 +10136,7 @@
           context,
           labelParameters: { ariaLabel, labelPosition, tagInput, tagLabel },
           textContentParameters: { getText: useDefault("getText", getText) },
-          pressParameters: null,
-          rovingTabIndexParameters: { untabbable: q$2(UntabbableContext$2) }
+          pressParameters: null
       });
       A$1(ref, () => info);
       return render(info);
@@ -10153,12 +10174,6 @@
       A$1(ref, () => info);
       return o$3(TableContext$1.Provider, { value: info.context, children: render(info) });
   });
-  const TableSectionUntabbableContext = F$3(false);
-  const TableSectionAriaPropNameContext = F$3("aria-selected");
-  const TableSectionSelectionModeContext = F$3("activation");
-  const TablRowUntabbableContext = F$3(false);
-  //const TablRowAriaPropNameContext = createContext<UseTableSectionParameters<any, any, any, any>["singleSelectionParameters"]["ariaPropName"]>("aria-selected");
-  //const TablRowSelectionModeContext = createContext<UseTableSectionParameters<any, any, any, any>["singleSelectionParameters"]["selectionMode"]>("activation");
   const TableSection$1 = memoForwardRef(function TableSection({ disableHomeEndKeys, getIndex, initiallySelectedIndex, untabbable, navigatePastEnd, navigatePastStart, onSelectedIndexChange, onTabbableColumnChange, onTabbableIndexChange, pageNavigationSize, paginationMax, paginationMin, staggered, render, location, ariaPropName, selectionMode, tagTableSection }) {
       untabbable = (untabbable ?? false);
       ariaPropName ??= "aria-selected";
@@ -10182,13 +10197,12 @@
           context: q$2(TableContext$1),
           tableSectionParameters: { tagTableSection, location },
       });
-      return (o$3(TableSectionAriaPropNameContext.Provider, { value: ariaPropName, children: o$3(TableSectionSelectionModeContext.Provider, { value: selectionMode, children: o$3(TableSectionUntabbableContext.Provider, { value: untabbable, children: o$3(TableSectionContext.Provider, { value: info.context, children: render(info) }) }) }) }));
+      return (o$3(TableSectionContext.Provider, { value: info.context, children: render(info) }));
   });
   const TableRow$1 = memoForwardRef(function TableRowU({ index, getText, tagTableRow, disableHomeEndKeys, onTabbableIndexChange, navigatePastEnd, navigatePastStart, selected, unselectable, initiallyTabbedIndex, untabbable, render }, ref) {
-      let gridIsUntabbable = q$2(TableSectionUntabbableContext);
-      untabbable ||= (gridIsUntabbable);
       const cx1 = q$2(TableSectionContext);
       console.assert(cx1 != null, `This TableRow is not contained within a TableSection`);
+      untabbable ||= (cx1.rovingTabIndexContext.untabbable);
       const info = useTableRow({
           info: { index, unselectable: unselectable || false, untabbable: untabbable || false },
           context: cx1,
@@ -10205,10 +10219,9 @@
               navigatePastStart: navigatePastStart ?? "wrap"
           },
           rovingTabIndexParameters: { onTabbableIndexChange: onTabbableIndexChange ?? null, initiallyTabbedIndex: initiallyTabbedIndex ?? null, untabbable },
-          singleSelectionParameters: { ariaPropName: q$2(TableSectionAriaPropNameContext), selectionMode: q$2(TableSectionSelectionModeContext) }
       });
       A$1(ref, () => info);
-      return (o$3(TablRowUntabbableContext.Provider, { value: untabbable, children: o$3(TableRowContext.Provider, { value: info.context, children: render(info) }) }));
+      return (o$3(TableRowContext.Provider, { value: info.context, children: render(info) }));
   });
   const TableCell$1 = memoForwardRef(function TableCell({ index, getText, focusSelf, untabbable, tagTableCell, render, colSpan, getSortValue, }, ref) {
       const context = q$2(TableRowContext);
@@ -10219,8 +10232,7 @@
           context,
           gridNavigationCellParameters: { colSpan: colSpan ?? 1 },
           tableCellParameters: { tagTableCell },
-          textContentParameters: { getText: useDefault("getText", getText) },
-          rovingTabIndexParameters: { untabbable: q$2(TablRowUntabbableContext) }
+          textContentParameters: { getText: useDefault("getText", getText) }
       });
       A$1(ref, () => info);
       return render(info);
@@ -10272,9 +10284,7 @@
           context,
           sortableChildParameters: { getSortValue },
           textContentParameters: { getText: useDefault("getText", getText) },
-          pressParameters: null,
-          rovingTabIndexParameters: { untabbable: q$2(UntabbableContext$1) },
-          singleSelectionParameters: { selectionMode: q$2(SelectionModeContext$1) }
+          pressParameters: null
       });
       A$1(ref, () => info);
       return render(info);
@@ -10356,9 +10366,7 @@
           info: { index, focusSelf, unselectable, untabbable, ...uinfo },
           sortableChildParameters: { getSortValue },
           textContentParameters: { getText: useDefault("getText", getText) },
-          pressParameters: null,
-          rovingTabIndexParameters: { untabbable: q$2(UntabbableContext) },
-          singleSelectionParameters: { ariaPropName: q$2(AriaPropNameContext), selectionMode: q$2(SelectionModeContext) }
+          pressParameters: null, //{ focusSelf, onPressSync: null },
       });
       A$1(ref, () => info);
       return (o$3(_$3, { children: render(info) }));
@@ -11479,6 +11487,10 @@
     };
   };
 
+  function evaluate(value, param) {
+    return typeof value === 'function' ? value(param) : value;
+  }
+
   function expandPaddingObject(padding) {
     return {
       top: 0,
@@ -11535,7 +11547,7 @@
       elementContext = 'floating',
       altBoundary = false,
       padding = 0
-    } = options;
+    } = evaluate(options, state);
     const paddingObject = getSideObjectFromPadding(padding);
     const altContext = elementContext === 'floating' ? 'reference' : 'floating';
     const element = elements[altBoundary ? altContext : elementContext];
@@ -11587,11 +11599,6 @@
     name: 'arrow',
     options,
     async fn(state) {
-      // Since `element` is required, we don't Partial<> the type.
-      const {
-        element,
-        padding = 0
-      } = options || {};
       const {
         x,
         y,
@@ -11600,6 +11607,11 @@
         platform,
         elements
       } = state;
+      // Since `element` is required, we don't Partial<> the type.
+      const {
+        element,
+        padding = 0
+      } = evaluate(options, state) || {};
       if (element == null) {
         return {};
       }
@@ -11626,24 +11638,30 @@
       }
       const centerToReference = endDiff / 2 - startDiff / 2;
 
+      // If the padding is large enough that it causes the arrow to no longer be
+      // centered, modify the padding so that it is centered.
+      const largestPossiblePadding = clientSize / 2 - arrowDimensions[length] / 2 - 1;
+      const minPadding = min$1(paddingObject[minProp], largestPossiblePadding);
+      const maxPadding = min$1(paddingObject[maxProp], largestPossiblePadding);
+
       // Make sure the arrow doesn't overflow the floating element if the center
       // point is outside the floating element's bounds.
-      const min = paddingObject[minProp];
-      const max = clientSize - arrowDimensions[length] - paddingObject[maxProp];
+      const min$1$1 = minPadding;
+      const max = clientSize - arrowDimensions[length] - maxPadding;
       const center = clientSize / 2 - arrowDimensions[length] / 2 + centerToReference;
-      const offset = within(min, center, max);
+      const offset = within(min$1$1, center, max);
 
       // If the reference is small enough that the arrow's padding causes it to
       // to point to nothing for an aligned placement, adjust the offset of the
       // floating element itself. This stops `shift()` from taking action, but can
       // be worked around by calling it again after the `arrow()` if desired.
-      const shouldAddOffset = getAlignment(placement) != null && center != offset && rects.reference[length] / 2 - (center < min ? paddingObject[minProp] : paddingObject[maxProp]) - arrowDimensions[length] / 2 < 0;
-      const alignmentOffset = shouldAddOffset ? center < min ? min - center : max - center : 0;
+      const shouldAddOffset = getAlignment(placement) != null && center != offset && rects.reference[length] / 2 - (center < min$1$1 ? minPadding : maxPadding) - arrowDimensions[length] / 2 < 0;
+      const alignmentOffset = shouldAddOffset ? center < min$1$1 ? min$1$1 - center : max - center : 0;
       return {
         [axis]: coords[axis] - alignmentOffset,
         data: {
           [axis]: offset,
-          centerOffset: center - offset
+          centerOffset: center - offset + alignmentOffset
         }
       };
     }
@@ -11751,7 +11769,7 @@
           fallbackAxisSideDirection = 'none',
           flipAlignment = true,
           ...detectOverflowOptions
-        } = options;
+        } = evaluate(options, state);
         const side = getSide(placement);
         const isBasePlacement = getSide(initialPlacement) === initialPlacement;
         const rtl = await (platform.isRTL == null ? void 0 : platform.isRTL(elements.floating));
@@ -11855,12 +11873,12 @@
       options,
       async fn(state) {
         const {
-          strategy = 'referenceHidden',
-          ...detectOverflowOptions
-        } = options;
-        const {
           rects
         } = state;
+        const {
+          strategy = 'referenceHidden',
+          ...detectOverflowOptions
+        } = evaluate(options, state);
         switch (strategy) {
           case 'referenceHidden':
             {
@@ -11899,7 +11917,7 @@
     };
   };
 
-  async function convertValueToCoords(state, value) {
+  async function convertValueToCoords(state, options) {
     const {
       placement,
       platform,
@@ -11911,7 +11929,7 @@
     const isVertical = getMainAxisFromPlacement(placement) === 'x';
     const mainAxisMulti = ['left', 'top'].includes(side) ? -1 : 1;
     const crossAxisMulti = rtl && isVertical ? -1 : 1;
-    const rawValue = typeof value === 'function' ? value(state) : value;
+    const rawValue = evaluate(options, state);
 
     // eslint-disable-next-line prefer-const
     let {
@@ -11947,19 +11965,19 @@
    * object may be passed.
    * @see https://floating-ui.com/docs/offset
    */
-  const offset = function (value) {
-    if (value === void 0) {
-      value = 0;
+  const offset = function (options) {
+    if (options === void 0) {
+      options = 0;
     }
     return {
       name: 'offset',
-      options: value,
+      options,
       async fn(state) {
         const {
           x,
           y
         } = state;
-        const diffCoords = await convertValueToCoords(state, value);
+        const diffCoords = await convertValueToCoords(state, options);
         return {
           x: x + diffCoords.x,
           y: y + diffCoords.y,
@@ -12007,7 +12025,7 @@
             }
           },
           ...detectOverflowOptions
-        } = options;
+        } = evaluate(options, state);
         const coords = {
           x,
           y
@@ -12070,7 +12088,7 @@
         const {
           apply = () => {},
           ...detectOverflowOptions
-        } = options;
+        } = evaluate(options, state);
         const overflow = await detectOverflow(state, detectOverflowOptions);
         const side = getSide(placement);
         const alignment = getAlignment(placement);
@@ -13660,7 +13678,7 @@
       }, [page, windowSize]);
       return (o$3(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "focus", selectedIndex: page, onSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
               const labelJsx = o$3("label", { ...info.propsLabel, children: label });
-              return (o$3(_$3, { children: [labelPosition == "before" && labelJsx, o$3("nav", { ...info.propsToolbar, children: o$3("ul", { class: "pagination", children: o$3(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }), labelPosition == "after" && labelJsx] }));
+              return (o$3(_$3, { children: [labelPosition == "before" && labelJsx, o$3("nav", { "aria-label": labelPosition == 'hidden' ? label : undefined, children: o$3("ul", { class: "pagination", ...info.propsToolbar, children: o$3(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }), labelPosition == "after" && labelJsx] }));
           } }));
   }
   const PaginationChildren = x$1(({ childCount, windowSize }) => {
@@ -13748,25 +13766,7 @@
       }
   }
 
-  /**
-   * A listbox is a much simpler List.
-   *
-   * Unlike a List, there can't be any additional elements for each list item -- e.g. you can't have a "delete" button for each item in a listbox.
-   *
-   * @param param0
-   * @returns
-   */
-  function ListboxSingle({ selectedIndex, onSelectedIndexChange, children, label, labelPosition, staggered, paginationLabel, paginationLocation, paginationSize }) {
-      const [paginationMin, setPaginationMin] = useState(paginationSize == null ? null : 0);
-      const [paginationMax, setPaginationMax] = useState(paginationSize);
-      if (paginationSize)
-          paginationLocation ||= "before";
-      return (o$3(Listbox, { selectedIndex: selectedIndex, selectionLimit: "single", onSelectedIndexChange: useStableCallback((e) => { onSelectedIndexChange(e[EventDetail].selectedIndex, e); }), staggered: staggered, paginationMin: paginationMin, paginationMax: paginationMax, ariaLabel: labelPosition == "hidden" ? label : null, render: info => {
-              const labelJsx = (o$3("label", { ...info.propsListboxLabel, children: label }));
-              return (o$3(_$3, { children: [labelPosition == 'before' && labelJsx, o$3(Paginated, { paginationSize: paginationSize, childCount: info.paginatedChildrenReturn.childCount || 0, setPaginationEnd: setPaginationMax, setPaginationStart: setPaginationMin, paginationLabel: paginationLabel, paginationLocation: paginationLocation, children: o$3("ol", { ...useMergedProps(info.propsListbox, { className: "list-group" }), children: children }) }), labelPosition == 'after' && labelJsx] }));
-          } }));
-  }
-  const ListboxSingleItem = x$1(forwardElementRef(function ListboxSingleItem({ index, disabled, children, ...props }, ref) {
+  x$1(forwardElementRef(function ListboxSingleItem({ index, disabled, children, ...props }, ref) {
       return (o$3(ListboxItem, { getSortValue: returnZero, index: index, selected: null, unselectable: disabled, render: info => {
               if (info.staggeredChildReturn.hideBecauseStaggered)
                   return o$3("li", { class: "d-none" });
@@ -13780,6 +13780,21 @@
   }));
 
   const DefaultDisabled = F$3(false);
+  function List({ columns, disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }) {
+      labelPosition ??= "before";
+      const [focusedInner, setFocusedInner] = useState(false);
+      const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
+      const { hasCurrentFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn });
+      const [paginationStart, setPaginationStart] = useState(paginationSize == null ? null : 0);
+      const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
+      if (paginationSize)
+          paginationLocation ||= "before";
+      return (o$3(DefaultDisabled.Provider, { value: disabled ?? false, children: o$3(Gridlist, { selectedIndex: selectedIndex ?? null, ariaPropName: "aria-selected", onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), paginationMin: paginationStart, paginationMax: paginationEnd, staggered: staggered || false, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", selectionLimit: selectedIndex === undefined ? "multi" : "single", render: info => {
+                  useUpdateRenderCounter("Gridlist");
+                  const labelJsx = o$3("label", { ...info.propsGridlistLabel, children: label });
+                  return (o$3(_$3, { children: [labelPosition == "before" && labelJsx, o$3(Paginated, { childCount: info.paginatedChildrenReturn.childCount ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: o$3("div", { class: clsx(`list-group gridlist-group`), ...useMergedProps(props, propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist), children: children }) }), labelPosition == "after" && labelJsx] }));
+              } }) }));
+  }
   const ListItemNonPaginated = x$1(({ infoRow, progressInfo, badge, disabled, iconEnd, iconStart, variantTheme, selected, children, props, ref2 }) => {
       useUpdateRenderCounter("GridlistRow");
       const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement({ refElementParameters: {} });
@@ -13807,9 +13822,9 @@
               return null;
           else
               return o$3("div", { "aria-busy": "true", class: "gridlist-item gridlist-item-placeholder", children: o$3("span", { class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"), children: o$3("span", { class: "placeholder w-100" }) }) });
-      return (o$3(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: false, children: o$3("div", { "aria-busy": (!show).toString(), ...finalPropsForDiv, children: show && c }) }));
+      return (o$3(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: false, children: o$3("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
   });
-  x$1(forwardElementRef(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
+  const ListItem = x$1(forwardElementRef(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
       const defaultDisabled = q$2(DefaultDisabled);
       disabled ||= defaultDisabled;
       let everShownPaginated = _$1(false);
@@ -16644,7 +16659,7 @@
       const [paginationWindow, setPaginationWindow] = h$2(10);
       const [selectedIndex, setSelectedIndex] = h$2(null);
       count ??= 0;
-      return (o$3("div", { children: [o$3("strong", { children: "(The gridlist demo is currently down for maintenance \u2014 please enjoy this listbox demo instead.)" }), o$3(TextField, { type: "number", value: count, onValueChange: setCount, label: "# of children", labelPosition: "floating" }), o$3(TextField, { type: "number", value: paginationWindow, onValueChange: setPaginationWindow, label: "Pagination window", labelPosition: "floating" }), o$3("div", { children: selectedIndex }), o$3(ListboxSingle, { paginationLocation: paginationWindow == null ? null : "before", paginationSize: paginationWindow ?? null, paginationLabel: "Choose the selected page of items to show", selectedIndex: selectedIndex, onSelectedIndexChange: setSelectedIndex, labelPosition: "before", label: "List (grid)", children: o$3(ListDemoContents, { count: count }) })] }));
+      return (o$3("div", { children: [o$3(TextField, { type: "number", value: count, onValueChange: setCount, label: "# of children", labelPosition: "floating" }), o$3(TextField, { type: "number", value: paginationWindow, onValueChange: setPaginationWindow, label: "Pagination window", labelPosition: "floating" }), o$3("div", { children: selectedIndex }), o$3(List, { paginationLocation: paginationWindow == null ? null : "before", paginationSize: paginationWindow ?? null, paginationLabel: "Choose the selected page of items to show", selectedIndex: selectedIndex, onSelectedIndexChange: setSelectedIndex, labelPosition: "before", label: "List (grid)", children: o$3(ListDemoContents, { count: count }) })] }));
   }
   const ListDemoContents = x$1(({ count }) => {
       console.log("ListDemoContents");
@@ -16654,7 +16669,7 @@
               }
           }()) }));
   });
-  x$1(k$1((props, ref) => {
+  const ListDemoMenu = x$1(k$1((props, ref) => {
       return (o$3(Menu, { ref: ref, ...props, anchor: o$3(Button, { variantSize: "sm", variantFill: "fill", variantTheme: "light", onPress: null, children: o$3(BootstrapIcon, { icon: "menu-app", label: "Open dropdown menu" }) }), children: Array.from(function* () {
               for (let i = 0; i < 10; ++i) {
                   yield (o$3(MenuItem, { index: i, onPress: async (c) => {
@@ -16665,11 +16680,13 @@
               }
           }()) }));
   }));
-  x$1(k$1((props, ref) => {
+  const ListDemoButton = x$1(k$1((props, ref) => {
       return (o$3(Button, { ref: ref, ...props, variantSize: "sm", variantFill: "fill", variantTheme: "light", onPress: () => alert("Delete button clicked"), children: o$3(BootstrapIcon, { icon: "trash-fill", label: "Delete" }) }));
   }));
   const ListDemoItem = x$1(({ i }) => {
-      return (o$3(ListboxSingleItem, { index: i, children: ["List item #", i] }));
+      /*return (
+          <ListItem index={i}>List item #{i}</ListItem>
+      )*/
       /* const [visible, setVisible] = useState(false);
        useTimeout({
            callback: () => setVisible(true),
@@ -16677,16 +16694,7 @@
        });
        if (!visible)
            return null;*/
-      /*return (
-          <ListItem
-              index={i}
-              onPress={useCallback(async () => { return new Promise<void>(resolve => setTimeout(resolve, 2000)) }, [])}
-              badge={<Badge variantTheme="info">10</Badge>}
-              iconStart={(i & 0b01) ? <ListDemoMenu /> : null}
-              iconEnd={(i & 0b10) ? <ListDemoButton /> : null}>
-              List item #{i}
-          </ListItem>
-      );*/
+      return (o$3(ListItem, { index: i, onPress: T$2(async () => { return new Promise(resolve => setTimeout(resolve, 2000)); }, []), badge: o$3(Badge, { variantTheme: "info", children: "10" }), iconStart: (i & 0b01) ? o$3(ListDemoMenu, {}) : null, iconEnd: (i & 0b10) ? o$3(ListDemoButton, {}) : null, children: ["List item #", i] }));
   });
   function MenuDemo() {
       const [selectedIndex, setSelectedIndex] = h$2(null);

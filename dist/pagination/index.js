@@ -16,7 +16,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
     }, [page, windowSize]);
     return (_jsx(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "focus", selectedIndex: page, onSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
             const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
-            return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx("nav", { ...info.propsToolbar, children: _jsx("ul", { class: "pagination", children: _jsx(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }), labelPosition == "after" && labelJsx] }));
+            return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx("nav", { "aria-label": labelPosition == 'hidden' ? label : undefined, children: _jsx("ul", { class: "pagination", ...info.propsToolbar, children: _jsx(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }), labelPosition == "after" && labelJsx] }));
         } }));
 }
 const PaginationChildren = memo(({ childCount, windowSize }) => {

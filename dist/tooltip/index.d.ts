@@ -47,8 +47,8 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
     /**
      * By default, this is `top`. Feel free to override.
      */
-    placement?: UsePopperProps["popperParameters"]["placement"];
-    alignMode?: UsePopperProps["popperParameters"]["alignMode"];
+    placement?: UsePopperProps<HTMLDivElement>["popperParameters"]["placement"];
+    alignMode?: UsePopperProps<HTMLDivElement>["popperParameters"]["alignMode"];
     forceOpen?: boolean;
 }
 export declare const Tooltip: ({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, hoverDelay, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) => import("preact").JSX.Element;

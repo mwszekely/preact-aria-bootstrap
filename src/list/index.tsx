@@ -145,7 +145,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
     return (
         <KeyboardAssistIcon leftRight={(!!iconStart || !!iconEnd)} upDown={true} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={false}>
             <div
-                aria-busy={(!show).toString()}
+                aria-busy={(!show)}
                 {...finalPropsForDiv}>
 
                 {show && c}

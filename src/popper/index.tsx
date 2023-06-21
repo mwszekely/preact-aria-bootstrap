@@ -1,11 +1,11 @@
 import { Alignment, arrow, computePosition, flip, hide, Middleware, offset, Placement, shift, Side, size } from "@floating-ui/dom";
 import { identity } from "lodash-es";
 import { h } from "preact";
-import { returnZero, runImmediately, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
+import { ElementProps, returnZero, runImmediately, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 import { CSSProperties } from "preact/compat";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 
-export interface UsePopperProps {
+export interface UsePopperProps<SourceElement extends Element> {
     popperParameters: {
 
         placement: Placement;
@@ -27,7 +27,7 @@ export interface UsePopperProps {
          */
         alignMode: "mouse" | "element";
 
-        getElement?: (e: HTMLElement) => HTMLElement;
+        getElement?: (e: SourceElement) => HTMLElement;
     }
 }
 
@@ -53,7 +53,15 @@ function roundByDPR(value: number) {
     return Math.round(value * dpr) / dpr;
 }
 
-export function usePopper<SourceElement extends Element, PopupElement extends HTMLElement, ArrowElement extends HTMLElement>({ popperParameters: { open, getElement, alignMode, placement: requestedPlacement, absolutePositioning } }: UsePopperProps) {
+export interface UsePopperReturnType<SourceElement extends Element, PopupElement extends HTMLElement, ArrowElement extends HTMLElement> {
+    propsSource: ElementProps<SourceElement>;
+    propsPopup: ElementProps<PopupElement>;
+    propsArrow: ElementProps<ArrowElement>;
+    propsData: h.JSX.HTMLAttributes<any>;
+    popperReturn: { usedSide: Side | null; usedAlignment: Alignment | null; hidden: boolean; };
+}
+
+export function usePopper<SourceElement extends Element, PopupElement extends HTMLElement, ArrowElement extends HTMLElement>({ popperParameters: { open, getElement, alignMode, placement: requestedPlacement, absolutePositioning } }: UsePopperProps<SourceElement>): UsePopperReturnType<SourceElement, PopupElement, ArrowElement> {
     //const [getSourceElement, setSourceElement] = usePassiveState<SourceElement | null, never>(null);
     //const [getPopupElement, setPopupElement] = usePassiveState<PopupElement | null, never>(null);
     //const [getArrowElement, setArrowElement] = usePassiveState<ArrowElement | null, never>(null);

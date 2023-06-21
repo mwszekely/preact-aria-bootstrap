@@ -65,9 +65,9 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
     /**
      * By default, this is `top`. Feel free to override.
      */
-    placement?: UsePopperProps["popperParameters"]["placement"];
+    placement?: UsePopperProps<HTMLDivElement>["popperParameters"]["placement"];
 
-    alignMode?: UsePopperProps["popperParameters"]["alignMode"];
+    alignMode?: UsePopperProps<HTMLDivElement>["popperParameters"]["alignMode"];
 
     forceOpen?: boolean;
 

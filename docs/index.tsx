@@ -1,8 +1,9 @@
 import { Ref, render } from "preact";
+import { focus } from "preact-prop-helpers";
 import { forwardRef, memo } from "preact/compat";
 import "preact/debug";
 import { useCallback, useMemo, useState } from "preact/hooks";
-import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, ListboxSingle as List, ListboxSingleItem as ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast, useRenderCounters } from "../dist/index.js";
+import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast, useRenderCounters } from "../dist/index.js";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
 import * as Radio from "./demos/radio";
@@ -25,7 +26,7 @@ function ListDemo() {
     const [selectedIndex, setSelectedIndex] = useState(null as null | number);
     count ??= 0;
     return (<div>
-        <strong>(The gridlist demo is currently down for maintenance &mdash; please enjoy this listbox demo instead.)</strong>
+        {/*<strong>(The gridlist demo is currently down for maintenance &mdash; please enjoy this listbox demo instead.)</strong>*/}
         <TextField type="number" value={count} onValueChange={setCount} label="# of children" labelPosition="floating" />
         <TextField type="number" value={paginationWindow} onValueChange={setPaginationWindow} label="Pagination window" labelPosition="floating" />
         <div>{selectedIndex}</div>
@@ -72,12 +73,12 @@ const ListDemoButton = memo(forwardRef((props, ref: Ref<HTMLButtonElement>) => {
     return (
         <ButtonAction ref={ref} {...props} variantSize="sm" variantFill="fill" variantTheme="light" onPress={() => alert("Delete button clicked")}><BootstrapIcon icon="trash-fill" label="Delete" /></ButtonAction>
     )
-}))
+}));
 
 const ListDemoItem = memo(({ i }: { i: number }) => {
-    return (
+    /*return (
         <ListItem index={i}>List item #{i}</ListItem>
-    )
+    )*/
     /* const [visible, setVisible] = useState(false);
      useTimeout({
          callback: () => setVisible(true),
@@ -85,7 +86,7 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
      });
      if (!visible)
          return null;*/
-    /*return (
+    return (
         <ListItem
             index={i}
             onPress={useCallback(async () => { return new Promise<void>(resolve => setTimeout(resolve, 2000)) }, [])}
@@ -94,7 +95,7 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
             iconEnd={(i & 0b10) ? <ListDemoButton /> : null}>
             List item #{i}
         </ListItem>
-    );*/
+    );
 })
 
 function MenuDemo() {
