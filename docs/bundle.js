@@ -2401,6 +2401,369 @@
       };
   }
 
+  /*!
+  * tabbable 6.2.0
+  * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
+  */
+  // NOTE: separate `:not()` selectors has broader browser support than the newer
+  //  `:not([inert], [inert] *)` (Feb 2023)
+  // CAREFUL: JSDom does not support `:not([inert] *)` as a selector; using it causes
+  //  the entire query to fail, resulting in no nodes found, which will break a lot
+  //  of things... so we have to rely on JS to identify nodes inside an inert container
+  var candidateSelectors = ['input:not([inert])', 'select:not([inert])', 'textarea:not([inert])', 'a[href]:not([inert])', 'button:not([inert])', '[tabindex]:not(slot):not([inert])', 'audio[controls]:not([inert])', 'video[controls]:not([inert])', '[contenteditable]:not([contenteditable="false"]):not([inert])', 'details>summary:first-of-type:not([inert])', 'details:not([inert])'];
+  var candidateSelector = /* #__PURE__ */candidateSelectors.join(',');
+  var NoElement = typeof Element === 'undefined';
+  var matches = NoElement ? function () {} : Element.prototype.matches || Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+  var getRootNode = !NoElement && Element.prototype.getRootNode ? function (element) {
+    var _element$getRootNode;
+    return element === null || element === void 0 ? void 0 : (_element$getRootNode = element.getRootNode) === null || _element$getRootNode === void 0 ? void 0 : _element$getRootNode.call(element);
+  } : function (element) {
+    return element === null || element === void 0 ? void 0 : element.ownerDocument;
+  };
+
+  /**
+   * Determines if a node is inert or in an inert ancestor.
+   * @param {Element} [node]
+   * @param {boolean} [lookUp] If true and `node` is not inert, looks up at ancestors to
+   *  see if any of them are inert. If false, only `node` itself is considered.
+   * @returns {boolean} True if inert itself or by way of being in an inert ancestor.
+   *  False if `node` is falsy.
+   */
+  var isInert = function isInert(node, lookUp) {
+    var _node$getAttribute;
+    if (lookUp === void 0) {
+      lookUp = true;
+    }
+    // CAREFUL: JSDom does not support inert at all, so we can't use the `HTMLElement.inert`
+    //  JS API property; we have to check the attribute, which can either be empty or 'true';
+    //  if it's `null` (not specified) or 'false', it's an active element
+    var inertAtt = node === null || node === void 0 ? void 0 : (_node$getAttribute = node.getAttribute) === null || _node$getAttribute === void 0 ? void 0 : _node$getAttribute.call(node, 'inert');
+    var inert = inertAtt === '' || inertAtt === 'true';
+
+    // NOTE: this could also be handled with `node.matches('[inert], :is([inert] *)')`
+    //  if it weren't for `matches()` not being a function on shadow roots; the following
+    //  code works for any kind of node
+    // CAREFUL: JSDom does not appear to support certain selectors like `:not([inert] *)`
+    //  so it likely would not support `:is([inert] *)` either...
+    var result = inert || lookUp && node && isInert(node.parentNode); // recursive
+
+    return result;
+  };
+
+  /**
+   * Determines if a node's content is editable.
+   * @param {Element} [node]
+   * @returns True if it's content-editable; false if it's not or `node` is falsy.
+   */
+  var isContentEditable = function isContentEditable(node) {
+    var _node$getAttribute2;
+    // CAREFUL: JSDom does not support the `HTMLElement.isContentEditable` API so we have
+    //  to use the attribute directly to check for this, which can either be empty or 'true';
+    //  if it's `null` (not specified) or 'false', it's a non-editable element
+    var attValue = node === null || node === void 0 ? void 0 : (_node$getAttribute2 = node.getAttribute) === null || _node$getAttribute2 === void 0 ? void 0 : _node$getAttribute2.call(node, 'contenteditable');
+    return attValue === '' || attValue === 'true';
+  };
+
+  /**
+   * @private
+   * Determines if the node has an explicitly specified `tabindex` attribute.
+   * @param {HTMLElement} node
+   * @returns {boolean} True if so; false if not.
+   */
+  var hasTabIndex = function hasTabIndex(node) {
+    return !isNaN(parseInt(node.getAttribute('tabindex'), 10));
+  };
+
+  /**
+   * Determine the tab index of a given node.
+   * @param {HTMLElement} node
+   * @returns {number} Tab order (negative, 0, or positive number).
+   * @throws {Error} If `node` is falsy.
+   */
+  var getTabIndex = function getTabIndex(node) {
+    if (!node) {
+      throw new Error('No node provided');
+    }
+    if (node.tabIndex < 0) {
+      // in Chrome, <details/>, <audio controls/> and <video controls/> elements get a default
+      // `tabIndex` of -1 when the 'tabindex' attribute isn't specified in the DOM,
+      // yet they are still part of the regular tab order; in FF, they get a default
+      // `tabIndex` of 0; since Chrome still puts those elements in the regular tab
+      // order, consider their tab index to be 0.
+      // Also browsers do not return `tabIndex` correctly for contentEditable nodes;
+      // so if they don't have a tabindex attribute specifically set, assume it's 0.
+      if ((/^(AUDIO|VIDEO|DETAILS)$/.test(node.tagName) || isContentEditable(node)) && !hasTabIndex(node)) {
+        return 0;
+      }
+    }
+    return node.tabIndex;
+  };
+  var isInput = function isInput(node) {
+    return node.tagName === 'INPUT';
+  };
+  var isHiddenInput = function isHiddenInput(node) {
+    return isInput(node) && node.type === 'hidden';
+  };
+  var isDetailsWithSummary = function isDetailsWithSummary(node) {
+    var r = node.tagName === 'DETAILS' && Array.prototype.slice.apply(node.children).some(function (child) {
+      return child.tagName === 'SUMMARY';
+    });
+    return r;
+  };
+  var getCheckedRadio = function getCheckedRadio(nodes, form) {
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i].checked && nodes[i].form === form) {
+        return nodes[i];
+      }
+    }
+  };
+  var isTabbableRadio = function isTabbableRadio(node) {
+    if (!node.name) {
+      return true;
+    }
+    var radioScope = node.form || getRootNode(node);
+    var queryRadios = function queryRadios(name) {
+      return radioScope.querySelectorAll('input[type="radio"][name="' + name + '"]');
+    };
+    var radioSet;
+    if (typeof window !== 'undefined' && typeof window.CSS !== 'undefined' && typeof window.CSS.escape === 'function') {
+      radioSet = queryRadios(window.CSS.escape(node.name));
+    } else {
+      try {
+        radioSet = queryRadios(node.name);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error('Looks like you have a radio button with a name attribute containing invalid CSS selector characters and need the CSS.escape polyfill: %s', err.message);
+        return false;
+      }
+    }
+    var checked = getCheckedRadio(radioSet, node.form);
+    return !checked || checked === node;
+  };
+  var isRadio = function isRadio(node) {
+    return isInput(node) && node.type === 'radio';
+  };
+  var isNonTabbableRadio = function isNonTabbableRadio(node) {
+    return isRadio(node) && !isTabbableRadio(node);
+  };
+
+  // determines if a node is ultimately attached to the window's document
+  var isNodeAttached = function isNodeAttached(node) {
+    var _nodeRoot;
+    // The root node is the shadow root if the node is in a shadow DOM; some document otherwise
+    //  (but NOT _the_ document; see second 'If' comment below for more).
+    // If rootNode is shadow root, it'll have a host, which is the element to which the shadow
+    //  is attached, and the one we need to check if it's in the document or not (because the
+    //  shadow, and all nodes it contains, is never considered in the document since shadows
+    //  behave like self-contained DOMs; but if the shadow's HOST, which is part of the document,
+    //  is hidden, or is not in the document itself but is detached, it will affect the shadow's
+    //  visibility, including all the nodes it contains). The host could be any normal node,
+    //  or a custom element (i.e. web component). Either way, that's the one that is considered
+    //  part of the document, not the shadow root, nor any of its children (i.e. the node being
+    //  tested).
+    // To further complicate things, we have to look all the way up until we find a shadow HOST
+    //  that is attached (or find none) because the node might be in nested shadows...
+    // If rootNode is not a shadow root, it won't have a host, and so rootNode should be the
+    //  document (per the docs) and while it's a Document-type object, that document does not
+    //  appear to be the same as the node's `ownerDocument` for some reason, so it's safer
+    //  to ignore the rootNode at this point, and use `node.ownerDocument`. Otherwise,
+    //  using `rootNode.contains(node)` will _always_ be true we'll get false-positives when
+    //  node is actually detached.
+    // NOTE: If `nodeRootHost` or `node` happens to be the `document` itself (which is possible
+    //  if a tabbable/focusable node was quickly added to the DOM, focused, and then removed
+    //  from the DOM as in https://github.com/focus-trap/focus-trap-react/issues/905), then
+    //  `ownerDocument` will be `null`, hence the optional chaining on it.
+    var nodeRoot = node && getRootNode(node);
+    var nodeRootHost = (_nodeRoot = nodeRoot) === null || _nodeRoot === void 0 ? void 0 : _nodeRoot.host;
+
+    // in some cases, a detached node will return itself as the root instead of a document or
+    //  shadow root object, in which case, we shouldn't try to look further up the host chain
+    var attached = false;
+    if (nodeRoot && nodeRoot !== node) {
+      var _nodeRootHost, _nodeRootHost$ownerDo, _node$ownerDocument;
+      attached = !!((_nodeRootHost = nodeRootHost) !== null && _nodeRootHost !== void 0 && (_nodeRootHost$ownerDo = _nodeRootHost.ownerDocument) !== null && _nodeRootHost$ownerDo !== void 0 && _nodeRootHost$ownerDo.contains(nodeRootHost) || node !== null && node !== void 0 && (_node$ownerDocument = node.ownerDocument) !== null && _node$ownerDocument !== void 0 && _node$ownerDocument.contains(node));
+      while (!attached && nodeRootHost) {
+        var _nodeRoot2, _nodeRootHost2, _nodeRootHost2$ownerD;
+        // since it's not attached and we have a root host, the node MUST be in a nested shadow DOM,
+        //  which means we need to get the host's host and check if that parent host is contained
+        //  in (i.e. attached to) the document
+        nodeRoot = getRootNode(nodeRootHost);
+        nodeRootHost = (_nodeRoot2 = nodeRoot) === null || _nodeRoot2 === void 0 ? void 0 : _nodeRoot2.host;
+        attached = !!((_nodeRootHost2 = nodeRootHost) !== null && _nodeRootHost2 !== void 0 && (_nodeRootHost2$ownerD = _nodeRootHost2.ownerDocument) !== null && _nodeRootHost2$ownerD !== void 0 && _nodeRootHost2$ownerD.contains(nodeRootHost));
+      }
+    }
+    return attached;
+  };
+  var isZeroArea = function isZeroArea(node) {
+    var _node$getBoundingClie = node.getBoundingClientRect(),
+      width = _node$getBoundingClie.width,
+      height = _node$getBoundingClie.height;
+    return width === 0 && height === 0;
+  };
+  var isHidden = function isHidden(node, _ref) {
+    var displayCheck = _ref.displayCheck,
+      getShadowRoot = _ref.getShadowRoot;
+    // NOTE: visibility will be `undefined` if node is detached from the document
+    //  (see notes about this further down), which means we will consider it visible
+    //  (this is legacy behavior from a very long way back)
+    // NOTE: we check this regardless of `displayCheck="none"` because this is a
+    //  _visibility_ check, not a _display_ check
+    if (getComputedStyle(node).visibility === 'hidden') {
+      return true;
+    }
+    var isDirectSummary = matches.call(node, 'details>summary:first-of-type');
+    var nodeUnderDetails = isDirectSummary ? node.parentElement : node;
+    if (matches.call(nodeUnderDetails, 'details:not([open]) *')) {
+      return true;
+    }
+    if (!displayCheck || displayCheck === 'full' || displayCheck === 'legacy-full') {
+      if (typeof getShadowRoot === 'function') {
+        // figure out if we should consider the node to be in an undisclosed shadow and use the
+        //  'non-zero-area' fallback
+        var originalNode = node;
+        while (node) {
+          var parentElement = node.parentElement;
+          var rootNode = getRootNode(node);
+          if (parentElement && !parentElement.shadowRoot && getShadowRoot(parentElement) === true // check if there's an undisclosed shadow
+          ) {
+            // node has an undisclosed shadow which means we can only treat it as a black box, so we
+            //  fall back to a non-zero-area test
+            return isZeroArea(node);
+          } else if (node.assignedSlot) {
+            // iterate up slot
+            node = node.assignedSlot;
+          } else if (!parentElement && rootNode !== node.ownerDocument) {
+            // cross shadow boundary
+            node = rootNode.host;
+          } else {
+            // iterate up normal dom
+            node = parentElement;
+          }
+        }
+        node = originalNode;
+      }
+      // else, `getShadowRoot` might be true, but all that does is enable shadow DOM support
+      //  (i.e. it does not also presume that all nodes might have undisclosed shadows); or
+      //  it might be a falsy value, which means shadow DOM support is disabled
+
+      // Since we didn't find it sitting in an undisclosed shadow (or shadows are disabled)
+      //  now we can just test to see if it would normally be visible or not, provided it's
+      //  attached to the main document.
+      // NOTE: We must consider case where node is inside a shadow DOM and given directly to
+      //  `isTabbable()` or `isFocusable()` -- regardless of `getShadowRoot` option setting.
+
+      if (isNodeAttached(node)) {
+        // this works wherever the node is: if there's at least one client rect, it's
+        //  somehow displayed; it also covers the CSS 'display: contents' case where the
+        //  node itself is hidden in place of its contents; and there's no need to search
+        //  up the hierarchy either
+        return !node.getClientRects().length;
+      }
+
+      // Else, the node isn't attached to the document, which means the `getClientRects()`
+      //  API will __always__ return zero rects (this can happen, for example, if React
+      //  is used to render nodes onto a detached tree, as confirmed in this thread:
+      //  https://github.com/facebook/react/issues/9117#issuecomment-284228870)
+      //
+      // It also means that even window.getComputedStyle(node).display will return `undefined`
+      //  because styles are only computed for nodes that are in the document.
+      //
+      // NOTE: THIS HAS BEEN THE CASE FOR YEARS. It is not new, nor is it caused by tabbable
+      //  somehow. Though it was never stated officially, anyone who has ever used tabbable
+      //  APIs on nodes in detached containers has actually implicitly used tabbable in what
+      //  was later (as of v5.2.0 on Apr 9, 2021) called `displayCheck="none"` mode -- essentially
+      //  considering __everything__ to be visible because of the innability to determine styles.
+      //
+      // v6.0.0: As of this major release, the default 'full' option __no longer treats detached
+      //  nodes as visible with the 'none' fallback.__
+      if (displayCheck !== 'legacy-full') {
+        return true; // hidden
+      }
+      // else, fallback to 'none' mode and consider the node visible
+    } else if (displayCheck === 'non-zero-area') {
+      // NOTE: Even though this tests that the node's client rect is non-zero to determine
+      //  whether it's displayed, and that a detached node will __always__ have a zero-area
+      //  client rect, we don't special-case for whether the node is attached or not. In
+      //  this mode, we do want to consider nodes that have a zero area to be hidden at all
+      //  times, and that includes attached or not.
+      return isZeroArea(node);
+    }
+
+    // visible, as far as we can tell, or per current `displayCheck=none` mode, we assume
+    //  it's visible
+    return false;
+  };
+
+  // form fields (nested) inside a disabled fieldset are not focusable/tabbable
+  //  unless they are in the _first_ <legend> element of the top-most disabled
+  //  fieldset
+  var isDisabledFromFieldset = function isDisabledFromFieldset(node) {
+    if (/^(INPUT|BUTTON|SELECT|TEXTAREA)$/.test(node.tagName)) {
+      var parentNode = node.parentElement;
+      // check if `node` is contained in a disabled <fieldset>
+      while (parentNode) {
+        if (parentNode.tagName === 'FIELDSET' && parentNode.disabled) {
+          // look for the first <legend> among the children of the disabled <fieldset>
+          for (var i = 0; i < parentNode.children.length; i++) {
+            var child = parentNode.children.item(i);
+            // when the first <legend> (in document order) is found
+            if (child.tagName === 'LEGEND') {
+              // if its parent <fieldset> is not nested in another disabled <fieldset>,
+              // return whether `node` is a descendant of its first <legend>
+              return matches.call(parentNode, 'fieldset[disabled] *') ? true : !child.contains(node);
+            }
+          }
+          // the disabled <fieldset> containing `node` has no <legend>
+          return true;
+        }
+        parentNode = parentNode.parentElement;
+      }
+    }
+
+    // else, node's tabbable/focusable state should not be affected by a fieldset's
+    //  enabled/disabled state
+    return false;
+  };
+  var isNodeMatchingSelectorFocusable = function isNodeMatchingSelectorFocusable(options, node) {
+    if (node.disabled ||
+    // we must do an inert look up to filter out any elements inside an inert ancestor
+    //  because we're limited in the type of selectors we can use in JSDom (see related
+    //  note related to `candidateSelectors`)
+    isInert(node) || isHiddenInput(node) || isHidden(node, options) ||
+    // For a details element with a summary, the summary element gets the focus
+    isDetailsWithSummary(node) || isDisabledFromFieldset(node)) {
+      return false;
+    }
+    return true;
+  };
+  var isNodeMatchingSelectorTabbable = function isNodeMatchingSelectorTabbable(options, node) {
+    if (isNonTabbableRadio(node) || getTabIndex(node) < 0 || !isNodeMatchingSelectorFocusable(options, node)) {
+      return false;
+    }
+    return true;
+  };
+  var isTabbable = function isTabbable(node, options) {
+    options = options || {};
+    if (!node) {
+      throw new Error('No node provided');
+    }
+    if (matches.call(node, candidateSelector) === false) {
+      return false;
+    }
+    return isNodeMatchingSelectorTabbable(options, node);
+  };
+  var focusableCandidateSelector = /* #__PURE__ */candidateSelectors.concat('iframe').join(',');
+  var isFocusable = function isFocusable(node, options) {
+    options = options || {};
+    if (!node) {
+      throw new Error('No node provided');
+    }
+    if (matches.call(node, focusableCandidateSelector) === false) {
+      return false;
+    }
+    return isNodeMatchingSelectorFocusable(options, node);
+  };
+
   function generateStack() {
       if (getBuildMode() === 'development') {
           try {
@@ -2431,6 +2794,56 @@
           console.log(generateStack());
       }
       e?.focus?.();
+  }
+  /**
+   * When an element unmounts, default HTML behavior is to just send focus to the body, which is wildly unhelpful. It means you lose your place in the keyboard tab order.
+   *
+   * If you still have access to the element that's unmounting, or perhaps its parent from beforehand, this will find the next suitable element to send focus to instead of the body.
+   *
+   * **Important**: This function is linear on the number of DOM nodes in your document, so it's not particularly fast. Only call it once when you need its value, not every time tab focus changed or something.
+   *
+   * @param unmountingElement
+   * @returns
+   */
+  function findBackupFocus(unmountingElement) {
+      if (unmountingElement == null)
+          return (globalThis.document.body);
+      let document = unmountingElement.ownerDocument;
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
+      let node = walker.firstChild();
+      let bestCandidateBefore = null;
+      let bestCandidateAfter = null;
+      let w = false;
+      while (node) {
+          let pos = node.compareDocumentPosition(unmountingElement);
+          if (pos & Node.DOCUMENT_POSITION_DISCONNECTED) {
+              if (!w)
+                  console.warn("Can't focus anything near a disconnected element");
+              w = true;
+          }
+          if (pos & Node.DOCUMENT_POSITION_PRECEDING) {
+              // The unmounting element is before this element we're treewalking.
+              // That means the next tabbable element we find is the candidate we really want.
+              if (node instanceof Element) {
+                  if (isTabbable(node)) {
+                      bestCandidateAfter = node;
+                      break;
+                  }
+              }
+          }
+          else if (pos & Node.DOCUMENT_POSITION_FOLLOWING) {
+              // The unmounting element is after this element we're treewalking.
+              // That means the we're getting closer and closer.
+              // If this element is tabbable, then it's even closer than any other tabbable element we've saved up to this point.
+              if (node instanceof Element) {
+                  if (isTabbable(node)) {
+                      bestCandidateBefore = node;
+                  }
+              }
+          }
+          node = walker.nextNode();
+      }
+      return bestCandidateAfter ?? bestCandidateBefore ?? document.body;
   }
 
   /**
@@ -2717,13 +3130,13 @@
                   mounts: new Set(),
                   unmounts: new Set(),
               };
-              if (onChildrenCountChange || onChildrenMountChange) {
-                  debounceRendering(() => {
+              debounceRendering(() => {
+                  if (onChildrenCountChange || onChildrenMountChange) {
                       onChildrenMountChange?.(hasRemoteULEChildMounted.current.mounts, hasRemoteULEChildMounted.current.unmounts);
                       onChildrenCountChange?.(getChildren().getHighestIndex() + 1);
                       hasRemoteULEChildMounted.current = null;
-                  });
-              }
+                  }
+              });
           }
           if (mounted) {
               if (typeof index == "number")
@@ -2733,7 +3146,7 @@
               if (typeof index == "number") {
                   delete managedChildrenArray.current.arr[index];
                   let shave = 0;
-                  while (shave <= managedChildrenArray.current.arr.length && managedChildrenArray.current.arr[managedChildrenArray.current.arr.length - 1 - shave] === undefined) {
+                  while (shave <= managedChildrenArray.current.arr.length && managedChildrenArray.current.arr[managedChildrenArray.current.arr.length - 1 - shave] == undefined) {
                       ++shave;
                   }
                   managedChildrenArray.current.arr.splice(managedChildrenArray.current.arr.length - shave, shave);
@@ -2743,7 +3156,7 @@
               if (typeof index == "number")
                   managedChildrenArray.current.highestIndex = managedChildrenArray.current.arr.length - 1;
           }
-          hasRemoteULEChildMounted.current[mounted ? "mounts" : "unmounts"].add(index);
+          hasRemoteULEChildMounted?.current?.[mounted ? "mounts" : "unmounts"]?.add?.(index);
       }, [ /* Must remain stable */]);
       const managedChildren = useMemoObject({
           ...{ _: managedChildrenArray.current },
@@ -2822,7 +3235,7 @@
    * @param param0
    * @returns
    */
-  function useChildrenFlag({ getChildren, initialIndex, closestFit, onIndexChange, getAt, setAt, isValid }) {
+  function useChildrenFlag({ getChildren, initialIndex, closestFit, onClosestFit, onIndexChange, getAt, setAt, isValid }) {
       useEnsureStability("useChildrenFlag", onIndexChange, getAt, setAt, isValid);
       // TODO (maybe?): Even if there is an initial index, it's not set until mount. Is that fine?
       const [getCurrentIndex, setCurrentIndex] = usePassiveState(onIndexChange);
@@ -2845,6 +3258,9 @@
           });
           return closestIndex;
       }, [ /* Must remain stable! */]);
+      if (closestFit) {
+          console.assert(onClosestFit != null, "When closestFit is used, onClosestFit must be provided");
+      }
       // Any time a child mounts/unmounts, we need to double-check to see if that affects 
       // the "currently selected" (or whatever) index.  The two cases we're looking for:
       // 1. The currently selected child unmounted
@@ -2864,6 +3280,10 @@
                   const closestFitChild = children.getAt(closestFitIndex);
                   console.assert(closestFitChild != null, "Internal logic???");
                   setAt(closestFitChild, true, closestFitIndex, currentIndex);
+                  onClosestFit(closestFitIndex);
+              }
+              else {
+                  onClosestFit(null);
               }
           }
       });
@@ -2999,6 +3419,7 @@
   function useRovingTabIndex({ managedChildrenReturn: { getChildren }, rovingTabIndexParameters: { focusSelfParent: focusSelfParentUnstable, untabbable, untabbableBehavior, initiallyTabbedIndex, onTabbableIndexChange }, refElementReturn: { getElement }, ...void1 }) {
       const focusSelfParent = useStableCallback(focusSelfParentUnstable);
       untabbableBehavior ||= "focus-parent";
+      const lastFocused = _$1(null);
       const getInitiallyTabbedIndex = useStableGetter(initiallyTabbedIndex);
       const getUntabbable = useStableGetter(untabbable);
       // Override the actual setter to include some extra logic related to avoiding hidden children, 
@@ -3083,6 +3504,21 @@
           getAt: getTabbableAt,
           isValid: isTabbableValid,
           setAt: setTabbableAt,
+          onClosestFit: (index) => {
+              // Whenever we change due to a closest-fit switch, make sure we don't lose focus to the body
+              // TODO: This is slightly janky -- we want to only mess with the user's focus when this list (or whatever) is the current focus,
+              // but by the time we know something like "all the children have unmounted",
+              // we've lot the ability to know if any of them were focused, at least easily.
+              // So we just check to see if focus was lost to the body and, if so, send it somewhere useful.
+              // This is liable to break, probably with blockingElements or something.
+              if (document.activeElement == null || document.activeElement == document.body) {
+                  let childElement = index == null ? null : getChildren().getAt(index)?.getElement();
+                  if (index == null || childElement == null)
+                      findBackupFocus(getElement()).focus();
+                  else
+                      getChildren().getAt(index)?.focusSelf(childElement);
+              }
+          }
       });
       const focusSelf = T$2((reason) => {
           const children = getChildren();
@@ -3110,7 +3546,8 @@
           getInitiallyTabbedIndex: T$2(() => { return initiallyTabbedIndex ?? (untabbable ? null : 0); }, []),
           reevaluateClosestFit,
           untabbable,
-          untabbableBehavior
+          untabbableBehavior,
+          giveParentFocusedElement: T$2((e) => { lastFocused.current = e; }, [])
       });
       return {
           managedChildrenParameters: { onChildrenMountChange: reevaluateClosestFit, },
@@ -3126,11 +3563,16 @@
           }
       };
   }
-  function useRovingTabIndexChild({ info: { index, untabbable: iAmUntabbable, ...void2 }, context: { rovingTabIndexContext: { untabbable: parentIsUntabbable, untabbableBehavior, reevaluateClosestFit, setTabbableIndex, getInitiallyTabbedIndex, parentFocusSelf } }, ...void3 }) {
+  function useRovingTabIndexChild({ info: { index, untabbable: iAmUntabbable, ...void2 }, context: { rovingTabIndexContext: { giveParentFocusedElement, untabbable: parentIsUntabbable, untabbableBehavior, reevaluateClosestFit, setTabbableIndex, getInitiallyTabbedIndex, parentFocusSelf } }, refElementReturn: { getElement }, ...void3 }) {
       const [tabbable, setTabbable, getTabbable] = useState(getInitiallyTabbedIndex() === index);
       p$2(() => {
           reevaluateClosestFit();
       }, [!!iAmUntabbable]);
+      p$2(() => {
+          if (tabbable) {
+              giveParentFocusedElement(getElement());
+          }
+      }, [tabbable]);
       return {
           hasCurrentFocusParameters: {
               onCurrentFocusedInnerChanged: useStableCallback((focused, _prevFocused, e) => {
@@ -3446,7 +3888,7 @@
       };
   }
   function useListNavigationChild({ info, context, refElementReturn, textContentParameters, ...void2 }) {
-      const { props, ...rticr } = useRovingTabIndexChild({ context, info });
+      const { props, ...rticr } = useRovingTabIndexChild({ context, info, refElementReturn });
       const { ...tncr } = useTypeaheadNavigationChild({ refElementReturn, textContentParameters, context, info });
       return {
           props,
@@ -3633,7 +4075,8 @@
           getAt: getSelectedAt,
           setAt: setSelectedAt,
           isValid: isSelectedValid,
-          closestFit: false
+          closestFit: false,
+          onClosestFit: null
       });
       return {
           singleSelectionReturn: useMemoObject({
@@ -4398,267 +4841,6 @@
           propsStablePopup
       };
   }
-
-  /*!
-  * tabbable 6.1.2
-  * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
-  */
-  // NOTE: separate `:not()` selectors has broader browser support than the newer
-  //  `:not([inert], [inert] *)` (Feb 2023)
-  // CAREFUL: JSDom does not support `:not([inert] *)` as a selector; using it causes
-  //  the entire query to fail, resulting in no nodes found, which will break a lot
-  //  of things... so we have to rely on JS to identify nodes inside an inert container
-  var candidateSelectors = ['input:not([inert])', 'select:not([inert])', 'textarea:not([inert])', 'a[href]:not([inert])', 'button:not([inert])', '[tabindex]:not(slot):not([inert])', 'audio[controls]:not([inert])', 'video[controls]:not([inert])', '[contenteditable]:not([contenteditable="false"]):not([inert])', 'details>summary:first-of-type:not([inert])', 'details:not([inert])'];
-  var NoElement = typeof Element === 'undefined';
-  var matches = NoElement ? function () {} : Element.prototype.matches || Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
-  var getRootNode = !NoElement && Element.prototype.getRootNode ? function (element) {
-    var _element$getRootNode;
-    return element === null || element === void 0 ? void 0 : (_element$getRootNode = element.getRootNode) === null || _element$getRootNode === void 0 ? void 0 : _element$getRootNode.call(element);
-  } : function (element) {
-    return element === null || element === void 0 ? void 0 : element.ownerDocument;
-  };
-
-  /**
-   * Determines if a node is inert or in an inert ancestor.
-   * @param {Element} [node]
-   * @param {boolean} [lookUp] If true and `node` is not inert, looks up at ancestors to
-   *  see if any of them are inert. If false, only `node` itself is considered.
-   * @returns {boolean} True if inert itself or by way of being in an inert ancestor.
-   *  False if `node` is falsy.
-   */
-  var isInert = function isInert(node, lookUp) {
-    var _node$getAttribute;
-    if (lookUp === void 0) {
-      lookUp = true;
-    }
-    // CAREFUL: JSDom does not support inert at all, so we can't use the `HTMLElement.inert`
-    //  JS API property; we have to check the attribute, which can either be empty or 'true';
-    //  if it's `null` (not specified) or 'false', it's an active element
-    var inertAtt = node === null || node === void 0 ? void 0 : (_node$getAttribute = node.getAttribute) === null || _node$getAttribute === void 0 ? void 0 : _node$getAttribute.call(node, 'inert');
-    var inert = inertAtt === '' || inertAtt === 'true';
-
-    // NOTE: this could also be handled with `node.matches('[inert], :is([inert] *)')`
-    //  if it weren't for `matches()` not being a function on shadow roots; the following
-    //  code works for any kind of node
-    // CAREFUL: JSDom does not appear to support certain selectors like `:not([inert] *)`
-    //  so it likely would not support `:is([inert] *)` either...
-    var result = inert || lookUp && node && isInert(node.parentNode); // recursive
-
-    return result;
-  };
-  var isInput = function isInput(node) {
-    return node.tagName === 'INPUT';
-  };
-  var isHiddenInput = function isHiddenInput(node) {
-    return isInput(node) && node.type === 'hidden';
-  };
-  var isDetailsWithSummary = function isDetailsWithSummary(node) {
-    var r = node.tagName === 'DETAILS' && Array.prototype.slice.apply(node.children).some(function (child) {
-      return child.tagName === 'SUMMARY';
-    });
-    return r;
-  };
-
-  // determines if a node is ultimately attached to the window's document
-  var isNodeAttached = function isNodeAttached(node) {
-    var _nodeRoot;
-    // The root node is the shadow root if the node is in a shadow DOM; some document otherwise
-    //  (but NOT _the_ document; see second 'If' comment below for more).
-    // If rootNode is shadow root, it'll have a host, which is the element to which the shadow
-    //  is attached, and the one we need to check if it's in the document or not (because the
-    //  shadow, and all nodes it contains, is never considered in the document since shadows
-    //  behave like self-contained DOMs; but if the shadow's HOST, which is part of the document,
-    //  is hidden, or is not in the document itself but is detached, it will affect the shadow's
-    //  visibility, including all the nodes it contains). The host could be any normal node,
-    //  or a custom element (i.e. web component). Either way, that's the one that is considered
-    //  part of the document, not the shadow root, nor any of its children (i.e. the node being
-    //  tested).
-    // To further complicate things, we have to look all the way up until we find a shadow HOST
-    //  that is attached (or find none) because the node might be in nested shadows...
-    // If rootNode is not a shadow root, it won't have a host, and so rootNode should be the
-    //  document (per the docs) and while it's a Document-type object, that document does not
-    //  appear to be the same as the node's `ownerDocument` for some reason, so it's safer
-    //  to ignore the rootNode at this point, and use `node.ownerDocument`. Otherwise,
-    //  using `rootNode.contains(node)` will _always_ be true we'll get false-positives when
-    //  node is actually detached.
-    // NOTE: If `nodeRootHost` or `node` happens to be the `document` itself (which is possible
-    //  if a tabbable/focusable node was quickly added to the DOM, focused, and then removed
-    //  from the DOM as in https://github.com/focus-trap/focus-trap-react/issues/905), then
-    //  `ownerDocument` will be `null`, hence the optional chaining on it.
-    var nodeRoot = node && getRootNode(node);
-    var nodeRootHost = (_nodeRoot = nodeRoot) === null || _nodeRoot === void 0 ? void 0 : _nodeRoot.host;
-
-    // in some cases, a detached node will return itself as the root instead of a document or
-    //  shadow root object, in which case, we shouldn't try to look further up the host chain
-    var attached = false;
-    if (nodeRoot && nodeRoot !== node) {
-      var _nodeRootHost, _nodeRootHost$ownerDo, _node$ownerDocument;
-      attached = !!((_nodeRootHost = nodeRootHost) !== null && _nodeRootHost !== void 0 && (_nodeRootHost$ownerDo = _nodeRootHost.ownerDocument) !== null && _nodeRootHost$ownerDo !== void 0 && _nodeRootHost$ownerDo.contains(nodeRootHost) || node !== null && node !== void 0 && (_node$ownerDocument = node.ownerDocument) !== null && _node$ownerDocument !== void 0 && _node$ownerDocument.contains(node));
-      while (!attached && nodeRootHost) {
-        var _nodeRoot2, _nodeRootHost2, _nodeRootHost2$ownerD;
-        // since it's not attached and we have a root host, the node MUST be in a nested shadow DOM,
-        //  which means we need to get the host's host and check if that parent host is contained
-        //  in (i.e. attached to) the document
-        nodeRoot = getRootNode(nodeRootHost);
-        nodeRootHost = (_nodeRoot2 = nodeRoot) === null || _nodeRoot2 === void 0 ? void 0 : _nodeRoot2.host;
-        attached = !!((_nodeRootHost2 = nodeRootHost) !== null && _nodeRootHost2 !== void 0 && (_nodeRootHost2$ownerD = _nodeRootHost2.ownerDocument) !== null && _nodeRootHost2$ownerD !== void 0 && _nodeRootHost2$ownerD.contains(nodeRootHost));
-      }
-    }
-    return attached;
-  };
-  var isZeroArea = function isZeroArea(node) {
-    var _node$getBoundingClie = node.getBoundingClientRect(),
-      width = _node$getBoundingClie.width,
-      height = _node$getBoundingClie.height;
-    return width === 0 && height === 0;
-  };
-  var isHidden = function isHidden(node, _ref) {
-    var displayCheck = _ref.displayCheck,
-      getShadowRoot = _ref.getShadowRoot;
-    // NOTE: visibility will be `undefined` if node is detached from the document
-    //  (see notes about this further down), which means we will consider it visible
-    //  (this is legacy behavior from a very long way back)
-    // NOTE: we check this regardless of `displayCheck="none"` because this is a
-    //  _visibility_ check, not a _display_ check
-    if (getComputedStyle(node).visibility === 'hidden') {
-      return true;
-    }
-    var isDirectSummary = matches.call(node, 'details>summary:first-of-type');
-    var nodeUnderDetails = isDirectSummary ? node.parentElement : node;
-    if (matches.call(nodeUnderDetails, 'details:not([open]) *')) {
-      return true;
-    }
-    if (!displayCheck || displayCheck === 'full' || displayCheck === 'legacy-full') {
-      if (typeof getShadowRoot === 'function') {
-        // figure out if we should consider the node to be in an undisclosed shadow and use the
-        //  'non-zero-area' fallback
-        var originalNode = node;
-        while (node) {
-          var parentElement = node.parentElement;
-          var rootNode = getRootNode(node);
-          if (parentElement && !parentElement.shadowRoot && getShadowRoot(parentElement) === true // check if there's an undisclosed shadow
-          ) {
-            // node has an undisclosed shadow which means we can only treat it as a black box, so we
-            //  fall back to a non-zero-area test
-            return isZeroArea(node);
-          } else if (node.assignedSlot) {
-            // iterate up slot
-            node = node.assignedSlot;
-          } else if (!parentElement && rootNode !== node.ownerDocument) {
-            // cross shadow boundary
-            node = rootNode.host;
-          } else {
-            // iterate up normal dom
-            node = parentElement;
-          }
-        }
-        node = originalNode;
-      }
-      // else, `getShadowRoot` might be true, but all that does is enable shadow DOM support
-      //  (i.e. it does not also presume that all nodes might have undisclosed shadows); or
-      //  it might be a falsy value, which means shadow DOM support is disabled
-
-      // Since we didn't find it sitting in an undisclosed shadow (or shadows are disabled)
-      //  now we can just test to see if it would normally be visible or not, provided it's
-      //  attached to the main document.
-      // NOTE: We must consider case where node is inside a shadow DOM and given directly to
-      //  `isTabbable()` or `isFocusable()` -- regardless of `getShadowRoot` option setting.
-
-      if (isNodeAttached(node)) {
-        // this works wherever the node is: if there's at least one client rect, it's
-        //  somehow displayed; it also covers the CSS 'display: contents' case where the
-        //  node itself is hidden in place of its contents; and there's no need to search
-        //  up the hierarchy either
-        return !node.getClientRects().length;
-      }
-
-      // Else, the node isn't attached to the document, which means the `getClientRects()`
-      //  API will __always__ return zero rects (this can happen, for example, if React
-      //  is used to render nodes onto a detached tree, as confirmed in this thread:
-      //  https://github.com/facebook/react/issues/9117#issuecomment-284228870)
-      //
-      // It also means that even window.getComputedStyle(node).display will return `undefined`
-      //  because styles are only computed for nodes that are in the document.
-      //
-      // NOTE: THIS HAS BEEN THE CASE FOR YEARS. It is not new, nor is it caused by tabbable
-      //  somehow. Though it was never stated officially, anyone who has ever used tabbable
-      //  APIs on nodes in detached containers has actually implicitly used tabbable in what
-      //  was later (as of v5.2.0 on Apr 9, 2021) called `displayCheck="none"` mode -- essentially
-      //  considering __everything__ to be visible because of the innability to determine styles.
-      //
-      // v6.0.0: As of this major release, the default 'full' option __no longer treats detached
-      //  nodes as visible with the 'none' fallback.__
-      if (displayCheck !== 'legacy-full') {
-        return true; // hidden
-      }
-      // else, fallback to 'none' mode and consider the node visible
-    } else if (displayCheck === 'non-zero-area') {
-      // NOTE: Even though this tests that the node's client rect is non-zero to determine
-      //  whether it's displayed, and that a detached node will __always__ have a zero-area
-      //  client rect, we don't special-case for whether the node is attached or not. In
-      //  this mode, we do want to consider nodes that have a zero area to be hidden at all
-      //  times, and that includes attached or not.
-      return isZeroArea(node);
-    }
-
-    // visible, as far as we can tell, or per current `displayCheck=none` mode, we assume
-    //  it's visible
-    return false;
-  };
-
-  // form fields (nested) inside a disabled fieldset are not focusable/tabbable
-  //  unless they are in the _first_ <legend> element of the top-most disabled
-  //  fieldset
-  var isDisabledFromFieldset = function isDisabledFromFieldset(node) {
-    if (/^(INPUT|BUTTON|SELECT|TEXTAREA)$/.test(node.tagName)) {
-      var parentNode = node.parentElement;
-      // check if `node` is contained in a disabled <fieldset>
-      while (parentNode) {
-        if (parentNode.tagName === 'FIELDSET' && parentNode.disabled) {
-          // look for the first <legend> among the children of the disabled <fieldset>
-          for (var i = 0; i < parentNode.children.length; i++) {
-            var child = parentNode.children.item(i);
-            // when the first <legend> (in document order) is found
-            if (child.tagName === 'LEGEND') {
-              // if its parent <fieldset> is not nested in another disabled <fieldset>,
-              // return whether `node` is a descendant of its first <legend>
-              return matches.call(parentNode, 'fieldset[disabled] *') ? true : !child.contains(node);
-            }
-          }
-          // the disabled <fieldset> containing `node` has no <legend>
-          return true;
-        }
-        parentNode = parentNode.parentElement;
-      }
-    }
-
-    // else, node's tabbable/focusable state should not be affected by a fieldset's
-    //  enabled/disabled state
-    return false;
-  };
-  var isNodeMatchingSelectorFocusable = function isNodeMatchingSelectorFocusable(options, node) {
-    if (node.disabled ||
-    // we must do an inert look up to filter out any elements inside an inert ancestor
-    //  because we're limited in the type of selectors we can use in JSDom (see related
-    //  note related to `candidateSelectors`)
-    isInert(node) || isHiddenInput(node) || isHidden(node, options) ||
-    // For a details element with a summary, the summary element gets the focus
-    isDetailsWithSummary(node) || isDisabledFromFieldset(node)) {
-      return false;
-    }
-    return true;
-  };
-  var focusableCandidateSelector = /* #__PURE__ */candidateSelectors.concat('iframe').join(',');
-  var isFocusable = function isFocusable(node, options) {
-    options = options || {};
-    if (!node) {
-      throw new Error('No node provided');
-    }
-    if (matches.call(node, focusableCandidateSelector) === false) {
-      return false;
-    }
-    return isNodeMatchingSelectorFocusable(options, node);
-  };
 
   /**
    * @license
@@ -6383,6 +6565,186 @@
       return { ...ret2, singleSelectionReturn: { getSelectedIndex } };
   }
 
+  /**
+   * All the list-related hooks combined into one giant hook that encapsulates everything.
+   *
+   * Unlike most others, this hook assume's it's the final one--the "outermost" hook in the component--so it uses `useManagedChildren` and wraps everything up nicely,
+   * combining event handlers that are used in multiple sub-hooks, collecting all the necessary context-related data, and merging all known DOM props together.
+   *
+   *
+   *
+   * @returns
+   */
+  function useCompleteListNavigation({ linearNavigationParameters, rearrangeableChildrenParameters, sortableChildrenParameters, typeaheadNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, paginatedChildrenParameters, staggeredChildrenParameters, ...completeListNavigationParameters }) {
+      const { initiallySelectedIndex } = singleSelectionParameters;
+      const getChildren = T$2(() => managedChildrenReturn.getChildren(), []);
+      const getHighestIndex = T$2(() => getChildren().getHighestIndex(), []);
+      const isValid = T$2((i) => {
+          const child = getChildren().getAt(i);
+          if (!child)
+              return false;
+          if (child.untabbable)
+              return false;
+          return true;
+      }, []);
+      const { propsStable: propsRef, refElementReturn } = useRefElement({});
+      const { childrenHaveFocusParameters, managedChildrenParameters: { onChildrenMountChange, ...managedChildrenParameters }, context: { rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext }, linearNavigationReturn, rovingTabIndexReturn, singleSelectionReturn, typeaheadNavigationReturn, rearrangeableChildrenReturn, sortableChildrenReturn, propsParent, propsStableParentOrChild } = useListNavigationSingleSelectionSortable({
+          managedChildrenReturn: { getChildren },
+          linearNavigationParameters: { getHighestIndex, isValid, ...linearNavigationParameters },
+          typeaheadNavigationParameters: { isValid, ...typeaheadNavigationParameters },
+          rovingTabIndexParameters: { initiallyTabbedIndex: initiallySelectedIndex, untabbableBehavior: "focus-parent", ...rovingTabIndexParameters },
+          singleSelectionParameters,
+          rearrangeableChildrenParameters: {
+              onRearranged: useStableCallback(() => { refreshPagination(paginatedChildrenParameters.paginationMin, paginatedChildrenParameters.paginationMax); }),
+              ...rearrangeableChildrenParameters
+          },
+          refElementReturn,
+          sortableChildrenParameters,
+          ...completeListNavigationParameters,
+      });
+      const { context: { childrenHaveFocusChildContext }, childrenHaveFocusReturn } = useChildrenHaveFocus({ childrenHaveFocusParameters });
+      const { paginatedChildrenReturn, paginatedChildrenReturn: { refreshPagination }, managedChildrenParameters: { onChildrenCountChange }, context: { paginatedChildContext } } = usePaginatedChildren({ refElementReturn, managedChildrenReturn: { getChildren: useStableCallback(() => managedChildrenReturn.getChildren()) }, rovingTabIndexReturn, paginatedChildrenParameters, linearNavigationParameters: { indexDemangler: rearrangeableChildrenReturn.indexDemangler } });
+      const { context: { staggeredChildContext }, staggeredChildrenReturn } = useStaggeredChildren({ managedChildrenReturn: { getChildren: useStableCallback(() => managedChildrenReturn.getChildren()) }, staggeredChildrenParameters });
+      const { context: { managedChildContext }, managedChildrenReturn } = useManagedChildren({
+          managedChildrenParameters: {
+              onChildrenCountChange: useStableCallback((c) => { onChildrenCountChange(c); }),
+              onChildrenMountChange,
+              ...managedChildrenParameters
+          }
+      });
+      const context = useMemoObject(useMemoObject({
+          childrenHaveFocusChildContext,
+          managedChildContext,
+          paginatedChildContext,
+          rovingTabIndexContext,
+          singleSelectionContext,
+          staggeredChildContext,
+          typeaheadNavigationContext
+      }));
+      return {
+          context,
+          props: useMergedProps(propsParent, propsRef, propsStableParentOrChild),
+          managedChildrenReturn,
+          rearrangeableChildrenReturn,
+          staggeredChildrenReturn,
+          paginatedChildrenReturn,
+          sortableChildrenReturn,
+          linearNavigationReturn,
+          rovingTabIndexReturn,
+          singleSelectionReturn,
+          typeaheadNavigationReturn,
+          childrenHaveFocusReturn
+      };
+  }
+  function useCompleteListNavigationChild({ info: { index, focusSelf, unselectable, untabbable, ...info }, // The "...info" is empty if M is the same as UCLNCI<ChildElement>.
+  textContentParameters, context: { childrenHaveFocusChildContext, managedChildContext, rovingTabIndexContext, paginatedChildContext, staggeredChildContext, singleSelectionContext, typeaheadNavigationContext }, sortableChildParameters, 
+  //pressParameters,
+  ...void1 }) {
+      //const { onPressSync, ...pressParameters1 } = (pressParameters ?? {});
+      const { info: mcp3, paginatedChildReturn, paginatedChildReturn: { hideBecausePaginated }, props: paginationProps } = usePaginatedChild({ info: { index }, context: { paginatedChildContext } });
+      const { info: mcp4, staggeredChildReturn, staggeredChildReturn: { hideBecauseStaggered }, props: staggeredProps } = useStaggeredChild({ info: { index }, context: { staggeredChildContext } });
+      untabbable ||= (hideBecausePaginated || hideBecauseStaggered);
+      unselectable ||= (hideBecausePaginated || hideBecauseStaggered);
+      if (untabbable)
+          unselectable = true;
+      const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
+      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1 }, pressParameters: { excludeSpace, ...pressParameters2 }, textContentReturn, singleSelectionChildReturn, info: mcp5, props: propsLs, rovingTabIndexChildReturn } = useListNavigationSingleSelectionChild({
+          info: { index, unselectable, untabbable },
+          context: { rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext },
+          refElementReturn,
+          textContentParameters
+      });
+      const onPress = useStableCallback((e) => {
+          if (singleSelectionContext.selectionMode == "activation")
+              singleSelectionContext.onSelectedIndexChange?.(enhanceEvent(e, { selectedIndex: index }));
+      });
+      const onPressSync = (rovingTabIndexContext.untabbable || unselectable || untabbable) ? null : onPress;
+      //const { propsStable: pressRefProps, refElementReturn: pressRefElementReturn } = useRefElement<any>({ refElementParameters: {} })
+      const mcp1 = {
+          index,
+          focusSelf,
+          getElement: refElementReturn.getElement,
+          getSortValue: sortableChildParameters.getSortValue,
+          unselectable,
+          untabbable,
+          ...mcp4,
+          ...mcp3,
+          ...mcp5,
+      };
+      const { managedChildReturn } = useManagedChild({ context: { managedChildContext }, info: { ...mcp1, ...info } });
+      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic2 } } = useChildrenHaveFocusChild({ context: { childrenHaveFocusChildContext } });
+      const onCurrentFocusedInnerChanged = useStableCallback((focused, prev, e) => {
+          ocfic1?.(focused, prev, e);
+          ocfic2?.(focused, prev, e);
+      });
+      const { hasCurrentFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedInnerChanged, onCurrentFocusedChanged: null }, refElementReturn });
+      const props = useMergedProps(propsStable, hasCurrentFocusReturn.propsStable, propsLs, paginationProps, staggeredProps);
+      return {
+          props,
+          pressParameters: {
+              onPressSync,
+              excludeSpace
+          },
+          textContentReturn,
+          refElementReturn,
+          singleSelectionChildReturn,
+          hasCurrentFocusReturn,
+          managedChildReturn,
+          paginatedChildReturn,
+          staggeredChildReturn,
+          rovingTabIndexChildReturn,
+          //propsPressStable: useMergedProps(pressProps, pressRefProps)
+      };
+  }
+  function useCompleteListNavigationDeclarative({ linearNavigationParameters, paginatedChildrenParameters, rearrangeableChildrenParameters, rovingTabIndexParameters, singleSelectionDeclarativeParameters, sortableChildrenParameters, staggeredChildrenParameters, typeaheadNavigationParameters, singleSelectionParameters }) {
+      const ret = useCompleteListNavigation({
+          linearNavigationParameters,
+          paginatedChildrenParameters,
+          rearrangeableChildrenParameters,
+          rovingTabIndexParameters,
+          singleSelectionParameters: {
+              initiallySelectedIndex: singleSelectionDeclarativeParameters.selectedIndex,
+              // Needs to be a (stable) callback because of declaration order
+              onSelectedIndexChange: useStableCallback((...e) => onSelectedIndexChange?.(...e)),
+              ...singleSelectionParameters
+          },
+          sortableChildrenParameters,
+          staggeredChildrenParameters,
+          typeaheadNavigationParameters
+      });
+      const { singleSelectionParameters: { onSelectedIndexChange } } = useSingleSelectionDeclarative({ singleSelectionDeclarativeParameters, singleSelectionReturn: ret.singleSelectionReturn });
+      const { singleSelectionReturn: { getSelectedIndex }, ...ret2 } = ret;
+      return { ...ret2, singleSelectionReturn: { getSelectedIndex } };
+  }
+
+  /**
+   * Combines dismissal hooks and focus trap hooks into one.
+   *
+   * Another in the "complete" series, alongside list/grid navigation and dismissal itself.
+   *
+   * Use for dialogs, menus, etc.  Anything that can be dismissed and might trap focus, basically.
+   *
+   * @param param0
+   * @returns
+   */
+  function useModal({ dismissParameters, escapeDismissParameters, focusTrapParameters: { trapActive, ...focusTrapParameters } }) {
+      const { open } = dismissParameters;
+      const { refElementPopupReturn, refElementSourceReturn, propsStablePopup, propsStableSource } = useDismiss({ dismissParameters, escapeDismissParameters });
+      const { propsStable, refElementReturn } = useRefElement({});
+      const { focusTrapReturn, props } = useFocusTrap({
+          focusTrapParameters: { trapActive: open && trapActive, ...focusTrapParameters },
+          refElementReturn
+      });
+      return {
+          propsFocusContainer: useMergedProps(propsStable, props),
+          refElementPopupReturn,
+          refElementSourceReturn,
+          focusTrapReturn,
+          propsStablePopup,
+          propsStableSource
+      };
+  }
+
   function useTimeout({ timeout, callback, triggerIndex }) {
       const stableCallback = useStableCallback(() => { startTimeRef.current = null; callback(); });
       const getTimeout = useStableGetter(timeout);
@@ -6740,191 +7102,6 @@
       };
   }
   let pulse = (("vibrate" in navigator) && (navigator.vibrate instanceof Function)) ? (() => navigator.vibrate(10)) : (() => { });
-
-  /**
-   * All the list-related hooks combined into one giant hook that encapsulates everything.
-   *
-   * Unlike most others, this hook assume's it's the final one--the "outermost" hook in the component--so it uses `useManagedChildren` and wraps everything up nicely,
-   * combining event handlers that are used in multiple sub-hooks, collecting all the necessary context-related data, and merging all known DOM props together.
-   *
-   *
-   *
-   * @returns
-   */
-  function useCompleteListNavigation({ linearNavigationParameters, rearrangeableChildrenParameters, sortableChildrenParameters, typeaheadNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, paginatedChildrenParameters, staggeredChildrenParameters, ...completeListNavigationParameters }) {
-      const { initiallySelectedIndex } = singleSelectionParameters;
-      const getChildren = T$2(() => managedChildrenReturn.getChildren(), []);
-      const getHighestIndex = T$2(() => getChildren().getHighestIndex(), []);
-      const isValid = T$2((i) => {
-          const child = getChildren().getAt(i);
-          if (!child)
-              return false;
-          if (child.untabbable)
-              return false;
-          return true;
-      }, []);
-      const { propsStable: propsRef, refElementReturn } = useRefElement({});
-      const { childrenHaveFocusParameters, managedChildrenParameters: { onChildrenMountChange, ...managedChildrenParameters }, context: { rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext }, linearNavigationReturn, rovingTabIndexReturn, singleSelectionReturn, typeaheadNavigationReturn, rearrangeableChildrenReturn, sortableChildrenReturn, propsParent, propsStableParentOrChild } = useListNavigationSingleSelectionSortable({
-          managedChildrenReturn: { getChildren },
-          linearNavigationParameters: { getHighestIndex, isValid, ...linearNavigationParameters },
-          typeaheadNavigationParameters: { isValid, ...typeaheadNavigationParameters },
-          rovingTabIndexParameters: { initiallyTabbedIndex: initiallySelectedIndex, untabbableBehavior: "focus-parent", ...rovingTabIndexParameters },
-          singleSelectionParameters,
-          rearrangeableChildrenParameters: {
-              onRearranged: useStableCallback(() => { refreshPagination(paginatedChildrenParameters.paginationMin, paginatedChildrenParameters.paginationMax); }),
-              ...rearrangeableChildrenParameters
-          },
-          refElementReturn,
-          sortableChildrenParameters,
-          ...completeListNavigationParameters,
-      });
-      const { context: { childrenHaveFocusChildContext }, childrenHaveFocusReturn } = useChildrenHaveFocus({ childrenHaveFocusParameters });
-      const { paginatedChildrenReturn, paginatedChildrenReturn: { refreshPagination }, managedChildrenParameters: { onChildrenCountChange }, context: { paginatedChildContext } } = usePaginatedChildren({ refElementReturn, managedChildrenReturn: { getChildren: useStableCallback(() => managedChildrenReturn.getChildren()) }, rovingTabIndexReturn, paginatedChildrenParameters, linearNavigationParameters: { indexDemangler: rearrangeableChildrenReturn.indexDemangler } });
-      const { context: { staggeredChildContext }, staggeredChildrenReturn } = useStaggeredChildren({ managedChildrenReturn: { getChildren: useStableCallback(() => managedChildrenReturn.getChildren()) }, staggeredChildrenParameters });
-      const { context: { managedChildContext }, managedChildrenReturn } = useManagedChildren({
-          managedChildrenParameters: {
-              onChildrenCountChange: useStableCallback((c) => { onChildrenCountChange(c); }),
-              onChildrenMountChange,
-              ...managedChildrenParameters
-          }
-      });
-      const context = useMemoObject(useMemoObject({
-          childrenHaveFocusChildContext,
-          managedChildContext,
-          paginatedChildContext,
-          rovingTabIndexContext,
-          singleSelectionContext,
-          staggeredChildContext,
-          typeaheadNavigationContext
-      }));
-      return {
-          context,
-          props: useMergedProps(propsParent, propsRef, propsStableParentOrChild),
-          managedChildrenReturn,
-          rearrangeableChildrenReturn,
-          staggeredChildrenReturn,
-          paginatedChildrenReturn,
-          sortableChildrenReturn,
-          linearNavigationReturn,
-          rovingTabIndexReturn,
-          singleSelectionReturn,
-          typeaheadNavigationReturn,
-          childrenHaveFocusReturn
-      };
-  }
-  function useCompleteListNavigationChild({ info: { index, focusSelf, unselectable, untabbable, ...info }, // The "...info" is empty if M is the same as UCLNCI<ChildElement>.
-  textContentParameters, context: { childrenHaveFocusChildContext, managedChildContext, rovingTabIndexContext, paginatedChildContext, staggeredChildContext, singleSelectionContext, typeaheadNavigationContext }, sortableChildParameters, pressParameters, ...void1 }) {
-      const { onPressSync, ...pressParameters1 } = (pressParameters ?? {});
-      const { info: mcp3, paginatedChildReturn, paginatedChildReturn: { hideBecausePaginated }, props: paginationProps } = usePaginatedChild({ info: { index }, context: { paginatedChildContext } });
-      const { info: mcp4, staggeredChildReturn, staggeredChildReturn: { hideBecauseStaggered }, props: staggeredProps } = useStaggeredChild({ info: { index }, context: { staggeredChildContext } });
-      untabbable ||= (hideBecausePaginated || hideBecauseStaggered);
-      unselectable ||= (hideBecausePaginated || hideBecauseStaggered);
-      if (untabbable)
-          unselectable = true;
-      const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
-      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1 }, pressParameters: { excludeSpace, ...pressParameters2 }, textContentReturn, singleSelectionChildReturn, info: mcp5, props: propsLs, rovingTabIndexChildReturn } = useListNavigationSingleSelectionChild({
-          info: { index, unselectable, untabbable },
-          context: { rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext },
-          refElementReturn,
-          textContentParameters
-      });
-      const onPress = useStableCallback((e) => {
-          if (singleSelectionContext.selectionMode == "activation")
-              singleSelectionContext.onSelectedIndexChange?.(enhanceEvent(e, { selectedIndex: index }));
-          onPressSync?.(e);
-      });
-      const { propsStable: pressRefProps, refElementReturn: pressRefElementReturn } = useRefElement({ refElementParameters: {} });
-      const { pressReturn, props: pressProps } = usePress({
-          refElementReturn: pressRefElementReturn,
-          pressParameters: {
-              focusSelf,
-              ...pressParameters1,
-              ...pressParameters2,
-              onPressSync: (rovingTabIndexContext.untabbable || unselectable || untabbable) ? null : onPress,
-              excludeSpace: useStableCallback(() => { return excludeSpace?.() || false; }),
-          }
-      });
-      const mcp1 = {
-          index,
-          focusSelf,
-          getElement: refElementReturn.getElement,
-          getSortValue: sortableChildParameters.getSortValue,
-          unselectable,
-          untabbable,
-          ...mcp4,
-          ...mcp3,
-          ...mcp5,
-      };
-      const { managedChildReturn } = useManagedChild({ context: { managedChildContext }, info: { ...mcp1, ...info } });
-      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic2 } } = useChildrenHaveFocusChild({ context: { childrenHaveFocusChildContext } });
-      const onCurrentFocusedInnerChanged = useStableCallback((focused, prev, e) => {
-          ocfic1?.(focused, prev, e);
-          ocfic2?.(focused, prev, e);
-      });
-      const { hasCurrentFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedInnerChanged, onCurrentFocusedChanged: null }, refElementReturn });
-      const props = useMergedProps(propsStable, hasCurrentFocusReturn.propsStable, propsLs, paginationProps, staggeredProps);
-      return {
-          props,
-          pressReturn,
-          textContentReturn,
-          refElementReturn,
-          singleSelectionChildReturn,
-          hasCurrentFocusReturn,
-          managedChildReturn,
-          paginatedChildReturn,
-          staggeredChildReturn,
-          rovingTabIndexChildReturn,
-          propsPressStable: useMergedProps(pressProps, pressRefProps)
-      };
-  }
-  function useCompleteListNavigationDeclarative({ linearNavigationParameters, paginatedChildrenParameters, rearrangeableChildrenParameters, rovingTabIndexParameters, singleSelectionDeclarativeParameters, sortableChildrenParameters, staggeredChildrenParameters, typeaheadNavigationParameters, singleSelectionParameters }) {
-      const ret = useCompleteListNavigation({
-          linearNavigationParameters,
-          paginatedChildrenParameters,
-          rearrangeableChildrenParameters,
-          rovingTabIndexParameters,
-          singleSelectionParameters: {
-              initiallySelectedIndex: singleSelectionDeclarativeParameters.selectedIndex,
-              // Needs to be a (stable) callback because of declaration order
-              onSelectedIndexChange: useStableCallback((...e) => onSelectedIndexChange?.(...e)),
-              ...singleSelectionParameters
-          },
-          sortableChildrenParameters,
-          staggeredChildrenParameters,
-          typeaheadNavigationParameters
-      });
-      const { singleSelectionParameters: { onSelectedIndexChange } } = useSingleSelectionDeclarative({ singleSelectionDeclarativeParameters, singleSelectionReturn: ret.singleSelectionReturn });
-      const { singleSelectionReturn: { getSelectedIndex }, ...ret2 } = ret;
-      return { ...ret2, singleSelectionReturn: { getSelectedIndex } };
-  }
-
-  /**
-   * Combines dismissal hooks and focus trap hooks into one.
-   *
-   * Another in the "complete" series, alongside list/grid navigation and dismissal itself.
-   *
-   * Use for dialogs, menus, etc.  Anything that can be dismissed and might trap focus, basically.
-   *
-   * @param param0
-   * @returns
-   */
-  function useModal({ dismissParameters, escapeDismissParameters, focusTrapParameters: { trapActive, ...focusTrapParameters } }) {
-      const { open } = dismissParameters;
-      const { refElementPopupReturn, refElementSourceReturn, propsStablePopup, propsStableSource } = useDismiss({ dismissParameters, escapeDismissParameters });
-      const { propsStable, refElementReturn } = useRefElement({});
-      const { focusTrapReturn, props } = useFocusTrap({
-          focusTrapParameters: { trapActive: open && trapActive, ...focusTrapParameters },
-          refElementReturn
-      });
-      return {
-          propsFocusContainer: useMergedProps(propsStable, props),
-          refElementPopupReturn,
-          refElementSourceReturn,
-          focusTrapReturn,
-          propsStablePopup,
-          propsStableSource
-      };
-  }
 
   function useRandomId({ randomIdParameters: { prefix, otherReferencerProp } }) {
       const id = (prefix + V$2());
@@ -7694,6 +7871,14 @@
   F$3(null);
 
   new Set();
+  function useContextWithWarning(context, parentContextName) {
+      let ret = q$2(context);
+      if (ret == null) {
+          debugger;
+          console.error(`This child is missing its parent ${parentContextName} context`);
+      }
+      return ret;
+  }
   function noop() { return; }
   // (These do not need to be unique)
   const Prefices = {
@@ -7766,6 +7951,7 @@
           }
           return false;
       }, []);
+      const { propsStable, refElementReturn: { getElement } } = useRefElement({});
       // Keep track of the one expanded index (if there is only one expanded index)
       const { changeIndex: changeExpandedIndexLocalOnly, getCurrentIndex: getCurrentExpandedIndex } = useChildrenFlag({
           initialIndex,
@@ -7774,7 +7960,8 @@
           setAt: T$2((child, open) => { return child.setOpenFromParent(open); }, []),
           isValid: isValidByChild,
           onIndexChange: null,
-          closestFit: false
+          closestFit: false,
+          onClosestFit: null
       });
       // Also keep track of which button is currently tabbable.
       // For some reason, Accordion buttons are both individually tabbable *and* arrow-key navigatable.
@@ -7789,7 +7976,15 @@
               if (i != null) {
                   getChildren().getAt(i)?.focusSelf();
               }
-          }, [])
+          }, []),
+          onClosestFit: useStableCallback((index) => {
+              if (document.activeElement == null || document.activeElement == document.body) {
+                  if (index == null)
+                      findBackupFocus(getElement()).focus();
+                  else
+                      getChildren().getAt(index)?.focusSelf();
+              }
+          })
       });
       const changeExpandedIndex = useStableCallback((value) => {
           changeExpandedIndexLocalOnly(value);
@@ -7804,6 +7999,7 @@
           typeaheadNavigationParameters
       });
       return {
+          props: propsStable,
           context: useMemoObject({
               managedChildContext,
               typeaheadNavigationContext,
@@ -7840,6 +8036,12 @@
       const open = ((openFromUser ?? openFromParent) ?? false);
       const { refElementReturn: { getElement: getHeaderElement }, propsStable: headerRefElementProps } = useRefElement({ refElementParameters: {} });
       const { refElementReturn: { getElement: _getBodyElement }, propsStable: bodyRefElementProps } = useRefElement({ refElementParameters: {} });
+      const { hasCurrentFocusReturn } = useHasCurrentFocus({ refElementReturn: { getElement: getHeaderElement }, hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: useStableCallback(focused => {
+                  if (focused) {
+                      setCurrentFocusedIndex(index);
+                      setMostRecentlyTabbed(true);
+                  }
+              }) } });
       const focusSelf = useStableCallback(() => {
           focus(getHeaderElement());
       });
@@ -7880,7 +8082,7 @@
       });
       const { pressReturn, props: buttonProps, refElementReturn } = buttonReturn;
       //const { linearNavigationReturn: { propsStable } } = linearReturnType;
-      const headerButtonProps = useMergedProps(buttonProps, headerRefElementProps, propsHeadReferencer, propsHeadSource, propsLN, stableTypeaheadProps, { "aria-expanded": (open ?? false), });
+      const headerButtonProps = useMergedProps(buttonProps, hasCurrentFocusReturn.propsStable, headerRefElementProps, propsHeadReferencer, propsHeadSource, propsLN, stableTypeaheadProps, { "aria-expanded": (open ?? false), });
       const bodyProps = useMergedProps(bodyRefElementProps, propsBodyReferencer, propsBodySource, {
           role: bodyRole,
           tabIndex: -1
@@ -7897,6 +8099,7 @@
           propsHeaderButton: headerButtonProps,
           propsHeader: {},
           propsBody: bodyProps,
+          hasCurrentFocusReturn
       };
   }
 
@@ -8005,14 +8208,13 @@
           typeaheadNavigationReturn
       };
   }
-  function useCheckboxGroupParent({ context, info, textContentParameters, sortableChildParameters, pressParameters }) {
+  function useCheckboxGroupParent({ context, info, textContentParameters, sortableChildParameters }) {
       const { checkboxGroupParentContext: { setSetter, setSetParentCheckboxChecked, getPercentChecked, getTotalChecked, getTotalChildren, onCheckboxGroupParentInput } } = context;
-      const { hasCurrentFocusReturn, managedChildReturn, pressReturn, propsPressStable, textContentReturn, refElementReturn, props, paginatedChildReturn, rovingTabIndexChildReturn, staggeredChildReturn, singleSelectionChildReturn, } = useCompleteListNavigationChild({
+      const { hasCurrentFocusReturn, managedChildReturn, pressParameters, textContentReturn, refElementReturn, props, paginatedChildReturn, rovingTabIndexChildReturn, staggeredChildReturn, singleSelectionChildReturn, } = useCompleteListNavigationChild({
           context,
           info,
           sortableChildParameters,
-          textContentParameters,
-          pressParameters,
+          textContentParameters
       });
       const [ariaControls, setControls] = useState("");
       y$2(() => {
@@ -8034,8 +8236,7 @@
           rovingTabIndexChildReturn,
           paginatedChildReturn,
           singleSelectionChildReturn,
-          pressReturn,
-          propsPressStable
+          pressParameters
       };
   }
   /**
@@ -8052,7 +8253,7 @@
    * @param param0
    * @returns
    */
-  function useCheckboxGroupChild({ checkboxGroupChild, context, info, textContentParameters, sortableChildParameters, pressParameters, }) {
+  function useCheckboxGroupChild({ checkboxGroupChild, context, info, textContentParameters, sortableChildParameters, }) {
       const { checkboxGroupChildrenContext: { allIds, setUpdateIndex, setTotalChildren, setTotalChecked, } } = context;
       const { checked, onChangeFromParent } = checkboxGroupChild;
       const getChecked = useStableGetter(checked);
@@ -8079,12 +8280,11 @@
               return () => setTotalChecked(c => ((c ?? 0) - 1));
           }
       }, [checked]);
-      const { hasCurrentFocusReturn, managedChildReturn, refElementReturn, textContentReturn, props, singleSelectionChildReturn: _singleSelectionChildReturn, staggeredChildReturn, paginatedChildReturn, rovingTabIndexChildReturn, pressReturn, propsPressStable } = useCompleteListNavigationChild({
+      const { hasCurrentFocusReturn, managedChildReturn, refElementReturn, textContentReturn, props, singleSelectionChildReturn: _singleSelectionChildReturn, staggeredChildReturn, paginatedChildReturn, rovingTabIndexChildReturn, pressParameters } = useCompleteListNavigationChild({
           info: { checkboxInfo: { checkboxChildType: "child", getLastUserChecked, getChecked, setCheckedFromParentInput: onChangeFromParent }, ...info },
           context,
           textContentParameters,
           sortableChildParameters,
-          pressParameters
       });
       return {
           checkboxGroupChild: {
@@ -8098,8 +8298,7 @@
           paginatedChildReturn,
           refElementReturn,
           props,
-          pressReturn,
-          propsPressStable,
+          pressParameters,
           rovingTabIndexChildReturn,
       };
   }
@@ -8390,7 +8589,7 @@
           linearNavigationParameters: { disableHomeEndKeys: true, ...linearNavigationParameters },
           info,
           context: cx1,
-          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
+          rovingTabIndexParameters: { ...rovingTabIndexParameters },
           sortableChildParameters,
           textContentParameters,
           typeaheadNavigationParameters,
@@ -8585,24 +8784,24 @@
   }
   function useMenubarChild({ menuItemParameters: { onPress: opu, role }, ...restParams }) {
       const focusSelf = T$2((e) => focus(e), []);
-      const { props, ...restRet } = useToolbarChild({
-          pressParameters: { focusSelf, onPressSync: opu },
+      const { props, pressParameters: { onPressSync, excludeSpace }, ...restRet } = useToolbarChild({
           ...restParams,
           toolbarChildParameters: { disabledProp: "aria-disabled" }
       });
-      /*const { pressReturn, props: propsPress } = usePress<MenuItemElement>({
+      const { pressReturn, props: propsPress } = usePress({
           pressParameters: {
               focusSelf,
               excludeSpace,
               onPressSync: useStableCallback((e) => {
-                  restRet.singleSelectionChildReturn.setThisOneSelected?.(e);
+                  onPressSync?.(e);
                   opu?.(e);
               })
           }, refElementReturn: restRet.refElementReturn
-      });*/
+      });
       props.role = role;
       return {
-          props,
+          props: useMergedProps(props, propsPress),
+          pressReturn,
           ...restRet
       };
   }
@@ -8728,7 +8927,7 @@
       };
   }
   function useNotify() {
-      return q$2(NotificationProviderContext).notify;
+      return useContextWithWarning(NotificationProviderContext, "notification provider").notify;
   }
 
   function useProgress({ labelParameters, progressIndicatorParameters: { max, value, valueText, tagIndicator } }) {
@@ -8863,20 +9062,19 @@
           ...restRet,
       };
   }
-  function useRadio({ radioParameters: { value }, checkboxLikeParameters: { disabled }, labelParameters, info, context, textContentParameters, sortableChildParameters, pressParameters, ...void1 }) {
+  function useRadio({ radioParameters: { value }, checkboxLikeParameters: { disabled }, labelParameters, info, context, textContentParameters, sortableChildParameters, ...void1 }) {
       const index = info.index;
       const onInput = useStableCallback((e) => {
-          singleSelectionChildReturn.setThisOneSelected(e);
+          onPressSync?.(e);
       });
       const { name, indexToName, nameToIndex } = context.radioContext;
       const { tagInput, labelPosition } = labelParameters;
       useStableGetter(value);
-      const { props: listNavigationSingleSelectionChildProps, singleSelectionChildReturn, ...listNavRet } = useCompleteListNavigationChild({
+      const { props: listNavigationSingleSelectionChildProps, singleSelectionChildReturn, pressParameters: { onPressSync, excludeSpace, ...void2 }, ...listNavRet } = useCompleteListNavigationChild({
           info,
           context,
           sortableChildParameters,
-          textContentParameters,
-          pressParameters
+          textContentParameters
       });
       const { selected: checked } = singleSelectionChildReturn;
       const { refElementReturn: refElementInputReturn, propsStable: propsRefInput } = useRefElement({ refElementParameters: {} });
@@ -8888,7 +9086,7 @@
               onInput: onInput,
               role: "radio"
           },
-          pressParameters: {},
+          pressParameters: { excludeSpace },
           labelParameters,
           randomIdInputParameters: { prefix: Prefices.radio },
           randomIdLabelParameters: { prefix: Prefices.radioLabel },
@@ -9077,7 +9275,7 @@
               })
           },
           linearNavigationParameters,
-          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
+          rovingTabIndexParameters: { ...rovingTabIndexParameters },
           typeaheadNavigationParameters: { noTypeahead: true, collator: null, typeaheadTimeout: Infinity }
       });
       props.role = "row";
@@ -9134,6 +9332,7 @@
       const { changeIndex: changeVisiblePanel, getCurrentIndex: getVisibleIndex, reevaluateClosestFit } = useChildrenFlag({
           getChildren: panelChildrenReturn.getChildren,
           closestFit: false,
+          onClosestFit: null,
           initialIndex: null,
           getAt: useStableCallback((i) => { return i.getVisible() ?? false; /*getPanels().getAt(i)?.getVisible() ?? false)*/ }, []),
           setAt: useStableCallback((i, b, n, p) => { return i.setVisibleIndex(n, p); /*(getPanels().getAt(i)?.setVisible(b));*/ }, []),
@@ -9189,23 +9388,23 @@
           ...listNavRet1
       };
   }
-  function useTab({ info: { focusSelf, ...info }, textContentParameters, sortableChildParameters, pressParameters, context }) {
-      const { props: listNavigationSingleSelectionChildProps, propsPressStable, ...listNavRet2 } = useCompleteListNavigationChild({
+  function useTab({ info: { focusSelf: focusSelfParent, ...info }, textContentParameters, sortableChildParameters, pressParameters: { focusSelf: focusSelfChild, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange, ...void2 }, context }) {
+      const { props: listNavigationSingleSelectionChildProps, pressParameters: { onPressSync, excludeSpace, ...void1 }, refElementReturn, ...listNavRet2 } = useCompleteListNavigationChild({
           context,
-          info: { focusSelf, ...info },
+          info: { focusSelf: focusSelfParent, ...info },
           sortableChildParameters,
           textContentParameters,
-          pressParameters
       });
       //const { pressParameters, refElementReturn } = listNavRet2
-      //const { pressReturn, props: propsPress } = usePress<TabElement>({ pressParameters: { ...pressParameters, onPressSync: useStableCallback((e) => listNavRet2.singleSelectionChildReturn.setThisOneSelected(e)), focusSelf }, refElementReturn })
+      const { pressReturn, props: propsPressStable } = usePress({ pressParameters: { onPressSync, focusSelf: focusSelfChild }, refElementReturn });
       const { singleSelectionChildReturn: { selected }, rovingTabIndexChildReturn: { tabbable } } = listNavRet2;
       const { getPanelId, getTabId } = context.tabsContext;
       const panelId = getPanelId(info.index);
       const tabId = getTabId(info.index);
       return {
-          propsPressStable,
-          props: useMergedProps(listNavigationSingleSelectionChildProps, {
+          pressReturn,
+          refElementReturn,
+          props: useMergedProps(propsPressStable, listNavigationSingleSelectionChildProps, {
               "data-tabbable": tabbable.toString(),
               "data-selected": selected.toString(),
               role: "tab",
@@ -9544,13 +9743,13 @@
               navigatePastStart: navigatePastStart ?? "wrap",
               pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
           },
-          managedChildrenParameters: { onAfterChildLayoutEffect, onChildrenMountChange }
+          managedChildrenParameters: { onAfterChildLayoutEffect, onChildrenMountChange },
       });
       A$1(imperativeHandle, () => info);
       return (o$3(AccordionSectionContext.Provider, { value: info.context, children: render(info) }));
   });
   const AccordionSection$1 = x$1(function AccordionSection({ open, index, tagButton, disabled, bodyRole, onPress, untabbable, getText, imperativeHandle, render, ...rest }) {
-      const context = q$2(AccordionSectionContext);
+      const context = useContextWithWarning(AccordionSectionContext, "accordion section");
       const info = useAccordionSection({
           buttonParameters: { disabled: disabled ?? false, tagButton, onPress: onPress ?? null },
           accordionSectionParameters: { open, bodyRole: bodyRole ?? "region" },
@@ -9604,10 +9803,9 @@
       return (o$3(UseCheckboxGroupChildContext.Provider, { value: info.context, children: render(info) }));
   });
   const CheckboxGroupParent$1 = memoForwardRef(function CheckboxGroupParent({ render, index, focusSelf, untabbable, getText, getSortValue, unselectable, ..._rest }, ref) {
-      const context = q$2(UseCheckboxGroupChildContext);
+      const context = useContextWithWarning(UseCheckboxGroupChildContext, "checkbox group");
       console.assert(context != null, `This CheckboxGroupParent is not contained within a CheckboxGroup`);
       const info = useCheckboxGroupParent({
-          pressParameters: { focusSelf, onPressSync: null },
           info: { index, unselectable: unselectable || false, untabbable: untabbable || false, focusSelf, checkboxInfo: { checkboxChildType: "parent" } },
           context,
           sortableChildParameters: { getSortValue },
@@ -9617,7 +9815,7 @@
       return render(info);
   });
   const CheckboxGroupChild$1 = memoForwardRef(function CheckboxGroupChild({ index, render, checked, onChangeFromParent, getSortValue, untabbable, getText, focusSelf, unselectable, ..._rest }, ref) {
-      const context = q$2(UseCheckboxGroupChildContext);
+      const context = useContextWithWarning(UseCheckboxGroupChildContext, "checkbox group");
       console.assert(context != null, `This CheckboxGroupChild is not contained within a CheckboxGroup`);
       const info = useCheckboxGroupChild({
           checkboxGroupChild: { checked, onChangeFromParent },
@@ -9625,7 +9823,6 @@
           textContentParameters: { getText: useDefault("getText", getText) },
           context,
           sortableChildParameters: { getSortValue },
-          pressParameters: { focusSelf, onPressSync: null },
       });
       A$1(ref, () => info);
       return render(info);
@@ -9752,7 +9949,7 @@
       return (o$3(GridlistContext.Provider, { value: info.context, children: render(info) }));
   });
   const GridlistRow = memoForwardRef(function GridlistRowU({ index, collator, unselectable, untabbable, navigatePastEnd, navigatePastStart, noTypeahead, onTabbableIndexChange, selected, typeaheadTimeout, getSortValue, getText, render, initiallyTabbedIndex, info: uinfo }, ref) {
-      const context = q$2(GridlistContext);
+      const context = useContextWithWarning(GridlistContext, "gridlist");
       console.assert(context != null, `This GridlistRow is not contained within a Gridlist`);
       untabbable ||= false;
       const info = useGridlistRow({
@@ -9776,7 +9973,7 @@
       return o$3(GridlistRowContext.Provider, { value: info.context, children: render(info) });
   });
   const GridlistChild = memoForwardRef(function GridlistChild({ index, colSpan, focusSelf, untabbable, getText, onPressSync, render, info: subInfo }, ref) {
-      const context = q$2(GridlistRowContext);
+      const context = useContextWithWarning(GridlistRowContext, "gridlist row");
       console.assert(context != null, `This GridlistChild is not contained within a GridlistRow that is contained within a Gridlist`);
       const defaultFocusSelf = useStableCallback((e) => { focus(e); }, []);
       const info = useGridlistCell({
@@ -9867,20 +10064,35 @@
           propsListboxLabel: propsLabelLabel
       };
   }
-  function useListboxItem({ context: { listboxContext: { selectionLimit }, ...context }, listboxParameters: { selected }, pressParameters, ...restParams }) {
-      const { props, refElementReturn, ...restRet } = useCompleteListNavigationChild({
+  function useListboxItem({ context: { listboxContext: { selectionLimit }, ...context }, listboxParameters: { selected, onMultiSelect }, pressParameters: { focusSelf, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange, ...void1 }, ...restParams }) {
+      const { props, refElementReturn, pressParameters: { onPressSync, excludeSpace, ...void2 }, ...restRet } = useCompleteListNavigationChild({
           context,
-          pressParameters,
           ...restParams
       });
       if (selectionLimit == "single")
           console.assert(selected == null);
       props.role = "option";
       props["aria-disabled"] = restParams.info.unselectable ? "true" : undefined;
+      const { pressReturn, props: propsPress } = usePress({
+          refElementReturn, pressParameters: {
+              focusSelf,
+              onPressSync: useStableCallback((e) => {
+                  onPressSync?.(e);
+                  if (selectionLimit == "multi")
+                      onMultiSelect?.(enhanceEvent(e, { selected: !selected }));
+              }),
+              excludeSpace,
+              allowRepeatPresses,
+              excludeEnter,
+              excludePointer,
+              longPressThreshold,
+              onPressingChange
+          }
+      });
       return {
-          //pressReturn,
+          pressReturn,
           refElementReturn,
-          props,
+          props: useMergedProps(props, propsPress),
           ...restRet
       };
   }
@@ -9945,16 +10157,16 @@
       });
       return (o$3(ListboxContext.Provider, { value: info.context, children: render(info) }));
   });
-  const ListboxItem = memoForwardRef(function ListboxItem({ unselectable, focusSelf, getText, untabbable, index, render, selected, getSortValue, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressSync, onPressingChange, ...subInfo }) {
-      const context = q$2(ListboxContext);
+  const ListboxItem = memoForwardRef(function ListboxItem({ unselectable, focusSelf, getText, untabbable, index, render, selected, getSortValue, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange, onMultiSelect, ...subInfo }) {
+      const context = useContextWithWarning(ListboxContext, "listbox");
       console.assert(context != null, `This ListboxItem is not contained within a Listbox`);
       const focusSelfDefault = T$2((e) => { focus(e); }, []);
       focusSelf ??= focusSelfDefault;
       const info = useListboxItem({
           info: { index, untabbable: untabbable || false, unselectable: unselectable || false, focusSelf, ...subInfo },
           context,
-          listboxParameters: { selected: selected ?? null, },
-          pressParameters: { onPressSync, focusSelf, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange },
+          listboxParameters: { selected: selected ?? null, onMultiSelect: onMultiSelect || null },
+          pressParameters: { focusSelf, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange },
           sortableChildParameters: { getSortValue: getSortValue },
           textContentParameters: { getText: useDefault("getText", getText) },
       });
@@ -10012,8 +10224,7 @@
       return (o$3(AriaPropNameContext$1.Provider, { value: ariaPropName, children: o$3(SelectionModeContext$2.Provider, { value: selectionMode, children: o$3(UntabbableContext$2.Provider, { value: untabbable, children: o$3(ParentDepthContext.Provider, { value: myDepth, children: o$3(MenuItemContext.Provider, { value: info.context, children: render(info) }) }) }) }) }));
   });
   const MenuItem$1 = memoForwardRef(function MenuItem({ index, untabbable, getSortValue, onPress, getText, role, focusSelf, unselectable, render, info: uinfo }, ref) {
-      const context = q$2(MenuItemContext);
-      console.assert(context != null, `This MenuItem is not contained within a Menubar/Menu`);
+      const context = useContextWithWarning(MenuItemContext, "menu");
       const defaultFocusSelf = T$2((e) => focus(e), []);
       const info = useMenuItem({
           info: { index, untabbable, unselectable, focusSelf: focusSelf ?? defaultFocusSelf, ...uinfo },
@@ -10055,8 +10266,7 @@
       return (o$3(MenubarItemContext.Provider, { value: info.context, children: render(info) }));
   });
   memoForwardRef(function MenuItemU({ index, render, focusSelf, untabbable, getText, unselectable, onPress, getSortValue, role, info: uinfo }, ref) {
-      const context = (q$2(MenubarItemContext));
-      console.assert(context != null, `This MenuItem is not contained within a Menubar/Menu`);
+      const context = (useContextWithWarning(MenubarItemContext, "menubar"));
       const defaultFocusSelf = T$2((e) => focus(e), []);
       const info = useMenubarChild({
           info: { index, untabbable: untabbable || false, unselectable: unselectable || false, focusSelf: focusSelf ?? defaultFocusSelf, ...uinfo },
@@ -10125,7 +10335,7 @@
   const Radio$1 = memoForwardRef(function Radio({ unselectable, disabled, index, render, value, ariaLabel, focusSelf, labelPosition, untabbable, tagInput, tagLabel, getText }, ref) {
       const defaultFocusSelf = () => info.checkboxLikeReturn.focusSelf();
       focusSelf ??= defaultFocusSelf;
-      const context = q$2(RadioContext);
+      const context = useContextWithWarning(RadioContext, "radio group");
       console.assert(context != null, `This Radio is not contained within a RadioGroup`);
       const getValue = useStableGetter(value);
       const info = useRadio({
@@ -10135,8 +10345,7 @@
           info: { index, focusSelf, untabbable: untabbable || false, unselectable: !!unselectable },
           context,
           labelParameters: { ariaLabel, labelPosition, tagInput, tagLabel },
-          textContentParameters: { getText: useDefault("getText", getText) },
-          pressParameters: null
+          textContentParameters: { getText: useDefault("getText", getText) }
       });
       A$1(ref, () => info);
       return render(info);
@@ -10152,7 +10361,7 @@
       return (o$3(SliderThumbContext.Provider, { value: info.context, children: children }));
   });
   memoForwardRef(function SliderThumbU({ label, tag, value, max, min, onValueChange, index, render, valueText }, ref) {
-      const context = q$2(SliderThumbContext);
+      const context = useContextWithWarning(SliderThumbContext, "slider");
       console.assert(context != null, `This SliderThumb is not contained within a Slider`);
       const info = useSliderThumb({
           context,
@@ -10194,13 +10403,13 @@
           rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
           rovingTabIndexParameters: { onTabbableIndexChange: onTabbableIndexChange ?? null, untabbable },
           singleSelectionParameters: { initiallySelectedIndex: initiallySelectedIndex ?? null, onSelectedIndexChange: onSelectedIndexChange ?? null, ariaPropName, selectionMode },
-          context: q$2(TableContext$1),
+          context: useContextWithWarning(TableContext$1, "table"),
           tableSectionParameters: { tagTableSection, location },
       });
       return (o$3(TableSectionContext.Provider, { value: info.context, children: render(info) }));
   });
   const TableRow$1 = memoForwardRef(function TableRowU({ index, getText, tagTableRow, disableHomeEndKeys, onTabbableIndexChange, navigatePastEnd, navigatePastStart, selected, unselectable, initiallyTabbedIndex, untabbable, render }, ref) {
-      const cx1 = q$2(TableSectionContext);
+      const cx1 = useContextWithWarning(TableSectionContext, "table section");
       console.assert(cx1 != null, `This TableRow is not contained within a TableSection`);
       untabbable ||= (cx1.rovingTabIndexContext.untabbable);
       const info = useTableRow({
@@ -10224,7 +10433,7 @@
       return (o$3(TableRowContext.Provider, { value: info.context, children: render(info) }));
   });
   const TableCell$1 = memoForwardRef(function TableCell({ index, getText, focusSelf, untabbable, tagTableCell, render, colSpan, getSortValue, }, ref) {
-      const context = q$2(TableRowContext);
+      const context = useContextWithWarning(TableRowContext, "table row");
       console.assert(context != null, `This TableCell is not contained within a TableRow`);
       const defaultFocusSelf = useStableCallback((e) => { focus(e); }, []);
       const info = useTableCell({
@@ -10275,22 +10484,22 @@
       A$1(ref, () => info);
       return (o$3(UntabbableContext$1.Provider, { value: untabbable, children: o$3(SelectionModeContext$1.Provider, { value: selectionMode, children: o$3(TabsContext.Provider, { value: contextTabs, children: o$3(TabPanelsContext.Provider, { value: contextPanels, children: render(info) }) }) }) }));
   });
-  const Tab$1 = memoForwardRef(function Tab({ unselectable, focusSelf, untabbable, index, getText, getSortValue, render, info: uinfo }, ref) {
-      const context = q$2(TabsContext);
+  const Tab$1 = memoForwardRef(function Tab({ unselectable, focusSelf, untabbable, index, getText, getSortValue, render, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange, info: uinfo }, ref) {
+      const context = useContextWithWarning(TabsContext, "tabs");
       console.assert(context != null, `This Tab is not contained within a Tabs component`);
       const focusSelfDefault = T$2((e) => { focus(e); }, []);
       const info = useTab({
           info: { index, unselectable, untabbable, focusSelf: focusSelf ?? focusSelfDefault, ...uinfo },
           context,
+          pressParameters: { focusSelf: focusSelfDefault, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange },
           sortableChildParameters: { getSortValue },
-          textContentParameters: { getText: useDefault("getText", getText) },
-          pressParameters: null
+          textContentParameters: { getText: useDefault("getText", getText) }
       });
       A$1(ref, () => info);
       return render(info);
   });
   function TabPanel$1({ index, render, info: uinfo }) {
-      const context = q$2(TabPanelsContext);
+      const context = useContextWithWarning(TabPanelsContext, "tabs");
       const info = useTabPanel({
           context,
           info: { index, ...uinfo }
@@ -10305,7 +10514,7 @@
       return (o$3(ToastContext.Provider, { value: info.context, children: render(info) }));
   });
   const Toast$1 = memoForwardRef(function Toast({ render, index, timeout, politeness, children }, ref) {
-      const context = q$2(ToastContext);
+      const context = useContextWithWarning(ToastContext, "toasts provider");
       console.assert(context != null, `This Toast was not rendered within a Toasts provider`);
       const info = useToast({
           info: { index },
@@ -10356,7 +10565,7 @@
       return (o$3(AriaPropNameContext.Provider, { value: ariaPropName, children: o$3(SelectionModeContext.Provider, { value: selectionMode, children: o$3(UntabbableContext.Provider, { value: untabbable, children: o$3(ToolbarContext.Provider, { value: listboxReturnType.context, children: render(listboxReturnType) }) }) }) }));
   });
   const ToolbarChild = memoForwardRef(function ToolbarChildU({ index, render, focusSelf, getSortValue, getText, unselectable, disabledProp, untabbable, info: uinfo }, ref) {
-      const context = q$2(ToolbarContext);
+      const context = useContextWithWarning(ToolbarContext, "toolbar");
       console.assert(context != null, `This ToolbarChild is not contained within a Toolbar`);
       const focusSelfDefault = T$2((e) => { focus(e); }, []);
       focusSelf ??= focusSelfDefault;
@@ -10366,7 +10575,6 @@
           info: { index, focusSelf, unselectable, untabbable, ...uinfo },
           sortableChildParameters: { getSortValue },
           textContentParameters: { getText: useDefault("getText", getText) },
-          pressParameters: null, //{ focusSelf, onPressSync: null },
       });
       A$1(ref, () => info);
       return (o$3(_$3, { children: render(info) }));
