@@ -75,7 +75,7 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
                             {labelPosition == "before" && labelJsx}
                             <Paginated childCount={info.paginatedChildrenReturn.childCount ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
 
-                                <div class={clsx(`list-group gridlist-group`)} {...useMergedProps(props, propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist)}>{children}</div>
+                                <div {...useMergedProps(props, propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist, { class: `list-group gridlist-group` })}>{children}</div>
 
                             </Paginated>
                             {labelPosition == "after" && labelJsx}
@@ -96,8 +96,12 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
             focusSelf: useCallback(() => {
                 return getElement()?.focus();
             }, []),
-            onPressSync: useStableCallback((e) => infoRow.singleSelectionChildReturn.setThisOneSelected(e)),
-            //...infoRow.pressParameters
+            allowRepeatPresses: null,
+            excludeEnter: null,
+            excludePointer: null,
+            longPressThreshold: null,
+            onPressingChange: null,
+            ...infoRow.pressParameters
         },
         refElementReturn
     });
@@ -115,7 +119,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
                 infoRow.paginatedChildReturn.hideBecausePaginated ? "d-none" : "",
                 `gridlist-item`,
                 variantTheme && `list-group-item-${variantTheme}`,
-                infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "",
+                infoRow.paginatedChildReturn.hideBecausePaginated ? "d-none" : "",
                 !show && "gridlist-item-placeholder",
                 "list-group-item list-group-item-action",
                 !!iconStart && "list-group-item-with-icon-start",
@@ -136,7 +140,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
 
 
     if (!show)
-        if (infoRow.paginatedChildReturn.isPaginated && !infoRow.paginatedChildReturn.paginatedVisible)
+        if (infoRow.paginatedChildReturn.hideBecausePaginated)
             return null!;
         else
             return <div aria-busy="true" class="gridlist-item gridlist-item-placeholder"><span class={clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow")}><span class="placeholder w-100"></span></span></div>;
@@ -204,7 +208,7 @@ const ListItemText = memo(forwardElementRef(function ListItemText({ onPress, chi
             render={infoCell => {
                 useUpdateRenderCounter("GridlistCell");
                 return (
-                    <div {...useMergedProps(infoCell.props, props, { ref })} class={clsx("gridlist-item-text")}>
+                    <div {...useMergedProps(infoCell.propsCell, infoCell.propsPress, infoCell.propsTabbable, props, { ref }, { class: clsx("gridlist-item-text") })}>
                         {children}
                     </div>
                 );
@@ -227,11 +231,11 @@ const ListItemStartEnd = memo(function ListItemStartEnd({ hidden, index, childre
             focusSelf={useStableCallback(e => {
                 e.focus();
             })}
-            render={info => {
+            render={infoCell => {
                 useUpdateRenderCounter("GridlistCell");
                 const ret = (
                     <div class={clsx("list-group-item-icon", `list-group-item-icon-${index === 0 ? "start" : "end"}`)}>
-                        {useClonedElement(children, info.props, undefined)}
+                        {useClonedElement(children, useMergedProps(infoCell.propsCell, infoCell.propsTabbable), undefined)}
                     </div>
                 )
                 if (hidden)

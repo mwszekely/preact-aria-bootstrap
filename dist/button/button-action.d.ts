@@ -1,7 +1,7 @@
 import { ComponentChildren, h, Ref, VNode } from "preact";
-import { TargetedButtonPressEvent, ElementToTag } from "preact-aria-widgets";
-import { UseAsyncHandlerParameters } from "preact-prop-helpers";
-import { ButtonThemes } from "../context.js";
+import { ElementToTag, TargetedButtonPressEvent } from "preact-aria-widgets";
+import { Nullable, UseAsyncHandlerParameters } from "preact-prop-helpers";
+import { ButtonFills, ButtonSizes, ButtonThemes } from "../context.js";
 import { TooltipProps } from "../tooltip/index.js";
 import { ButtonGroupChildProps } from "./button-group.js";
 export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttributes<E>, "children" | "style" | "class" | "className">, Partial<ButtonGroupChildProps>, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
@@ -13,13 +13,13 @@ export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttri
     onPress: null | ((pressed: boolean | null, event: TargetedButtonPressEvent<E>) => (void | Promise<void>));
     tag?: ElementToTag<E>;
     badge?: VNode;
-    variantTheme?: ButtonThemes;
-    variantFill?: "fill" | "outline";
-    variantSize?: "sm" | "md" | "lg";
+    variantTheme?: Nullable<ButtonThemes>;
+    variantFill?: Nullable<ButtonFills>;
+    variantSize?: Nullable<ButtonSizes>;
     /**
      * Generally only used as part of a menu button
      */
-    variantDropdown?: "split" | "joined";
+    variantDropdown?: Nullable<"split" | "joined">;
     /**
      * If outside of a `ButtonGroup`, effectively acts like a checkbox.
      *

@@ -25,7 +25,7 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
     return (_jsx(DefaultDisabled.Provider, { value: disabled ?? false, children: _jsx(Gridlist, { selectedIndex: selectedIndex ?? null, ariaPropName: "aria-selected", onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), paginationMin: paginationStart, paginationMax: paginationEnd, staggered: staggered || false, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", selectionLimit: selectedIndex === undefined ? "multi" : "single", render: info => {
                 useUpdateRenderCounter("Gridlist");
                 const labelJsx = _jsx("label", { ...info.propsGridlistLabel, children: label });
-                return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx(Paginated, { childCount: info.paginatedChildrenReturn.childCount ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: _jsx("div", { class: clsx(`list-group gridlist-group`), ...useMergedProps(props, propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist), children: children }) }), labelPosition == "after" && labelJsx] }));
+                return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx(Paginated, { childCount: info.paginatedChildrenReturn.childCount ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: _jsx("div", { ...useMergedProps(props, propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist, { class: `list-group gridlist-group` }), children: children }) }), labelPosition == "after" && labelJsx] }));
             } }) }));
 }
 const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, iconEnd, iconStart, variantTheme, selected, children, props, ref2 }) => {
@@ -36,8 +36,12 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
             focusSelf: useCallback(() => {
                 return getElement()?.focus();
             }, []),
-            onPressSync: useStableCallback((e) => infoRow.singleSelectionChildReturn.setThisOneSelected(e)),
-            //...infoRow.pressParameters
+            allowRepeatPresses: null,
+            excludeEnter: null,
+            excludePointer: null,
+            longPressThreshold: null,
+            onPressingChange: null,
+            ...infoRow.pressParameters
         },
         refElementReturn
     });
@@ -47,11 +51,11 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
     //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
     const finalPropsForText = useMergedProps(p1, p2);
     const finalPropsForDiv = useMergedProps(infoRow.props, { ...props, ref: ref2 }, {
-        className: clsx(infoRow.paginatedChildReturn.hideBecausePaginated ? "d-none" : "", `gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.paginatedChildReturn.isPaginated ? !infoRow.paginatedChildReturn.paginatedVisible && "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.singleSelectionChildReturn.selected || selected) && `active`)
+        className: clsx(infoRow.paginatedChildReturn.hideBecausePaginated ? "d-none" : "", `gridlist-item`, variantTheme && `list-group-item-${variantTheme}`, infoRow.paginatedChildReturn.hideBecausePaginated ? "d-none" : "", !show && "gridlist-item-placeholder", "list-group-item list-group-item-action", !!iconStart && "list-group-item-with-icon-start", !!iconEnd && "list-group-item-with-icon-end", !!badge && "list-group-item-with-badge", !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending", disabled && "disabled", (infoRow.singleSelectionChildReturn.selected || selected) && `active`)
     });
     const c = _jsxs(_Fragment, { children: [_jsx(ListItemStartEnd, { index: 0, hidden: iconStart == null, children: iconStart }), _jsxs(ListItemText, { onPress: progressInfo.asyncHandlerReturn.syncHandler, ...finalPropsForText, children: [_jsx("span", { children: children }), _jsxs("span", { class: "list-group-item-badge-and-spinner", children: [_jsx("div", { children: badge }), _jsx("div", { children: loadingJsx })] })] }), _jsx(ListItemStartEnd, { index: 2, hidden: iconEnd == null, children: iconEnd })] });
     if (!show)
-        if (infoRow.paginatedChildReturn.isPaginated && !infoRow.paginatedChildReturn.paginatedVisible)
+        if (infoRow.paginatedChildReturn.hideBecausePaginated)
             return null;
         else
             return _jsx("div", { "aria-busy": "true", class: "gridlist-item gridlist-item-placeholder", children: _jsx("span", { class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"), children: _jsx("span", { class: "placeholder w-100" }) }) });
@@ -76,15 +80,15 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
 const ListItemText = memo(forwardElementRef(function ListItemText({ onPress, children, ...props }, ref) {
     return (_jsx(GridlistChild, { index: 1, onPressSync: onPress, render: infoCell => {
             useUpdateRenderCounter("GridlistCell");
-            return (_jsx("div", { ...useMergedProps(infoCell.props, props, { ref }), class: clsx("gridlist-item-text"), children: children }));
+            return (_jsx("div", { ...useMergedProps(infoCell.propsCell, infoCell.propsPress, infoCell.propsTabbable, props, { ref }, { class: clsx("gridlist-item-text") }), children: children }));
         } }));
 }));
 const ListItemStartEnd = memo(function ListItemStartEnd({ hidden, index, children }) {
     return (_jsx(GridlistChild, { index: index, untabbable: hidden, focusSelf: useStableCallback(e => {
             e.focus();
-        }), render: info => {
+        }), render: infoCell => {
             useUpdateRenderCounter("GridlistCell");
-            const ret = (_jsx("div", { class: clsx("list-group-item-icon", `list-group-item-icon-${index === 0 ? "start" : "end"}`), children: useClonedElement(children, info.props, undefined) }));
+            const ret = (_jsx("div", { class: clsx("list-group-item-icon", `list-group-item-icon-${index === 0 ? "start" : "end"}`), children: useClonedElement(children, useMergedProps(infoCell.propsCell, infoCell.propsTabbable), undefined) }));
             if (hidden)
                 return _jsx(_Fragment, { children: null });
             else

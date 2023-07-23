@@ -4,4 +4,5 @@ export declare const DefaultButtonTheme: import("preact").Context<ButtonThemes |
 export declare const DefaultButtonSize: import("preact").Context<ButtonSizes | null>;
 export type ButtonThemes = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 export type ButtonSizes = "sm" | "md" | "lg";
+export type ButtonFills = "fill" | "outline";
 //# sourceMappingURL=context.d.ts.map

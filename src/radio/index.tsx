@@ -1,7 +1,7 @@
 
 import { clsx } from "clsx";
 import { createContext, h, Ref } from "preact";
-import { LabelPosition, Progress, Radio as AriaRadio, RadioGroup as AriaRadioGroup, UseRadioGroupReturnType, RadioChangeEventHandler, TargetedRadioChangeEvent, EventDetail } from "preact-aria-widgets";
+import { Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail, LabelPosition, Progress, TargetedRadioChangeEvent, UseRadioGroupReturnType } from "preact-aria-widgets";
 import { useAsync, UseAsyncHandlerParameters, useMergedProps, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { useContext, useMemo, useRef } from "preact/hooks";
@@ -118,7 +118,7 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                 const pending = singleSelectPending;//(pendingValue != null);
 
                 const loadingJsx = (
-                    <Fade show={pending} exitVisibility="removed"><span class="spinner-border" {...propsIndicator} /></Fade>
+                    <Fade show={pending} exitVisibility="removed"><span  {...useMergedProps(propsIndicator, { class: "spinner-border" })} /></Fade>
                 );
 
                 return (

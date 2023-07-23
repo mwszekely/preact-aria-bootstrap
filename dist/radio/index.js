@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { createContext } from "preact";
-import { Progress, Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail } from "preact-aria-widgets";
+import { Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail, Progress } from "preact-aria-widgets";
 import { useAsync, useMergedProps, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { useContext, useMemo, useRef } from "preact/hooks";
@@ -44,7 +44,7 @@ export function Radio({ index, label, value, labelPosition, loadingLabel, deboun
             const d = disabled ? disabledType : false;
             //const buttonClass = clsx(`btn`, `btn-${variantTheme ?? "primary"}`, asyncHandlerReturn.pending && "pending", disabled && "disabled");
             const pending = singleSelectPending; //(pendingValue != null);
-            const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border", ...propsIndicator }) }));
+            const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { ...useMergedProps(propsIndicator, { class: "spinner-border" }) }) }));
             return (_jsx(AriaRadio, { ariaLabel: labelPosition == 'hidden' ? label : null, value: value, index: index, labelPosition: labelPosition == "hidden" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, render: info => {
                     const inputJsx = _jsx("input", { class: "form-check-input", ...useMergedProps(info.propsInput, props, { ref }) });
                     return (_jsxs("span", { ...useMergedProps({ className: clsx(labelPosition == "after" && ".form-check-reverse", "form-check", pending && "pending", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse") }), children: [loadingJsx, _jsxs("label", { class: "form-check-label", ...info.propsLabel, children: [labelPosition == "before" && label, labelPosition == "tooltip" ? _jsx(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && label] })] }));

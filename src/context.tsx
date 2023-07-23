@@ -7,4 +7,5 @@ export const DefaultButtonSize = createContext<ButtonSizes | null>(null);
 
 export type ButtonThemes = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
 export type ButtonSizes = "sm" | "md" | "lg";
+export type ButtonFills = "fill" | "outline";
 

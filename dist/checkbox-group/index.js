@@ -14,7 +14,7 @@ function CheckboxGroupParent({ label, labelPosition, debounce, loadingLabel, thr
             if (imperativeHandle.current)
                 imperativeHandle.current.checkboxLikeReturn.focusSelf();
         }), index: 0, getSortValue: getSortValue ?? returnZero, render: info => {
-            return (_jsx(Checkbox, { labelPosition: labelPosition, label: label, throttle: throttle, disabled: disabled, inline: true, tristate: true, debounce: debounce, loadingLabel: loadingLabel, imperativeHandle: imperativeHandle, checked: info.checkboxGroupParentReturn.checked, onValueChange: useStableCallback(async (c, e) => { await info.checkboxGroupParentReturn.onParentCheckedChange(e); }), propsInput: useMergedProps(props, info.props) }));
+            return (_jsx(Checkbox, { labelPosition: labelPosition, label: label, throttle: throttle, disabled: disabled, inline: true, tristate: true, debounce: debounce, loadingLabel: loadingLabel, imperativeHandle: imperativeHandle, checked: info.checkboxGroupParentReturn.checked, onValueChange: useStableCallback(async (c, e) => { await info.checkboxGroupParentReturn.onParentCheckedChange(e); }), propsInput: useMergedProps(props, info.propsChild, info.propsTabbable) }));
         } }));
 }
 export function CheckboxGroupChild({ checked, label, labelPosition, onValueChange, debounce, throttle, disabled, inline, loadingLabel, tristate, getSortValue, untabbable, index, ...props }) {
@@ -39,7 +39,7 @@ export function CheckboxGroupChild({ checked, label, labelPosition, onValueChang
             return (_jsx(Checkbox, { checked: checked, label: label, inline: inline, loadingLabel: loadingLabel, tristate: tristate, debounce: debounce, throttle: throttle, disabled: pendingFromParent || disabled, labelPosition: labelPosition, imperativeHandle: imperativeHandle, onValueChange: useStableCallback(async (checked, event) => {
                     await onValueChange?.(checked, event);
                     info.checkboxGroupChild.onChildCheckedChange(checked);
-                }), propsInput: useMergedProps(props, info.props) }));
+                }), propsInput: useMergedProps(props, info.propsChild, info.propsTabbable) }));
         } }));
 }
 //# sourceMappingURL=index.js.map

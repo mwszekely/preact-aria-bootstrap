@@ -1,14 +1,15 @@
 import { clsx } from "clsx";
 import { ComponentChildren, h, Ref, VNode } from "preact";
-import { Button as AriaButton, TargetedButtonPressEvent, ElementToTag, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets";
-import { returnZero, useAsyncHandler, UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
+import { Button as AriaButton, ElementToTag, EventDetail, Progress, TargetedButtonPressEvent, ToolbarChild } from "preact-aria-widgets";
+import { Nullable, returnZero, useAsyncHandler, UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext } from "preact/hooks";
-import { ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "../context.js";
+import { ButtonFills, ButtonSizes, ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip, TooltipProps } from "../tooltip/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { ButtonGroupChildProps, ButtonGroupContext } from "./button-group.js";
+
 
 export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttributes<E>, "children" | "style" | "class" | "className">, Partial<ButtonGroupChildProps>, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
     ref?: Ref<E>;
@@ -27,14 +28,14 @@ export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttri
 
     badge?: VNode;
 
-    variantTheme?: ButtonThemes;
-    variantFill?: "fill" | "outline";
-    variantSize?: "sm" | "md" | "lg";
+    variantTheme?: Nullable<ButtonThemes>;
+    variantFill?: Nullable<ButtonFills>;
+    variantSize?: Nullable<ButtonSizes>;
 
     /**
      * Generally only used as part of a menu button
      */
-    variantDropdown?: "split" | "joined";
+    variantDropdown?: Nullable<"split" | "joined">;
 
     /**
      * If outside of a `ButtonGroup`, effectively acts like a checkbox.
@@ -121,15 +122,15 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
                         loadingLabel={loadingLabel ?? null}
                         variantTheme={variantTheme ?? "primary"}
                         variantFill={variantFill ?? null}
-                        variantSize={variantSize}
+                        variantSize={variantSize ?? "md"}
                         variantDropdown={variantDropdown || null}
                         pressed={toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne}
                         callCount={callCount}
                         onPress={(e) => {
-                            toolbarChildInfo.singleSelectionChildReturn.setThisOneSelected(e);
+                            toolbarChildInfo.pressParameters.onPressSync?.(e);
                             return syncHandler?.(e);
                         }}
-                        otherProps={useMergedProps(props, toolbarChildInfo.props)}
+                        otherProps={useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable)}
                     />);
                 }}
             />

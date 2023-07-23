@@ -1,7 +1,7 @@
 
 import { clsx } from "clsx";
 import { h, Ref } from "preact";
-import { Checkbox as AriaCheckbox, CheckboxChangeEventHandler, TargetedCheckboxChangeEvent, EventDetail, ProgressWithHandler, UseCheckboxReturnType } from "preact-aria-widgets";
+import { Checkbox as AriaCheckbox, EventDetail, ProgressWithHandler, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets";
 import { UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { useContext } from "preact/hooks";
@@ -106,8 +106,9 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
 
 
                         render={info => {
-                            const inputJsx = <input class={clsx("form-check-input", w && "mt-0")} {...useMergedProps(info.propsInput, propsInput || {})} />
-                            const visibleLabel = <label class="form-check-label" {...useMergedProps(info.propsLabel, propsLabel || {})}>{label}</label>;
+                            debugger;
+                            const inputJsx = <input {...useMergedProps(info.propsInput, propsInput || {}, { class: clsx("form-check-input", w && "mt-0") })} />
+                            const visibleLabel = <label {...useMergedProps(info.propsLabel, propsLabel || {}, { class: "form-check-label" })}>{label}</label>;
 
                             if (!w) {
                                 return (

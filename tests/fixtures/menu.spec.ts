@@ -1,12 +1,12 @@
-import { Page, expect } from '@playwright/test';
-import { test } from "./fixtures/menu.js"
+import { expect } from '@playwright/test';
+import { test } from "./menu.fixture.js";
 
-test('Opens when button clicked', async ({ page, menu: { getCounter, menuButton }, shared: { install, run, locator } }) => {
+test('Opens when button clicked', async ({ page, menu: { menuButton }, shared: { install, run, locator } }) => {
     await menuButton.click();
     await expect(page.locator("[role=menuitem]").first()).toBeVisible();
 });
 
-test('Menu items can be pressed', async ({ page, menu: { getCounter, menuButton }, shared: { install, run, locator } }) => {
+test('Menu items can be pressed', async ({ page, menu: { menuButton }, shared: { getCounter, install, run, locator } }) => {
     await install("Menu", "onMenuItem", async (closeMenu, index) => { 
        await new Promise(resolve => setTimeout(resolve, 500));  
        await window.increment(); 
@@ -29,13 +29,13 @@ test('Menu items can be pressed', async ({ page, menu: { getCounter, menuButton 
     expect(getCounter()).toBe(2);
 });
 
-test('Down arrow opens menu', async ({ page, menu: { getCounter, menuButton }, shared: { install, run, locator } }) => {
+test('Down arrow opens menu', async ({ page, menu: { menuButton }, shared: { install, run, locator } }) => {
     await menuButton.focus();
     await page.keyboard.press("ArrowDown");
     await expect(page.locator("[role=menuitem]").first()).toBeVisible();
 });
 
-test('Escape closes menu', async ({ page, menu: { getCounter, menuButton }, shared: { install, run, locator } }) => {
+test('Escape closes menu', async ({ page, menu: { menuButton }, shared: { install, run, locator } }) => {
     await menuButton.click();
     await expect(page.locator("[role=menuitem]").first()).toBeFocused();
     await page.keyboard.press("Escape");
@@ -43,13 +43,13 @@ test('Escape closes menu', async ({ page, menu: { getCounter, menuButton }, shar
 });
 
 // TODO: Is there a way to test a screen reader?
-test('Losing focus closes menu', async ({ page, menu: { getCounter, menuButton }, shared: { install, run, locator } }) => {
+test('Losing focus closes menu', async ({ page, menu: { menuButton }, shared: { focusableFirst, install, run, locator } }) => {
 
     await menuButton.click();
     await expect(page.locator(":focus")).toHaveAttribute("role", "menuitem");
-    await page.locator("input").click();
+    await focusableFirst.click();
     await expect(page.locator("[role=menuitem]").first(), "The menu should not be visible when clicking a focusable element").not.toBeVisible();
-    await expect(page.locator("input"), "Focus must remain on the element that gained focus").toBeFocused();
+    await expect(focusableFirst, "Focus must remain on the element that gained focus").toBeFocused();
 
     await menuButton.click();
     await expect(page.locator(":focus")).toHaveAttribute("role", "menuitem");
@@ -59,13 +59,13 @@ test('Losing focus closes menu', async ({ page, menu: { getCounter, menuButton }
 });
 
 
-test('Focus enters/leaves properly', async ({ page, menu: { getCounter, menuButton }, shared: { install, run, locator } }) => {
+test('Focus enters/leaves properly', async ({ page, menu: { menuButton }, shared: { install, run, locator } }) => {
     await install("Menu", "onMenuItem", async (index) => { await new Promise(resolve => setTimeout(resolve, 750)); await window.increment(); });
     await menuButton.click();
     await expect(page.locator(":focus")).toHaveAttribute("role", "menuitem");
 });
 
-test('Keyboard navigation works as expected', async ({ page, menu: { getCounter, menuButton }, shared: { install, run, locator } }) => {
+test('Keyboard navigation works as expected', async ({ page, menu: { menuButton }, shared: { install, run, locator } }) => {
     await page.keyboard.down("ArrowDown")
     await expect(page.locator("[role=menuitem]").nth(0), "The 0-th menu item should be focused by default").toBeFocused();
     await page.keyboard.press("ArrowDown");

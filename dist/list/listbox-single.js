@@ -2,8 +2,8 @@ import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-ru
 import { clsx } from "clsx";
 import { Listbox, ListboxItem } from "preact-aria-widgets";
 import { EventDetail, returnZero, useMergedProps, useStableCallback, useState } from "preact-prop-helpers";
-import { Paginated } from "../pagination/index.js";
 import { memo } from "preact/compat";
+import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 /**
  * A listbox is a much simpler List.
@@ -29,7 +29,7 @@ export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleIt
                 return _jsx("li", { class: "d-none" });
             if (info.paginatedChildReturn.hideBecausePaginated)
                 return _jsx("li", { class: "d-none" });
-            return (_jsx(ListboxSingleItemStatic, { ...useMergedProps(info.props, { ...props, ref }, info.propsPressStable), disabled: disabled, selected: info.singleSelectionChildReturn.selected, children: children }));
+            return (_jsx(ListboxSingleItemStatic, { ...useMergedProps(info.props, { ...props, ref }), disabled: disabled, selected: info.singleSelectionChildReturn.selected, children: children }));
         } }));
 }));
 const ListboxSingleItemStatic = memo(forwardElementRef(function ListboxSingleItemStatic({ selected, children, disabled, ...props }, ref) {

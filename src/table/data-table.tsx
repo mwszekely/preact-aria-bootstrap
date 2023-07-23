@@ -133,7 +133,7 @@ export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, 
                 }
 
                 return (
-                    <Fade show={!hideBecauseStaggered} animateOnMount={info.staggeredChildReturn.isStaggered} delayMountUntilShown={true}>
+                    <Fade show={!hideBecauseStaggered} animateOnMount={info.staggeredChildReturn.parentIsStaggered} delayMountUntilShown={true}>
                         <TableRow {...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" })}>
                             {/*hideBecausePaginated? null : */children}
                         </TableRow>
@@ -189,6 +189,11 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
                 const { pressReturn, props: propsPress } = usePress({
                     pressParameters: {
                         focusSelf,
+                        allowRepeatPresses: null,
+                        excludeEnter: null,
+                        excludePointer: null,
+                        longPressThreshold: null,
+                        onPressingChange: null,
                         onPressSync: !isTableHead ? undefined : () => {
                             const { column, direction } = info.tableCellReturn.sortByThisColumn();
                             setSortingByThisColumn(true);

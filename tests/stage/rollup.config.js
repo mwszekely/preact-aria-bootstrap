@@ -10,9 +10,9 @@ const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
 /** @type {import('rollup').RollupOptions} */
 export default {
-    input: "test-source/index.tsx",
+    input: "stage/index.tsx",
     output: {
-        file: "test-source/index.js",
+        file: "stage/index.js",
         format: "iife",
         name: "bundle",
         sourcemap: true,
@@ -25,7 +25,7 @@ export default {
         resolve({ extensions, dedupe: ['preact', "preact/compat", "preact/hooks", "preact-prop-helpers"] }),   // TODO: Why, exactly, is dedupe needed? It doesn't not make sense, but specifically. Why.
         getBabelOutputPlugin({  // Used instead of babel because babel generates incorrect source maps for our code (but not Preact's)
             allowAllFormats: true,                  // Needed because we output in iife for this demo
-            configFile: path.resolve("test-source/.babelrc"),   // getBabelOutputPlugin doesn't use the default config file                  
+            configFile: path.resolve("stage/.babelrc"),   // getBabelOutputPlugin doesn't use the default config file                  
         }),
         sourcemaps(),    // TODO: This is deprecated but needed for both Preact's and our own TS source maps.
     ],

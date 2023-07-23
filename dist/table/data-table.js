@@ -49,7 +49,7 @@ export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, 
             if (hideBecausePaginated || hideBecauseStaggered) {
                 return _jsx("tr", {});
             }
-            return (_jsx(Fade, { show: !hideBecauseStaggered, animateOnMount: info.staggeredChildReturn.isStaggered, delayMountUntilShown: true, children: _jsx(TableRow, { ...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" }), children: /*hideBecausePaginated? null : */ children }) }));
+            return (_jsx(Fade, { show: !hideBecauseStaggered, animateOnMount: info.staggeredChildReturn.parentIsStaggered, delayMountUntilShown: true, children: _jsx(TableRow, { ...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" }), children: /*hideBecausePaginated? null : */ children }) }));
         } }));
 }));
 export const IsTableHeadContext = createContext(false);
@@ -69,6 +69,11 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
             const { pressReturn, props: propsPress } = usePress({
                 pressParameters: {
                     focusSelf,
+                    allowRepeatPresses: null,
+                    excludeEnter: null,
+                    excludePointer: null,
+                    longPressThreshold: null,
+                    onPressingChange: null,
                     onPressSync: !isTableHead ? undefined : () => {
                         const { column, direction } = info.tableCellReturn.sortByThisColumn();
                         setSortingByThisColumn(true);

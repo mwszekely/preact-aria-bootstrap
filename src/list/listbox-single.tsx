@@ -1,11 +1,11 @@
 import { clsx } from "clsx";
 import { RenderableProps } from "preact";
 import { Listbox, ListboxItem } from "preact-aria-widgets";
-import { ElementProps, EventDetail, SelectedIndexChangeEvent, UseCompleteListNavigationParameters, returnZero, useMergedProps, useStableCallback, useState } from "preact-prop-helpers";
-import { GlobalAttributes, LabelledProps, OmitStrong, PaginatedProps } from "../utility/types.js";
-import { Paginated } from "../pagination/index.js";
+import { ElementProps, EventDetail, SelectedIndexChangeEvent, returnZero, useMergedProps, useStableCallback, useState } from "preact-prop-helpers";
 import { memo } from "preact/compat";
+import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { GlobalAttributes, LabelledProps, OmitStrong, PaginatedProps } from "../utility/types.js";
 
 export interface ListboxSingleProps {
     selectedIndex: number | null;
@@ -75,7 +75,7 @@ export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleIt
                     return <li class="d-none" />;
 
                 return (
-                    <ListboxSingleItemStatic {...useMergedProps(info.props, { ...props, ref }, info.propsPressStable)} disabled={disabled} selected={info.singleSelectionChildReturn.selected as boolean}>{children}</ListboxSingleItemStatic>
+                    <ListboxSingleItemStatic {...useMergedProps(info.props, { ...props, ref })} disabled={disabled} selected={info.singleSelectionChildReturn.selected as boolean}>{children}</ListboxSingleItemStatic>
                 )
             }}
         />

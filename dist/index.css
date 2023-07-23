@@ -316,10 +316,24 @@
   max-width: 100%;
   white-space: nowrap;
 }
+.pagination > .page-item {
+  padding-bottom: 0.25rem;
+  padding-top: 0.25rem;
+}
+.pagination > .page-item:first-child > button {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.pagination > .page-item:last-child > button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
 .pagination-center {
   display: inline-flex;
   overflow-x: auto;
+  padding-bottom: 0.25rem;
+  padding-top: 0.25rem;
 }
 .pagination-center > .page-item > .page-link {
   --bs-pagination-border-radius: 0;

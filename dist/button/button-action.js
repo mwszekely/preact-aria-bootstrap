@@ -45,10 +45,10 @@ export const Button = memo(forwardElementRef(function Button({ tag: Tag, tooltip
     }
     else {
         return (_jsx(ToolbarChild, { index: buttonGroupIndex ?? 0, getSortValue: returnZero, disabledProp: "disabled", render: toolbarChildInfo => {
-                return (_jsx(ButtonStructure, { ref: ref, Tag: (Tag), tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne, callCount: callCount, onPress: (e) => {
-                        toolbarChildInfo.singleSelectionChildReturn.setThisOneSelected(e);
+                return (_jsx(ButtonStructure, { ref: ref, Tag: (Tag), tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne, callCount: callCount, onPress: (e) => {
+                        toolbarChildInfo.pressParameters.onPressSync?.(e);
                         return syncHandler?.(e);
-                    }, otherProps: useMergedProps(props, toolbarChildInfo.props) }));
+                    }, otherProps: useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable) }));
             } }));
     }
 }));

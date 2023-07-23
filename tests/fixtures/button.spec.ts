@@ -1,13 +1,13 @@
-import { Page, expect } from '@playwright/test';
-import { test } from "./fixtures/button.js"
+import { expect } from '@playwright/test';
+import { test } from "./button.fixture.js";
 
 
 
-test('Clicking fires `press` events', async ({ page, button: { getCounter, button }, shared: { install, run, locator } }) => {
+test('Clicking fires `press` events', async ({ page, button: { button }, shared: { getCounter, install, run, locator } }) => {
 
     // Set the button's press handler to wait for 1 second, 
     // then increment our counter
-    await install("Button", "onPress", async (e) => { await new Promise(resolve => setTimeout(resolve, 750)); await window.increment(); });
+    await install("Button", "onPress", async (e) => { await new Promise(resolve => setTimeout(resolve, 750)); await window.increment?.(); });
 
     expect(getCounter(), "We haven't clicked the button, so the counter should still be 0").toBe(0);
     await button.click();
@@ -17,14 +17,14 @@ test('Clicking fires `press` events', async ({ page, button: { getCounter, butto
     expect(getCounter()).toBe(1);
 
 
-    await install("Button", "onPress", async (e) => { await window.increment(); });
+    await install("Button", "onPress", async (e) => { await window.increment?.(); });
     await button.click();
     await new Promise(resolve => setTimeout(resolve, 100));
     expect(getCounter()).toBe(2);
 });
 
 
-test('Disabled during an async press', async ({ page, button: { getCounter, button }, shared: { install, run, locator } }) => {
+test('Disabled during an async press', async ({ page, button: {button }, shared: { getCounter,  install, run, locator } }) => {
 
     // When clicking a button with a sync handler, it should not become disabled in any way.
     await install("Button", "onPress", (e) => {  });
@@ -56,7 +56,7 @@ test('Disabled during an async press', async ({ page, button: { getCounter, butt
 
 
 
-test('While disabled cannot be pressed', async ({ page, button: { getCounter, button }, shared: { install, locator, run } }) => {
+test('While disabled cannot be pressed', async ({ page, button: { button }, shared: { getCounter, install, locator, run } }) => {
 
     const types = ["hard", "soft"] as const;
 
@@ -72,7 +72,7 @@ test('While disabled cannot be pressed', async ({ page, button: { getCounter, bu
     }
 });
 
-test('All press event types work', async ({ page, button: { getCounter, button }, shared: { run, install, locator } }) => {
+test('All press event types work', async ({ page, button: { button }, shared: { getCounter, run, install, locator } }) => {
     await install("Button", "onPress", () => { window.increment(); });
 
     let c = 0;

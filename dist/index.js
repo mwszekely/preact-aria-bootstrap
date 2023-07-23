@@ -1,10 +1,11 @@
+export { Heading, HeadingReset } from "preact-aria-widgets";
 export { Accordion, AccordionSection } from "./accordion/index.js";
 export { Badge } from "./badge/index.js";
 export { Button, ButtonGroup } from "./button/index.js";
 export { Card, CardElement, CardGroup } from "./card/index.js";
 export { CheckboxGroup, CheckboxGroupChild } from "./checkbox-group/index.js";
 export { Checkbox } from "./checkbox/index.js";
-export { DefaultDisabledType } from "./context.js";
+export { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "./context.js";
 export { Dialog } from "./dialog/index.js";
 export { Figure } from "./figure/index.js";
 export { BootstrapIcon, FontIcon } from "./icon/index.js";
@@ -27,5 +28,4 @@ export { AllProviders } from "./utility/all-providers.js";
 export { UtilityClasses } from "./utility/classes.js";
 export { KeyboardAssistProvider } from "./utility/keyboard-assist.js";
 export { RenderCounterProvider, useRenderCounters } from "./utility/render-counter.js";
-export { Heading, HeadingReset } from "preact-aria-widgets";
 //# sourceMappingURL=index.js.map

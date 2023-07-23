@@ -49,8 +49,9 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
             //disabled ||= pending;
             const d = disabled ? disabledType : false;
             return (_jsx(AriaCheckbox, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, ref: imperativeHandle, render: info => {
-                    const inputJsx = _jsx("input", { class: clsx("form-check-input", w && "mt-0"), ...useMergedProps(info.propsInput, propsInput || {}) });
-                    const visibleLabel = _jsx("label", { class: "form-check-label", ...useMergedProps(info.propsLabel, propsLabel || {}), children: label });
+                    debugger;
+                    const inputJsx = _jsx("input", { ...useMergedProps(info.propsInput, propsInput || {}, { class: clsx("form-check-input", w && "mt-0") }) });
+                    const visibleLabel = _jsx("label", { ...useMergedProps(info.propsLabel, propsLabel || {}, { class: "form-check-label" }), children: label });
                     if (!w) {
                         return (_jsxs("div", { ...useMergedProps({
                                 className: clsx("form-check", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse")

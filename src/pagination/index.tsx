@@ -31,8 +31,8 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
                 return (
                     <>
                         {labelPosition == "before" && labelJsx}
-                        <nav aria-label={labelPosition == 'hidden'? label : undefined}>
-                            <ul class="pagination" {...info.propsToolbar}>
+                        <nav aria-label={labelPosition == 'hidden' ? label : undefined}>
+                            <ul {...useMergedProps(info.propsToolbar, { class: "pagination" })}>
                                 <PaginationChildren childCount={childCount} windowSize={windowSize} />
                             </ul>
                         </nav>
@@ -87,10 +87,10 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
 
             render={info => {
                 const { refElementReturn, propsStable } = useRefElement<HTMLButtonElement>({ refElementParameters: {} })
-                const { pressReturn, props: propsPress } = usePress<HTMLButtonElement>({ pressParameters: { onPressSync: null, focusSelf: useCallback((e) => { e.focus(); }, []) }, refElementReturn })
+                const { pressReturn, props: propsPress } = usePress<HTMLButtonElement>({ pressParameters: { onPressSync: null, allowRepeatPresses: false, excludeEnter: null, excludePointer: null, excludeSpace: null, longPressThreshold: null, onPressingChange: null, focusSelf: useCallback((e) => { e.focus(); }, []) }, refElementReturn })
                 return (
                     <li class="page-item">
-                        <button {...useMergedProps(info.props, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {})}>{children}</button>
+                        <button {...useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {})}>{children}</button>
                     </li>
                 )
             }}
