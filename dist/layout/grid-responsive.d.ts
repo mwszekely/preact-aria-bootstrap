@@ -13,5 +13,5 @@ export declare const GridResponsive: <E extends Element>({ minWidth, leftover, c
     leftover?: "fill" | "shrink" | undefined;
     minWidth: `${string}em`;
     tag?: "passthrough" | undefined;
-} & GlobalAttributes<E, "children">, ref: Ref<E>) => import("preact").VNode<any>;
+} & GlobalAttributes<E, "children">, ref: Ref<E>) => import("preact").VNode<(import("preact").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>) | null>;
 //# sourceMappingURL=grid-responsive.d.ts.map
