@@ -23,17 +23,17 @@ export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, name, ch
     });
     const pendingValue = (pending ? capturedValue : null);
     inline ??= false;
-    return (_jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(RadioGroupContext.Provider, { value: useMemo(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: _jsx(AriaRadioGroup, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, ref: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", render: info => {
+    return (_jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(RadioGroupContext.Provider, { value: useMemo(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: _jsx(AriaRadioGroup, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, imperativeHandle: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", render: info => {
                     const visibleLabel = _jsx("label", { ...info.propsRadioGroupLabel, children: label });
-                    return (_jsxs(_Fragment, { children: [labelPosition == "before" && visibleLabel, _jsx(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: _jsxs("span", { ...useMergedProps({ className: clsx("radio-group"), ref, "aria-busy": (pending ? "true" : undefined) }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
+                    return (_jsxs(_Fragment, { children: [labelPosition == "before" && visibleLabel, _jsx(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: _jsxs("span", { ...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
                 } }) }) }));
 }
 export function Radio({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }, ref) {
     const radioGroupInfo = useContext(RadioGroupContext);
     const { pendingValue, inline } = (radioGroupInfo ?? {});
     const singleSelectPending = pendingValue != null && (pendingValue === value);
-    return (_jsx(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: singleSelectPending ? "indeterminate" : "disabled", tagIndicator: "span", render: progressInfo => {
-            const { propsIndicator, propsRegion, propsLabel } = progressInfo;
+    return (_jsx(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: singleSelectPending ? "indeterminate" : "disabled", tagProgressIndicator: "span", render: progressInfo => {
+            const { propsProgressIndicator, propsProgressRegion, propsProgressLabel } = progressInfo;
             //const inButtonGroup = (useContext(ButtonGroupContext) ?? false);
             const defaultDisabled = useContext(DisabledContext);
             const disabledType = useContext(DefaultDisabledType);
@@ -44,7 +44,7 @@ export function Radio({ index, label, value, labelPosition, loadingLabel, deboun
             const d = disabled ? disabledType : false;
             //const buttonClass = clsx(`btn`, `btn-${variantTheme ?? "primary"}`, asyncHandlerReturn.pending && "pending", disabled && "disabled");
             const pending = singleSelectPending; //(pendingValue != null);
-            const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { ...useMergedProps(propsIndicator, { class: "spinner-border" }) }) }));
+            const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { ...useMergedProps(propsProgressIndicator, { class: "spinner-border" }) }) }));
             return (_jsx(AriaRadio, { ariaLabel: labelPosition == 'hidden' ? label : null, value: value, index: index, labelPosition: labelPosition == "hidden" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, render: info => {
                     const inputJsx = _jsx("input", { class: "form-check-input", ...useMergedProps(info.propsInput, props, { ref }) });
                     return (_jsxs("span", { ...useMergedProps({ className: clsx(labelPosition == "after" && ".form-check-reverse", "form-check", pending && "pending", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse") }), children: [loadingJsx, _jsxs("label", { class: "form-check-label", ...info.propsLabel, children: [labelPosition == "before" && label, labelPosition == "tooltip" ? _jsx(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && label] })] }));

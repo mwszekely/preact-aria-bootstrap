@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { cloneElement, ComponentChildren, Ref, VNode } from "preact";
-import { defaultRenderPortal, Tooltip as AriaTooltip, TooltipStatus } from "preact-aria-widgets";
+import { Tooltip as AriaTooltip, TooltipStatus, useDefaultRenderPortal } from "preact-aria-widgets";
 import { useMergedProps, useState } from "preact-prop-helpers";
 import { SlideFade } from "preact-transition";
 import { useCallback, useEffect } from "preact/hooks";
@@ -147,7 +147,8 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
                         </div>
                     </SlideFade>
                 </div>
-            const portalJsx = absolutePositioning ? tooltipContent : defaultRenderPortal({ children: tooltipContent, portalId });
+            let contentIfRelative = useDefaultRenderPortal({ children: tooltipContent, portalId });
+            const portalJsx = absolutePositioning ? tooltipContent : contentIfRelative;
             if (forward) {
                 const vnode = (children as VNode);
                 console.assert(!!vnode.type);

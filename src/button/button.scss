@@ -1,19 +1,22 @@
+@use "bootstrap-sass-variables/bootstrap.scss" as *;
 
 .btn {
     position: relative;
     outline: none;
 
-    &>.spinner-border, &>.spinner-grow {
+    &>.spinner-border,
+    &>.spinner-grow {
         opacity: 0;
         transition: opacity 0.25s ease-in-out;
     }
 
-    &>.spinner-border, &>.spinner-grow {
+    &>.spinner-border,
+    &>.spinner-grow {
         position: absolute;
         left: 0;
-        right:0;
-        top:0;
-        bottom:0;
+        right: 0;
+        top: 0;
+        bottom: 0;
         inset: 0;
         margin: auto;
         pointer-events: none;
@@ -21,20 +24,54 @@
     }
 
     &.pending {
-        &>.spinner-border, &>.spinner-grow {
+
+        &>.spinner-border,
+        &>.spinner-grow {
             opacity: 1;
         }
 
-        &::after {  
+        &::after {
             content: "";
             position: absolute;
             left: 0;
-            right:0;
-            top:0;
-            bottom:0;
+            right: 0;
+            top: 0;
+            bottom: 0;
             inset: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             overflow: hidden;
         }
+    }
+}
+
+
+// This fixes focus styles on outline buttons, because focus and hover and selection are all the same otherwise.
+// This is done by adding some --bs-btn-focus-* properties that default to their corresponding hover properties if they don't exist
+@each $color,
+$value in $theme-colors {
+    .btn-outline-#{$color} {
+        --#{$prefix}btn-focus-color: #{$value};
+        --#{$prefix}btn-focus-bg: transparent;
+        --#{$prefix}btn-focus-border-color: #{$value};
+    }
+}
+
+.btn {
+    &:focus-visible {
+        color: var(--#{$prefix}btn-focus-color, var(--#{$prefix}btn-hover-color));
+        @include gradient-bg(var(--#{$prefix}btn-focus-bg, var(--#{$prefix}btn-hover-bg)));
+        border-color: var(--#{$prefix}btn-focus-border-color, var(--#{$prefix}btn-hover-border-color));
+
+        @media (any-hover: hover) {
+            &:hover {
+                color: var(--#{$prefix}btn-hover-color);
+                @include gradient-bg(var(--#{$prefix}btn-hover-bg));
+                border-color: var(--#{$prefix}btn-hover-border-color);
+            }
+        }
+    }
+
+    .btn-check:focus-visible+& {
+        border-color: var(--#{$prefix}btn-focus-border-color, var(--#{$prefix}btn-hover-border-color));
     }
 }

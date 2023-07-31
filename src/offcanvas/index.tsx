@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { ComponentChildren, h, Ref, VNode } from "preact";
-import { defaultRenderPortal, Dialog as AriaDialog, DialogProps as AriaDialogProps } from "preact-aria-widgets";
+import { Dialog as AriaDialog, DialogProps as AriaDialogProps, useDefaultRenderPortal } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
 import { Fade, Slide } from "preact-transition";
 import { memo } from "preact/compat";
@@ -12,7 +12,7 @@ import { usePortalId } from "../utility/use-portal-id.js";
 
 export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     open: boolean;
-    onClose: AriaDialogProps<HTMLSpanElement, HTMLSpanElement, HTMLSpanElement, HTMLSpanElement>["onClose"];
+    onClose: AriaDialogProps<HTMLSpanElement, HTMLSpanElement, HTMLSpanElement, HTMLSpanElement>["onDismiss"];
     headerPosition?: "hidden" | "start";
     header: ComponentChildren;
     anchor: VNode;
@@ -35,18 +35,18 @@ export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, heade
         <AriaDialog<HTMLDivElement, HTMLSpanElement, HTMLDivElement, HTMLHeadingElement>
 
             ariaLabel={headerPosition == "hidden" ? header as string : null}
-            open={open}
-            onClose={onClose}
+            active={open}
+            onDismiss={onClose}
             focusPopup={(e, f) => f()?.focus?.()}
-            closeOnBackdrop={true}
-            closeOnEscape={true}
+            dismissBackdropActive={true}
+            dismissEscapeActive={true}
 
             render={info => {
 
                 return (
                     <>
                         {useClonedElement(anchor, useMergedProps(info.propsSource, props), ref)}
-                        {defaultRenderPortal({
+                        {useDefaultRenderPortal({
                             portalId: usePortalId("offcanvas"),
                             children: (
                                 <div {...useMergedProps(info.propsFocusContainer, propsPortal || {})}>
@@ -54,7 +54,7 @@ export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, heade
                                         <div {...useMergedProps(info.propsDialog, { class: clsx("offcanvas"), tabIndex: -1 })}>
                                             <div {...useMergedProps({ class: "offcanvas-header" })}>
                                                 <h5 {...useMergedProps(info.propsTitle, { class: "offcanvas-title" })}>{header}</h5>
-                                                <Button class="btn-close" aria-label="Close" onPress={() => onClose("escape")} />
+                                                <Button class="btn-close" aria-label="Close" onPress={(_pressed, e) => onClose(e, "escape")} />
                                             </div>
                                             <div class="offcanvas-body">{children}</div>
                                         </div>

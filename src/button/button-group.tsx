@@ -51,7 +51,9 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync<Parameters<NonNullable<OSSI>>, void | Promise<void>>(
         (e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); },
         {
-            capture: (e) => { setCapturedIndex(e[EventDetail].selectedIndex); return [e]; }
+            capture: (e) => { setCapturedIndex(e[EventDetail].selectedIndex); return [e]; },
+            debounce: null,
+            throttle: null,
         });
 
     const pendingIndex = (pending ? capturedIndex : null);
@@ -64,10 +66,13 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                 <DisabledContext.Provider value={disabled ?? false}>
                     <ButtonGroupContext.Provider value={useMemo(() => ({ pendingIndex }), [pendingIndex])}>
                         <Toolbar<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement>
-                            onSelectedIndexChange={onSelectedIndexChangeSync}
-                            ref={imperativeHandle}
+                            onSelectedIndexChange={(...e) => {
+                                debugger;
+                                onSelectedIndexChangeSync(...e);
+                            }}
+                            imperativeHandle={imperativeHandle}
                             ariaPropName="aria-pressed"
-                            selectionMode="disabled"
+                            selectionMode="activation"
                             role="toolbar"  // TODO: Was group, but that doesn't count as an application, I think?
                             pageNavigationSize={0}
                             orientation={orientation || "horizontal"}

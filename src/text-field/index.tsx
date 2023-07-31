@@ -507,11 +507,11 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
             debounce={debounce ?? 500}
             throttle={throttle ?? 1000}
 
-            tagIndicator="span"
+            tagProgressIndicator="span"
             render={progressInfo => {
 
 
-                const { asyncHandlerReturn: { pending: p, debouncingAsync, callCount, debouncingSync, currentCapture, syncHandler, invocationResult }, propsIndicator } = progressInfo;
+                const { asyncHandlerReturn: { pending: p, debouncingAsync, callCount, debouncingSync, currentCapture, syncHandler, invocationResult }, propsProgressIndicator } = progressInfo;
 
                 const showSpinner = (p || debouncingAsync || debouncingSync);
 
@@ -658,7 +658,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
                                 {labelPosition == "tooltip" ? <Tooltip tooltip={label} absolutePositioning={true}>{finalInputJsx}</Tooltip> : finalInputJsx}
                                 {labelPosition == "floating" && labelJsx}
                                 {iconEnd && <span class={clsx("form-control-icon-end form-control-icon", !showSpinner && "show")}>{iconEnd}</span>}
-                                <TextFieldSpinner callCount={callCount} containerClass={"form-control-icon-end form-control-icon"} invocationResult={invocationResult} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
+                                <TextFieldSpinner callCount={callCount} containerClass={"form-control-icon-end form-control-icon"} invocationResult={invocationResult} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsProgressIndicator} />
                             </div>
                             {labelPosition == "after" && labelJsx}
                         </div>
@@ -674,7 +674,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
                             {labelPosition == "tooltip" ? <Tooltip tooltip={label} absolutePositioning={true}>{finalInputJsx}</Tooltip> : finalInputJsx}
                             {labelPosition == "floating" && labelJsx}
                             {iconEnd && <span class={clsx("input-group-text", !showSpinner && "show")}>{iconEnd}</span>}
-                            <TextFieldSpinner callCount={callCount} containerClass={""} invocationResult={invocationResult} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsIndicator} />
+                            <TextFieldSpinner callCount={callCount} containerClass={""} invocationResult={invocationResult} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsProgressIndicator} />
                             {labelPosition == "after" && labelJsx}
                         </>
                     );
@@ -697,8 +697,8 @@ export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSyn
 
     const ret = (
         <>
-            <Fade show={(pendingDisplayType == 1)} animateOnMount exitVisibility="removed"><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-border spinner-border-sm`)} {...((pendingDisplayType == 1) ? propsIndicator : {})} /></span></Fade>
-            <Fade show={(pendingDisplayType == 2)} animateOnMount exitVisibility="removed"><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-grow spinner-grow-sm`)} {...((pendingDisplayType == 2) ? propsIndicator : {})} /></span></Fade>
+            <Fade show={(pendingDisplayType == 1)} animateOnMount={false} exitVisibility="removed"><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-border spinner-border-sm`)} {...((pendingDisplayType == 1) ? propsIndicator : {})} /></span></Fade>
+            <Fade show={(pendingDisplayType == 2)} animateOnMount={false} exitVisibility="removed"><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-grow spinner-grow-sm`)} {...((pendingDisplayType == 2) ? propsIndicator : {})} /></span></Fade>
         </>
     )
 

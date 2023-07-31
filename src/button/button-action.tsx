@@ -11,7 +11,10 @@ import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { ButtonGroupChildProps, ButtonGroupContext } from "./button-group.js";
 
 
-export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttributes<E>, "children" | "style" | "class" | "className">, Partial<ButtonGroupChildProps>, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
+export interface ButtonProps<E extends HTMLElement> extends
+    Pick<h.JSX.HTMLAttributes<E>, "children" | "style" | "class" | "className">,
+    Partial<ButtonGroupChildProps>,
+    Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     ref?: Ref<E>;
 
     disabled?: boolean;
@@ -26,7 +29,7 @@ export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttri
 
     tag?: ElementToTag<E>;
 
-    badge?: VNode;
+    badge?: Nullable<VNode>;
 
     variantTheme?: Nullable<ButtonThemes>;
     variantFill?: Nullable<ButtonFills>;
@@ -43,7 +46,7 @@ export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttri
      * If inside of a `ButtonGroup`, used for multi-selection. Prefer `selectedIndex` for single-selection.
      * 
      */
-    pressed?: boolean;
+    pressed?: Nullable<boolean>;
 }
 
 export const Button = memo(forwardElementRef(function Button<E extends HTMLElement>({ tag: Tag, tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps<E>, ref?: Ref<E>) {
@@ -56,7 +59,7 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
 
     const { currentCapture, pending: individualPending, syncHandler, callCount } = useAsyncHandler({
         asyncHandler: onPressAsync,
-        capture: (e) => e[EventDetail].pressed,
+        capture: (e) => e[EventDetail].pressed ?? null,
         debounce,
         throttle
     });
@@ -124,9 +127,10 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
                         variantFill={variantFill ?? null}
                         variantSize={variantSize ?? "md"}
                         variantDropdown={variantDropdown || null}
-                        pressed={toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne}
+                        pressed={toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne || false}
                         callCount={callCount}
                         onPress={(e) => {
+                            debugger;
                             toolbarChildInfo.pressParameters.onPressSync?.(e);
                             return syncHandler?.(e);
                         }}
@@ -146,7 +150,7 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extend
         <AriaButton<E>
             tagButton={(Tag) as never}
             disabled={disabled}
-            onPress={onPress}
+            onPressSync={onPress}
             pressed={pressed}
             render={buttonInfo => {
                 return (
@@ -154,12 +158,14 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extend
                         ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
                         value={pending ? "indeterminate" : "disabled"}
 
-                        tagIndicator="span"
+                        tagProgressIndicator="span"
                         render={progressInfo => {
-                            const { propsIndicator, propsRegion } = progressInfo;
-                            const loadingJsx = (<Fade show={pending} exitVisibility="removed"><span class="spinner-border" {...propsIndicator} /></Fade>)
-                            if (pressed !== null)
+                            const { propsProgressIndicator, propsProgressRegion } = progressInfo;
+                            const loadingJsx = (<Fade show={pending} exitVisibility="removed"><span class="spinner-border" {...propsProgressIndicator} /></Fade>)
+                            if (pressed != null)
                                 variantFill ??= (pressed ? "fill" : "outline");
+
+                            console.log(`Button rendered pressed ${pressed} and fill ${variantFill}`);
 
                             const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
 

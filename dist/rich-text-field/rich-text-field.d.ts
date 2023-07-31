@@ -25,6 +25,6 @@ export interface DocumentFieldProps extends RichTextFieldProps {
      */
     implementation?: any;
 }
-export declare function RichTextField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }: RichTextFieldProps): import("preact").JSX.Element;
-export declare function DocumentField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }: RichTextFieldProps): import("preact").JSX.Element;
+export declare function RichTextField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }: RichTextFieldProps): import("preact-prop-helpers").JSX.Element;
+export declare function DocumentField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }: RichTextFieldProps): import("preact-prop-helpers").JSX.Element;
 //# sourceMappingURL=rich-text-field.d.ts.map

@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  var n$1,l$3,u$3,t$2,r$3,o$4,f$3,e$1,c$3={},s$3=[],a$3=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function h$3(n,l){for(var u in l)n[u]=l[u];return n}function v$3(n){var l=n.parentNode;l&&l.removeChild(n);}function y$3(l,u,i){var t,r,o,f={};for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];if(arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(o in l.defaultProps)void 0===f[o]&&(f[o]=l.defaultProps[o]);return p$3(l,f,t,r,null)}function p$3(n,i,t,r,o){var f={type:n,props:i,key:t,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++u$3:o};return null==o&&null!=l$3.vnode&&l$3.vnode(f),f}function _$3(n){return n.children}function k$3(n,l){this.props=n,this.context=l;}function b$2(n,l){if(null==l)return n.__?b$2(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?b$2(n):null}function g$3(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return g$3(n)}}function m$2(n){(!n.__d&&(n.__d=!0)&&t$2.push(n)&&!w$3.__r++||r$3!==l$3.debounceRendering)&&((r$3=l$3.debounceRendering)||o$4)(w$3);}function w$3(){var n,l,u,i,r,o,e,c;for(t$2.sort(f$3);n=t$2.shift();)n.__d&&(l=t$2.length,i=void 0,r=void 0,e=(o=(u=n).__v).__e,(c=u.__P)&&(i=[],(r=h$3({},o)).__v=o.__v+1,L$3(c,o,r,u.__n,void 0!==c.ownerSVGElement,null!=o.__h?[e]:null,i,null==e?b$2(o):e,o.__h),M$1(i,o),o.__e!=e&&g$3(o)),t$2.length>l&&t$2.sort(f$3));w$3.__r=0;}function x$2(n,l,u,i,t,r,o,f,e,a){var h,v,y,d,k,g,m,w=i&&i.__k||s$3,x=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(d=u.__k[h]=null==(d=l[h])||"boolean"==typeof d||"function"==typeof d?null:"string"==typeof d||"number"==typeof d||"bigint"==typeof d?p$3(null,d,null,null,d):Array.isArray(d)?p$3(_$3,{children:d},null,null,null):d.__b>0?p$3(d.type,d.props,d.key,d.ref?d.ref:null,d.__v):d)){if(d.__=u,d.__b=u.__b+1,null===(y=w[h])||y&&d.key==y.key&&d.type===y.type)w[h]=void 0;else for(v=0;v<x;v++){if((y=w[v])&&d.key==y.key&&d.type===y.type){w[v]=void 0;break}y=null;}L$3(n,d,y=y||c$3,t,r,o,f,e,a),k=d.__e,(v=d.ref)&&y.ref!=v&&(m||(m=[]),y.ref&&m.push(y.ref,null,d),m.push(v,d.__c||k,d)),null!=k?(null==g&&(g=k),"function"==typeof d.type&&d.__k===y.__k?d.__d=e=A$2(d,e,n):e=C$2(n,d,y,w,k,e),"function"==typeof u.type&&(u.__d=e)):e&&y.__e==e&&e.parentNode!=n&&(e=b$2(y));}for(u.__e=g,h=x;h--;)null!=w[h]&&("function"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=$$2(i).nextSibling),S$1(w[h],w[h]));if(m)for(h=0;h<m.length;h++)O$1(m[h],m[++h],m[++h]);}function A$2(n,l,u){for(var i,t=n.__k,r=0;t&&r<t.length;r++)(i=t[r])&&(i.__=n,l="function"==typeof i.type?A$2(i,l,u):C$2(u,i,i,t,i.__e,l));return l}function P$3(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){P$3(n,l);}):l.push(n)),l}function C$2(n,l,u,i,t,r){var o,f,e;if(void 0!==l.__d)o=l.__d,l.__d=void 0;else if(null==u||t!=r||null==t.parentNode)n:if(null==r||r.parentNode!==n)n.appendChild(t),o=null;else {for(f=r,e=0;(f=f.nextSibling)&&e<i.length;e+=1)if(f==t)break n;n.insertBefore(t,r),o=r;}return void 0!==o?o:t.nextSibling}function $$2(n){var l,u,i;if(null==n.type||"string"==typeof n.type)return n.__e;if(n.__k)for(l=n.__k.length-1;l>=0;l--)if((u=n.__k[l])&&(i=$$2(u)))return i;return null}function H$2(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||T$3(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||T$3(n,r,l[r],u[r],i);}function I$2(n,l,u){"-"===l[0]?n.setProperty(l,null==u?"":u):n[l]=null==u?"":"number"!=typeof u||a$3.test(l)?u:u+"px";}function T$3(n,l,u,i,t){var r;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else {if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||I$2(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||I$2(n.style,l,u[l]);}else if("o"===l[0]&&"n"===l[1])r=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+r]=u,u?i||n.addEventListener(l,r?z$3:j$3,r):n.removeEventListener(l,r?z$3:j$3,r);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("width"!==l&&"height"!==l&&"href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null==u||!1===u&&"-"!==l[4]?n.removeAttribute(l):n.setAttribute(l,u));}}function j$3(n){return this.l[n.type+!1](l$3.event?l$3.event(n):n)}function z$3(n){return this.l[n.type+!0](l$3.event?l$3.event(n):n)}function L$3(n,u,i,t,r,o,f,e,c){var s,a,v,y,p,d,b,g,m,w,A,P,C,$,H,I=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,o=[e]),(s=l$3.__b)&&s(u);try{n:if("function"==typeof I){if(g=u.props,m=(s=I.contextType)&&t[s.__c],w=s?m?m.props.value:s.__:t,i.__c?b=(a=u.__c=i.__c).__=a.__E:("prototype"in I&&I.prototype.render?u.__c=a=new I(g,w):(u.__c=a=new k$3(g,w),a.constructor=I,a.render=q$3),m&&m.sub(a),a.props=g,a.state||(a.state={}),a.context=w,a.__n=t,v=a.__d=!0,a.__h=[],a._sb=[]),null==a.__s&&(a.__s=a.state),null!=I.getDerivedStateFromProps&&(a.__s==a.state&&(a.__s=h$3({},a.__s)),h$3(a.__s,I.getDerivedStateFromProps(g,a.__s))),y=a.props,p=a.state,a.__v=u,v)null==I.getDerivedStateFromProps&&null!=a.componentWillMount&&a.componentWillMount(),null!=a.componentDidMount&&a.__h.push(a.componentDidMount);else {if(null==I.getDerivedStateFromProps&&g!==y&&null!=a.componentWillReceiveProps&&a.componentWillReceiveProps(g,w),!a.__e&&null!=a.shouldComponentUpdate&&!1===a.shouldComponentUpdate(g,a.__s,w)||u.__v===i.__v){for(u.__v!==i.__v&&(a.props=g,a.state=a.__s,a.__d=!1),a.__e=!1,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u);}),A=0;A<a._sb.length;A++)a.__h.push(a._sb[A]);a._sb=[],a.__h.length&&f.push(a);break n}null!=a.componentWillUpdate&&a.componentWillUpdate(g,a.__s,w),null!=a.componentDidUpdate&&a.__h.push(function(){a.componentDidUpdate(y,p,d);});}if(a.context=w,a.props=g,a.__P=n,P=l$3.__r,C=0,"prototype"in I&&I.prototype.render){for(a.state=a.__s,a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),$=0;$<a._sb.length;$++)a.__h.push(a._sb[$]);a._sb=[];}else do{a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),a.state=a.__s;}while(a.__d&&++C<25);a.state=a.__s,null!=a.getChildContext&&(t=h$3(h$3({},t),a.getChildContext())),v||null==a.getSnapshotBeforeUpdate||(d=a.getSnapshotBeforeUpdate(y,p)),H=null!=s&&s.type===_$3&&null==s.key?s.props.children:s,x$2(n,Array.isArray(H)?H:[H],u,i,t,r,o,f,e,c),a.base=u.__e,u.__h=null,a.__h.length&&f.push(a),b&&(a.__E=a.__=null),a.__e=!1;}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=N$2(i.__e,u,i,t,r,o,f,c);(s=l$3.diffed)&&s(u);}catch(n){u.__v=null,(c||null!=o)&&(u.__e=e,u.__h=!!c,o[o.indexOf(e)]=null),l$3.__e(n,u,i);}}function M$1(n,u){l$3.__c&&l$3.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u);});}catch(n){l$3.__e(n,u.__v);}});}function N$2(l,u,i,t,r,o,f,e){var s,a,h,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(r=!0),null!=o)for(;_<o.length;_++)if((s=o[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,o[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=r?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),o=null,e=!1;}if(null===d)y===p||e&&l.data===p||(l.data=p);else {if(o=o&&n$1.call(l.childNodes),a=(y=i.props||c$3).dangerouslySetInnerHTML,h=p.dangerouslySetInnerHTML,!e){if(null!=o)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(h||a)&&(h&&(a&&h.__html==a.__html||h.__html===l.innerHTML)||(l.innerHTML=h&&h.__html||""));}if(H$2(l,p,y,r,e),h)u.__k=[];else if(_=u.props.children,x$2(l,Array.isArray(_)?_:[_],u,i,t,r&&"foreignObject"!==d,o,f,o?o[0]:i.__k&&b$2(i,0),e),null!=o)for(_=o.length;_--;)null!=o[_]&&v$3(o[_]);e||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&T$3(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&T$3(l,"checked",_,y.checked,!1));}return l}function O$1(n,u,i){try{"function"==typeof n?n(u):n.current=u;}catch(n){l$3.__e(n,i);}}function S$1(n,u,i){var t,r;if(l$3.unmount&&l$3.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||O$1(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(n){l$3.__e(n,u);}t.base=t.__P=null,n.__c=void 0;}if(t=n.__k)for(r=0;r<t.length;r++)t[r]&&S$1(t[r],u,i||"function"!=typeof n.type);i||null==n.__e||v$3(n.__e),n.__=n.__e=n.__d=void 0;}function q$3(n,l,u){return this.constructor(n,u)}function B$3(u,i,t){var r,o,f;l$3.__&&l$3.__(u,i),o=(r="function"==typeof t)?null:t&&t.__k||i.__k,f=[],L$3(i,u=(!r&&t||i).__k=y$3(_$3,null,[u]),o||c$3,c$3,void 0!==i.ownerSVGElement,!r&&t?[t]:o?null:i.firstChild?n$1.call(i.childNodes):null,f,!r&&t?t:o?o.__e:i.firstChild,r),M$1(f,u);}function E$1(l,u,i){var t,r,o,f=h$3({},l.props);for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];return arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),p$3(l.type,f,t||l.key,r||l.ref,null)}function F$3(n,l){var u={__c:l="__cC"+e$1++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(function(n){n.__e=!0,m$2(n);});},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n$1=s$3.slice,l$3={__e:function(n,l,u,i){for(var t,r,o;l=l.__;)if((t=l.__c)&&!t.__)try{if((r=t.constructor)&&null!=r.getDerivedStateFromError&&(t.setState(r.getDerivedStateFromError(n)),o=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),o=t.__d),o)return t.__E=t}catch(l){n=l;}throw n}},u$3=0,k$3.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=h$3({},this.state),"function"==typeof n&&(n=n(h$3({},u),this.props)),n&&h$3(u,n),null!=n&&this.__v&&(l&&this._sb.push(l),m$2(this));},k$3.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),m$2(this));},k$3.prototype.render=_$3,t$2=[],o$4="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,f$3=function(n,l){return n.__v.__b-l.__v.__b},w$3.__r=0,e$1=0;
+  var n$1,l$3,u$3,t$2,r$4,o$4,f$3,e$1,c$3={},s$3=[],a$3=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function h$3(n,l){for(var u in l)n[u]=l[u];return n}function v$3(n){var l=n.parentNode;l&&l.removeChild(n);}function y$3(l,u,i){var t,r,o,f={};for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];if(arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(o in l.defaultProps)void 0===f[o]&&(f[o]=l.defaultProps[o]);return p$3(l,f,t,r,null)}function p$3(n,i,t,r,o){var f={type:n,props:i,key:t,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++u$3:o};return null==o&&null!=l$3.vnode&&l$3.vnode(f),f}function _$3(n){return n.children}function k$3(n,l){this.props=n,this.context=l;}function b$2(n,l){if(null==l)return n.__?b$2(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return "function"==typeof n.type?b$2(n):null}function g$3(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return g$3(n)}}function m$2(n){(!n.__d&&(n.__d=!0)&&t$2.push(n)&&!w$3.__r++||r$4!==l$3.debounceRendering)&&((r$4=l$3.debounceRendering)||o$4)(w$3);}function w$3(){var n,l,u,i,r,o,e,c;for(t$2.sort(f$3);n=t$2.shift();)n.__d&&(l=t$2.length,i=void 0,r=void 0,e=(o=(u=n).__v).__e,(c=u.__P)&&(i=[],(r=h$3({},o)).__v=o.__v+1,L$3(c,o,r,u.__n,void 0!==c.ownerSVGElement,null!=o.__h?[e]:null,i,null==e?b$2(o):e,o.__h),M$1(i,o),o.__e!=e&&g$3(o)),t$2.length>l&&t$2.sort(f$3));w$3.__r=0;}function x$2(n,l,u,i,t,r,o,f,e,a){var h,v,y,d,k,g,m,w=i&&i.__k||s$3,x=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(d=u.__k[h]=null==(d=l[h])||"boolean"==typeof d||"function"==typeof d?null:"string"==typeof d||"number"==typeof d||"bigint"==typeof d?p$3(null,d,null,null,d):Array.isArray(d)?p$3(_$3,{children:d},null,null,null):d.__b>0?p$3(d.type,d.props,d.key,d.ref?d.ref:null,d.__v):d)){if(d.__=u,d.__b=u.__b+1,null===(y=w[h])||y&&d.key==y.key&&d.type===y.type)w[h]=void 0;else for(v=0;v<x;v++){if((y=w[v])&&d.key==y.key&&d.type===y.type){w[v]=void 0;break}y=null;}L$3(n,d,y=y||c$3,t,r,o,f,e,a),k=d.__e,(v=d.ref)&&y.ref!=v&&(m||(m=[]),y.ref&&m.push(y.ref,null,d),m.push(v,d.__c||k,d)),null!=k?(null==g&&(g=k),"function"==typeof d.type&&d.__k===y.__k?d.__d=e=A$2(d,e,n):e=C$2(n,d,y,w,k,e),"function"==typeof u.type&&(u.__d=e)):e&&y.__e==e&&e.parentNode!=n&&(e=b$2(y));}for(u.__e=g,h=x;h--;)null!=w[h]&&("function"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=$$2(i).nextSibling),S$1(w[h],w[h]));if(m)for(h=0;h<m.length;h++)O$1(m[h],m[++h],m[++h]);}function A$2(n,l,u){for(var i,t=n.__k,r=0;t&&r<t.length;r++)(i=t[r])&&(i.__=n,l="function"==typeof i.type?A$2(i,l,u):C$2(u,i,i,t,i.__e,l));return l}function P$3(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){P$3(n,l);}):l.push(n)),l}function C$2(n,l,u,i,t,r){var o,f,e;if(void 0!==l.__d)o=l.__d,l.__d=void 0;else if(null==u||t!=r||null==t.parentNode)n:if(null==r||r.parentNode!==n)n.appendChild(t),o=null;else {for(f=r,e=0;(f=f.nextSibling)&&e<i.length;e+=1)if(f==t)break n;n.insertBefore(t,r),o=r;}return void 0!==o?o:t.nextSibling}function $$2(n){var l,u,i;if(null==n.type||"string"==typeof n.type)return n.__e;if(n.__k)for(l=n.__k.length-1;l>=0;l--)if((u=n.__k[l])&&(i=$$2(u)))return i;return null}function H$2(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||T$3(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||T$3(n,r,l[r],u[r],i);}function I$2(n,l,u){"-"===l[0]?n.setProperty(l,null==u?"":u):n[l]=null==u?"":"number"!=typeof u||a$3.test(l)?u:u+"px";}function T$3(n,l,u,i,t){var r;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else {if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||I$2(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||I$2(n.style,l,u[l]);}else if("o"===l[0]&&"n"===l[1])r=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+r]=u,u?i||n.addEventListener(l,r?z$3:j$3,r):n.removeEventListener(l,r?z$3:j$3,r);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("width"!==l&&"height"!==l&&"href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null==u||!1===u&&"-"!==l[4]?n.removeAttribute(l):n.setAttribute(l,u));}}function j$3(n){return this.l[n.type+!1](l$3.event?l$3.event(n):n)}function z$3(n){return this.l[n.type+!0](l$3.event?l$3.event(n):n)}function L$3(n,u,i,t,r,o,f,e,c){var s,a,v,y,p,d,b,g,m,w,A,P,C,$,H,I=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,o=[e]),(s=l$3.__b)&&s(u);try{n:if("function"==typeof I){if(g=u.props,m=(s=I.contextType)&&t[s.__c],w=s?m?m.props.value:s.__:t,i.__c?b=(a=u.__c=i.__c).__=a.__E:("prototype"in I&&I.prototype.render?u.__c=a=new I(g,w):(u.__c=a=new k$3(g,w),a.constructor=I,a.render=q$3),m&&m.sub(a),a.props=g,a.state||(a.state={}),a.context=w,a.__n=t,v=a.__d=!0,a.__h=[],a._sb=[]),null==a.__s&&(a.__s=a.state),null!=I.getDerivedStateFromProps&&(a.__s==a.state&&(a.__s=h$3({},a.__s)),h$3(a.__s,I.getDerivedStateFromProps(g,a.__s))),y=a.props,p=a.state,a.__v=u,v)null==I.getDerivedStateFromProps&&null!=a.componentWillMount&&a.componentWillMount(),null!=a.componentDidMount&&a.__h.push(a.componentDidMount);else {if(null==I.getDerivedStateFromProps&&g!==y&&null!=a.componentWillReceiveProps&&a.componentWillReceiveProps(g,w),!a.__e&&null!=a.shouldComponentUpdate&&!1===a.shouldComponentUpdate(g,a.__s,w)||u.__v===i.__v){for(u.__v!==i.__v&&(a.props=g,a.state=a.__s,a.__d=!1),a.__e=!1,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u);}),A=0;A<a._sb.length;A++)a.__h.push(a._sb[A]);a._sb=[],a.__h.length&&f.push(a);break n}null!=a.componentWillUpdate&&a.componentWillUpdate(g,a.__s,w),null!=a.componentDidUpdate&&a.__h.push(function(){a.componentDidUpdate(y,p,d);});}if(a.context=w,a.props=g,a.__P=n,P=l$3.__r,C=0,"prototype"in I&&I.prototype.render){for(a.state=a.__s,a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),$=0;$<a._sb.length;$++)a.__h.push(a._sb[$]);a._sb=[];}else do{a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),a.state=a.__s;}while(a.__d&&++C<25);a.state=a.__s,null!=a.getChildContext&&(t=h$3(h$3({},t),a.getChildContext())),v||null==a.getSnapshotBeforeUpdate||(d=a.getSnapshotBeforeUpdate(y,p)),H=null!=s&&s.type===_$3&&null==s.key?s.props.children:s,x$2(n,Array.isArray(H)?H:[H],u,i,t,r,o,f,e,c),a.base=u.__e,u.__h=null,a.__h.length&&f.push(a),b&&(a.__E=a.__=null),a.__e=!1;}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=N$2(i.__e,u,i,t,r,o,f,c);(s=l$3.diffed)&&s(u);}catch(n){u.__v=null,(c||null!=o)&&(u.__e=e,u.__h=!!c,o[o.indexOf(e)]=null),l$3.__e(n,u,i);}}function M$1(n,u){l$3.__c&&l$3.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u);});}catch(n){l$3.__e(n,u.__v);}});}function N$2(l,u,i,t,r,o,f,e){var s,a,h,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(r=!0),null!=o)for(;_<o.length;_++)if((s=o[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,o[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=r?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),o=null,e=!1;}if(null===d)y===p||e&&l.data===p||(l.data=p);else {if(o=o&&n$1.call(l.childNodes),a=(y=i.props||c$3).dangerouslySetInnerHTML,h=p.dangerouslySetInnerHTML,!e){if(null!=o)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(h||a)&&(h&&(a&&h.__html==a.__html||h.__html===l.innerHTML)||(l.innerHTML=h&&h.__html||""));}if(H$2(l,p,y,r,e),h)u.__k=[];else if(_=u.props.children,x$2(l,Array.isArray(_)?_:[_],u,i,t,r&&"foreignObject"!==d,o,f,o?o[0]:i.__k&&b$2(i,0),e),null!=o)for(_=o.length;_--;)null!=o[_]&&v$3(o[_]);e||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&T$3(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&T$3(l,"checked",_,y.checked,!1));}return l}function O$1(n,u,i){try{"function"==typeof n?n(u):n.current=u;}catch(n){l$3.__e(n,i);}}function S$1(n,u,i){var t,r;if(l$3.unmount&&l$3.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||O$1(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount();}catch(n){l$3.__e(n,u);}t.base=t.__P=null,n.__c=void 0;}if(t=n.__k)for(r=0;r<t.length;r++)t[r]&&S$1(t[r],u,i||"function"!=typeof n.type);i||null==n.__e||v$3(n.__e),n.__=n.__e=n.__d=void 0;}function q$3(n,l,u){return this.constructor(n,u)}function B$3(u,i,t){var r,o,f;l$3.__&&l$3.__(u,i),o=(r="function"==typeof t)?null:t&&t.__k||i.__k,f=[],L$3(i,u=(!r&&t||i).__k=y$3(_$3,null,[u]),o||c$3,c$3,void 0!==i.ownerSVGElement,!r&&t?[t]:o?null:i.firstChild?n$1.call(i.childNodes):null,f,!r&&t?t:o?o.__e:i.firstChild,r),M$1(f,u);}function E$1(l,u,i){var t,r,o,f=h$3({},l.props);for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];return arguments.length>2&&(f.children=arguments.length>3?n$1.call(arguments,2):i),p$3(l.type,f,t||l.key,r||l.ref,null)}function F$3(n,l){var u={__c:l="__cC"+e$1++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(function(n){n.__e=!0,m$2(n);});},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n);};}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n$1=s$3.slice,l$3={__e:function(n,l,u,i){for(var t,r,o;l=l.__;)if((t=l.__c)&&!t.__)try{if((r=t.constructor)&&null!=r.getDerivedStateFromError&&(t.setState(r.getDerivedStateFromError(n)),o=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),o=t.__d),o)return t.__E=t}catch(l){n=l;}throw n}},u$3=0,k$3.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=h$3({},this.state),"function"==typeof n&&(n=n(h$3({},u),this.props)),n&&h$3(u,n),null!=n&&this.__v&&(l&&this._sb.push(l),m$2(this));},k$3.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),m$2(this));},k$3.prototype.render=_$3,t$2=[],o$4="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,f$3=function(n,l){return n.__v.__b-l.__v.__b},w$3.__r=0,e$1=0;
 
   var _$2=0;function o$3(o,e,n,t,f,l){var s,u,a={};for(u in e)"ref"==u?s=e[u]:a[u]=e[u];var i={type:o,props:a,key:n,ref:s,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:--_$2,__source:f,__self:l};if("function"==typeof o&&(s=o.defaultProps))for(u in s)void 0===a[u]&&(a[u]=s[u]);return l$3.vnode&&l$3.vnode(i),i}
 
-  var t$1,r$2,u$2,i$2,o$2=0,f$2=[],c$2=[],e=l$3.__b,a$2=l$3.__r,v$2=l$3.diffed,l$2=l$3.__c,m$1=l$3.unmount;function d$2(t,u){l$3.__h&&l$3.__h(r$2,t,o$2||u),o$2=0;var i=r$2.__H||(r$2.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({__V:c$2}),i.__[t]}function h$2(n){return o$2=1,s$2(B$2,n)}function s$2(n,u,i){var o=d$2(t$1++,2);if(o.t=n,!o.__c&&(o.__=[i?i(u):B$2(void 0,u),function(n){var t=o.__N?o.__N[0]:o.__[0],r=o.t(t,n);t!==r&&(o.__N=[r,o.__[1]],o.__c.setState({}));}],o.__c=r$2,!r$2.u)){var f=function(n,t,r){if(!o.__c.__H)return !0;var u=o.__c.__H.__.filter(function(n){return n.__c});if(u.every(function(n){return !n.__N}))return !c||c.call(this,n,t,r);var i=!1;return u.forEach(function(n){if(n.__N){var t=n.__[0];n.__=n.__N,n.__N=void 0,t!==n.__[0]&&(i=!0);}}),!(!i&&o.__c.props===n)&&(!c||c.call(this,n,t,r))};r$2.u=!0;var c=r$2.shouldComponentUpdate,e=r$2.componentWillUpdate;r$2.componentWillUpdate=function(n,t,r){if(this.__e){var u=c;c=void 0,f(n,t,r),c=u;}e&&e.call(this,n,t,r);},r$2.shouldComponentUpdate=f;}return o.__N||o.__}function p$2(u,i){var o=d$2(t$1++,3);!l$3.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$2.__H.__h.push(o));}function y$2(u,i){var o=d$2(t$1++,4);!l$3.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$2.__h.push(o));}function _$1(n){return o$2=5,F$2(function(){return {current:n}},[])}function A$1(n,t,r){o$2=6,y$2(function(){return "function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==r?r:r.concat(n));}function F$2(n,r){var u=d$2(t$1++,7);return z$2(u.__H,r)?(u.__V=n(),u.i=r,u.__h=n,u.__V):u.__}function T$2(n,t){return o$2=8,F$2(function(){return n},t)}function q$2(n){var u=r$2.context[n.__c],i=d$2(t$1++,9);return i.c=n,u?(null==i.__&&(i.__=!0,u.sub(r$2)),u.props.value):n.__}function P$2(n){var u=d$2(t$1++,10),i=h$2();return u.__=n,r$2.componentDidCatch||(r$2.componentDidCatch=function(n,t){u.__&&u.__(n,t),i[1](n);}),[i[0],function(){i[1](void 0);}]}function V$2(){var n=d$2(t$1++,11);if(!n.__){for(var u=r$2.__v;null!==u&&!u.__m&&null!==u.__;)u=u.__;var i=u.__m||(u.__m=[0,0]);n.__="P"+i[0]+"-"+i[1]++;}return n.__}function b$1(){for(var t;t=f$2.shift();)if(t.__P&&t.__H)try{t.__H.__h.forEach(k$2),t.__H.__h.forEach(w$2),t.__H.__h=[];}catch(r){t.__H.__h=[],l$3.__e(r,t.__v);}}l$3.__b=function(n){r$2=null,e&&e(n);},l$3.__r=function(n){a$2&&a$2(n),t$1=0;var i=(r$2=n.__c).__H;i&&(u$2===r$2?(i.__h=[],r$2.__h=[],i.__.forEach(function(n){n.__N&&(n.__=n.__N),n.__V=c$2,n.__N=n.i=void 0;})):(i.__h.forEach(k$2),i.__h.forEach(w$2),i.__h=[])),u$2=r$2;},l$3.diffed=function(t){v$2&&v$2(t);var o=t.__c;o&&o.__H&&(o.__H.__h.length&&(1!==f$2.push(o)&&i$2===l$3.requestAnimationFrame||((i$2=l$3.requestAnimationFrame)||j$2)(b$1)),o.__H.__.forEach(function(n){n.i&&(n.__H=n.i),n.__V!==c$2&&(n.__=n.__V),n.i=void 0,n.__V=c$2;})),u$2=r$2=null;},l$3.__c=function(t,r){r.some(function(t){try{t.__h.forEach(k$2),t.__h=t.__h.filter(function(n){return !n.__||w$2(n)});}catch(u){r.some(function(n){n.__h&&(n.__h=[]);}),r=[],l$3.__e(u,t.__v);}}),l$2&&l$2(t,r);},l$3.unmount=function(t){m$1&&m$1(t);var r,u=t.__c;u&&u.__H&&(u.__H.__.forEach(function(n){try{k$2(n);}catch(n){r=n;}}),u.__H=void 0,r&&l$3.__e(r,u.__v));};var g$2="function"==typeof requestAnimationFrame;function j$2(n){var t,r=function(){clearTimeout(u),g$2&&cancelAnimationFrame(t),setTimeout(n);},u=setTimeout(r,100);g$2&&(t=requestAnimationFrame(r));}function k$2(n){var t=r$2,u=n.__c;"function"==typeof u&&(n.__c=void 0,u()),r$2=t;}function w$2(n){var t=r$2;n.__c=n.__(),r$2=t;}function z$2(n,t){return !n||n.length!==t.length||t.some(function(t,r){return t!==n[r]})}function B$2(n,t){return "function"==typeof t?t(n):t}
+  var t$1,r$3,u$2,i$2,o$2=0,f$2=[],c$2=[],e=l$3.__b,a$2=l$3.__r,v$2=l$3.diffed,l$2=l$3.__c,m$1=l$3.unmount;function d$2(t,u){l$3.__h&&l$3.__h(r$3,t,o$2||u),o$2=0;var i=r$3.__H||(r$3.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({__V:c$2}),i.__[t]}function h$2(n){return o$2=1,s$2(B$2,n)}function s$2(n,u,i){var o=d$2(t$1++,2);if(o.t=n,!o.__c&&(o.__=[i?i(u):B$2(void 0,u),function(n){var t=o.__N?o.__N[0]:o.__[0],r=o.t(t,n);t!==r&&(o.__N=[r,o.__[1]],o.__c.setState({}));}],o.__c=r$3,!r$3.u)){var f=function(n,t,r){if(!o.__c.__H)return !0;var u=o.__c.__H.__.filter(function(n){return n.__c});if(u.every(function(n){return !n.__N}))return !c||c.call(this,n,t,r);var i=!1;return u.forEach(function(n){if(n.__N){var t=n.__[0];n.__=n.__N,n.__N=void 0,t!==n.__[0]&&(i=!0);}}),!(!i&&o.__c.props===n)&&(!c||c.call(this,n,t,r))};r$3.u=!0;var c=r$3.shouldComponentUpdate,e=r$3.componentWillUpdate;r$3.componentWillUpdate=function(n,t,r){if(this.__e){var u=c;c=void 0,f(n,t,r),c=u;}e&&e.call(this,n,t,r);},r$3.shouldComponentUpdate=f;}return o.__N||o.__}function p$2(u,i){var o=d$2(t$1++,3);!l$3.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$3.__H.__h.push(o));}function y$2(u,i){var o=d$2(t$1++,4);!l$3.__s&&z$2(o.__H,i)&&(o.__=u,o.i=i,r$3.__h.push(o));}function _$1(n){return o$2=5,F$2(function(){return {current:n}},[])}function A$1(n,t,r){o$2=6,y$2(function(){return "function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==r?r:r.concat(n));}function F$2(n,r){var u=d$2(t$1++,7);return z$2(u.__H,r)?(u.__V=n(),u.i=r,u.__h=n,u.__V):u.__}function T$2(n,t){return o$2=8,F$2(function(){return n},t)}function q$2(n){var u=r$3.context[n.__c],i=d$2(t$1++,9);return i.c=n,u?(null==i.__&&(i.__=!0,u.sub(r$3)),u.props.value):n.__}function P$2(n){var u=d$2(t$1++,10),i=h$2();return u.__=n,r$3.componentDidCatch||(r$3.componentDidCatch=function(n,t){u.__&&u.__(n,t),i[1](n);}),[i[0],function(){i[1](void 0);}]}function V$2(){var n=d$2(t$1++,11);if(!n.__){for(var u=r$3.__v;null!==u&&!u.__m&&null!==u.__;)u=u.__;var i=u.__m||(u.__m=[0,0]);n.__="P"+i[0]+"-"+i[1]++;}return n.__}function b$1(){for(var t;t=f$2.shift();)if(t.__P&&t.__H)try{t.__H.__h.forEach(k$2),t.__H.__h.forEach(w$2),t.__H.__h=[];}catch(r){t.__H.__h=[],l$3.__e(r,t.__v);}}l$3.__b=function(n){r$3=null,e&&e(n);},l$3.__r=function(n){a$2&&a$2(n),t$1=0;var i=(r$3=n.__c).__H;i&&(u$2===r$3?(i.__h=[],r$3.__h=[],i.__.forEach(function(n){n.__N&&(n.__=n.__N),n.__V=c$2,n.__N=n.i=void 0;})):(i.__h.forEach(k$2),i.__h.forEach(w$2),i.__h=[])),u$2=r$3;},l$3.diffed=function(t){v$2&&v$2(t);var o=t.__c;o&&o.__H&&(o.__H.__h.length&&(1!==f$2.push(o)&&i$2===l$3.requestAnimationFrame||((i$2=l$3.requestAnimationFrame)||j$2)(b$1)),o.__H.__.forEach(function(n){n.i&&(n.__H=n.i),n.__V!==c$2&&(n.__=n.__V),n.i=void 0,n.__V=c$2;})),u$2=r$3=null;},l$3.__c=function(t,r){r.some(function(t){try{t.__h.forEach(k$2),t.__h=t.__h.filter(function(n){return !n.__||w$2(n)});}catch(u){r.some(function(n){n.__h&&(n.__h=[]);}),r=[],l$3.__e(u,t.__v);}}),l$2&&l$2(t,r);},l$3.unmount=function(t){m$1&&m$1(t);var r,u=t.__c;u&&u.__H&&(u.__H.__.forEach(function(n){try{k$2(n);}catch(n){r=n;}}),u.__H=void 0,r&&l$3.__e(r,u.__v));};var g$2="function"==typeof requestAnimationFrame;function j$2(n){var t,r=function(){clearTimeout(u),g$2&&cancelAnimationFrame(t),setTimeout(n);},u=setTimeout(r,100);g$2&&(t=requestAnimationFrame(r));}function k$2(n){var t=r$3,u=n.__c;"function"==typeof u&&(n.__c=void 0,u()),r$3=t;}function w$2(n){var t=r$3;n.__c=n.__(),r$3=t;}function z$2(n,t){return !n||n.length!==t.length||t.some(function(t,r){return t!==n[r]})}function B$2(n,t){return "function"==typeof t?t(n):t}
 
   function g$1(n,t){for(var e in t)n[e]=t[e];return n}function C$1(n,t){for(var e in n)if("__source"!==e&&!(e in t))return !0;for(var r in t)if("__source"!==r&&n[r]!==t[r])return !0;return !1}function w$1(n){this.props=n;}function x$1(n,e){function r(n){var t=this.props.ref,r=t==n.ref;return !r&&t&&(t.call?t(null):t.current=null),e?!e(this.props,n)||!r:C$1(this.props,n)}function u(e){return this.shouldComponentUpdate=r,y$3(n,e)}return u.displayName="Memo("+(n.displayName||n.name)+")",u.prototype.isReactComponent=!0,u.__f=!0,u}(w$1.prototype=new k$3).isPureReactComponent=!0,w$1.prototype.shouldComponentUpdate=function(n,t){return C$1(this.props,n)||C$1(this.state,t)};var R$1=l$3.__b;l$3.__b=function(n){n.type&&n.type.__f&&n.ref&&(n.props.ref=n.ref,n.ref=null),R$1&&R$1(n);};var N$1="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function k$1(n){function t(t){var e=g$1({},t);return delete e.ref,n(e,t.ref||null)}return t.$$typeof=N$1,t.render=t,t.prototype.isReactComponent=t.__f=!0,t.displayName="ForwardRef("+(n.displayName||n.name)+")",t}var T$1=l$3.__e;l$3.__e=function(n,t,e,r){if(n.then)for(var u,o=t;o=o.__;)if((u=o.__c)&&u.__c)return null==t.__e&&(t.__e=e.__e,t.__k=e.__k),u.__c(n,t);T$1(n,t,e,r);};var I$1=l$3.unmount;function L$2(n,t,e){return n&&(n.__c&&n.__c.__H&&(n.__c.__H.__.forEach(function(n){"function"==typeof n.__c&&n.__c();}),n.__c.__H=null),null!=(n=g$1({},n)).__c&&(n.__c.__P===e&&(n.__c.__P=t),n.__c=null),n.__k=n.__k&&n.__k.map(function(n){return L$2(n,t,e)})),n}function U$1(n,t,e){return n&&(n.__v=null,n.__k=n.__k&&n.__k.map(function(n){return U$1(n,t,e)}),n.__c&&n.__c.__P===t&&(n.__e&&e.insertBefore(n.__e,n.__d),n.__c.__e=!0,n.__c.__P=e)),n}function D$1(){this.__u=0,this.t=null,this.__b=null;}function F$1(n){var t=n.__.__c;return t&&t.__a&&t.__a(n)}function V$1(){this.u=null,this.o=null;}l$3.unmount=function(n){var t=n.__c;t&&t.__R&&t.__R(),t&&!0===n.__h&&(n.type=null),I$1&&I$1(n);},(D$1.prototype=new k$3).__c=function(n,t){var e=t.__c,r=this;null==r.t&&(r.t=[]),r.t.push(e);var u=F$1(r.__v),o=!1,i=function(){o||(o=!0,e.__R=null,u?u(l):l());};e.__R=i;var l=function(){if(!--r.__u){if(r.state.__a){var n=r.state.__a;r.__v.__k[0]=U$1(n,n.__c.__P,n.__c.__O);}var t;for(r.setState({__a:r.__b=null});t=r.t.pop();)t.forceUpdate();}},c=!0===t.__h;r.__u++||c||r.setState({__a:r.__b=r.__v.__k[0]}),n.then(i,i);},D$1.prototype.componentWillUnmount=function(){this.t=[];},D$1.prototype.render=function(n,e){if(this.__b){if(this.__v.__k){var r=document.createElement("div"),o=this.__v.__k[0].__c;this.__v.__k[0]=L$2(this.__b,r,o.__O=o.__P);}this.__b=null;}var i=e.__a&&y$3(_$3,null,n.fallback);return i&&(i.__h=null),[y$3(_$3,null,e.__a?null:n.children),i]};var W$1=function(n,t,e){if(++e[1]===e[0]&&n.o.delete(t),n.props.revealOrder&&("t"!==n.props.revealOrder[0]||!n.o.size))for(e=n.u;e;){for(;e.length>3;)e.pop()();if(e[1]<e[0])break;n.u=e=e[2];}};function P$1(n){return this.getChildContext=function(){return n.context},n.children}function j$1(n){var e=this,r=n.i;e.componentWillUnmount=function(){B$3(null,e.l),e.l=null,e.i=null;},e.i&&e.i!==r&&e.componentWillUnmount(),n.__v?(e.l||(e.i=r,e.l={nodeType:1,parentNode:r,childNodes:[],appendChild:function(n){this.childNodes.push(n),e.i.appendChild(n);},insertBefore:function(n,t){this.childNodes.push(n),e.i.appendChild(n);},removeChild:function(n){this.childNodes.splice(this.childNodes.indexOf(n)>>>1,1),e.i.removeChild(n);}}),B$3(y$3(P$1,{context:e.context},n.__v),e.l)):e.l&&e.componentWillUnmount();}function z$1(n,e){var r=y$3(j$1,{__v:n,i:e});return r.containerInfo=e,r}(V$1.prototype=new k$3).__a=function(n){var t=this,e=F$1(t.__v),r=t.o.get(n);return r[0]++,function(u){var o=function(){t.props.revealOrder?(r.push(u),W$1(t,n,r)):u();};e?e(o):o();}},V$1.prototype.render=function(n){this.u=null,this.o=new Map;var t=P$3(n.children);n.revealOrder&&"b"===n.revealOrder[0]&&t.reverse();for(var e=t.length;e--;)this.o.set(t[e],this.u=[1,0,this.u]);return n.children},V$1.prototype.componentDidUpdate=V$1.prototype.componentDidMount=function(){var n=this;this.o.forEach(function(t,e){W$1(n,e,t);});};var B$1="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,H$1=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,Z$1=/^on(Ani|Tra|Tou|BeforeInp|Compo)/,Y$1=/[A-Z0-9]/g,$$1="undefined"!=typeof document,q$1=function(n){return ("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/:/fil|che|ra/).test(n)};k$3.prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach(function(t){Object.defineProperty(k$3.prototype,t,{configurable:!0,get:function(){return this["UNSAFE_"+t]},set:function(n){Object.defineProperty(this,t,{configurable:!0,writable:!0,value:n});}});});var K$1=l$3.event;function Q$1(){}function X$1(){return this.cancelBubble}function nn(){return this.defaultPrevented}l$3.event=function(n){return K$1&&(n=K$1(n)),n.persist=Q$1,n.isPropagationStopped=X$1,n.isDefaultPrevented=nn,n.nativeEvent=n};var en={enumerable:!1,configurable:!0,get:function(){return this.class}},rn=l$3.vnode;l$3.vnode=function(n){"string"==typeof n.type&&function(n){var t=n.props,e=n.type,u={};for(var o in t){var i=t[o];if(!("value"===o&&"defaultValue"in t&&null==i||$$1&&"children"===o&&"noscript"===e||"class"===o||"className"===o)){var l=o.toLowerCase();"defaultValue"===o&&"value"in t&&null==t.value?o="value":"download"===o&&!0===i?i="":"ondoubleclick"===l?o="ondblclick":"onchange"!==l||"input"!==e&&"textarea"!==e||q$1(t.type)?"onfocus"===l?o="onfocusin":"onblur"===l?o="onfocusout":Z$1.test(o)?o=l:-1===e.indexOf("-")&&H$1.test(o)?o=o.replace(Y$1,"-$&").toLowerCase():null===i&&(i=void 0):l=o="oninput","oninput"===l&&u[o=l]&&(o="oninputCapture"),u[o]=i;}}"select"==e&&u.multiple&&Array.isArray(u.value)&&(u.value=P$3(t.children).forEach(function(n){n.props.selected=-1!=u.value.indexOf(n.props.value);})),"select"==e&&null!=u.defaultValue&&(u.value=P$3(t.children).forEach(function(n){n.props.selected=u.multiple?-1!=u.defaultValue.indexOf(n.props.value):u.defaultValue==n.props.value;})),t.class&&!t.className?(u.class=t.class,Object.defineProperty(u,"className",en)):(t.className&&!t.class||t.class&&t.className)&&(u.class=u.className=t.className),n.props=u;}(n),n.$$typeof=B$1,rn&&rn(n);};var un=l$3.__r;l$3.__r=function(n){un&&un(n),n.__c;};var on=l$3.diffed;l$3.diffed=function(n){on&&on(n);var t=n.props,e=n.__e;null!=e&&"textarea"===n.type&&"value"in t&&t.value!==e.value&&(e.value=null==t.value?"":t.value);};
 
@@ -1848,45 +1848,240 @@
     return func(collection);
   }
 
-  function debounceRendering(f) {
-      (l$3.debounceRendering ?? queueMicrotask)(f);
-  }
+  /** These are all the event mappings that are shared between Preact/React */
+  const EventMapping$1 = {
+      abort: "onAbort",
+      animationend: "onAnimationEnd",
+      animationstart: "onAnimationStart",
+      animationiteration: "onAnimationIteration",
+      beforeinput: "onBeforeInput",
+      blur: "onBlur",
+      canplay: "onCanPlay",
+      canplaythrough: "onCanPlayThrough",
+      change: "onChange",
+      click: "onClick",
+      compositionend: "onCompositionEnd",
+      compositionstart: "onCompositionStart",
+      compositionupdate: "onCompositionUpdate",
+      contextmenu: "onContextMenu",
+      cut: "onCut",
+      drag: "onDrag",
+      dragend: "onDragEnd",
+      dragenter: "onDragEnter",
+      dragleave: "onDragLeave",
+      dragover: "onDragOver",
+      dragstart: "onDragStart",
+      drop: "onDrop",
+      durationchange: "onDurationChange",
+      emptied: "onEmptied",
+      ended: "onEnded",
+      error: "onError",
+      focus: "onFocus",
+      gotpointercapture: "onGotPointerCapture",
+      input: "onInput",
+      invalid: "onInvalid",
+      keydown: "onKeyDown",
+      keypress: "onKeyPress",
+      keyup: "onKeyUp",
+      load: "onLoad",
+      loadeddata: "onLoadedData",
+      loadedmetadata: "onLoadedMetadata",
+      loadstart: "onLoadStart",
+      lostpointercapture: "onLostPointerCapture",
+      mousedown: "onMouseDown",
+      mouseenter: "onMouseEnter",
+      mouseleave: "onMouseLeave",
+      mousemove: "onMouseMove",
+      mouseout: "onMouseOut",
+      mouseover: "onMouseOver",
+      mouseup: "onMouseUp",
+      paste: "onPaste",
+      pause: "onPause",
+      play: "onPlay",
+      playing: "onPlaying",
+      pointercancel: "onPointerCancel",
+      pointerdown: "onPointerDown",
+      pointerenter: "onPointerEnter",
+      pointerleave: "onPointerLeave",
+      pointermove: "onPointerMove",
+      pointerout: "onPointerOut",
+      pointerover: "onPointerOver",
+      pointerup: "onPointerUp",
+      progress: "onProgress",
+      reset: "onReset",
+      scroll: "onScroll",
+      seeked: "onSeeked",
+      seeking: "onSeeking",
+      select: "onSelect",
+      stalled: "onStalled",
+      submit: "onSubmit",
+      suspend: "onSuspend",
+      timeupdate: "onTimeUpdate",
+      touchcancel: "onTouchCancel",
+      touchend: "onTouchEnd",
+      touchmove: "onTouchMove",
+      touchstart: "onTouchStart",
+      transitionend: "onTransitionEnd",
+      volumechange: "onVolumeChange",
+      waiting: "onWaiting",
+      wheel: "onWheel",
+      fullscreenchange: null,
+      animationcancel: null,
+      auxclick: null,
+      cancel: null,
+      close: null,
+      copy: null,
+      cuechange: null,
+      fullscreenerror: null,
+      ratechange: null,
+      resize: null,
+      securitypolicyviolation: null,
+      selectionchange: null,
+      selectstart: null,
+      slotchange: null,
+      transitioncancel: null,
+      transitionrun: null,
+      transitionstart: null,
+      webkitanimationend: null,
+      webkitanimationiteration: null,
+      webkitanimationstart: null,
+      webkittransitionend: null,
+  };
 
-  let cached = null;
-  function getBuildModeUnmemoized() {
-      try {
-          if ("development" === "development")
-              return "development";
-          return "production";
-      }
-      catch (_e) {
-          // As long as we're returning "production" due to it being unspecified, 
-          // try to make sure anyone else who tries does too for consistency.
-          // TODO: Good/bad idea?
-          try {
-              globalThis["process"] ??= {};
-              globalThis["process"]["env"] ??= {};
-              globalThis["process"]["env"]["NODE_ENV"] ??= "production";
-          }
-          finally {
-              return "production";
-          }
-      }
-  }
-  function getBuildMode() {
-      return cached ||= (getBuildModeUnmemoized());
-  }
+  // Get the value of process?.env?.NODE_ENV delicately (also fun fact @rollup/plugin-replace works in comments!)
+  // (i.e. in a way that doesn't throw an error but has isDevMode be a constant)
+  globalThis["process"] ??= {};
+  globalThis["process"]["env"] ??= {};
+  globalThis["process"]["env"]["NODE_ENV"] ??= "production";
 
   // TODO: This shouldn't be in every build, I don't think it's in core-js? I think?
   // And it's extremely small anyway and basically does nothing.
   window.requestIdleCallback ??= (callback) => {
       return setTimeout(() => { callback({ didTimeout: false, timeRemaining: () => { return 0; }, }); }, 5);
   };
-  function callCountU(hook) {
-      return;
+  let timeoutHandle = null;
+  /**
+   * When called inside a hook, monitors each call of that hook and prints the results to a table once things settle.
+   *
+   * @remarks Re-renders and such are all collected together when the table is printed to the console with `requestIdleCallback`.
+   */
+  function monitorCallCount(hook) {
+      const name = hook.name;
+      if (filters.has(name))
+          return;
+      console.assert(name.length > 0);
+      window._hookCallCount ??= { callCounts: {} };
+      window._hookCallCount.callCounts[name] ??= { moment: 0, total: 0 };
+      window._hookCallCount.callCounts[name].moment += 1;
+      window._hookCallCount.callCounts[name].total += 1;
+      if (timeoutHandle == null) {
+          timeoutHandle = requestIdleCallback(() => {
+              //console.log((window as WindowWithHookCallCount)._hookCallCount.callCountsMoment);
+              //(window as WindowWithHookCallCount)._hookCallCount.callCountsMoment = {};
+              const o = Object.entries(window._hookCallCount.callCounts)
+                  .map(([hook, counts]) => { return { Hook: hook || "?", Now: counts?.moment || 0, Total: counts?.total || 0 }; })
+                  .filter(({ Now }) => { return !!Now; })
+                  .sort(({ Now: lhsM }, { Now: rhsM }) => {
+                  if (!lhsM && !rhsM)
+                      return 0;
+                  lhsM ||= Infinity;
+                  rhsM ||= Infinity;
+                  return lhsM - rhsM;
+              });
+              console.table(o, ['Hook', 'Now', 'Total']);
+              Object.entries(window._hookCallCount.callCounts).forEach(([, counts]) => { counts.moment = 0; });
+              timeoutHandle = null;
+          });
+      }
   }
-  new Set();
-  (getBuildMode() == "development") ? callCountU : noop$1;
+  const filters = new Set();
+
+  const toRun = new Map();
+  // TODO: Whether this goes in options.diffed or options._commit
+  // is a post-suspense question.
+  // Right now, using options._commit has the problem of running
+  // *after* refs are applied, but we need to come before even that
+  // so `ref={someStableFunction}` works.
+  // 
+  // Also it's private.
+  //
+  // ...
+  // Well, useEvent or whatever is finally, finally 4 years later finally here
+  // which is cool and means we won't need this at all soon.
+  // So for now we'll stick with diff to prevent any weirdness with
+  // commit being private and all.
+  //
+  // Also, in theory this could be replaced with `useInsertionEffect`,
+  // but that probably won't be available in Preact for awhile.
+  const commitName = "diffed";
+  const newCommit = (vnode, ...args) => {
+      for (const [id, effectInfo] of toRun) {
+          const oldInputs = effectInfo.prevInputs;
+          if (argsChanged(oldInputs, effectInfo.inputs)) {
+              effectInfo.cleanup?.();
+              effectInfo.cleanup = effectInfo.effect();
+              effectInfo.prevInputs = effectInfo.inputs;
+          }
+      }
+      toRun.clear();
+      originalCommit?.(vnode, ...args);
+  };
+  const originalCommit = l$3[commitName];
+  l$3[commitName] = newCommit;
+  let incrementingId = 0;
+  function nextId() {
+      let next = ++incrementingId;
+      // TODO: This seems reasonable, but is is necessary or are we orders of magnitude from having to worry about overflow?
+      if (incrementingId >= Number.MAX_SAFE_INTEGER)
+          incrementingId = -Number.MAX_SAFE_INTEGER;
+      return next;
+  }
+  /**
+   * Semi-private function to allow stable callbacks even within `useLayoutEffect` and ref assignment.
+   *
+   * @remarks Every render, we send the arguments to be evaluated after diffing has completed,
+   * which happens before.
+   *
+   * @param effect
+   * @param inputs
+   */
+  function useBeforeLayoutEffect(effect, inputs) {
+      monitorCallCount(useBeforeLayoutEffect);
+      // Note to self: This is by far the most called hook by sheer volume of dependencies.
+      // So it should ideally be as quick as possible.
+      const ref = _$1(null);
+      ref.current ??= nextId();
+      const id = ref.current;
+      if (effect)
+          toRun.set(id, { effect, inputs, cleanup: null });
+      else
+          toRun.delete(id);
+      // Not needed, because the insertion cleanup would run before useEffect anyway, I think?
+      /*useEffect(() => {
+          return () => {
+              toRun.delete(id);
+          }
+      }, [id])*/
+  }
+  function argsChanged(oldArgs, newArgs) {
+      return !!(!oldArgs ||
+          oldArgs.length !== newArgs?.length ||
+          newArgs?.some((arg, index) => arg !== oldArgs[index]));
+  }
+
+  function debounceRendering(f) {
+      (l$3.debounceRendering ?? queueMicrotask)(f);
+  }
+  const onfocusin = "onfocusin";
+  const onfocusout = "onfocusout";
+  const EventMapping = {
+      dblclick: "onDblClick",
+      focusin: "onfocusin",
+      focusout: "onfocusout",
+      formdata: "onFormData",
+      toggle: "onToggle",
+      ...EventMapping$1
+  };
 
   /**
    * Debug hook. Given a value or set of values, emits a console error if any of them change from one render to the next.
@@ -1894,8 +2089,6 @@
    * @remarks Eventually, when useEvent lands, we hopefully won't need this.
    */
   function useEnsureStability(parentHookName, ...values) {
-      if (getBuildMode() == 'production')
-          return;
       const helperToEnsureStability = _$1([]);
       const shownError = _$1([]);
       useHelper(values.length, -1);
@@ -1938,6 +2131,7 @@
    * @returns
    */
   function usePassiveState(onChange, getInitialValue, customDebounceRendering) {
+      monitorCallCount(usePassiveState);
       //let [id, ,getId] = useState(() => generateRandomId());
       const valueRef = _$1(Unset$2);
       const reasonRef = _$1(Unset$2);
@@ -2043,78 +2237,6 @@
    */
   function runImmediately(f) { f(); }
 
-  const toRun = new Map();
-  // TODO: Whether this goes in options.diffed or options._commit
-  // is a post-suspense question.
-  // Right now, using options._commit has the problem of running
-  // *after* refs are applied, but we need to come before even that
-  // so `ref={someStableFunction}` works.
-  // 
-  // Also it's private.
-  //
-  // ...
-  // Well, useEvent or whatever is finally, finally 4 years later finally here
-  // which is cool and means we won't need this at all soon.
-  // So for now we'll stick with diff to prevent any weirdness with
-  // commit being private and all.
-  //
-  // Also, in theory this could be replaced with `useInsertionEffect`,
-  // but that probably won't be available in Preact for awhile.
-  const commitName = "diffed";
-  const newCommit = (vnode, ...args) => {
-      for (const [id, effectInfo] of toRun) {
-          const oldInputs = effectInfo.prevInputs;
-          if (argsChanged(oldInputs, effectInfo.inputs)) {
-              effectInfo.cleanup?.();
-              effectInfo.cleanup = effectInfo.effect();
-              effectInfo.prevInputs = effectInfo.inputs;
-          }
-      }
-      toRun.clear();
-      originalCommit?.(vnode, ...args);
-  };
-  const originalCommit = l$3[commitName];
-  l$3[commitName] = newCommit;
-  let incrementingId = 0;
-  function nextId() {
-      let next = ++incrementingId;
-      // TODO: This seems reasonable, but is is necessary or are we orders of magnitude from having to worry about overflow?
-      if (incrementingId >= Number.MAX_SAFE_INTEGER)
-          incrementingId = -Number.MAX_SAFE_INTEGER;
-      return next;
-  }
-  /**
-   * Semi-private function to allow stable callbacks even within `useLayoutEffect` and ref assignment.
-   *
-   * @remarks Every render, we send the arguments to be evaluated after diffing has completed,
-   * which happens before.
-   *
-   * @param effect
-   * @param inputs
-   */
-  function useBeforeLayoutEffect(effect, inputs) {
-      // Note to self: This is by far the most called hook by sheer volume of dependencies.
-      // So it should ideally be as quick as possible.
-      const ref = _$1(null);
-      ref.current ??= nextId();
-      const id = ref.current;
-      if (effect)
-          toRun.set(id, { effect, inputs, cleanup: null });
-      else
-          toRun.delete(id);
-      // Not needed, because the insertion cleanup would run before useEffect anyway, I think?
-      /*useEffect(() => {
-          return () => {
-              toRun.delete(id);
-          }
-      }, [id])*/
-  }
-  function argsChanged(oldArgs, newArgs) {
-      return !!(!oldArgs ||
-          oldArgs.length !== newArgs?.length ||
-          newArgs?.some((arg, index) => arg !== oldArgs[index]));
-  }
-
   const Unset$1 = Symbol("unset");
   /**
    * Given an input value, returns a constant getter function that can be used
@@ -2124,6 +2246,7 @@
    * ref assignment. This means this getter is safe to use anywhere ***except the render phase***.
    */
   function useStableGetter(value) {
+      monitorCallCount(useStableGetter);
       const ref = _$1(Unset$1);
       useBeforeLayoutEffect((() => { ref.current = value; }), [value]);
       return T$2(() => {
@@ -2161,6 +2284,7 @@
    * truly has no dependencies/only stable dependencies!!
    */
   function useStableCallback(fn, noDeps) {
+      monitorCallCount(useStableCallback);
       useEnsureStability("useStableCallback", noDeps == null, noDeps?.length, isStableGetter(fn));
       if (isStableGetter(fn))
           return fn;
@@ -2187,6 +2311,7 @@
    * *
    */
   function useGlobalHandler(target, type, handler, options, mode) {
+      monitorCallCount(useGlobalHandler);
       mode ||= "grouped";
       useEnsureStability("useGlobalHandler", mode);
       if (mode === "grouped") {
@@ -2257,27 +2382,14 @@
   }
 
   /**
-   * Quick and easy way to add extra information to an event that was fired.
-   *
-   * For example, "this was a click event, but it has information about what list item was pressed too."
-   *
-   * Get that extra information from the [EventDetail] symbol.
-   */
-  const EventDetail = Symbol("event-detail");
-  function enhanceEvent(e, detail) {
-      const event = (e ?? {});
-      event[EventDetail] = detail;
-      return event;
-  }
-
-  /**
    * Handles events for a backdrop on a modal dialog -- the kind where the user expects the modal to close when they click/tap outside of it.
    *
    * @compositeParams
    */
-  function useBackdropDismiss({ backdropDismissParameters: { active: open, onDismiss: onCloseUnstable, ...void1 }, refElementPopupReturn: { getElement, ...void3 }, ...void2 }) {
+  function useBackdropDismiss({ backdropDismissParameters: { dismissBackdropActive: open, onDismissBackdrop: onCloseUnstable, ...void1 }, refElementPopupReturn: { getElement, ...void3 }, ...void2 }) {
+      monitorCallCount(useBackdropDismiss);
       const getOpen = useStableGetter(open);
-      const onClose = useStableCallback(onCloseUnstable);
+      const onClose = useStableGetter(onCloseUnstable);
       const onBackdropClick = T$2(function onBackdropClick(e) {
           if (!getOpen())
               return;
@@ -2289,11 +2401,25 @@
               foundInsideClick = true;
           }
           if (!foundInsideClick) {
-              onClose(enhanceEvent(e, { reason: "backdrop" }));
+              onClose()?.(e);
           }
       }, []);
       useGlobalHandler(window, "mousedown", open ? onBackdropClick : null, { capture: true });
       useGlobalHandler(window, "touchstart", open ? onBackdropClick : null, { capture: true });
+  }
+
+  /**
+   * Quick and easy way to add extra information to an event that was fired.
+   *
+   * For example, "this was a click event, but it has information about what list item was pressed too."
+   *
+   * Get that extra information from the [EventDetail] symbol.
+   */
+  const EventDetail = Symbol("event-detail");
+  function enhanceEvent(e, detail) {
+      const event = (e ?? {});
+      event[EventDetail] = detail;
+      return event;
   }
 
   const MagicWindowKey = ("__preact-prop-helpers-escape-key-dismiss__");
@@ -2315,9 +2441,10 @@
    *
    * @compositeParams
    */
-  function useEscapeDismiss({ escapeDismissParameters: { onDismiss: onClose, active: open, getWindow: unstableGetWindow, parentDepth, ...void1 }, refElementPopupReturn: { getElement, ...void2 } }) {
-      const stableOnClose = useStableCallback(onClose);
-      const getWindow = useStableCallback(unstableGetWindow);
+  function useEscapeDismiss({ escapeDismissParameters: { onDismissEscape: onClose, dismissEscapeActive: open, getDocument: unstableGetDocument, parentDepth, ...void1 }, refElementPopupReturn: { getElement, ...void2 } }) {
+      monitorCallCount(useEscapeDismiss);
+      const stableOnClose = useStableGetter(onClose);
+      const getDocument = useStableCallback(unstableGetDocument);
       const getDepth = useStableGetter(parentDepth + 1);
       // When this component opens, add an event listener that finds the deepest open soft dismiss element to actually dismiss.
       // Only opened components will add event handlers, and will remove them once closed.
@@ -2330,7 +2457,8 @@
       // then the first one to do so will wait for a microtask, 
       // then find the deepest element in the document tree to dismiss of all of those components currently open.
       p$2(() => {
-          const window = getWindow();
+          const document = getDocument();
+          const window = document.defaultView;
           window[MagicWindowKey] ??= { microtaskQueued: false, elementQueue: new Map() };
           const info = window[MagicWindowKey];
           if (open) {
@@ -2350,7 +2478,7 @@
                   e.preventDefault();
                   e.stopPropagation();
                   // This is what at least one of the elements will call
-                  const onClose2 = () => { stableOnClose(enhanceEvent(e, { reason: "escape" })); };
+                  const onClose2 = () => { stableOnClose()?.(enhanceEvent(e, { reason: "escape" })); };
                   const element = getElement();
                   if (element) {
                       const treeDepth = getElementDepth(element);
@@ -2394,17 +2522,20 @@
    *
    * @compositeParams
    */
-  function useLostFocusDismiss({ refElementPopupReturn: { getElement: getPopupElement, ...void3 }, refElementSourceReturn, lostFocusDismissParameters: { active: open, onDismiss: onClose, ...void4 }, ...void1 }) {
+  function useLostFocusDismiss({ refElementPopupReturn: { getElement: getPopupElement, ...void3 }, refElementSourceReturn, lostFocusDismissParameters: { dismissLostFocusActive: open, onDismissLostFocus: onClose, ...void4 }, ...void1 }) {
+      monitorCallCount(useLostFocusDismiss);
       const { getElement: getSourceElement, ...void2 } = (refElementSourceReturn ?? {});
-      const stableOnClose = useStableCallback(onClose);
+      const stableOnClose = useStableGetter(onClose);
       const getOpen = useStableGetter(open);
       const onLastActiveElementChange = T$2((newElement, _prevElement, e) => {
           const open = getOpen();
           const sourceElement = getSourceElement?.();
           const popupElement = getPopupElement();
           if (!(sourceElement?.contains(newElement) || popupElement?.contains(newElement))) {
-              if (open)
-                  stableOnClose(enhanceEvent(e, { reason: "lost-focus" }));
+              if (open) {
+                  console.assert(e != null);
+                  stableOnClose()?.(e);
+              }
           }
       }, [getSourceElement]);
       return { activeElementParameters: { onLastActiveElementChange } };
@@ -2418,6 +2549,7 @@
    * TODO: This could accept a variable number of arguments to be consistent with useMergedProps, but I feel like it might be a performance hit.
    */
   function useMergedChildren(lhs, rhs) {
+      monitorCallCount(useMergedChildren);
       if (lhs == null && rhs == null) {
           return undefined;
       }
@@ -2438,6 +2570,7 @@
    * @remarks Duplicate classes are removed (order doesn't matter anyway).
    */
   function useMergedClasses(...classes) {
+      monitorCallCount(useMergedClasses);
       // Note: For the sake of forward compatibility, this function is labelled as
       // a hook, but as it uses no other hooks it technically isn't one.
       let classesSet = new Set();
@@ -2472,6 +2605,7 @@
    * @remarks Or just use {@link useMergedProps}
    */
   function useMergedRefs(rhs, lhs) {
+      monitorCallCount(useMergedRefs);
       // This *must* be stable in order to prevent repeated reset `null` calls after every render.
       const combined = useStableCallback(function combined(current) {
           processRef(current, lhs);
@@ -2503,6 +2637,7 @@
    * @returns A CSS object containing the properties of both objects.
    */
   function useMergedStyles(lhs, rhs) {
+      monitorCallCount(useMergedStyles);
       // Easy case, when there are no styles to merge return nothing.
       if (!lhs && !rhs)
           return undefined;
@@ -2555,6 +2690,7 @@
    * @returns A single object with all the provided props merged into one.
    */
   function useMergedProps(...allProps) {
+      monitorCallCount(useMergedProps);
       useEnsureStability("useMergedProps", allProps.length);
       let ret = {};
       for (let nextProps of allProps) {
@@ -3010,7 +3146,7 @@
   };
 
   function generateStack() {
-      if (getBuildMode() === 'development') {
+      if (window._generate_setState_stacks) {
           try {
               throw new Error();
           }
@@ -3021,12 +3157,16 @@
       return undefined;
   }
   /**
-   * @returns A function that retrieves the stack at the time this hook was called (in development mode only).
+   * Returns a function that retrieves the stack at the time this hook was called (in development mode only).
+   *
+   *
    */
   function useStack() {
-      const stack = F$2(generateStack, []);
-      const getStack = T$2(() => stack, []);
-      return getStack;
+      {
+          const stack = F$2(generateStack, []);
+          const getStack = T$2(() => stack, []);
+          return getStack;
+      }
   }
 
   /**
@@ -3034,7 +3174,7 @@
    * here:
    */
   function focus(e) {
-      if (getBuildMode() === 'development' && window.LOG_FOCUS_CHANGES === true) {
+      if (window.LOG_FOCUS_CHANGES === true) {
           console.log(`Focus changed to ${(e?.tagName || "").toLowerCase().padStart(6)}:`, e);
           console.log(generateStack());
       }
@@ -3089,6 +3229,82 @@
   }
 
   /**
+   * Runs a function the specified number of milliseconds after the component renders.
+   *
+   * @remarks This is particularly useful to function as "useEffect on a delay".
+   *
+   * @remarks
+   * {@include } {@link UseTimeoutParameters}
+   */
+  function useTimeout({ timeout, callback, triggerIndex }) {
+      monitorCallCount(useTimeout);
+      const stableCallback = useStableCallback(() => { startTimeRef.current = null; callback(); });
+      const getTimeout = useStableGetter(timeout);
+      // Set any time we start timeout.
+      // Unset any time the timeout completes
+      const startTimeRef = _$1(null);
+      const timeoutIsNull = (timeout == null);
+      // Any time the triggerIndex changes (including on mount)
+      // restart the timeout.  The timeout does NOT reset
+      // when the duration or callback changes, only triggerIndex.
+      p$2(() => {
+          if (!timeoutIsNull) {
+              const timeout = getTimeout();
+              console.assert(timeoutIsNull == (timeout == null));
+              if (timeout != null) {
+                  startTimeRef.current = +(new Date());
+                  const handle = setTimeout(stableCallback, timeout);
+                  return () => clearTimeout(handle);
+              }
+          }
+      }, [triggerIndex, timeoutIsNull]);
+      const getElapsedTime = T$2(() => {
+          return (+(new Date())) - (+(startTimeRef.current ?? new Date()));
+      }, []);
+      const getRemainingTime = T$2(() => {
+          const timeout = getTimeout();
+          return timeout == null ? null : Math.max(0, timeout - getElapsedTime());
+      }, []);
+      return { getElapsedTime, getRemainingTime };
+  }
+
+  let idIndex = 0;
+  /**
+   * Debug function that yells at you if your forgot to use the props a hook returns.
+   *
+   * @remarks Like other debug hooks, only has any effect IFF there is a global variable called `"development"` and it contains the value `"development"`.
+   *
+   * @param props - The props to return a modified copy of
+   * @param tag - Should be unique
+   * @returns A modified copy of the given props
+   */
+  function useTagProps(props, tag) {
+      {
+          const [id] = h$2(() => ++idIndex);
+          const propsIdTag = `data-props-${tag}-${id}`;
+          const getStack = useStack();
+          // Don't have multiple tags of the same type on the same props, means a hook has been called twice!
+          console.assert(!(props && typeof props == "object" && tag in props));
+          useTimeout({
+              callback: () => {
+                  let element = document.querySelectorAll(`[${propsIdTag}]`);
+                  if (element.length != 1) {
+                      console.error("A hook returned props that were not properly spread to any HTMLElement:");
+                      console.log(getStack());
+                      /* eslint-disable no-debugger */
+                      debugger;
+                  }
+              },
+              timeout: 250,
+              triggerIndex: tag
+          });
+          return F$2(() => {
+              return { ...props, [propsIdTag]: true /*, [tag as never]: true*/ };
+          }, [props, tag]);
+      }
+  }
+
+  /**
    * When used in tandem with `useRovingTabIndex`, allows control of
    * the tabbable index with the arrow keys, Page Up/Page Down, or Home/End.
    *
@@ -3098,17 +3314,16 @@
    *
    * @compositeParams
    */
-  function useLinearNavigation({ rovingTabIndexReturn, linearNavigationParameters, paginatedChildrenParameters: { paginationMax, paginationMin, ...void2 }, ...void1 }) {
+  function useLinearNavigation({ linearNavigationParameters: { getLowestIndex, getHighestIndex, isValidForLinearNavigation, navigatePastEnd, navigatePastStart, onNavigateLinear, arrowKeyDirection, disableHomeEndKeys, pageNavigationSize, ...void4 }, rovingTabIndexReturn: { getTabbableIndex, setTabbableIndex, ...void5 }, paginatedChildrenParameters: { paginationMax, paginationMin, ...void2 }, rearrangeableChildrenReturn: { indexDemangler, indexMangler, ...void3 }, ...void1 }) {
+      monitorCallCount(useLinearNavigation);
       let getPaginatedRange = useStableGetter(paginationMax == null || paginationMin == null ? null : paginationMax - paginationMin);
-      const { getLowestIndex, getHighestIndex, indexDemangler, indexMangler, isValid, navigatePastEnd, navigatePastStart, onNavigateLinear } = linearNavigationParameters;
-      const { getTabbableIndex, setTabbableIndex } = rovingTabIndexReturn;
-      useEnsureStability("useLinearNavigation", onNavigateLinear, isValid, indexDemangler, indexMangler);
+      useEnsureStability("useLinearNavigation", onNavigateLinear, isValidForLinearNavigation, indexDemangler, indexMangler);
       const navigateAbsolute = T$2((requestedIndexMangled, searchDirection, e, fromUserInteraction, mode) => {
           const highestChildIndex = getHighestIndex();
           const lowestChildIndex = getLowestIndex();
           (getTabbableIndex() ?? 0);
           const targetDemangled = indexDemangler(requestedIndexMangled);
-          const { status, valueDemangled } = tryNavigateToIndex({ isValid, lowestChildIndex, highestChildIndex, indexDemangler, indexMangler, searchDirection, targetDemangled });
+          const { status, valueDemangled } = tryNavigateToIndex({ isValid: isValidForLinearNavigation, lowestChildIndex, highestChildIndex, indexDemangler, indexMangler, searchDirection, targetDemangled });
           if (status == "past-end") {
               if (navigatePastEnd == "wrap") {
                   if (mode == "single")
@@ -3179,18 +3394,18 @@
       const navigateToPrev = useStableCallback((e, fromUserInteraction) => {
           return navigateRelative2(e, -1, fromUserInteraction, "single");
       });
-      const getDisableHomeEndKeys = useStableGetter(linearNavigationParameters.disableHomeEndKeys);
-      const getArrowKeyDirection = useStableGetter(linearNavigationParameters.arrowKeyDirection);
-      const getPageNavigationSize = useStableGetter(linearNavigationParameters.pageNavigationSize);
-      const stableProps = _$1({
-          onKeyDown: (e) => {
+      //const getDisableHomeEndKeys = useStableGetter(disableHomeEndKeys);
+      //const getArrowKeyDirection = useStableGetter(arrowKeyDirection);
+      //const getPageNavigationSize = useStableGetter(pageNavigationSize);
+      const stableProps = _$1(useTagProps({
+          onKeyDown: useStableCallback((e) => {
               // Not handled by typeahead (i.e. assume this is a keyboard shortcut)
               if (e.ctrlKey || e.metaKey)
                   return;
               //const info = getLogicalDirectionInfo();
-              const arrowKeyDirection = getArrowKeyDirection();
-              const disableHomeEndKeys = getDisableHomeEndKeys();
-              const pageNavigationSize = getPageNavigationSize();
+              //const arrowKeyDirection = getArrowKeyDirection();
+              //const disableHomeEndKeys = getDisableHomeEndKeys();
+              //const pageNavigationSize = getPageNavigationSize();
               const allowsVerticalNavigation = (arrowKeyDirection == "vertical" || arrowKeyDirection == "either");
               const allowsHorizontalNavigation = (arrowKeyDirection == "horizontal" || arrowKeyDirection == "either");
               let childRange = (getHighestIndex() - getLowestIndex());
@@ -3246,8 +3461,8 @@
                   e.preventDefault();
                   e.stopPropagation();
               }
-          }
-      });
+          })
+      }, "data-linear-navigation"));
       return {
           linearNavigationReturn: {},
           propsStable: stableProps.current
@@ -3304,14 +3519,16 @@
    * and runs no effects.  Each child *does* run an effect, but with no state
    * changes unless you explicitly request them.
    *
+   * {@include } {@link ManagedChildren}
+   *
    * @hasChild {@link useManagedChild}
    *
    * @compositeParams
    */
   function useManagedChildren(parentParameters) {
+      monitorCallCount(useManagedChildren);
       const { managedChildrenParameters: { onAfterChildLayoutEffect, onChildrenMountChange, onChildrenCountChange }, ...rest } = parentParameters;
       useEnsureStability("useManagedChildren", onAfterChildLayoutEffect, onChildrenMountChange, onChildrenCountChange);
-      //const [getMountCount, setMountCount] = usePassiveState(onChildrenCountChange, returnZero, runImmediately);
       const getHighestIndex = T$2(() => { return managedChildrenArray.current.highestIndex; }, []);
       const getLowestIndex = T$2(() => { return managedChildrenArray.current.lowestIndex; }, []);
       // All the information we have about our children is stored in this **stable** array.
@@ -3420,7 +3637,7 @@
           getAt: getManagedChildInfo,
           getHighestIndex: getHighestIndex,
           getLowestIndex: getLowestIndex,
-          arraySlice: T$2(() => {
+          _arraySlice: T$2(() => {
               let ret = managedChildrenArray.current.arr.slice();
               const max = getHighestIndex();
               for (let i = 0; i <= max; ++i) {
@@ -3447,6 +3664,7 @@
    * @compositeParams
    */
   function useManagedChild({ context, info }) {
+      monitorCallCount(useManagedChild);
       const { managedChildContext: { getChildren, managedChildrenArray, remoteULEChildMounted, remoteULEChildChanged } } = (context ?? { managedChildContext: {} });
       const index = info.index;
       // Any time our child props change, make that information available
@@ -3609,13 +3827,14 @@
    */
   function useState(initialState) {
       const getStack = useStack();
+      monitorCallCount(useState);
       // We keep both, but override the `setState` functionality
       const [state, setStateP] = h$2(initialState);
       const ref = _$1(state);
       // Hijack the normal setter function 
       // to also set our ref to the new value
       const setState = T$2(value => {
-          if (getBuildMode() === 'development') {
+          {
               window._setState_stack = getStack();
           }
           if (typeof value === "function") {
@@ -3663,6 +3882,7 @@
    * @returns - {@link UseRovingTabIndexReturnType}
    */
   function useRovingTabIndex({ managedChildrenReturn: { getChildren }, rovingTabIndexParameters: { focusSelfParent: focusSelfParentUnstable, untabbable, untabbableBehavior, initiallyTabbedIndex, onTabbableIndexChange }, refElementReturn: { getElement }, ...void1 }) {
+      monitorCallCount(useRovingTabIndex);
       const focusSelfParent = useStableCallback(focusSelfParentUnstable);
       untabbableBehavior ||= "focus-parent";
       const lastFocused = _$1(null);
@@ -3724,7 +3944,7 @@
               // Finally, return the value the user requested the index be set to.
               return nextIndex ?? 0;
           }, reason);
-      }, []);
+      });
       // When we switch from tabbable to non/tabbable, we really want to remember the last tabbable child.
       // So every time we change the index for any reason, record that change as a back up here that can be restored.
       const [getLastNonNullIndex, setLastNonNullIndex] = usePassiveState(null, T$2(() => (initiallyTabbedIndex ?? 0), []));
@@ -3733,10 +3953,12 @@
           let shouldFocusParentAfterwards = (getElement()?.contains(document.activeElement));
           if (untabbable)
               changeTabbableIndex(null, undefined);
-          else
+          else {
               changeTabbableIndex(getLastNonNullIndex(), undefined);
-          if (shouldFocusParentAfterwards)
-              focusSelf();
+          }
+          if (shouldFocusParentAfterwards) {
+              focusSelf(true);
+          }
       }, [untabbable]);
       // Boilerplate related to notifying individual children when they become tabbable/untabbable
       const getTabbableAt = T$2((child) => { return child.getLocallyTabbable(); }, []);
@@ -3770,7 +3992,7 @@
               }
           }
       });
-      const focusSelf = T$2((reason) => {
+      const focusSelf = T$2((force, reason) => {
           const children = getChildren();
           let index = getTabbableIndex();
           const untabbable = getUntabbable();
@@ -3779,7 +4001,7 @@
               index ??= getInitiallyTabbedIndex() ?? children.getLowestIndex();
           }
           if (untabbable) {
-              if (document.activeElement != getElement() && untabbableBehavior != 'leave-child-focused') {
+              if (document.activeElement != getElement() && (force || untabbableBehavior != 'leave-child-focused')) {
                   focusSelfParent(getElement());
               }
           }
@@ -3795,15 +4017,15 @@
           parentFocusSelf: focusSelf,
           getInitiallyTabbedIndex: T$2(() => { return initiallyTabbedIndex ?? (untabbable ? null : 0); }, []),
           reevaluateClosestFit,
-          untabbable,
-          untabbableBehavior,
+          getUntabbable: useStableGetter(untabbable),
+          getUntabbableBehavior: useStableGetter(untabbableBehavior),
           giveParentFocusedElement: T$2((e) => { lastFocused.current = e; }, [])
       });
       return {
           managedChildrenParameters: { onChildrenMountChange: reevaluateClosestFit, },
           rovingTabIndexReturn: { setTabbableIndex, getTabbableIndex, focusSelf },
           context: useMemoObject({ rovingTabIndexContext }),
-          props: {
+          props: useTagProps({
               // Note: Making this -1 instead of null is partially intentional --
               // it gives us time during useEffect to move focus back to the last focused element
               // (otherwise focus gets lost to the body, and useEffect thinks that it shouldn't
@@ -3812,17 +4034,17 @@
               tabIndex: untabbable ? 0 : -1,
               // TODO: When a hidden child is clicked, some browsers focus the parent, just because it's got a role and a tabindex.
               // But this won't work to avoid that, because it messes with grid navigation
-              /*onFocus: useStableCallback((e: FocusEvent) => {
+              onFocus: useStableCallback((e) => {
                   const parentElement = getElement();
                   console.assert(!!parentElement);
                   if (e.target == getElement()) {
                       debugger;
                       if (!untabbable) {
-                          focusSelf(e);
+                          focusSelf(false, e);
                       }
                   }
-              })*/
-          }
+              })
+          }, "data-roving-tab-index")
       };
   }
   /**
@@ -3832,7 +4054,8 @@
    * @param args - {@link UseRovingTabIndexChildParameters}
    * @returns - {@link UseRovingTabIndexChildReturnType}
    */
-  function useRovingTabIndexChild({ info: { index, untabbable: iAmUntabbable, ...void2 }, context: { rovingTabIndexContext: { giveParentFocusedElement, untabbable: parentIsUntabbable, untabbableBehavior, reevaluateClosestFit, setTabbableIndex, getInitiallyTabbedIndex, parentFocusSelf } }, refElementReturn: { getElement }, ...void3 }) {
+  function useRovingTabIndexChild({ info: { index, untabbable: iAmUntabbable, ...void2 }, context: { rovingTabIndexContext: { giveParentFocusedElement, getUntabbable: getParentIsUntabbable, getUntabbableBehavior, reevaluateClosestFit, setTabbableIndex, getInitiallyTabbedIndex, parentFocusSelf } }, refElementReturn: { getElement }, ...void3 }) {
+      monitorCallCount(useRovingTabIndexChild);
       const [tabbable, setTabbable, getTabbable] = useState(getInitiallyTabbedIndex() === index);
       p$2(() => {
           reevaluateClosestFit();
@@ -3846,10 +4069,12 @@
           hasCurrentFocusParameters: {
               onCurrentFocusedInnerChanged: useStableCallback((focused, _prevFocused, e) => {
                   if (focused) {
+                      const parentIsUntabbable = getParentIsUntabbable();
+                      const untabbableBehavior = getUntabbableBehavior();
                       if ((!parentIsUntabbable && !iAmUntabbable) || untabbableBehavior != "focus-parent")
                           setTabbableIndex(index, e, false);
                       else
-                          parentFocusSelf();
+                          parentFocusSelf(false);
                   }
               })
           },
@@ -3858,10 +4083,10 @@
               getTabbable,
           },
           info: { setLocallyTabbable: setTabbable, getLocallyTabbable: getTabbable },
-          props: {
+          props: useTagProps({
               tabIndex: (tabbable ? 0 : -1),
               ...{ inert: iAmUntabbable } // This inert is to prevent the edge case of clicking a hidden item and it focusing itself
-          },
+          }, "data-roving-tab-index-child"),
       };
   }
 
@@ -3871,6 +4096,7 @@
    * @compositeParams
    */
   function useTextContent({ refElementReturn: { getElement }, textContentParameters: { getText, onTextContentChange } }) {
+      monitorCallCount(useTextContent);
       const [getTextContent, setTextContent] = usePassiveState(onTextContentChange, returnNull, runImmediately);
       p$2(() => {
           const element = getElement();
@@ -3893,7 +4119,9 @@
    *
    * @compositeParams
    */
-  function useTypeaheadNavigation({ typeaheadNavigationParameters: { collator, typeaheadTimeout, noTypeahead, isValid, onNavigateTypeahead, ...void3 }, rovingTabIndexReturn: { getTabbableIndex: getIndex, setTabbableIndex: setIndex, ...void1 }, ...void2 }) {
+  function useTypeaheadNavigation({ typeaheadNavigationParameters: { collator, typeaheadTimeout, noTypeahead, isValidForTypeaheadNavigation, onNavigateTypeahead, ...void3 }, rovingTabIndexReturn: { getTabbableIndex: getIndex, setTabbableIndex: setIndex, ...void1 }, ...void2 }) {
+      //type EventType = Parameters<NonNullable<ElementProps<ParentOrChildElement>["onKeyDown"]>>[0];
+      monitorCallCount(useTypeaheadNavigation);
       // For typeahead, keep track of what our current "search" string is (if we have one)
       // and also clear it every 1000 ms since the last time it changed.
       // Next, keep a mapping of typeahead values to indices for faster searching.
@@ -3947,7 +4175,7 @@
           return lhs - rhs;
       });
       const isDisabled = useStableGetter(noTypeahead);
-      const propsStable = _$1({
+      const propsStable = _$1(useTagProps({
           onKeyDown: useStableCallback((e) => {
               if (isDisabled())
                   return;
@@ -3986,7 +4214,7 @@
               setImeActive(false);
           }),
           onCompositionEnd: useStableCallback((_e) => { setImeActive(true); }),
-      });
+      }, "data-typeahead-navigation"));
       const excludeSpace = useStableCallback(() => { return typeaheadStatus != "none"; });
       return {
           context: useMemoObject({
@@ -4044,7 +4272,7 @@
                   let lowestUnsortedIndexNext = null;
                   let lowestSortedIndexNext = sortedTypeaheadIndex;
                   const updateBestFit = (u) => {
-                      if (!isValid(u))
+                      if (!isValidForTypeaheadNavigation(u))
                           return;
                       if (lowestUnsortedIndexAll == null || u < lowestUnsortedIndexAll) {
                           lowestUnsortedIndexAll = u;
@@ -4083,6 +4311,7 @@
    * @compositeParams
    */
   function useTypeaheadNavigationChild({ info: { index, ...void1 }, textContentParameters: { getText, ...void5 }, context: { typeaheadNavigationContext: { sortedTypeaheadInfo, insertingComparator, excludeSpace, ...void2 } }, refElementReturn: { getElement, ...void3 }, ...void4 }) {
+      monitorCallCount(useTypeaheadNavigationChild);
       const { textContentReturn } = useTextContent({
           refElementReturn: { getElement },
           textContentParameters: {
@@ -4157,10 +4386,11 @@
    *
    * @hasChild {@link useListNavigationChild}
    */
-  function useListNavigation({ linearNavigationParameters, typeaheadNavigationParameters, rovingTabIndexParameters, managedChildrenReturn, refElementReturn, paginatedChildrenParameters, ...void1 }) {
-      const { context: { rovingTabIndexContext }, managedChildrenParameters, rovingTabIndexReturn, props: propsRTI, ...void2 } = useRovingTabIndex({ managedChildrenReturn, rovingTabIndexParameters, refElementReturn });
-      const { context: { typeaheadNavigationContext }, propsStable: propsStableTN, typeaheadNavigationReturn, ...void3 } = useTypeaheadNavigation({ rovingTabIndexReturn, typeaheadNavigationParameters, });
-      const { propsStable: propsStableLN, linearNavigationReturn, ...void4 } = useLinearNavigation({ rovingTabIndexReturn, linearNavigationParameters, paginatedChildrenParameters });
+  function useListNavigation({ linearNavigationParameters, typeaheadNavigationParameters, rovingTabIndexParameters, managedChildrenReturn, refElementReturn, paginatedChildrenParameters, rearrangeableChildrenReturn, ...void1 }) {
+      monitorCallCount(useListNavigation);
+      const { props: propsRTI, rovingTabIndexReturn, managedChildrenParameters, context: contextRovingTabIndex, ...void2 } = useRovingTabIndex({ managedChildrenReturn, rovingTabIndexParameters, refElementReturn });
+      const { propsStable: propsStableTN, typeaheadNavigationReturn, context: contextTypeahead, ...void3 } = useTypeaheadNavigation({ rovingTabIndexReturn, typeaheadNavigationParameters, });
+      const { propsStable: propsStableLN, linearNavigationReturn, ...void4 } = useLinearNavigation({ rovingTabIndexReturn, linearNavigationParameters, paginatedChildrenParameters, rearrangeableChildrenReturn });
       // Merge the props while keeping them stable
       // (TODO: We run this merge logic every render but only need the first render's result because it's stable)
       const p = useMergedProps(propsStableTN, propsStableLN);
@@ -4170,8 +4400,8 @@
           rovingTabIndexReturn,
           typeaheadNavigationReturn,
           context: useMemoObject({
-              rovingTabIndexContext,
-              typeaheadNavigationContext
+              ...contextRovingTabIndex,
+              ...contextTypeahead
           }),
           linearNavigationReturn,
           propsStableParentOrChild: propsStable.current,
@@ -4181,9 +4411,10 @@
   /**
    * @compositeParams
    */
-  function useListNavigationChild({ info, context, refElementReturn, textContentParameters, ...void2 }) {
-      const { props, ...rticr } = useRovingTabIndexChild({ context, info, refElementReturn });
-      const { ...tncr } = useTypeaheadNavigationChild({ refElementReturn, textContentParameters, context, info });
+  function useListNavigationChild({ info: { index, untabbable, ...void1 }, context, refElementReturn, textContentParameters, ...void2 }) {
+      monitorCallCount(useListNavigationChild);
+      const { props, ...rticr } = useRovingTabIndexChild({ context, info: { index, untabbable }, refElementReturn });
+      const { ...tncr } = useTypeaheadNavigationChild({ refElementReturn, textContentParameters, context, info: { index } });
       return {
           props,
           ...tncr,
@@ -4211,6 +4442,7 @@
    * @hasChild {@link useGridNavigationCell}
    */
   function useGridNavigation({ gridNavigationParameters: { onTabbableColumnChange, ...void3 }, linearNavigationParameters, ...listNavigationParameters }) {
+      monitorCallCount(useGridNavigation);
       const [getTabbableColumn, setTabbableColumn] = usePassiveState(onTabbableColumnChange, useStableCallback(() => {
           let t = (listNavigationParameters.rovingTabIndexParameters.initiallyTabbedIndex ?? 0);
           return { actual: t, ideal: t };
@@ -4249,45 +4481,56 @@
    */
   function useGridNavigationRow({ 
   // Stuff for the row as a child of the parent grid
-  info: managedChildParameters, textContentParameters, context: contextFromParent, 
+  info: { index, untabbable, ...void3 }, textContentParameters, context: contextFromParent, 
   // Stuff for the row as a parent of child cells
   linearNavigationParameters, rovingTabIndexParameters: { untabbable: rowIsUntabbableAndSoAreCells, initiallyTabbedIndex, onTabbableIndexChange, ...void4 }, managedChildrenReturn, typeaheadNavigationParameters, 
   // Both/neither
   refElementReturn, ...void1 }) {
+      monitorCallCount(useGridNavigationRow);
       const { getTabbableColumn, setTabbableColumn, setTabbableRow } = contextFromParent.gridNavigationRowContext;
-      const getIndex = useStableCallback(() => { return managedChildParameters.index; });
+      const getIndex = useStableCallback(() => { return index; });
+      // When this row is focused from the parent's `useRovingTabIndex`,
+      // instead of focusing the row element, this function focuses the appropriate cell element.
       const whenThisRowIsFocused = useStableCallback((e) => {
           const { getChildren } = managedChildrenReturn;
-          let { ideal, actual } = (getTabbableColumn());
-          let index = (ideal ?? 0);
-          let child = getChildren().getAt(index);
-          let lowestIndex = getChildren().getLowestIndex();
-          let highestIndex = getChildren().getHighestIndex();
-          while ((!child || child.untabbable) && index > lowestIndex) {
-              --index;
-              child = getChildren().getAt(index);
-          }
-          while ((!child || child.untabbable) && index <= highestIndex) {
-              ++index;
-              child = getChildren().getAt(index);
-          }
-          if (child) {
-              const e = child.getElement();
-              child.focusSelf(e);
+          if (contextFromParent.rovingTabIndexContext.getUntabbable()) {
+              // If the parent is untabbable, and this row was requested to focus itself (as part of parentFocusSelf),
+              // then we focus the parent grid instead of the child cell.
+              contextFromParent.rovingTabIndexContext.parentFocusSelf(true);
           }
           else {
-              focus(e);
+              // If the parent is tabbable (normal behavior), 
+              // then we focus the cell that should be focused in this row.
+              let { ideal, actual } = (getTabbableColumn());
+              let index = (ideal ?? 0);
+              let child = getChildren().getAt(index);
+              let lowestIndex = getChildren().getLowestIndex();
+              let highestIndex = getChildren().getHighestIndex();
+              while ((!child || child.untabbable) && index > lowestIndex) {
+                  --index;
+                  child = getChildren().getAt(index);
+              }
+              while ((!child || child.untabbable) && index <= highestIndex) {
+                  ++index;
+                  child = getChildren().getAt(index);
+              }
+              if (child) {
+                  const e = child.getElement();
+                  child.focusSelf(e);
+              }
+              else {
+                  focus(e);
+              }
           }
       }, []);
       const focusSelf = whenThisRowIsFocused;
-      const { props: propsLNC, info, ...ulncRet } = useListNavigationChild({ info: managedChildParameters, refElementReturn, textContentParameters, context: contextFromParent });
-      const allChildCellsAreUntabbable = !ulncRet.rovingTabIndexChildReturn.tabbable;
-      const { propsStableParentOrChild: propsLN, 
-      // This is just tabIndex = 0 or -1, see the TODO below
-      propsParent: propsLN2, context: contextULN, ...ulnRet } = useListNavigation({
+      const { props: propsLNC, info: { getLocallyTabbable, setLocallyTabbable, ...void2 }, hasCurrentFocusParameters, pressParameters, rovingTabIndexChildReturn, textContentReturn, ...void6 } = useListNavigationChild({ info: { index, untabbable }, refElementReturn, textContentParameters, context: contextFromParent });
+      const allChildCellsAreUntabbable = !rovingTabIndexChildReturn.tabbable;
+      const { propsStableParentOrChild: propsLN, propsParent: propsLN2, context: contextULN, linearNavigationReturn, managedChildrenParameters, rovingTabIndexReturn, typeaheadNavigationReturn, ...void5 } = useListNavigation({
           managedChildrenReturn,
           refElementReturn,
           typeaheadNavigationParameters,
+          rearrangeableChildrenReturn: { indexDemangler: identity, indexMangler: identity },
           rovingTabIndexParameters: {
               untabbableBehavior: "leave-child-focused",
               focusSelfParent: whenThisRowIsFocused,
@@ -4303,12 +4546,13 @@
                   setTabbableColumn(prev => ({ ideal: next, actual: prev?.actual ?? next }), event);
               }),
               disableHomeEndKeys: true,
+              pageNavigationSize: 0,
               arrowKeyDirection: "horizontal",
               ...linearNavigationParameters
           },
           paginatedChildrenParameters: { paginationMin: null, paginationMax: null }
       });
-      const { setTabbableIndex } = ulnRet.rovingTabIndexReturn;
+      const { setTabbableIndex } = rovingTabIndexReturn;
       const gridNavigationCellContext = useMemoObject({
           //allChildCellsAreUntabbable,
           setTabbableRow,
@@ -4320,7 +4564,8 @@
       // TODO: propsLN2 (awful name) is just the tabIndex=0 or -1 from rovingTabIndex, which flips around when `untabbable` flips.
       // We can ignore it here, because our tabIndex is entirely controlled by our own list navigation,
       // but it shouldn't just be ignored wholesale like this.
-      const props = useMergedProps(propsLN, /*propsLN2,*/ propsLNC, {
+      propsLN2.tabIndex = propsLN.tabIndex ?? propsLNC.tabIndex;
+      const props = useMergedProps(propsLN, propsLN2, propsLNC, {
           // Ensure that if the browser focuses the row for whatever reason, we transfer the focus to a child cell.
           onFocus: useStableCallback(e => whenThisRowIsFocused(e.currentTarget))
       });
@@ -4331,10 +4576,16 @@
       });
       return {
           context: contextToChildren,
-          props,
-          info: { focusSelf, ...info },
-          ...ulncRet,
-          ...ulnRet,
+          props: useTagProps(props, "data-use-grid-navigation-partial-row"),
+          info: { focusSelf, getLocallyTabbable, setLocallyTabbable },
+          hasCurrentFocusParameters,
+          pressParameters,
+          rovingTabIndexChildReturn,
+          textContentReturn,
+          linearNavigationReturn,
+          managedChildrenParameters,
+          rovingTabIndexReturn,
+          typeaheadNavigationReturn
       };
   }
   /**
@@ -4342,13 +4593,11 @@
    *
    * @compositeParams
    */
-  function useGridNavigationCell({ context: { gridNavigationCellContext: { getRowIndex, setTabbableRow, getTabbableColumn: _getCurrentColumn, setTabbableColumn, setTabbableCell, 
-  //allChildCellsAreUntabbable,
-  ...void4 }, rovingTabIndexContext, typeaheadNavigationContext, ...void5 }, info, refElementReturn, textContentParameters, gridNavigationCellParameters: { colSpan, ...void6 }, ...void1 }) {
+  function useGridNavigationCell({ context: { gridNavigationCellContext: { getRowIndex, setTabbableRow, getTabbableColumn: _getCurrentColumn, setTabbableColumn, setTabbableCell, ...void4 }, rovingTabIndexContext, typeaheadNavigationContext, ...void5 }, info: { index, untabbable, ...void7 }, refElementReturn, textContentParameters, gridNavigationCellParameters: { colSpan, ...void6 }, ...void1 }) {
+      monitorCallCount(useGridNavigationCell);
       colSpan ??= 1;
-      const { index } = info;
       const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1, ...void3 }, rovingTabIndexChildReturn, textContentReturn, pressParameters, props, info: infoLs, ...void2 } = useListNavigationChild({
-          info,
+          info: { index, untabbable },
           context: { rovingTabIndexContext, typeaheadNavigationContext },
           textContentParameters,
           refElementReturn,
@@ -4364,7 +4613,7 @@
                   ocfic1?.(focused, prev, e);
                   if (focused) {
                       setTabbableRow(getRowIndex(), e, false);
-                      setTabbableColumn(prev => { debugger; return { actual: index, ideal: prev?.ideal ?? index }; }, e);
+                      setTabbableColumn(prev => { return { actual: index, ideal: prev?.ideal ?? index }; }, e);
                       setTabbableCell((prev) => {
                           if (prev != null && (prev < index || prev > index + (colSpan))) {
                               return prev;
@@ -4378,6 +4627,168 @@
   }
 
   /**
+   * Hook that allows for the **direct descendant** children of this component to be re-ordered and sorted.
+   *
+   * @remarks *This is **separate** from "managed" children, which can be any level of child needed! Sortable/rearrangeable children must be **direct descendants** of the parent that uses this hook!*
+   *
+   * It's recommended to use this in conjunction with `useListNavigation`; it takes the same `indexMangler` and `indexDemangler`
+   * functions that this hook returns. `useListNavigation` does not directly use this hook because, as mentioned,
+   * this hook imposes serious restrictions on child structure, while `useListNavigation` allows anything.
+   *
+   * Besides the prop-modifying hook that's returned, the `sort` function that's returned will
+   * sort all children according to their value from the `getValue` argument you pass in.
+   *
+   * If you want to perform some re-ordering operation that's *not* a sort, you can manually
+   * re-map each child's position using `mangleMap` and `demangleMap`, which convert between
+   * sorted and unsorted index positions.
+   *
+   * Again, unlike some other hooks, **these children must be direct descendants**. This is because
+   * the prop-modifying hook inspects the given children, then re-creates them with new `key`s.
+   * Because keys are given special treatment and a child has no way of modifying its own key
+   * there's no other time or place this can happen other than exactly within the parent component's render function.
+   *
+   * @compositeParams
+   */
+  function useRearrangeableChildren({ rearrangeableChildrenParameters: { getIndex, onRearranged }, managedChildrenReturn: { getChildren } }) {
+      monitorCallCount(useRearrangeableChildren);
+      useEnsureStability("useRearrangeableChildren", getIndex);
+      // These are used to keep track of a mapping between unsorted index <---> sorted index.
+      // These are needed for navigation with the arrow keys.
+      const mangleMap = _$1(new Map());
+      const demangleMap = _$1(new Map());
+      const indexMangler = T$2((n) => (mangleMap.current.get(n) ?? n), []);
+      const indexDemangler = T$2((n) => (demangleMap.current.get(n) ?? n), []);
+      const onRearrangedGetter = useStableGetter(onRearranged);
+      //const { setTabbableIndex } = rovingTabIndexReturn;
+      const shuffle$1 = T$2(() => {
+          const managedRows = getChildren();
+          const originalRows = managedRows._arraySlice();
+          const shuffledRows = shuffle(originalRows);
+          return rearrange(originalRows, shuffledRows);
+      }, [ /* Must remain stable */]);
+      const reverse = T$2(() => {
+          const managedRows = getChildren();
+          const originalRows = managedRows._arraySlice();
+          const reversedRows = managedRows._arraySlice().reverse();
+          return rearrange(originalRows, reversedRows);
+      }, [ /* Must remain stable */]);
+      // The sort function needs to be able to update whoever has all the sortable children.
+      // Because that might not be the consumer of *this* hook directly (e.g. a table uses
+      // this hook, but it's tbody that actually needs updating), we need to remotely
+      // get and set a forceUpdate function.
+      //const [getForceUpdate, setForceUpdate] = usePassiveState<null | (() => void)>(null, returnNull);
+      const [getForceUpdate, setForceUpdate] = usePassiveState(null, returnNull);
+      const rearrange = T$2((originalRows, sortedRows) => {
+          mangleMap.current.clear();
+          demangleMap.current.clear();
+          // Update our sorted <--> unsorted indices map 
+          // and rerender the whole table, basically
+          for (let indexAsSorted = 0; indexAsSorted < sortedRows.length; ++indexAsSorted) {
+              if (sortedRows[indexAsSorted]) {
+                  const indexAsUnsorted = sortedRows[indexAsSorted].index;
+                  mangleMap.current.set(indexAsUnsorted, indexAsSorted);
+                  demangleMap.current.set(indexAsSorted, indexAsUnsorted);
+              }
+          }
+          onRearrangedGetter()?.();
+          getForceUpdate()?.();
+      }, []);
+      const useRearrangedChildren = T$2(function useRearrangedChildren(children) {
+          monitorCallCount(useRearrangedChildren);
+          console.assert(Array.isArray(children));
+          return children
+              .slice()
+              .map(child => ({ child, mangledIndex: indexMangler(getIndex(child)), demangledIndex: getIndex(child) }))
+              .sort((lhs, rhs) => { return lhs.mangledIndex - rhs.mangledIndex; })
+              .map(({ child, mangledIndex, demangledIndex }) => {
+              return y$3(child.type, { ...child.props, key: demangledIndex, "data-mangled-index": mangledIndex, "data-demangled-index": demangledIndex });
+          });
+      }, []);
+      const toJsonArray = T$2((transform) => {
+          const managedRows = getChildren();
+          return managedRows._arraySlice().map(child => {
+              if (transform)
+                  return (transform(child));
+              else
+                  return child.getSortValue();
+          });
+      }, []);
+      return {
+          rearrangeableChildrenReturn: {
+              indexMangler,
+              indexDemangler,
+              //mangleMap,
+              //demangleMap,
+              rearrange,
+              shuffle: shuffle$1,
+              reverse,
+              useRearrangedChildren,
+              toJsonArray
+          }
+      };
+  }
+  /**
+   * Hook that allows for the **direct descendant** children of this component to be re-ordered and sorted.
+   *
+   * @remarks *This is **separate** from "managed" children, which can be any level of child needed! Sortable/rearrangeable children must be **direct descendants** of the parent that uses this hook!*
+   *
+   * It's recommended to use this in conjunction with `useListNavigation`; it takes the same `indexMangler` and `indexDemangler`
+   * functions that this hook returns. `useListNavigation` does not directly use this hook because, as mentioned,
+   * this hook imposes serious restrictions on child structure, while `useListNavigation` allows anything.
+   *
+   * Besides the prop-modifying hook that's returned, the `sort` function that's returned will
+   * sort all children according to their value from the `getValue` argument you pass in.
+   *
+   * If you want to perform some re-ordering operation that's *not* a sort, you can manually
+   * re-map each child's position using `mangleMap` and `demangleMap`, which convert between
+   * sorted and unsorted index positions.
+   *
+   * Again, unlike some other hooks, **these children must be direct descendants**. This is because
+   * the prop-modifying hook inspects the given children, then re-creates them with new `key`s.
+   * Because keys are given special treatment and a child has no way of modifying its own key
+   * there's no other time or place this can happen other than exactly within the parent component's render function.
+   *
+   * @compositeParams
+   */
+  function useSortableChildren({ rearrangeableChildrenParameters, sortableChildrenParameters: { compare: userCompare }, managedChildrenReturn: { getChildren } }) {
+      monitorCallCount(useSortableChildren);
+      const getCompare = useStableGetter(userCompare ?? defaultCompare);
+      const { rearrangeableChildrenReturn } = useRearrangeableChildren({ rearrangeableChildrenParameters, managedChildrenReturn: { getChildren } });
+      const { rearrange } = rearrangeableChildrenReturn;
+      // The actual sort function.
+      const sort = T$2((direction) => {
+          const managedRows = getChildren();
+          const compare = getCompare();
+          const originalRows = managedRows._arraySlice();
+          const sortedRows = compare ? originalRows.sort((lhsRow, rhsRow) => {
+              const lhsValue = lhsRow;
+              const rhsValue = rhsRow;
+              const result = compare(lhsValue, rhsValue);
+              if (direction[0] == "d")
+                  return -result;
+              return result;
+          }) : managedRows._arraySlice();
+          return rearrange(originalRows, sortedRows);
+      }, [ /* Must remain stable */]);
+      return {
+          sortableChildrenReturn: { sort },
+          rearrangeableChildrenReturn
+      };
+  }
+  function defaultCompare(lhs, rhs) {
+      return compare1(lhs?.getSortValue(), rhs?.getSortValue());
+      function compare1(lhs, rhs) {
+          if (lhs == null || rhs == null) {
+              if (lhs == null)
+                  return -1;
+              if (rhs == null)
+                  return 1;
+          }
+          return lhs - rhs;
+      }
+  }
+
+  /**
    * Allows a single child among all children to be the "selected" child (which can be different from the "focused" child).
    *
    * @remarks If you need multi-select instead of single-select and you're using this hook (e.g. as part of {@link useCompleteListNavigation}), you can disable the single-selection behavior either by setting the selected index to `null` or.
@@ -4387,6 +4798,7 @@
    * @compositeParams
    */
   function useSingleSelection({ managedChildrenReturn: { getChildren, ...void1 }, rovingTabIndexReturn: { setTabbableIndex, ...void2 }, singleSelectionParameters: { onSelectedIndexChange: onSelectedIndexChange_U, initiallySelectedIndex, ariaPropName, selectionMode, ...void3 }, ...void4 }) {
+      monitorCallCount(useSingleSelection);
       const onSelectedIndexChange = useStableCallback(onSelectedIndexChange_U ?? noop$1);
       const getSelectedAt = T$2((m) => { return m.getSelected(); }, []);
       const setSelectedAt = T$2((m, t, newSelectedIndex, prevSelectedIndex) => {
@@ -4442,17 +4854,21 @@
    * @compositeParams
    */
   function useSingleSelectionChild({ context: { singleSelectionContext: { getSelectedIndex, onSelectedIndexChange, ariaPropName, selectionMode, ...void1 }, ...void2 }, info: { index, unselectable, ...void3 }, ...void4 }) {
+      monitorCallCount(useSingleSelectionChild);
       useEnsureStability("useSingleSelectionChild", getSelectedIndex, onSelectedIndexChange);
-      useStableGetter(unselectable);
+      //const getUnselectable = useStableGetter(unselectable);
       const [localSelected, setLocalSelected, getLocalSelected] = useState(getSelectedIndex() == index);
       const [direction, setDirection, getDirection] = useState(getSelectedIndex() == null ? null : (getSelectedIndex() - index));
       const onCurrentFocusedInnerChanged = useStableCallback((focused, _prev, e) => {
-          if (selectionMode == 'focus' && focused) {
+          if (selectionMode == 'focus' && focused && !unselectable) {
               onSelectedIndexChange?.(enhanceEvent(e, { selectedIndex: index }));
           }
       });
+      const onPressSync = useStableCallback((e) => {
+          if (selectionMode == 'activation' && !unselectable)
+              onSelectedIndexChange?.(enhanceEvent(e, { selectedIndex: index }));
+      });
       const propParts = ariaPropName?.split("-") ?? [];
-      const onPressSync = useStableCallback((e) => { onSelectedIndexChange?.(enhanceEvent(e, { selectedIndex: index })); });
       return {
           info: {
               setLocalSelected: useStableCallback((selected, direction) => {
@@ -4468,9 +4884,9 @@
               selectedOffset: direction,
               getSelectedOffset: getDirection,
           },
-          props: ariaPropName == null || selectionMode == "disabled" ? {} : {
+          props: useTagProps(ariaPropName == null || selectionMode == "disabled" ? {} : {
               [`${propParts[0]}-${propParts[1]}`]: (localSelected ? (propParts[1] == "current" ? `${propParts[2]}` : `true`) : "false")
-          },
+          }, "data-single-selection-child"),
           hasCurrentFocusParameters: { onCurrentFocusedInnerChanged },
           pressParameters: { onPressSync: onSelectedIndexChange ? onPressSync : null }
       };
@@ -4479,13 +4895,23 @@
    * Let's face it, declarative is nicer to use than imperative, so this is a shortcut.
    */
   function useSingleSelectionDeclarative({ singleSelectionReturn: { changeSelectedIndex }, singleSelectionDeclarativeParameters: { selectedIndex, onSelectedIndexChange } }) {
-      p$2(() => {
-          changeSelectedIndex(selectedIndex);
-      }, [selectedIndex]);
+      let s = (selectedIndex ?? null);
+      p$2(() => { changeSelectedIndex(s); }, [s]);
       return { singleSelectionParameters: { onSelectedIndexChange } };
   }
 
-  function useGridNavigationSingleSelection({ gridNavigationParameters, linearNavigationParameters, rovingTabIndexParameters, managedChildrenReturn, typeaheadNavigationParameters, singleSelectionParameters, refElementReturn, paginatedChildrenParameters, ...void2 }) {
+  /**
+   * Combines {@link useGridNavigation} and {@link useSingleSelection}.
+   *
+   * @remarks The single-selection behavior is optional, if you decide you need multi-selection instead within the same component.
+   *
+   * @hasChild {@link useGridNavigationSingleSelectionRow}
+   * @hasChild {@link useGridNavigationSingleSelectionCell}
+   *
+   * @compositeParams
+   */
+  function useGridNavigationSingleSelection({ gridNavigationParameters, linearNavigationParameters, rovingTabIndexParameters, managedChildrenReturn, typeaheadNavigationParameters, singleSelectionParameters, refElementReturn, paginatedChildrenParameters, rearrangeableChildrenReturn, ...void2 }) {
+      monitorCallCount(useGridNavigationSingleSelection);
       const { context: { gridNavigationRowContext, rovingTabIndexContext, typeaheadNavigationContext }, linearNavigationReturn, managedChildrenParameters, propsParent, propsStableParentOrChild, rovingTabIndexReturn, typeaheadNavigationReturn, } = useGridNavigation({
           gridNavigationParameters,
           linearNavigationParameters,
@@ -4493,6 +4919,7 @@
           rovingTabIndexParameters,
           typeaheadNavigationParameters,
           paginatedChildrenParameters,
+          rearrangeableChildrenReturn,
           refElementReturn
       });
       const { childrenHaveFocusParameters, context: { singleSelectionContext }, singleSelectionReturn, } = useSingleSelection({
@@ -4517,17 +4944,28 @@
           typeaheadNavigationReturn
       };
   }
-  function useGridNavigationSingleSelectionRow({ info: mcp1, linearNavigationParameters, managedChildrenReturn, refElementReturn, rovingTabIndexParameters, textContentParameters, typeaheadNavigationParameters, context: { gridNavigationRowContext, rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext }, ...void1 }) {
-      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1, ...void6 }, info: mcp2, props: propsSS, singleSelectionChildReturn, pressParameters: { onPressSync, ...void4 }, ...void2 } = useSingleSelectionChild({ info: mcp1, context: { singleSelectionContext } });
-      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic2, ...void7 }, info: mcp3, props: propsGN, linearNavigationReturn, managedChildrenParameters, pressParameters: { excludeSpace, ...void5 }, rovingTabIndexChildReturn, rovingTabIndexReturn, textContentReturn, typeaheadNavigationReturn, context, ...void3 } = useGridNavigationRow({ context: { gridNavigationRowContext, rovingTabIndexContext, typeaheadNavigationContext }, linearNavigationParameters, info: mcp1, managedChildrenReturn, refElementReturn, rovingTabIndexParameters, textContentParameters, typeaheadNavigationParameters });
+  /**
+   * @compositeParams
+   */
+  function useGridNavigationSingleSelectionRow({ info: mcp1, linearNavigationParameters, managedChildrenReturn, refElementReturn, rovingTabIndexParameters, textContentParameters, typeaheadNavigationParameters, context, ...void1 }) {
+      monitorCallCount(useGridNavigationSingleSelectionRow);
+      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1, ...void6 }, info: { getSelected, selected, setLocalSelected, ...void8 }, props: propsSingleSelection, singleSelectionChildReturn, pressParameters: { onPressSync, ...void4 }, ...void2 } = useSingleSelectionChild({ info: mcp1, context });
+      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic2, ...void7 }, info: { focusSelf, getLocallyTabbable, setLocallyTabbable, ...void9 }, props: propsGridNavigation, linearNavigationReturn, managedChildrenParameters, pressParameters: { excludeSpace, ...void5 }, rovingTabIndexChildReturn, rovingTabIndexReturn, textContentReturn, typeaheadNavigationReturn, context: contextGridNavigation, ...void3 } = useGridNavigationRow({ context, linearNavigationParameters, info: mcp1, managedChildrenReturn, refElementReturn, rovingTabIndexParameters, textContentParameters, typeaheadNavigationParameters });
       return {
-          context: { ...context, singleSelectionContext },
+          context: { ...contextGridNavigation, singleSelectionContext: context.singleSelectionContext },
           linearNavigationReturn,
-          info: { ...mcp2, ...mcp3 },
+          info: {
+              getLocallyTabbable,
+              getSelected,
+              selected,
+              setLocallyTabbable,
+              setLocalSelected,
+              focusSelf
+          },
           managedChildrenParameters,
           pressParameters: { onPressSync, excludeSpace },
           hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: useStableCallback((hasFocus, hadFocus) => { ocfic1?.(hasFocus, hadFocus); ocfic2?.(hasFocus, hadFocus); }) },
-          props: useMergedProps(propsGN, propsSS),
+          props: useMergedProps(propsGridNavigation, propsSingleSelection),
           rovingTabIndexChildReturn,
           rovingTabIndexReturn,
           singleSelectionChildReturn,
@@ -4535,183 +4973,108 @@
           typeaheadNavigationReturn
       };
   }
-  // EZ
+  /**
+   * @compositeParams
+   */
   function useGridNavigationSingleSelectionCell(p) {
+      monitorCallCount(useGridNavigationSingleSelectionCell);
       return useGridNavigationCell(p);
   }
 
   /**
-   * Hook that allows for the **direct descendant** children of this component to be re-ordered and sorted.
+   * Combines {@link useGridNavigation}, {@link useSingleSelection}, and {@link useSortableChildren}.
    *
-   * @remarks *This is **separate** from "managed" children, which can be any level of child needed! Sortable/rearrangeable children must be **direct descendants** of the parent that uses this hook!*
+   * @remarks This is a separate hook because {@link useSortableChildren} imposes unique requirements to the structure of your `children`.
    *
-   * It's recommended to use this in conjunction with `useListNavigation`; it takes the same `indexMangler` and `indexDemangler`
-   * functions that this hook returns. `useListNavigation` does not directly use this hook because, as mentioned,
-   * this hook imposes serious restrictions on child structure, while `useListNavigation` allows anything.
-   *
-   * Besides the prop-modifying hook that's returned, the `sort` function that's returned will
-   * sort all children according to their value from the `getValue` argument you pass in.
-   *
-   * If you want to perform some re-ordering operation that's *not* a sort, you can manually
-   * re-map each child's position using `mangleMap` and `demangleMap`, which convert between
-   * sorted and unsorted index positions.
-   *
-   * Again, unlike some other hooks, **these children must be direct descendants**. This is because
-   * the prop-modifying hook inspects the given children, then re-creates them with new `key`s.
-   * Because keys are given special treatment and a child has no way of modifying its own key
-   * there's no other time or place this can happen other than exactly within the parent component's render function.
+   * @hasChild {@link useGridNavigationSingleSelectionSortableRow}
    *
    * @compositeParams
    */
-  function useRearrangeableChildren({ rearrangeableChildrenParameters: { getIndex, onRearranged }, managedChildrenReturn: { getChildren } }) {
-      useEnsureStability("useRearrangeableChildren", getIndex);
-      // These are used to keep track of a mapping between unsorted index <---> sorted index.
-      // These are needed for navigation with the arrow keys.
-      const mangleMap = _$1(new Map());
-      const demangleMap = _$1(new Map());
-      const indexMangler = T$2((n) => (mangleMap.current.get(n) ?? n), []);
-      const indexDemangler = T$2((n) => (demangleMap.current.get(n) ?? n), []);
-      const onRearrangedGetter = useStableGetter(onRearranged);
-      //const { setTabbableIndex } = rovingTabIndexReturn;
-      const shuffle$1 = T$2(() => {
-          const managedRows = getChildren();
-          const originalRows = managedRows.arraySlice();
-          const shuffledRows = shuffle(originalRows);
-          return rearrange(originalRows, shuffledRows);
-      }, [ /* Must remain stable */]);
-      const reverse = T$2(() => {
-          const managedRows = getChildren();
-          const originalRows = managedRows.arraySlice();
-          const reversedRows = managedRows.arraySlice().reverse();
-          return rearrange(originalRows, reversedRows);
-      }, [ /* Must remain stable */]);
-      // The sort function needs to be able to update whoever has all the sortable children.
-      // Because that might not be the consumer of *this* hook directly (e.g. a table uses
-      // this hook, but it's tbody that actually needs updating), we need to remotely
-      // get and set a forceUpdate function.
-      //const [getForceUpdate, setForceUpdate] = usePassiveState<null | (() => void)>(null, returnNull);
-      const [getForceUpdate, setForceUpdate] = usePassiveState(null, returnNull);
-      const rearrange = T$2((originalRows, sortedRows) => {
-          mangleMap.current.clear();
-          demangleMap.current.clear();
-          // Update our sorted <--> unsorted indices map 
-          // and rerender the whole table, basically
-          for (let indexAsSorted = 0; indexAsSorted < sortedRows.length; ++indexAsSorted) {
-              if (sortedRows[indexAsSorted]) {
-                  const indexAsUnsorted = sortedRows[indexAsSorted].index;
-                  mangleMap.current.set(indexAsUnsorted, indexAsSorted);
-                  demangleMap.current.set(indexAsSorted, indexAsUnsorted);
-              }
-          }
-          onRearrangedGetter()?.();
-          getForceUpdate()?.();
-      }, []);
-      const useRearrangedChildren = T$2(function useRearrangedChildren(children) {
-          console.assert(Array.isArray(children));
-          return children
-              .slice()
-              .map(child => ({ child, mangledIndex: indexMangler(getIndex(child)), demangledIndex: getIndex(child) }))
-              .sort((lhs, rhs) => { return lhs.mangledIndex - rhs.mangledIndex; })
-              .map(({ child, mangledIndex, demangledIndex }) => {
-              return y$3(child.type, { ...child.props, key: demangledIndex, "data-mangled-index": mangledIndex, "data-demangled-index": demangledIndex });
-          });
-      }, []);
-      const toJsonArray = T$2((transform) => {
-          const managedRows = getChildren();
-          return managedRows.arraySlice().map(child => {
-              if (transform)
-                  return (transform(child));
-              else
-                  return child.getSortValue();
-          });
-      }, []);
+  function useGridNavigationSingleSelectionSortable({ rearrangeableChildrenParameters, sortableChildrenParameters, linearNavigationParameters, managedChildrenReturn, gridNavigationParameters, paginatedChildrenParameters, refElementReturn, rovingTabIndexParameters, singleSelectionParameters, typeaheadNavigationParameters, ...void1 }) {
+      monitorCallCount(useGridNavigationSingleSelectionSortable);
+      const { rearrangeableChildrenReturn, sortableChildrenReturn } = useSortableChildren({ rearrangeableChildrenParameters, sortableChildrenParameters, managedChildrenReturn });
+      const gnr = useGridNavigationSingleSelection({
+          rearrangeableChildrenReturn,
+          linearNavigationParameters,
+          managedChildrenReturn,
+          gridNavigationParameters,
+          paginatedChildrenParameters,
+          refElementReturn,
+          rovingTabIndexParameters,
+          singleSelectionParameters,
+          typeaheadNavigationParameters
+      });
       return {
-          rearrangeableChildrenReturn: {
-              indexMangler,
-              indexDemangler,
-              //mangleMap,
-              //demangleMap,
-              rearrange,
-              shuffle: shuffle$1,
-              reverse,
-              useRearrangedChildren,
-              toJsonArray
-          }
+          rearrangeableChildrenReturn,
+          sortableChildrenReturn,
+          ...gnr
       };
   }
   /**
-   * Hook that allows for the **direct descendant** children of this component to be re-ordered and sorted.
-   *
-   * @remarks *This is **separate** from "managed" children, which can be any level of child needed! Sortable/rearrangeable children must be **direct descendants** of the parent that uses this hook!*
-   *
-   * It's recommended to use this in conjunction with `useListNavigation`; it takes the same `indexMangler` and `indexDemangler`
-   * functions that this hook returns. `useListNavigation` does not directly use this hook because, as mentioned,
-   * this hook imposes serious restrictions on child structure, while `useListNavigation` allows anything.
-   *
-   * Besides the prop-modifying hook that's returned, the `sort` function that's returned will
-   * sort all children according to their value from the `getValue` argument you pass in.
-   *
-   * If you want to perform some re-ordering operation that's *not* a sort, you can manually
-   * re-map each child's position using `mangleMap` and `demangleMap`, which convert between
-   * sorted and unsorted index positions.
-   *
-   * Again, unlike some other hooks, **these children must be direct descendants**. This is because
-   * the prop-modifying hook inspects the given children, then re-creates them with new `key`s.
-   * Because keys are given special treatment and a child has no way of modifying its own key
-   * there's no other time or place this can happen other than exactly within the parent component's render function.
+   * Besides just overriding `focusSelf` for `useRovingTabIndex`, this also overrides `getSortValue` to return the sort value of the current cell.
    *
    * @compositeParams
    */
-  function useSortableChildren({ rearrangeableChildrenParameters, sortableChildrenParameters: { compare: userCompare }, managedChildrenReturn: { getChildren } }) {
-      const getCompare = useStableGetter(userCompare ?? defaultCompare);
-      const { rearrangeableChildrenReturn } = useRearrangeableChildren({ rearrangeableChildrenParameters, managedChildrenReturn: { getChildren } });
-      const { rearrange } = rearrangeableChildrenReturn;
-      // The actual sort function.
-      const sort = T$2((direction) => {
-          const managedRows = getChildren();
-          const compare = getCompare();
-          const originalRows = managedRows.arraySlice();
-          const sortedRows = compare ? originalRows.sort((lhsRow, rhsRow) => {
-              const lhsValue = lhsRow;
-              const rhsValue = rhsRow;
-              const result = compare(lhsValue, rhsValue);
-              if (direction[0] == "d")
-                  return -result;
-              return result;
-          }) : managedRows.arraySlice();
-          return rearrange(originalRows, sortedRows);
-      }, [ /* Must remain stable */]);
+  function useGridNavigationSingleSelectionSortableRow({ context: ctxIncoming, info: { index, unselectable, untabbable, ...void2 }, linearNavigationParameters, managedChildrenReturn, refElementReturn, rovingTabIndexParameters, textContentParameters, typeaheadNavigationParameters, gridNavigationSingleSelectionSortableRowParameters: { getSortableColumnIndex: getSortableColumnIndexUnstable, ...void5 }, ...void1 }) {
+      monitorCallCount(useGridNavigationSingleSelectionSortableRow);
+      const getSortableColumnIndex = useStableCallback(getSortableColumnIndexUnstable);
+      const getSortValue = T$2(() => {
+          let rows = managedChildrenReturn.getChildren();
+          let columnIndex = getSortableColumnIndex() || 0;
+          let cell = rows.getAt(columnIndex);
+          return cell?.getSortValue();
+      }, []);
+      const { info: { getLocallyTabbable, getSelected, selected, setLocalSelected, setLocallyTabbable, focusSelf, ...void4 }, context: ctxOutgoing, hasCurrentFocusParameters, linearNavigationReturn, managedChildrenParameters, pressParameters, props, rovingTabIndexChildReturn, rovingTabIndexReturn, singleSelectionChildReturn, textContentReturn, typeaheadNavigationReturn, ...void3 } = useGridNavigationSingleSelectionRow({
+          context: ctxIncoming,
+          info: { index, unselectable, untabbable },
+          linearNavigationParameters,
+          managedChildrenReturn,
+          refElementReturn,
+          rovingTabIndexParameters,
+          textContentParameters,
+          typeaheadNavigationParameters
+      });
       return {
-          sortableChildrenReturn: { sort },
-          rearrangeableChildrenReturn
+          info: { getLocallyTabbable, getSelected, selected, setLocallyTabbable, setLocalSelected, getSortValue, focusSelf },
+          context: ctxOutgoing,
+          hasCurrentFocusParameters,
+          linearNavigationReturn,
+          managedChildrenParameters,
+          pressParameters,
+          props,
+          rovingTabIndexChildReturn,
+          rovingTabIndexReturn,
+          singleSelectionChildReturn,
+          textContentReturn,
+          typeaheadNavigationReturn
       };
   }
-  function defaultCompare(lhs, rhs) {
-      return compare1(lhs?.getSortValue(), rhs?.getSortValue());
-      function compare1(lhs, rhs) {
-          if (lhs == null || rhs == null) {
-              if (lhs == null)
-                  return -1;
-              if (rhs == null)
-                  return 1;
-          }
-          return lhs - rhs;
-      }
-  }
-
-  function useGridNavigationSingleSelectionSortable({ rearrangeableChildrenParameters, sortableChildrenParameters, linearNavigationParameters, managedChildrenReturn, ...gridNavigationSingleSelectionParameters }) {
-      const { ...scr } = useSortableChildren({ rearrangeableChildrenParameters, sortableChildrenParameters, managedChildrenReturn });
-      const { rearrangeableChildrenReturn: { indexDemangler, indexMangler } } = scr;
-      const gnr = useGridNavigationSingleSelection({
-          linearNavigationParameters: { indexDemangler, indexMangler, ...linearNavigationParameters },
-          managedChildrenReturn,
-          ...gridNavigationSingleSelectionParameters
+  /**
+   * @compositeParams
+   */
+  function useGridNavigationSingleSelectionSortableCell({ context, gridNavigationCellParameters, info: { index, untabbable, ...void2 }, refElementReturn, textContentParameters, ...void1 }) {
+      monitorCallCount(useGridNavigationSingleSelectionSortableCell);
+      return useGridNavigationSingleSelectionCell({
+          context,
+          info: { index, untabbable },
+          gridNavigationCellParameters,
+          refElementReturn,
+          textContentParameters,
       });
-      return { ...gnr, ...scr, };
   }
 
-  function useListNavigationSingleSelection({ linearNavigationParameters, rovingTabIndexParameters, typeaheadNavigationParameters, singleSelectionParameters, managedChildrenReturn, refElementReturn, paginatedChildrenParameters, ...void3 }) {
-      const { context: contextLN, propsParent, propsStableParentOrChild, rovingTabIndexReturn, ...retLN } = useListNavigation({ linearNavigationParameters, rovingTabIndexParameters, paginatedChildrenParameters, typeaheadNavigationParameters, managedChildrenReturn, refElementReturn });
+  /**
+   * Combines {@link useListNavigation} and {@link useSingleSelection}.
+   *
+   * @remarks The single-selection behavior is optional, if you decide you need multi-selection instead within the same component.
+   *
+   * @hasChild {@link useListNavigationSingleSelectionChild}
+   *
+   * @compositeParams
+   */
+  function useListNavigationSingleSelection({ linearNavigationParameters, rovingTabIndexParameters, typeaheadNavigationParameters, singleSelectionParameters, managedChildrenReturn, refElementReturn, paginatedChildrenParameters, rearrangeableChildrenReturn, ...void3 }) {
+      monitorCallCount(useListNavigationSingleSelection);
+      const { context: contextLN, propsParent, propsStableParentOrChild, rovingTabIndexReturn, ...retLN } = useListNavigation({ linearNavigationParameters, rovingTabIndexParameters, paginatedChildrenParameters, typeaheadNavigationParameters, managedChildrenReturn, refElementReturn, rearrangeableChildrenReturn });
       const { context: contextSS, ...retSS } = useSingleSelection({ rovingTabIndexReturn, managedChildrenReturn, singleSelectionParameters });
       return {
           rovingTabIndexReturn,
@@ -4721,17 +5084,21 @@
               ...contextLN,
               ...contextSS
           }),
-          propsParent,
-          propsStableParentOrChild
+          propsStableParentOrChild: propsStableParentOrChild,
+          propsParent: propsParent,
       };
   }
-  function useListNavigationSingleSelectionChild({ info, context, refElementReturn, textContentParameters, ...void1 }) {
+  /**
+   * @compositeParams
+   */
+  function useListNavigationSingleSelectionChild({ info: { index, untabbable, unselectable, ...void2 }, context, refElementReturn, textContentParameters, ...void1 }) {
+      monitorCallCount(useListNavigationSingleSelectionChild);
       const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic2, ...void3 }, info: infoSS, singleSelectionChildReturn, props: propsSS, pressParameters: { onPressSync }, ...void9 } = useSingleSelectionChild({
-          info,
+          info: { index, unselectable },
           context,
       });
       const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1, ...void6 }, pressParameters: { excludeSpace }, rovingTabIndexChildReturn, textContentReturn, props: propsLN, info: infoLN, ...void8 } = useListNavigationChild({
-          info,
+          info: { index, untabbable },
           context,
           refElementReturn,
           textContentParameters,
@@ -4753,10 +5120,19 @@
       };
   }
 
+  /**
+   * Combines {@link useListNavigation}, {@link useSingleSelection}, and {@link useSortableChildren}.
+   *
+   * @remarks This is a separate hook because {@link useSortableChildren} imposes unique requirements to the structure of your `children`.
+   *
+   * @hasChild {@link useListNavigationSingleSelectionSortableChild}
+   *
+   * @compositeParams
+   */
   function useListNavigationSingleSelectionSortable({ linearNavigationParameters, rovingTabIndexParameters, typeaheadNavigationParameters, singleSelectionParameters, managedChildrenReturn, rearrangeableChildrenParameters, sortableChildrenParameters, refElementReturn, paginatedChildrenParameters, ...void3 }) {
+      monitorCallCount(useListNavigationSingleSelectionSortable);
       const { rearrangeableChildrenReturn, sortableChildrenReturn, ...void1 } = useSortableChildren({ rearrangeableChildrenParameters, sortableChildrenParameters, managedChildrenReturn });
-      const { indexDemangler, indexMangler } = rearrangeableChildrenReturn;
-      const { propsParent, propsStableParentOrChild, context, ...restLN } = useListNavigationSingleSelection({ linearNavigationParameters: { ...linearNavigationParameters, indexDemangler, indexMangler }, rovingTabIndexParameters, typeaheadNavigationParameters, singleSelectionParameters, managedChildrenReturn, refElementReturn, paginatedChildrenParameters });
+      const { propsParent, propsStableParentOrChild, context, ...restLN } = useListNavigationSingleSelection({ linearNavigationParameters, rearrangeableChildrenReturn, rovingTabIndexParameters, typeaheadNavigationParameters, singleSelectionParameters, managedChildrenReturn, refElementReturn, paginatedChildrenParameters });
       return {
           context,
           propsParent,
@@ -4803,6 +5179,7 @@
    * @compositeParams
    */
   function useRefElement(args) {
+      monitorCallCount(useRefElement);
       const nonElementWarn = _$1(false);
       if (nonElementWarn.current) {
           nonElementWarn.current = false;
@@ -4827,7 +5204,7 @@
       }, []);
       // Let us store the actual (reference to) the element we capture
       const [getElement, setElement] = usePassiveState(handler, returnNull, runImmediately);
-      const propsStable = _$1({ ref: setElement });
+      const propsStable = _$1(useTagProps({ ref: setElement }, "data-use-ref-element"));
       // Return both the element and the hook that modifies 
       // the props and allows us to actually find the element
       return {
@@ -4914,11 +5291,12 @@
    *
    * @compositeParams
    */
-  function useActiveElement({ activeElementParameters: { onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, getDocument, getWindow } }) {
-      useEnsureStability("useActiveElement", onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, getDocument, getWindow);
+  function useActiveElement({ activeElementParameters: { onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, getDocument } }) {
+      monitorCallCount(useActiveElement);
+      useEnsureStability("useActiveElement", onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, getDocument);
       p$2(() => {
           const document = getDocument();
-          const window = (getWindow?.(document) ?? document?.defaultView);
+          const window = (document?.defaultView);
           if ((activeElementUpdaters.get(window)?.size ?? 0) === 0) {
               document?.addEventListener("focusin", focusin, { passive: true });
               document?.addEventListener("focusout", focusout, { passive: true });
@@ -4954,24 +5332,59 @@
    *
    * @compositeParams
    */
-  function useDismiss({ dismissParameters: { open: globalOpen, onClose: globalOnClose, closeOnBackdrop, closeOnEscape, closeOnLostFocus }, escapeDismissParameters: { getWindow, parentDepth } }) {
+  function useDismiss({ dismissParameters: { dismissActive, onDismiss, ...void3 }, backdropDismissParameters: { dismissBackdropActive, onDismissBackdrop, ...void6 }, lostFocusDismissParameters: { dismissLostFocusActive, onDismissLostFocus, ...void7 }, escapeDismissParameters: { dismissEscapeActive, onDismissEscape, parentDepth, ...void2 }, activeElementParameters: { getDocument, onActiveElementChange, onLastActiveElementChange: olaec1, onWindowFocusedChange, ...void5 }, ...void4 }) {
+      monitorCallCount(useDismiss);
       const { refElementReturn: refElementSourceReturn, propsStable: propsStableSource } = useRefElement({ refElementParameters: {} });
       const { refElementReturn: refElementPopupReturn, propsStable: propsStablePopup } = useRefElement({ refElementParameters: {} });
-      const onCloseBackdrop = T$2(() => { return globalOnClose?.("backdrop"); }, [globalOnClose]);
-      const onCloseEscape = T$2(() => { return globalOnClose?.("escape"); }, [globalOnClose]);
-      const onCloseFocus = T$2(() => { return globalOnClose?.("lost-focus"); }, [globalOnClose]);
-      useBackdropDismiss({ backdropDismissParameters: { onDismiss: onCloseBackdrop, active: (closeOnBackdrop && globalOpen) }, refElementPopupReturn });
-      useEscapeDismiss({ escapeDismissParameters: { getWindow, onDismiss: onCloseEscape, active: (closeOnEscape && globalOpen), parentDepth }, refElementPopupReturn });
-      const { activeElementParameters } = useLostFocusDismiss({ lostFocusDismissParameters: { onDismiss: onCloseFocus, active: (closeOnLostFocus && globalOpen) }, refElementPopupReturn, refElementSourceReturn });
-      const getDocument = T$2(() => {
-          return getWindow().document;
-      }, [getWindow]);
-      useActiveElement({ activeElementParameters: { ...activeElementParameters, getWindow, getDocument } });
+      //const onCloseBackdrop = useCallback(() => { return globalOnClose?.("backdrop" as Listeners); }, [globalOnClose]);
+      //const onCloseEscape = useCallback(() => { return globalOnClose?.("escape" as Listeners); }, [globalOnClose]);
+      //const onCloseFocus = useCallback(() => { return globalOnClose?.("lost-focus" as Listeners); }, [globalOnClose]);
+      useBackdropDismiss({
+          refElementPopupReturn,
+          backdropDismissParameters: {
+              dismissBackdropActive: (dismissBackdropActive && dismissActive),
+              onDismissBackdrop: useStableCallback((e) => {
+                  onDismissBackdrop?.(e);
+                  onDismiss(e, "backdrop");
+              }),
+          },
+      });
+      useEscapeDismiss({
+          refElementPopupReturn,
+          escapeDismissParameters: {
+              dismissEscapeActive: (dismissEscapeActive && dismissActive),
+              getDocument,
+              onDismissEscape: useStableCallback((e) => {
+                  onDismissEscape?.(e);
+                  onDismiss(e, "escape");
+              }),
+              parentDepth,
+          },
+      });
+      const { activeElementParameters: { onLastActiveElementChange: olaec2, ...void1 } } = useLostFocusDismiss({
+          lostFocusDismissParameters: {
+              dismissLostFocusActive: (dismissLostFocusActive && dismissActive),
+              onDismissLostFocus: useStableCallback((e) => {
+                  onDismissLostFocus?.(e);
+                  onDismiss(e, "lost-focus");
+              }),
+          },
+          refElementPopupReturn,
+          refElementSourceReturn
+      });
+      useActiveElement({
+          activeElementParameters: {
+              onLastActiveElementChange: useStableCallback((a, b) => { olaec2?.(a, b); olaec1?.(a, b); }),
+              onActiveElementChange,
+              onWindowFocusedChange,
+              getDocument
+          }
+      });
       return {
           refElementSourceReturn,
           refElementPopupReturn,
-          propsStableSource,
-          propsStablePopup
+          propsStableSource: propsStableSource,
+          propsStablePopup: propsStablePopup
       };
   }
 
@@ -6155,7 +6568,7 @@
     }
   })();
 
-  function r$1(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e))for(t=0;t<e.length;t++)e[t]&&(f=r$1(e[t]))&&(n&&(n+=" "),n+=f);else for(t in e)e[t]&&(n&&(n+=" "),n+=t);return n}function clsx(){for(var e,t,f=0,n="";f<arguments.length;)(e=arguments[f++])&&(t=r$1(e))&&(n&&(n+=" "),n+=t);return n}
+  function r$2(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e))for(t=0;t<e.length;t++)e[t]&&(f=r$2(e[t]))&&(n&&(n+=" "),n+=f);else for(t in e)e[t]&&(n&&(n+=" "),n+=t);return n}function clsx$1(){for(var e,t,f=0,n="";f<arguments.length;)(e=arguments[f++])&&(t=r$2(e))&&(n&&(n+=" "),n+=t);return n}
 
   function getDocument(element) { return (element?.ownerDocument ?? document ?? window.document ?? globalThis.document); }
 
@@ -6169,13 +6582,17 @@
    *
    * @param target
    */
-  function useBlockingElement(enabled, getTarget) {
+  function useBlockingElement({ activeElementParameters: { getDocument, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, ...void3 }, blockingElementParameters: { enabled, getTarget, ...void1 }, ...void2 }) {
+      monitorCallCount(useBlockingElement);
       const stableGetTarget = useStableCallback(getTarget);
-      const getDocument = useStableCallback(() => (getTarget()?.ownerDocument ?? globalThis.document));
+      //const getDocument = useStableCallback(() => (getTarget()?.ownerDocument ?? globalThis.document));
       useActiveElement({
           activeElementParameters: {
               getDocument,
-              onLastActiveElementChange: useStableCallback((e) => {
+              onActiveElementChange,
+              onWindowFocusedChange,
+              onLastActiveElementChange: useStableCallback((e, prev, reason) => {
+                  onLastActiveElementChange?.(e, prev, reason);
                   if (e) {
                       if (enabled)
                           setLastActiveWhenOpen(e);
@@ -6215,13 +6632,15 @@
   }
 
   /**
-   * Allows you to move focus to an isolated area of the page and restore it when finished.
+   * Allows you to move focus to an isolated area of the page, restore it when finished, and **optionally trap it there** so that you can't tab out of it.
    *
-   * @remarks By default, this implements a focus trap using the
+   * @remarks By default, this implements a focus trap using the Blocking Elements...uh...[proposal](https://github.com/whatwg/html/issues/897)?
+   * Not that it really looks like it's going anywhere, but until something better comes along, [the polyfill](#https://github.com/PolymerLabs/blocking-elements) has been working pretty great.
    *
    * @compositeParams
    */
-  function useFocusTrap({ focusTrapParameters: { onlyMoveFocus, trapActive, focusPopup: focusSelfUnstable, focusOpener: focusOpenerUnstable }, refElementReturn }) {
+  function useFocusTrap({ focusTrapParameters: { onlyMoveFocus, trapActive, focusPopup: focusSelfUnstable, focusOpener: focusOpenerUnstable }, activeElementParameters, refElementReturn }) {
+      monitorCallCount(useFocusTrap);
       const focusSelf = useStableCallback(focusSelfUnstable);
       const focusOpener = useStableCallback(focusOpenerUnstable);
       p$2(() => {
@@ -6249,9 +6668,15 @@
           }
       }, [trapActive]);
       const { getElement } = refElementReturn;
-      const { getTop, getLastActiveWhenClosed, getLastActiveWhenOpen } = useBlockingElement(trapActive && !onlyMoveFocus, getElement);
+      const { getTop, getLastActiveWhenClosed, getLastActiveWhenOpen } = useBlockingElement({
+          activeElementParameters,
+          blockingElementParameters: {
+              enabled: trapActive && !onlyMoveFocus,
+              getTarget: getElement
+          }
+      });
       return {
-          props: { "aria-modal": trapActive ? "true" : undefined }
+          props: useTagProps({ "aria-modal": trapActive ? "true" : undefined }, "data-focus-trap")
       };
   }
   /**
@@ -6279,7 +6704,8 @@
    *
    * @hasChild {@link usePaginatedChild}
    */
-  function usePaginatedChildren({ managedChildrenReturn: { getChildren }, linearNavigationParameters: { indexDemangler }, paginatedChildrenParameters: { paginationMax, paginationMin }, rovingTabIndexReturn: { getTabbableIndex, setTabbableIndex }, refElementReturn: { getElement } }) {
+  function usePaginatedChildren({ managedChildrenReturn: { getChildren }, rearrangeableChildrenReturn: { indexDemangler }, paginatedChildrenParameters: { paginationMax, paginationMin }, rovingTabIndexReturn: { getTabbableIndex, setTabbableIndex }, refElementReturn: { getElement } }) {
+      monitorCallCount(usePaginatedChildren);
       const [childCount, setChildCount] = useState(null);
       const parentIsPaginated = (paginationMin != null || paginationMax != null);
       const lastPagination = _$1({ paginationMax: null, paginationMin: null });
@@ -6353,10 +6779,11 @@
    * @compositeParams
    */
   function usePaginatedChild({ info: { index }, context: { paginatedChildContext: { parentIsPaginated, getDefaultPaginationVisible } } }) {
+      monitorCallCount(usePaginatedChild);
       const [childCountIfPaginated, setChildCountIfPaginated] = useState(null);
       const [paginatedVisible, setPaginatedVisible] = useState(parentIsPaginated ? getDefaultPaginationVisible(index) : true);
       return {
-          props: !parentIsPaginated ? {} : { "aria-setsize": childCountIfPaginated ?? undefined, "aria-posinset": (index + 1) },
+          props: useTagProps(!parentIsPaginated ? {} : { "aria-setsize": childCountIfPaginated ?? undefined, "aria-posinset": (index + 1) }, "data-paginated-children-child"),
           paginatedChildReturn: { /*paginatedVisible,*/ parentIsPaginated, hideBecausePaginated: parentIsPaginated ? !paginatedVisible : false },
           info: {
               setPaginationVisible: setPaginatedVisible,
@@ -6376,6 +6803,7 @@
    * @hasChild {@link useStaggeredChild}
    */
   function useStaggeredChildren({ managedChildrenReturn: { getChildren }, staggeredChildrenParameters: { staggered } }) {
+      monitorCallCount(useStaggeredChildren);
       // By default, when a child mounts, we tell the next child to mount and simply repeat.
       // If a child is missing, however, it will break that chain.
       // To guard against that, we also wait for 50ms, and if it hasn't loaded by then, we just continue as if it did.
@@ -6471,6 +6899,7 @@
    * @compositeParams
    */
   function useStaggeredChild({ info: { index }, context: { staggeredChildContext: { parentIsStaggered, childCallsThisToTellTheParentTheHighestIndex, getDefaultStaggeredVisible, childCallsThisToTellTheParentToMountTheNextOne } } }) {
+      monitorCallCount(useStaggeredChild);
       const [staggeredVisible, setStaggeredVisible] = useState(getDefaultStaggeredVisible(index));
       y$2(() => {
           childCallsThisToTellTheParentTheHighestIndex(index);
@@ -6480,7 +6909,7 @@
               childCallsThisToTellTheParentToMountTheNextOne(index);
       }, [index, (parentIsStaggered && staggeredVisible)]);
       return {
-          props: !parentIsStaggered ? {} : { "aria-busy": (!staggeredVisible).toString() },
+          props: useTagProps(!parentIsStaggered ? {} : { "aria-busy": (!staggeredVisible).toString() }, "data-staggered-children-child"),
           staggeredChildReturn: { parentIsStaggered, hideBecauseStaggered: parentIsStaggered ? !staggeredVisible : false },
           info: { setStaggeredVisible: setStaggeredVisible, }
       };
@@ -6498,6 +6927,7 @@
    * @hasChild {@link useChildrenHaveFocusChild}
    */
   function useChildrenHaveFocus(args) {
+      monitorCallCount(useChildrenHaveFocus);
       const { childrenHaveFocusParameters: { onCompositeFocusChange } } = args;
       const [getAnyFocused, setAnyFocused] = usePassiveState(onCompositeFocusChange, returnFalse, runImmediately);
       const [_getFocusCount, setFocusCount] = usePassiveState(useStableCallback((anyFocused, anyPreviouslyFocused, e) => {
@@ -6513,6 +6943,7 @@
    * @compositeParams
    */
   function useChildrenHaveFocusChild({ context: { childrenHaveFocusChildContext: { setFocusCount } } }) {
+      monitorCallCount(useChildrenHaveFocusChild);
       return {
           hasCurrentFocusParameters: {
               onCurrentFocusedInnerChanged: useStableCallback((focused, prev, e) => {
@@ -6535,6 +6966,7 @@
    * @compositeParams
    */
   function useHasCurrentFocus(args) {
+      monitorCallCount(useHasCurrentFocus);
       const { hasCurrentFocusParameters: { onCurrentFocusedChanged, onCurrentFocusedInnerChanged }, refElementReturn: { getElement } } = args;
       useEnsureStability("useHasCurrentFocus", onCurrentFocusedChanged, onCurrentFocusedInnerChanged, getElement);
       const [getFocused, setFocused] = usePassiveState(onCurrentFocusedChanged, returnFalse, runImmediately);
@@ -6557,8 +6989,8 @@
           };
       }, []);
       const propsStable = _$1({
-          onfocusin: onFocusIn,
-          onfocusout: onFocusOut
+          [onfocusin]: onFocusIn,
+          [onfocusout]: onFocusOut
       });
       p$2(() => {
           return () => {
@@ -6583,11 +7015,12 @@
    * @hasChild {@link useCompleteGridNavigationRow}
    * @hasChild {@link useCompleteGridNavigationCell}
    */
-  function useCompleteGridNavigation({ gridNavigationParameters, linearNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, typeaheadNavigationParameters, sortableChildrenParameters, rearrangeableChildrenParameters, paginatedChildrenParameters, staggeredChildrenParameters, ...void1 }) {
+  function useCompleteGridNavigation({ gridNavigationParameters, linearNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, typeaheadNavigationParameters, sortableChildrenParameters, rearrangeableChildrenParameters, paginatedChildrenParameters, staggeredChildrenParameters, refElementParameters, ...void1 }) {
+      monitorCallCount(useCompleteGridNavigation);
       const getChildren = T$2(() => managedChildrenReturn.getChildren(), []);
       const getLowestChildIndex = T$2(() => getChildren().getLowestIndex(), []);
       const getHighestChildIndex = T$2(() => getChildren().getHighestIndex(), []);
-      const isValid = T$2((i) => {
+      const isValidForNavigation = T$2((i) => {
           const child = getChildren().getAt(i);
           if (child == null)
               return false;
@@ -6595,14 +7028,14 @@
               return false;
           return true;
       }, []);
-      const { refElementReturn } = useRefElement({});
-      const { childrenHaveFocusParameters, managedChildrenParameters, context: { gridNavigationRowContext, rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext }, rearrangeableChildrenReturn, propsParent, propsStableParentOrChild, rovingTabIndexReturn, ...gridNavigationSingleSelectionReturn } = useGridNavigationSingleSelectionSortable({
+      const { refElementReturn, propsStable, ...void2 } = useRefElement({ refElementParameters });
+      const { childrenHaveFocusParameters, managedChildrenParameters, context: { gridNavigationRowContext, rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext }, rearrangeableChildrenReturn, propsParent, propsStableParentOrChild, rovingTabIndexReturn, linearNavigationReturn, singleSelectionReturn, sortableChildrenReturn, typeaheadNavigationReturn, ...void3 } = useGridNavigationSingleSelectionSortable({
           gridNavigationParameters,
-          linearNavigationParameters: { getLowestIndex: getLowestChildIndex, getHighestIndex: getHighestChildIndex, isValid, ...linearNavigationParameters },
+          linearNavigationParameters: { getLowestIndex: getLowestChildIndex, getHighestIndex: getHighestChildIndex, isValidForLinearNavigation: isValidForNavigation, ...linearNavigationParameters },
           managedChildrenReturn: { getChildren },
           rovingTabIndexParameters: { initiallyTabbedIndex: singleSelectionParameters.initiallySelectedIndex, untabbableBehavior: "focus-parent", ...rovingTabIndexParameters },
           singleSelectionParameters,
-          typeaheadNavigationParameters: { isValid, ...typeaheadNavigationParameters },
+          typeaheadNavigationParameters: { isValidForTypeaheadNavigation: isValidForNavigation, ...typeaheadNavigationParameters },
           paginatedChildrenParameters,
           refElementReturn,
           rearrangeableChildrenParameters: {
@@ -6615,9 +7048,8 @@
       const { context: { childrenHaveFocusChildContext }, childrenHaveFocusReturn } = useChildrenHaveFocus({ childrenHaveFocusParameters });
       const mcr = useManagedChildren({ managedChildrenParameters: { onChildrenCountChange: useStableCallback(c => onChildrenCountChange?.(c)), ...managedChildrenParameters } });
       const { context: { managedChildContext }, managedChildrenReturn } = mcr; // TODO: This is split into two lines for TypeScript reasons? Can this be fixed? E.G. like vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv  why doesn't that work?
-      const { paginatedChildrenReturn, paginatedChildrenReturn: { refreshPagination }, managedChildrenParameters: { onChildrenCountChange }, context: { paginatedChildContext } } = usePaginatedChildren({ refElementReturn, managedChildrenReturn, paginatedChildrenParameters, rovingTabIndexReturn, linearNavigationParameters: { indexDemangler } });
+      const { paginatedChildrenReturn, paginatedChildrenReturn: { refreshPagination }, managedChildrenParameters: { onChildrenCountChange }, context: { paginatedChildContext } } = usePaginatedChildren({ refElementReturn, managedChildrenReturn, paginatedChildrenParameters, rovingTabIndexReturn, rearrangeableChildrenReturn: { indexDemangler } });
       const { context: { staggeredChildContext }, staggeredChildrenReturn } = useStaggeredChildren({ managedChildrenReturn, staggeredChildrenParameters });
-      //const props = useMergedProps(linearNavigationReturn.propsStable, typeaheadNavigationReturn.propsStable);
       const context = useMemoObject({
           singleSelectionContext,
           managedChildContext,
@@ -6630,29 +7062,32 @@
       });
       return {
           context,
-          props: useMergedProps(propsParent, propsStableParentOrChild),
+          props: useMergedProps(propsParent, propsStable, propsStableParentOrChild),
           managedChildrenReturn,
           rearrangeableChildrenReturn,
           staggeredChildrenReturn,
           rovingTabIndexReturn,
           childrenHaveFocusReturn,
           paginatedChildrenReturn,
-          ...gridNavigationSingleSelectionReturn,
+          linearNavigationReturn,
+          singleSelectionReturn,
+          sortableChildrenReturn,
+          typeaheadNavigationReturn
       };
   }
   /**
    * @compositeParams
    */
-  function useCompleteGridNavigationRow({ info, context: contextIncomingForRowAsChildOfTable, textContentParameters, linearNavigationParameters, rovingTabIndexParameters, typeaheadNavigationParameters, ...void1 }) {
-      const { info: infoPaginatedChild, paginatedChildReturn, props: paginationProps } = usePaginatedChild({ info, context: contextIncomingForRowAsChildOfTable });
-      const { info: infoStaggeredChild, // { setParentIsStaggered, setStaggeredVisible },
-      staggeredChildReturn, props: staggeredProps } = useStaggeredChild({ info, context: contextIncomingForRowAsChildOfTable });
-      info.untabbable ||= (paginatedChildReturn.hideBecausePaginated || staggeredChildReturn.hideBecauseStaggered);
-      info.unselectable ||= info.untabbable;
+  function useCompleteGridNavigationRow({ info: { index, unselectable, untabbable, ...customUserInfo }, context: contextIncomingForRowAsChildOfTable, textContentParameters, linearNavigationParameters, rovingTabIndexParameters, typeaheadNavigationParameters, gridNavigationSingleSelectionSortableRowParameters, hasCurrentFocusParameters: { onCurrentFocusedChanged: ocfc1, onCurrentFocusedInnerChanged: ocfic3, ...void5 }, ...void1 }) {
+      monitorCallCount(useCompleteGridNavigationRow);
+      const { info: infoPaginatedChild, paginatedChildReturn, props: paginationProps, ...void7 } = usePaginatedChild({ info: { index }, context: contextIncomingForRowAsChildOfTable });
+      const { info: infoStaggeredChild, staggeredChildReturn, props: staggeredProps, ...void8 } = useStaggeredChild({ info: { index }, context: contextIncomingForRowAsChildOfTable });
+      untabbable ||= (paginatedChildReturn.hideBecausePaginated || staggeredChildReturn.hideBecauseStaggered);
+      unselectable ||= untabbable;
       const getChildren = T$2(() => managedChildrenReturn.getChildren(), []);
       const getHighestChildIndex = T$2(() => getChildren().getHighestIndex(), []);
       const getLowestChildIndex = T$2(() => getChildren().getLowestIndex(), []);
-      const isValid = T$2((i) => {
+      const isValidForNavigation = T$2((i) => {
           const child = getChildren().getAt(i);
           if (child == null)
               return false;
@@ -6660,35 +7095,45 @@
               return false;
           return true;
       }, []);
-      const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
-      const r = useGridNavigationSingleSelectionRow({
+      const { refElementReturn, propsStable, ...void6 } = useRefElement({ refElementParameters: {} });
+      const r = useGridNavigationSingleSelectionSortableRow({
           rovingTabIndexParameters,
-          typeaheadNavigationParameters: { isValid, ...typeaheadNavigationParameters },
-          linearNavigationParameters: { isValid, getHighestIndex: getHighestChildIndex, getLowestIndex: getLowestChildIndex, pageNavigationSize: 0, indexDemangler: identity, indexMangler: identity, ...linearNavigationParameters },
+          typeaheadNavigationParameters: { isValidForTypeaheadNavigation: isValidForNavigation, ...typeaheadNavigationParameters },
+          linearNavigationParameters: { isValidForLinearNavigation: isValidForNavigation, getHighestIndex: getHighestChildIndex, getLowestIndex: getLowestChildIndex, ...linearNavigationParameters },
           managedChildrenReturn: { getChildren },
           refElementReturn,
           context: contextIncomingForRowAsChildOfTable,
-          info,
-          textContentParameters
+          info: { index, unselectable, untabbable },
+          textContentParameters,
+          gridNavigationSingleSelectionSortableRowParameters,
       });
       const { linearNavigationReturn, managedChildrenParameters, pressParameters, rovingTabIndexChildReturn, rovingTabIndexReturn, singleSelectionChildReturn, textContentReturn, typeaheadNavigationReturn, context: contextGNR, info: infoRowReturn, props: p3, hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1, ...void3 }, ...void2 } = r;
       const { context: contextMC, managedChildrenReturn } = useManagedChildren({ managedChildrenParameters });
       const completeInfo = {
           getElement: refElementReturn.getElement,
-          ...info,
+          index,
+          unselectable,
+          untabbable,
           ...infoRowReturn,
           ...infoPaginatedChild,
-          ...infoStaggeredChild
+          ...infoStaggeredChild,
       };
-      const { managedChildReturn } = useManagedChild({ context: contextIncomingForRowAsChildOfTable, info: completeInfo });
+      const { managedChildReturn, ...void4 } = useManagedChild({ context: contextIncomingForRowAsChildOfTable, info: { ...completeInfo, ...customUserInfo } });
       const context = useMemoObject({
           ...contextGNR,
           ...contextMC,
-          //completeGridNavigationCellContext: { excludeSpace }
       });
-      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic2, ...void4 } } = useChildrenHaveFocusChild({ context: contextIncomingForRowAsChildOfTable });
-      //const { refElementReturn } = useRefElement<RowElement>({ refElementParameters: {} })
-      const { hasCurrentFocusReturn } = useHasCurrentFocus({ refElementReturn, hasCurrentFocusParameters: { onCurrentFocusedChanged: useStableCallback((a, b) => { ocfic1?.(a, b); ocfic2?.(a, b); }) } });
+      const { hasCurrentFocusReturn } = useHasCurrentFocus({
+          refElementReturn,
+          hasCurrentFocusParameters: {
+              onCurrentFocusedChanged: ocfc1,
+              onCurrentFocusedInnerChanged: useStableCallback((focused, prevFocused) => {
+                  // Call grid navigation's focus change
+                  ocfic1?.(focused, prevFocused);
+                  ocfic3?.(focused, prevFocused);
+              }),
+          }
+      });
       const props = useMergedProps(propsStable, p3, hasCurrentFocusReturn.propsStable, paginationProps, staggeredProps);
       return {
           pressParameters,
@@ -6710,24 +7155,33 @@
   /**
    * @compositeParams
    */
-  function useCompleteGridNavigationCell({ gridNavigationCellParameters, context: { gridNavigationCellContext, managedChildContext, rovingTabIndexContext, typeaheadNavigationContext }, textContentParameters, info, ...void1 }) {
+  function useCompleteGridNavigationCell({ gridNavigationCellParameters, context, textContentParameters, info: { focusSelf, index, untabbable, getSortValue, ...customUserInfo }, ...void1 }) {
+      monitorCallCount(useCompleteGridNavigationCell);
       const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
-      const { hasCurrentFocusParameters, rovingTabIndexChildReturn, textContentReturn, pressParameters: { excludeSpace: es1 }, props: propsRti, info: info2, ...void2 } = useGridNavigationSingleSelectionCell({
+      const { hasCurrentFocusParameters, rovingTabIndexChildReturn, textContentReturn, pressParameters: { excludeSpace: es1 }, props: propsRti, info: info2, ...void2 } = useGridNavigationSingleSelectionSortableCell({
           gridNavigationCellParameters,
-          info,
-          context: { gridNavigationCellContext, rovingTabIndexContext, typeaheadNavigationContext },
+          info: { index, untabbable },
+          context,
           refElementReturn,
           textContentParameters,
       });
-      const { hasCurrentFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, ...hasCurrentFocusParameters }, refElementReturn });
+      const { hasCurrentFocusReturn } = useHasCurrentFocus({
+          hasCurrentFocusParameters: {
+              onCurrentFocusedChanged: null,
+              ...hasCurrentFocusParameters
+          },
+          refElementReturn
+      });
       const baseInfo = {
+          getSortValue,
           getElement: refElementReturn.getElement,
           getLocallyTabbable: rovingTabIndexChildReturn.getTabbable,
           setLocallyTabbable: info2.setLocallyTabbable,
-          tabbable: rovingTabIndexChildReturn.tabbable,
-          ...info
+          focusSelf,
+          index,
+          untabbable
       };
-      const { managedChildReturn } = useManagedChild({ context: { managedChildContext }, info: baseInfo });
+      const { managedChildReturn } = useManagedChild({ context, info: { ...baseInfo, ...customUserInfo } });
       const props = useMergedProps(propsStable, propsRti, hasCurrentFocusReturn.propsStable);
       return {
           props,
@@ -6739,7 +7193,7 @@
           textContentReturn
       };
   }
-  function useCompleteGridNavigationDeclarative({ gridNavigationParameters, linearNavigationParameters, paginatedChildrenParameters, rearrangeableChildrenParameters, rovingTabIndexParameters, singleSelectionDeclarativeParameters, sortableChildrenParameters, staggeredChildrenParameters, typeaheadNavigationParameters, singleSelectionParameters, }) {
+  function useCompleteGridNavigationDeclarative({ gridNavigationParameters, linearNavigationParameters, paginatedChildrenParameters, rearrangeableChildrenParameters, rovingTabIndexParameters, singleSelectionDeclarativeParameters, sortableChildrenParameters, staggeredChildrenParameters, typeaheadNavigationParameters, singleSelectionParameters, refElementParameters, ...void1 }) {
       const ret = useCompleteGridNavigation({
           linearNavigationParameters,
           paginatedChildrenParameters,
@@ -6748,6 +7202,7 @@
           singleSelectionParameters: { initiallySelectedIndex: singleSelectionDeclarativeParameters.selectedIndex, onSelectedIndexChange: useStableCallback((...e) => onSelectedIndexChange?.(...e)), ...singleSelectionParameters },
           sortableChildrenParameters,
           staggeredChildrenParameters,
+          refElementParameters,
           typeaheadNavigationParameters,
           gridNavigationParameters,
       });
@@ -6762,16 +7217,17 @@
    * @remarks Unlike most others, this hook assume's it's the final one--the "outermost" hook in the component--so it uses `useManagedChildren` and wraps everything up nicely,
    * combining event handlers that are used in multiple sub-hooks, collecting all the necessary context-related data, and merging all known DOM props together.
    *
-   *
+   * @hasChild {@link useCompleteListNavigationChild}
    *
    * @compositeParams
    */
-  function useCompleteListNavigation({ linearNavigationParameters, rearrangeableChildrenParameters, sortableChildrenParameters, typeaheadNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, paginatedChildrenParameters, staggeredChildrenParameters, ...completeListNavigationParameters }) {
+  function useCompleteListNavigation({ linearNavigationParameters, rearrangeableChildrenParameters, sortableChildrenParameters, typeaheadNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, paginatedChildrenParameters, staggeredChildrenParameters, refElementParameters, ...void1 }) {
+      monitorCallCount(useCompleteListNavigation);
       const { initiallySelectedIndex } = singleSelectionParameters;
       const getChildren = T$2(() => managedChildrenReturn.getChildren(), []);
       const getLowestIndex = T$2(() => getChildren().getLowestIndex(), []);
       const getHighestIndex = T$2(() => getChildren().getHighestIndex(), []);
-      const isValid = T$2((i) => {
+      const isValidForNavigation = T$2((i) => {
           const child = getChildren().getAt(i);
           if (!child)
               return false;
@@ -6779,11 +7235,11 @@
               return false;
           return true;
       }, []);
-      const { propsStable: propsRef, refElementReturn } = useRefElement({});
-      const { childrenHaveFocusParameters, managedChildrenParameters: { onChildrenMountChange, ...mcp1 }, context: { rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext }, linearNavigationReturn, rovingTabIndexReturn, singleSelectionReturn, typeaheadNavigationReturn, rearrangeableChildrenReturn, sortableChildrenReturn, propsParent, propsStableParentOrChild } = useListNavigationSingleSelectionSortable({
+      const { propsStable: propsRef, refElementReturn } = useRefElement({ refElementParameters });
+      const { childrenHaveFocusParameters, managedChildrenParameters: { onChildrenMountChange, ...mcp1 }, context: { rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext }, linearNavigationReturn, rovingTabIndexReturn, singleSelectionReturn, typeaheadNavigationReturn, rearrangeableChildrenReturn, sortableChildrenReturn, propsParent, propsStableParentOrChild, ...void2 } = useListNavigationSingleSelectionSortable({
           managedChildrenReturn: { getChildren },
-          linearNavigationParameters: { getLowestIndex, getHighestIndex, isValid, ...linearNavigationParameters },
-          typeaheadNavigationParameters: { isValid, ...typeaheadNavigationParameters },
+          linearNavigationParameters: { getLowestIndex, getHighestIndex, isValidForLinearNavigation: isValidForNavigation, ...linearNavigationParameters },
+          typeaheadNavigationParameters: { isValidForTypeaheadNavigation: isValidForNavigation, ...typeaheadNavigationParameters },
           rovingTabIndexParameters: { initiallyTabbedIndex: initiallySelectedIndex, untabbableBehavior: "focus-parent", ...rovingTabIndexParameters },
           singleSelectionParameters,
           rearrangeableChildrenParameters: {
@@ -6792,11 +7248,10 @@
           },
           paginatedChildrenParameters,
           refElementReturn,
-          sortableChildrenParameters,
-          ...completeListNavigationParameters,
+          sortableChildrenParameters
       });
       const { context: { childrenHaveFocusChildContext }, childrenHaveFocusReturn } = useChildrenHaveFocus({ childrenHaveFocusParameters });
-      const { paginatedChildrenReturn, paginatedChildrenReturn: { refreshPagination }, managedChildrenParameters: mcp2, context: { paginatedChildContext } } = usePaginatedChildren({ refElementReturn, managedChildrenReturn: { getChildren: useStableCallback(() => managedChildrenReturn.getChildren()) }, rovingTabIndexReturn, paginatedChildrenParameters, linearNavigationParameters: { indexDemangler: rearrangeableChildrenReturn.indexDemangler } });
+      const { paginatedChildrenReturn, paginatedChildrenReturn: { refreshPagination }, managedChildrenParameters: mcp2, context: { paginatedChildContext } } = usePaginatedChildren({ refElementReturn, managedChildrenReturn: { getChildren: useStableCallback(() => managedChildrenReturn.getChildren()) }, rovingTabIndexReturn, paginatedChildrenParameters, rearrangeableChildrenReturn: { indexDemangler: rearrangeableChildrenReturn.indexDemangler } });
       const { context: { staggeredChildContext }, staggeredChildrenReturn } = useStaggeredChildren({ managedChildrenReturn: { getChildren: useStableCallback(() => managedChildrenReturn.getChildren()) }, staggeredChildrenParameters });
       const mcr = useManagedChildren({
           managedChildrenParameters: {
@@ -6830,46 +7285,55 @@
           childrenHaveFocusReturn
       };
   }
-  function useCompleteListNavigationChild({ info: { index, focusSelf, unselectable, untabbable, getSortValue, ...info }, // The "...info" is empty if M is the same as UCLNCI<ChildElement>.
-  textContentParameters, context: { childrenHaveFocusChildContext, managedChildContext, rovingTabIndexContext, paginatedChildContext, staggeredChildContext, singleSelectionContext, typeaheadNavigationContext }, ...void1 }) {
-      //const { onPressSync, ...pressParameters1 } = (pressParameters ?? {});
-      const { info: mcp3, paginatedChildReturn, paginatedChildReturn: { hideBecausePaginated }, props: paginationProps } = usePaginatedChild({ info: { index }, context: { paginatedChildContext } });
-      const { info: mcp4, staggeredChildReturn, staggeredChildReturn: { hideBecauseStaggered }, props: staggeredProps } = useStaggeredChild({ info: { index }, context: { staggeredChildContext } });
+  /**
+   *
+   * @compositeParams
+   */
+  function useCompleteListNavigationChild({ info: { index, focusSelf, unselectable, untabbable, getSortValue, ...customUserInfo }, // The "...info" is empty if M is the same as UCLNCI<ChildElement>.
+  textContentParameters, refElementParameters, hasCurrentFocusParameters: { onCurrentFocusedChanged, onCurrentFocusedInnerChanged: ocfic3, ...void7 }, context: { managedChildContext, rovingTabIndexContext, paginatedChildContext, staggeredChildContext, singleSelectionContext, typeaheadNavigationContext, childrenHaveFocusChildContext, ...void5 }, ...void1 }) {
+      monitorCallCount(useCompleteListNavigationChild);
+      const { info: infoFromPaginated, paginatedChildReturn, paginatedChildReturn: { hideBecausePaginated }, props: paginationProps } = usePaginatedChild({ info: { index }, context: { paginatedChildContext } });
+      const { info: infoFromStaggered, staggeredChildReturn, staggeredChildReturn: { hideBecauseStaggered }, props: staggeredProps } = useStaggeredChild({ info: { index }, context: { staggeredChildContext } });
+      // TODO: uPC and pSC can't exactly return `{ info: { untabbable: false } }`, or can they...? 
+      // (Really it's more about *should* they -- I don't like this hook doing more than just calling sub-hooks, but where else does this logic take place if not here?)
       untabbable ||= (hideBecausePaginated || hideBecauseStaggered);
       unselectable ||= (hideBecausePaginated || hideBecauseStaggered);
+      // TODO: I feel like this needs stronger justification. It's probably correct but why is it here of all places?
+      // I.E. shouldn't it be in useListNavigationSingleSelection?
       if (untabbable)
           unselectable = true;
-      const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
-      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1 }, pressParameters: { excludeSpace, ...pressParameters2 }, textContentReturn, singleSelectionChildReturn, info: mcp5, rovingTabIndexChildReturn, propsChild, propsTabbable } = useListNavigationSingleSelectionChild({
+      const { refElementReturn, propsStable, ...void6 } = useRefElement({ refElementParameters });
+      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1, ...void3 }, pressParameters: { excludeSpace, onPressSync, ...void2 }, textContentReturn, singleSelectionChildReturn, info: infoFromListNav, rovingTabIndexChildReturn, propsChild, propsTabbable, ...void4 } = useListNavigationSingleSelectionChild({
           info: { index, unselectable, untabbable },
           context: { rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext },
           refElementReturn,
           textContentParameters
       });
-      const onPress = useStableCallback((e) => {
-          if (singleSelectionContext.selectionMode == "activation")
-              singleSelectionContext.onSelectedIndexChange?.(enhanceEvent(e, { selectedIndex: index }));
-      });
-      const onPressSync = (rovingTabIndexContext.untabbable || unselectable || untabbable) ? null : onPress;
-      //const { propsStable: pressRefProps, refElementReturn: pressRefElementReturn } = useRefElement<any>({ refElementParameters: {} })
-      const mcp1 = {
+      const allStandardInfo = {
           index,
           focusSelf,
           getElement: refElementReturn.getElement,
           getSortValue,
           unselectable,
           untabbable,
-          ...mcp4,
-          ...mcp3,
-          ...mcp5,
+          ...infoFromStaggered,
+          ...infoFromPaginated,
+          ...infoFromListNav,
       };
-      const { managedChildReturn } = useManagedChild({ context: { managedChildContext }, info: { ...mcp1, ...info } });
+      const { managedChildReturn } = useManagedChild({ context: { managedChildContext }, info: { ...allStandardInfo, ...customUserInfo } });
       const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic2 } } = useChildrenHaveFocusChild({ context: { childrenHaveFocusChildContext } });
       const onCurrentFocusedInnerChanged = useStableCallback((focused, prev, e) => {
           ocfic1?.(focused, prev, e);
           ocfic2?.(focused, prev, e);
+          ocfic3?.(focused, prev, e);
       });
-      const { hasCurrentFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedInnerChanged, onCurrentFocusedChanged: null }, refElementReturn });
+      const { hasCurrentFocusReturn } = useHasCurrentFocus({
+          hasCurrentFocusParameters: {
+              onCurrentFocusedInnerChanged,
+              onCurrentFocusedChanged
+          },
+          refElementReturn
+      });
       const props = useMergedProps(propsStable, hasCurrentFocusReturn.propsStable, propsChild, paginationProps, staggeredProps);
       return {
           propsChild: props,
@@ -6885,16 +7349,16 @@
           managedChildReturn,
           paginatedChildReturn,
           staggeredChildReturn,
-          rovingTabIndexChildReturn,
-          //propsPressStable: useMergedProps(pressProps, pressRefProps)
+          rovingTabIndexChildReturn
       };
   }
-  function useCompleteListNavigationDeclarative({ linearNavigationParameters, paginatedChildrenParameters, rearrangeableChildrenParameters, rovingTabIndexParameters, singleSelectionDeclarativeParameters, sortableChildrenParameters, staggeredChildrenParameters, typeaheadNavigationParameters, singleSelectionParameters }) {
+  function useCompleteListNavigationDeclarative({ linearNavigationParameters, paginatedChildrenParameters, rearrangeableChildrenParameters, rovingTabIndexParameters, singleSelectionDeclarativeParameters, sortableChildrenParameters, staggeredChildrenParameters, typeaheadNavigationParameters, singleSelectionParameters, refElementParameters, ...void1 }) {
       const ret = useCompleteListNavigation({
           linearNavigationParameters,
           paginatedChildrenParameters,
           rearrangeableChildrenParameters,
           rovingTabIndexParameters,
+          refElementParameters,
           singleSelectionParameters: {
               initiallySelectedIndex: singleSelectionDeclarativeParameters.selectedIndex,
               // Needs to be a (stable) callback because of declaration order
@@ -6916,14 +7380,23 @@
    *
    * @remarks Another in the "complete" series, alongside list/grid navigation and dismissal itself.
    *
+   * TODO: The HTML &lt;dialog&gt; element is a thing now, and it can be modal or nonmodal, just like this hook. Hmm...
+   *
    * @compositeParams
    */
-  function useModal({ dismissParameters, escapeDismissParameters, focusTrapParameters: { trapActive, ...focusTrapParameters } }) {
-      const { open } = dismissParameters;
-      const { refElementPopupReturn, refElementSourceReturn, propsStablePopup, propsStableSource } = useDismiss({ dismissParameters, escapeDismissParameters });
-      const { propsStable, refElementReturn } = useRefElement({});
+  function useModal({ dismissParameters: { dismissActive, onDismiss, ...void2 }, escapeDismissParameters: { dismissEscapeActive, onDismissEscape, parentDepth, ...void3 }, focusTrapParameters: { trapActive, ...focusTrapParameters }, activeElementParameters: { getDocument, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, ...void4 }, backdropDismissParameters: { dismissBackdropActive, onDismissBackdrop, ...void5 }, lostFocusDismissParameters: { dismissLostFocusActive, onDismissLostFocus, ...void6 }, refElementParameters: { onElementChange, onMount, onUnmount, ...void7 }, modalParameters: { active: modalActive, ...void8 }, ...void1 }) {
+      monitorCallCount(useModal);
+      const { refElementPopupReturn, refElementSourceReturn, propsStablePopup, propsStableSource } = useDismiss({
+          dismissParameters: { dismissActive: dismissActive && modalActive, onDismiss },
+          escapeDismissParameters: { dismissEscapeActive, onDismissEscape, parentDepth },
+          activeElementParameters: { getDocument, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange },
+          backdropDismissParameters: { dismissBackdropActive, onDismissBackdrop },
+          lostFocusDismissParameters: { dismissLostFocusActive, onDismissLostFocus },
+      });
+      const { propsStable, refElementReturn } = useRefElement({ refElementParameters: { onElementChange, onMount, onUnmount } });
       const { props } = useFocusTrap({
-          focusTrapParameters: { trapActive: open && trapActive, ...focusTrapParameters },
+          focusTrapParameters: { trapActive: trapActive && modalActive, ...focusTrapParameters },
+          activeElementParameters: { getDocument, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange },
           refElementReturn
       });
       return {
@@ -6935,43 +7408,324 @@
       };
   }
 
+  function isPromise(p) {
+      return p instanceof Promise;
+  }
+  const Unset = Symbol("Unset");
   /**
-   * Runs a function the specified number of milliseconds after the component renders.
+   * lodash-ish function that's like debounce + (throttle w/ async handling) combined.
    *
-   * @remarks This is particularly useful to function as "useEffect on a delay".
+   * Requires a lot of callbacks to meaningfully turn a red function into a blue one, but you *can* do it!
+   * Note that part of this is emulating the fact that the sync handler cannot have a return value,
+   * so you'll need to use `setResolve` and the other related functions to do that in whatever way works for your specific scenario.
    *
-   * @remarks
-   * {@include } {@link UseTimeoutParameters}
+   * The comments are numbered in approximate execution order for your reading pleasure (1 is near the bottom).
    */
-  function useTimeout({ timeout, callback, triggerIndex }) {
-      const stableCallback = useStableCallback(() => { startTimeRef.current = null; callback(); });
-      const getTimeout = useStableGetter(timeout);
-      // Set any time we start timeout.
-      // Unset any time the timeout completes
-      const startTimeRef = _$1(null);
-      const timeoutIsNull = (timeout == null);
-      // Any time the triggerIndex changes (including on mount)
-      // restart the timeout.  The timeout does NOT reset
-      // when the duration or callback changes, only triggerIndex.
-      p$2(() => {
-          if (!timeoutIsNull) {
-              const timeout = getTimeout();
-              console.assert(timeoutIsNull == (timeout == null));
-              if (timeout != null) {
-                  startTimeRef.current = +(new Date());
-                  const handle = setTimeout(stableCallback, timeout);
-                  return () => clearTimeout(handle);
+  function asyncToSync({ asyncInput, onInvoke, onInvoked, onFinally: onFinallyAny, onReject, onResolve, onHasError, onHasResult, onError, onReturnValue, capture, onAsyncDebounce, onSyncDebounce, onPending, throttle, wait }) {
+      let pending = false;
+      let syncDebouncing = false;
+      let asyncDebouncing = false;
+      let currentCapture = Unset;
+      const onFinally = () => {
+          // 8. This is run at the end of every invocation of the async handler,
+          // whether it completed or not, and whether it was async or not.
+          onFinallyAny?.();
+          onPending?.(pending = false);
+          let nothingElseToDo = (!asyncDebouncing);
+          onAsyncDebounce?.(asyncDebouncing = false);
+          if (nothingElseToDo) ;
+          else {
+              // 9b. Another request to run the async handler came in while we were running this one.
+              // Instead of stopping, we're just going to immediately run again using the arguments that were given to us most recently.
+              // We also clear that flag, because we're handling it now. It'll be set again if the handler is called again while *this* one is running
+              console.assert(currentCapture !== Unset);
+              if (currentCapture != Unset) {
+                  onSyncDebounce?.(syncDebouncing = true);
+                  syncDebounced();
               }
           }
-      }, [triggerIndex, timeoutIsNull]);
-      const getElapsedTime = T$2(() => {
-          return (+(new Date())) - (+(startTimeRef.current ?? new Date()));
-      }, []);
-      const getRemainingTime = T$2(() => {
-          const timeout = getTimeout();
-          return timeout == null ? null : Math.max(0, timeout - getElapsedTime());
-      }, []);
-      return { getElapsedTime, getRemainingTime };
+      };
+      const sync = (...args) => {
+          // 5. We're finally running the async version of the function, so notify the caller that the return value is pending.
+          // And because the fact that we're here means the debounce/throttle period is over, we can clear that flag too.
+          onPending?.(pending = true);
+          console.assert(syncDebouncing == false);
+          onHasError?.(null);
+          onHasResult?.(null);
+          let promiseOrReturn;
+          let hadSyncError = false;
+          try {
+              // 6. Run the function we were given.
+              // Because it may be sync, or it may throw before returning, we must still wrap it in a try/catch...
+              // Also important is that we preserve the async-ness (or lack thereof) on the original input function.
+              onInvoke?.();
+              promiseOrReturn = asyncInput(...args);
+              onHasError?.(false);
+          }
+          catch (ex) {
+              hadSyncError = true;
+              onError?.(ex);
+              onInvoked?.("throw");
+          }
+          // 7. Either end immediately, or schedule to end when completed.
+          if (isPromise(promiseOrReturn)) {
+              onInvoked?.("async");
+              promiseOrReturn
+                  .then(r => { onResolve?.(); onHasResult?.(true); onReturnValue?.(r); return r; })
+                  .catch(e => { onReject?.(); onHasError?.(true); onError?.(e); return e; })
+                  .finally(onFinally);
+          }
+          else {
+              onInvoked?.("sync");
+              if (!hadSyncError) {
+                  onResolve?.();
+                  onHasResult?.(true);
+                  onHasError?.(false);
+              }
+              else {
+                  onReject?.();
+                  onHasResult?.(false);
+                  onHasError?.(true);
+              }
+              onReturnValue?.(promiseOrReturn);
+              onPending?.(pending = false);
+              onFinally();
+          }
+      };
+      // lodash uses "in" instead of checking for `undefined`...
+      const lodashOptions = {
+          leading: !wait,
+          trailing: true
+      };
+      if (throttle) {
+          if (wait == null || (wait < throttle))
+              wait = throttle;
+          lodashOptions.maxWait = throttle;
+      }
+      const syncDebounced = debounce(() => {
+          // 3. Instead of calling the sync version of our function directly, we allow it to be throttled/debounced (above)
+          // and now that we're done throttling/debouncing, notify anyone who cares of this fact (below).
+          onSyncDebounce?.(syncDebouncing = false);
+          if (!pending) {
+              // 4a. If this is the first invocation, or if we're not still waiting for a previous invocation to finish its async call,
+              // then we can just go ahead and run the debounced version of our function.
+              console.assert(currentCapture != Unset);
+              sync(...currentCapture);
+          }
+          else {
+              // 4b. If we were called while still waiting for the (or a) previous invocation to finish,
+              // then we'll need to delay this one. When that previous invocation finishes, it'll check
+              // to see if it needs to run again, and it will use these new captured arguments from step 2.
+              onAsyncDebounce?.(asyncDebouncing = true);
+          }
+      }, wait || undefined, lodashOptions);
+      return {
+          syncOutput: (...args) => {
+              // 1. Someone just called the sync version of our async function.
+              // 2. We capture the arguments in a way that won't become stale if/when the function is called with a (possibly seconds-long) delay (e.g. event.currentTarget.value on an <input> element).
+              currentCapture = capture?.(...args) ?? [];
+              onSyncDebounce?.(syncDebouncing = true);
+              syncDebounced();
+          },
+          flushSyncDebounce: () => {
+              syncDebounced.flush();
+          },
+          cancelSyncDebounce: () => {
+              syncDebounced.cancel();
+          }
+      };
+  }
+
+  function identityCapture(...t) { return t; }
+  const AsyncFunction = ((async function () { }).constructor);
+  /**
+   * Given an async function, returns a function that's suitable for non-async APIs,
+   * along with other information about the current run's status.
+   *
+   * @see {@link useAsyncHandler} for a version that's specialized for DOM event handlers.
+   *
+   * @remarks When called multiple times in quick succession, (i.e. before the handler has finished),
+   * this works like Lodash's `throttle` function with the `wait` option always
+   * set to however long the handler takes to complete. A second call to the sync function will be
+   * throttled until the first call has finished. The return value of the function is the result
+   * of the previous invocation, or `undefined` on the first call.
+   *
+   * The handler is only ever delayed if one is currently running, so, e.g. for iOS touch events the
+   * first call happens in the same event handler (which means things like calls to `element.focus()`
+   * will work as intended, since that fails when the event is "split up")
+   *
+   * Finally, because the sync handler may be invoked on a delay, any property references on the arguments
+   * provided might be stale by the time it's actually invoked (e.g. accessing `event.currentTarget.checked`
+   * is not stable across time because it's a "live" value -- you almost always want the value that it
+   * had at the original time the handler was called). The `capture` option allows you to save that kind of
+   * dynamic data at the time it runs; the `AP` and `SP` type parameters likewise control
+   * the parameters the async handler and sync handler expect respectively.
+   *
+   * {@include } {@link UseAsyncParameters}
+   *
+   * @param asyncHandler - The async function to make sync
+   * @param options - @see {@link UseAsyncParameters}
+   *
+   */
+  function useAsync(asyncHandler, options) {
+      monitorCallCount(useAsync);
+      // Things related to current execution
+      // Because we can both return and throw undefined, 
+      // we need separate state to track their existence too.
+      //
+      // We keep, like, a *lot* of render-state, but it only ever triggers a re-render
+      // when we start/stop an async action.
+      const [pending, setPending, _getPending] = useState(false);
+      const [result, setResult, _getResult] = useState(undefined);
+      const [error, setError, _getError] = useState(undefined);
+      const [hasError, setHasError, _getHasError] = useState(false);
+      const [hasResult, setHasResult, _getHasResult] = useState(false);
+      const [asyncDebouncing, setAsyncDebouncing] = useState(false);
+      const [syncDebouncing, setSyncDebouncing] = useState(false);
+      const [invocationResult, setInvocationResult] = useState(asyncHandler instanceof AsyncFunction ? "async" : null);
+      // Keep track of this for the caller's sake -- we don't really care.
+      const [runCount, setRunCount] = useState(0);
+      const [settleCount, setSettleCount] = useState(0);
+      const [resolveCount, setResolveCount] = useState(0);
+      const [rejectCount, setRejectCount] = useState(0);
+      const incrementCallCount = T$2(() => { setRunCount(c => c + 1); }, []);
+      const incrementResolveCount = T$2(() => { setResolveCount(c => c + 1); }, []);
+      const incrementRejectCount = T$2(() => { setRejectCount(c => c + 1); }, []);
+      const incrementFinallyCount = T$2(() => { setSettleCount(c => c + 1); }, []);
+      /* eslint-disable prefer-const */
+      let { throttle, debounce, capture: captureUnstable } = (options ?? {});
+      const captureStable = useStableCallback(captureUnstable ?? identityCapture);
+      const asyncHandlerStable = useStableCallback(asyncHandler ?? identity);
+      const { flushSyncDebounce, syncOutput, cancelSyncDebounce } = F$2(() => {
+          return asyncToSync({
+              asyncInput: asyncHandlerStable,
+              capture: captureStable,
+              onAsyncDebounce: setAsyncDebouncing,
+              onError: setError,
+              onPending: setPending,
+              onReturnValue: setResult,
+              onSyncDebounce: setSyncDebouncing,
+              onHasError: setHasError,
+              onHasResult: setHasResult,
+              onInvoked: setInvocationResult,
+              onInvoke: incrementCallCount,
+              onFinally: incrementFinallyCount,
+              onReject: incrementRejectCount,
+              onResolve: incrementResolveCount,
+              throttle: options?.throttle ?? undefined,
+              wait: options?.debounce ?? undefined
+          });
+      }, [throttle, debounce]);
+      p$2(() => {
+          return () => cancelSyncDebounce();
+      }, [cancelSyncDebounce]);
+      return {
+          syncHandler: syncOutput,
+          pending,
+          result,
+          error,
+          hasError: hasError || false,
+          hasResult: hasResult || false,
+          resolveCount,
+          rejectCount,
+          settleCount,
+          debouncingAsync: asyncDebouncing,
+          debouncingSync: syncDebouncing,
+          invocationResult,
+          callCount: runCount,
+          flushDebouncedPromise: flushSyncDebounce
+      };
+  }
+
+  /**
+   * Given an asynchronous event handler, returns a synchronous one that works on the DOM,
+   * along with some other information related to the current state.
+   * Does not modify any props.
+   *
+   * @remarks Note that because the handler you provide may be called with a delay, and
+   * because the `value` of, e.g., an `<input>` element will likely have changed by the
+   * time the delay is over, a `capture` function is necessary in order to
+   * save the relevant information from the DOM at call-time. Any other simple event data,
+   * like `mouseX` or `shiftKey` can stay on the event itself and don't
+   * need to be captured &ndash; it's never stale.
+   *
+   * The handler is automatically throttled to only run one at a time.
+   * If the handler is called, and then before it finishes, is called again,
+   * it will be put on hold until the current one finishes, at which point
+   * the second one will run.  If the handler is called a third time before
+   * the first has finished, it will *replace* the second, so only the most
+   * recently called iteration of the handler will run.
+   *
+   *
+   * You may optionally *also* specify debounce and throttle parameters that wait until the
+   * synchronous handler has not been called for the specified number of
+   * milliseconds, at which point we *actually* run the asynchronous handler
+   * according to the logic in the previous paragraph. This is in
+   * *addition* to throttling the handler, and does not replace that behavior.
+   *
+   *
+   * @example
+   * General use
+   * ```tsx
+   * const asyncHandler = async (value: number, e: Event) => {
+   *     [...] // Ex. send to a server and setState when done
+   * };
+   * const {
+   *     // A sync version of asyncHandler
+   *     syncHandler,
+   *     // True while the handler is running
+   *     pending,
+   *     // The error thrown, if any
+   *     error,
+   *     // Show this value while the operation's pending
+   *     currentCapture,
+   *     // And others, see `UseAsyncHandlerReturnType`
+   *     ...rest
+   * } = useAsyncHandler<HTMLInputElement>()({
+   *     asyncHandler,
+   *     // Pass in the capture function that saves event data
+   *     // from being stale.
+   *     capture: e => {
+   *         // `capture` can have side-effects because
+   *         // it's called exactly once per invocation
+   *         e.preventDefault();
+   *
+   *         // Save this value so that it's never stale
+   *         return e.currentTarget.valueAsNumber;
+   *     }
+   * });
+   *
+   * const onInput = pending? null : syncHandler;
+   * ```
+   *
+   * {@include } {@link UseAsyncHandlerParameters}
+   *
+   * @see useAsync A more general version of this hook that can work with any type of handler, not just DOM event handlers.
+   */
+  function useAsyncHandler({ asyncHandler, capture: originalCapture, ...restAsyncOptions }) {
+      monitorCallCount(useAsyncHandler);
+      // We need to differentiate between "nothing captured yet" and "`undefined` was captured"
+      const [currentCapture, setCurrentCapture, getCurrentCapture] = useState(undefined);
+      const [hasCapture, setHasCapture] = useState(false);
+      // Wrap around the normal `useAsync` `capture` function to also
+      // keep track of the last value the user actually input.
+      // 
+      // Without this there's no way to re-render the control with
+      // it being both controlled and also having the "correct" value,
+      // and at any rate also protects against sudden exceptions reverting
+      // your change out from under you.
+      const capture = useStableCallback((e) => {
+          const captured = originalCapture(e);
+          setCurrentCapture(captured);
+          setHasCapture(true);
+          return [captured, e];
+      });
+      return {
+          getCurrentCapture,
+          currentCapture,
+          hasCapture,
+          ...useAsync(asyncHandler, { capture, ...restAsyncOptions })
+      };
   }
 
   function supportsPointerEvents() {
@@ -7003,6 +7757,7 @@
    *
    */
   function usePress(args) {
+      monitorCallCount(usePress);
       const { refElementReturn: { getElement }, pressParameters: { focusSelf, onPressSync, allowRepeatPresses, longPressThreshold, excludeEnter: ee, excludePointer: ep, excludeSpace: es, onPressingChange: opc } } = args;
       const excludeEnter = useStableCallback(ee ?? returnFalse);
       const excludeSpace = useStableCallback(es ?? returnFalse);
@@ -7072,10 +7827,10 @@
           // Be as generous as possible with touch events by checking all four corners of the radius too
           const offsets = [
               [0, 0],
-              [-touch.radiusX, -touch.radiusY],
-              [+touch.radiusX, -touch.radiusY],
-              [-touch.radiusX, +touch.radiusY],
-              [+touch.radiusX, +touch.radiusY]
+              [-touch.radiusX || 0, -touch.radiusY || 0],
+              [+touch.radiusX || 0, -touch.radiusY || 0],
+              [-touch.radiusX || 0, +touch.radiusY || 0],
+              [+touch.radiusX || 0, +touch.radiusY || 0]
           ];
           let hoveringAtAnyPoint = false;
           for (const [x, y] of offsets) {
@@ -7245,7 +8000,8 @@
           if (onPressSync) {
               e.preventDefault();
               if (e.detail > 1) {
-                  e.stopImmediatePropagation();
+                  if ("stopImmediatePropagation" in e)
+                      e.stopImmediatePropagation();
                   e.stopPropagation();
               }
               else {
@@ -7299,7 +8055,7 @@
               onPointerUp: !hasPressEvent ? undefined : (p ? onPointerUp : undefined),
               onPointerEnter: !hasPressEvent ? undefined : (p ? onPointerEnter : undefined),
               onPointerLeave: !hasPressEvent ? undefined : (p ? onPointerLeave : undefined),
-              onfocusout: onFocusOut,
+              [onfocusout]: onFocusOut,
               onClick
           },
       };
@@ -7312,6 +8068,7 @@
    * @compositeParams
    */
   function useRandomId({ randomIdParameters: { prefix, otherReferencerProp } }) {
+      monitorCallCount(useRandomId);
       const id = (prefix + V$2());
       useEnsureStability("useRandomId", prefix, id);
       const referencerElementProps = _$1(otherReferencerProp == null ? {} : { [otherReferencerProp]: id });
@@ -7332,6 +8089,7 @@
    * @compositeParams
    */
   function useRandomDualIds({ randomIdInputParameters, randomIdLabelParameters, }) {
+      monitorCallCount(useRandomDualIds);
       const { randomIdReturn: randomIdInputReturn, propsReferencer: propsLabelAsReferencer, propsSource: propsInputAsSource } = useRandomId({ randomIdParameters: randomIdInputParameters });
       const { randomIdReturn: randomIdLabelReturn, propsReferencer: propsInputAsReferencer, propsSource: propsLabelAsSource } = useRandomId({ randomIdParameters: randomIdLabelParameters });
       return {
@@ -7339,324 +8097,6 @@
           propsInput: useMergedProps(propsInputAsReferencer, propsInputAsSource),
           randomIdInputReturn,
           randomIdLabelReturn
-      };
-  }
-
-  function isPromise(p) {
-      return p instanceof Promise;
-  }
-  const Unset = Symbol("Unset");
-  /**
-   * lodash-ish function that's like debounce + (throttle w/ async handling) combined.
-   *
-   * Requires a lot of callbacks to meaningfully turn a red function into a blue one, but you *can* do it!
-   * Note that part of this is emulating the fact that the sync handler cannot have a return value,
-   * so you'll need to use `setResolve` and the other related functions to do that in whatever way works for your specific scenario.
-   *
-   * The comments are numbered in approximate execution order for your reading pleasure (1 is near the bottom).
-   */
-  function asyncToSync({ asyncInput, onInvoke, onInvoked, onFinally: onFinallyAny, onReject, onResolve, onHasError, onHasResult, onError, onReturnValue, capture, onAsyncDebounce, onSyncDebounce, onPending, throttle, wait }) {
-      let pending = false;
-      let syncDebouncing = false;
-      let asyncDebouncing = false;
-      let currentCapture = Unset;
-      const onFinally = () => {
-          // 8. This is run at the end of every invocation of the async handler,
-          // whether it completed or not, and whether it was async or not.
-          onFinallyAny?.();
-          onPending?.(pending = false);
-          let nothingElseToDo = (!asyncDebouncing);
-          onAsyncDebounce?.(asyncDebouncing = false);
-          if (nothingElseToDo) ;
-          else {
-              // 9b. Another request to run the async handler came in while we were running this one.
-              // Instead of stopping, we're just going to immediately run again using the arguments that were given to us most recently.
-              // We also clear that flag, because we're handling it now. It'll be set again if the handler is called again while *this* one is running
-              console.assert(currentCapture !== Unset);
-              if (currentCapture != Unset) {
-                  onSyncDebounce?.(syncDebouncing = true);
-                  syncDebounced();
-              }
-          }
-      };
-      const sync = (...args) => {
-          // 5. We're finally running the async version of the function, so notify the caller that the return value is pending.
-          // And because the fact that we're here means the debounce/throttle period is over, we can clear that flag too.
-          onPending?.(pending = true);
-          console.assert(syncDebouncing == false);
-          onHasError?.(null);
-          onHasResult?.(null);
-          let promiseOrReturn;
-          let hadSyncError = false;
-          try {
-              // 6. Run the function we were given.
-              // Because it may be sync, or it may throw before returning, we must still wrap it in a try/catch...
-              // Also important is that we preserve the async-ness (or lack thereof) on the original input function.
-              onInvoke?.();
-              promiseOrReturn = asyncInput(...args);
-              onHasError?.(false);
-          }
-          catch (ex) {
-              hadSyncError = true;
-              onError?.(ex);
-              onInvoked?.("throw");
-          }
-          // 7. Either end immediately, or schedule to end when completed.
-          if (isPromise(promiseOrReturn)) {
-              onInvoked?.("async");
-              promiseOrReturn
-                  .then(r => { onResolve?.(); onHasResult?.(true); onReturnValue?.(r); return r; })
-                  .catch(e => { onReject?.(); onHasError?.(true); onError?.(e); return e; })
-                  .finally(onFinally);
-          }
-          else {
-              onInvoked?.("sync");
-              if (!hadSyncError) {
-                  onResolve?.();
-                  onHasResult?.(true);
-                  onHasError?.(false);
-              }
-              else {
-                  onReject?.();
-                  onHasResult?.(false);
-                  onHasError?.(true);
-              }
-              onReturnValue?.(promiseOrReturn);
-              onPending?.(pending = false);
-              onFinally();
-          }
-      };
-      // lodash uses "in" instead of checking for `undefined`...
-      const lodashOptions = {
-          leading: !wait,
-          trailing: true
-      };
-      if (throttle) {
-          if (wait == null || (wait < throttle))
-              wait = throttle;
-          lodashOptions.maxWait = throttle;
-      }
-      const syncDebounced = debounce(() => {
-          // 3. Instead of calling the sync version of our function directly, we allow it to be throttled/debounced (above)
-          // and now that we're done throttling/debouncing, notify anyone who cares of this fact (below).
-          onSyncDebounce?.(syncDebouncing = false);
-          if (!pending) {
-              // 4a. If this is the first invocation, or if we're not still waiting for a previous invocation to finish its async call,
-              // then we can just go ahead and run the debounced version of our function.
-              console.assert(currentCapture != Unset);
-              sync(...currentCapture);
-          }
-          else {
-              // 4b. If we were called while still waiting for the (or a) previous invocation to finish,
-              // then we'll need to delay this one. When that previous invocation finishes, it'll check
-              // to see if it needs to run again, and it will use these new captured arguments from step 2.
-              onAsyncDebounce?.(asyncDebouncing = true);
-          }
-      }, wait || undefined, lodashOptions);
-      return {
-          syncOutput: (...args) => {
-              // 1. Someone just called the sync version of our async function.
-              // 2. We capture the arguments in a way that won't become stale if/when the function is called with a (possibly seconds-long) delay (e.g. event.currentTarget.value on an <input> element).
-              currentCapture = capture?.(...args) ?? [];
-              onSyncDebounce?.(syncDebouncing = true);
-              syncDebounced();
-          },
-          flushSyncDebounce: () => {
-              syncDebounced.flush();
-          },
-          cancelSyncDebounce: () => {
-              syncDebounced.cancel();
-          }
-      };
-  }
-
-  function identityCapture(...t) { return t; }
-  const AsyncFunction = ((async function () { }).constructor);
-  /**
-   * Given an async function, returns a function that's suitable for non-async APIs,
-   * along with other information about the current run's status.
-   *
-   * @see {@link useAsyncHandler} for a version that's specialized for DOM event handlers.
-   *
-   * @remarks When called multiple times in quick succession, (i.e. before the handler has finished),
-   * this works like Lodash's `throttle` function with the `wait` option always
-   * set to however long the handler takes to complete. A second call to the sync function will be
-   * throttled until the first call has finished. The return value of the function is the result
-   * of the previous invocation, or `undefined` on the first call.
-   *
-   * The handler is only ever delayed if one is currently running, so, e.g. for iOS touch events the
-   * first call happens in the same event handler (which means things like calls to `element.focus()`
-   * will work as intended, since that fails when the event is "split up")
-   *
-   * Finally, because the sync handler may be invoked on a delay, any property references on the arguments
-   * provided might be stale by the time it's actually invoked (e.g. accessing `event.currentTarget.checked`
-   * is not stable across time because it's a "live" value -- you almost always want the value that it
-   * had at the original time the handler was called). The `capture` option allows you to save that kind of
-   * dynamic data at the time it runs; the `AP` and `SP` type parameters likewise control
-   * the parameters the async handler and sync handler expect respectively.
-   *
-   * {@include } {@link UseAsyncParameters}
-   *
-   * @param asyncHandler - The async function to make sync
-   * @param options - @see {@link UseAsyncParameters}
-   *
-   */
-  function useAsync(asyncHandler, options) {
-      // Things related to current execution
-      // Because we can both return and throw undefined, 
-      // we need separate state to track their existence too.
-      //
-      // We keep, like, a *lot* of render-state, but it only ever triggers a re-render
-      // when we start/stop an async action.
-      const [pending, setPending, _getPending] = useState(false);
-      const [result, setResult, _getResult] = useState(undefined);
-      const [error, setError, _getError] = useState(undefined);
-      const [hasError, setHasError, _getHasError] = useState(false);
-      const [hasResult, setHasResult, _getHasResult] = useState(false);
-      const [asyncDebouncing, setAsyncDebouncing] = useState(false);
-      const [syncDebouncing, setSyncDebouncing] = useState(false);
-      const [invocationResult, setInvocationResult] = useState(asyncHandler instanceof AsyncFunction ? "async" : null);
-      // Keep track of this for the caller's sake -- we don't really care.
-      const [runCount, setRunCount] = useState(0);
-      const [settleCount, setSettleCount] = useState(0);
-      const [resolveCount, setResolveCount] = useState(0);
-      const [rejectCount, setRejectCount] = useState(0);
-      const incrementCallCount = T$2(() => { setRunCount(c => c + 1); }, []);
-      const incrementResolveCount = T$2(() => { setResolveCount(c => c + 1); }, []);
-      const incrementRejectCount = T$2(() => { setRejectCount(c => c + 1); }, []);
-      const incrementFinallyCount = T$2(() => { setSettleCount(c => c + 1); }, []);
-      /* eslint-disable prefer-const */
-      let { throttle, debounce, capture: captureUnstable } = (options ?? {});
-      const captureStable = useStableCallback(captureUnstable ?? identityCapture);
-      const asyncHandlerStable = useStableCallback(asyncHandler ?? identity);
-      const { flushSyncDebounce, syncOutput, cancelSyncDebounce } = F$2(() => {
-          return asyncToSync({
-              asyncInput: asyncHandlerStable,
-              capture: captureStable,
-              onAsyncDebounce: setAsyncDebouncing,
-              onError: setError,
-              onPending: setPending,
-              onReturnValue: setResult,
-              onSyncDebounce: setSyncDebouncing,
-              onHasError: setHasError,
-              onHasResult: setHasResult,
-              onInvoked: setInvocationResult,
-              onInvoke: incrementCallCount,
-              onFinally: incrementFinallyCount,
-              onReject: incrementRejectCount,
-              onResolve: incrementResolveCount,
-              throttle: options?.throttle,
-              wait: options?.debounce
-          });
-      }, [throttle, debounce]);
-      p$2(() => {
-          return () => cancelSyncDebounce();
-      }, [cancelSyncDebounce]);
-      return {
-          syncHandler: syncOutput,
-          pending,
-          result,
-          error,
-          hasError: hasError || false,
-          hasResult: hasResult || false,
-          resolveCount,
-          rejectCount,
-          settleCount,
-          debouncingAsync: asyncDebouncing,
-          debouncingSync: syncDebouncing,
-          invocationResult,
-          callCount: runCount,
-          flushDebouncedPromise: flushSyncDebounce
-      };
-  }
-
-  /**
-   * Given an asynchronous event handler, returns a synchronous one that works on the DOM,
-   * along with some other information related to the current state.
-   * Does not modify any props.
-   *
-   * @remarks Note that because the handler you provide may be called with a delay, and
-   * because the `value` of, e.g., an `<input>` element will likely have changed by the
-   * time the delay is over, a `capture` function is necessary in order to
-   * save the relevant information from the DOM at call-time. Any other simple event data,
-   * like `mouseX` or `shiftKey` can stay on the event itself and don't
-   * need to be captured &ndash; it's never stale.
-   *
-   * The handler is automatically throttled to only run one at a time.
-   * If the handler is called, and then before it finishes, is called again,
-   * it will be put on hold until the current one finishes, at which point
-   * the second one will run.  If the handler is called a third time before
-   * the first has finished, it will *replace* the second, so only the most
-   * recently called iteration of the handler will run.
-   *
-   *
-   * You may optionally *also* specify debounce and throttle parameters that wait until the
-   * synchronous handler has not been called for the specified number of
-   * milliseconds, at which point we *actually* run the asynchronous handler
-   * according to the logic in the previous paragraph. This is in
-   * *addition* to throttling the handler, and does not replace that behavior.
-   *
-   *
-   * @example
-   * General use
-   * ```tsx
-   * const asyncHandler = async (value: number, e: Event) => {
-   *     [...] // Ex. send to a server and setState when done
-   * };
-   * const {
-   *     // A sync version of asyncHandler
-   *     syncHandler,
-   *     // True while the handler is running
-   *     pending,
-   *     // The error thrown, if any
-   *     error,
-   *     // Show this value while the operation's pending
-   *     currentCapture,
-   *     // And others, see `UseAsyncHandlerReturnType`
-   *     ...rest
-   * } = useAsyncHandler<HTMLInputElement>()({
-   *     asyncHandler,
-   *     // Pass in the capture function that saves event data
-   *     // from being stale.
-   *     capture: e => {
-   *         // `capture` can have side-effects because
-   *         // it's called exactly once per invocation
-   *         e.preventDefault();
-   *
-   *         // Save this value so that it's never stale
-   *         return e.currentTarget.valueAsNumber;
-   *     }
-   * });
-   *
-   * const onInput = pending? null : syncHandler;
-   * ```
-   *
-   * {@include } {@link UseAsyncHandlerParameters}
-   *
-   * @see useAsync A more general version of this hook that can work with any type of handler, not just DOM event handlers.
-   */
-  function useAsyncHandler({ asyncHandler, capture: originalCapture, ...restAsyncOptions }) {
-      // We need to differentiate between "nothing captured yet" and "`undefined` was captured"
-      const [currentCapture, setCurrentCapture, getCurrentCapture] = useState(undefined);
-      const [hasCapture, setHasCapture] = useState(false);
-      // Wrap around the normal `useAsync` `capture` function to also
-      // keep track of the last value the user actually input.
-      // 
-      // Without this there's no way to re-render the control with
-      // it being both controlled and also having the "correct" value,
-      // and at any rate also protects against sudden exceptions reverting
-      // your change out from under you.
-      const capture = useStableCallback((e) => {
-          const captured = originalCapture(e);
-          setCurrentCapture(captured);
-          setHasCapture(true);
-          return [captured, e];
-      });
-      return {
-          getCurrentCapture,
-          currentCapture,
-          hasCapture,
-          ...useAsync(asyncHandler, { capture, ...restAsyncOptions })
       };
   }
 
@@ -7685,6 +8125,7 @@
    * @compositeParams
    */
   function useImperativeProps({ refElementReturn: { getElement } }) {
+      monitorCallCount(useImperativeProps);
       const currentImperativeProps = _$1({ className: new Set(), style: {}, children: null, html: null, others: {} });
       const hasClass = T$2((cls) => { return currentImperativeProps.current.className.has(cls); }, []);
       const setClass = T$2((cls, enabled) => {
@@ -7793,88 +8234,6 @@
       A$1(handle, () => imperativeHandle);
       return (y$3(Tag, useMergedProps(propsStable, imperativeProps, props, { ref })));
   }
-  const EventMapping = {
-      abort: "onAbort",
-      animationend: "onAnimationEnd",
-      animationstart: "onAnimationStart",
-      animationiteration: "onAnimationIteration",
-      beforeinput: "onBeforeInput",
-      blur: "onBlur",
-      canplay: "onCanPlay",
-      canplaythrough: "onCanPlayThrough",
-      change: "onChange",
-      click: "onClick",
-      compositionend: "onCompositionEnd",
-      compositionstart: "onCompositionStart",
-      compositionupdate: "onCompositionUpdate",
-      contextmenu: "onContextMenu",
-      cut: "onCut",
-      dblclick: "onDblClick",
-      drag: "onDrag",
-      dragend: "onDragEnd",
-      dragenter: "onDragEnter",
-      dragleave: "onDragLeave",
-      dragover: "onDragOver",
-      dragstart: "onDragStart",
-      drop: "onDrop",
-      durationchange: "onDurationChange",
-      emptied: "onEmptied",
-      ended: "onEnded",
-      error: "onError",
-      focus: "onFocus",
-      focusin: "onfocusin",
-      focusout: "onfocusout",
-      formdata: "onFormData",
-      gotpointercapture: "onGotPointerCapture",
-      input: "onInput",
-      invalid: "onInvalid",
-      keydown: "onKeyDown",
-      keypress: "onKeyPress",
-      keyup: "onKeyUp",
-      load: "onLoad",
-      loadeddata: "onLoadedData",
-      loadedmetadata: "onLoadedMetadata",
-      loadstart: "onLoadStart",
-      lostpointercapture: "onLostPointerCapture",
-      mousedown: "onMouseDown",
-      mouseenter: "onMouseEnter",
-      mouseleave: "onMouseLeave",
-      mousemove: "onMouseMove",
-      mouseout: "onMouseOut",
-      mouseover: "onMouseOver",
-      mouseup: "onMouseUp",
-      paste: "onPaste",
-      pause: "onPause",
-      play: "onPlay",
-      playing: "onPlaying",
-      pointercancel: "onPointerCancel",
-      pointerdown: "onPointerDown",
-      pointerenter: "onPointerEnter",
-      pointerleave: "onPointerLeave",
-      pointermove: "onPointerMove",
-      pointerout: "onPointerOut",
-      pointerover: "onPointerOver",
-      pointerup: "onPointerUp",
-      progress: "onProgress",
-      reset: "onReset",
-      scroll: "onScroll",
-      seeked: "onSeeked",
-      seeking: "onSeeking",
-      select: "onSelect",
-      stalled: "onStalled",
-      submit: "onSubmit",
-      suspend: "onSuspend",
-      timeupdate: "onTimeUpdate",
-      toggle: "onToggle",
-      touchcancel: "onTouchCancel",
-      touchend: "onTouchEnd",
-      touchmove: "onTouchMove",
-      touchstart: "onTouchStart",
-      transitionend: "onTransitionEnd",
-      volumechange: "onVolumeChange",
-      waiting: "onWaiting",
-      wheel: "onWheel"
-  };
 
   const Table$2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-";
   function base64(value) {
@@ -7909,6 +8268,7 @@
    * {@include } {@link UsePortalChildrenParameters}
    */
   function usePortalChildren({ target }) {
+      monitorCallCount(usePortalChildren);
       const [pushChild, setPushChild] = useState(null);
       const [updateChild, setUpdateChild] = useState(null);
       const [removeChild, setRemoveChild] = useState(null);
@@ -7922,7 +8282,7 @@
           return removeChild?.(index);
       });
       const element = F$2(() => { return target == null ? null : typeof target == "string" ? document.getElementById(target) : target; }, [target]);
-      const children = !element ? null : z$1(o$3(PortalChildren, { setPushChild: setPushChild, setUpdateChild: setUpdateChild, setRemoveChild: setRemoveChild }), element);
+      const children = !element ? null : z$1(y$3(PortalChildren, { setPushChild, setUpdateChild, setRemoveChild }), element);
       return {
           children: children,
           pushChild: pushChildStable,
@@ -7944,7 +8304,7 @@
       }, []);
       const updateChild = T$2((index, child) => {
           const key = getChildren()[index]?.key;
-          console.assert(key);
+          console.assert(!!key);
           if (key) {
               setChildren(prev => {
                   let newChildren = prev.slice();
@@ -7956,7 +8316,7 @@
       }, []);
       const removeChild = T$2((index) => {
           const key = getChildren()[index]?.key;
-          console.assert(key);
+          console.assert(!!key);
           if (key) {
               setChildren(prev => {
                   let newChildren = prev.slice();
@@ -7969,7 +8329,7 @@
       y$2(() => { setPushChild(_ => pushChild); }, [pushChild]);
       y$2(() => { setUpdateChild(_ => updateChild); }, [updateChild]);
       y$2(() => { setRemoveChild(_ => removeChild); }, [removeChild]);
-      return (o$3(_$3, { children: children }));
+      return (y$3(_$3, {}, children));
   }
 
   /**
@@ -7978,6 +8338,7 @@
    * @compositeParams
    */
   function useElementSize({ elementSizeParameters: { getObserveBox, onSizeChange }, refElementParameters }) {
+      monitorCallCount(useElementSize);
       const { onElementChange, onMount, onUnmount } = (refElementParameters || {});
       useEnsureStability("useElementSize", getObserveBox, onSizeChange, onElementChange, onMount, onUnmount);
       const [getSize, setSize] = usePassiveState(onSizeChange, returnNull, runImmediately);
@@ -8067,6 +8428,7 @@
    * @returns
    */
   function usePersistentState(key, initialValue, fromString = JSON.parse, toString = JSON.stringify, storage = localStorage) {
+      monitorCallCount(usePersistentState);
       const [localCopy, setLocalCopy, getLocalCopy] = useState(() => ((key ? (getFromLocalStorage(key, fromString, storage)) : null) ?? initialValue));
       const getInitialValue = useStableGetter(initialValue);
       // Ensure that if our key changes, we also update `localCopy` to match.
@@ -8148,15 +8510,32 @@
       toolbarLabel: "tlbl-"
   };
 
-  function useButton({ buttonParameters: { tagButton, disabled, onPress, pressed, role }, pressParameters, refElementParameters }) {
-      const { refElementReturn, propsStable: propsRef } = useRefElement({ refElementParameters });
-      const focusSelf = T$2((e) => focus(e), []);
-      const { pressReturn, props: propsPress } = usePress({
+  /**
+   * Implements a [Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/) pattern.
+   *
+   * @remarks The press handler can be async or sync&mdash;either way, pass it to `asyncHandlerParameters.asyncHandler`
+   *
+   * @compositeParams
+   */
+  function useButton({ buttonParameters: { tagButton, disabled, pressed, role, onPressSync, ...void1 }, pressParameters: { focusSelf, allowRepeatPresses, longPressThreshold, onPressingChange, excludeSpace, ...void3 }, refElementParameters, ...void2 }) {
+      monitorCallCount(useButton);
+      const { refElementReturn, propsStable: propsRef, ...void5 } = useRefElement({ refElementParameters });
+      const { pressReturn, props: propsPress, ...void4 } = usePress({
           refElementReturn,
           pressParameters: {
-              onPressSync: (e) => (disabled ? null : onPress)?.(enhanceEvent(e, { pressed: pressed == null ? null : !pressed })),
+              onPressSync: useStableCallback((e) => {
+                  if (!disabled) {
+                      const p = (pressed == null ? undefined : !pressed);
+                      onPressSync?.(enhanceEvent(e, { pressed: p }));
+                  }
+              }),
               focusSelf,
-              ...pressParameters // Intentionally at the end so Typescript will error if we forget something
+              allowRepeatPresses,
+              excludeEnter: returnFalse,
+              excludePointer: returnFalse,
+              excludeSpace,
+              longPressThreshold,
+              onPressingChange
           },
       });
       const baseProps = { "aria-pressed": (pressed === true ? "true" : pressed === false ? "false" : undefined) };
@@ -8169,15 +8548,28 @@
       };
   }
 
-  function useAccordion({ accordionParameters: { initialIndex, localStorageKey, orientation, ...void2 }, typeaheadNavigationParameters, linearNavigationParameters: { disableHomeEndKeys, navigatePastEnd, navigatePastStart, pageNavigationSize, onNavigateLinear, ...void1 }, managedChildrenParameters: { onAfterChildLayoutEffect, onChildrenMountChange, onChildrenCountChange, ...void3 }, ...void4 }) {
+  /**
+   * Implements an [Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) pattern.
+   *
+   * @remarks For some reason, accordions don't have a parent element, and don't have a roving tab index, but do implement keyboard navigation.
+   *
+   * This makes their implementation a little bit messy. Each child individually handles keyboard navigation even though the parent orchestrates it.
+   *
+   * @compositeParams
+   *
+   * @hasChild {@link useAccordionSection}
+   */
+  function useAccordion({ accordionParameters: { initialIndex, localStorageKey, orientation, ...accordionParameters }, typeaheadNavigationParameters: { collator, noTypeahead, onNavigateTypeahead, typeaheadTimeout, ...typeaheadNavigationParameters }, linearNavigationParameters: { disableHomeEndKeys, navigatePastEnd, navigatePastStart, pageNavigationSize, onNavigateLinear, ...linearNavigationParameters }, managedChildrenParameters: { onAfterChildLayoutEffect, onChildrenMountChange: ocmc1, onChildrenCountChange, ...managedChildrenParameters }, refElementParameters, ...void1 }) {
+      monitorCallCount(useAccordion);
       const [localStorageIndex, setLocalStorageIndex] = usePersistentState(localStorageKey ?? null, initialIndex ?? null);
       if (localStorageIndex != null)
           initialIndex = localStorageIndex;
       const { managedChildrenReturn, context: { managedChildContext } } = useManagedChildren({
           managedChildrenParameters: {
-              onChildrenMountChange: useStableCallback((m, u) => { ocmc2(); onChildrenMountChange?.(m, u); }),
+              onChildrenMountChange: useStableCallback((m, u) => { ocmc2(); ocmc1?.(m, u); }),
               onAfterChildLayoutEffect,
-              onChildrenCountChange
+              onChildrenCountChange,
+              ...managedChildrenParameters
           }
       });
       const { getChildren } = managedChildrenReturn;
@@ -8189,7 +8581,7 @@
           }
           return false;
       }, []);
-      const { propsStable, refElementReturn: { getElement } } = useRefElement({});
+      const { propsStable, refElementReturn: { getElement } } = useRefElement({ refElementParameters });
       // Keep track of the one expanded index (if there is only one expanded index)
       const { changeIndex: changeExpandedIndexLocalOnly, getCurrentIndex: getCurrentExpandedIndex } = useChildrenFlag({
           initialIndex,
@@ -8212,15 +8604,20 @@
           closestFit: true,
           onIndexChange: T$2((i) => {
               if (i != null) {
-                  getChildren().getAt(i)?.focusSelf();
+                  const element = getChildren().getAt(i)?.getElement();
+                  if (element)
+                      getChildren().getAt(i)?.focusSelf(element);
               }
           }, []),
           onClosestFit: useStableCallback((index) => {
               if (document.activeElement == null || document.activeElement == document.body) {
-                  if (index == null)
-                      findBackupFocus(getElement()).focus();
-                  else
-                      getChildren().getAt(index)?.focusSelf();
+                  if (index != null) {
+                      const element = getChildren().getAt(index)?.getElement();
+                      if (index == null)
+                          findBackupFocus(getElement()).focus();
+                      else if (element)
+                          getChildren().getAt(index)?.focusSelf(element);
+                  }
               }
           })
       });
@@ -8232,12 +8629,20 @@
           getTabbableIndex: getTabbedIndex,
           setTabbableIndex: changeTabbedIndex
       });
-      const { context: { typeaheadNavigationContext }, typeaheadNavigationReturn, propsStable: propsTN } = useTypeaheadNavigation({
+      const { context: { typeaheadNavigationContext }, typeaheadNavigationReturn, propsStable: propsTN, ...void2 } = useTypeaheadNavigation({
           rovingTabIndexReturn,
-          typeaheadNavigationParameters
+          typeaheadNavigationParameters: {
+              isValidForTypeaheadNavigation: isValidByIndex,
+              collator,
+              noTypeahead,
+              onNavigateTypeahead,
+              typeaheadTimeout,
+              ...typeaheadNavigationParameters
+          }
       });
       return {
           props: propsStable,
+          typeaheadNavigationReturn,
           context: useMemoObject({
               managedChildContext,
               typeaheadNavigationContext,
@@ -8249,17 +8654,18 @@
                   stableTypeaheadProps: propsTN,
               }),
               linearNavigationParameters: useMemoObject({
-                  disableHomeEndKeys,
                   getHighestIndex: T$2(() => getChildren().getHighestIndex(), []),
                   getLowestIndex: T$2(() => getChildren().getLowestIndex(), []),
                   indexMangler: identity,
                   indexDemangler: identity,
+                  isValidForLinearNavigation: isValidByIndex,
                   arrowKeyDirection: orientation ?? "vertical",
-                  isValid: isValidByIndex,
+                  disableHomeEndKeys,
                   navigatePastEnd,
                   navigatePastStart,
                   pageNavigationSize,
-                  onNavigateLinear
+                  onNavigateLinear,
+                  ...linearNavigationParameters
               }),
               rovingTabIndexReturn
           }),
@@ -8267,17 +8673,22 @@
           accordionReturn: useMemoObject({ changeExpandedIndex })
       };
   }
-  function useAccordionSection({ buttonParameters, accordionSectionParameters: { open: openFromUser, bodyRole }, info: { index, untabbable }, textContentParameters, context: { accordionSectionParameters: { changeExpandedIndex, changeTabbedIndex: setCurrentFocusedIndex, getTabbedIndex: getCurrentFocusedIndex, stableTypeaheadProps }, linearNavigationParameters, rovingTabIndexReturn, managedChildContext, typeaheadNavigationContext }, refElementParameters, }) {
-      const { disabled, onPress: userOnPress } = buttonParameters;
+  /**
+   * @compositeParams
+   */
+  function useAccordionSection({ buttonParameters: { disabled, tagButton, onPressSync: userOnPress, ...buttonParameters }, accordionSectionParameters: { open: openFromUser, bodyRole, ...accordionSectionParameters }, info: { index, untabbable, ...void4 }, textContentParameters: { getText, ...textContentParameters }, context, refElementBodyParameters, refElementHeaderButtonParameters, pressParameters: { focusSelf, ...pressParameters }, ...void1 }) {
+      monitorCallCount(useAccordionSection);
       const [openFromParent, setOpenFromParent, getOpenFromParent] = useState(null);
       const [mostRecentlyTabbed, setMostRecentlyTabbed, getMostRecentlyTabbed] = useState(null);
+      const { accordionSectionParameters: { changeExpandedIndex, changeTabbedIndex: setCurrentFocusedIndex, getTabbedIndex: getCurrentFocusedIndex, stableTypeaheadProps }, linearNavigationParameters, rovingTabIndexReturn, } = context;
       const { randomIdReturn: _bodyIdReturn, propsSource: propsBodySource, propsReferencer: propsHeadReferencer } = useRandomId({ randomIdParameters: { prefix: Prefices.accordionSectionHeaderButton, otherReferencerProp: "aria-controls" } });
       const { randomIdReturn: _headIdReturn, propsSource: propsHeadSource, propsReferencer: propsBodyReferencer } = useRandomId({ randomIdParameters: { prefix: Prefices.accordionSectionBody, otherReferencerProp: "aria-labelledby" } });
       const open = ((openFromUser ?? openFromParent) ?? false);
-      const { refElementReturn: { getElement: getHeaderElement }, propsStable: headerRefElementProps } = useRefElement({ refElementParameters: {} });
-      const { refElementReturn: { getElement: _getBodyElement }, propsStable: bodyRefElementProps } = useRefElement({ refElementParameters: {} });
+      const { refElementReturn: refElementBodyReturn, propsStable: bodyRefElementProps } = useRefElement({ refElementParameters: refElementBodyParameters });
       const { hasCurrentFocusReturn } = useHasCurrentFocus({
-          refElementReturn: { getElement: getHeaderElement }, hasCurrentFocusParameters: {
+          refElementReturn: { getElement: useStableCallback(() => { return refElementHeaderButtonReturn.getElement(); }) },
+          hasCurrentFocusParameters: {
+              onCurrentFocusedChanged: null,
               onCurrentFocusedInnerChanged: useStableCallback(focused => {
                   if (focused) {
                       setCurrentFocusedIndex(index);
@@ -8286,75 +8697,90 @@
               })
           }
       });
-      const focusSelf = useStableCallback(() => {
-          focus(getHeaderElement());
-      });
       useManagedChild({
-          context: {
-              managedChildContext
-          },
+          context,
           info: {
               index,
-              disabled,
+              disabled: disabled || false,
               focusSelf,
               getMostRecentlyTabbed,
               getOpenFromParent,
               untabbable,
               setMostRecentlyTabbed,
               setOpenFromParent,
+              getElement: useStableCallback(() => { return refElementHeaderButtonReturn.getElement(); }),
           }
       });
-      const onPress = (e) => {
-          setCurrentFocusedIndex(index);
-          if (getOpenFromParent())
-              changeExpandedIndex(null);
-          else
-              changeExpandedIndex(index);
-          userOnPress?.(e);
-      };
-      const { propsStable: propsLN, ...linearReturnType } = useLinearNavigation({ linearNavigationParameters, rovingTabIndexReturn, paginatedChildrenParameters: { paginationMin: null, paginationMax: null } });
-      const { pressParameters: { excludeSpace }, textContentReturn } = useTypeaheadNavigationChild({
+      const { propsStable: propsLN, linearNavigationReturn, ...void10 } = useLinearNavigation({
+          linearNavigationParameters,
+          rovingTabIndexReturn,
+          paginatedChildrenParameters: { paginationMin: null, paginationMax: null },
+          rearrangeableChildrenReturn: { indexMangler: identity, indexDemangler: identity }
+      });
+      const { pressParameters: { excludeSpace, ...void11 }, textContentReturn, ...void2 } = useTypeaheadNavigationChild({
           info: { index },
-          refElementReturn: { getElement: useStableCallback(() => refElementReturn.getElement()) },
-          textContentParameters,
-          context: { typeaheadNavigationContext }
+          refElementReturn: { getElement: useStableCallback(() => refElementHeaderButtonReturn.getElement()) },
+          textContentParameters: { getText, },
+          context
       });
-      const buttonReturn = useButton({
-          buttonParameters: { ...buttonParameters, pressed: null, onPress, role: "button", },
-          pressParameters: { excludeSpace, allowRepeatPresses: false, excludeEnter: null, excludePointer: null, longPressThreshold: null, onPressingChange: null },
-          refElementParameters
-      });
-      const { pressReturn, props: buttonProps, refElementReturn } = buttonReturn;
-      //const { linearNavigationReturn: { propsStable } } = linearReturnType;
-      const headerButtonProps = useMergedProps(buttonProps, hasCurrentFocusReturn.propsStable, headerRefElementProps, propsHeadReferencer, propsHeadSource, propsLN, stableTypeaheadProps, { "aria-expanded": (open ?? false), });
-      const bodyProps = useMergedProps(bodyRefElementProps, propsBodyReferencer, propsBodySource, {
-          role: bodyRole,
-          tabIndex: -1
+      const { pressReturn, props, refElementReturn: refElementHeaderButtonReturn, ...void12 } = useButton({
+          buttonParameters: {
+              pressed: null,
+              role: "button",
+              disabled,
+              tagButton,
+              onPressSync: (e) => {
+                  setCurrentFocusedIndex(index);
+                  if (getOpenFromParent())
+                      changeExpandedIndex(null);
+                  else
+                      changeExpandedIndex(index);
+                  userOnPress?.(e);
+              },
+              ...buttonParameters
+          },
+          pressParameters: {
+              excludeSpace,
+              focusSelf,
+              allowRepeatPresses: false,
+              longPressThreshold: null,
+              onPressingChange: null,
+              ...pressParameters
+          },
+          refElementParameters: refElementHeaderButtonParameters
       });
       return {
           pressReturn,
-          refElementReturn,
+          refElementBodyReturn,
+          refElementHeaderButtonReturn,
+          linearNavigationReturn,
           textContentReturn,
+          hasCurrentFocusReturn,
           accordionSectionReturn: {
               mostRecentlyTabbed: !!mostRecentlyTabbed,
               expanded: open,
               focused: (getCurrentFocusedIndex() == index)
           },
-          propsHeaderButton: headerButtonProps,
-          propsHeader: {},
-          propsBody: bodyProps,
-          hasCurrentFocusReturn
+          propsHeaderButton: useMergedProps(props, hasCurrentFocusReturn.propsStable, propsHeadReferencer, propsHeadSource, propsLN, stableTypeaheadProps, { "aria-expanded": (open ?? false), }),
+          propsBody: useMergedProps(bodyRefElementProps, propsBodyReferencer, propsBodySource, {
+              role: bodyRole,
+              tabIndex: -1
+          }),
+          propsHeader: {} // This is intentionally empty, it's just a reminder that there *does* need to be a header that contains the button.
       };
   }
 
   /**
+   * Allows a parent checkbox to control a number of child checkboxes, in accordance with the [Checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) pattern.
    *
+   * @compositeParams
    *
-   * @param param0
-   * @returns
+   * @hasChild {@link useCheckboxGroupParent}
+   * @hasChild {@link useCheckboxGroupChild}
    */
   function useCheckboxGroup({ linearNavigationParameters, rovingTabIndexParameters, checkboxGroupParameters: { orientation }, ...listNavParameters }) {
-      const { childrenHaveFocusReturn, context, linearNavigationReturn, managedChildrenReturn, props, rearrangeableChildrenReturn, rovingTabIndexReturn, singleSelectionReturn, staggeredChildrenReturn, paginatedChildrenReturn, sortableChildrenReturn, typeaheadNavigationReturn } = useCompleteListNavigation({
+      monitorCallCount(useCheckboxGroup);
+      const { context, linearNavigationReturn, managedChildrenReturn, props, rearrangeableChildrenReturn, rovingTabIndexReturn, singleSelectionReturn, staggeredChildrenReturn, paginatedChildrenReturn, sortableChildrenReturn, typeaheadNavigationReturn, childrenHaveFocusReturn, } = useCompleteListNavigation({
           linearNavigationParameters: { arrowKeyDirection: orientation, ...linearNavigationParameters },
           rovingTabIndexParameters: { focusSelfParent: focus, ...rovingTabIndexParameters },
           singleSelectionParameters: { initiallySelectedIndex: null, onSelectedIndexChange: null, ariaPropName: null, selectionMode: "disabled" },
@@ -8368,9 +8794,9 @@
       // (but only once per render);
       const allIds = _$1(new Set());
       const updateParentControlIds = useStableCallback((setter) => { setter?.(Array.from(allIds.current).join(" ")); });
-      const [getSetter, setSetter] = usePassiveState(updateParentControlIds, returnNull);
-      const [_getUpdateIndex, setUpdateIndex] = usePassiveState(useStableCallback(() => { updateParentControlIds(getSetter()); }), returnZero);
-      // Lots of machenery to track what total percentage of all checkboxes are checked,
+      const [getControlsSetterOnParentCheckbox, setControlsSetterOnParentCheckbox] = usePassiveState(updateParentControlIds, returnNull);
+      const [_getUpdateIndex, setUpdateIndex] = usePassiveState(useStableCallback(() => { updateParentControlIds(getControlsSetterOnParentCheckbox()); }), returnZero, setTimeout);
+      // Lots of machinery to track what total percentage of all checkboxes are checked,
       // and notifying the parent checkbox of this information (while re-rendering as little as possible)
       const getSelfIsChecked = T$2((percentChecked) => { return percentChecked <= 0 ? false : percentChecked >= 1 ? true : "mixed"; }, []);
       const onAnyChildCheckedUpdate = useStableCallback((setter, percentChecked) => { setter?.(getSelfIsChecked(percentChecked)); });
@@ -8392,16 +8818,16 @@
           let willChangeAny = false;
           const promises = [];
           children.forEach(child => {
-              if (child.checkboxInfo.checkboxChildType == "child")
-                  willChangeAny ||= (child.checkboxInfo.getChecked() != child.checkboxInfo.getLastUserChecked());
+              if (child.checkboxChildType == "child")
+                  willChangeAny ||= (child.getChecked() != child.getLastUserChecked());
           });
           children.forEach(child => {
-              if (child.checkboxInfo.checkboxChildType == "child") {
-                  const prevChecked = child.checkboxInfo.getChecked();
+              if (child.checkboxChildType == "child") {
+                  const prevChecked = child.getChecked();
                   let checked;
                   if (nextChecked == "mixed") {
                       if (willChangeAny)
-                          checked = (child.checkboxInfo.getLastUserChecked());
+                          checked = (child.getLastUserChecked());
                       else
                           checked = true;
                   }
@@ -8409,7 +8835,7 @@
                       checked = nextChecked;
                   }
                   if (checked != prevChecked) {
-                      const promise = child.checkboxInfo.setCheckedFromParentInput(checked, e);
+                      const promise = child.setCheckedFromParentInput(checked, e);
                       if (promise) {
                           promises.push(promise);
                       }
@@ -8420,6 +8846,7 @@
       }, []);
       return {
           linearNavigationReturn,
+          childrenHaveFocusReturn,
           context: useMemoObject({
               ...context,
               checkboxGroupChildrenContext: useMemoObject({
@@ -8429,7 +8856,7 @@
                   setTotalChildren
               }),
               checkboxGroupParentContext: useMemoObject({
-                  setSetter,
+                  setControlsSetterOnParentCheckbox,
                   setSetParentCheckboxChecked,
                   getPercentChecked,
                   getTotalChecked,
@@ -8437,7 +8864,6 @@
                   onCheckboxGroupParentInput,
               })
           }),
-          childrenHaveFocusReturn,
           props,
           staggeredChildrenReturn,
           paginatedChildrenReturn,
@@ -8449,17 +8875,31 @@
           typeaheadNavigationReturn
       };
   }
-  function useCheckboxGroupParent({ context, info, textContentParameters }) {
-      const { checkboxGroupParentContext: { setSetter, setSetParentCheckboxChecked, getPercentChecked, getTotalChecked, getTotalChildren, onCheckboxGroupParentInput } } = context;
+  /**
+   * Implements the logic for the parent checkbox (but not the checkbox itself).
+   *
+   * @compositeParams
+   */
+  function useCheckboxGroupParent({ context: { checkboxGroupParentContext: { setControlsSetterOnParentCheckbox, setSetParentCheckboxChecked, getPercentChecked, getTotalChecked, getTotalChildren, onCheckboxGroupParentInput }, ...context }, info, hasCurrentFocusParameters, refElementParameters, textContentParameters }) {
       const { hasCurrentFocusReturn, managedChildReturn, pressParameters, textContentReturn, refElementReturn, propsChild, propsTabbable, paginatedChildReturn, rovingTabIndexChildReturn, staggeredChildReturn, singleSelectionChildReturn, } = useCompleteListNavigationChild({
           context,
-          info,
+          hasCurrentFocusParameters,
+          refElementParameters,
+          info: {
+              ...info,
+              checkboxChildType: "parent",
+              // These 3 are child-only
+              getLastUserChecked: null,
+              setCheckedFromParentInput: null,
+              getChecked: null
+          },
           textContentParameters
       });
       const [ariaControls, setControls] = useState("");
       y$2(() => {
-          setSetter(() => setControls);
+          setControlsSetterOnParentCheckbox(() => setControls);
       }, [setControls]);
+      monitorCallCount(useCheckboxGroupParent);
       const [checked, setChecked] = useState(false);
       p$2(() => {
           setSetParentCheckboxChecked(() => setChecked);
@@ -8483,7 +8923,7 @@
   /**
    * Implements the "child" part of a checkbox group.
    *
-   * Does not implement any actual "checkbox" functionality,
+   * @remarks Does not implement any actual "checkbox" functionality,
    * but it does tell you what to do *with* a checkbox.
    *
    * (That is to say, use `onChildCheckedChange` whenever
@@ -8491,12 +8931,12 @@
    * properly implement `onChangeFromParent` to work
    * properly when the parent changes)
    *
-   * @param param0
-   * @returns
+   * @compositeParams
    */
-  function useCheckboxGroupChild({ checkboxGroupChild, context, info, textContentParameters, }) {
+  function useCheckboxGroupChild({ checkboxGroupChildParameters, context, info: { focusSelf, getSortValue, index, unselectable, untabbable, ...void3 }, textContentParameters, hasCurrentFocusParameters, refElementParameters, ...void4 }) {
       const { checkboxGroupChildrenContext: { allIds, setUpdateIndex, setTotalChildren, setTotalChecked, } } = context;
-      const { checked, onChangeFromParent } = checkboxGroupChild;
+      monitorCallCount(useCheckboxGroupChild);
+      const { checked, onChangeFromParent, ...void1 } = checkboxGroupChildParameters;
       const getChecked = useStableGetter(checked);
       const [getLastUserChecked, setLastUserChecked] = usePassiveState(null, returnFalse);
       const onChildCheckedChange = useStableCallback((checked) => {
@@ -8521,13 +8961,25 @@
               return () => setTotalChecked(c => ((c ?? 0) - 1));
           }
       }, [checked]);
-      const { hasCurrentFocusReturn, managedChildReturn, refElementReturn, textContentReturn, propsChild, propsTabbable, singleSelectionChildReturn: _singleSelectionChildReturn, staggeredChildReturn, paginatedChildReturn, rovingTabIndexChildReturn, pressParameters } = useCompleteListNavigationChild({
-          info: { checkboxInfo: { checkboxChildType: "child", getLastUserChecked, getChecked, setCheckedFromParentInput: onChangeFromParent }, ...info },
+      const { hasCurrentFocusReturn, managedChildReturn, refElementReturn, textContentReturn, propsChild, propsTabbable, singleSelectionChildReturn: _singleSelectionChildReturn, staggeredChildReturn, paginatedChildReturn, rovingTabIndexChildReturn, pressParameters, ...void2 } = useCompleteListNavigationChild({
+          info: {
+              checkboxChildType: "child",
+              getLastUserChecked,
+              getChecked,
+              setCheckedFromParentInput: onChangeFromParent,
+              focusSelf,
+              getSortValue,
+              index,
+              unselectable,
+              untabbable
+          },
           context,
           textContentParameters,
+          hasCurrentFocusParameters,
+          refElementParameters,
       });
       return {
-          checkboxGroupChild: {
+          checkboxGroupChildReturn: {
               onChildCheckedChange,
               onControlIdChanged
           },
@@ -8544,6 +8996,9 @@
       };
   }
 
+  /**
+   * @compositeParams
+   */
   function useLabel({ randomIdInputParameters, randomIdLabelParameters, labelParameters: { tagInput, tagLabel, ariaLabel, labelPosition, onLabelClick } }) {
       const nativeHTMLBehavior = (tagInput == "input" && tagLabel == "label" && labelPosition != "wrapping");
       const synthetic = !nativeHTMLBehavior;
@@ -8558,7 +9013,19 @@
           propsInput["aria-labelledby"] = undefined;
           propsLabel["for"] = undefined;
       }
-      const { pressReturn, props: propsPress } = usePress({ pressParameters: { excludeEnter: returnTrue, excludeSpace: returnTrue, onPressSync: onLabelClick, focusSelf: noop, allowRepeatPresses: false, excludePointer: null, longPressThreshold: null, onPressingChange: null }, refElementReturn });
+      const { pressReturn, props: propsPress } = usePress({
+          pressParameters: {
+              excludeEnter: returnTrue,
+              excludeSpace: returnTrue,
+              onPressSync: onLabelClick,
+              focusSelf: noop,
+              allowRepeatPresses: false,
+              excludePointer: null,
+              longPressThreshold: null,
+              onPressingChange: null
+          },
+          refElementReturn
+      });
       return {
           pressReturn,
           propsInput,
@@ -8569,8 +9036,11 @@
   }
   /**
    * Shortcut for `useLabel` that assumes we're just never working with native HTML `input` and `label` elements. So for labelling guaranteably non-native elements.
+   *
+   * @compositeParams
    */
   function useLabelSynthetic({ labelParameters: { ariaLabel, onLabelClick }, ...rest }) {
+      monitorCallCount(useLabelSynthetic);
       return useLabel({
           labelParameters: {
               ariaLabel,
@@ -8588,15 +9058,17 @@
   }
   /**
    * Handles any component where there's:
+   * ```md-literal
    * 1. Some kind of an on/off binary/trinary input element that needs event handlers
    * 2. Some kind of label for that input element
+   * ```md-literal
    *
    * See also `useLabel` for when there's a label for a non-checkbox-like component.
    *
-   * @param param0
-   * @returns
+   * @compositeParams
    */
-  function useCheckboxLike({ labelParameters, randomIdInputParameters, randomIdLabelParameters, checkboxLikeParameters: { checked, disabled, onInput: onInputSync, role, ...void1 }, refElementInputReturn, refElementLabelReturn, pressParameters: { excludeSpace, longPressThreshold, ...void2 }, ...void3 }) {
+  function useCheckboxLike({ labelParameters, randomIdInputParameters, randomIdLabelParameters, checkboxLikeParameters: { checked, disabled, role, ...void1 }, refElementInputReturn, refElementLabelReturn, pressParameters: { excludeSpace, longPressThreshold, onPressSync: onInputSync, ...void2 }, ...void3 }) {
+      monitorCallCount(useCheckboxLike);
       const { getElement: getInputElement } = refElementInputReturn;
       const { getElement: getLabelElement } = refElementLabelReturn;
       const { tagInput, tagLabel, labelPosition } = labelParameters;
@@ -8618,7 +9090,7 @@
               onLabelClick: useStableCallback((e) => {
                   if (!disabled && tagInput != "input" && tagLabel != "label" && labelPosition != "separate") {
                       focusSelf();
-                      onInputSync(e);
+                      onInputSync?.(e);
                   }
               })
           },
@@ -8703,38 +9175,64 @@
       };
   }
 
-  function useCheckbox({ checkboxParameters: { onCheckedChange }, checkboxLikeParameters, labelParameters, pressParameters }) {
+  /**
+   * Implements a [Checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) pattern.
+   *
+   * @compositeParams
+   */
+  function useCheckbox({ checkboxLikeParameters: { checked, disabled, ...void2 }, checkboxParameters: { onCheckedChange, ...void4 }, labelParameters, pressParameters, ...void1 }) {
+      monitorCallCount(useCheckbox);
       const { tagInput, labelPosition } = labelParameters;
-      const { checked } = checkboxLikeParameters;
-      const { refElementReturn: refElementInputReturn, propsStable: propsRefInput } = useRefElement({});
-      const { refElementReturn: refElementLabelReturn, propsStable: propsRefLabel } = useRefElement({});
-      const onInputEnhanced = useStableCallback((e) => onCheckedChange?.(enhanceEvent(e, { checked: !checked })));
-      const { propsInput, propsLabel, ...ret } = useCheckboxLike({
+      const { refElementReturn: refElementInputReturn, propsStable: propsRefInput } = useRefElement({ refElementParameters: {} });
+      const { refElementReturn: refElementLabelReturn, propsStable: propsRefLabel } = useRefElement({ refElementParameters: {} });
+      const { propsInput, propsLabel, checkboxLikeInputReturn, checkboxLikeLabelReturn, checkboxLikeReturn, pressInputReturn, pressLabelReturn, pressReturn, randomIdInputReturn, randomIdLabelReturn, ...void3 } = useCheckboxLike({
           randomIdInputParameters: { prefix: Prefices.checkboxLikeInput },
           randomIdLabelParameters: { prefix: Prefices.checkboxLikeLabel },
           refElementInputReturn,
           refElementLabelReturn,
-          checkboxLikeParameters: { role: "checkbox", onInput: onInputEnhanced, ...checkboxLikeParameters },
-          pressParameters,
-          labelParameters
+          checkboxLikeParameters: { role: "checkbox", checked, disabled },
+          pressParameters: {
+              onPressSync: useStableCallback(e => { onCheckedChange?.(enhanceEvent(e, { checked: !checked, previous: checked })); }),
+              ...pressParameters,
+          },
+          labelParameters,
       });
       return {
           checkboxReturn: { propsUnstable: { type: (tagInput == "input" && labelPosition != "wrapping" ? "checkbox" : undefined) } },
           propsInput: useMergedProps(propsInput, propsRefInput),
           propsLabel: useMergedProps(propsLabel, propsRefLabel),
-          ...ret
+          checkboxLikeInputReturn,
+          checkboxLikeLabelReturn,
+          checkboxLikeReturn,
+          pressInputReturn,
+          pressLabelReturn,
+          pressReturn,
+          randomIdInputReturn,
+          randomIdLabelReturn
       };
   }
 
-  function useDialog({ dismissParameters, escapeDismissParameters, focusTrapParameters, labelParameters }) {
-      const { propsFocusContainer, propsStablePopup, propsStableSource, refElementPopupReturn, refElementSourceReturn } = useModal({
-          dismissParameters: { closeOnLostFocus: false, ...dismissParameters },
-          escapeDismissParameters,
+  /**
+   * Implements a [Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/dialog/) pattern.
+   *
+   * @compositeParams
+   */
+  function useDialog({ dismissParameters, escapeDismissParameters, focusTrapParameters, activeElementParameters, backdropDismissParameters, modalParameters, refElementParameters, labelParameters, ...void1 }) {
+      monitorCallCount(useDialog);
+      const { propsFocusContainer, propsStablePopup, propsStableSource, refElementPopupReturn, refElementSourceReturn, ...void2 } = useModal({
+          dismissParameters: { dismissActive: true, ...dismissParameters },
+          backdropDismissParameters: { onDismissBackdrop: null, ...backdropDismissParameters },
+          lostFocusDismissParameters: { onDismissLostFocus: null, dismissLostFocusActive: false },
+          escapeDismissParameters: { onDismissEscape: null, ...escapeDismissParameters },
+          modalParameters,
+          refElementParameters,
+          activeElementParameters,
           focusTrapParameters: { trapActive: true, onlyMoveFocus: false, ...focusTrapParameters }
       });
-      const { propsInput, propsLabel } = useLabelSynthetic({
+      const { propsInput, propsLabel, pressReturn, randomIdInputReturn, randomIdLabelReturn, ...void3 } = useLabelSynthetic({
           labelParameters: {
-              ...labelParameters, onLabelClick: useStableCallback(() => {
+              ...labelParameters,
+              onLabelClick: useStableCallback(() => {
                   const e = refElementPopupReturn.getElement();
                   focusTrapParameters.focusPopup(e, () => findFirstFocusable(e));
               })
@@ -8752,13 +9250,24 @@
       };
   }
 
-  function useDrawer({ dismissParameters, escapeDismissParameters, focusTrapParameters, labelParameters }) {
-      const { propsFocusContainer, propsStablePopup, propsStableSource, refElementPopupReturn, refElementSourceReturn } = useModal({
-          dismissParameters,
-          escapeDismissParameters,
+  /**
+   * Implements a drawer, which is a specific kind of [Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/dialog/).
+   *
+   * @compositeParams
+   */
+  function useDrawer({ dismissParameters, escapeDismissParameters, focusTrapParameters, activeElementParameters, labelParameters, backdropDismissParameters, lostFocusDismissParameters, modalParameters, refElementParameters, ...void1 }) {
+      monitorCallCount(useDrawer);
+      const { propsFocusContainer, propsStablePopup, propsStableSource, refElementPopupReturn, refElementSourceReturn, ...void2 } = useModal({
+          dismissParameters: { dismissActive: true, ...dismissParameters },
+          escapeDismissParameters: { onDismissEscape: null, ...escapeDismissParameters },
+          backdropDismissParameters: { onDismissBackdrop: null, ...backdropDismissParameters },
+          lostFocusDismissParameters: { onDismissLostFocus: null, ...lostFocusDismissParameters },
+          activeElementParameters,
+          modalParameters,
+          refElementParameters,
           focusTrapParameters: { onlyMoveFocus: false, ...focusTrapParameters }
       });
-      const { propsInput, propsLabel, } = useLabelSynthetic({
+      const { propsInput, propsLabel, pressReturn, randomIdInputReturn, randomIdLabelReturn, ...void3 } = useLabelSynthetic({
           labelParameters: {
               ...labelParameters, onLabelClick: useStableCallback(() => {
                   const e = refElementPopupReturn.getElement();
@@ -8778,7 +9287,20 @@
       };
   }
 
+  /**
+   * Implements a gridlist, which is a hybrid of a [Listbox](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/) and a [Grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/).
+   *
+   * @remarks A Listbox is a very limited structure, essentially being just a list with no further interactive content allowed.
+   *
+   * If you need a list where each list item has a menu or a button or other non-text content, a Gridlist is probably what you want.
+   *
+   * @compositeParams
+   *
+   * @hasChild {@link useGridlistRow}
+   * @hasChild {@link useGridlistCell}
+   */
   function useGridlist({ labelParameters, listboxParameters: { selectionLimit, groupingType, selectedIndex, onSelectedIndexChange }, rovingTabIndexParameters, ...restParams }) {
+      monitorCallCount(useGridlist);
       const { propsInput: propsLabelList, propsLabel: propsLabelLabel, randomIdInputReturn: { id: _gridlistId }, randomIdLabelReturn: { id: _labelId } } = useLabelSynthetic({
           labelParameters: {
               ...labelParameters,
@@ -8822,7 +9344,12 @@
           ...restRet
       };
   }
-  function useGridlistRow({ gridlistRowParameters: { selected }, linearNavigationParameters, context: cx1, info, rovingTabIndexParameters, textContentParameters, typeaheadNavigationParameters, ...void1 }) {
+  /**
+   * @compositeParams
+   *
+   */
+  function useGridlistRow({ gridlistRowParameters: { selected }, linearNavigationParameters, context: cx1, info, rovingTabIndexParameters, textContentParameters, typeaheadNavigationParameters, hasCurrentFocusParameters, gridNavigationSingleSelectionSortableRowParameters, ...void1 }) {
+      monitorCallCount(useGridlistRow);
       const { gridlistRowContext: { selectionLimit } } = cx1;
       const { context: cx2, hasCurrentFocusReturn, linearNavigationReturn, managedChildReturn, managedChildrenReturn, paginatedChildReturn, props, rovingTabIndexChildReturn, rovingTabIndexReturn, singleSelectionChildReturn, staggeredChildReturn, textContentReturn, typeaheadNavigationReturn, pressParameters, ...void2 } = useCompleteGridNavigationRow({
           linearNavigationParameters,
@@ -8831,6 +9358,8 @@
           rovingTabIndexParameters,
           textContentParameters,
           typeaheadNavigationParameters,
+          hasCurrentFocusParameters,
+          gridNavigationSingleSelectionSortableRowParameters,
       });
       // `selected` should only be true/false for multi-selection
       if (selectionLimit != "multi")
@@ -8853,7 +9382,12 @@
           props
       };
   }
+  /**
+   * @compositeParams
+   *
+   */
   function useGridlistCell({ pressParameters: { onPressSync, longPressThreshold, onPressingChange, ...void1 }, ...p }) {
+      monitorCallCount(useGridlistCell);
       const { props, ...info } = useCompleteGridNavigationCell(p);
       const { pressReturn, props: propsPress } = usePress({
           pressParameters: { onPressSync, focusSelf: p.info.focusSelf, allowRepeatPresses: false, excludeEnter: null, excludePointer: null, excludeSpace: info.pressParameters.excludeSpace, longPressThreshold, onPressingChange },
@@ -8877,19 +9411,121 @@
   }*/
 
   /**
-   * A menu surface is what handles user interaction with an interactive but transient surface (like a menu or a popup).
+   * Implements a [Listbox](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/) pattern.
    *
-   * The keyboard (etc.) interactions are shared among a lot of widgets, and the opening button has some ARIA properties that need setting.
+   * @remarks A listbox is a very limited widget and its items cannot contain interactive or non-text content.
    *
-   * Related to menus, which are a menu contained within a menu surface. Not related to menubars -- menus contain menubars, but not all menubars are contained within a menu or its surface.
+   * @see {@link useGridlist} for a more capable list widget.
    *
+   * @compositeParams
+   *
+   * @hasChild {@link useListboxItem}
    */
-  function useMenuSurface({ dismissParameters, escapeDismissParameters, focusTrapParameters, menuSurfaceParameters: { role, surfaceId, ...void1 }, ...void2 }) {
+  function useListbox({ labelParameters, listboxParameters: { selectionLimit, groupingType, selectedIndex, onSelectedIndexChange, orientation }, linearNavigationParameters, singleSelectionParameters: { ariaPropName, selectionMode }, rovingTabIndexParameters, ...restParams }) {
+      monitorCallCount(useListbox);
+      useEnsureStability("useListbox", selectionLimit);
+      const { propsInput: propsLabelList, propsLabel: propsLabelLabel, randomIdInputReturn: { id: _inputId }, randomIdLabelReturn: { id: _labelId } } = useLabelSynthetic({
+          labelParameters: {
+              ...labelParameters,
+              onLabelClick: useStableCallback(() => {
+                  rovingTabIndexReturn.focusSelf();
+              })
+          },
+          randomIdInputParameters: { prefix: Prefices.listbox },
+          randomIdLabelParameters: { prefix: Prefices.listboxLabel }
+      });
+      let { context, props: { ...props }, rovingTabIndexReturn, singleSelectionReturn, ...restRet } = useCompleteListNavigationDeclarative({
+          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
+          singleSelectionDeclarativeParameters: { selectedIndex, onSelectedIndexChange },
+          singleSelectionParameters: { ariaPropName: ariaPropName || "aria-selected", selectionMode: selectionMode },
+          linearNavigationParameters: { arrowKeyDirection: orientation, ...linearNavigationParameters },
+          ...restParams
+      });
+      if (groupingType == "group")
+          props.role = "group";
+      else if (groupingType == "with-groups") {
+          // Intentionally clobbering all the list navigation stuff.
+          props = { role: "listbox" };
+          // ...actually, context too while we're at it.
+          context = null;
+      }
+      else {
+          props.role = "listbox";
+      }
+      if (selectionLimit == "multi")
+          console.assert(singleSelectionReturn.getSelectedIndex() == null);
+      return {
+          ...restRet,
+          context: useMemoObject({
+              ...context,
+              listboxContext: useMemoObject({
+                  selectionLimit
+              })
+          }),
+          rovingTabIndexReturn,
+          propsListbox: useMergedProps(props, propsLabelList, { "aria-multiselectable": (selectionLimit == "multi" ? "true" : undefined) }),
+          propsListboxLabel: propsLabelLabel
+      };
+  }
+  /**
+   * @compositeParams
+   */
+  function useListboxItem({ context: { listboxContext: { selectionLimit }, ...context }, listboxParameters: { selected, onMultiSelect }, pressParameters: { allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange, ...void1 }, ...restParams }) {
+      monitorCallCount(useListboxItem);
+      const { propsChild, propsTabbable, refElementReturn, pressParameters: { onPressSync, excludeSpace, ...void2 }, ...restRet } = useCompleteListNavigationChild({
+          context,
+          ...restParams
+      });
+      if (selectionLimit == "single")
+          console.assert(selected == null);
+      propsChild.role = "option";
+      propsChild["aria-disabled"] = restParams.info.unselectable ? "true" : undefined;
+      const { pressReturn, props: propsPress } = usePress({
+          refElementReturn,
+          pressParameters: {
+              onPressSync: useStableCallback((e) => {
+                  onPressSync?.(e);
+                  if (selectionLimit == "multi")
+                      onMultiSelect?.(enhanceEvent(e, { selected: !selected }));
+              }),
+              focusSelf: restParams.info.focusSelf,
+              excludeSpace,
+              allowRepeatPresses,
+              excludeEnter,
+              excludePointer,
+              longPressThreshold,
+              onPressingChange
+          }
+      });
+      return {
+          pressReturn,
+          refElementReturn,
+          props: useMergedProps(propsChild, propsTabbable, propsPress),
+          ...restRet
+      };
+  }
+
+  /**
+   * A menu surface is what handles user interaction with an interactive but transient surface (like a menu or a popup, but not something potentially modal like a dialog).
+   *
+   * @remarks The keyboard (etc.) interactions are shared among a lot of widgets, and the opening button has some ARIA properties that need setting.
+   *
+   * Related to **menus**, which are a **menubar** contained within a **menu surface**.
+   *
+   * @compositeParams
+   */
+  function useMenuSurface({ dismissParameters, focusTrapParameters, activeElementParameters, menuSurfaceParameters: { role, surfaceId, ...void1 }, modalParameters, escapeDismissParameters, ...void2 }) {
+      monitorCallCount(useMenuSurface);
       const { refElementReturn: { getElement: getButtonElement }, propsStable: propsRefTrigger, ...void4 } = useRefElement({ refElementParameters: { onElementChange: undefined } });
       const { refElementReturn: { getElement: getMenuElement, ...void5 }, propsStable: propsRefSurface, ...void6 } = useRefElement({ refElementParameters: { onElementChange: undefined } });
       const { propsFocusContainer, propsStablePopup: propsPopup, propsStableSource: ps2, refElementPopupReturn, refElementSourceReturn } = useModal({
-          dismissParameters,
-          escapeDismissParameters,
+          dismissParameters: { dismissActive: true, ...dismissParameters },
+          backdropDismissParameters: { dismissBackdropActive: true, onDismissBackdrop: null },
+          lostFocusDismissParameters: { dismissLostFocusActive: true, onDismissLostFocus: null },
+          escapeDismissParameters: { dismissEscapeActive: true, onDismissEscape: null, ...escapeDismissParameters },
+          modalParameters,
+          refElementParameters: {},
+          activeElementParameters,
           focusTrapParameters: {
               onlyMoveFocus: true,
               trapActive: true,
@@ -8906,14 +9542,14 @@
           id: surfaceId
       });
       const propsTrigger = useMergedProps({
-          "aria-expanded": (dismissParameters.open),
+          "aria-expanded": (modalParameters.active),
           "aria-haspopup": role,
       }, propsRefTrigger, ps2, { "aria-controls": surfaceId });
       const propsSentinel = useFocusSentinel({
           focusSentinel: {
-              sendFocusToMenu: T$2(() => { return focusTrapParameters.focusPopup(getMenuElement(), () => findFirstFocusable(getMenuElement())); }, []),
-              onClose: T$2(() => { dismissParameters.onClose("lost-focus"); }, [dismissParameters.onClose]),
-              open: dismissParameters.open
+              sendFocusToMenu: useStableCallback(() => { return focusTrapParameters.focusPopup(getMenuElement(), () => findFirstFocusable(getMenuElement())); }),
+              onClose: useStableCallback((e) => { dismissParameters.onDismiss(e, "lost-focus"); }),
+              open: modalParameters.active
           }
       });
       return {
@@ -8936,16 +9572,16 @@
    * and keyboard users can escape to close a menu, screen readers and other input methods
    * that don't use those two would become stuck.
    *
-   * @param param0
-   * @returns
+   * @compositeParams
    */
   function useFocusSentinel({ focusSentinel: { open, onClose, sendFocusToMenu } }) {
+      monitorCallCount(useFocusSentinel);
       const getSendFocusWithinMenu = useStableGetter(sendFocusToMenu);
       const stableOnClose = useStableCallback(onClose);
       const [sentinelIsActive, setSentinelIsActive] = useState(false);
       useTimeout({ callback: () => { setSentinelIsActive(open); }, timeout: 100, triggerIndex: `${open}-${sentinelIsActive}` });
-      const onFocus = sentinelIsActive ? (() => stableOnClose()) : (() => getSendFocusWithinMenu()?.());
-      const onClick = () => stableOnClose();
+      const onFocus = sentinelIsActive ? ((e) => stableOnClose(e)) : (() => getSendFocusWithinMenu()?.());
+      const onClick = (e) => stableOnClose(e);
       return {
           tabIndex: sentinelIsActive ? 0 : -1,
           onFocus,
@@ -8954,18 +9590,19 @@
   }
 
   /**
-   * A toolbar is just a collection of widgets in an expected order with a label (visible or hidden) and with the usual keyboard navigation stuff.
+   * Implements a [Toolbar](https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/) pattern, which is a collection of widgets in an expected order with a label (visible or hidden) and with the usual keyboard navigation stuff.
    *
+   * @remarks
    * The main difference between a toolbar and a menubar is that a menubar contains purely static menuitems,
    * but a toolbar is the more general case, being able to contain anything at all.
    * A menubar is implemented as a special case of a toolbar, and a menu is implemented as a specialized menubar.
    *
    * Either way, be sure to specify the role and orientation this toolbar has (role=toolbar if you're using this as an actual toolbar).
    *
-   * @param param0
-   * @returns
+   * @compositeParams
    */
   function useToolbar({ linearNavigationParameters, toolbarParameters: { orientation, role, selectedIndex, onSelectedIndexChange, disabled }, labelParameters, rovingTabIndexParameters, ...listNavParameters }) {
+      monitorCallCount(useToolbar);
       const { context, props, ...listNavReturn } = useCompleteListNavigationDeclarative({
           ...listNavParameters,
           rovingTabIndexParameters: { ...rovingTabIndexParameters, untabbable: disabled, focusSelfParent: focus },
@@ -8994,7 +9631,11 @@
           ...listNavReturn
       };
   }
+  /**
+   * @compositeParams
+   */
   function useToolbarChild({ info, toolbarChildParameters: { disabledProp }, ...args }) {
+      monitorCallCount(useToolbarChild);
       const { propsChild, propsTabbable, ...listNavReturn } = useCompleteListNavigationChild({ info, ...args });
       return {
           propsChild: useMergedProps(propsChild, { [disabledProp]: info.unselectable ? true : undefined }),
@@ -9004,23 +9645,29 @@
   }
 
   /**
-   * A menubar is identical to a toolbar, except that every item
+   * Implements a [Menubar](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) pattern.
+   *
+   * @remarks A menubar is identical to a toolbar, except that every item
    * in a menubar is a menuitem (or similar) and has some sort of
    * role and action when pressed besides just single selection (if applicable).
    *
    * (A toolbar child won't have a defined role, but every menubar child will)
    *
-   * @param args
-   * @returns
+   * @compositeParams
    */
   function useMenubar(args) {
+      monitorCallCount(useMenubar);
       const { propsToolbar: propsMenubar, ...restReturn } = useToolbar(args);
       return {
           propsMenubar,
           ...restReturn
       };
   }
+  /**
+   * @compositeParams
+   */
   function useMenubarChild({ menuItemParameters: { onPress: opu, role }, pressParameters: { onPressingChange, ...void1 }, ...restParams }) {
+      monitorCallCount(useMenubarChild);
       const focusSelf = T$2((e) => focus(e), []);
       const { propsChild, propsTabbable, pressParameters: { onPressSync, excludeSpace }, ...restRet } = useToolbarChild({
           ...restParams,
@@ -9050,23 +9697,25 @@
   }
 
   /**
-   * A menu is a specialization of a menubar (something that handles navigation among a set of menuitems)
+   * Implements the [Menu](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) and [Menu Button](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) patterns.
+   *
+   * @remarks A menu is a specialization of a menubar (something that handles navigation among a set of menuitems)
    * and a menu surface (something that handles moving focus to/from an unrelated area of the page).
    *
    * Additionally, pressing the arrow key that corresponds to the direction that the menu opens
    * in will open it.
    *
-   * @param param0
-   * @returns
+   * @compositeParams
    */
-  function useMenu({ dismissParameters, escapeDismissParameters, menuParameters: { openDirection, onOpen }, menuSurfaceParameters, toolbarParameters, ...restParams }) {
+  function useMenu({ dismissParameters, escapeDismissParameters, menuParameters: { openDirection, onOpen }, menuSurfaceParameters, activeElementParameters, toolbarParameters, modalParameters, ...restParams }) {
+      monitorCallCount(useMenu);
       const { context, propsLabel: propsButtonAsMenuLabel, propsMenubar, randomIdInputReturn, rovingTabIndexReturn, ...restRet } = useMenubar({
           toolbarParameters: { role: "menu", ...toolbarParameters },
           labelParameters: { ariaLabel: null },
           ...restParams
       });
       const onKeyDown = useStableCallback((e) => {
-          const isOpen = dismissParameters.open;
+          const isOpen = modalParameters.active;
           if (!isOpen) {
               switch (e.key) {
                   case "ArrowUp": {
@@ -9110,8 +9759,10 @@
               surfaceId: randomIdInputReturn.id,
               role: "menu",
           },
-          dismissParameters,
           escapeDismissParameters,
+          modalParameters,
+          dismissParameters,
+          activeElementParameters,
           focusTrapParameters: {
               focusPopup: () => { rovingTabIndexReturn.focusSelf(); }
           }
@@ -9122,8 +9773,8 @@
           context: useMemoObject({
               ...context,
               menu: useMemoObject({
-                  closeFromMenuItemClicked: useStableCallback(() => {
-                      dismissParameters.onClose("item-clicked");
+                  closeFromMenuItemClicked: useStableCallback((e) => {
+                      dismissParameters.onDismiss(e, "item-clicked"); // TODO
                   })
               })
           }),
@@ -9134,7 +9785,11 @@
           propsTrigger: useMergedProps({ onKeyDown }, propsTrigger, propsButtonAsMenuLabel),
       };
   }
+  /**
+   * @compositeParams
+   */
   function useMenuItem(p) {
+      monitorCallCount(useMenuItem);
       const ret = useMenubarChild(p);
       return {
           ...ret,
@@ -9152,10 +9807,12 @@
    * One *must* have `aria-live=polite` and one *must* have `aria-live=assertive`, but there aren't really any other requirements.
    * They shouldn't be visible, I suppose.
    *
-   * @param param0
-   * @returns
+   * @compositeParams
+   *
+   * @hasChild {@link useNotify}
    */
   function useNotificationProvider({ targetAssertive, targetPolite }) {
+      monitorCallCount(useNotificationProvider);
       const { children: childrenPolite, pushChild: notifyPolite, portalElement: politeElement } = usePortalChildren({ target: targetPolite });
       const { children: childrenAssertive, pushChild: notifyAssertive, portalElement: assertiveElement } = usePortalChildren({ target: targetAssertive });
       console.assert(politeElement?.getAttribute("aria-live") == "polite");
@@ -9170,10 +9827,17 @@
       };
   }
   function useNotify() {
+      monitorCallCount(useNotify);
       return useContextWithWarning(NotificationProviderContext, "notification provider").notify;
   }
 
-  function useProgress({ labelParameters, progressIndicatorParameters: { max, value, valueText, tagIndicator, ...void1 }, ...void2 }) {
+  /**
+   * Provides the attributes and roles for a progress bar.
+   *
+   * @compositeParams
+   */
+  function useProgress({ labelParameters, progressIndicatorParameters: { max, value, valueText, tagProgressIndicator, ...void1 }, ...void2 }) {
+      monitorCallCount(useProgress);
       const { propsInput, propsLabel, randomIdInputReturn, randomIdLabelReturn, pressReturn, ...void3 } = useLabelSynthetic({
           labelParameters: { ...labelParameters, onLabelClick: null },
           randomIdInputParameters: { prefix: Prefices.progressIndicator },
@@ -9188,7 +9852,7 @@
           value = null;
           max ??= 100;
       }
-      const indicatorProps = tagIndicator === "progress" ?
+      const indicatorProps = tagProgressIndicator === "progress" ?
           {
               max,
               value: (value ?? undefined),
@@ -9214,17 +9878,46 @@
           "aria-describedby": randomIdInputReturn.id
       };
       return {
-          propsIndicator: useMergedProps(indicatorProps, propsInput),
-          propsLabel: useMergedProps(labelProps, propsLabel),
-          propsRegion: regionProps,
+          propsProgressIndicator: useMergedProps(indicatorProps, propsInput),
+          propsProgressLabel: useMergedProps(labelProps, propsLabel),
+          propsProgressRegion: regionProps,
           randomIdInputReturn,
           randomIdLabelReturn,
           pressReturn,
       };
   }
-  function useProgressWithHandler({ labelParameters, progressIndicatorParameters, asyncHandlerParameters, progressWithHandlerParameters: { forciblyPending } }) {
-      const asyncInfo = useAsyncHandler(asyncHandlerParameters);
-      const { propsIndicator, propsLabel, propsRegion } = useProgress({
+  /**
+   * Provides props for a progress bar based on the progress of an async event handler, and notifies ATs when the operation has started/finished.
+   *
+   * @remarks
+   *
+   * @compositeParams
+   */
+  function useProgressWithHandler({ labelParameters, progressIndicatorParameters, asyncHandlerParameters: { asyncHandler, ...asyncHandlerParameters }, progressWithHandlerParameters: { forciblyPending, notifyFailure, notifyPending, notifySuccess, ...void1 }, ...void2 }) {
+      monitorCallCount(useProgressWithHandler);
+      const notify = useNotify();
+      const asyncInfo = useAsyncHandler({
+          ...asyncHandlerParameters, asyncHandler: async (...args) => {
+              try {
+                  let promiseOrValue = asyncHandler?.(...args);
+                  if (promiseOrValue && "then" in promiseOrValue) {
+                      if (notifyPending)
+                          notify("assertive", notifyPending);
+                      let value = await promiseOrValue;
+                      if (notifySuccess)
+                          notify("assertive", notifySuccess);
+                      return value;
+                  }
+                  return promiseOrValue;
+              }
+              catch (ex) {
+                  if (notifyFailure)
+                      notify("assertive", notifyFailure);
+                  throw ex;
+              }
+          }
+      });
+      const { propsProgressIndicator, propsProgressLabel, propsProgressRegion } = useProgress({
           labelParameters,
           progressIndicatorParameters: {
               max: 1,
@@ -9234,17 +9927,30 @@
           },
       });
       return {
-          propsIndicator,
-          propsLabel,
-          propsRegion,
+          propsProgressIndicator,
+          propsProgressLabel,
+          propsProgressRegion,
           asyncHandlerReturn: asyncInfo
       };
   }
 
-  function useRadioGroup({ labelParameters, radioGroupParameters: { name, onSelectedValueChange, selectedValue }, rovingTabIndexParameters, ...restParams }) {
+  /**
+   * Implements a [Radio Group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) pattern.
+   *
+   * @compositeParams
+   *
+   * @hasChild {@link useRadio}
+   */
+  function useRadioGroup({ labelParameters, radioGroupParameters: { name, selectedValue, onSelectedValueChange, ...void2 }, rovingTabIndexParameters, linearNavigationParameters, rearrangeableChildrenParameters, sortableChildrenParameters, staggeredChildrenParameters, typeaheadNavigationParameters, refElementParameters, ...void1 }) {
+      monitorCallCount(useRadioGroup);
+      // TODO: The way this is structured causes 1 extra re-render on the parent
+      // when the selectedValue changes to selectedIndex.
       const [selectedIndex, setSelectedIndex] = useState(null);
       const nameToIndex = _$1(new Map());
       const indexToName = _$1(new Map());
+      p$2(() => {
+          setSelectedIndex(nameToIndex.current.get(selectedValue) ?? null);
+      }, [selectedValue]);
       const { propsInput: propsGroup1, propsLabel } = useLabelSynthetic({
           labelParameters: {
               onLabelClick: useStableCallback(() => {
@@ -9255,30 +9961,34 @@
           randomIdLabelParameters: { prefix: Prefices.radioGroupLabel, },
           randomIdInputParameters: { prefix: Prefices.radioGroup }
       });
-      y$2(() => {
+      /*useLayoutEffect(() => {
           if (selectedValue != null)
-              singleSelectionReturn.changeSelectedIndex(nameToIndex.current.get(selectedValue) ?? null);
+          asyncHandlerReturn.syncHandler(nameToIndex.current.get(selectedValue) ?? null);
           else
-              singleSelectionReturn.changeSelectedIndex(null);
-      }, [selectedValue]);
-      const { context, props: propsGroup2, singleSelectionReturn, managedChildrenReturn, rovingTabIndexReturn, ...restRet } = useCompleteListNavigation({
-          singleSelectionParameters: { initiallySelectedIndex: selectedIndex, onSelectedIndexChange: useStableCallback((e) => { setSelectedIndex(e[EventDetail].selectedIndex); onSelectedIndexChange?.(e); }), selectionMode: "focus", ariaPropName: null },
+          asyncHandlerReturn.syncHandler(null);
+      }, [selectedValue])*/
+      const { context, props: propsGroup2, singleSelectionReturn, managedChildrenReturn, rovingTabIndexReturn, linearNavigationReturn, paginatedChildrenReturn, rearrangeableChildrenReturn, sortableChildrenReturn, staggeredChildrenReturn, typeaheadNavigationReturn, childrenHaveFocusReturn, ...void3 } = useCompleteListNavigationDeclarative({
+          singleSelectionDeclarativeParameters: {
+              selectedIndex,
+              onSelectedIndexChange: useStableCallback((e) => {
+                  setSelectedIndex(e[EventDetail].selectedIndex);
+                  onSelectedValueChange?.(enhanceEvent(e, { selectedValue: indexToName.current.get(e[EventDetail].selectedIndex) }));
+              }),
+          },
+          singleSelectionParameters: { selectionMode: "focus", ariaPropName: null },
           paginatedChildrenParameters: { paginationMin: null, paginationMax: null },
           rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
-          ...restParams
+          linearNavigationParameters,
+          rearrangeableChildrenParameters,
+          sortableChildrenParameters,
+          staggeredChildrenParameters,
+          typeaheadNavigationParameters,
+          refElementParameters
       });
-      const { singleSelectionParameters: { onSelectedIndexChange } } = useSingleSelectionDeclarative({
+      /*const { singleSelectionParameters: { onSelectedIndexChange } } = useSingleSelectionDeclarative<G, TCE, M>({
           singleSelectionReturn: {
               changeSelectedIndex: useStableCallback((s, r) => {
                   singleSelectionReturn.changeSelectedIndex(s, r);
-                  /*let next = typeof s == "function" ? s(selectedIndex) : s;
-                  if (next != null) {
-                      const nextValue = indexToName.current.get(next); //managedChildrenReturn.getChildren().getAt(next)?.getValue2();
-                      onSelectedValueChange(nextValue as V, r);
-                  }
-                  else {
-                      onSelectedValueChange(null, r);
-                  }*/
               })
           },
           singleSelectionDeclarativeParameters: {
@@ -9289,34 +9999,48 @@
                   onSelectedValueChange?.(enhanceEvent(e, { selectedValue: value }));
               })
           }
-      });
+      })*/
       const propsRadioGroup = useMergedProps(propsGroup1, propsGroup2, { role: "radiogroup" });
       return {
           propsRadioGroup,
           propsRadioGroupLabel: propsLabel,
           rovingTabIndexReturn,
+          linearNavigationReturn,
+          paginatedChildrenReturn,
+          managedChildrenReturn,
+          radioGroupReturn: { selectedIndex },
+          singleSelectionReturn,
+          rearrangeableChildrenReturn,
+          sortableChildrenReturn,
+          staggeredChildrenReturn,
+          typeaheadNavigationReturn,
+          childrenHaveFocusReturn,
           context: F$2(() => ({
               ...context,
               radioContext: { name, indexToName: indexToName.current, nameToIndex: nameToIndex.current }
           }), [name]),
-          managedChildrenReturn,
-          radioGroupReturn: { selectedIndex },
-          singleSelectionReturn,
-          ...restRet,
       };
   }
-  function useRadio({ radioParameters: { value }, checkboxLikeParameters: { disabled }, labelParameters, info, context, textContentParameters, pressParameters: { longPressThreshold, ...void3 }, ...void1 }) {
+  /**
+   * @compositeParams
+   */
+  function useRadio({ radioParameters: { value, ...void5 }, checkboxLikeParameters: { disabled, ...void4 }, labelParameters, info, context, textContentParameters, pressParameters: { longPressThreshold, ...void3 }, hasCurrentFocusParameters, refElementParameters, ...void1 }) {
+      monitorCallCount(useRadio);
       const index = info.index;
-      const onInput = useStableCallback((e) => {
-          onPressSync?.(e);
-      });
+      /*const onInput = useStableCallback((e: EventType<InputElement, Event>) => {
+          onPressSync?.(e as PressEventReason<any>);
+      });*/
       const { name, indexToName, nameToIndex } = context.radioContext;
       const { tagInput, labelPosition } = labelParameters;
-      useStableGetter(value);
       const { propsChild: listNavigationSingleSelectionChildProps, propsTabbable, singleSelectionChildReturn, pressParameters: { onPressSync, excludeSpace, ...void2 }, ...listNavRet } = useCompleteListNavigationChild({
-          info,
+          info: {
+              focusSelf: useStableCallback((e) => { return checkboxLikeRet.checkboxLikeReturn.focusSelf(); }),
+              ...info
+          },
           context,
-          textContentParameters
+          textContentParameters,
+          hasCurrentFocusParameters,
+          refElementParameters
       });
       const { selected: checked } = singleSelectionChildReturn;
       const { refElementReturn: refElementInputReturn, propsStable: propsRefInput } = useRefElement({ refElementParameters: {} });
@@ -9325,10 +10049,9 @@
           checkboxLikeParameters: {
               checked: (checked ?? false),
               disabled,
-              onInput: onInput,
               role: "radio"
           },
-          pressParameters: { excludeSpace, longPressThreshold },
+          pressParameters: { excludeSpace, longPressThreshold, onPressSync },
           labelParameters,
           randomIdInputParameters: { prefix: Prefices.radio },
           randomIdLabelParameters: { prefix: Prefices.radioLabel },
@@ -9364,7 +10087,15 @@
       };
   }
 
+  /**
+   * Implements a [Slider](https://www.w3.org/WAI/ARIA/apg/patterns/slider-multithumb/) pattern.
+   *
+   * @compositeParams
+   *
+   * @hasChild {@link useSliderThumb}
+   */
   function useSlider({ sliderParameters: { max, min }, managedChildrenParameters }) {
+      monitorCallCount(useSlider);
       const { context, managedChildrenReturn } = useManagedChildren({ managedChildrenParameters });
       const baseIdRef = _$1(null);
       if (baseIdRef.current === null)
@@ -9381,15 +10112,18 @@
           managedChildrenReturn
       };
   }
-  function useSliderThumb({ info, context: { sliderContext: { max: maxParent, min: minParent }, ...context }, sliderThumbParameters }) {
+  /**
+   * @compositeParams
+   */
+  function useSliderThumb({ sliderThumbParameters: { tag, value, max: maxOverride, min: minOverride, valueText, label, onValueChange, ...void2 }, info, context: { sliderContext: { max: maxParent, min: minParent }, ...context }, ...void1 }) {
+      monitorCallCount(useSliderThumb);
       const { managedChildReturn } = useManagedChild({ info, context });
-      const { tag, value, max: maxOverride, min: minOverride, onValueChange, valueText, label } = sliderThumbParameters;
       const min = (minOverride ?? minParent);
       const max = (maxOverride ?? maxParent);
       let newProps = (tag == "input" ?
           { min, max, value, type: "range" } :
           { "aria-valuemax": max, "aria-valuemin": min, "aria-valuenow": value });
-      newProps = { ...newProps, "aria-label": label, "aria-valuetext": valueText, style: { "--range-value": `${value}`, "--range-value-text": `${valueText}` } };
+      newProps = { ...newProps, "aria-label": label, "aria-valuetext": valueText ?? undefined, style: { "--range-value": `${value}`, "--range-value-text": `${valueText}` } };
       if (tag == "input") {
           newProps.onInput = e => {
               onValueChange?.(enhanceEvent(e, { value: e.currentTarget.valueAsNumber }));
@@ -9408,20 +10142,53 @@
       };
   }
 
+  /**
+   * Creates a sortable data table in a [Grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) pattern.
+   *
+   * @compositeParams
+   *
+   * @hasChild {@link useTableSection}
+   * @hasChild {@link useTableRow}
+   * @hasChild {@link useTableCell}
+   */
   function useTable({ labelParameters, tableParameters: { selectionLimit, tagTable }, }) {
+      monitorCallCount(useTable);
+      // This is the function that, when called, sorts the body's children.
+      // It's here to coordinate among multiple table sections (i.e. the head sorts the body, but they're siblings to each other, so we need to take care that)
+      // TODO: This...should probably be useManagedChildren
       const [getSortBody, setSortBody] = usePassiveState(null, returnNull);
-      const sortQueue = _$1([]);
-      const [getSortColumn, setSortColumn] = usePassiveState(T$2((a) => { sortQueue.current.push(a.column); }, []), T$2(() => { return { column: 0, direction: "ascending" }; }, []));
-      const updateSortDirection = T$2((column) => {
+      const [sortDirection, setSortDirection, getSortDirection] = useState("ascending");
+      const [sortColumn, setSortColumn, getSortColumn] = useState(null);
+      /*const updateSortDirection = useCallback((column: number) => {
           const { column: currentColumn, direction: currentDirection } = getSortColumn();
-          const next = { column, direction: column != currentColumn ? "ascending" : (currentDirection == "ascending" ? "descending" : "ascending") };
+          const next = { column, direction: column != currentColumn ? "ascending" : (currentDirection == "ascending" ? "descending" : "ascending") } as const;
           setSortColumn(next);
           return next;
       }, []);
-      const sortByColumn = T$2((column) => {
+      const sortByColumn = useCallback((column: number) => {
           const next = updateSortDirection(column);
           getSortBody()?.();
           return next;
+      }, [])*/
+      const sortByColumn = T$2((column) => {
+          let nextSortDirection = getSortDirection();
+          let nextSortIndex = getSortColumn();
+          if (column == nextSortIndex) {
+              setSortDirection(nextSortDirection = (nextSortDirection == "ascending" ? "descending" : "ascending"));
+          }
+          else {
+              setSortColumn(nextSortIndex = column);
+          }
+          const sortBody = getSortBody();
+          console.assert(!!sortBody);
+          if (!sortBody) {
+              debugger;
+              console.error("An attempt was made to sort a table with a head but no body");
+          }
+          else {
+              sortBody();
+          }
+          return { column: nextSortIndex, direction: nextSortDirection };
       }, []);
       const { propsInput: propsLabelList, propsLabel: propsLabelLabel } = useLabelSynthetic({
           labelParameters: { ...labelParameters, onLabelClick: null },
@@ -9431,7 +10198,14 @@
       return {
           propsTable: useMergedProps({ role: tagTable == "table" ? undefined : "grid", "aria-multiselectable": (selectionLimit == "multi" ? "true" : undefined) }, propsLabelList),
           propsLabel: propsLabelLabel,
-          context: useMemoObject({ tableContext: useMemoObject({ sortByColumn, setSortBodyFunction: setSortBody, getCurrentSortColumn: getSortColumn }) })
+          context: useMemoObject({
+              tableContext: useMemoObject({
+                  sortByColumn,
+                  setSortBodyFunction: setSortBody,
+                  getCurrentSortColumn: getSortColumn,
+                  getCurrentSortDirection: getSortDirection
+              })
+          })
       };
   }
   function fuzzyCompare(lhs, rhs) {
@@ -9457,8 +10231,12 @@
       return 0;
   }
   const naturalSectionTypes = new Set(["thead", "tbody", "tfoot"]);
-  function useTableSection({ linearNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, gridNavigationParameters, rearrangeableChildrenParameters, paginatedChildrenParameters, staggeredChildrenParameters, tableSectionParameters: { tagTableSection, location }, typeaheadNavigationParameters, context: { tableContext } }) {
-      const { childrenHaveFocusReturn, context, linearNavigationReturn, managedChildrenReturn, props: { ...props }, rovingTabIndexReturn, singleSelectionReturn, typeaheadNavigationReturn, staggeredChildrenReturn, rearrangeableChildrenReturn, paginatedChildrenReturn, sortableChildrenReturn } = useCompleteGridNavigation({
+  /**
+   * @compositeParams
+   */
+  function useTableSection({ linearNavigationParameters, rovingTabIndexParameters, singleSelectionParameters, gridNavigationParameters, rearrangeableChildrenParameters, paginatedChildrenParameters, staggeredChildrenParameters, tableSectionParameters: { tagTableSection, location }, typeaheadNavigationParameters, context: { tableContext }, refElementParameters, ...void1 }) {
+      monitorCallCount(useTableSection);
+      const { childrenHaveFocusReturn, context, linearNavigationReturn, managedChildrenReturn, props: { ...props }, rovingTabIndexReturn, singleSelectionReturn, typeaheadNavigationReturn, staggeredChildrenReturn, rearrangeableChildrenReturn, paginatedChildrenReturn, sortableChildrenReturn, ...void2 } = useCompleteGridNavigation({
           linearNavigationParameters,
           rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
           singleSelectionParameters,
@@ -9472,6 +10250,7 @@
           typeaheadNavigationParameters,
           gridNavigationParameters,
           rearrangeableChildrenParameters,
+          refElementParameters,
       });
       if (!naturalSectionTypes.has(tagTableSection)) {
           props.role = "rowgroup";
@@ -9479,7 +10258,7 @@
       p$2(() => {
           if (location == "body") {
               tableContext.setSortBodyFunction(() => {
-                  return () => { sortableChildrenReturn.sort(tableContext.getCurrentSortColumn().direction); };
+                  return () => { sortableChildrenReturn.sort(tableContext.getCurrentSortDirection()); };
               });
           }
       });
@@ -9501,23 +10280,21 @@
           propsTableSection: props
       };
   }
-  function useTableRow({ info, textContentParameters, context: cx1, tableRowParameters: { selected }, linearNavigationParameters, rovingTabIndexParameters, ...void1 }) {
+  /**
+   * @compositeParams
+   */
+  function useTableRow({ info, textContentParameters, context: cx1, tableRowParameters: { selected }, linearNavigationParameters, rovingTabIndexParameters, hasCurrentFocusParameters, ...void1 }) {
+      monitorCallCount(useTableRow);
       const { context: cx2, managedChildrenReturn, props: { ...props }, ...restRet
       // props
        } = useCompleteGridNavigationRow({
           textContentParameters,
+          hasCurrentFocusParameters,
           context: { ...cx1 },
-          info: {
-              ...info,
-              getSortValue: useStableCallback(() => {
-                  const currentColumn = cx1.tableContext.getCurrentSortColumn().column;
-                  const currentChild = managedChildrenReturn.getChildren().getAt(currentColumn ?? 0);
-                  const sortValue = currentChild?.getSortValue();
-                  return sortValue;
-              })
-          },
+          info,
           linearNavigationParameters,
-          rovingTabIndexParameters: { ...rovingTabIndexParameters },
+          rovingTabIndexParameters,
+          gridNavigationSingleSelectionSortableRowParameters: { getSortableColumnIndex: cx1.tableContext.getCurrentSortColumn },
           typeaheadNavigationParameters: { noTypeahead: true, collator: null, typeaheadTimeout: Infinity, onNavigateTypeahead: null }
       });
       props.role = "row";
@@ -9543,7 +10320,11 @@
           ...restRet
       };
   }
+  /**
+   * @compositeParams
+   */
   function useTableCell({ tableCellParameters: { tagTableCell }, info, ...p }) {
+      monitorCallCount(useTableCell);
       const { props, ...ret } = useCompleteGridNavigationCell({
           info,
           ...p
@@ -9560,7 +10341,16 @@
       };
   }
 
+  /**
+   * Implements a [Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) pattern.
+   *
+   * @compositeParams
+   *
+   * @hasChild {@link useTab}
+   * @hasChild {@link useTabPanel}
+   */
   function useTabs({ labelParameters, linearNavigationParameters, singleSelectionParameters: { initiallySelectedIndex, onSelectedIndexChange: ssi, selectionMode, ...singleSelectionParameters }, tabsParameters: { orientation, role, localStorageKey }, rovingTabIndexParameters, ...restParams }) {
+      monitorCallCount(useTabs);
       const [localStorageIndex, setLocalStorageIndex] = usePersistentState(localStorageKey ?? null, 0);
       if (localStorageIndex != null)
           initiallySelectedIndex = localStorageIndex;
@@ -9633,17 +10423,23 @@
           ...listNavRet1
       };
   }
-  function useTab({ info: { focusSelf: focusSelfParent, ...info }, textContentParameters, pressParameters: { focusSelf: focusSelfChild, longPressThreshold, onPressingChange, ...void2 }, context }) {
+  /**
+   * @compositeParams
+   */
+  function useTab({ info: { focusSelf: focusSelfParent, index, unselectable, untabbable, getSortValue, ...info }, textContentParameters, pressParameters: { focusSelf: focusSelfChild, longPressThreshold, onPressingChange, ...void2 }, context, hasCurrentFocusParameters, refElementParameters, ...void3 }) {
       const { propsChild: listNavigationSingleSelectionChildProps, propsTabbable, pressParameters: { onPressSync, excludeSpace, ...void1 }, refElementReturn, ...listNavRet2 } = useCompleteListNavigationChild({
           context,
-          info: { focusSelf: focusSelfParent, ...info },
+          info: { index, focusSelf: focusSelfParent, getSortValue, unselectable, untabbable, ...info },
           textContentParameters,
+          hasCurrentFocusParameters,
+          refElementParameters
       });
       const { pressReturn, props: propsPressStable } = usePress({ pressParameters: { onPressSync, focusSelf: focusSelfChild, allowRepeatPresses: false, excludeEnter: returnFalse, excludePointer: returnFalse, excludeSpace: returnFalse, longPressThreshold, onPressingChange }, refElementReturn });
       const { singleSelectionChildReturn: { selected }, rovingTabIndexChildReturn: { tabbable } } = listNavRet2;
       const { getPanelId, getTabId } = context.tabsContext;
-      const panelId = getPanelId(info.index);
-      const tabId = getTabId(info.index);
+      const panelId = getPanelId(index);
+      const tabId = getTabId(index);
+      monitorCallCount(useTab);
       return {
           pressReturn,
           refElementReturn,
@@ -9657,15 +10453,20 @@
           ...listNavRet2
       };
   }
+  /**
+   * @compositeParams
+   */
   function useTabPanel({ info, context }) {
       const { index } = info;
+      monitorCallCount(useTabPanel);
       const { tabPanelContext: { getVisibleIndex: g, getPanelId, getTabId } } = context;
       //const [correspondingTabId, setCorrespondingTabId] = useState<string | null>(null);
       const [lastKnownVisibleIndex, setLastKnownVisibleIndex, getLastKnownVisibleIndex] = useState(g());
       const [isVisible, setIsVisible, getIsVisible] = useState(null);
       //const visibleRef = useRef<ChildFlagOperations>({ get: getIsVisible, set: setIsVisible, isValid: returnTrue });
       useManagedChild({
-          context, info: {
+          context,
+          info: {
               getVisible: useStableCallback(() => { return getLastKnownVisibleIndex() == index; }),
               setVisibleIndex: useStableCallback((newIndex, prevIndex) => {
                   // Similar logic is in singleSelection, but we need to duplicate it here
@@ -9700,7 +10501,15 @@
       };
   }
 
+  /**
+   * Allows any descendent children to push a visible (and/or audible) message to the user's attention.
+   *
+   * @compositeParams
+   *
+   * @hasChild {@link useToast}
+   */
   function useToasts({ managedChildrenParameters: { onChildrenMountChange: ocmu, onAfterChildLayoutEffect }, toastsParameters: { visibleCount } }) {
+      monitorCallCount(useToasts);
       // Normally, this does just look like [0, 1, 2, 3], etc
       // so it could be just an index to the current toast,
       // but if we dismiss toasts out of order, it's [0, 2, 3] or something.
@@ -9783,8 +10592,12 @@
           props
       };
   }
+  /**
+   * @compositeParams
+   */
   function useToast({ toastParameters: { politeness, timeout, children }, info: { index, ...info }, context }) {
       const { getMaxVisibleCount, onAnyToastDismissed, onAnyToastMounted } = context.toastContext;
+      monitorCallCount(useToast);
       const [numberOfToastsAheadOfUs, setNumberOfToastsAheadOfUs] = useState(Infinity);
       const getIndex = useStableGetter(index);
       const [dismissed2, setDismissed2, getDismissed2] = useState(false);
@@ -9798,7 +10611,7 @@
           setShowing2(false);
       }, []);
       const show = useStableCallback(() => {
-          notify("polite", o$3("p", { children: children }));
+          notify(politeness ?? "polite", o$3("p", { children: children }));
           setShowing2(true);
       });
       p$2(() => {
@@ -9815,7 +10628,7 @@
               focus(firstFocusable);
           }
       }, []);
-      useManagedChild({ info: { index, focus: focus2, setNumberAheadOfMe: setNumberOfToastsAheadOfUs, show }, context });
+      const { managedChildReturn } = useManagedChild({ info: { index, focus: focus2, setNumberAheadOfMe: setNumberOfToastsAheadOfUs, show, ...info }, context });
       const resetDismissTimer = T$2(() => {
           setTriggerIndex(i => ++i);
       }, []);
@@ -9840,11 +10653,20 @@
               dismiss,
               resetDismissTimer
           },
+          managedChildReturn,
           props: propsStable
       };
   }
 
-  function useTooltip({ tooltipParameters: { onStatus, tooltipSemanticType, hoverDelay }, escapeDismissParameters }) {
+  /**
+   * Implements a [Tooltip](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/) pattern.
+   *
+   * @remarks Tooltips are remarkably under-specified, so some of this is speculative.
+   *
+   * @compositeParams
+   */
+  function useTooltip({ tooltipParameters: { onStatus, tooltipSemanticType, hoverDelay }, activeElementParameters, escapeDismissParameters, ...void1 }) {
+      monitorCallCount(useTooltip);
       useGlobalHandler(window, "mouseout", T$2((e) => {
           console.log(e);
           if (e.relatedTarget == null)
@@ -9913,16 +10735,26 @@
       const { hasCurrentFocusReturn: triggerFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: onTriggerCurrentFocusedInnerChanged }, refElementReturn: { getElement: getTriggerElement } });
       const { hasCurrentFocusReturn: popupFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: onPopupCurrentFocusedInnerChanged }, refElementReturn: { getElement: getPopupElement } });
       const { refElementPopupReturn, refElementSourceReturn, propsStablePopup, propsStableSource } = useDismiss({
+          backdropDismissParameters: {
+              dismissBackdropActive: true,
+              onDismissBackdrop: null
+          },
+          lostFocusDismissParameters: {
+              dismissLostFocusActive: false,
+              onDismissLostFocus: null,
+          },
           dismissParameters: {
-              closeOnBackdrop: true,
-              closeOnLostFocus: false,
-              closeOnEscape: true,
-              open: openLocal,
-              onClose: useStableCallback((reason) => {
+              dismissActive: openLocal,
+              onDismiss: useStableCallback((e, reason) => {
                   setState(null);
               }),
           },
-          escapeDismissParameters,
+          activeElementParameters,
+          escapeDismissParameters: {
+              dismissEscapeActive: true,
+              onDismissEscape: null,
+              ...escapeDismissParameters
+          },
       });
       const otherPopupProps = {
           onPointerEnter: T$2(() => { onHoverChanged(true, "popup"); }, []),
@@ -9955,18 +10787,35 @@
       };
   }
 
-  function memoForwardRef(fn) {
-      return x$1(k$1(fn));
+  /**
+   * Almost all components are built in the exact same way from their implementing hook -- this just sets all of that up.
+   *
+   * @param imperativeHandle The `imperativeHandle` prop all component props have that hook a `ref` up to the hook's return values
+   * @param render The `render` prop all component props have that turns a hook's return values into JSX to render
+   * @param Context Optional. Some hooks return a `context` object, and if so, it will be rendered with the `Context` object provided.
+   * @param info The return type of the hook.
+   * @returns
+   */
+  function useComponent(imperativeHandle, render, Context, info) {
+      A$1(imperativeHandle, () => info);
+      if (Context) {
+          return o$3(Context.Provider, { value: info.context, children: render(info) });
+      }
+      else {
+          return render(info);
+      }
   }
   const ContextDefaults = {
       collator: F$3(null),
       pageNavigationSize: F$3(0.1),
       typeaheadTimeout: F$3(1000),
+      focusSelf: F$3((e) => e.focus?.()),
       noTypeahead: F$3(false),
       getIndex: F$3(v => v.props.index),
       disableArrowKeys: F$3(false),
       disableHomeEndKeys: F$3(false),
       getWindow: F$3(() => globalThis.window),
+      getDocument: F$3(() => globalThis.document),
       focusOpener: F$3((e) => focus(e)),
       getText: F$3((e) => (e?.textContent ?? "")),
       selectionMode: F$3("activation"),
@@ -9976,129 +10825,7 @@
       return userValue ?? defaultValue;
   }
   const ParentDepthContext = F$3(0);
-
-  const AccordionSectionContext = F$3(null);
-  const Accordion$1 = x$1(function Accordion({ disableHomeEndKeys, initialIndex, onAfterChildLayoutEffect, onChildrenMountChange, navigatePastEnd, navigatePastStart, pageNavigationSize, localStorageKey, collator, noTypeahead, typeaheadTimeout, onChildrenCountChange, isValid, render, imperativeHandle, orientation, onNavigateLinear, onNavigateTypeahead, ...rest }) {
-      const info = useAccordion({
-          accordionParameters: { orientation, initialIndex, localStorageKey: localStorageKey ?? null },
-          typeaheadNavigationParameters: {
-              onNavigateTypeahead,
-              isValid: isValid || returnTrue,
-              collator: useDefault("collator", collator),
-              noTypeahead: useDefault("noTypeahead", noTypeahead),
-              typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
-          },
-          linearNavigationParameters: {
-              onNavigateLinear,
-              disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
-              navigatePastEnd: navigatePastEnd ?? "wrap",
-              navigatePastStart: navigatePastStart ?? "wrap",
-              pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
-          },
-          managedChildrenParameters: { onAfterChildLayoutEffect, onChildrenMountChange },
-      });
-      A$1(imperativeHandle, () => info);
-      return (o$3(AccordionSectionContext.Provider, { value: info.context, children: render(info) }));
-  });
-  const AccordionSection$1 = x$1(function AccordionSection({ open, index, tagButton, disabled, bodyRole, onPress, untabbable, getText, imperativeHandle, render, ...rest }) {
-      const context = useContextWithWarning(AccordionSectionContext, "accordion section");
-      const info = useAccordionSection({
-          buttonParameters: { disabled: disabled ?? false, tagButton, onPress: onPress ?? null },
-          accordionSectionParameters: { open, bodyRole: bodyRole ?? "region" },
-          info: { index, untabbable: untabbable || false },
-          refElementParameters: {},
-          context,
-          textContentParameters: { getText: useDefault("getText", getText) },
-      });
-      A$1(imperativeHandle, () => info);
-      return render(info);
-  });
-
-  const Button$1 = memoForwardRef(function Button({ tagButton, onPress, pressed, render, disabled, onElementChange, onMount, onUnmount, allowRepeatPresses, longPressThreshold, excludeEnter, excludePointer, excludeSpace, onPressingChange }, ref) {
-      const info = useButton({
-          buttonParameters: {
-              role: "button",
-              tagButton: tagButton,
-              onPress: onPress ?? null,
-              pressed,
-              disabled: disabled ?? false
-          },
-          pressParameters: { longPressThreshold, allowRepeatPresses, excludeEnter, excludePointer, excludeSpace, onPressingChange },
-          refElementParameters: { onElementChange, onMount, onUnmount }
-      });
-      A$1(ref, () => info);
-      return render(info);
-  });
-
-  const UseCheckboxGroupChildContext = F$3(null);
-  const CheckboxGroup$1 = memoForwardRef(function CheckboxGroup({ render, collator, disableHomeEndKeys, noTypeahead, typeaheadTimeout, onTabbableIndexChange, compare, staggered, getIndex, untabbable, navigatePastEnd, navigatePastStart, pageNavigationSize, orientation, onNavigateLinear, onNavigateTypeahead, ..._rest }, ref) {
-      untabbable ||= false;
-      const info = useCheckboxGroup({
-          linearNavigationParameters: {
-              onNavigateLinear,
-              disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
-              navigatePastEnd: navigatePastEnd ?? "wrap",
-              navigatePastStart: navigatePastStart ?? "wrap",
-              pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
-          },
-          checkboxGroupParameters: { orientation: orientation ?? "vertical" },
-          staggeredChildrenParameters: { staggered: staggered || false },
-          rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
-          rovingTabIndexParameters: { onTabbableIndexChange: onTabbableIndexChange ?? null, untabbable },
-          sortableChildrenParameters: { compare: compare ?? null },
-          typeaheadNavigationParameters: {
-              onNavigateTypeahead,
-              collator: useDefault("collator", collator),
-              noTypeahead: useDefault("noTypeahead", noTypeahead),
-              typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
-          }
-      });
-      A$1(ref, () => info);
-      return (o$3(UseCheckboxGroupChildContext.Provider, { value: info.context, children: render(info) }));
-  });
-  const CheckboxGroupParent$1 = memoForwardRef(function CheckboxGroupParent({ render, index, focusSelf, untabbable, getText, getSortValue, unselectable, ..._rest }, ref) {
-      const context = useContextWithWarning(UseCheckboxGroupChildContext, "checkbox group");
-      console.assert(context != null, `This CheckboxGroupParent is not contained within a CheckboxGroup`);
-      const info = useCheckboxGroupParent({
-          info: {
-              index,
-              unselectable: unselectable || false,
-              untabbable: untabbable || false,
-              focusSelf,
-              getSortValue,
-              checkboxInfo: { checkboxChildType: "parent" }
-          },
-          context,
-          textContentParameters: { getText: useDefault("getText", getText) }
-      });
-      A$1(ref, () => info);
-      return render(info);
-  });
-  const CheckboxGroupChild$1 = memoForwardRef(function CheckboxGroupChild({ index, render, checked, onChangeFromParent, getSortValue, untabbable, getText, focusSelf, unselectable, ..._rest }, ref) {
-      const context = useContextWithWarning(UseCheckboxGroupChildContext, "checkbox group");
-      console.assert(context != null, `This CheckboxGroupChild is not contained within a CheckboxGroup`);
-      const info = useCheckboxGroupChild({
-          checkboxGroupChild: { checked, onChangeFromParent },
-          info: { index, untabbable: untabbable || false, unselectable: unselectable || false, focusSelf, getSortValue },
-          textContentParameters: { getText: useDefault("getText", getText) },
-          context,
-      });
-      A$1(ref, () => info);
-      return render(info);
-  });
-
-  const Checkbox$1 = memoForwardRef(function Checkbox({ checked, disabled, tagLabel, labelPosition, tagInput, ariaLabel, onCheckedChange, longPressThreshold, excludeSpace, render }, ref) {
-      const checkbox = useCheckbox({
-          checkboxLikeParameters: { checked: checked ?? false, disabled: disabled ?? false },
-          checkboxParameters: { onCheckedChange },
-          labelParameters: { ariaLabel: ariaLabel, labelPosition, tagInput, tagLabel },
-          pressParameters: { excludeSpace, longPressThreshold }
-      });
-      A$1(ref, () => checkbox);
-      return render(checkbox);
-  });
-
-  function defaultRenderPortal({ portalId, children }) {
+  function useDefaultRenderPortal({ portalId, children }) {
       const portalRef = _$1(null);
       portalRef.current ??= document.getElementById(portalId);
       if (portalRef.current)
@@ -10106,63 +10833,211 @@
       else
           return children;
   }
-  const Dialog$1 = memoForwardRef(function Dialog({ onClose, open, closeOnBackdrop, closeOnEscape, focusOpener, getWindow, parentDepth, focusPopup, ariaLabel, render }, ref) {
-      const defaultParentDepth = q$2(ParentDepthContext);
-      let myDepth = (parentDepth ?? defaultParentDepth) + 1;
-      const info = useDialog({
-          dismissParameters: {
-              closeOnBackdrop: closeOnBackdrop ?? true,
-              closeOnEscape: closeOnEscape ?? true,
-              onClose,
-              open
+
+  const AccordionSectionContext = F$3(null);
+  const Accordion$1 = x$1(function Accordion({ disableHomeEndKeys, initialIndex, onAfterChildLayoutEffect, onChildrenMountChange, navigatePastEnd, navigatePastStart, pageNavigationSize, localStorageKey, collator, noTypeahead, typeaheadTimeout, onChildrenCountChange, render, imperativeHandle, orientation, onNavigateLinear, onNavigateTypeahead, onElementChange, onMount, onUnmount, ...void1 }) {
+      return (useComponent(imperativeHandle, render, AccordionSectionContext, useAccordion({
+          accordionParameters: { orientation, initialIndex, localStorageKey: localStorageKey ?? null },
+          typeaheadNavigationParameters: {
+              onNavigateTypeahead,
+              collator: useDefault("collator", collator),
+              noTypeahead: useDefault("noTypeahead", noTypeahead),
+              typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
           },
-          escapeDismissParameters: {
-              getWindow: useDefault("getWindow", getWindow),
-              parentDepth: parentDepth ?? defaultParentDepth
+          linearNavigationParameters: {
+              onNavigateLinear,
+              disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
+              navigatePastEnd: navigatePastEnd ?? "wrap",
+              navigatePastStart: navigatePastStart ?? "wrap",
+              pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
           },
-          focusTrapParameters: {
-              focusOpener: useDefault("focusOpener", focusOpener),
-              focusPopup
-          },
-          labelParameters: { ariaLabel }
-      });
-      A$1(ref, () => info);
-      return (o$3(ParentDepthContext.Provider, { value: myDepth, children: render(info) }));
+          refElementParameters: { onElementChange, onMount, onUnmount },
+          managedChildrenParameters: { onAfterChildLayoutEffect, onChildrenMountChange },
+      })));
+  });
+  const AccordionSection$1 = x$1(function AccordionSection({ open, index, tagButton, disabled, bodyRole, untabbable, getText, imperativeHandle, onPressSync, focusSelf, render, info, onElementChange, onMount, onUnmount, ...void1 }) {
+      return useComponent(imperativeHandle, render, null, useAccordionSection({
+          buttonParameters: { disabled: disabled ?? false, tagButton, onPressSync: onPressSync },
+          pressParameters: { focusSelf: useDefault("focusSelf", focusSelf) },
+          accordionSectionParameters: { open, bodyRole: bodyRole ?? "region" },
+          info: { index, untabbable: untabbable || false, ...info },
+          refElementHeaderButtonParameters: { onElementChange, onMount, onUnmount },
+          refElementBodyParameters: {},
+          textContentParameters: { getText: useDefault("getText", getText) },
+          context: useContextWithWarning(AccordionSectionContext, "accordion section"),
+      }));
   });
 
-  memoForwardRef(function Drawer({ closeOnBackdrop, closeOnEscape, closeOnLostFocus, focusOpener, focusPopup, getWindow, onClose, open, parentDepth, render, trapActive, ariaLabel, }, ref) {
+  const Button$1 = x$1(function Button({ tagButton, pressed, render, disabled, onElementChange, onMount, onUnmount, allowRepeatPresses, longPressThreshold, excludeSpace, onPressingChange, onPressSync, focusSelf, role, imperativeHandle, ...void1 }) {
+      return useComponent(imperativeHandle, render, null, useButton({
+          buttonParameters: { onPressSync, role: role, tagButton, pressed, disabled },
+          pressParameters: { longPressThreshold, allowRepeatPresses, excludeSpace, onPressingChange, focusSelf: useDefault("focusSelf", focusSelf) },
+          refElementParameters: { onElementChange, onMount, onUnmount },
+      }));
+  });
+
+  const UseCheckboxGroupChildContext = F$3(null);
+  const CheckboxGroup$1 = x$1(function CheckboxGroup({ render, collator, disableHomeEndKeys, noTypeahead, typeaheadTimeout, onTabbableIndexChange, compare, staggered, getIndex, untabbable, navigatePastEnd, navigatePastStart, pageNavigationSize, orientation, onNavigateLinear, onNavigateTypeahead, imperativeHandle, onElementChange, onMount, onUnmount, ...void1 }) {
+      return useComponent(imperativeHandle, render, UseCheckboxGroupChildContext, useCheckboxGroup({
+          linearNavigationParameters: {
+              onNavigateLinear,
+              navigatePastEnd: navigatePastEnd ?? "wrap",
+              navigatePastStart: navigatePastStart ?? "wrap",
+              disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
+              pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
+          },
+          checkboxGroupParameters: {
+              orientation: orientation ?? "vertical"
+          },
+          staggeredChildrenParameters: {
+              staggered: staggered || false
+          },
+          rearrangeableChildrenParameters: {
+              getIndex: useDefault("getIndex", getIndex)
+          },
+          rovingTabIndexParameters: {
+              onTabbableIndexChange,
+              untabbable: untabbable || false
+          },
+          sortableChildrenParameters: {
+              compare,
+          },
+          typeaheadNavigationParameters: {
+              onNavigateTypeahead,
+              collator: useDefault("collator", collator),
+              noTypeahead: useDefault("noTypeahead", noTypeahead),
+              typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
+          },
+          refElementParameters: { onElementChange, onMount, onUnmount }
+      }));
+  });
+  const CheckboxGroupParent$1 = x$1(function CheckboxGroupParent({ render, index, focusSelf, untabbable, getSortValue, unselectable, imperativeHandle, getText, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, onElementChange, onMount, onUnmount, 
+  //info,
+  ..._rest }) {
+      const context = useContextWithWarning(UseCheckboxGroupChildContext, "checkbox group");
+      console.assert(context != null, `This CheckboxGroupParent is not contained within a CheckboxGroup`);
+      return (useComponent(imperativeHandle, render, null, useCheckboxGroupParent({
+          info: {
+              index,
+              unselectable: unselectable || false,
+              untabbable: untabbable || false,
+              focusSelf,
+              getSortValue,
+          },
+          context,
+          textContentParameters: {
+              getText: useDefault("getText", getText)
+          },
+          hasCurrentFocusParameters: { onCurrentFocusedChanged, onCurrentFocusedInnerChanged },
+          refElementParameters: { onElementChange, onMount, onUnmount }
+      })));
+  });
+  const CheckboxGroupChild$1 = (function CheckboxGroupChild({ index, render, checked, onChangeFromParent, getSortValue, untabbable, getText, focusSelf, unselectable, 
+  //info,
+  imperativeHandle, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, onElementChange, onMount, onUnmount, ...void1 }) {
+      return useComponent(imperativeHandle, render, null, useCheckboxGroupChild({
+          checkboxGroupChildParameters: {
+              checked: checked,
+              onChangeFromParent
+          },
+          info: {
+              index,
+              untabbable: untabbable || false,
+              unselectable: unselectable || false,
+              focusSelf,
+              getSortValue
+          },
+          textContentParameters: {
+              getText: useDefault("getText", getText)
+          },
+          context: useContextWithWarning(UseCheckboxGroupChildContext, "checkbox group"),
+          hasCurrentFocusParameters: {
+              onCurrentFocusedChanged,
+              onCurrentFocusedInnerChanged
+          },
+          refElementParameters: {
+              onElementChange,
+              onMount,
+              onUnmount
+          }
+      }));
+  });
+
+  const Checkbox$1 = x$1(function Checkbox({ checked, disabled, tagLabel, labelPosition, tagInput, ariaLabel, longPressThreshold, excludeSpace, imperativeHandle, render, onCheckedChange, ...void1 }) {
+      return useComponent(imperativeHandle, render, null, useCheckbox({
+          checkboxLikeParameters: { checked, disabled: disabled ?? false },
+          labelParameters: { ariaLabel: ariaLabel, labelPosition, tagInput, tagLabel },
+          pressParameters: { excludeSpace, longPressThreshold },
+          checkboxParameters: { onCheckedChange }
+      }));
+  });
+
+  const Dialog$1 = x$1(function Dialog({ active, onDismiss, dismissBackdropActive, dismissEscapeActive, focusOpener, getDocument, imperativeHandle, parentDepth, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, focusPopup, ariaLabel, onElementChange, onMount, onUnmount, render }) {
       const defaultParentDepth = q$2(ParentDepthContext);
       let myDepth = (parentDepth ?? defaultParentDepth) + 1;
-      const info = useDrawer({
-          dismissParameters: {
-              closeOnBackdrop: closeOnBackdrop ?? true,
-              closeOnEscape: closeOnEscape ?? true,
-              closeOnLostFocus: closeOnLostFocus ?? true,
-              onClose,
-              open
-          },
-          escapeDismissParameters: {
-              getWindow: useDefault("getWindow", getWindow),
-              parentDepth: parentDepth ?? defaultParentDepth
-          },
-          focusTrapParameters: {
-              focusOpener: useDefault("focusOpener", focusOpener),
-              focusPopup,
-              trapActive: trapActive ?? false
-          },
-          labelParameters: { ariaLabel }
-      });
-      A$1(ref, () => info);
-      return (o$3(ParentDepthContext.Provider, { value: myDepth, children: render(info) }));
+      return (o$3(ParentDepthContext.Provider, { value: myDepth, children: useComponent(imperativeHandle, render, null, useDialog({
+              dismissParameters: {
+                  onDismiss,
+              },
+              backdropDismissParameters: { dismissBackdropActive: dismissBackdropActive || false },
+              //lostFocusDismissParameters: { dismissLostFocusActive: dismissLostFocusActive || false },
+              modalParameters: { active },
+              refElementParameters: { onElementChange, onMount, onUnmount },
+              escapeDismissParameters: {
+                  dismissEscapeActive: dismissEscapeActive || false,
+                  parentDepth: parentDepth ?? defaultParentDepth
+              },
+              activeElementParameters: {
+                  getDocument: useDefault("getDocument", getDocument),
+                  onActiveElementChange,
+                  onLastActiveElementChange,
+                  onWindowFocusedChange
+              },
+              focusTrapParameters: {
+                  focusOpener: useDefault("focusOpener", focusOpener),
+                  focusPopup
+              },
+              labelParameters: { ariaLabel }
+          })) }));
+  });
+
+  x$1(function Drawer({ active, onDismiss, dismissBackdropActive, dismissEscapeActive, dismissLostFocusActive, onElementChange, onMount, onUnmount, focusOpener, focusPopup, getDocument, imperativeHandle, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, parentDepth, render, trapActive, ariaLabel, ...void1 }) {
+      const defaultParentDepth = q$2(ParentDepthContext);
+      let myDepth = (parentDepth ?? defaultParentDepth) + 1;
+      return (o$3(ParentDepthContext.Provider, { value: myDepth, children: useComponent(imperativeHandle, render, null, useDrawer({
+              dismissParameters: {
+                  onDismiss,
+              },
+              backdropDismissParameters: { dismissBackdropActive: dismissBackdropActive || false },
+              lostFocusDismissParameters: { dismissLostFocusActive: dismissLostFocusActive || false },
+              modalParameters: { active },
+              refElementParameters: { onElementChange, onMount, onUnmount },
+              escapeDismissParameters: {
+                  parentDepth: parentDepth ?? defaultParentDepth,
+                  dismissEscapeActive: dismissEscapeActive || false
+              },
+              activeElementParameters: {
+                  getDocument: useDefault("getDocument", getDocument),
+                  onActiveElementChange,
+                  onLastActiveElementChange,
+                  onWindowFocusedChange
+              },
+              focusTrapParameters: {
+                  focusOpener: useDefault("focusOpener", focusOpener),
+                  focusPopup,
+                  trapActive: trapActive ?? false
+              },
+              labelParameters: { ariaLabel }
+          })) }));
   });
 
   const GridlistContext = F$3(null);
   const GridlistRowContext = F$3(null);
-  const Gridlist = memoForwardRef(function GridlistU({ collator, disableHomeEndKeys, noTypeahead, onTabbableIndexChange, groupingType, typeaheadTimeout, selectedIndex, navigatePastEnd, navigatePastStart, onSelectedIndexChange, pageNavigationSize, selectionLimit, untabbable, paginationMax, paginationMin, staggered, compare, getIndex, onTabbableColumnChange, ariaLabel, orientation, ariaPropName, selectionMode, onNavigateLinear, onNavigateTypeahead, render }, ref) {
+  const Gridlist = (function Gridlist({ collator, disableHomeEndKeys, noTypeahead, onTabbableIndexChange, groupingType, typeaheadTimeout, selectedIndex, navigatePastEnd, navigatePastStart, onSelectedIndexChange, pageNavigationSize, selectionLimit, untabbable, paginationMax, paginationMin, staggered, compare, getIndex, onTabbableColumnChange, ariaLabel, orientation, ariaPropName, selectionMode, onNavigateLinear, onNavigateTypeahead, imperativeHandle, onElementChange, onMount, onUnmount, render, ...void1 }) {
       untabbable ??= false;
       ariaPropName ??= "aria-selected";
       selectionMode ??= "activation";
-      const info = useGridlist({
+      return useComponent(imperativeHandle, render, GridlistContext, useGridlist({
           linearNavigationParameters: {
               onNavigateLinear,
               disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
@@ -10171,7 +11046,7 @@
               pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize),
           },
           rovingTabIndexParameters: {
-              onTabbableIndexChange: onTabbableIndexChange ?? null,
+              onTabbableIndexChange,
               untabbable
           },
           staggeredChildrenParameters: { staggered: staggered || false },
@@ -10185,11 +11060,11 @@
               selectionLimit,
               groupingType,
               selectedIndex,
-              onSelectedIndexChange: onSelectedIndexChange ?? null,
+              onSelectedIndexChange,
               orientation: orientation ?? "vertical"
           },
           gridNavigationParameters: {
-              onTabbableColumnChange: onTabbableColumnChange ?? null
+              onTabbableColumnChange,
           },
           labelParameters: {
               ariaLabel
@@ -10198,53 +11073,68 @@
               getIndex: useDefault("getIndex", getIndex)
           },
           sortableChildrenParameters: {
-              compare: compare ?? null
+              compare,
           },
           paginatedChildrenParameters: {
-              paginationMax: paginationMax ?? null,
-              paginationMin: paginationMin ?? null
+              paginationMax,
+              paginationMin
           },
-          singleSelectionParameters: { ariaPropName, selectionMode }
-      });
-      A$1(ref, () => info);
-      return (o$3(GridlistContext.Provider, { value: info.context, children: render(info) }));
+          singleSelectionParameters: { ariaPropName, selectionMode },
+          refElementParameters: { onElementChange, onMount, onUnmount }
+      }));
   });
-  const GridlistRow = memoForwardRef(function GridlistRowU({ index, collator, unselectable, untabbable, navigatePastEnd, navigatePastStart, noTypeahead, onTabbableIndexChange, selected, typeaheadTimeout, getSortValue, getText, render, initiallyTabbedIndex, onNavigateTypeahead, info: uinfo }, ref) {
+  const GridlistRow = x$1(function GridlistRowU({ index, collator, unselectable, untabbable, navigatePastEnd, navigatePastStart, noTypeahead, onTabbableIndexChange, selected, typeaheadTimeout, getText, render, initiallyTabbedIndex, onNavigateTypeahead, imperativeHandle, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, info: uinfo }) {
       const context = useContextWithWarning(GridlistContext, "gridlist");
       console.assert(context != null, `This GridlistRow is not contained within a Gridlist`);
-      untabbable ||= false;
-      const info = useGridlistRow({
-          info: { index, untabbable, unselectable, getSortValue, ...uinfo },
+      return useComponent(imperativeHandle, render, GridlistRowContext, useGridlistRow({
+          info: {
+              index,
+              untabbable: untabbable || false,
+              unselectable: unselectable || false,
+              ...uinfo
+          },
           context,
-          gridlistRowParameters: { selected: selected ?? null },
+          gridlistRowParameters: { selected },
           textContentParameters: { getText: useDefault("getText", getText) },
           linearNavigationParameters: {
               navigatePastEnd: navigatePastEnd ?? "wrap",
               navigatePastStart: navigatePastStart ?? "wrap"
           },
-          rovingTabIndexParameters: { onTabbableIndexChange: onTabbableIndexChange ?? null, initiallyTabbedIndex: initiallyTabbedIndex ?? null, untabbable },
+          hasCurrentFocusParameters: {
+              onCurrentFocusedChanged,
+              onCurrentFocusedInnerChanged,
+          },
+          rovingTabIndexParameters: {
+              onTabbableIndexChange,
+              initiallyTabbedIndex,
+              untabbable: untabbable || false,
+          },
           typeaheadNavigationParameters: {
               onNavigateTypeahead,
               collator: useDefault("collator", collator),
               noTypeahead: useDefault("noTypeahead", noTypeahead),
               typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
-          }
-      });
-      A$1(ref, () => info);
-      return o$3(GridlistRowContext.Provider, { value: info.context, children: render(info) });
+          },
+          gridNavigationSingleSelectionSortableRowParameters: { getSortableColumnIndex: returnZero }
+      }));
   });
-  const GridlistChild = memoForwardRef(function GridlistChild({ index, colSpan, focusSelf, untabbable, getText, onPressSync, longPressThreshold, onPressingChange, render, info: subInfo }, ref) {
+  const GridlistChild = x$1(function GridlistChild({ index, colSpan, focusSelf, untabbable, getText, onPressSync, longPressThreshold, onPressingChange, render, getSortValue, imperativeHandle, info: subInfo }) {
       const context = useContextWithWarning(GridlistRowContext, "gridlist row");
       console.assert(context != null, `This GridlistChild is not contained within a GridlistRow that is contained within a Gridlist`);
       const defaultFocusSelf = useStableCallback((e) => { focus(e); }, []);
       const info = useGridlistCell({
-          info: { index, untabbable: untabbable || false, focusSelf: (focusSelf ?? defaultFocusSelf), ...subInfo },
+          info: {
+              index: index,
+              untabbable: untabbable || false,
+              focusSelf: (focusSelf ?? defaultFocusSelf),
+              getSortValue: getSortValue,
+          },
           context,
           gridNavigationCellParameters: { colSpan: colSpan ?? 1 },
           textContentParameters: { getText: useDefault("getText", getText) },
           pressParameters: { onPressSync, longPressThreshold, onPressingChange }
       });
-      A$1(ref, () => info);
+      A$1(imperativeHandle, () => info);
       return render(info);
   });
 
@@ -10280,87 +11170,9 @@
       return (o$3(HeadingLevelContext.Provider, { value: newLevel - 1, children: children }));
   });
 
-  function useListbox({ labelParameters, listboxParameters: { selectionLimit, groupingType, selectedIndex, onSelectedIndexChange, orientation }, linearNavigationParameters, singleSelectionParameters: { ariaPropName, selectionMode }, rovingTabIndexParameters, ...restParams }) {
-      useEnsureStability("useListbox", selectionLimit);
-      const { propsInput: propsLabelList, propsLabel: propsLabelLabel, randomIdInputReturn: { id: _inputId }, randomIdLabelReturn: { id: _labelId } } = useLabelSynthetic({
-          labelParameters: {
-              ...labelParameters,
-              onLabelClick: useStableCallback(() => {
-                  rovingTabIndexReturn.focusSelf();
-              })
-          },
-          randomIdInputParameters: { prefix: Prefices.listbox },
-          randomIdLabelParameters: { prefix: Prefices.listboxLabel }
-      });
-      let { context, props: { ...props }, rovingTabIndexReturn, singleSelectionReturn, ...restRet } = useCompleteListNavigationDeclarative({
-          rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
-          singleSelectionDeclarativeParameters: { selectedIndex, onSelectedIndexChange },
-          singleSelectionParameters: { ariaPropName: ariaPropName || "aria-selected", selectionMode: selectionMode },
-          linearNavigationParameters: { arrowKeyDirection: orientation, ...linearNavigationParameters },
-          ...restParams
-      });
-      if (groupingType == "group")
-          props.role = "group";
-      else if (groupingType == "with-groups") {
-          // Intentionally clobbering all the list navigation stuff.
-          props = { role: "listbox" };
-          // ...actually, context too while we're at it.
-          context = null;
-      }
-      else {
-          props.role = "listbox";
-      }
-      if (selectionLimit == "multi")
-          console.assert(singleSelectionReturn.getSelectedIndex() == null);
-      return {
-          ...restRet,
-          context: useMemoObject({
-              ...context,
-              listboxContext: useMemoObject({
-                  selectionLimit
-              })
-          }),
-          rovingTabIndexReturn,
-          propsListbox: useMergedProps(props, propsLabelList, { "aria-multiselectable": (selectionLimit == "multi" ? "true" : undefined) }),
-          propsListboxLabel: propsLabelLabel
-      };
-  }
-  function useListboxItem({ context: { listboxContext: { selectionLimit }, ...context }, listboxParameters: { selected, onMultiSelect }, pressParameters: { focusSelf, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange, ...void1 }, ...restParams }) {
-      const { propsChild, propsTabbable, refElementReturn, pressParameters: { onPressSync, excludeSpace, ...void2 }, ...restRet } = useCompleteListNavigationChild({
-          context,
-          ...restParams
-      });
-      if (selectionLimit == "single")
-          console.assert(selected == null);
-      propsChild.role = "option";
-      propsChild["aria-disabled"] = restParams.info.unselectable ? "true" : undefined;
-      const { pressReturn, props: propsPress } = usePress({
-          refElementReturn, pressParameters: {
-              focusSelf,
-              onPressSync: useStableCallback((e) => {
-                  onPressSync?.(e);
-                  if (selectionLimit == "multi")
-                      onMultiSelect?.(enhanceEvent(e, { selected: !selected }));
-              }),
-              excludeSpace,
-              allowRepeatPresses,
-              excludeEnter,
-              excludePointer,
-              longPressThreshold,
-              onPressingChange
-          }
-      });
-      return {
-          pressReturn,
-          refElementReturn,
-          props: useMergedProps(propsChild, propsTabbable, propsPress),
-          ...restRet
-      };
-  }
-
   const ListboxContext = F$3(null);
   const ListboxGroupContext = F$3(null);
-  x$1(function GroupedListbox({ ariaLabel, selectionLimit, orientation, render }) {
+  x$1(function GroupedListbox({ ariaLabel, selectionLimit, orientation, render, onElementChange, onMount, onUnmount }) {
       const info = useListbox({
           labelParameters: { ariaLabel },
           linearNavigationParameters: {
@@ -10382,17 +11194,17 @@
               typeaheadTimeout: Infinity,
               onNavigateTypeahead: null
           },
+          refElementParameters: { onElementChange, onMount, onUnmount },
           singleSelectionParameters: { ariaPropName: null, selectionMode: "disabled" }
       });
-      info.context;
       return (o$3(ListboxGroupContext.Provider, { value: info, children: render(info) }));
   });
-  memoForwardRef(function Listbox({ ariaLabel, collator, compare, disableHomeEndKeys, getIndex, selectedIndex, navigatePastEnd, navigatePastStart, noTypeahead, onSelectedIndexChange, onTabbableIndexChange, staggered, pageNavigationSize, paginationMax, paginationMin, selectionLimit, untabbable, typeaheadTimeout, orientation, ariaPropName, selectionMode, onNavigateLinear, onNavigateTypeahead, render }) {
+  x$1(function Listbox({ ariaLabel, collator, compare, disableHomeEndKeys, getIndex, selectedIndex, navigatePastEnd, navigatePastStart, noTypeahead, onSelectedIndexChange, onTabbableIndexChange, staggered, pageNavigationSize, paginationMax, paginationMin, selectionLimit, untabbable, typeaheadTimeout, orientation, ariaPropName, selectionMode, onNavigateLinear, onNavigateTypeahead, onElementChange, onMount, onUnmount, render, imperativeHandle, ...void1 }) {
       const listboxGroupInfo = q$2(ListboxGroupContext);
       ariaPropName ||= "aria-selected";
       selectionMode ||= "activation";
       untabbable ||= false;
-      const info = useListbox({
+      return useComponent(imperativeHandle, render, ListboxContext, useListbox({
           labelParameters: { ariaLabel },
           staggeredChildrenParameters: {
               staggered: staggered || false
@@ -10405,106 +11217,146 @@
               pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
           },
           paginatedChildrenParameters: {
-              paginationMax: paginationMax ?? null,
-              paginationMin: paginationMin ?? null
+              paginationMax,
+              paginationMin
           },
-          listboxParameters: { selectionLimit, groupingType: listboxGroupInfo == null ? "without-groups" : "group", selectedIndex, onSelectedIndexChange: onSelectedIndexChange ?? null, orientation: orientation ?? "vertical" },
+          listboxParameters: {
+              selectionLimit,
+              groupingType: listboxGroupInfo == null ? "without-groups" : "group",
+              selectedIndex,
+              onSelectedIndexChange,
+              orientation: orientation ?? "vertical"
+          },
           rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
-          rovingTabIndexParameters: { onTabbableIndexChange: onTabbableIndexChange ?? null, untabbable: untabbable ?? false },
-          sortableChildrenParameters: { compare: compare ?? null },
+          rovingTabIndexParameters: {
+              onTabbableIndexChange,
+              untabbable: untabbable ?? false
+          },
+          sortableChildrenParameters: { compare },
           typeaheadNavigationParameters: {
               onNavigateTypeahead,
               collator: useDefault("collator", collator),
               noTypeahead: useDefault("noTypeahead", noTypeahead),
               typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
           },
+          refElementParameters: { onElementChange, onMount, onUnmount },
           singleSelectionParameters: { ariaPropName, selectionMode }
-      });
-      return (o$3(ListboxContext.Provider, { value: info.context, children: render(info) }));
+      }));
   });
-  const ListboxItem = memoForwardRef(function ListboxItem({ unselectable, focusSelf, getText, untabbable, index, render, selected, getSortValue, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange, onMultiSelect, ...subInfo }) {
+  const ListboxItem = x$1(function ListboxItem({ unselectable, getText, untabbable, index, render, selected, getSortValue, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange, onMultiSelect, onElementChange, onMount, onUnmount, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, focusSelf, imperativeHandle, ...void1 }) {
       const context = useContextWithWarning(ListboxContext, "listbox");
       console.assert(context != null, `This ListboxItem is not contained within a Listbox`);
       const focusSelfDefault = T$2((e) => { focus(e); }, []);
-      focusSelf ??= focusSelfDefault;
-      const info = useListboxItem({
-          info: { index, untabbable: untabbable || false, unselectable: unselectable || false, focusSelf, getSortValue, ...subInfo },
+      return useComponent(imperativeHandle, render, null, useListboxItem({
+          info: {
+              index,
+              untabbable: untabbable || false,
+              unselectable: unselectable || false,
+              focusSelf: focusSelf ?? focusSelfDefault,
+              getSortValue
+          },
           context,
-          listboxParameters: { selected: selected ?? null, onMultiSelect: onMultiSelect || null },
-          pressParameters: { focusSelf, allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange },
+          listboxParameters: { selected, onMultiSelect },
+          pressParameters: { allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange },
           textContentParameters: { getText: useDefault("getText", getText) },
-      });
-      return render(info);
+          hasCurrentFocusParameters: { onCurrentFocusedChanged, onCurrentFocusedInnerChanged, },
+          refElementParameters: { onElementChange, onMount, onUnmount }
+      }));
   });
 
   const UntabbableContext$2 = F$3(false);
   const AriaPropNameContext$1 = F$3("aria-selected");
   const SelectionModeContext$2 = F$3("focus");
   const MenuItemContext = F$3(null);
-  const Menu$1 = memoForwardRef(function Menu({ collator, disableHomeEndKeys, noTypeahead, typeaheadTimeout, orientation, ariaPropName, selectionMode, untabbable, onClose, open, openDirection, onTabbableIndexChange, closeOnBackdrop, closeOnEscape, closeOnLostFocus, compare, getIndex, selectedIndex, navigatePastEnd, navigatePastStart, onSelectedIndexChange, pageNavigationSize, parentDepth, disabled, staggered, onOpen, onNavigateLinear, onNavigateTypeahead, getWindow, render }, ref) {
+  function Menu$1({ collator, disableHomeEndKeys, noTypeahead, typeaheadTimeout, orientation, ariaPropName, selectionMode, untabbable, active, onDismiss, onElementChange, onMount, onUnmount, openDirection, onTabbableIndexChange, compare, getIndex, selectedIndex, navigatePastEnd, navigatePastStart, onSelectedIndexChange, pageNavigationSize, parentDepth, disabled, staggered, onOpen, onNavigateLinear, onNavigateTypeahead, getDocument, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, render, imperativeHandle, ...void1 }) {
       const defaultParentDepth = q$2(ParentDepthContext);
       let myDepth = (parentDepth ?? defaultParentDepth) + 1;
       ariaPropName ||= "aria-selected";
       selectionMode ||= "activation";
       untabbable ||= false;
-      const info = useMenu({
-          linearNavigationParameters: {
-              onNavigateLinear,
-              disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
-              pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize),
-              navigatePastEnd: navigatePastEnd ?? "wrap",
-              navigatePastStart: navigatePastStart ?? "wrap"
-          },
-          staggeredChildrenParameters: {
-              staggered: staggered || false
-          },
-          dismissParameters: {
-              closeOnBackdrop: closeOnBackdrop ?? true,
-              closeOnEscape: closeOnEscape ?? true,
-              closeOnLostFocus: closeOnLostFocus ?? true,
-              onClose,
-              open
-          },
-          escapeDismissParameters: {
-              getWindow: useDefault("getWindow", getWindow),
-              parentDepth: parentDepth ?? defaultParentDepth
-          },
-          rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
-          sortableChildrenParameters: { compare: compare ?? null },
-          menuParameters: { openDirection, onOpen },
-          menuSurfaceParameters: {},
-          rovingTabIndexParameters: {
-              onTabbableIndexChange: onTabbableIndexChange ?? null,
-              untabbable: untabbable
-          },
-          typeaheadNavigationParameters: {
-              onNavigateTypeahead,
-              collator: useDefault("collator", collator),
-              noTypeahead: useDefault("noTypeahead", noTypeahead),
-              typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
-          },
-          toolbarParameters: { orientation, selectedIndex: selectedIndex ?? null, onSelectedIndexChange: onSelectedIndexChange ?? null, disabled: disabled || false },
-          singleSelectionParameters: { ariaPropName: ariaPropName || "aria-selected", selectionMode: selectionMode || "activation" }
-      });
-      A$1(ref, () => info);
-      return (o$3(AriaPropNameContext$1.Provider, { value: ariaPropName, children: o$3(SelectionModeContext$2.Provider, { value: selectionMode, children: o$3(UntabbableContext$2.Provider, { value: untabbable, children: o$3(ParentDepthContext.Provider, { value: myDepth, children: o$3(MenuItemContext.Provider, { value: info.context, children: render(info) }) }) }) }) }));
-  });
-  const MenuItem$1 = memoForwardRef(function MenuItem({ index, untabbable, getSortValue, onPress, getText, role, focusSelf, unselectable, onPressingChange, render, info: uinfo }, ref) {
+      return (o$3(AriaPropNameContext$1.Provider, { value: ariaPropName, children: o$3(SelectionModeContext$2.Provider, { value: selectionMode, children: o$3(UntabbableContext$2.Provider, { value: untabbable, children: o$3(ParentDepthContext.Provider, { value: myDepth, children: useComponent(imperativeHandle, render, MenuItemContext, useMenu({
+                          linearNavigationParameters: {
+                              onNavigateLinear,
+                              disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
+                              pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize),
+                              navigatePastEnd: navigatePastEnd ?? "wrap",
+                              navigatePastStart: navigatePastStart ?? "wrap"
+                          },
+                          staggeredChildrenParameters: {
+                              staggered: staggered || false
+                          },
+                          escapeDismissParameters: { parentDepth: parentDepth || 1, },
+                          dismissParameters: { onDismiss },
+                          modalParameters: { active },
+                          refElementParameters: { onElementChange, onMount, onUnmount },
+                          activeElementParameters: {
+                              getDocument: useDefault("getDocument", getDocument),
+                              onActiveElementChange,
+                              onLastActiveElementChange,
+                              onWindowFocusedChange
+                          },
+                          rearrangeableChildrenParameters: {
+                              getIndex: useDefault("getIndex", getIndex)
+                          },
+                          sortableChildrenParameters: {
+                              compare
+                          },
+                          menuParameters: {
+                              openDirection,
+                              onOpen
+                          },
+                          menuSurfaceParameters: {},
+                          rovingTabIndexParameters: {
+                              onTabbableIndexChange,
+                              untabbable: untabbable
+                          },
+                          typeaheadNavigationParameters: {
+                              onNavigateTypeahead,
+                              collator: useDefault("collator", collator),
+                              noTypeahead: useDefault("noTypeahead", noTypeahead),
+                              typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
+                          },
+                          toolbarParameters: {
+                              orientation,
+                              selectedIndex,
+                              onSelectedIndexChange,
+                              disabled: disabled || false
+                          },
+                          singleSelectionParameters: {
+                              ariaPropName: ariaPropName || "aria-selected",
+                              selectionMode: selectionMode || "activation"
+                          }
+                      })) }) }) }) }));
+  }
+  function MenuItem$1({ index, untabbable, getSortValue, onPress, getText, role, focusSelf, unselectable, onPressingChange, render, imperativeHandle, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, onElementChange, onMount, onUnmount, info: uinfo, ...void1 }) {
       const context = useContextWithWarning(MenuItemContext, "menu");
       const defaultFocusSelf = T$2((e) => focus(e), []);
-      const info = useMenuItem({
-          info: { index, untabbable, unselectable, focusSelf: focusSelf ?? defaultFocusSelf, getSortValue, ...uinfo },
+      return (useComponent(imperativeHandle, render, null, useMenuItem({
+          info: {
+              index,
+              untabbable: untabbable || false,
+              unselectable: unselectable || false,
+              focusSelf: focusSelf ?? defaultFocusSelf,
+              getSortValue,
+          },
           context,
-          textContentParameters: { getText: useDefault("getText", getText) },
-          menuItemParameters: { onPress: onPress ?? null, role: role ?? "menuitem" },
-          pressParameters: { onPressingChange }
-      });
-      A$1(ref, () => info);
-      return (o$3(_$3, { children: render(info) }));
-  });
+          textContentParameters: {
+              getText: useDefault("getText", getText)
+          },
+          menuItemParameters: {
+              onPress,
+              role: role ?? "menuitem"
+          },
+          pressParameters: {
+              onPressingChange
+          },
+          hasCurrentFocusParameters: { onCurrentFocusedChanged, onCurrentFocusedInnerChanged },
+          refElementParameters: { onElementChange, onMount, onUnmount },
+      })));
+  }
 
   const MenubarItemContext = F$3(null);
-  memoForwardRef(function MenubarU({ render, collator, disableHomeEndKeys, navigatePastEnd, navigatePastStart, pageNavigationSize, orientation, staggered, noTypeahead, untabbable, onTabbableIndexChange, compare, getIndex, disabled, selectedIndex, onSelectedIndexChange, typeaheadTimeout, role, ariaLabel, ariaPropName, selectionMode, onNavigateLinear, onNavigateTypeahead }, ref) {
+  x$1(function Menubar({ render, collator, disableHomeEndKeys, navigatePastEnd, navigatePastStart, pageNavigationSize, orientation, staggered, noTypeahead, untabbable, onTabbableIndexChange, compare, getIndex, disabled, selectedIndex, onSelectedIndexChange, typeaheadTimeout, role, ariaLabel, ariaPropName, selectionMode, onNavigateLinear, onNavigateTypeahead, imperativeHandle, onElementChange, onMount, onUnmount, ...void1 }) {
       ariaPropName ||= "aria-selected";
       selectionMode ||= "activation";
       untabbable ||= false;
@@ -10516,65 +11368,68 @@
               navigatePastStart: navigatePastStart ?? "wrap",
               pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
           },
-          toolbarParameters: { orientation, selectedIndex: selectedIndex ?? null, onSelectedIndexChange: onSelectedIndexChange ?? null, role: role ?? "menubar", disabled: disabled || false },
-          rovingTabIndexParameters: { onTabbableIndexChange: onTabbableIndexChange ?? null, untabbable },
+          toolbarParameters: {
+              orientation,
+              selectedIndex,
+              onSelectedIndexChange,
+              role: role ?? "menubar",
+              disabled: disabled || false
+          },
+          rovingTabIndexParameters: {
+              onTabbableIndexChange, untabbable
+          },
           typeaheadNavigationParameters: {
               onNavigateTypeahead,
               collator: useDefault("collator", collator),
               noTypeahead: useDefault("noTypeahead", noTypeahead),
               typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
           },
-          rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
-          staggeredChildrenParameters: { staggered: staggered || false },
-          sortableChildrenParameters: { compare: compare ?? null },
-          labelParameters: { ariaLabel },
-          singleSelectionParameters: { ariaPropName, selectionMode }
+          rearrangeableChildrenParameters: {
+              getIndex: useDefault("getIndex", getIndex)
+          },
+          staggeredChildrenParameters: {
+              staggered: staggered || false
+          },
+          sortableChildrenParameters: {
+              compare,
+          },
+          labelParameters: {
+              ariaLabel
+          },
+          singleSelectionParameters: {
+              ariaPropName,
+              selectionMode
+          },
+          refElementParameters: { onElementChange, onMount, onUnmount }
       });
-      A$1(ref, () => info);
+      A$1(imperativeHandle, () => info);
       return (o$3(MenubarItemContext.Provider, { value: info.context, children: render(info) }));
   });
-  memoForwardRef(function MenuItemU({ index, render, focusSelf, untabbable, getText, unselectable, onPress, getSortValue, onPressingChange, role, info: uinfo }, ref) {
-      const context = (useContextWithWarning(MenubarItemContext, "menubar"));
-      const defaultFocusSelf = T$2((e) => focus(e), []);
-      const info = useMenubarChild({
-          info: { index, untabbable: untabbable || false, unselectable: unselectable || false, focusSelf: focusSelf ?? defaultFocusSelf, getSortValue, ...uinfo },
-          context,
-          textContentParameters: { getText: useDefault("getText", getText) },
-          menuItemParameters: { onPress: onPress ?? null, role: role ?? "menuitem" },
-          pressParameters: { onPressingChange }
-      });
-      A$1(ref, () => info);
-      return (o$3(_$3, { children: render(info) }));
-  });
 
-  const Progress = memoForwardRef(function Progress({ tagIndicator, ariaLabel, max, render, value, valueText }, ref) {
-      const info = useProgress({
+  const Progress = x$1(function Progress({ tagProgressIndicator, ariaLabel, max, render, value, valueText, imperativeHandle, ...void1 }) {
+      return useComponent(imperativeHandle, render, null, useProgress({
           labelParameters: { ariaLabel },
           progressIndicatorParameters: {
               max: max ?? 100,
               value: value ?? "indeterminate",
-              valueText: valueText ?? null,
-              tagIndicator
+              valueText,
+              tagProgressIndicator
           }
-      });
-      A$1(ref, () => info);
-      return render(info);
+      }));
   });
-  const ProgressWithHandler = memoForwardRef(function ProgressWithHandler({ ariaLabel, forciblyPending, render, tagIndicator, asyncHandler, capture, debounce, throttle }, ref) {
-      const info = useProgressWithHandler({
+  const ProgressWithHandler = x$1(function ProgressWithHandler({ ariaLabel, forciblyPending, render, tagProgressIndicator, asyncHandler, capture, debounce, throttle, notifyFailure, notifyPending, notifySuccess, imperativeHandle, ...void1 }) {
+      return useComponent(imperativeHandle, render, null, useProgressWithHandler({
           asyncHandlerParameters: { asyncHandler, capture, debounce, throttle },
           labelParameters: { ariaLabel },
-          progressIndicatorParameters: { tagIndicator },
-          progressWithHandlerParameters: { forciblyPending: forciblyPending ?? false }
-      });
-      A$1(ref, () => info);
-      return (render(info));
+          progressIndicatorParameters: { tagProgressIndicator },
+          progressWithHandlerParameters: { forciblyPending, notifyFailure, notifyPending, notifySuccess }
+      }));
   });
 
   const RadioContext = F$3(null);
-  const RadioGroup$1 = memoForwardRef(function RadioGroup({ render, name, onSelectedValueChange, collator, disableHomeEndKeys, arrowKeyDirection, noTypeahead, typeaheadTimeout, ariaLabel, compare, staggered, getIndex, navigatePastEnd, navigatePastStart, selectedValue, untabbable, onTabbableIndexChange, onNavigateLinear, onNavigateTypeahead, pageNavigationSize, ...rest }, ref) {
+  const RadioGroup$1 = x$1(function RadioGroup({ render, name, collator, disableHomeEndKeys, arrowKeyDirection, noTypeahead, typeaheadTimeout, ariaLabel, compare, staggered, getIndex, navigatePastEnd, navigatePastStart, selectedValue, untabbable, onTabbableIndexChange, onNavigateLinear, onNavigateTypeahead, pageNavigationSize, onElementChange, onMount, onUnmount, imperativeHandle, onSelectedValueChange, ...void1 }) {
       untabbable ??= false;
-      const info = useRadioGroup({
+      return useComponent(imperativeHandle, render, RadioContext, useRadioGroup({
           linearNavigationParameters: {
               onNavigateLinear,
               arrowKeyDirection: arrowKeyDirection ?? "either",
@@ -10586,10 +11441,10 @@
           staggeredChildrenParameters: { staggered: staggered || false },
           labelParameters: { ariaLabel },
           rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
-          sortableChildrenParameters: { compare: compare ?? null },
-          radioGroupParameters: { name, onSelectedValueChange, selectedValue },
+          sortableChildrenParameters: { compare },
+          radioGroupParameters: { name, selectedValue, onSelectedValueChange },
           rovingTabIndexParameters: {
-              onTabbableIndexChange: onTabbableIndexChange ?? null,
+              onTabbableIndexChange,
               untabbable
           },
           typeaheadNavigationParameters: {
@@ -10598,68 +11453,48 @@
               noTypeahead: useDefault("noTypeahead", noTypeahead),
               typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
           },
-      });
-      A$1(ref, () => info);
-      return (o$3(RadioContext.Provider, { value: info.context, children: render(info) }));
+          refElementParameters: { onElementChange, onMount, onUnmount },
+      }));
   });
-  const Radio$1 = memoForwardRef(function Radio({ unselectable, disabled, index, render, value, ariaLabel, focusSelf, labelPosition, untabbable, tagInput, tagLabel, getText, longPressThreshold }, ref) {
-      const defaultFocusSelf = () => info.checkboxLikeReturn.focusSelf();
-      focusSelf ??= defaultFocusSelf;
+  const Radio$1 = x$1(function Radio({ unselectable, disabled, index, render, value, ariaLabel, labelPosition, untabbable, tagInput, tagLabel, getText, longPressThreshold, onElementChange, onMount, onUnmount, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, imperativeHandle, ...void1 }) {
       const context = useContextWithWarning(RadioContext, "radio group");
       console.assert(context != null, `This Radio is not contained within a RadioGroup`);
       const getValue = useStableGetter(value);
-      const info = useRadio({
+      return useComponent(imperativeHandle, render, null, useRadio({
           radioParameters: { value },
           checkboxLikeParameters: { disabled: disabled ?? false },
-          info: { index, focusSelf, untabbable: untabbable || false, unselectable: !!unselectable, getSortValue: getValue },
+          info: { index, untabbable: untabbable || false, unselectable: !!unselectable, getSortValue: getValue },
           context,
           labelParameters: { ariaLabel, labelPosition, tagInput, tagLabel },
           textContentParameters: { getText: useDefault("getText", getText) },
-          pressParameters: { longPressThreshold }
-      });
-      A$1(ref, () => info);
-      return render(info);
+          pressParameters: { longPressThreshold },
+          hasCurrentFocusParameters: { onCurrentFocusedChanged, onCurrentFocusedInnerChanged },
+          refElementParameters: { onElementChange, onMount, onUnmount }
+      }));
   });
 
-  const SliderThumbContext = F$3(null);
-  memoForwardRef(function Slider({ max, min, onAfterChildLayoutEffect, onChildrenMountChange, children }, ref) {
-      const info = useSlider({
-          managedChildrenParameters: { onAfterChildLayoutEffect, onChildrenMountChange },
-          sliderParameters: { max, min }
-      });
-      A$1(ref, () => info);
-      return (o$3(SliderThumbContext.Provider, { value: info.context, children: children }));
-  });
-  memoForwardRef(function SliderThumbU({ label, tag, value, max, min, onValueChange, index, render, valueText }, ref) {
-      const context = useContextWithWarning(SliderThumbContext, "slider");
-      console.assert(context != null, `This SliderThumb is not contained within a Slider`);
-      const info = useSliderThumb({
-          context,
-          info: { index },
-          sliderThumbParameters: { label, tag, value, max, min, onValueChange, valueText },
-      });
-      A$1(ref, () => info);
-      return render(info);
-  });
+  F$3(null);
 
   const TableContext$1 = F$3(null);
   const TableSectionContext = F$3(null);
   const TableRowContext = F$3(null);
-  const Table$1 = memoForwardRef(function TableU({ ariaLabel, selectionLimit, tagTable, render }, ref) {
-      const info = useTable({
+  const Table$1 = x$1(function Table({ ariaLabel, selectionLimit, tagTable, imperativeHandle, render }) {
+      return useComponent(imperativeHandle, render, TableContext$1, useTable({
           labelParameters: { ariaLabel },
-          tableParameters: { selectionLimit, tagTable }
-      });
-      A$1(ref, () => info);
-      return o$3(TableContext$1.Provider, { value: info.context, children: render(info) });
+          tableParameters: { selectionLimit, tagTable, }
+      }));
   });
-  const TableSection$1 = memoForwardRef(function TableSection({ disableHomeEndKeys, getIndex, initiallySelectedIndex, untabbable, navigatePastEnd, navigatePastStart, onSelectedIndexChange, onTabbableColumnChange, onTabbableIndexChange, pageNavigationSize, paginationMax, paginationMin, staggered, render, location, ariaPropName, selectionMode, onNavigateLinear, collator, noTypeahead, onNavigateTypeahead, typeaheadTimeout, tagTableSection }) {
+  const TableSection$1 = x$1(function TableSection({ disableHomeEndKeys, getIndex, initiallySelectedIndex, untabbable, navigatePastEnd, navigatePastStart, onSelectedIndexChange, onTabbableColumnChange, onTabbableIndexChange, pageNavigationSize, paginationMax, paginationMin, staggered, render, location, ariaPropName, selectionMode, onNavigateLinear, collator, noTypeahead, onNavigateTypeahead, typeaheadTimeout, tagTableSection, onElementChange, onMount, onUnmount }) {
       untabbable = (untabbable ?? false);
       ariaPropName ??= "aria-selected";
       selectionMode ??= "activation";
       const info = useTableSection({
-          gridNavigationParameters: { onTabbableColumnChange: onTabbableColumnChange ?? null },
-          staggeredChildrenParameters: { staggered: staggered || false },
+          gridNavigationParameters: {
+              onTabbableColumnChange: onTabbableColumnChange
+          },
+          staggeredChildrenParameters: {
+              staggered: staggered || false
+          },
           typeaheadNavigationParameters: {
               onNavigateTypeahead,
               collator: useDefault("collator", collator),
@@ -10674,60 +11509,89 @@
               pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
           },
           paginatedChildrenParameters: {
-              paginationMax: paginationMax ?? null,
-              paginationMin: paginationMin ?? null
+              paginationMax,
+              paginationMin,
           },
-          rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
-          rovingTabIndexParameters: { onTabbableIndexChange: onTabbableIndexChange ?? null, untabbable },
-          singleSelectionParameters: { initiallySelectedIndex: initiallySelectedIndex ?? null, onSelectedIndexChange: onSelectedIndexChange ?? null, ariaPropName, selectionMode },
+          rearrangeableChildrenParameters: {
+              getIndex: useDefault("getIndex", getIndex)
+          },
+          rovingTabIndexParameters: {
+              onTabbableIndexChange,
+              untabbable
+          },
+          singleSelectionParameters: {
+              initiallySelectedIndex,
+              onSelectedIndexChange,
+              ariaPropName,
+              selectionMode
+          },
           context: useContextWithWarning(TableContext$1, "table"),
-          tableSectionParameters: { tagTableSection, location },
+          tableSectionParameters: {
+              tagTableSection,
+              location
+          },
+          refElementParameters: { onElementChange, onMount, onUnmount }
       });
       return (o$3(TableSectionContext.Provider, { value: info.context, children: render(info) }));
   });
-  const TableRow$1 = memoForwardRef(function TableRowU({ index, getText, tagTableRow, onTabbableIndexChange, navigatePastEnd, navigatePastStart, selected, unselectable, initiallyTabbedIndex, untabbable, render }, ref) {
-      const cx1 = useContextWithWarning(TableSectionContext, "table section");
-      console.assert(cx1 != null, `This TableRow is not contained within a TableSection`);
-      untabbable ||= (cx1.rovingTabIndexContext.untabbable);
-      const info = useTableRow({
-          info: { index, unselectable: unselectable || false, untabbable: untabbable || false },
-          context: cx1,
+  const TableRow$1 = x$1(function TableRow({ index, getText, tagTableRow, onTabbableIndexChange, navigatePastEnd, navigatePastStart, selected, unselectable, initiallyTabbedIndex, untabbable, info, imperativeHandle, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, render, ...void1 }) {
+      return useComponent(imperativeHandle, render, TableRowContext, useTableRow({
+          info: {
+              index,
+              unselectable: unselectable || false,
+              untabbable: untabbable || false,
+              ...info
+          },
+          context: useContextWithWarning(TableSectionContext, "table section"),
           textContentParameters: {
               getText: useDefault("getText", getText)
           },
           tableRowParameters: {
-              selected: selected ?? null,
+              selected,
               tagTableRow
           },
-          linearNavigationParameters: {
-              navigatePastEnd: navigatePastEnd ?? "wrap",
-              navigatePastStart: navigatePastStart ?? "wrap"
+          hasCurrentFocusParameters: {
+              onCurrentFocusedChanged,
+              onCurrentFocusedInnerChanged,
           },
-          rovingTabIndexParameters: { onTabbableIndexChange: onTabbableIndexChange ?? null, initiallyTabbedIndex: initiallyTabbedIndex ?? null, untabbable },
-      });
-      A$1(ref, () => info);
-      return (o$3(TableRowContext.Provider, { value: info.context, children: render(info) }));
+          linearNavigationParameters: {
+              navigatePastEnd: navigatePastEnd || "wrap",
+              navigatePastStart: navigatePastStart || "wrap"
+          },
+          rovingTabIndexParameters: {
+              onTabbableIndexChange: onTabbableIndexChange || null,
+              initiallyTabbedIndex: initiallyTabbedIndex ?? null,
+              untabbable: untabbable || false
+          },
+      }));
   });
-  const TableCell$1 = memoForwardRef(function TableCell({ index, getText, focusSelf, untabbable, tagTableCell, render, colSpan, getSortValue, }, ref) {
-      const context = useContextWithWarning(TableRowContext, "table row");
-      console.assert(context != null, `This TableCell is not contained within a TableRow`);
+  const TableCell$1 = x$1(function TableCell({ index, getText, focusSelf, untabbable, tagTableCell, render, colSpan, imperativeHandle, getSortValue, info, ...void1 }) {
       const defaultFocusSelf = useStableCallback((e) => { focus(e); }, []);
-      const info = useTableCell({
-          info: { index, focusSelf: focusSelf ?? defaultFocusSelf, untabbable: untabbable || false, getSortValue },
-          context,
-          gridNavigationCellParameters: { colSpan: colSpan ?? 1 },
-          tableCellParameters: { tagTableCell },
-          textContentParameters: { getText: useDefault("getText", getText) }
-      });
-      A$1(ref, () => info);
-      return render(info);
+      return useComponent(imperativeHandle, render, null, useTableCell({
+          info: {
+              index,
+              focusSelf: focusSelf ?? defaultFocusSelf,
+              untabbable: untabbable || false,
+              getSortValue
+          },
+          context: useContextWithWarning(TableRowContext, "table row"),
+          gridNavigationCellParameters: {
+              colSpan: colSpan ?? 1
+          },
+          tableCellParameters: {
+              tagTableCell
+          },
+          textContentParameters: {
+              getText: useDefault("getText", getText)
+          }
+      }));
   });
 
   const TabsContext = F$3(null);
   const TabPanelsContext = F$3(null);
   const UntabbableContext$1 = F$3(false);
   const SelectionModeContext$1 = F$3("focus");
-  const Tabs$1 = memoForwardRef(function Tabs({ ariaLabel, collator, compare, disableHomeEndKeys, getIndex, initiallySelectedIndex, navigatePastEnd, navigatePastStart, noTypeahead, onSelectedIndexChange, onTabbableIndexChange, orientation, staggered, pageNavigationSize, localStorageKey, selectionMode, untabbable, typeaheadTimeout, role, onNavigateLinear, onNavigateTypeahead, render }, ref) {
+  const Tabs$1 = x$1(function Tabs({ ariaLabel, collator, compare, disableHomeEndKeys, getIndex, initiallySelectedIndex, navigatePastEnd, navigatePastStart, noTypeahead, onSelectedIndexChange, onTabbableIndexChange, orientation, staggered, pageNavigationSize, localStorageKey, selectionMode, untabbable, typeaheadTimeout, role, onNavigateLinear, onNavigateTypeahead, imperativeHandle, onElementChange, onMount, onUnmount, render, ...void1 }) {
       untabbable ??= false;
       selectionMode ??= "focus";
       const info = useTabs({
@@ -10742,36 +11606,48 @@
           },
           rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
           rovingTabIndexParameters: {
-              onTabbableIndexChange: onTabbableIndexChange ?? null,
+              onTabbableIndexChange,
               untabbable
           },
-          singleSelectionParameters: { initiallySelectedIndex: initiallySelectedIndex ?? 0, onSelectedIndexChange: onSelectedIndexChange ?? null, selectionMode },
-          sortableChildrenParameters: { compare: compare ?? null },
-          tabsParameters: { orientation, role, localStorageKey: localStorageKey ?? null },
+          singleSelectionParameters: { initiallySelectedIndex, onSelectedIndexChange, selectionMode },
+          sortableChildrenParameters: { compare },
+          tabsParameters: {
+              orientation,
+              role,
+              localStorageKey
+          },
           typeaheadNavigationParameters: {
               onNavigateTypeahead,
               collator: useDefault("collator", collator),
               noTypeahead: useDefault("noTypeahead", noTypeahead),
               typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
-          }
+          },
+          refElementParameters: { onElementChange, onMount, onUnmount }
       });
       const { contextPanels, contextTabs } = info;
-      A$1(ref, () => info);
+      A$1(imperativeHandle, () => info);
       return (o$3(UntabbableContext$1.Provider, { value: untabbable, children: o$3(SelectionModeContext$1.Provider, { value: selectionMode, children: o$3(TabsContext.Provider, { value: contextTabs, children: o$3(TabPanelsContext.Provider, { value: contextPanels, children: render(info) }) }) }) }));
   });
-  const Tab$1 = memoForwardRef(function Tab({ unselectable, focusSelf, untabbable, index, getText, getSortValue, render, longPressThreshold, onPressingChange, info: uinfo }, ref) {
+  function Tab$1({ unselectable, focusSelf, untabbable, index, getText, render, longPressThreshold, onPressingChange, getSortValue, imperativeHandle, onElementChange, onMount, onUnmount, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, info: uinfo }) {
       const context = useContextWithWarning(TabsContext, "tabs");
       console.assert(context != null, `This Tab is not contained within a Tabs component`);
       const focusSelfDefault = T$2((e) => { focus(e); }, []);
-      const info = useTab({
-          info: { index, unselectable, untabbable, focusSelf: focusSelf ?? focusSelfDefault, getSortValue, ...uinfo },
+      return useComponent(imperativeHandle, render, null, useTab({
+          info: {
+              index,
+              unselectable: unselectable || false,
+              untabbable: untabbable || false,
+              focusSelf: focusSelf ?? focusSelfDefault,
+              getSortValue,
+              ...uinfo
+          },
           context,
+          hasCurrentFocusParameters: { onCurrentFocusedChanged, onCurrentFocusedInnerChanged },
+          refElementParameters: { onElementChange, onMount, onUnmount },
           pressParameters: { focusSelf: focusSelfDefault, longPressThreshold, onPressingChange },
           textContentParameters: { getText: useDefault("getText", getText) }
-      });
-      A$1(ref, () => info);
-      return render(info);
-  });
+      }));
+  }
   function TabPanel$1({ index, render, info: uinfo }) {
       const context = useContextWithWarning(TabPanelsContext, "tabs");
       const info = useTabPanel({
@@ -10782,35 +11658,45 @@
   }
 
   const ToastContext = F$3(null);
-  const Toasts = memoForwardRef(function Toasts({ onAfterChildLayoutEffect, onChildrenMountChange, render, visibleCount }, ref) {
-      const info = useToasts({ managedChildrenParameters: { onAfterChildLayoutEffect, onChildrenMountChange }, toastsParameters: { visibleCount } });
-      A$1(ref, () => info);
-      return (o$3(ToastContext.Provider, { value: info.context, children: render(info) }));
-  });
-  const Toast$1 = memoForwardRef(function Toast({ render, index, timeout, politeness, children }, ref) {
-      const context = useContextWithWarning(ToastContext, "toasts provider");
-      console.assert(context != null, `This Toast was not rendered within a Toasts provider`);
-      const info = useToast({
-          info: { index },
-          toastParameters: { timeout, politeness, children },
-          context
-      });
-      A$1(ref, () => info);
-      return render(info);
-  });
+  function Toasts({ onAfterChildLayoutEffect, onChildrenMountChange, render, visibleCount, imperativeHandle, onChildrenCountChange, ...void1 }) {
+      return useComponent(imperativeHandle, render, ToastContext, useToasts({
+          managedChildrenParameters: {
+              onAfterChildLayoutEffect,
+              onChildrenMountChange,
+              onChildrenCountChange
+          },
+          toastsParameters: {
+              visibleCount
+          }
+      }));
+  }
+  function Toast$1({ render, index, timeout, politeness, children, info, imperativeHandle }) {
+      return useComponent(imperativeHandle, render, null, useToast({
+          toastParameters: {
+              timeout,
+              politeness,
+              children
+          },
+          info: {
+              index,
+              ...info
+          },
+          context: useContextWithWarning(ToastContext, "toasts provider")
+      }));
+  }
 
   // TODO: Are there performance/sanity implications for having one context per primitive?
   const UntabbableContext = F$3(false);
   const AriaPropNameContext = F$3("aria-selected");
   const SelectionModeContext = F$3("focus");
   const ToolbarContext = F$3(null);
-  const Toolbar = memoForwardRef(function ToolbarU({ render, role, collator, disableHomeEndKeys, disabled, compare, getIndex, navigatePastEnd, navigatePastStart, pageNavigationSize, selectedIndex, onSelectedIndexChange, orientation, noTypeahead, onTabbableIndexChange, typeaheadTimeout, staggered, ariaLabel, ariaPropName, selectionMode, untabbable, onNavigateLinear, onNavigateTypeahead }, ref) {
+  const Toolbar = x$1(function ToolbarU({ render, role, collator, disableHomeEndKeys, disabled, compare, getIndex, navigatePastEnd, navigatePastStart, pageNavigationSize, selectedIndex, onSelectedIndexChange, orientation, noTypeahead, onTabbableIndexChange, typeaheadTimeout, staggered, ariaLabel, ariaPropName, selectionMode, untabbable, onNavigateLinear, onNavigateTypeahead, onElementChange, onMount, onUnmount }, ref) {
       ariaPropName ??= "aria-selected";
       selectionMode ??= "activation";
       untabbable ||= false;
       const listboxReturnType = useToolbar({
           rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
-          sortableChildrenParameters: { compare: compare ?? null },
+          sortableChildrenParameters: { compare: compare },
           linearNavigationParameters: {
               onNavigateLinear,
               disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
@@ -10822,11 +11708,11 @@
               orientation,
               disabled: disabled || false,
               role: role ?? "toolbar",
-              selectedIndex: selectedIndex ?? null,
-              onSelectedIndexChange: onSelectedIndexChange ?? null
+              selectedIndex,
+              onSelectedIndexChange
           },
           staggeredChildrenParameters: { staggered: staggered || false },
-          rovingTabIndexParameters: { onTabbableIndexChange: onTabbableIndexChange ?? null, untabbable },
+          rovingTabIndexParameters: { onTabbableIndexChange, untabbable },
           typeaheadNavigationParameters: {
               onNavigateTypeahead,
               collator: useDefault("collator", collator),
@@ -10834,12 +11720,13 @@
               typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
           },
           labelParameters: { ariaLabel },
-          singleSelectionParameters: { ariaPropName: ariaPropName, selectionMode }
+          singleSelectionParameters: { ariaPropName: ariaPropName, selectionMode },
+          refElementParameters: { onElementChange, onMount, onUnmount },
       });
       A$1(ref, () => listboxReturnType);
       return (o$3(AriaPropNameContext.Provider, { value: ariaPropName, children: o$3(SelectionModeContext.Provider, { value: selectionMode, children: o$3(UntabbableContext.Provider, { value: untabbable, children: o$3(ToolbarContext.Provider, { value: listboxReturnType.context, children: render(listboxReturnType) }) }) }) }));
   });
-  const ToolbarChild = memoForwardRef(function ToolbarChildU({ index, render, focusSelf, getSortValue, getText, unselectable, disabledProp, untabbable, info: uinfo }, ref) {
+  function ToolbarChild({ index, render, focusSelf, getSortValue, getText, unselectable, disabledProp, untabbable, onElementChange, onMount, onUnmount, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, imperativeHandle, info: uinfo }) {
       const context = useContextWithWarning(ToolbarContext, "toolbar");
       console.assert(context != null, `This ToolbarChild is not contained within a Toolbar`);
       const focusSelfDefault = T$2((e) => { focus(e); }, []);
@@ -10847,30 +11734,44 @@
       const info = useToolbarChild({
           context,
           toolbarChildParameters: { disabledProp },
-          info: { index, focusSelf, unselectable, untabbable, getSortValue, ...uinfo },
+          info: {
+              index,
+              focusSelf,
+              unselectable: unselectable || false,
+              untabbable: untabbable || false,
+              getSortValue
+          },
           textContentParameters: { getText: useDefault("getText", getText) },
+          hasCurrentFocusParameters: { onCurrentFocusedChanged, onCurrentFocusedInnerChanged },
+          refElementParameters: { onElementChange, onMount, onUnmount }
       });
-      A$1(ref, () => info);
+      A$1(imperativeHandle, () => info);
       return (o$3(_$3, { children: render(info) }));
-  });
+  }
 
-  const Tooltip$1 = memoForwardRef(function TooltipU({ onStatus, getWindow, parentDepth, hoverDelay, render, tooltipSemanticType }, ref) {
+  const Tooltip$1 = x$1(function TooltipU({ onStatus, getDocument, parentDepth, hoverDelay, render, imperativeHandle, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, tooltipSemanticType, ...void1 }) {
       const defaultParentDepth = q$2(ParentDepthContext);
       let myDepth = (parentDepth ?? defaultParentDepth) + 1;
-      const info = useTooltip({
-          escapeDismissParameters: {
-              getWindow: useDefault("getWindow", getWindow),
-              parentDepth: parentDepth ?? defaultParentDepth
-          },
-          tooltipParameters: {
-              onStatus,
-              tooltipSemanticType,
-              hoverDelay: hoverDelay ?? null
-          }
-      });
-      A$1(ref, () => info);
-      return (o$3(ParentDepthContext.Provider, { value: myDepth, children: render(info) }));
+      return (o$3(ParentDepthContext.Provider, { value: myDepth, children: useComponent(imperativeHandle, render, null, useTooltip({
+              escapeDismissParameters: {
+                  getDocument: useDefault("getDocument", getDocument),
+                  parentDepth: parentDepth ?? defaultParentDepth,
+              },
+              activeElementParameters: {
+                  getDocument: useDefault("getDocument", getDocument),
+                  onActiveElementChange,
+                  onLastActiveElementChange,
+                  onWindowFocusedChange
+              },
+              tooltipParameters: {
+                  onStatus,
+                  tooltipSemanticType,
+                  hoverDelay: hoverDelay ?? null
+              }
+          })) }));
   });
+
+  function r$1(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e))for(t=0;t<e.length;t++)e[t]&&(f=r$1(e[t]))&&(n&&(n+=" "),n+=f);else for(t in e)e[t]&&(n&&(n+=" "),n+=t);return n}function clsx(){for(var e,t,f=0,n="";f<arguments.length;)(e=arguments[f++])&&(t=r$1(e))&&(n&&(n+=" "),n+=t);return n}
 
   function getExclusiveTransitionContextPrememoization(exclusivityKey) {
       if (exclusivityKey == null)
@@ -10931,6 +11832,7 @@
           setAt: T$2((m, v) => { m.setExclusivelyOpen(v); }, []),
           getAt: T$2((m) => m.getExclusivelyOpen(), []),
           isValid: T$2((m) => { return true; }, []),
+          onClosestFit: null
       });
       const onVisibilityChange = T$2((index, visible) => {
           const nextInLine = getNextIndexInLine();
@@ -11034,7 +11936,7 @@
   function useCreateSwappableProps({ inline }, otherProps) {
       const { GetBaseClass } = useCssClasses();
       return useMergedProps({
-          className: clsx(`${GetBaseClass()}-swap-container`, inline && `${GetBaseClass()}-swap-container-inline`)
+          className: clsx$1(`${GetBaseClass()}-swap-container`, inline && `${GetBaseClass()}-swap-container-inline`)
       }, otherProps);
   }
   /**
@@ -11140,10 +12042,9 @@
   /**
    * Provide props that can be used to animate a transition.
    *
-   * @param param0
-   * @returns
+   * @compositeParams
    */
-  function useTransition({ transitionParameters: { propsIncoming: { children, ...p }, show, animateOnMount, measure, exitVisibility, duration, delayMountUntilShown, easing, easingIn, easingOut, onVisibilityChange }, exclusiveTransitionParameters: { exclusivityKey } }) {
+  function useTransition({ transitionParameters: { propsIncoming: { children, ...p }, show, animateOnMount, measure, exitVisibility, duration, delayMountUntilShown, easing, easingIn, easingOut, onVisibilityChange, ...void2 }, exclusiveTransitionParameters: { exclusivityKey, ...void3 }, refElementParameters, ...void1 }) {
       useEnsureStability("useTransition", onVisibilityChange);
       const { getAnimateOnMount } = q$2(SwappableContext);
       exitVisibility ||= "hidden";
@@ -11159,7 +12060,7 @@
       if (isExclusive) {
           show = (show && exclusivelyOpen);
       }
-      const { refElementReturn: { getElement }, propsStable } = useRefElement({});
+      const { refElementReturn: { getElement }, propsStable } = useRefElement({ refElementParameters });
       const cssProperties = _$1({});
       const classNames = _$1(new Set([
           // This is removed during useLayoutEffect on the first render
@@ -11413,7 +12314,7 @@
   }
 
   /**
-   * Creates a set of props that implement a Fade transition. Like all `useCreate*Props` hooks, must be used in tamdem with a `Transitionable` component (or `useCreateTransitionableProps`).
+   * Creates a set of props that implement a Fade transition. Like all `useCreate*Props` hooks, must be used in tandem with a `Transitionable` component (or `useTransition`).
    * Be sure to merge these returned props with whatever the user passed in.
    */
   function useBasePropsFade({ fadeParameters: { fadeMin, fadeMax } }) {
@@ -11436,8 +12337,9 @@
    *
    * @see `Transitionable`
    */
-  const Fade = x$1(forwardElementRef$1(function Fade({ duration, exclusivityKey, easing, easingIn, easingOut, delayMountUntilShown, fadeMin, fadeMax, show, animateOnMount, exitVisibility, onVisibilityChange, ...rest }, ref) {
+  const Fade = x$1(forwardElementRef$1(function Fade({ duration, exclusivityKey, easing, easingIn, easingOut, delayMountUntilShown, fadeMin, fadeMax, show, animateOnMount, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: false,
               show,
@@ -11455,7 +12357,7 @@
   function useBasePropsClip({ clipParameters: { clipMin, clipMinBlock, clipMinInline, clipOrigin, clipOriginBlock, clipOriginInline } }) {
       const { GetBaseClass } = useCssClasses();
       return ({
-          className: clsx(`${GetBaseClass()}-clip`),
+          className: clsx$1(`${GetBaseClass()}-clip`),
           style: {
               [`--${GetBaseClass()}-clip-origin-inline`]: (clipOriginInline ?? clipOrigin ?? 0.5),
               [`--${GetBaseClass()}-clip-origin-block`]: (clipOriginBlock ?? clipOrigin ?? 0),
@@ -11464,8 +12366,9 @@
           },
       });
   }
-  x$1(forwardElementRef$1(function Clip({ duration, exclusivityKey, easing, easingIn, easingOut, delayMountUntilShown, clipOrigin, clipOriginInline, clipOriginBlock, clipMin, clipMinInline, clipMinBlock, show, animateOnMount, exitVisibility, onVisibilityChange, ...rest }, ref) {
+  x$1(forwardElementRef$1(function Clip({ duration, exclusivityKey, easing, easingIn, easingOut, delayMountUntilShown, clipOrigin, clipOriginInline, clipOriginBlock, clipMin, clipMinInline, clipMinBlock, show, animateOnMount, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: false,
               show,
@@ -11483,8 +12386,9 @@
       });
   }));
 
-  x$1(forwardElementRef$1(function ClipFade({ delayMountUntilShown, exclusivityKey, easing, easingIn, easingOut, duration, fadeMin, fadeMax, show, animateOnMount, clipMin, clipMinBlock, clipMinInline, clipOrigin, clipOriginBlock, clipOriginInline, exitVisibility, onVisibilityChange, ...rest }, ref) {
+  x$1(forwardElementRef$1(function ClipFade({ delayMountUntilShown, exclusivityKey, easing, easingIn, easingOut, duration, fadeMin, fadeMax, show, animateOnMount, clipMin, clipMinBlock, clipMinInline, clipOrigin, clipOriginBlock, clipOriginInline, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: false,
               show,
@@ -11503,7 +12407,7 @@
   }));
 
   /**
-   * Creates a set of props that implement a Zoom transition. Like all `useCreate*Props` hooks, must be used in tamdem with a `Transitionable` component (or `useCreateTransitionableProps`).
+   * Creates a set of props that implement a Zoom transition. Like all `useCreate*Props` hooks, must be used in tandem with a `Transitionable` component (or `useTransition`).
    * Be sure to merge these returned props with whatever the user passed in.
    *
    * IMPORTANT: If used outside of a `<Collapse />`, you must include the `measure` prop on the `<Transitionable>` that you use.
@@ -11528,8 +12432,9 @@
    *
    * @see `Transitionable`
    */
-  x$1(forwardElementRef$1(function Collapse({ show, exclusivityKey, easing, easingIn, easingOut, duration, delayMountUntilShown, minBlockSize, animateOnMount, exitVisibility, onVisibilityChange, ...rest }, ref) {
+  x$1(forwardElementRef$1(function Collapse({ show, exclusivityKey, easing, easingIn, easingOut, duration, delayMountUntilShown, minBlockSize, animateOnMount, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: true,
               show,
@@ -11547,8 +12452,9 @@
       });
   }));
 
-  const CollapseFade = x$1(forwardElementRef$1(function CollapseFade({ show, exclusivityKey, easing, easingIn, easingOut, duration, animateOnMount, delayMountUntilShown, fadeMin, fadeMax, exitVisibility, minBlockSize, onVisibilityChange, ...rest }, ref) {
+  const CollapseFade = x$1(forwardElementRef$1(function CollapseFade({ show, exclusivityKey, easing, easingIn, easingOut, duration, animateOnMount, delayMountUntilShown, fadeMin, fadeMax, exitVisibility, minBlockSize, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: true,
               show,
@@ -11567,7 +12473,7 @@
   }));
 
   /**
-   * Creates a set of props that implement a Flip transition. Like all `useCreate*Props` hooks, must be used in tamdem with a `Transitionable` component (or `useCreateTransitionableProps`).
+   * Creates a set of props that implement a Flip transition. Like all `useCreate*Props` hooks, must be used in tandem with a `Transitionable` component (or `useTransition`).
    */
   function useBasePropsFlip({ flipParameters: { flipAngleBlock, flipAngleInline, flipPerspective } }) {
       const { GetBaseClass } = useCssClasses();
@@ -11592,8 +12498,9 @@
    *
    * @see `Transitionable`
    */
-  x$1(forwardElementRef$1(function Flip({ duration, exclusivityKey, easing, easingIn, easingOut, delayMountUntilShown, flipAngleInline, flipAngleBlock, flipPerspective, show, animateOnMount, exitVisibility, onVisibilityChange, ...rest }, ref) {
+  x$1(forwardElementRef$1(function Flip({ duration, exclusivityKey, easing, easingIn, easingOut, delayMountUntilShown, flipAngleInline, flipAngleBlock, flipPerspective, show, animateOnMount, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: false,
               show,
@@ -11612,7 +12519,7 @@
   }));
 
   /**
-   * Creates a set of props that implement a Slide transition. Like all `useCreate*Props` hooks, must be used in tamdem with a `Transitionable` component (or `useCreateTransitionableProps`).
+   * Creates a set of props that implement a Slide transition. Like all `useCreate*Props` hooks, must be used in tandem with a `Transitionable` component (or `useTransition`).
    */
   function useBasePropsSlide({ slideParameters: { slideTargetInline, slideTargetBlock } }) {
       slideTargetInline = useLastNonNullValue(slideTargetInline);
@@ -11638,8 +12545,9 @@
    *
    * @see `Transitionable`
    */
-  const Slide = x$1(forwardElementRef$1(function Slide({ duration, exclusivityKey, easing, easingIn, easingOut, onVisibilityChange, slideTargetInline, slideTargetBlock, show, animateOnMount, exitVisibility, delayMountUntilShown, ...rest }, ref) {
+  const Slide = x$1(forwardElementRef$1(function Slide({ duration, exclusivityKey, easing, easingIn, easingOut, onVisibilityChange, slideTargetInline, slideTargetBlock, show, animateOnMount, exitVisibility, delayMountUntilShown, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: false,
               show,
@@ -11657,8 +12565,9 @@
       });
   }));
 
-  const SlideFade = x$1(forwardElementRef$1(function SlideFade({ duration, exclusivityKey, easing, easingIn, easingOut, fadeMin, fadeMax, show, animateOnMount, delayMountUntilShown, slideTargetBlock, slideTargetInline, exitVisibility, onVisibilityChange, ...rest }, ref) {
+  const SlideFade = x$1(forwardElementRef$1(function SlideFade({ duration, exclusivityKey, easing, easingIn, easingOut, fadeMin, fadeMax, show, animateOnMount, delayMountUntilShown, slideTargetBlock, slideTargetInline, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: false,
               show,
@@ -11677,7 +12586,7 @@
   }));
 
   /**
-   * Creates a set of props that implement a Zoom transition. Like all `useCreate*Props` hooks, must be used in tamdem with a `Transitionable` component (or `useCreateTransitionableProps`).
+   * Creates a set of props that implement a Zoom transition. Like all `useCreate*Props` hooks, must be used in tandem with a `Transitionable` component (or `useTransition`).
    */
   function useBasePropsZoom({ zoomParameters: { zoomOrigin, zoomOriginInline, zoomOriginBlock, zoomMin, zoomMinInline, zoomMinBlock } }) {
       const { GetBaseClass } = useCssClasses();
@@ -11695,8 +12604,9 @@
    * Wraps a div (etc.) and allows it to transition in/out smoothly with a Zoom effect.
    * @see `Transitionable` `ZoomFade`
    */
-  x$1(forwardElementRef$1(function Zoom({ duration, exclusivityKey, easing, easingIn, easingOut, delayMountUntilShown, zoomOrigin, zoomOriginInline, zoomOriginBlock, zoomMin, zoomMinInline, zoomMinBlock, show, animateOnMount, exitVisibility, onVisibilityChange, ...rest }, ref) {
+  x$1(forwardElementRef$1(function Zoom({ duration, exclusivityKey, easing, easingIn, easingOut, delayMountUntilShown, zoomOrigin, zoomOriginInline, zoomOriginBlock, zoomMin, zoomMinInline, zoomMinBlock, show, animateOnMount, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return (useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: false,
               show,
@@ -11714,8 +12624,9 @@
       }));
   }));
 
-  x$1(forwardElementRef$1(function SlideZoom({ duration, exclusivityKey, easing, easingIn, easingOut, zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline, show, animateOnMount, delayMountUntilShown, slideTargetBlock, slideTargetInline, exitVisibility, onVisibilityChange, ...rest }, ref) {
+  x$1(forwardElementRef$1(function SlideZoom({ duration, exclusivityKey, easing, easingIn, easingOut, zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline, show, animateOnMount, delayMountUntilShown, slideTargetBlock, slideTargetInline, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: false,
               show,
@@ -11733,8 +12644,9 @@
       });
   }));
 
-  const SlideZoomFade = x$1(forwardElementRef$1(function SlideZoomFade({ duration, exclusivityKey, easing, easingIn, easingOut, zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline, show, animateOnMount, delayMountUntilShown, slideTargetBlock, slideTargetInline, fadeMax, fadeMin, exitVisibility, onVisibilityChange, ...rest }, ref) {
+  const SlideZoomFade = x$1(forwardElementRef$1(function SlideZoomFade({ duration, exclusivityKey, easing, easingIn, easingOut, zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline, show, animateOnMount, delayMountUntilShown, slideTargetBlock, slideTargetInline, fadeMax, fadeMin, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: false,
               show,
@@ -11752,8 +12664,9 @@
       });
   }));
 
-  const ZoomFade = x$1(forwardElementRef$1(function ZoomFade({ duration, exclusivityKey, easing, easingIn, easingOut, fadeMin, fadeMax, show, animateOnMount, delayMountUntilShown, zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline, exitVisibility, onVisibilityChange, ...rest }, ref) {
+  const ZoomFade = x$1(forwardElementRef$1(function ZoomFade({ duration, exclusivityKey, easing, easingIn, easingOut, fadeMin, fadeMax, show, animateOnMount, delayMountUntilShown, zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return (useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
               measure: false,
               show,
@@ -11806,20 +12719,124 @@
   const DefaultButtonTheme = F$3(null);
   const DefaultButtonSize = F$3(null);
 
-  function getAlignment(placement) {
-    return placement.split('-')[1];
+  const sides = ['top', 'right', 'bottom', 'left'];
+  const min = Math.min;
+  const max = Math.max;
+  const round = Math.round;
+  const createCoords = v => ({
+    x: v,
+    y: v
+  });
+  const oppositeSideMap = {
+    left: 'right',
+    right: 'left',
+    bottom: 'top',
+    top: 'bottom'
+  };
+  const oppositeAlignmentMap = {
+    start: 'end',
+    end: 'start'
+  };
+  function clamp(start, value, end) {
+    return max(start, min(value, end));
   }
-
-  function getLengthFromAxis(axis) {
-    return axis === 'y' ? 'height' : 'width';
+  function evaluate(value, param) {
+    return typeof value === 'function' ? value(param) : value;
   }
-
   function getSide(placement) {
     return placement.split('-')[0];
   }
-
-  function getMainAxisFromPlacement(placement) {
-    return ['top', 'bottom'].includes(getSide(placement)) ? 'x' : 'y';
+  function getAlignment(placement) {
+    return placement.split('-')[1];
+  }
+  function getOppositeAxis(axis) {
+    return axis === 'x' ? 'y' : 'x';
+  }
+  function getAxisLength(axis) {
+    return axis === 'y' ? 'height' : 'width';
+  }
+  function getSideAxis(placement) {
+    return ['top', 'bottom'].includes(getSide(placement)) ? 'y' : 'x';
+  }
+  function getAlignmentAxis(placement) {
+    return getOppositeAxis(getSideAxis(placement));
+  }
+  function getAlignmentSides(placement, rects, rtl) {
+    if (rtl === void 0) {
+      rtl = false;
+    }
+    const alignment = getAlignment(placement);
+    const alignmentAxis = getAlignmentAxis(placement);
+    const length = getAxisLength(alignmentAxis);
+    let mainAlignmentSide = alignmentAxis === 'x' ? alignment === (rtl ? 'end' : 'start') ? 'right' : 'left' : alignment === 'start' ? 'bottom' : 'top';
+    if (rects.reference[length] > rects.floating[length]) {
+      mainAlignmentSide = getOppositePlacement(mainAlignmentSide);
+    }
+    return [mainAlignmentSide, getOppositePlacement(mainAlignmentSide)];
+  }
+  function getExpandedPlacements(placement) {
+    const oppositePlacement = getOppositePlacement(placement);
+    return [getOppositeAlignmentPlacement(placement), oppositePlacement, getOppositeAlignmentPlacement(oppositePlacement)];
+  }
+  function getOppositeAlignmentPlacement(placement) {
+    return placement.replace(/start|end/g, alignment => oppositeAlignmentMap[alignment]);
+  }
+  function getSideList(side, isStart, rtl) {
+    const lr = ['left', 'right'];
+    const rl = ['right', 'left'];
+    const tb = ['top', 'bottom'];
+    const bt = ['bottom', 'top'];
+    switch (side) {
+      case 'top':
+      case 'bottom':
+        if (rtl) return isStart ? rl : lr;
+        return isStart ? lr : rl;
+      case 'left':
+      case 'right':
+        return isStart ? tb : bt;
+      default:
+        return [];
+    }
+  }
+  function getOppositeAxisPlacements(placement, flipAlignment, direction, rtl) {
+    const alignment = getAlignment(placement);
+    let list = getSideList(getSide(placement), direction === 'start', rtl);
+    if (alignment) {
+      list = list.map(side => side + "-" + alignment);
+      if (flipAlignment) {
+        list = list.concat(list.map(getOppositeAlignmentPlacement));
+      }
+    }
+    return list;
+  }
+  function getOppositePlacement(placement) {
+    return placement.replace(/left|right|bottom|top/g, side => oppositeSideMap[side]);
+  }
+  function expandPaddingObject(padding) {
+    return {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      ...padding
+    };
+  }
+  function getPaddingObject(padding) {
+    return typeof padding !== 'number' ? expandPaddingObject(padding) : {
+      top: padding,
+      right: padding,
+      bottom: padding,
+      left: padding
+    };
+  }
+  function rectToClientRect(rect) {
+    return {
+      ...rect,
+      top: rect.y,
+      left: rect.x,
+      right: rect.x + rect.width,
+      bottom: rect.y + rect.height
+    };
   }
 
   function computeCoordsFromPlacement(_ref, placement, rtl) {
@@ -11827,13 +12844,14 @@
       reference,
       floating
     } = _ref;
+    const sideAxis = getSideAxis(placement);
+    const alignmentAxis = getAlignmentAxis(placement);
+    const alignLength = getAxisLength(alignmentAxis);
+    const side = getSide(placement);
+    const isVertical = sideAxis === 'y';
     const commonX = reference.x + reference.width / 2 - floating.width / 2;
     const commonY = reference.y + reference.height / 2 - floating.height / 2;
-    const mainAxis = getMainAxisFromPlacement(placement);
-    const length = getLengthFromAxis(mainAxis);
-    const commonAlign = reference[length] / 2 - floating[length] / 2;
-    const side = getSide(placement);
-    const isVertical = mainAxis === 'x';
+    const commonAlign = reference[alignLength] / 2 - floating[alignLength] / 2;
     let coords;
     switch (side) {
       case 'top':
@@ -11868,10 +12886,10 @@
     }
     switch (getAlignment(placement)) {
       case 'start':
-        coords[mainAxis] -= commonAlign * (rtl && isVertical ? -1 : 1);
+        coords[alignmentAxis] -= commonAlign * (rtl && isVertical ? -1 : 1);
         break;
       case 'end':
-        coords[mainAxis] += commonAlign * (rtl && isVertical ? -1 : 1);
+        coords[alignmentAxis] += commonAlign * (rtl && isVertical ? -1 : 1);
         break;
     }
     return coords;
@@ -11969,39 +12987,6 @@
     };
   };
 
-  function evaluate(value, param) {
-    return typeof value === 'function' ? value(param) : value;
-  }
-
-  function expandPaddingObject(padding) {
-    return {
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
-      ...padding
-    };
-  }
-
-  function getSideObjectFromPadding(padding) {
-    return typeof padding !== 'number' ? expandPaddingObject(padding) : {
-      top: padding,
-      right: padding,
-      bottom: padding,
-      left: padding
-    };
-  }
-
-  function rectToClientRect(rect) {
-    return {
-      ...rect,
-      top: rect.y,
-      left: rect.x,
-      right: rect.x + rect.width,
-      bottom: rect.y + rect.height
-    };
-  }
-
   /**
    * Resolves with an object of overflow side offsets that determine how much the
    * element is overflowing a given clipping boundary on each side.
@@ -12030,7 +13015,7 @@
       altBoundary = false,
       padding = 0
     } = evaluate(options, state);
-    const paddingObject = getSideObjectFromPadding(padding);
+    const paddingObject = getPaddingObject(padding);
     const altContext = elementContext === 'floating' ? 'reference' : 'floating';
     const element = elements[altBoundary ? altContext : elementContext];
     const clippingClientRect = rectToClientRect(await platform.getClippingRect({
@@ -12065,13 +13050,6 @@
     };
   }
 
-  const min$1 = Math.min;
-  const max$1 = Math.max;
-
-  function within(min$1$1, value, max$1$1) {
-    return max$1(min$1$1, min$1(value, max$1$1));
-  }
-
   /**
    * Provides data to position an inner element of the floating element so that it
    * appears centered to the reference element.
@@ -12097,13 +13075,13 @@
       if (element == null) {
         return {};
       }
-      const paddingObject = getSideObjectFromPadding(padding);
+      const paddingObject = getPaddingObject(padding);
       const coords = {
         x,
         y
       };
-      const axis = getMainAxisFromPlacement(placement);
-      const length = getLengthFromAxis(axis);
+      const axis = getAlignmentAxis(placement);
+      const length = getAxisLength(axis);
       const arrowDimensions = await platform.getDimensions(element);
       const isYAxis = axis === 'y';
       const minProp = isYAxis ? 'top' : 'left';
@@ -12123,22 +13101,22 @@
       // If the padding is large enough that it causes the arrow to no longer be
       // centered, modify the padding so that it is centered.
       const largestPossiblePadding = clientSize / 2 - arrowDimensions[length] / 2 - 1;
-      const minPadding = min$1(paddingObject[minProp], largestPossiblePadding);
-      const maxPadding = min$1(paddingObject[maxProp], largestPossiblePadding);
+      const minPadding = min(paddingObject[minProp], largestPossiblePadding);
+      const maxPadding = min(paddingObject[maxProp], largestPossiblePadding);
 
       // Make sure the arrow doesn't overflow the floating element if the center
       // point is outside the floating element's bounds.
-      const min$1$1 = minPadding;
+      const min$1 = minPadding;
       const max = clientSize - arrowDimensions[length] - maxPadding;
       const center = clientSize / 2 - arrowDimensions[length] / 2 + centerToReference;
-      const offset = within(min$1$1, center, max);
+      const offset = clamp(min$1, center, max);
 
       // If the reference is small enough that the arrow's padding causes it to
       // to point to nothing for an aligned placement, adjust the offset of the
       // floating element itself. This stops `shift()` from taking action, but can
       // be worked around by calling it again after the `arrow()` if desired.
-      const shouldAddOffset = getAlignment(placement) != null && center != offset && rects.reference[length] / 2 - (center < min$1$1 ? minPadding : maxPadding) - arrowDimensions[length] / 2 < 0;
-      const alignmentOffset = shouldAddOffset ? center < min$1$1 ? min$1$1 - center : max - center : 0;
+      const shouldAddOffset = getAlignment(placement) != null && center != offset && rects.reference[length] / 2 - (center < min$1 ? minPadding : maxPadding) - arrowDimensions[length] / 2 < 0;
+      const alignmentOffset = shouldAddOffset ? center < min$1 ? min$1 - center : max - center : 0;
       return {
         [axis]: coords[axis] - alignmentOffset,
         data: {
@@ -12148,77 +13126,6 @@
       };
     }
   });
-
-  const sides = ['top', 'right', 'bottom', 'left'];
-
-  const oppositeSideMap = {
-    left: 'right',
-    right: 'left',
-    bottom: 'top',
-    top: 'bottom'
-  };
-  function getOppositePlacement(placement) {
-    return placement.replace(/left|right|bottom|top/g, side => oppositeSideMap[side]);
-  }
-
-  function getAlignmentSides(placement, rects, rtl) {
-    if (rtl === void 0) {
-      rtl = false;
-    }
-    const alignment = getAlignment(placement);
-    const mainAxis = getMainAxisFromPlacement(placement);
-    const length = getLengthFromAxis(mainAxis);
-    let mainAlignmentSide = mainAxis === 'x' ? alignment === (rtl ? 'end' : 'start') ? 'right' : 'left' : alignment === 'start' ? 'bottom' : 'top';
-    if (rects.reference[length] > rects.floating[length]) {
-      mainAlignmentSide = getOppositePlacement(mainAlignmentSide);
-    }
-    return {
-      main: mainAlignmentSide,
-      cross: getOppositePlacement(mainAlignmentSide)
-    };
-  }
-
-  const oppositeAlignmentMap = {
-    start: 'end',
-    end: 'start'
-  };
-  function getOppositeAlignmentPlacement(placement) {
-    return placement.replace(/start|end/g, alignment => oppositeAlignmentMap[alignment]);
-  }
-
-  function getExpandedPlacements(placement) {
-    const oppositePlacement = getOppositePlacement(placement);
-    return [getOppositeAlignmentPlacement(placement), oppositePlacement, getOppositeAlignmentPlacement(oppositePlacement)];
-  }
-
-  function getSideList(side, isStart, rtl) {
-    const lr = ['left', 'right'];
-    const rl = ['right', 'left'];
-    const tb = ['top', 'bottom'];
-    const bt = ['bottom', 'top'];
-    switch (side) {
-      case 'top':
-      case 'bottom':
-        if (rtl) return isStart ? rl : lr;
-        return isStart ? lr : rl;
-      case 'left':
-      case 'right':
-        return isStart ? tb : bt;
-      default:
-        return [];
-    }
-  }
-  function getOppositeAxisPlacements(placement, flipAlignment, direction, rtl) {
-    const alignment = getAlignment(placement);
-    let list = getSideList(getSide(placement), direction === 'start', rtl);
-    if (alignment) {
-      list = list.map(side => side + "-" + alignment);
-      if (flipAlignment) {
-        list = list.concat(list.map(getOppositeAlignmentPlacement));
-      }
-    }
-    return list;
-  }
 
   /**
    * Optimizes the visibility of the floating element by flipping the `placement`
@@ -12267,11 +13174,8 @@
           overflows.push(overflow[side]);
         }
         if (checkCrossAxis) {
-          const {
-            main,
-            cross
-          } = getAlignmentSides(placement, rects, rtl);
-          overflows.push(overflow[main], overflow[cross]);
+          const sides = getAlignmentSides(placement, rects, rtl);
+          overflows.push(overflow[sides[0]], overflow[sides[1]]);
         }
         overflowsData = [...overflowsData, {
           placement,
@@ -12399,6 +13303,8 @@
     };
   };
 
+  // For type backwards-compatibility, the `OffsetOptions` type was also
+  // Derivable.
   async function convertValueToCoords(state, options) {
     const {
       placement,
@@ -12408,7 +13314,7 @@
     const rtl = await (platform.isRTL == null ? void 0 : platform.isRTL(elements.floating));
     const side = getSide(placement);
     const alignment = getAlignment(placement);
-    const isVertical = getMainAxisFromPlacement(placement) === 'x';
+    const isVertical = getSideAxis(placement) === 'y';
     const mainAxisMulti = ['left', 'top'].includes(side) ? -1 : 1;
     const crossAxisMulti = rtl && isVertical ? -1 : 1;
     const rawValue = evaluate(options, state);
@@ -12469,10 +13375,6 @@
     };
   };
 
-  function getCrossAxis(axis) {
-    return axis === 'x' ? 'y' : 'x';
-  }
-
   /**
    * Optimizes the visibility of the floating element by shifting it in order to
    * keep it in view when it will overflow the clipping boundary.
@@ -12513,8 +13415,8 @@
           y
         };
         const overflow = await detectOverflow(state, detectOverflowOptions);
-        const mainAxis = getMainAxisFromPlacement(getSide(placement));
-        const crossAxis = getCrossAxis(mainAxis);
+        const crossAxis = getSideAxis(getSide(placement));
+        const mainAxis = getOppositeAxis(crossAxis);
         let mainAxisCoord = coords[mainAxis];
         let crossAxisCoord = coords[crossAxis];
         if (checkMainAxis) {
@@ -12522,14 +13424,14 @@
           const maxSide = mainAxis === 'y' ? 'bottom' : 'right';
           const min = mainAxisCoord + overflow[minSide];
           const max = mainAxisCoord - overflow[maxSide];
-          mainAxisCoord = within(min, mainAxisCoord, max);
+          mainAxisCoord = clamp(min, mainAxisCoord, max);
         }
         if (checkCrossAxis) {
           const minSide = crossAxis === 'y' ? 'top' : 'left';
           const maxSide = crossAxis === 'y' ? 'bottom' : 'right';
           const min = crossAxisCoord + overflow[minSide];
           const max = crossAxisCoord - overflow[maxSide];
-          crossAxisCoord = within(min, crossAxisCoord, max);
+          crossAxisCoord = clamp(min, crossAxisCoord, max);
         }
         const limitedCoords = limiter.fn({
           ...state,
@@ -12574,8 +13476,7 @@
         const overflow = await detectOverflow(state, detectOverflowOptions);
         const side = getSide(placement);
         const alignment = getAlignment(placement);
-        const axis = getMainAxisFromPlacement(placement);
-        const isXAxis = axis === 'x';
+        const isYAxis = getSideAxis(placement) === 'y';
         const {
           width,
           height
@@ -12594,22 +13495,22 @@
         const noShift = !state.middlewareData.shift;
         let availableHeight = overflowAvailableHeight;
         let availableWidth = overflowAvailableWidth;
-        if (isXAxis) {
+        if (isYAxis) {
           const maximumClippingWidth = width - overflow.left - overflow.right;
-          availableWidth = alignment || noShift ? min$1(overflowAvailableWidth, maximumClippingWidth) : maximumClippingWidth;
+          availableWidth = alignment || noShift ? min(overflowAvailableWidth, maximumClippingWidth) : maximumClippingWidth;
         } else {
           const maximumClippingHeight = height - overflow.top - overflow.bottom;
-          availableHeight = alignment || noShift ? min$1(overflowAvailableHeight, maximumClippingHeight) : maximumClippingHeight;
+          availableHeight = alignment || noShift ? min(overflowAvailableHeight, maximumClippingHeight) : maximumClippingHeight;
         }
         if (noShift && !alignment) {
-          const xMin = max$1(overflow.left, 0);
-          const xMax = max$1(overflow.right, 0);
-          const yMin = max$1(overflow.top, 0);
-          const yMax = max$1(overflow.bottom, 0);
-          if (isXAxis) {
-            availableWidth = width - 2 * (xMin !== 0 || xMax !== 0 ? xMin + xMax : max$1(overflow.left, overflow.right));
+          const xMin = max(overflow.left, 0);
+          const xMax = max(overflow.right, 0);
+          const yMin = max(overflow.top, 0);
+          const yMax = max(overflow.bottom, 0);
+          if (isYAxis) {
+            availableWidth = width - 2 * (xMin !== 0 || xMax !== 0 ? xMin + xMax : max(overflow.left, overflow.right));
           } else {
-            availableHeight = height - 2 * (yMin !== 0 || yMax !== 0 ? yMin + yMax : max$1(overflow.top, overflow.bottom));
+            availableHeight = height - 2 * (yMin !== 0 || yMax !== 0 ? yMin + yMax : max(overflow.top, overflow.bottom));
           }
         }
         await apply({
@@ -12630,48 +13531,38 @@
     };
   };
 
+  function getNodeName(node) {
+    if (isNode(node)) {
+      return (node.nodeName || '').toLowerCase();
+    }
+    // Mocked nodes in testing environments may not be instances of Node. By
+    // returning `#document` an infinite loop won't occur.
+    // https://github.com/floating-ui/floating-ui/issues/2317
+    return '#document';
+  }
   function getWindow(node) {
     var _node$ownerDocument;
-    return ((_node$ownerDocument = node.ownerDocument) == null ? void 0 : _node$ownerDocument.defaultView) || window;
+    return (node == null ? void 0 : (_node$ownerDocument = node.ownerDocument) == null ? void 0 : _node$ownerDocument.defaultView) || window;
   }
-
-  function getComputedStyle$1(element) {
-    return getWindow(element).getComputedStyle(element);
+  function getDocumentElement(node) {
+    var _ref;
+    return (_ref = (isNode(node) ? node.ownerDocument : node.document) || window.document) == null ? void 0 : _ref.documentElement;
   }
-
   function isNode(value) {
-    return value instanceof getWindow(value).Node;
-  }
-  function getNodeName(node) {
-    return isNode(node) ? (node.nodeName || '').toLowerCase() : '';
-  }
-
-  let uaString;
-  function getUAString() {
-    if (uaString) {
-      return uaString;
-    }
-    const uaData = navigator.userAgentData;
-    if (uaData && Array.isArray(uaData.brands)) {
-      uaString = uaData.brands.map(item => item.brand + "/" + item.version).join(' ');
-      return uaString;
-    }
-    return navigator.userAgent;
-  }
-
-  function isHTMLElement(value) {
-    return value instanceof getWindow(value).HTMLElement;
+    return value instanceof Node || value instanceof getWindow(value).Node;
   }
   function isElement(value) {
-    return value instanceof getWindow(value).Element;
+    return value instanceof Element || value instanceof getWindow(value).Element;
   }
-  function isShadowRoot(node) {
+  function isHTMLElement(value) {
+    return value instanceof HTMLElement || value instanceof getWindow(value).HTMLElement;
+  }
+  function isShadowRoot(value) {
     // Browsers without `ShadowRoot` support.
     if (typeof ShadowRoot === 'undefined') {
       return false;
     }
-    const OwnElement = getWindow(node).ShadowRoot;
-    return node instanceof OwnElement || node instanceof ShadowRoot;
+    return value instanceof ShadowRoot || value instanceof getWindow(value).ShadowRoot;
   }
   function isOverflowElement(element) {
     const {
@@ -12686,49 +13577,90 @@
     return ['table', 'td', 'th'].includes(getNodeName(element));
   }
   function isContainingBlock(element) {
-    // TODO: Try to use feature detection here instead.
-    const isFirefox = /firefox/i.test(getUAString());
+    const webkit = isWebKit();
     const css = getComputedStyle$1(element);
-    const backdropFilter = css.backdropFilter || css.WebkitBackdropFilter;
 
-    // This is non-exhaustive but covers the most common CSS properties that
-    // create a containing block.
     // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
-    return css.transform !== 'none' || css.perspective !== 'none' || (backdropFilter ? backdropFilter !== 'none' : false) || isFirefox && css.willChange === 'filter' || isFirefox && (css.filter ? css.filter !== 'none' : false) || ['transform', 'perspective'].some(value => css.willChange.includes(value)) || ['paint', 'layout', 'strict', 'content'].some(value => {
-      // Add type check for old browsers.
-      const contain = css.contain;
-      return contain != null ? contain.includes(value) : false;
-    });
+    return css.transform !== 'none' || css.perspective !== 'none' || (css.containerType ? css.containerType !== 'normal' : false) || !webkit && (css.backdropFilter ? css.backdropFilter !== 'none' : false) || !webkit && (css.filter ? css.filter !== 'none' : false) || ['transform', 'perspective', 'filter'].some(value => (css.willChange || '').includes(value)) || ['paint', 'layout', 'strict', 'content'].some(value => (css.contain || '').includes(value));
   }
-
-  /**
-   * Determines whether or not `.getBoundingClientRect()` is affected by visual
-   * viewport offsets. In Safari, the `x`/`y` offsets are values relative to the
-   * visual viewport, while in other engines, they are values relative to the
-   * layout viewport.
-   */
-  function isClientRectVisualViewportBased() {
-    // TODO: Try to use feature detection here instead. Feature detection for
-    // this can fail in various ways, making the userAgent check the most
-    // reliable:
-    // • Always-visible scrollbar or not
-    // • Width of <html>
-
-    // Is Safari.
-    return /^((?!chrome|android).)*safari/i.test(getUAString());
+  function getContainingBlock(element) {
+    let currentNode = getParentNode(element);
+    while (isHTMLElement(currentNode) && !isLastTraversableNode(currentNode)) {
+      if (isContainingBlock(currentNode)) {
+        return currentNode;
+      } else {
+        currentNode = getParentNode(currentNode);
+      }
+    }
+    return null;
+  }
+  function isWebKit() {
+    if (typeof CSS === 'undefined' || !CSS.supports) return false;
+    return CSS.supports('-webkit-backdrop-filter', 'none');
   }
   function isLastTraversableNode(node) {
     return ['html', 'body', '#document'].includes(getNodeName(node));
   }
-
-  const min = Math.min;
-  const max = Math.max;
-  const round = Math.round;
+  function getComputedStyle$1(element) {
+    return getWindow(element).getComputedStyle(element);
+  }
+  function getNodeScroll(element) {
+    if (isElement(element)) {
+      return {
+        scrollLeft: element.scrollLeft,
+        scrollTop: element.scrollTop
+      };
+    }
+    return {
+      scrollLeft: element.pageXOffset,
+      scrollTop: element.pageYOffset
+    };
+  }
+  function getParentNode(node) {
+    if (getNodeName(node) === 'html') {
+      return node;
+    }
+    const result =
+    // Step into the shadow DOM of the parent of a slotted node.
+    node.assignedSlot ||
+    // DOM Element detected.
+    node.parentNode ||
+    // ShadowRoot detected.
+    isShadowRoot(node) && node.host ||
+    // Fallback.
+    getDocumentElement(node);
+    return isShadowRoot(result) ? result.host : result;
+  }
+  function getNearestOverflowAncestor(node) {
+    const parentNode = getParentNode(node);
+    if (isLastTraversableNode(parentNode)) {
+      return node.ownerDocument ? node.ownerDocument.body : node.body;
+    }
+    if (isHTMLElement(parentNode) && isOverflowElement(parentNode)) {
+      return parentNode;
+    }
+    return getNearestOverflowAncestor(parentNode);
+  }
+  function getOverflowAncestors(node, list) {
+    var _node$ownerDocument2;
+    if (list === void 0) {
+      list = [];
+    }
+    const scrollableAncestor = getNearestOverflowAncestor(node);
+    const isBody = scrollableAncestor === ((_node$ownerDocument2 = node.ownerDocument) == null ? void 0 : _node$ownerDocument2.body);
+    const win = getWindow(scrollableAncestor);
+    if (isBody) {
+      return list.concat(win, win.visualViewport || [], isOverflowElement(scrollableAncestor) ? scrollableAncestor : []);
+    }
+    return list.concat(scrollableAncestor, getOverflowAncestors(scrollableAncestor));
+  }
 
   function getCssDimensions(element) {
     const css = getComputedStyle$1(element);
-    let width = parseFloat(css.width);
-    let height = parseFloat(css.height);
+    // In testing environments, the `width` and `height` properties are empty
+    // strings for SVG elements, returning NaN. Fallback to `0` in this case.
+    let width = parseFloat(css.width) || 0;
+    let height = parseFloat(css.height) || 0;
     const hasOffset = isHTMLElement(element);
     const offsetWidth = hasOffset ? element.offsetWidth : width;
     const offsetHeight = hasOffset ? element.offsetHeight : height;
@@ -12740,7 +13672,7 @@
     return {
       width,
       height,
-      fallback: shouldFallback
+      $: shouldFallback
     };
   }
 
@@ -12748,23 +13680,19 @@
     return !isElement(element) ? element.contextElement : element;
   }
 
-  const FALLBACK_SCALE = {
-    x: 1,
-    y: 1
-  };
   function getScale(element) {
     const domElement = unwrapElement(element);
     if (!isHTMLElement(domElement)) {
-      return FALLBACK_SCALE;
+      return createCoords(1);
     }
     const rect = domElement.getBoundingClientRect();
     const {
       width,
       height,
-      fallback
+      $
     } = getCssDimensions(domElement);
-    let x = (fallback ? round(rect.width) : rect.width) / width;
-    let y = (fallback ? round(rect.height) : rect.height) / height;
+    let x = ($ ? round(rect.width) : rect.width) / width;
+    let y = ($ ? round(rect.height) : rect.height) / height;
 
     // 0, NaN, or Infinity should always fallback to 1.
 
@@ -12780,8 +13708,28 @@
     };
   }
 
+  const noOffsets = /*#__PURE__*/createCoords(0);
+  function getVisualOffsets(element) {
+    const win = getWindow(element);
+    if (!isWebKit() || !win.visualViewport) {
+      return noOffsets;
+    }
+    return {
+      x: win.visualViewport.offsetLeft,
+      y: win.visualViewport.offsetTop
+    };
+  }
+  function shouldAddVisualOffsets(element, isFixed, floatingOffsetParent) {
+    if (isFixed === void 0) {
+      isFixed = false;
+    }
+    if (!floatingOffsetParent || isFixed && floatingOffsetParent !== getWindow(element)) {
+      return false;
+    }
+    return isFixed;
+  }
+
   function getBoundingClientRect(element, includeScale, isFixedStrategy, offsetParent) {
-    var _win$visualViewport, _win$visualViewport2;
     if (includeScale === void 0) {
       includeScale = false;
     }
@@ -12790,7 +13738,7 @@
     }
     const clientRect = element.getBoundingClientRect();
     const domElement = unwrapElement(element);
-    let scale = FALLBACK_SCALE;
+    let scale = createCoords(1);
     if (includeScale) {
       if (offsetParent) {
         if (isElement(offsetParent)) {
@@ -12800,10 +13748,9 @@
         scale = getScale(element);
       }
     }
-    const win = domElement ? getWindow(domElement) : window;
-    const addVisualOffsets = isClientRectVisualViewportBased() && isFixedStrategy;
-    let x = (clientRect.left + (addVisualOffsets ? ((_win$visualViewport = win.visualViewport) == null ? void 0 : _win$visualViewport.offsetLeft) || 0 : 0)) / scale.x;
-    let y = (clientRect.top + (addVisualOffsets ? ((_win$visualViewport2 = win.visualViewport) == null ? void 0 : _win$visualViewport2.offsetTop) || 0 : 0)) / scale.y;
+    const visualOffsets = shouldAddVisualOffsets(domElement, isFixedStrategy, offsetParent) ? getVisualOffsets(domElement) : createCoords(0);
+    let x = (clientRect.left + visualOffsets.x) / scale.x;
+    let y = (clientRect.top + visualOffsets.y) / scale.y;
     let width = clientRect.width / scale.x;
     let height = clientRect.height / scale.y;
     if (domElement) {
@@ -12813,15 +13760,15 @@
       while (currentIFrame && offsetParent && offsetWin !== win) {
         const iframeScale = getScale(currentIFrame);
         const iframeRect = currentIFrame.getBoundingClientRect();
-        const css = getComputedStyle(currentIFrame);
-        iframeRect.x += (currentIFrame.clientLeft + parseFloat(css.paddingLeft)) * iframeScale.x;
-        iframeRect.y += (currentIFrame.clientTop + parseFloat(css.paddingTop)) * iframeScale.y;
+        const css = getComputedStyle$1(currentIFrame);
+        const left = iframeRect.left + (currentIFrame.clientLeft + parseFloat(css.paddingLeft)) * iframeScale.x;
+        const top = iframeRect.top + (currentIFrame.clientTop + parseFloat(css.paddingTop)) * iframeScale.y;
         x *= iframeScale.x;
         y *= iframeScale.y;
         width *= iframeScale.x;
         height *= iframeScale.y;
-        x += iframeRect.x;
-        y += iframeRect.y;
+        x += left;
+        y += top;
         currentIFrame = getWindow(currentIFrame).frameElement;
       }
     }
@@ -12831,23 +13778,6 @@
       x,
       y
     });
-  }
-
-  function getDocumentElement(node) {
-    return ((isNode(node) ? node.ownerDocument : node.document) || window.document).documentElement;
-  }
-
-  function getNodeScroll(element) {
-    if (isElement(element)) {
-      return {
-        scrollLeft: element.scrollLeft,
-        scrollTop: element.scrollTop
-      };
-    }
-    return {
-      scrollLeft: element.pageXOffset,
-      scrollTop: element.pageYOffset
-    };
   }
 
   function convertOffsetParentRelativeRectToViewportRelativeRect(_ref) {
@@ -12865,14 +13795,8 @@
       scrollLeft: 0,
       scrollTop: 0
     };
-    let scale = {
-      x: 1,
-      y: 1
-    };
-    const offsets = {
-      x: 0,
-      y: 0
-    };
+    let scale = createCoords(1);
+    const offsets = createCoords(0);
     if (isOffsetParentAnElement || !isOffsetParentAnElement && strategy !== 'fixed') {
       if (getNodeName(offsetParent) !== 'body' || isOverflowElement(documentElement)) {
         scroll = getNodeScroll(offsetParent);
@@ -12890,6 +13814,10 @@
       x: rect.x * scale.x - scroll.scrollLeft * scale.x + offsets.x,
       y: rect.y * scale.y - scroll.scrollTop * scale.y + offsets.y
     };
+  }
+
+  function getClientRects(element) {
+    return Array.from(element.getClientRects());
   }
 
   function getWindowScrollBarX(element) {
@@ -12919,49 +13847,6 @@
     };
   }
 
-  function getParentNode(node) {
-    if (getNodeName(node) === 'html') {
-      return node;
-    }
-    const result =
-    // Step into the shadow DOM of the parent of a slotted node.
-    node.assignedSlot ||
-    // DOM Element detected.
-    node.parentNode ||
-    // ShadowRoot detected.
-    isShadowRoot(node) && node.host ||
-    // Fallback.
-    getDocumentElement(node);
-    return isShadowRoot(result) ? result.host : result;
-  }
-
-  function getNearestOverflowAncestor(node) {
-    const parentNode = getParentNode(node);
-    if (isLastTraversableNode(parentNode)) {
-      // `getParentNode` will never return a `Document` due to the fallback
-      // check, so it's either the <html> or <body> element.
-      return parentNode.ownerDocument.body;
-    }
-    if (isHTMLElement(parentNode) && isOverflowElement(parentNode)) {
-      return parentNode;
-    }
-    return getNearestOverflowAncestor(parentNode);
-  }
-
-  function getOverflowAncestors(node, list) {
-    var _node$ownerDocument;
-    if (list === void 0) {
-      list = [];
-    }
-    const scrollableAncestor = getNearestOverflowAncestor(node);
-    const isBody = scrollableAncestor === ((_node$ownerDocument = node.ownerDocument) == null ? void 0 : _node$ownerDocument.body);
-    const win = getWindow(scrollableAncestor);
-    if (isBody) {
-      return list.concat(win, win.visualViewport || [], isOverflowElement(scrollableAncestor) ? scrollableAncestor : []);
-    }
-    return list.concat(scrollableAncestor, getOverflowAncestors(scrollableAncestor));
-  }
-
   function getViewportRect(element, strategy) {
     const win = getWindow(element);
     const html = getDocumentElement(element);
@@ -12973,7 +13858,7 @@
     if (visualViewport) {
       width = visualViewport.width;
       height = visualViewport.height;
-      const visualViewportBased = isClientRectVisualViewportBased();
+      const visualViewportBased = isWebKit();
       if (!visualViewportBased || visualViewportBased && strategy === 'fixed') {
         x = visualViewport.offsetLeft;
         y = visualViewport.offsetTop;
@@ -12992,10 +13877,7 @@
     const clientRect = getBoundingClientRect(element, true, strategy === 'fixed');
     const top = clientRect.top + element.clientTop;
     const left = clientRect.left + element.clientLeft;
-    const scale = isHTMLElement(element) ? getScale(element) : {
-      x: 1,
-      y: 1
-    };
+    const scale = isHTMLElement(element) ? getScale(element) : createCoords(1);
     const width = element.clientWidth * scale.x;
     const height = element.clientHeight * scale.y;
     const x = left * scale.x;
@@ -13016,16 +13898,12 @@
     } else if (isElement(clippingAncestor)) {
       rect = getInnerBoundingClientRect(clippingAncestor, strategy);
     } else {
-      const mutableRect = {
-        ...clippingAncestor
+      const visualOffsets = getVisualOffsets(element);
+      rect = {
+        ...clippingAncestor,
+        x: clippingAncestor.x - visualOffsets.x,
+        y: clippingAncestor.y - visualOffsets.y
       };
-      if (isClientRectVisualViewportBased()) {
-        var _win$visualViewport, _win$visualViewport2;
-        const win = getWindow(element);
-        mutableRect.x -= ((_win$visualViewport = win.visualViewport) == null ? void 0 : _win$visualViewport.offsetLeft) || 0;
-        mutableRect.y -= ((_win$visualViewport2 = win.visualViewport) == null ? void 0 : _win$visualViewport2.offsetTop) || 0;
-      }
-      rect = mutableRect;
     }
     return rectToClientRect(rect);
   }
@@ -13103,6 +13981,36 @@
     return getCssDimensions(element);
   }
 
+  function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
+    const isOffsetParentAnElement = isHTMLElement(offsetParent);
+    const documentElement = getDocumentElement(offsetParent);
+    const isFixed = strategy === 'fixed';
+    const rect = getBoundingClientRect(element, true, isFixed, offsetParent);
+    let scroll = {
+      scrollLeft: 0,
+      scrollTop: 0
+    };
+    const offsets = createCoords(0);
+    if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
+      if (getNodeName(offsetParent) !== 'body' || isOverflowElement(documentElement)) {
+        scroll = getNodeScroll(offsetParent);
+      }
+      if (isOffsetParentAnElement) {
+        const offsetRect = getBoundingClientRect(offsetParent, true, isFixed, offsetParent);
+        offsets.x = offsetRect.x + offsetParent.clientLeft;
+        offsets.y = offsetRect.y + offsetParent.clientTop;
+      } else if (documentElement) {
+        offsets.x = getWindowScrollBarX(documentElement);
+      }
+    }
+    return {
+      x: rect.left + scroll.scrollLeft - offsets.x,
+      y: rect.top + scroll.scrollTop - offsets.y,
+      width: rect.width,
+      height: rect.height
+    };
+  }
+
   function getTrueOffsetParent(element, polyfill) {
     if (!isHTMLElement(element) || getComputedStyle$1(element).position === 'fixed') {
       return null;
@@ -13111,17 +14019,6 @@
       return polyfill(element);
     }
     return element.offsetParent;
-  }
-  function getContainingBlock(element) {
-    let currentNode = getParentNode(element);
-    while (isHTMLElement(currentNode) && !isLastTraversableNode(currentNode)) {
-      if (isContainingBlock(currentNode)) {
-        return currentNode;
-      } else {
-        currentNode = getParentNode(currentNode);
-      }
-    }
-    return null;
   }
 
   // Gets the closest ancestor positioned element. Handles some edge cases,
@@ -13141,65 +14038,39 @@
     return offsetParent || getContainingBlock(element) || window;
   }
 
-  function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
-    const isOffsetParentAnElement = isHTMLElement(offsetParent);
-    const documentElement = getDocumentElement(offsetParent);
-    const rect = getBoundingClientRect(element, true, strategy === 'fixed', offsetParent);
-    let scroll = {
-      scrollLeft: 0,
-      scrollTop: 0
-    };
-    const offsets = {
-      x: 0,
-      y: 0
-    };
-    if (isOffsetParentAnElement || !isOffsetParentAnElement && strategy !== 'fixed') {
-      if (getNodeName(offsetParent) !== 'body' || isOverflowElement(documentElement)) {
-        scroll = getNodeScroll(offsetParent);
-      }
-      if (isHTMLElement(offsetParent)) {
-        const offsetRect = getBoundingClientRect(offsetParent, true);
-        offsets.x = offsetRect.x + offsetParent.clientLeft;
-        offsets.y = offsetRect.y + offsetParent.clientTop;
-      } else if (documentElement) {
-        offsets.x = getWindowScrollBarX(documentElement);
-      }
-    }
+  const getElementRects = async function (_ref) {
+    let {
+      reference,
+      floating,
+      strategy
+    } = _ref;
+    const getOffsetParentFn = this.getOffsetParent || getOffsetParent;
+    const getDimensionsFn = this.getDimensions;
     return {
-      x: rect.left + scroll.scrollLeft - offsets.x,
-      y: rect.top + scroll.scrollTop - offsets.y,
-      width: rect.width,
-      height: rect.height
+      reference: getRectRelativeToOffsetParent(reference, await getOffsetParentFn(floating), strategy),
+      floating: {
+        x: 0,
+        y: 0,
+        ...(await getDimensionsFn(floating))
+      }
     };
+  };
+
+  function isRTL(element) {
+    return getComputedStyle$1(element).direction === 'rtl';
   }
 
   const platform = {
-    getClippingRect,
     convertOffsetParentRelativeRectToViewportRelativeRect,
-    isElement,
-    getDimensions,
-    getOffsetParent,
     getDocumentElement,
+    getClippingRect,
+    getOffsetParent,
+    getElementRects,
+    getClientRects,
+    getDimensions,
     getScale,
-    async getElementRects(_ref) {
-      let {
-        reference,
-        floating,
-        strategy
-      } = _ref;
-      const getOffsetParentFn = this.getOffsetParent || getOffsetParent;
-      const getDimensionsFn = this.getDimensions;
-      return {
-        reference: getRectRelativeToOffsetParent(reference, await getOffsetParentFn(floating), strategy),
-        floating: {
-          x: 0,
-          y: 0,
-          ...(await getDimensionsFn(floating))
-        }
-      };
-    },
-    getClientRects: element => Array.from(element.getClientRects()),
-    isRTL: element => getComputedStyle$1(element).direction === 'rtl'
+    isElement,
+    isRTL
   };
 
   /**
@@ -13531,7 +14402,8 @@
               // The tooltip must remain non-hidden to assistive technologies even when closed.
               // Don't set hidden or inert or anything like that when is's closed!
               const tooltipContent = o$3("div", { ...useMergedProps(propsPopup, {}), children: o$3(SlideFade, { exitVisibility: "visible", exclusivityKey: "tooltip", duration: transitionDuration, show: hidden ? false : (tooltip == null ? false : (status != null)), slideTargetBlock: slideTargetBlock, slideTargetInline: slideTargetInline, children: o$3("div", { ...useMergedProps(propsData, { style: maxWidth ? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup), children: [o$3("div", { ...useMergedProps(propsArrow, { className: "tooltip-arrow" }) }), o$3("div", { class: "tooltip-inner", children: tooltip })] }) }) });
-              const portalJsx = absolutePositioning ? tooltipContent : defaultRenderPortal({ children: tooltipContent, portalId });
+              let contentIfRelative = useDefaultRenderPortal({ children: tooltipContent, portalId });
+              const portalJsx = absolutePositioning ? tooltipContent : contentIfRelative;
               if (forward) {
                   const vnode = children;
                   console.assert(!!vnode.type);
@@ -13770,11 +14642,16 @@
       const imperativeHandle = _$1(null);
       const [capturedIndex, setCapturedIndex] = useState(null);
       const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); }, {
-          capture: (e) => { setCapturedIndex(e[EventDetail].selectedIndex); return [e]; }
+          capture: (e) => { setCapturedIndex(e[EventDetail].selectedIndex); return [e]; },
+          debounce: null,
+          throttle: null,
       });
       const pendingIndex = (pending ? capturedIndex : null);
       const classBase = (separated ? "btn-toolbar" : "btn-group");
-      return (o$3(DefaultButtonSize.Provider, { value: variantSize ?? null, children: o$3(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(ButtonGroupContext.Provider, { value: F$2(() => ({ pendingIndex }), [pendingIndex]), children: o$3(Toolbar, { onSelectedIndexChange: onSelectedIndexChangeSync, ref: imperativeHandle, ariaPropName: "aria-pressed", selectionMode: "disabled", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
+      return (o$3(DefaultButtonSize.Provider, { value: variantSize ?? null, children: o$3(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(ButtonGroupContext.Provider, { value: F$2(() => ({ pendingIndex }), [pendingIndex]), children: o$3(Toolbar, { onSelectedIndexChange: (...e) => {
+                              debugger;
+                              onSelectedIndexChangeSync(...e);
+                          }, imperativeHandle: imperativeHandle, ariaPropName: "aria-pressed", selectionMode: "activation", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
                           , pageNavigationSize: 0, orientation: orientation || "horizontal", ariaLabel: labelPosition == 'hidden' ? label : null, selectedIndex: pendingIndex ?? selectedIndex, render: info => {
                               const visibleLabel = o$3("label", { ...info.propsLabel, children: label });
                               return (o$3(_$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: false, typeaheadActive: false, children: o$3("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
@@ -13789,7 +14666,7 @@
       variantSize ??= defaultSize ?? undefined;
       const { currentCapture, pending: individualPending, syncHandler, callCount } = useAsyncHandler({
           asyncHandler: onPressAsync,
-          capture: (e) => e[EventDetail].pressed,
+          capture: (e) => e[EventDetail].pressed ?? null,
           debounce,
           throttle
       });
@@ -13816,7 +14693,8 @@
       }
       else {
           return (o$3(ToolbarChild, { index: buttonGroupIndex ?? 0, getSortValue: returnZero, disabledProp: "disabled", render: toolbarChildInfo => {
-                  return (o$3(ButtonStructure, { ref: ref, Tag: (Tag), tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne, callCount: callCount, onPress: (e) => {
+                  return (o$3(ButtonStructure, { ref: ref, Tag: (Tag), tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne || false, callCount: callCount, onPress: (e) => {
+                          debugger;
                           toolbarChildInfo.pressParameters.onPressSync?.(e);
                           return syncHandler?.(e);
                       }, otherProps: useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable) }));
@@ -13827,12 +14705,13 @@
    * A "raw" button -- just the markup.
    */
   const ButtonStructure = x$1(forwardElementRef(function ButtonStructure({ Tag, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
-      return (o$3(Button$1, { tagButton: (Tag), disabled: disabled, onPress: onPress, pressed: pressed, render: buttonInfo => {
-              return (o$3(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagIndicator: "span", render: progressInfo => {
-                      const { propsIndicator, propsRegion } = progressInfo;
-                      const loadingJsx = (o$3(Fade, { show: pending, exitVisibility: "removed", children: o$3("span", { class: "spinner-border", ...propsIndicator }) }));
-                      if (pressed !== null)
+      return (o$3(Button$1, { tagButton: (Tag), disabled: disabled, onPressSync: onPress, pressed: pressed, render: buttonInfo => {
+              return (o$3(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagProgressIndicator: "span", render: progressInfo => {
+                      const { propsProgressIndicator, propsProgressRegion } = progressInfo;
+                      const loadingJsx = (o$3(Fade, { show: pending, exitVisibility: "removed", children: o$3("span", { class: "spinner-border", ...propsProgressIndicator }) }));
+                      if (pressed != null)
                           variantFill ??= (pressed ? "fill" : "outline");
+                      console.log(`Button rendered pressed ${pressed} and fill ${variantFill}`);
                       const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
                       const ret = (y$3(Tag, useMergedProps(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx));
                       if (tooltip) {
@@ -13944,18 +14823,18 @@
               else {
                   return e[EventDetail].checked;
               }
-          }, debounce: debounce, throttle: throttle, tagIndicator: "span", render: progressInfo => {
-              const { asyncHandlerReturn, propsIndicator, propsRegion } = progressInfo;
+          }, debounce: debounce, throttle: throttle, tagProgressIndicator: "span", render: progressInfo => {
+              const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
               const { pending: p, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
               const pending = (p || debouncingAsync || debouncingSync);
-              const loadingJsx = (o$3(Fade, { show: p, exitVisibility: "removed", children: o$3("span", { class: "spinner-border spinner-border-sm", ...propsIndicator }) }));
+              const loadingJsx = (o$3(Fade, { show: p, exitVisibility: "removed", children: o$3("span", { class: "spinner-border spinner-border-sm", ...propsProgressIndicator }) }));
               const defaultDisabled = q$2(DisabledContext$1);
               const disabledType = q$2(DefaultDisabledType);
               let disabled = userDisabled;
               disabled ||= defaultDisabled;
               //disabled ||= pending;
               const d = disabled ? disabledType : false;
-              return (o$3(Checkbox$1, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, ref: imperativeHandle, render: info => {
+              return (o$3(Checkbox$1, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, imperativeHandle: imperativeHandle, render: info => {
                       debugger;
                       const inputJsx = o$3("input", { ...useMergedProps(info.propsInput, propsInput || {}, { class: clsx("form-check-input", w && "mt-0") }) });
                       const visibleLabel = o$3("label", { ...useMergedProps(info.propsLabel, propsLabel || {}, { class: "form-check-label" }), children: label });
@@ -14006,7 +14885,7 @@
           }), untabbable: untabbable, render: info => {
               return (o$3(Checkbox, { checked: checked, label: label, inline: inline, loadingLabel: loadingLabel, tristate: tristate, debounce: debounce, throttle: throttle, disabled: pendingFromParent || disabled, labelPosition: labelPosition, imperativeHandle: imperativeHandle, onValueChange: useStableCallback(async (checked, event) => {
                       await onValueChange?.(checked, event);
-                      info.checkboxGroupChild.onChildCheckedChange(checked);
+                      info.checkboxGroupChildReturn.onChildCheckedChange(checked);
                   }), propsInput: useMergedProps(props, info.propsChild, info.propsTabbable) }));
           } }));
   }
@@ -14017,11 +14896,11 @@
       if (headerPosition == "hidden") {
           console.assert(typeof header == "string", `A dialog whose label is hidden must provide the label to use as a string to the header`);
       }
-      return (o$3(Dialog$1, { ariaLabel: headerPosition == "hidden" ? header : null, open: open, onClose: onClose, focusPopup: (e, f) => f()?.focus?.(), closeOnBackdrop: modal ? false : true, closeOnEscape: modal ? false : true, render: info => {
-              const headingJsx = (o$3(_$3, { children: [o$3("span", { class: "modal-title", children: header }), o$3(Button, { class: "btn-close", onPress: () => onClose("escape"), "aria-label": "Close" })] }));
+      return (o$3(Dialog$1, { ariaLabel: headerPosition == "hidden" ? header : null, active: open, onDismiss: onClose, focusPopup: (e, f) => f()?.focus?.(), dismissBackdropActive: modal ? false : true, dismissEscapeActive: modal ? false : true, render: info => {
+              const headingJsx = (o$3(_$3, { children: [o$3("span", { class: "modal-title", children: header }), o$3(Button, { class: "btn-close", onPress: (_pressed, e) => onClose(e, "escape"), "aria-label": "Close" })] }));
               const bodyJsx = (o$3("span", { class: "modal-body", children: children }));
               const footerJsx = (o$3("span", { class: "modal-footer", children: footer }));
-              return (o$3(_$3, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
+              return (o$3(_$3, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), useDefaultRenderPortal({
                           portalId: usePortalId("dialog"),
                           children: (o$3("div", { ...useMergedProps(info.propsFocusContainer, propsPortal || {}), children: o$3("div", { ...useMergedProps(info.propsDialog, {
                                       tabIndex: -1,
@@ -14159,7 +15038,7 @@
           onChange?.(start, end);
           return () => onChange(null, null);
       }, [page, windowSize]);
-      return (o$3(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "focus", selectedIndex: page, onSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
+      return (o$3(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "activation", selectedIndex: page, onSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
               const labelJsx = o$3("label", { ...info.propsLabel, children: label });
               return (o$3(_$3, { children: [labelPosition == "before" && labelJsx, o$3("nav", { "aria-label": labelPosition == 'hidden' ? label : undefined, children: o$3("ul", { ...useMergedProps(info.propsToolbar, { class: "pagination" }), children: o$3(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }), labelPosition == "after" && labelJsx] }));
           } }));
@@ -14188,7 +15067,17 @@
   const PaginationButton = x$1(forwardElementRef(function PaginationButton({ index, children, onFocus }, ref) {
       return (o$3(ToolbarChild, { index: index, disabledProp: "disabled", getSortValue: useStableGetter(index), render: info => {
               const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
-              const { pressReturn, props: propsPress } = usePress({ pressParameters: { onPressSync: null, allowRepeatPresses: false, excludeEnter: null, excludePointer: null, excludeSpace: null, longPressThreshold: null, onPressingChange: null, focusSelf: T$2((e) => { e.focus(); }, []) }, refElementReturn });
+              const { pressReturn, props: propsPress } = usePress({
+                  pressParameters: {
+                      ...info.pressParameters,
+                      allowRepeatPresses: false,
+                      excludeEnter: null,
+                      excludePointer: null,
+                      longPressThreshold: null,
+                      onPressingChange: null,
+                      focusSelf: T$2((e) => { e.focus(); }, [])
+                  }, refElementReturn
+              });
               return (o$3("li", { class: "page-item", children: o$3("button", { ...useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {}), children: children }) }));
           } }));
   }));
@@ -14296,8 +15185,8 @@
           refElementReturn
       });
       const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
-      const { propsIndicator, propsRegion } = progressInfo;
-      const loadingJsx = (o$3(Fade, { show: progressInfo.asyncHandlerReturn.pending, exitVisibility: "removed", children: o$3("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsIndicator }) }));
+      const { propsProgressIndicator, propsProgressRegion } = progressInfo;
+      const loadingJsx = (o$3(Fade, { show: progressInfo.asyncHandlerReturn.pending, exitVisibility: "removed", children: o$3("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsProgressIndicator }) }));
       //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
       const finalPropsForText = useMergedProps(p1, p2);
       const finalPropsForDiv = useMergedProps(infoRow.props, { ...props, ref: ref2 }, {
@@ -14315,8 +15204,8 @@
       const defaultDisabled = q$2(DefaultDisabled);
       disabled ||= defaultDisabled;
       let everShownPaginated = _$1(false);
-      return (o$3(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onPress ?? null, capture: returnUndefined, tagIndicator: "span", render: progressInfo => {
-              return (o$3(GridlistRow, { index: index, getSortValue: getSortValue ?? returnZero, unselectable: disabled, noTypeahead: true, getText: T$2((e) => { return e?.querySelector(".gridlist-item-text")?.textContent || ""; }, []), render: infoRow => {
+      return (o$3(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onPress ?? null, capture: returnUndefined, tagProgressIndicator: "span", render: progressInfo => {
+              return (o$3(GridlistRow, { index: index, unselectable: disabled, noTypeahead: true, getText: T$2((e) => { return e?.querySelector(".gridlist-item-text")?.textContent || ""; }, []), render: infoRow => {
                       if (infoRow.paginatedChildReturn.hideBecausePaginated && everShownPaginated.current == false)
                           return o$3("div", {}, "hide-because-paginated");
                       everShownPaginated.current = true;
@@ -14370,8 +15259,7 @@
           callback: () => setMenuOpen(popperOpen),
           triggerIndex: popperOpen
       });
-      return (o$3(Menu$1, { onOpen: onOpen, onClose: onClose, open: menuOpen, openDirection: "down", orientation: "vertical", selectionMode: "activation", ariaPropName: "aria-selected", selectedIndex: selectedIndex, onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
-              A$1(imperativeHandle, () => info);
+      return (o$3(Menu$1, { onOpen: onOpen, onDismiss: onClose, active: menuOpen, openDirection: "down", orientation: "vertical", selectionMode: "activation", ariaPropName: "aria-selected", selectedIndex: selectedIndex, imperativeHandle: imperativeHandle, onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
               const portalId = usePortalId("menu");
               const { propsArrow, propsPopup, propsSource, propsData } = usePopper({
                   popperParameters: {
@@ -14384,7 +15272,7 @@
               return (o$3(_$3, { children: [useClonedElement(anchor, useMergedProps({
                           onPress: onAnchorPress,
                           class: popperOpen ? "active" : ""
-                      }, props, info.propsTrigger, propsSource), ref), defaultRenderPortal({
+                      }, props, info.propsTrigger, propsSource), ref), useDefaultRenderPortal({
                           portalId,
                           children: (o$3("div", { ...useMergedProps(propsPopup, { className: "popper-menu" }), children: [o$3("div", { ...propsArrow }), o$3(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: o$3(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: o$3("div", { ...useMergedProps(info.propsSurface, { className: clsx("dropdown-menu shadow show") }), children: [o$3("div", { ...info.propsSentinel }), o$3("div", { ...useMergedProps(info.propsTarget, { className: "dropdown-menu-list" }), children: children }), o$3("div", { ...info.propsSentinel })] }) }) })] }))
                       })] }));
@@ -14395,10 +15283,10 @@
       return (o$3(ProgressWithHandler, { asyncHandler: () => {
               console.assert(!!imperativeHandle.current);
               return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu);
-          }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagIndicator: "div", render: progressInfo => {
+          }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
               const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
-              return (o$3(MenuItem$1, { ref: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, unselectable: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
-                      const spinnerJsx = (o$3(Fade, { show: showSpinner, exitVisibility: "removed", children: o$3("div", { ...progressInfo.propsIndicator, class: clsx("spinner-border", "spinner-border-sm") }) }));
+              return (o$3(MenuItem$1, { imperativeHandle: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, unselectable: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
+                      const spinnerJsx = (o$3(Fade, { show: showSpinner, exitVisibility: "removed", children: o$3("div", { ...progressInfo.propsProgressIndicator, class: clsx("spinner-border", "spinner-border-sm") }) }));
                       return (o$3("div", { ...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props), children: [children, o$3("div", { class: "dropdown-item-icon dropdown-item-icon-end", children: spinnerJsx })] }));
                   } }));
           } }));
@@ -14409,10 +15297,10 @@
       if (headerPosition == "hidden") {
           console.assert(typeof header == "string", `An offcanvas whose label is hidden must provide the label to use as a string to the header`);
       }
-      return (o$3(Dialog$1, { ariaLabel: headerPosition == "hidden" ? header : null, open: open, onClose: onClose, focusPopup: (e, f) => f()?.focus?.(), closeOnBackdrop: true, closeOnEscape: true, render: info => {
-              return (o$3(_$3, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
+      return (o$3(Dialog$1, { ariaLabel: headerPosition == "hidden" ? header : null, active: open, onDismiss: onClose, focusPopup: (e, f) => f()?.focus?.(), dismissBackdropActive: true, dismissEscapeActive: true, render: info => {
+              return (o$3(_$3, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), useDefaultRenderPortal({
                           portalId: usePortalId("offcanvas"),
-                          children: (o$3("div", { ...useMergedProps(info.propsFocusContainer, propsPortal || {}), children: [o$3(Slide, { show: open, slideTargetInline: -1, duration: 500, children: o$3("div", { ...useMergedProps(info.propsDialog, { class: clsx("offcanvas"), tabIndex: -1 }), children: [o$3("div", { ...useMergedProps({ class: "offcanvas-header" }), children: [o$3("h5", { ...useMergedProps(info.propsTitle, { class: "offcanvas-title" }), children: header }), o$3(Button, { class: "btn-close", "aria-label": "Close", onPress: () => onClose("escape") })] }), o$3("div", { class: "offcanvas-body", children: children })] }) }), o$3(Fade, { show: open, fadeMax: 0.25, duration: 1000, children: o$3("div", { class: clsx("offcanvas-backdrop") }) })] }))
+                          children: (o$3("div", { ...useMergedProps(info.propsFocusContainer, propsPortal || {}), children: [o$3(Slide, { show: open, slideTargetInline: -1, duration: 500, children: o$3("div", { ...useMergedProps(info.propsDialog, { class: clsx("offcanvas"), tabIndex: -1 }), children: [o$3("div", { ...useMergedProps({ class: "offcanvas-header" }), children: [o$3("h5", { ...useMergedProps(info.propsTitle, { class: "offcanvas-title" }), children: header }), o$3(Button, { class: "btn-close", "aria-label": "Close", onPress: (_pressed, e) => onClose(e, "escape") })] }), o$3("div", { class: "offcanvas-body", children: children })] }) }), o$3(Fade, { show: open, fadeMax: 0.25, duration: 1000, children: o$3("div", { class: clsx("offcanvas-backdrop") }) })] }))
                       })] }));
           } }));
   }));
@@ -14432,17 +15320,17 @@
       });
       const pendingValue = (pending ? capturedValue : null);
       inline ??= false;
-      return (o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(RadioGroupContext.Provider, { value: F$2(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: o$3(RadioGroup$1, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, ref: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", render: info => {
+      return (o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(RadioGroupContext.Provider, { value: F$2(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: o$3(RadioGroup$1, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, imperativeHandle: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", render: info => {
                       const visibleLabel = o$3("label", { ...info.propsRadioGroupLabel, children: label });
-                      return (o$3(_$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: o$3("span", { ...useMergedProps({ className: clsx("radio-group"), ref, "aria-busy": (pending ? "true" : undefined) }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
+                      return (o$3(_$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: o$3("span", { ...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
                   } }) }) }));
   }
   function Radio({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }, ref) {
       const radioGroupInfo = q$2(RadioGroupContext);
       const { pendingValue, inline } = (radioGroupInfo ?? {});
       const singleSelectPending = pendingValue != null && (pendingValue === value);
-      return (o$3(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: singleSelectPending ? "indeterminate" : "disabled", tagIndicator: "span", render: progressInfo => {
-              const { propsIndicator, propsRegion, propsLabel } = progressInfo;
+      return (o$3(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: singleSelectPending ? "indeterminate" : "disabled", tagProgressIndicator: "span", render: progressInfo => {
+              const { propsProgressIndicator, propsProgressRegion, propsProgressLabel } = progressInfo;
               //const inButtonGroup = (useContext(ButtonGroupContext) ?? false);
               const defaultDisabled = q$2(DisabledContext$1);
               const disabledType = q$2(DefaultDisabledType);
@@ -14453,7 +15341,7 @@
               const d = disabled ? disabledType : false;
               //const buttonClass = clsx(`btn`, `btn-${variantTheme ?? "primary"}`, asyncHandlerReturn.pending && "pending", disabled && "disabled");
               const pending = singleSelectPending; //(pendingValue != null);
-              const loadingJsx = (o$3(Fade, { show: pending, exitVisibility: "removed", children: o$3("span", { ...useMergedProps(propsIndicator, { class: "spinner-border" }) }) }));
+              const loadingJsx = (o$3(Fade, { show: pending, exitVisibility: "removed", children: o$3("span", { ...useMergedProps(propsProgressIndicator, { class: "spinner-border" }) }) }));
               return (o$3(Radio$1, { ariaLabel: labelPosition == 'hidden' ? label : null, value: value, index: index, labelPosition: labelPosition == "hidden" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, render: info => {
                       const inputJsx = o$3("input", { class: "form-check-input", ...useMergedProps(info.propsInput, props, { ref }) });
                       return (o$3("span", { ...useMergedProps({ className: clsx(labelPosition == "after" && ".form-check-reverse", "form-check", pending && "pending", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse") }), children: [loadingJsx, o$3("label", { class: "form-check-label", ...info.propsLabel, children: [labelPosition == "before" && label, labelPosition == "tooltip" ? o$3(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && label] })] }));
@@ -14463,7 +15351,7 @@
 
   class JSBI extends Array{constructor(i,_){if(super(i),this.sign=_,Object.setPrototypeOf(this,JSBI.prototype),i>JSBI.__kMaxLength)throw new RangeError("Maximum BigInt size exceeded")}static BigInt(i){var _=Math.floor,t=Number.isFinite;if("number"==typeof i){if(0===i)return JSBI.__zero();if(JSBI.__isOneDigitInt(i))return 0>i?JSBI.__oneDigit(-i,!0):JSBI.__oneDigit(i,!1);if(!t(i)||_(i)!==i)throw new RangeError("The number "+i+" cannot be converted to BigInt because it is not an integer");return JSBI.__fromDouble(i)}if("string"==typeof i){const _=JSBI.__fromString(i);if(null===_)throw new SyntaxError("Cannot convert "+i+" to a BigInt");return _}if("boolean"==typeof i)return !0===i?JSBI.__oneDigit(1,!1):JSBI.__zero();if("object"==typeof i){if(i.constructor===JSBI)return i;const _=JSBI.__toPrimitive(i);return JSBI.BigInt(_)}throw new TypeError("Cannot convert "+i+" to a BigInt")}toDebugString(){const i=["BigInt["];for(const _ of this)i.push((_?(_>>>0).toString(16):_)+", ");return i.push("]"),i.join("")}toString(i=10){if(2>i||36<i)throw new RangeError("toString() radix argument must be between 2 and 36");return 0===this.length?"0":0==(i&i-1)?JSBI.__toStringBasePowerOfTwo(this,i):JSBI.__toStringGeneric(this,i,!1)}valueOf(){throw new Error("Convert JSBI instances to native numbers using `toNumber`.")}static toNumber(i){const _=i.length;if(0===_)return 0;if(1===_){const _=i.__unsignedDigit(0);return i.sign?-_:_}const t=i.__digit(_-1),e=JSBI.__clz30(t),n=30*_-e;if(1024<n)return i.sign?-Infinity:1/0;let g=n-1,s=t,o=_-1;const l=e+3;let r=32===l?0:s<<l;r>>>=12;const a=l-12;let u=12<=l?0:s<<20+l,d=20+l;for(0<a&&0<o&&(o--,s=i.__digit(o),r|=s>>>30-a,u=s<<a+2,d=a+2);0<d&&0<o;)o--,s=i.__digit(o),u|=30<=d?s<<d-30:s>>>30-d,d-=30;const h=JSBI.__decideRounding(i,d,o,s);if((1===h||0===h&&1==(1&u))&&(u=u+1>>>0,0===u&&(r++,0!=r>>>20&&(r=0,g++,1023<g))))return i.sign?-Infinity:1/0;const m=i.sign?-2147483648:0;return g=g+1023<<20,JSBI.__kBitConversionInts[1]=m|g|r,JSBI.__kBitConversionInts[0]=u,JSBI.__kBitConversionDouble[0]}static unaryMinus(i){if(0===i.length)return i;const _=i.__copy();return _.sign=!i.sign,_}static bitwiseNot(i){return i.sign?JSBI.__absoluteSubOne(i).__trim():JSBI.__absoluteAddOne(i,!0)}static exponentiate(i,_){if(_.sign)throw new RangeError("Exponent must be positive");if(0===_.length)return JSBI.__oneDigit(1,!1);if(0===i.length)return i;if(1===i.length&&1===i.__digit(0))return i.sign&&0==(1&_.__digit(0))?JSBI.unaryMinus(i):i;if(1<_.length)throw new RangeError("BigInt too big");let t=_.__unsignedDigit(0);if(1===t)return i;if(t>=JSBI.__kMaxLengthBits)throw new RangeError("BigInt too big");if(1===i.length&&2===i.__digit(0)){const _=1+(0|t/30),e=i.sign&&0!=(1&t),n=new JSBI(_,e);n.__initializeDigits();const g=1<<t%30;return n.__setDigit(_-1,g),n}let e=null,n=i;for(0!=(1&t)&&(e=i),t>>=1;0!==t;t>>=1)n=JSBI.multiply(n,n),0!=(1&t)&&(null===e?e=n:e=JSBI.multiply(e,n));return e}static multiply(_,t){if(0===_.length)return _;if(0===t.length)return t;let i=_.length+t.length;30<=_.__clzmsd()+t.__clzmsd()&&i--;const e=new JSBI(i,_.sign!==t.sign);e.__initializeDigits();for(let n=0;n<_.length;n++)JSBI.__multiplyAccumulate(t,_.__digit(n),e,n);return e.__trim()}static divide(i,_){if(0===_.length)throw new RangeError("Division by zero");if(0>JSBI.__absoluteCompare(i,_))return JSBI.__zero();const t=i.sign!==_.sign,e=_.__unsignedDigit(0);let n;if(1===_.length&&32767>=e){if(1===e)return t===i.sign?i:JSBI.unaryMinus(i);n=JSBI.__absoluteDivSmall(i,e,null);}else n=JSBI.__absoluteDivLarge(i,_,!0,!1);return n.sign=t,n.__trim()}static remainder(i,_){if(0===_.length)throw new RangeError("Division by zero");if(0>JSBI.__absoluteCompare(i,_))return i;const t=_.__unsignedDigit(0);if(1===_.length&&32767>=t){if(1===t)return JSBI.__zero();const _=JSBI.__absoluteModSmall(i,t);return 0===_?JSBI.__zero():JSBI.__oneDigit(_,i.sign)}const e=JSBI.__absoluteDivLarge(i,_,!1,!0);return e.sign=i.sign,e.__trim()}static add(i,_){const t=i.sign;return t===_.sign?JSBI.__absoluteAdd(i,_,t):0<=JSBI.__absoluteCompare(i,_)?JSBI.__absoluteSub(i,_,t):JSBI.__absoluteSub(_,i,!t)}static subtract(i,_){const t=i.sign;return t===_.sign?0<=JSBI.__absoluteCompare(i,_)?JSBI.__absoluteSub(i,_,t):JSBI.__absoluteSub(_,i,!t):JSBI.__absoluteAdd(i,_,t)}static leftShift(i,_){return 0===_.length||0===i.length?i:_.sign?JSBI.__rightShiftByAbsolute(i,_):JSBI.__leftShiftByAbsolute(i,_)}static signedRightShift(i,_){return 0===_.length||0===i.length?i:_.sign?JSBI.__leftShiftByAbsolute(i,_):JSBI.__rightShiftByAbsolute(i,_)}static unsignedRightShift(){throw new TypeError("BigInts have no unsigned right shift; use >> instead")}static lessThan(i,_){return 0>JSBI.__compareToBigInt(i,_)}static lessThanOrEqual(i,_){return 0>=JSBI.__compareToBigInt(i,_)}static greaterThan(i,_){return 0<JSBI.__compareToBigInt(i,_)}static greaterThanOrEqual(i,_){return 0<=JSBI.__compareToBigInt(i,_)}static equal(_,t){if(_.sign!==t.sign)return !1;if(_.length!==t.length)return !1;for(let e=0;e<_.length;e++)if(_.__digit(e)!==t.__digit(e))return !1;return !0}static notEqual(i,_){return !JSBI.equal(i,_)}static bitwiseAnd(i,_){var t=Math.max;if(!i.sign&&!_.sign)return JSBI.__absoluteAnd(i,_).__trim();if(i.sign&&_.sign){const e=t(i.length,_.length)+1;let n=JSBI.__absoluteSubOne(i,e);const g=JSBI.__absoluteSubOne(_);return n=JSBI.__absoluteOr(n,g,n),JSBI.__absoluteAddOne(n,!0,n).__trim()}return i.sign&&([i,_]=[_,i]),JSBI.__absoluteAndNot(i,JSBI.__absoluteSubOne(_)).__trim()}static bitwiseXor(i,_){var t=Math.max;if(!i.sign&&!_.sign)return JSBI.__absoluteXor(i,_).__trim();if(i.sign&&_.sign){const e=t(i.length,_.length),n=JSBI.__absoluteSubOne(i,e),g=JSBI.__absoluteSubOne(_);return JSBI.__absoluteXor(n,g,n).__trim()}const e=t(i.length,_.length)+1;i.sign&&([i,_]=[_,i]);let n=JSBI.__absoluteSubOne(_,e);return n=JSBI.__absoluteXor(n,i,n),JSBI.__absoluteAddOne(n,!0,n).__trim()}static bitwiseOr(i,_){var t=Math.max;const e=t(i.length,_.length);if(!i.sign&&!_.sign)return JSBI.__absoluteOr(i,_).__trim();if(i.sign&&_.sign){let t=JSBI.__absoluteSubOne(i,e);const n=JSBI.__absoluteSubOne(_);return t=JSBI.__absoluteAnd(t,n,t),JSBI.__absoluteAddOne(t,!0,t).__trim()}i.sign&&([i,_]=[_,i]);let n=JSBI.__absoluteSubOne(_,e);return n=JSBI.__absoluteAndNot(n,i,n),JSBI.__absoluteAddOne(n,!0,n).__trim()}static asIntN(_,t){var i=Math.floor;if(0===t.length)return t;if(_=i(_),0>_)throw new RangeError("Invalid value: not (convertible to) a safe integer");if(0===_)return JSBI.__zero();if(_>=JSBI.__kMaxLengthBits)return t;const e=0|(_+29)/30;if(t.length<e)return t;const g=t.__unsignedDigit(e-1),s=1<<(_-1)%30;if(t.length===e&&g<s)return t;if(!((g&s)===s))return JSBI.__truncateToNBits(_,t);if(!t.sign)return JSBI.__truncateAndSubFromPowerOfTwo(_,t,!0);if(0==(g&s-1)){for(let n=e-2;0<=n;n--)if(0!==t.__digit(n))return JSBI.__truncateAndSubFromPowerOfTwo(_,t,!1);return t.length===e&&g===s?t:JSBI.__truncateToNBits(_,t)}return JSBI.__truncateAndSubFromPowerOfTwo(_,t,!1)}static asUintN(i,_){var t=Math.floor;if(0===_.length)return _;if(i=t(i),0>i)throw new RangeError("Invalid value: not (convertible to) a safe integer");if(0===i)return JSBI.__zero();if(_.sign){if(i>JSBI.__kMaxLengthBits)throw new RangeError("BigInt too big");return JSBI.__truncateAndSubFromPowerOfTwo(i,_,!1)}if(i>=JSBI.__kMaxLengthBits)return _;const e=0|(i+29)/30;if(_.length<e)return _;const g=i%30;if(_.length==e){if(0===g)return _;const i=_.__digit(e-1);if(0==i>>>g)return _}return JSBI.__truncateToNBits(i,_)}static ADD(i,_){if(i=JSBI.__toPrimitive(i),_=JSBI.__toPrimitive(_),"string"==typeof i)return "string"!=typeof _&&(_=_.toString()),i+_;if("string"==typeof _)return i.toString()+_;if(i=JSBI.__toNumeric(i),_=JSBI.__toNumeric(_),JSBI.__isBigInt(i)&&JSBI.__isBigInt(_))return JSBI.add(i,_);if("number"==typeof i&&"number"==typeof _)return i+_;throw new TypeError("Cannot mix BigInt and other types, use explicit conversions")}static LT(i,_){return JSBI.__compare(i,_,0)}static LE(i,_){return JSBI.__compare(i,_,1)}static GT(i,_){return JSBI.__compare(i,_,2)}static GE(i,_){return JSBI.__compare(i,_,3)}static EQ(i,_){for(;;){if(JSBI.__isBigInt(i))return JSBI.__isBigInt(_)?JSBI.equal(i,_):JSBI.EQ(_,i);if("number"==typeof i){if(JSBI.__isBigInt(_))return JSBI.__equalToNumber(_,i);if("object"!=typeof _)return i==_;_=JSBI.__toPrimitive(_);}else if("string"==typeof i){if(JSBI.__isBigInt(_))return i=JSBI.__fromString(i),null!==i&&JSBI.equal(i,_);if("object"!=typeof _)return i==_;_=JSBI.__toPrimitive(_);}else if("boolean"==typeof i){if(JSBI.__isBigInt(_))return JSBI.__equalToNumber(_,+i);if("object"!=typeof _)return i==_;_=JSBI.__toPrimitive(_);}else if("symbol"==typeof i){if(JSBI.__isBigInt(_))return !1;if("object"!=typeof _)return i==_;_=JSBI.__toPrimitive(_);}else if("object"==typeof i){if("object"==typeof _&&_.constructor!==JSBI)return i==_;i=JSBI.__toPrimitive(i);}else return i==_}}static NE(i,_){return !JSBI.EQ(i,_)}static DataViewGetBigInt64(i,_,t=!1){return JSBI.asIntN(64,JSBI.DataViewGetBigUint64(i,_,t))}static DataViewGetBigUint64(i,_,t=!1){const[e,n]=t?[4,0]:[0,4],g=i.getUint32(_+e,t),s=i.getUint32(_+n,t),o=new JSBI(3,!1);return o.__setDigit(0,1073741823&s),o.__setDigit(1,(268435455&g)<<2|s>>>30),o.__setDigit(2,g>>>28),o.__trim()}static DataViewSetBigInt64(i,_,t,e=!1){JSBI.DataViewSetBigUint64(i,_,t,e);}static DataViewSetBigUint64(i,_,t,e=!1){t=JSBI.asUintN(64,t);let n=0,g=0;if(0<t.length&&(g=t.__digit(0),1<t.length)){const i=t.__digit(1);g|=i<<30,n=i>>>2,2<t.length&&(n|=t.__digit(2)<<28);}const[s,o]=e?[4,0]:[0,4];i.setUint32(_+s,n,e),i.setUint32(_+o,g,e);}static __zero(){return new JSBI(0,!1)}static __oneDigit(i,_){const t=new JSBI(1,_);return t.__setDigit(0,i),t}__copy(){const _=new JSBI(this.length,this.sign);for(let t=0;t<this.length;t++)_[t]=this[t];return _}__trim(){let i=this.length,_=this[i-1];for(;0===_;)i--,_=this[i-1],this.pop();return 0===i&&(this.sign=!1),this}__initializeDigits(){for(let _=0;_<this.length;_++)this[_]=0;}static __decideRounding(i,_,t,e){if(0<_)return -1;let n;if(0>_)n=-_-1;else {if(0===t)return -1;t--,e=i.__digit(t),n=29;}let g=1<<n;if(0==(e&g))return -1;if(g-=1,0!=(e&g))return 1;for(;0<t;)if(t--,0!==i.__digit(t))return 1;return 0}static __fromDouble(i){JSBI.__kBitConversionDouble[0]=i;const _=2047&JSBI.__kBitConversionInts[1]>>>20,t=_-1023,e=(0|t/30)+1,n=new JSBI(e,0>i);let g=1048575&JSBI.__kBitConversionInts[1]|1048576,s=JSBI.__kBitConversionInts[0];const o=20,l=t%30;let r,a=0;if(l<20){const i=o-l;a=i+32,r=g>>>i,g=g<<32-i|s>>>i,s<<=32-i;}else if(l===20)a=32,r=g,g=s,s=0;else {const i=l-o;a=32-i,r=g<<i|s>>>32-i,g=s<<i,s=0;}n.__setDigit(e-1,r);for(let _=e-2;0<=_;_--)0<a?(a-=30,r=g>>>2,g=g<<30|s>>>2,s<<=30):r=0,n.__setDigit(_,r);return n.__trim()}static __isWhitespace(i){return !!(13>=i&&9<=i)||(159>=i?32==i:131071>=i?160==i||5760==i:196607>=i?(i&=131071,10>=i||40==i||41==i||47==i||95==i||4096==i):65279==i)}static __fromString(i,_=0){let t=0;const e=i.length;let n=0;if(n===e)return JSBI.__zero();let g=i.charCodeAt(n);for(;JSBI.__isWhitespace(g);){if(++n===e)return JSBI.__zero();g=i.charCodeAt(n);}if(43===g){if(++n===e)return null;g=i.charCodeAt(n),t=1;}else if(45===g){if(++n===e)return null;g=i.charCodeAt(n),t=-1;}if(0===_){if(_=10,48===g){if(++n===e)return JSBI.__zero();if(g=i.charCodeAt(n),88===g||120===g){if(_=16,++n===e)return null;g=i.charCodeAt(n);}else if(79===g||111===g){if(_=8,++n===e)return null;g=i.charCodeAt(n);}else if(66===g||98===g){if(_=2,++n===e)return null;g=i.charCodeAt(n);}}}else if(16===_&&48===g){if(++n===e)return JSBI.__zero();if(g=i.charCodeAt(n),88===g||120===g){if(++n===e)return null;g=i.charCodeAt(n);}}if(0!=t&&10!==_)return null;for(;48===g;){if(++n===e)return JSBI.__zero();g=i.charCodeAt(n);}const s=e-n;let o=JSBI.__kMaxBitsPerChar[_],l=JSBI.__kBitsPerCharTableMultiplier-1;if(s>1073741824/o)return null;const r=o*s+l>>>JSBI.__kBitsPerCharTableShift,a=new JSBI(0|(r+29)/30,!1),u=10>_?_:10,h=10<_?_-10:0;if(0==(_&_-1)){o>>=JSBI.__kBitsPerCharTableShift;const _=[],t=[];let s=!1;do{let l=0,r=0;for(;;){let _;if(g-48>>>0<u)_=g-48;else if((32|g)-97>>>0<h)_=(32|g)-87;else {s=!0;break}if(r+=o,l=l<<o|_,++n===e){s=!0;break}if(g=i.charCodeAt(n),30<r+o)break}_.push(l),t.push(r);}while(!s);JSBI.__fillFromParts(a,_,t);}else {a.__initializeDigits();let t=!1,s=0;do{let r=0,b=1;for(;;){let o;if(g-48>>>0<u)o=g-48;else if((32|g)-97>>>0<h)o=(32|g)-87;else {t=!0;break}const l=b*_;if(1073741823<l)break;if(b=l,r=r*_+o,s++,++n===e){t=!0;break}g=i.charCodeAt(n);}l=30*JSBI.__kBitsPerCharTableMultiplier-1;const D=0|(o*s+l>>>JSBI.__kBitsPerCharTableShift)/30;a.__inplaceMultiplyAdd(b,r,D);}while(!t)}if(n!==e){if(!JSBI.__isWhitespace(g))return null;for(n++;n<e;n++)if(g=i.charCodeAt(n),!JSBI.__isWhitespace(g))return null}return a.sign=-1==t,a.__trim()}static __fillFromParts(_,t,e){let n=0,g=0,s=0;for(let o=t.length-1;0<=o;o--){const i=t[o],l=e[o];g|=i<<s,s+=l,30===s?(_.__setDigit(n++,g),s=0,g=0):30<s&&(_.__setDigit(n++,1073741823&g),s-=30,g=i>>>l-s);}if(0!==g){if(n>=_.length)throw new Error("implementation bug");_.__setDigit(n++,g);}for(;n<_.length;n++)_.__setDigit(n,0);}static __toStringBasePowerOfTwo(_,i){const t=_.length;let e=i-1;e=(85&e>>>1)+(85&e),e=(51&e>>>2)+(51&e),e=(15&e>>>4)+(15&e);const n=e,g=i-1,s=_.__digit(t-1),o=JSBI.__clz30(s);let l=0|(30*t-o+n-1)/n;if(_.sign&&l++,268435456<l)throw new Error("string too long");const r=Array(l);let a=l-1,u=0,d=0;for(let e=0;e<t-1;e++){const i=_.__digit(e),t=(u|i<<d)&g;r[a--]=JSBI.__kConversionChars[t];const s=n-d;for(u=i>>>s,d=30-s;d>=n;)r[a--]=JSBI.__kConversionChars[u&g],u>>>=n,d-=n;}const h=(u|s<<d)&g;for(r[a--]=JSBI.__kConversionChars[h],u=s>>>n-d;0!==u;)r[a--]=JSBI.__kConversionChars[u&g],u>>>=n;if(_.sign&&(r[a--]="-"),-1!=a)throw new Error("implementation bug");return r.join("")}static __toStringGeneric(_,i,t){const e=_.length;if(0===e)return "";if(1===e){let e=_.__unsignedDigit(0).toString(i);return !1===t&&_.sign&&(e="-"+e),e}const n=30*e-JSBI.__clz30(_.__digit(e-1)),g=JSBI.__kMaxBitsPerChar[i],s=g-1;let o=n*JSBI.__kBitsPerCharTableMultiplier;o+=s-1,o=0|o/s;const l=o+1>>1,r=JSBI.exponentiate(JSBI.__oneDigit(i,!1),JSBI.__oneDigit(l,!1));let a,u;const d=r.__unsignedDigit(0);if(1===r.length&&32767>=d){a=new JSBI(_.length,!1),a.__initializeDigits();let t=0;for(let e=2*_.length-1;0<=e;e--){const i=t<<15|_.__halfDigit(e);a.__setHalfDigit(e,0|i/d),t=0|i%d;}u=t.toString(i);}else {const t=JSBI.__absoluteDivLarge(_,r,!0,!0);a=t.quotient;const e=t.remainder.__trim();u=JSBI.__toStringGeneric(e,i,!0);}a.__trim();let h=JSBI.__toStringGeneric(a,i,!0);for(;u.length<l;)u="0"+u;return !1===t&&_.sign&&(h="-"+h),h+u}static __unequalSign(i){return i?-1:1}static __absoluteGreater(i){return i?-1:1}static __absoluteLess(i){return i?1:-1}static __compareToBigInt(i,_){const t=i.sign;if(t!==_.sign)return JSBI.__unequalSign(t);const e=JSBI.__absoluteCompare(i,_);return 0<e?JSBI.__absoluteGreater(t):0>e?JSBI.__absoluteLess(t):0}static __compareToNumber(i,_){if(JSBI.__isOneDigitInt(_)){const t=i.sign,e=0>_;if(t!==e)return JSBI.__unequalSign(t);if(0===i.length){if(e)throw new Error("implementation bug");return 0===_?0:-1}if(1<i.length)return JSBI.__absoluteGreater(t);const n=Math.abs(_),g=i.__unsignedDigit(0);return g>n?JSBI.__absoluteGreater(t):g<n?JSBI.__absoluteLess(t):0}return JSBI.__compareToDouble(i,_)}static __compareToDouble(i,_){if(_!==_)return _;if(_===1/0)return -1;if(_===-Infinity)return 1;const t=i.sign;if(t!==0>_)return JSBI.__unequalSign(t);if(0===_)throw new Error("implementation bug: should be handled elsewhere");if(0===i.length)return -1;JSBI.__kBitConversionDouble[0]=_;const e=2047&JSBI.__kBitConversionInts[1]>>>20;if(2047==e)throw new Error("implementation bug: handled elsewhere");const n=e-1023;if(0>n)return JSBI.__absoluteGreater(t);const g=i.length;let s=i.__digit(g-1);const o=JSBI.__clz30(s),l=30*g-o,r=n+1;if(l<r)return JSBI.__absoluteLess(t);if(l>r)return JSBI.__absoluteGreater(t);let a=1048576|1048575&JSBI.__kBitConversionInts[1],u=JSBI.__kBitConversionInts[0];const d=20,h=29-o;if(h!==(0|(l-1)%30))throw new Error("implementation bug");let m,b=0;if(20>h){const i=d-h;b=i+32,m=a>>>i,a=a<<32-i|u>>>i,u<<=32-i;}else if(20===h)b=32,m=a,a=u,u=0;else {const i=h-d;b=32-i,m=a<<i|u>>>32-i,a=u<<i,u=0;}if(s>>>=0,m>>>=0,s>m)return JSBI.__absoluteGreater(t);if(s<m)return JSBI.__absoluteLess(t);for(let e=g-2;0<=e;e--){0<b?(b-=30,m=a>>>2,a=a<<30|u>>>2,u<<=30):m=0;const _=i.__unsignedDigit(e);if(_>m)return JSBI.__absoluteGreater(t);if(_<m)return JSBI.__absoluteLess(t)}if(0!==a||0!==u){if(0===b)throw new Error("implementation bug");return JSBI.__absoluteLess(t)}return 0}static __equalToNumber(i,_){var t=Math.abs;return JSBI.__isOneDigitInt(_)?0===_?0===i.length:1===i.length&&i.sign===0>_&&i.__unsignedDigit(0)===t(_):0===JSBI.__compareToDouble(i,_)}static __comparisonResultToBool(i,_){return 0===_?0>i:1===_?0>=i:2===_?0<i:3===_?0<=i:void 0}static __compare(i,_,t){if(i=JSBI.__toPrimitive(i),_=JSBI.__toPrimitive(_),"string"==typeof i&&"string"==typeof _)switch(t){case 0:return i<_;case 1:return i<=_;case 2:return i>_;case 3:return i>=_;}if(JSBI.__isBigInt(i)&&"string"==typeof _)return _=JSBI.__fromString(_),null!==_&&JSBI.__comparisonResultToBool(JSBI.__compareToBigInt(i,_),t);if("string"==typeof i&&JSBI.__isBigInt(_))return i=JSBI.__fromString(i),null!==i&&JSBI.__comparisonResultToBool(JSBI.__compareToBigInt(i,_),t);if(i=JSBI.__toNumeric(i),_=JSBI.__toNumeric(_),JSBI.__isBigInt(i)){if(JSBI.__isBigInt(_))return JSBI.__comparisonResultToBool(JSBI.__compareToBigInt(i,_),t);if("number"!=typeof _)throw new Error("implementation bug");return JSBI.__comparisonResultToBool(JSBI.__compareToNumber(i,_),t)}if("number"!=typeof i)throw new Error("implementation bug");if(JSBI.__isBigInt(_))return JSBI.__comparisonResultToBool(JSBI.__compareToNumber(_,i),2^t);if("number"!=typeof _)throw new Error("implementation bug");return 0===t?i<_:1===t?i<=_:2===t?i>_:3===t?i>=_:void 0}__clzmsd(){return JSBI.__clz30(this.__digit(this.length-1))}static __absoluteAdd(_,t,e){if(_.length<t.length)return JSBI.__absoluteAdd(t,_,e);if(0===_.length)return _;if(0===t.length)return _.sign===e?_:JSBI.unaryMinus(_);let n=_.length;(0===_.__clzmsd()||t.length===_.length&&0===t.__clzmsd())&&n++;const g=new JSBI(n,e);let s=0,o=0;for(;o<t.length;o++){const i=_.__digit(o)+t.__digit(o)+s;s=i>>>30,g.__setDigit(o,1073741823&i);}for(;o<_.length;o++){const i=_.__digit(o)+s;s=i>>>30,g.__setDigit(o,1073741823&i);}return o<g.length&&g.__setDigit(o,s),g.__trim()}static __absoluteSub(_,t,e){if(0===_.length)return _;if(0===t.length)return _.sign===e?_:JSBI.unaryMinus(_);const n=new JSBI(_.length,e);let g=0,s=0;for(;s<t.length;s++){const i=_.__digit(s)-t.__digit(s)-g;g=1&i>>>30,n.__setDigit(s,1073741823&i);}for(;s<_.length;s++){const i=_.__digit(s)-g;g=1&i>>>30,n.__setDigit(s,1073741823&i);}return n.__trim()}static __absoluteAddOne(_,i,t=null){const e=_.length;null===t?t=new JSBI(e,i):t.sign=i;let n=1;for(let g=0;g<e;g++){const i=_.__digit(g)+n;n=i>>>30,t.__setDigit(g,1073741823&i);}return 0!=n&&t.__setDigitGrow(e,1),t}static __absoluteSubOne(_,t){const e=_.length;t=t||e;const n=new JSBI(t,!1);let g=1;for(let s=0;s<e;s++){const i=_.__digit(s)-g;g=1&i>>>30,n.__setDigit(s,1073741823&i);}if(0!=g)throw new Error("implementation bug");for(let g=e;g<t;g++)n.__setDigit(g,0);return n}static __absoluteAnd(_,t,e=null){let n=_.length,g=t.length,s=g;if(n<g){s=n;const i=_,e=n;_=t,n=g,t=i,g=e;}let o=s;null===e?e=new JSBI(o,!1):o=e.length;let l=0;for(;l<s;l++)e.__setDigit(l,_.__digit(l)&t.__digit(l));for(;l<o;l++)e.__setDigit(l,0);return e}static __absoluteAndNot(_,t,e=null){const n=_.length,g=t.length;let s=g;n<g&&(s=n);let o=n;null===e?e=new JSBI(o,!1):o=e.length;let l=0;for(;l<s;l++)e.__setDigit(l,_.__digit(l)&~t.__digit(l));for(;l<n;l++)e.__setDigit(l,_.__digit(l));for(;l<o;l++)e.__setDigit(l,0);return e}static __absoluteOr(_,t,e=null){let n=_.length,g=t.length,s=g;if(n<g){s=n;const i=_,e=n;_=t,n=g,t=i,g=e;}let o=n;null===e?e=new JSBI(o,!1):o=e.length;let l=0;for(;l<s;l++)e.__setDigit(l,_.__digit(l)|t.__digit(l));for(;l<n;l++)e.__setDigit(l,_.__digit(l));for(;l<o;l++)e.__setDigit(l,0);return e}static __absoluteXor(_,t,e=null){let n=_.length,g=t.length,s=g;if(n<g){s=n;const i=_,e=n;_=t,n=g,t=i,g=e;}let o=n;null===e?e=new JSBI(o,!1):o=e.length;let l=0;for(;l<s;l++)e.__setDigit(l,_.__digit(l)^t.__digit(l));for(;l<n;l++)e.__setDigit(l,_.__digit(l));for(;l<o;l++)e.__setDigit(l,0);return e}static __absoluteCompare(_,t){const e=_.length-t.length;if(0!=e)return e;let n=_.length-1;for(;0<=n&&_.__digit(n)===t.__digit(n);)n--;return 0>n?0:_.__unsignedDigit(n)>t.__unsignedDigit(n)?1:-1}static __multiplyAccumulate(_,t,e,n){if(0===t)return;const g=32767&t,s=t>>>15;let o=0,l=0;for(let r,a=0;a<_.length;a++,n++){r=e.__digit(n);const i=_.__digit(a),t=32767&i,u=i>>>15,d=JSBI.__imul(t,g),h=JSBI.__imul(t,s),m=JSBI.__imul(u,g),b=JSBI.__imul(u,s);r+=l+d+o,o=r>>>30,r&=1073741823,r+=((32767&h)<<15)+((32767&m)<<15),o+=r>>>30,l=b+(h>>>15)+(m>>>15),e.__setDigit(n,1073741823&r);}for(;0!=o||0!==l;n++){let i=e.__digit(n);i+=o+l,l=0,o=i>>>30,e.__setDigit(n,1073741823&i);}}static __internalMultiplyAdd(_,t,e,g,s){let o=e,l=0;for(let n=0;n<g;n++){const i=_.__digit(n),e=JSBI.__imul(32767&i,t),g=JSBI.__imul(i>>>15,t),a=e+((32767&g)<<15)+l+o;o=a>>>30,l=g>>>15,s.__setDigit(n,1073741823&a);}if(s.length>g)for(s.__setDigit(g++,o+l);g<s.length;)s.__setDigit(g++,0);else if(0!==o+l)throw new Error("implementation bug")}__inplaceMultiplyAdd(i,_,t){t>this.length&&(t=this.length);const e=32767&i,n=i>>>15;let g=0,s=_;for(let o=0;o<t;o++){const i=this.__digit(o),_=32767&i,t=i>>>15,l=JSBI.__imul(_,e),r=JSBI.__imul(_,n),a=JSBI.__imul(t,e),u=JSBI.__imul(t,n);let d=s+l+g;g=d>>>30,d&=1073741823,d+=((32767&r)<<15)+((32767&a)<<15),g+=d>>>30,s=u+(r>>>15)+(a>>>15),this.__setDigit(o,1073741823&d);}if(0!=g||0!==s)throw new Error("implementation bug")}static __absoluteDivSmall(_,t,e=null){null===e&&(e=new JSBI(_.length,!1));let n=0;for(let g,s=2*_.length-1;0<=s;s-=2){g=(n<<15|_.__halfDigit(s))>>>0;const i=0|g/t;n=0|g%t,g=(n<<15|_.__halfDigit(s-1))>>>0;const o=0|g/t;n=0|g%t,e.__setDigit(s>>>1,i<<15|o);}return e}static __absoluteModSmall(_,t){let e=0;for(let n=2*_.length-1;0<=n;n--){const i=(e<<15|_.__halfDigit(n))>>>0;e=0|i%t;}return e}static __absoluteDivLarge(i,_,t,e){const g=_.__halfDigitLength(),n=_.length,s=i.__halfDigitLength()-g;let o=null;t&&(o=new JSBI(s+2>>>1,!1),o.__initializeDigits());const l=new JSBI(g+2>>>1,!1);l.__initializeDigits();const r=JSBI.__clz15(_.__halfDigit(g-1));0<r&&(_=JSBI.__specialLeftShift(_,r,0));const a=JSBI.__specialLeftShift(i,r,1),u=_.__halfDigit(g-1);let d=0;for(let r,h=s;0<=h;h--){r=32767;const i=a.__halfDigit(h+g);if(i!==u){const t=(i<<15|a.__halfDigit(h+g-1))>>>0;r=0|t/u;let e=0|t%u;const n=_.__halfDigit(g-2),s=a.__halfDigit(h+g-2);for(;JSBI.__imul(r,n)>>>0>(e<<16|s)>>>0&&(r--,e+=u,!(32767<e)););}JSBI.__internalMultiplyAdd(_,r,0,n,l);let e=a.__inplaceSub(l,h,g+1);0!==e&&(e=a.__inplaceAdd(_,h,g),a.__setHalfDigit(h+g,32767&a.__halfDigit(h+g)+e),r--),t&&(1&h?d=r<<15:o.__setDigit(h>>>1,d|r));}if(e)return a.__inplaceRightShift(r),t?{quotient:o,remainder:a}:a;if(t)return o;throw new Error("unreachable")}static __clz15(i){return JSBI.__clz30(i)-15}__inplaceAdd(_,t,e){let n=0;for(let g=0;g<e;g++){const i=this.__halfDigit(t+g)+_.__halfDigit(g)+n;n=i>>>15,this.__setHalfDigit(t+g,32767&i);}return n}__inplaceSub(_,t,e){let n=0;if(1&t){t>>=1;let g=this.__digit(t),s=32767&g,o=0;for(;o<e-1>>>1;o++){const i=_.__digit(o),e=(g>>>15)-(32767&i)-n;n=1&e>>>15,this.__setDigit(t+o,(32767&e)<<15|32767&s),g=this.__digit(t+o+1),s=(32767&g)-(i>>>15)-n,n=1&s>>>15;}const i=_.__digit(o),l=(g>>>15)-(32767&i)-n;n=1&l>>>15,this.__setDigit(t+o,(32767&l)<<15|32767&s);if(t+o+1>=this.length)throw new RangeError("out of bounds");0==(1&e)&&(g=this.__digit(t+o+1),s=(32767&g)-(i>>>15)-n,n=1&s>>>15,this.__setDigit(t+_.length,1073709056&g|32767&s));}else {t>>=1;let g=0;for(;g<_.length-1;g++){const i=this.__digit(t+g),e=_.__digit(g),s=(32767&i)-(32767&e)-n;n=1&s>>>15;const o=(i>>>15)-(e>>>15)-n;n=1&o>>>15,this.__setDigit(t+g,(32767&o)<<15|32767&s);}const i=this.__digit(t+g),s=_.__digit(g),o=(32767&i)-(32767&s)-n;n=1&o>>>15;let l=0;0==(1&e)&&(l=(i>>>15)-(s>>>15)-n,n=1&l>>>15),this.__setDigit(t+g,(32767&l)<<15|32767&o);}return n}__inplaceRightShift(_){if(0===_)return;let t=this.__digit(0)>>>_;const e=this.length-1;for(let n=0;n<e;n++){const i=this.__digit(n+1);this.__setDigit(n,1073741823&i<<30-_|t),t=i>>>_;}this.__setDigit(e,t);}static __specialLeftShift(_,t,e){const g=_.length,n=new JSBI(g+e,!1);if(0===t){for(let t=0;t<g;t++)n.__setDigit(t,_.__digit(t));return 0<e&&n.__setDigit(g,0),n}let s=0;for(let o=0;o<g;o++){const i=_.__digit(o);n.__setDigit(o,1073741823&i<<t|s),s=i>>>30-t;}return 0<e&&n.__setDigit(g,s),n}static __leftShiftByAbsolute(_,i){const t=JSBI.__toShiftAmount(i);if(0>t)throw new RangeError("BigInt too big");const e=0|t/30,n=t%30,g=_.length,s=0!==n&&0!=_.__digit(g-1)>>>30-n,o=g+e+(s?1:0),l=new JSBI(o,_.sign);if(0===n){let t=0;for(;t<e;t++)l.__setDigit(t,0);for(;t<o;t++)l.__setDigit(t,_.__digit(t-e));}else {let t=0;for(let _=0;_<e;_++)l.__setDigit(_,0);for(let s=0;s<g;s++){const i=_.__digit(s);l.__setDigit(s+e,1073741823&i<<n|t),t=i>>>30-n;}if(s)l.__setDigit(g+e,t);else if(0!==t)throw new Error("implementation bug")}return l.__trim()}static __rightShiftByAbsolute(_,i){const t=_.length,e=_.sign,n=JSBI.__toShiftAmount(i);if(0>n)return JSBI.__rightShiftByMaximum(e);const g=0|n/30,s=n%30;let o=t-g;if(0>=o)return JSBI.__rightShiftByMaximum(e);let l=!1;if(e){if(0!=(_.__digit(g)&(1<<s)-1))l=!0;else for(let t=0;t<g;t++)if(0!==_.__digit(t)){l=!0;break}}if(l&&0===s){const i=_.__digit(t-1);0==~i&&o++;}let r=new JSBI(o,e);if(0===s){r.__setDigit(o-1,0);for(let e=g;e<t;e++)r.__setDigit(e-g,_.__digit(e));}else {let e=_.__digit(g)>>>s;const n=t-g-1;for(let t=0;t<n;t++){const i=_.__digit(t+g+1);r.__setDigit(t,1073741823&i<<30-s|e),e=i>>>s;}r.__setDigit(n,e);}return l&&(r=JSBI.__absoluteAddOne(r,!0,r)),r.__trim()}static __rightShiftByMaximum(i){return i?JSBI.__oneDigit(1,!0):JSBI.__zero()}static __toShiftAmount(i){if(1<i.length)return -1;const _=i.__unsignedDigit(0);return _>JSBI.__kMaxLengthBits?-1:_}static __toPrimitive(i,_="default"){if("object"!=typeof i)return i;if(i.constructor===JSBI)return i;if("undefined"!=typeof Symbol&&"symbol"==typeof Symbol.toPrimitive){const t=i[Symbol.toPrimitive];if(t){const i=t(_);if("object"!=typeof i)return i;throw new TypeError("Cannot convert object to primitive value")}}const t=i.valueOf;if(t){const _=t.call(i);if("object"!=typeof _)return _}const e=i.toString;if(e){const _=e.call(i);if("object"!=typeof _)return _}throw new TypeError("Cannot convert object to primitive value")}static __toNumeric(i){return JSBI.__isBigInt(i)?i:+i}static __isBigInt(i){return "object"==typeof i&&null!==i&&i.constructor===JSBI}static __truncateToNBits(i,_){const t=0|(i+29)/30,e=new JSBI(t,_.sign),n=t-1;for(let t=0;t<n;t++)e.__setDigit(t,_.__digit(t));let g=_.__digit(n);if(0!=i%30){const _=32-i%30;g=g<<_>>>_;}return e.__setDigit(n,g),e.__trim()}static __truncateAndSubFromPowerOfTwo(_,t,e){var n=Math.min;const g=0|(_+29)/30,s=new JSBI(g,e);let o=0;const l=g-1;let a=0;for(const i=n(l,t.length);o<i;o++){const i=0-t.__digit(o)-a;a=1&i>>>30,s.__setDigit(o,1073741823&i);}for(;o<l;o++)s.__setDigit(o,0|1073741823&-a);let u=l<t.length?t.__digit(l):0;const d=_%30;let h;if(0==d)h=0-u-a,h&=1073741823;else {const i=32-d;u=u<<i>>>i;const _=1<<32-i;h=_-u-a,h&=_-1;}return s.__setDigit(l,h),s.__trim()}__digit(_){return this[_]}__unsignedDigit(_){return this[_]>>>0}__setDigit(_,i){this[_]=0|i;}__setDigitGrow(_,i){this[_]=0|i;}__halfDigitLength(){const i=this.length;return 32767>=this.__unsignedDigit(i-1)?2*i-1:2*i}__halfDigit(_){return 32767&this[_>>>1]>>>15*(1&_)}__setHalfDigit(_,i){const t=_>>>1,e=this.__digit(t),n=1&_?32767&e|i<<15:1073709056&e|32767&i;this.__setDigit(t,n);}static __digitPow(i,_){let t=1;for(;0<_;)1&_&&(t*=i),_>>>=1,i*=i;return t}static __isOneDigitInt(i){return (1073741823&i)===i}}JSBI.__kMaxLength=33554432,JSBI.__kMaxLengthBits=JSBI.__kMaxLength<<5,JSBI.__kMaxBitsPerChar=[0,0,32,51,64,75,83,90,96,102,107,111,115,119,122,126,128,131,134,136,139,141,143,145,147,149,151,153,154,156,158,159,160,162,163,165,166],JSBI.__kBitsPerCharTableShift=5,JSBI.__kBitsPerCharTableMultiplier=1<<JSBI.__kBitsPerCharTableShift,JSBI.__kConversionChars=["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],JSBI.__kBitConversionBuffer=new ArrayBuffer(8),JSBI.__kBitConversionDouble=new Float64Array(JSBI.__kBitConversionBuffer),JSBI.__kBitConversionInts=new Int32Array(JSBI.__kBitConversionBuffer),JSBI.__clz30=Math.clz32?function(i){return Math.clz32(i)-2}:function(i){return 0===i?30:0|29-(0|Math.log(i>>>0)/Math.LN2)},JSBI.__imul=Math.imul||function(i,_){return 0|i*_};
 
-  const t={};function MakeIntrinsicClass(e,t){Object.defineProperty(e.prototype,Symbol.toStringTag,{value:t,writable:!1,enumerable:!1,configurable:!0});for(const t of Object.getOwnPropertyNames(e)){const r=Object.getOwnPropertyDescriptor(e,t);r.configurable&&r.enumerable&&(r.enumerable=!1,Object.defineProperty(e,t,r));}for(const t of Object.getOwnPropertyNames(e.prototype)){const r=Object.getOwnPropertyDescriptor(e.prototype,t);r.configurable&&r.enumerable&&(r.enumerable=!1,Object.defineProperty(e.prototype,t,r));}DefineIntrinsic(t,e),DefineIntrinsic(`${t}.prototype`,e.prototype);}function DefineIntrinsic(e,r){const o=`%${e}%`;if(void 0!==t[o])throw new Error(`intrinsic ${e} already exists`);t[o]=r;}function GetIntrinsic(e){return t[e]}const r="slot-epochNanoSeconds",o="slot-timezone-identifier",n="slot-year",a="slot-month",i="slot-day",s="slot-hour",l="slot-minute",d="slot-second",m="slot-millisecond",c="slot-microsecond",h="slot-nanosecond",u="slot-calendar",T="slot-cached-instant",p="slot-time-zone",f="slot-years",y="slot-months",S="slot-weeks",w="slot-days",g="slot-hours",I="slot-minutes",D="slot-seconds",G="slot-milliseconds",v="slot-microseconds",O="slot-nanoseconds",C="slot-calendar-identifier",E=new WeakMap;function CreateSlots(e){E.set(e,Object.create(null));}function GetSlots(e){return E.get(e)}function HasSlot(e,...t){if(!e||"object"!=typeof e)return !1;const r=GetSlots(e);return !!r&&t.reduce(((e,t)=>e&&t in r),!0)}function GetSlot(e,t){const r=GetSlots(e)[t];if(void 0===r)throw new TypeError(`Missing internal slot ${t}`);return r}function SetSlot(e,t,r){GetSlots(e)[t]=r;}const b=/\.[-A-Za-z_]|\.\.[-A-Za-z._]{1,12}|\.[-A-Za-z_][-A-Za-z._]{0,12}|[A-Za-z_][-A-Za-z._]{0,13}/,M=new RegExp(`(?:(?:${b.source})(?:\\/(?:${b.source}))*|Etc/GMT[-+]\\d{1,2}|${/(?:[+\u2212-][0-2][0-9](?::?[0-5][0-9](?::?[0-5][0-9](?:[.,]\d{1,9})?)?)?)/.source})`),R=/[A-Za-z0-9]{3,8}/,Z=new RegExp(`(?:${R.source}(?:-${R.source})*)`),P=/(?:[+\u2212-]\d{6}|\d{4})/,F=/(?:0[1-9]|1[0-2])/,Y=/(?:0[1-9]|[12]\d|3[01])/,j=new RegExp(`(${P.source})(?:-(${F.source})-(${Y.source})|(${F.source})(${Y.source}))`),$=/(\d{2})(?::(\d{2})(?::(\d{2})(?:[.,](\d{1,9}))?)?|(\d{2})(?:(\d{2})(?:[.,](\d{1,9}))?)?)?/,B=/([+\u2212-])([01][0-9]|2[0-3])(?::?([0-5][0-9])(?::?([0-5][0-9])(?:[.,](\d{1,9}))?)?)?/,N=new RegExp(`(?:([zZ])|(?:${B.source})?)(?:\\[(${M.source})\\])?`),k=new RegExp(`\\[u-ca=(${Z.source})\\]`),A=new RegExp(`^${j.source}(?:(?:T|\\s+)${$.source})?${N.source}(?:${k.source})?$`,"i"),U=new RegExp(`^T?${$.source}(?:${N.source})?(?:${k.source})?$`,"i"),L$1=new RegExp(`^(${P.source})-?(${F.source})$`),x=new RegExp(`^(?:--)?(${F.source})-?(${Y.source})$`),H=/(\d+)(?:[.,](\d{1,9}))?/,q=new RegExp(`(?:${H.source}H)?(?:${H.source}M)?(?:${H.source}S)?`),W=new RegExp(`^([+−-])?P${/(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)W)?(?:(\d+)D)?/.source}(?:T(?!$)${q.source})?$`,"i"),z=Array.prototype.includes,_=Array.prototype.push,J=globalThis.Intl.DateTimeFormat,V=Math.min,X=Math.max,K=Math.abs,Q=Math.floor,ee=Math.sign,te=Math.trunc,re=Number.isNaN,oe=Number.isFinite,ne=Number,ae=String,ie=Number.MAX_SAFE_INTEGER,se=Object.assign,le=Object.create,de=Object.getOwnPropertyDescriptor,me=Object.is,ce=Reflect.apply,he=JSBI.BigInt(0),ue=JSBI.BigInt(1),Te=JSBI.BigInt(60),pe=JSBI.BigInt(1e3),fe=JSBI.BigInt(1e6),ye=JSBI.BigInt(1e9),Se=JSBI.BigInt(-1),we=JSBI.multiply(JSBI.BigInt(86400),ye),ge=JSBI.multiply(JSBI.BigInt(-86400),JSBI.BigInt(1e17)),Ie=JSBI.multiply(JSBI.BigInt(86400),JSBI.BigInt(1e17)),De=JSBI.multiply(JSBI.BigInt(-388152),JSBI.BigInt(1e13)),Ge=JSBI.multiply(we,JSBI.BigInt(3660)),ve=JSBI.multiply(we,JSBI.BigInt(366)),Oe=JSBI.multiply(we,JSBI.BigInt(14)),Ce=["iso8601","hebrew","islamic","islamic-umalqura","islamic-tbla","islamic-civil","islamic-rgsa","islamicc","persian","ethiopic","ethioaa","coptic","chinese","dangi","roc","indian","buddhist","japanese","gregory"];function IsInteger(e){if("number"!=typeof e||!oe(e))return !1;const t=K(e);return Q(t)===t}function IsObject(e){return "object"==typeof e&&null!==e||"function"==typeof e}function ToNumber(e){if("bigint"==typeof e)throw new TypeError("Cannot convert BigInt to number");return ne(e)}function ToInteger(e){const t=ToNumber(e);if(re(t))return 0;const r=te(t);return 0===t?0:r}function ToString(e){if("symbol"==typeof e)throw new TypeError("Cannot convert a Symbol value to a String");return ae(e)}function ToIntegerThrowOnInfinity(e){const t=ToInteger(e);if(!oe(t))throw new RangeError("infinity is out of range");return t}function ToPositiveInteger(e,t){const r=ToInteger(e);if(!oe(r))throw new RangeError("infinity is out of range");if(r<1){if(void 0!==t)throw new RangeError(`property '${t}' cannot be a a number less than one`);throw new RangeError("Cannot convert a number less than one to a positive integer")}return r}function ToIntegerWithoutRounding(e){const t=ToNumber(e);if(re(t))return 0;if(!oe(t))throw new RangeError("infinity is out of range");if(!IsInteger(t))throw new RangeError(`unsupported fractional value ${t}`);return ToInteger(t)}function divmod(t,r){return {quotient:JSBI.divide(t,r),remainder:JSBI.remainder(t,r)}}function abs(t){return JSBI.lessThan(t,he)?JSBI.multiply(t,Se):t}function ArrayPush(e,...t){return _.apply(e,t),e}const Ee=new Map([["year",ToIntegerThrowOnInfinity],["month",ToPositiveInteger],["monthCode",ToString],["day",ToPositiveInteger],["hour",ToIntegerThrowOnInfinity],["minute",ToIntegerThrowOnInfinity],["second",ToIntegerThrowOnInfinity],["millisecond",ToIntegerThrowOnInfinity],["microsecond",ToIntegerThrowOnInfinity],["nanosecond",ToIntegerThrowOnInfinity],["years",ToIntegerWithoutRounding],["months",ToIntegerWithoutRounding],["weeks",ToIntegerWithoutRounding],["days",ToIntegerWithoutRounding],["hours",ToIntegerWithoutRounding],["minutes",ToIntegerWithoutRounding],["seconds",ToIntegerWithoutRounding],["milliseconds",ToIntegerWithoutRounding],["microseconds",ToIntegerWithoutRounding],["nanoseconds",ToIntegerWithoutRounding],["era",ToString],["eraYear",ToInteger],["offset",ToString]]),be=new Map([["hour",0],["minute",0],["second",0],["millisecond",0],["microsecond",0],["nanosecond",0]]),Me=[["years","year","date"],["months","month","date"],["weeks","week","date"],["days","day","date"],["hours","hour","time"],["minutes","minute","time"],["seconds","second","time"],["milliseconds","millisecond","time"],["microseconds","microsecond","time"],["nanoseconds","nanosecond","time"]],Re=new Map(Me.map((e=>[e[0],e[1]]))),Ze=new Map(Me.map((([e,t])=>[t,e]))),Pe=Me.map((([,e])=>e)),Fe=Array.from(Re.keys()).sort(),Ye=new Map;function getIntlDateTimeFormatEnUsForTimeZone(e){let t=Ye.get(e);return void 0===t&&(t=new J("en-us",{timeZone:ae(e),hour12:!1,era:"short",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"}),Ye.set(e,t)),t}function IsTemporalInstant(e){return HasSlot(e,r)&&!HasSlot(e,p,u)}function IsTemporalTimeZone(e){return HasSlot(e,o)}function IsTemporalCalendar(e){return HasSlot(e,C)}function IsTemporalDuration(e){return HasSlot(e,f,y,w,g,I,D,G,v,O)}function IsTemporalDate(e){return HasSlot(e,"slot-date-brand")}function IsTemporalTime(e){return HasSlot(e,s,l,d,m,c,h)&&!HasSlot(e,n,a,i)}function IsTemporalDateTime(e){return HasSlot(e,n,a,i,s,l,d,m,c,h)}function IsTemporalYearMonth(e){return HasSlot(e,"slot-year-month-brand")}function IsTemporalMonthDay(e){return HasSlot(e,"slot-month-day-brand")}function IsTemporalZonedDateTime(e){return HasSlot(e,r,p,u)}function RejectObjectWithCalendarOrTimeZone(e){if(HasSlot(e,u)||HasSlot(e,p))throw new TypeError("with() does not support a calendar or timeZone property");if(void 0!==e.calendar)throw new TypeError("with() does not support a calendar property");if(void 0!==e.timeZone)throw new TypeError("with() does not support a timeZone property")}function ParseTemporalTimeZone(e){let{ianaName:t,offset:r,z:o}=function ParseTemporalTimeZoneString(e){try{let t=GetCanonicalTimeZoneIdentifier(e);if(t)return {ianaName:t.toString()}}catch{}try{const t=ParseISODateTime(e);if(t.z||t.offset||t.ianaName)return t}catch{}throw new RangeError(`Invalid time zone: ${e}`)}(e);return t||(o?"UTC":r)}function FormatCalendarAnnotation(e,t){return "never"===t||"auto"===t&&"iso8601"===e?"":`[u-ca=${e}]`}function ParseISODateTime(e){const t=A.exec(e);if(!t)throw new RangeError(`invalid ISO 8601 string: ${e}`);let r=t[1];if("−"===r[0]&&(r=`-${r.slice(1)}`),"-000000"===r)throw new RangeError(`invalid ISO 8601 string: ${e}`);const o=ToInteger(r),n=ToInteger(t[2]||t[4]),a=ToInteger(t[3]||t[5]),i=ToInteger(t[6]),s=void 0!==t[6],l=ToInteger(t[7]||t[10]);let d=ToInteger(t[8]||t[11]);60===d&&(d=59);const m=(t[9]||t[12])+"000000000",c=ToInteger(m.slice(0,3)),h=ToInteger(m.slice(3,6)),u=ToInteger(m.slice(6,9));let T,p=!1;if(t[13])T=void 0,p=!0;else if(t[14]&&t[15]){const e="-"===t[14]||"−"===t[14]?"-":"+",r=t[15]||"00",o=t[16]||"00",n=t[17]||"00";let a=t[18]||"0";if(T=`${e}${r}:${o}`,+a){for(;a.endsWith("0");)a=a.slice(0,-1);T+=`:${n}.${a}`;}else +n&&(T+=`:${n}`);"-00:00"===T&&(T="+00:00");}let f=t[19];if(f)try{f=GetCanonicalTimeZoneIdentifier(f).toString();}catch{}const y=t[20];return RejectDateTime(o,n,a,i,l,d,c,h,u),{year:o,month:n,day:a,hasTime:s,hour:i,minute:l,second:d,millisecond:c,microsecond:h,nanosecond:u,ianaName:f,offset:T,z:p,calendar:y}}function ParseTemporalYearMonthString(e){const t=L$1.exec(e);let r,o,n,a;if(t){let a=t[1];if("−"===a[0]&&(a=`-${a.slice(1)}`),"-000000"===a)throw new RangeError(`invalid ISO 8601 string: ${e}`);r=ToInteger(a),o=ToInteger(t[2]),n=t[3];}else {let t;if(({year:r,month:o,calendar:n,day:a,z:t}=ParseISODateTime(e)),t)throw new RangeError("Z designator not supported for PlainYearMonth")}return {year:r,month:o,calendar:n,referenceISODay:a}}function ParseTemporalMonthDayString(e){const t=x.exec(e);let r,o,n,a;if(t)r=ToInteger(t[1]),o=ToInteger(t[2]);else {let t;if(({month:r,day:o,calendar:n,year:a,z:t}=ParseISODateTime(e)),t)throw new RangeError("Z designator not supported for PlainMonthDay")}return {month:r,day:o,calendar:n,referenceISOYear:a}}function ParseTemporalDurationString(e){const t=W.exec(e);if(!t)throw new RangeError(`invalid duration: ${e}`);if(t.slice(2).every((e=>void 0===e)))throw new RangeError(`invalid duration: ${e}`);const r="-"===t[1]||"−"===t[1]?-1:1,o=ToInteger(t[2])*r,n=ToInteger(t[3])*r,a=ToInteger(t[4])*r,i=ToInteger(t[5])*r,s=ToInteger(t[6])*r;let l=t[7],d=ToInteger(t[8])*r,m=t[9],c=ToInteger(t[10])*r;const h=t[11]+"000000000";let u=ToInteger(h.slice(0,3))*r,T=ToInteger(h.slice(3,6))*r,p=ToInteger(h.slice(6,9))*r;return l=l?r*ToInteger(l)/10**l.length:0,m=m?r*ToInteger(m)/10**m.length:0,({minutes:d,seconds:c,milliseconds:u,microseconds:T,nanoseconds:p}=function DurationHandleFractions(e,t,r,o,n,a,i){let s=e,l=t,d=r,m=o,c=n,h=a,u=i;if(0!==s){[l,d,m,c,h,u].forEach((e=>{if(0!==e)throw new RangeError("only the smallest unit can be fractional")}));const e=60*s;l=te(e),d=e%1;}if(0!==d){[m,c,h,u].forEach((e=>{if(0!==e)throw new RangeError("only the smallest unit can be fractional")}));const e=60*d;m=te(e);const t=e%1;if(0!==t){const e=1e3*t;c=te(e);const r=e%1;if(0!==r){const e=1e3*r;h=te(e);const t=e%1;if(0!==t){u=te(1e3*t);}}}}return {minutes:l,seconds:m,milliseconds:c,microseconds:h,nanoseconds:u}}(l,d,m,c,u,T,p)),RejectDuration(o,n,a,i,s,d,c,u,T,p),{years:o,months:n,weeks:a,days:i,hours:s,minutes:d,seconds:c,milliseconds:u,microseconds:T,nanoseconds:p}}function ParseTemporalInstant(e){let{year:t,month:r,day:o,hour:n,minute:a,second:i,millisecond:s,microsecond:l,nanosecond:d,offset:m,z:c}=function ParseTemporalInstantString(e){const t=ParseISODateTime(e);if(!t.z&&!t.offset)throw new RangeError("Temporal.Instant requires a time zone offset");return t}(e);if(!c&&!m)throw new RangeError("Temporal.Instant requires a time zone offset");const h=c?0:ParseTimeZoneOffsetString(m);({year:t,month:r,day:o,hour:n,minute:a,second:i,millisecond:s,microsecond:l,nanosecond:d}=BalanceISODateTime(t,r,o,n,a,i,s,l,d-h));const u=GetEpochFromISOParts(t,r,o,n,a,i,s,l,d);if(null===u)throw new RangeError("DateTime outside of supported range");return u}function RegulateISODate(e,t,r,o){let n=e,a=t,i=r;switch(o){case"reject":RejectISODate(n,a,i);break;case"constrain":({year:n,month:a,day:i}=ConstrainISODate(n,a,i));}return {year:n,month:a,day:i}}function RegulateTime(e,t,r,o,n,a,i){let s=e,l=t,d=r,m=o,c=n,h=a;switch(i){case"reject":RejectTime(s,l,d,m,c,h);break;case"constrain":({hour:s,minute:l,second:d,millisecond:m,microsecond:c,nanosecond:h}=function ConstrainTime(e,t,r,o,n,a){const i=ConstrainToRange(e,0,23),s=ConstrainToRange(t,0,59),l=ConstrainToRange(r,0,59),d=ConstrainToRange(o,0,999),m=ConstrainToRange(n,0,999),c=ConstrainToRange(a,0,999);return {hour:i,minute:s,second:l,millisecond:d,microsecond:m,nanosecond:c}}(s,l,d,m,c,h));}return {hour:s,minute:l,second:d,millisecond:m,microsecond:c,nanosecond:h}}function ToTemporalDurationRecord(e){if(!IsObject(e))return ParseTemporalDurationString(ToString(e));if(IsTemporalDuration(e))return {years:GetSlot(e,f),months:GetSlot(e,y),weeks:GetSlot(e,S),days:GetSlot(e,w),hours:GetSlot(e,g),minutes:GetSlot(e,I),seconds:GetSlot(e,D),milliseconds:GetSlot(e,G),microseconds:GetSlot(e,v),nanoseconds:GetSlot(e,O)};const t={years:0,months:0,weeks:0,days:0,hours:0,minutes:0,seconds:0,milliseconds:0,microseconds:0,nanoseconds:0};let r=function ToTemporalPartialDurationRecord(e){if(!IsObject(e))throw new TypeError("invalid duration-like");const t={years:void 0,months:void 0,weeks:void 0,days:void 0,hours:void 0,minutes:void 0,seconds:void 0,milliseconds:void 0,microseconds:void 0,nanoseconds:void 0};let r=!1;for(const o of Fe){const n=e[o];void 0!==n&&(r=!0,t[o]=ToIntegerWithoutRounding(n));}if(!r)throw new TypeError("invalid duration-like");return t}(e);for(const e of Fe){const o=r[e];void 0!==o&&(t[e]=o);}let{years:o,months:n,weeks:a,days:i,hours:s,minutes:l,seconds:d,milliseconds:m,microseconds:c,nanoseconds:h}=t;return RejectDuration(o,n,a,i,s,l,d,m,c,h),{years:o,months:n,weeks:a,days:i,hours:s,minutes:l,seconds:d,milliseconds:m,microseconds:c,nanoseconds:h}}function ToTemporalOverflow(e){return void 0===e?"constrain":GetOption(e,"overflow",["constrain","reject"],"constrain")}function ToTemporalDisambiguation(e){return void 0===e?"compatible":GetOption(e,"disambiguation",["compatible","earlier","later","reject"],"compatible")}function ToTemporalRoundingMode(e,t){return GetOption(e,"roundingMode",["ceil","floor","trunc","halfExpand"],t)}function NegateTemporalRoundingMode(e){switch(e){case"ceil":return "floor";case"floor":return "ceil";default:return e}}function ToTemporalOffset(e,t){return void 0===e?t:GetOption(e,"offset",["prefer","use","ignore","reject"],t)}function ToShowCalendarOption(e){return GetOption(e,"calendarName",["auto","always","never"],"auto")}function ToTemporalRoundingIncrement(e,t,r){let o=1/0;void 0!==t&&(o=t),r||void 0===t||(o=t>1?t-1:1);const n=function GetNumberOption(e,t,r,o,n){let a=e[t];if(void 0===a)return n;const i=ToNumber(a);if(re(i)||i<r||i>o)throw new RangeError(`${String(t)} must be between ${r} and ${o}, not ${i}`);return Q(i)}(e,"roundingIncrement",1,o,1);if(void 0!==t&&t%n!=0)throw new RangeError(`Rounding increment must divide evenly into ${t}`);return n}function ToTemporalDateTimeRoundingIncrement(e,t){return ToTemporalRoundingIncrement(e,{year:void 0,month:void 0,week:void 0,day:void 0,hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[t],!1)}function ToSecondsStringPrecision(e){const t=GetTemporalUnit(e,"smallestUnit","time",void 0);if("hour"===t){const e=Me.reduce(((e,[t,r,o])=>("time"===o&&"hour"!==r&&e.push(r,t),e)),[]);throw new RangeError(`smallestUnit must be one of ${e.join(", ")}, not ${t}`)}switch(t){case"minute":return {precision:"minute",unit:"minute",increment:1};case"second":return {precision:0,unit:"second",increment:1};case"millisecond":return {precision:3,unit:"millisecond",increment:1};case"microsecond":return {precision:6,unit:"microsecond",increment:1};case"nanosecond":return {precision:9,unit:"nanosecond",increment:1}}let r=e.fractionalSecondDigits;if(void 0===r&&(r="auto"),"number"!=typeof r){const e=ToString(r);if("auto"===e)return {precision:"auto",unit:"nanosecond",increment:1};throw new RangeError(`fractionalSecondDigits must be 'auto' or 0 through 9, not ${e}`)}if(re(r)||r<0||r>9)throw new RangeError(`fractionalSecondDigits must be 'auto' or 0 through 9, not ${r}`);const o=Q(r);switch(o){case 0:return {precision:o,unit:"second",increment:1};case 1:case 2:case 3:return {precision:o,unit:"millisecond",increment:10**(3-o)};case 4:case 5:case 6:return {precision:o,unit:"microsecond",increment:10**(6-o)};case 7:case 8:case 9:return {precision:o,unit:"nanosecond",increment:10**(9-o)};default:throw new RangeError(`fractionalSecondDigits must be 'auto' or 0 through 9, not ${r}`)}}const je=Symbol("~required~");function GetTemporalUnit(e,t,r,o,n=[]){const a=[];for(const[,e,t]of Me)"datetime"!==r&&r!==t||a.push(e);a.push(...n);let i=o;i===je?i=void 0:void 0!==i&&a.push(i);const s=[...a];for(const e of a){const t=Ze.get(e);void 0!==t&&s.push(t);}let l=GetOption(e,t,s,i);if(void 0===l&&o===je)throw new RangeError(`${t} is required`);return Re.has(l)?Re.get(l):l}function ToRelativeTemporalObject(e){const t=e.relativeTo;if(void 0===t)return t;let r,o,n,a,i,s,l,d,m,c,h,u,T="option",p=!1;if(IsObject(t)){if(IsTemporalZonedDateTime(t)||IsTemporalDate(t))return t;if(IsTemporalDateTime(t))return TemporalDateTimeToDate(t);c=GetTemporalCalendarWithISODefault(t);const e=PrepareTemporalFields(t,CalendarFields(c,["day","hour","microsecond","millisecond","minute","month","monthCode","nanosecond","second","year"]),[]),p=le(null);p.overflow="constrain",({year:r,month:o,day:n,hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m}=InterpretTemporalDateTimeFields(c,e,p)),u=t.offset,void 0===u&&(T="wall"),h=t.timeZone;}else {let e,f;(({year:r,month:o,day:n,hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m,calendar:c,ianaName:e,offset:u,z:f}=ParseISODateTime(ToString(t)))),e&&(h=e),f?T="exact":u||(T="wall"),c||(c=GetISO8601Calendar()),c=ToTemporalCalendar(c),p=!0;}if(void 0!==h){h=ToTemporalTimeZone(h);let e=0;"option"===T&&(e=ParseTimeZoneOffsetString(ToString(u)));return CreateTemporalZonedDateTime(InterpretISODateTimeOffset(r,o,n,a,i,s,l,d,m,T,e,h,"compatible","reject",p),h,c)}return CreateTemporalDate(r,o,n,c)}function DefaultTemporalLargestUnit(e,t,r,o,n,a,i,s,l,d){for(const[m,c]of [["years",e],["months",t],["weeks",r],["days",o],["hours",n],["minutes",a],["seconds",i],["milliseconds",s],["microseconds",l],["nanoseconds",d]])if(0!==c)return Re.get(m);return "nanosecond"}function LargerOfTwoTemporalUnits(e,t){return Pe.indexOf(e)>Pe.indexOf(t)?t:e}function MergeLargestUnitOption(e,t){let r=e;return void 0===r&&(r=le(null)),se(le(null),r,{largestUnit:t})}function PrepareTemporalFields(e,t,r,{emptySourceErrorMessage:o}={emptySourceErrorMessage:"no supported properties found"}){const n=le(null);let a=!1;for(const o of t){let t=e[o];if(void 0!==t)a=!0,Ee.has(o)&&(t=Ee.get(o)(t)),n[o]=t;else if("partial"!==r){if(z.call(r,o))throw new TypeError(`required property '${o}' missing or undefined`);t=be.get(o),n[o]=t;}}if("partial"===r&&!a)throw new TypeError(o);if(void 0===n.era!=(void 0===n.eraYear))throw new RangeError("properties 'era' and 'eraYear' must be provided together");return n}function ToTemporalTimeRecord(e,t="complete"){const r=["hour","microsecond","millisecond","minute","nanosecond","second"],o=PrepareTemporalFields(e,r,"partial",{emptySourceErrorMessage:"invalid time-like"}),n={};for(const e of r){const r=de(o,e);void 0!==r?n[e]=r.value:"complete"===t&&(n[e]=0);}return n}function ToTemporalDate(e,t){let r=e;if(IsObject(r)){if(IsTemporalDate(r))return r;if(IsTemporalZonedDateTime(r)&&(ToTemporalOverflow(t),r=BuiltinTimeZoneGetPlainDateTimeFor(GetSlot(r,p),GetSlot(r,T),GetSlot(r,u))),IsTemporalDateTime(r))return ToTemporalOverflow(t),CreateTemporalDate(GetSlot(r,n),GetSlot(r,a),GetSlot(r,i),GetSlot(r,u));const e=GetTemporalCalendarWithISODefault(r);return CalendarDateFromFields(e,PrepareTemporalFields(r,CalendarFields(e,["day","month","monthCode","year"]),[]),t)}ToTemporalOverflow(t);const{year:o,month:s,day:l,calendar:d,z:m}=function ParseTemporalDateString(e){return ParseISODateTime(e)}(ToString(r));if(m)throw new RangeError("Z designator not supported for PlainDate");return new(GetIntrinsic("%Temporal.PlainDate%"))(o,s,l,d)}function InterpretTemporalDateTimeFields(e,t,r){let{hour:o,minute:s,second:l,millisecond:d,microsecond:m,nanosecond:c}=ToTemporalTimeRecord(t);const h=ToTemporalOverflow(r),u=CalendarDateFromFields(e,t,r),T=GetSlot(u,n),p=GetSlot(u,a),f=GetSlot(u,i);return ({hour:o,minute:s,second:l,millisecond:d,microsecond:m,nanosecond:c}=RegulateTime(o,s,l,d,m,c,h)),{year:T,month:p,day:f,hour:o,minute:s,second:l,millisecond:d,microsecond:m,nanosecond:c}}function ToTemporalDateTime(e,t){let r,o,s,l,d,m,c,h,f,y;if(IsObject(e)){if(IsTemporalDateTime(e))return e;if(IsTemporalZonedDateTime(e))return ToTemporalOverflow(t),BuiltinTimeZoneGetPlainDateTimeFor(GetSlot(e,p),GetSlot(e,T),GetSlot(e,u));if(IsTemporalDate(e))return ToTemporalOverflow(t),CreateTemporalDateTime(GetSlot(e,n),GetSlot(e,a),GetSlot(e,i),0,0,0,0,0,0,GetSlot(e,u));y=GetTemporalCalendarWithISODefault(e);const S=PrepareTemporalFields(e,CalendarFields(y,["day","hour","microsecond","millisecond","minute","month","monthCode","nanosecond","second","year"]),[]);({year:r,month:o,day:s,hour:l,minute:d,second:m,millisecond:c,microsecond:h,nanosecond:f}=InterpretTemporalDateTimeFields(y,S,t));}else {let n;if(ToTemporalOverflow(t),({year:r,month:o,day:s,hour:l,minute:d,second:m,millisecond:c,microsecond:h,nanosecond:f,calendar:y,z:n}=function ParseTemporalDateTimeString(e){return ParseISODateTime(e)}(ToString(e))),n)throw new RangeError("Z designator not supported for PlainDateTime");RejectDateTime(r,o,s,l,d,m,c,h,f),void 0===y&&(y=GetISO8601Calendar()),y=ToTemporalCalendar(y);}return CreateTemporalDateTime(r,o,s,l,d,m,c,h,f,y)}function ToTemporalDuration(e){if(IsTemporalDuration(e))return e;let{years:t,months:r,weeks:o,days:n,hours:a,minutes:i,seconds:s,milliseconds:l,microseconds:d,nanoseconds:m}=ToTemporalDurationRecord(e);return new(GetIntrinsic("%Temporal.Duration%"))(t,r,o,n,a,i,s,l,d,m)}function ToTemporalInstant(e){if(IsTemporalInstant(e))return e;if(IsTemporalZonedDateTime(e)){return new(GetIntrinsic("%Temporal.Instant%"))(GetSlot(e,r))}const t=ParseTemporalInstant(ToString(e));return new(GetIntrinsic("%Temporal.Instant%"))(t)}function ToTemporalMonthDay(e,t){let r=e;if(IsObject(r)){if(IsTemporalMonthDay(r))return r;let e,o;if(HasSlot(r,u))e=GetSlot(r,u),o=!1;else {let t=r.calendar;o=void 0===t,void 0===t&&(t=GetISO8601Calendar()),e=ToTemporalCalendar(t);}r=r;const n=PrepareTemporalFields(r,CalendarFields(e,["day","month","monthCode","year"]),[]);return o&&void 0!==n.month&&void 0===n.monthCode&&void 0===n.year&&(n.year=1972),CalendarMonthDayFromFields(e,n,t)}ToTemporalOverflow(t);let{month:o,day:n,referenceISOYear:a,calendar:i}=ParseTemporalMonthDayString(ToString(r)),s=i;if(void 0===s&&(s=GetISO8601Calendar()),s=ToTemporalCalendar(s),void 0===a)return RejectISODate(1972,o,n),CreateTemporalMonthDay(o,n,s);return CalendarMonthDayFromFields(s,CreateTemporalMonthDay(o,n,s,a))}function ToTemporalTime(e,t="constrain"){let r,o,n,a,i,f,y,S=e;if(IsObject(S)){if(IsTemporalTime(S))return S;if(IsTemporalZonedDateTime(S)&&(S=BuiltinTimeZoneGetPlainDateTimeFor(GetSlot(S,p),GetSlot(S,T),GetSlot(S,u))),IsTemporalDateTime(S)){return new(GetIntrinsic("%Temporal.PlainTime%"))(GetSlot(S,s),GetSlot(S,l),GetSlot(S,d),GetSlot(S,m),GetSlot(S,c),GetSlot(S,h))}if(y=GetTemporalCalendarWithISODefault(S),"iso8601"!==ToString(y))throw new RangeError("PlainTime can only have iso8601 calendar");(({hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:f}=ToTemporalTimeRecord(S))),({hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:f}=RegulateTime(r,o,n,a,i,f,t));}else if(({hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:f,calendar:y}=function ParseTemporalTimeString(e){const t=U.exec(e);let r,o,n,a,i,s,l;if(t){r=ToInteger(t[1]),o=ToInteger(t[2]||t[5]),n=ToInteger(t[3]||t[6]),60===n&&(n=59);const e=(t[4]||t[7])+"000000000";a=ToInteger(e.slice(0,3)),i=ToInteger(e.slice(3,6)),s=ToInteger(e.slice(6,9)),l=t[15];}else {let t,d;if(({hasTime:d,hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:s,calendar:l,z:t}=ParseISODateTime(e)),!d)throw new RangeError(`time is missing in string: ${e}`);if(t)throw new RangeError("Z designator not supported for PlainTime")}if(/[tT ][0-9][0-9]/.test(e))return {hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:s,calendar:l};try{const{month:t,day:r}=ParseTemporalMonthDayString(e);RejectISODate(1972,t,r);}catch{try{const{year:t,month:r}=ParseTemporalYearMonthString(e);RejectISODate(t,r,1);}catch{return {hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:s,calendar:l}}}throw new RangeError(`invalid ISO 8601 time-only string ${e}; may need a T prefix`)}(ToString(S))),RejectTime(r,o,n,a,i,f),void 0!==y&&"iso8601"!==y)throw new RangeError("PlainTime can only have iso8601 calendar");return new(GetIntrinsic("%Temporal.PlainTime%"))(r,o,n,a,i,f)}function ToTemporalYearMonth(e,t){if(IsObject(e)){if(IsTemporalYearMonth(e))return e;const r=GetTemporalCalendarWithISODefault(e);return CalendarYearMonthFromFields(r,PrepareTemporalFields(e,CalendarFields(r,["month","monthCode","year"]),[]),t)}ToTemporalOverflow(t);let{year:r,month:o,referenceISODay:n,calendar:a}=ParseTemporalYearMonthString(ToString(e)),i=a;if(void 0===i&&(i=GetISO8601Calendar()),i=ToTemporalCalendar(i),void 0===n)return RejectISODate(r,o,1),CreateTemporalYearMonth(r,o,i);return CalendarYearMonthFromFields(i,CreateTemporalYearMonth(r,o,i,n))}function InterpretISODateTimeOffset(t,n,a,i,s,l,d,m,c,h,u,T,p,f,y){const S=new(GetIntrinsic("%Temporal.PlainDateTime%"))(t,n,a,i,s,l,d,m,c);if("wall"===h||"ignore"===f){return GetSlot(BuiltinTimeZoneGetInstantFor(T,S,p),r)}if("exact"===h||"use"===f){const r=GetEpochFromISOParts(t,n,a,i,s,l,d,m,c);if(null===r)throw new RangeError("ZonedDateTime outside of supported range");return JSBI.subtract(r,JSBI.BigInt(u))}const w=GetPossibleInstantsFor(T,S);for(const t of w){const o=GetOffsetNanosecondsFor(T,t),n=JSBI.toNumber(RoundNumberToIncrement(JSBI.BigInt(o),6e10,"halfExpand"));if(o===u||y&&n===u)return GetSlot(t,r)}if("reject"===f){const e=FormatTimeZoneOffsetString(u),t=IsTemporalTimeZone(T)?GetSlot(T,o):"time zone";throw new RangeError(`Offset ${e} is invalid for ${S.toString()} in ${t}`)}return GetSlot(DisambiguatePossibleInstants(w,T,S,p),r)}function ToTemporalZonedDateTime(e,t){let r,o,n,a,i,s,l,d,m,c,h,u,T=!1,p="option";if(IsObject(e)){if(IsTemporalZonedDateTime(e))return e;u=GetTemporalCalendarWithISODefault(e);const T=PrepareTemporalFields(e,ArrayPush(CalendarFields(u,["day","hour","microsecond","millisecond","minute","month","monthCode","nanosecond","second","year"]),"timeZone","offset"),["timeZone"]);(({year:r,month:o,day:n,hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m}=InterpretTemporalDateTimeFields(u,T,t))),c=ToTemporalTimeZone(T.timeZone),h=T.offset,void 0===h?p="wall":h=ToString(h);}else {let f,y;if(ToTemporalOverflow(t),({year:r,month:o,day:n,hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m,ianaName:f,offset:h,z:y,calendar:u}=function ParseTemporalZonedDateTimeString(e){const t=ParseISODateTime(e);if(!t.ianaName)throw new RangeError("Temporal.ZonedDateTime requires a time zone ID in brackets");return t}(ToString(e))),!f)throw new RangeError("time zone ID required in brackets");y?p="exact":h||(p="wall");c=new(GetIntrinsic("%Temporal.TimeZone%"))(f),u||(u=GetISO8601Calendar()),u=ToTemporalCalendar(u),T=!0;}let f=0;"option"===p&&(f=ParseTimeZoneOffsetString(h));return CreateTemporalZonedDateTime(InterpretISODateTimeOffset(r,o,n,a,i,s,l,d,m,p,f,c,ToTemporalDisambiguation(t),ToTemporalOffset(t,"reject"),T),c,u)}function CreateTemporalDateSlots(e,t,r,o,s){RejectISODate(t,r,o),RejectDateRange(t,r,o),CreateSlots(e),SetSlot(e,n,t),SetSlot(e,a,r),SetSlot(e,i,o),SetSlot(e,u,s),SetSlot(e,"slot-date-brand",!0);}function CreateTemporalDate(e,t,r,o=GetISO8601Calendar()){const n=GetIntrinsic("%Temporal.PlainDate%"),a=le(n.prototype);return CreateTemporalDateSlots(a,e,t,r,o),a}function CreateTemporalDateTimeSlots(e,t,r,o,T,p,f,y,S,w,g){RejectDateTime(t,r,o,T,p,f,y,S,w),RejectDateTimeRange(t,r,o,T,p,f,y,S,w),CreateSlots(e),SetSlot(e,n,t),SetSlot(e,a,r),SetSlot(e,i,o),SetSlot(e,s,T),SetSlot(e,l,p),SetSlot(e,d,f),SetSlot(e,m,y),SetSlot(e,c,S),SetSlot(e,h,w),SetSlot(e,u,g);}function CreateTemporalDateTime(e,t,r,o,n,a,i,s,l,d=GetISO8601Calendar()){const m=GetIntrinsic("%Temporal.PlainDateTime%"),c=le(m.prototype);return CreateTemporalDateTimeSlots(c,e,t,r,o,n,a,i,s,l,d),c}function CreateTemporalMonthDaySlots(e,t,r,o,s){RejectISODate(s,t,r),RejectDateRange(s,t,r),CreateSlots(e),SetSlot(e,a,t),SetSlot(e,i,r),SetSlot(e,n,s),SetSlot(e,u,o),SetSlot(e,"slot-month-day-brand",!0);}function CreateTemporalMonthDay(e,t,r=GetISO8601Calendar(),o=1972){const n=GetIntrinsic("%Temporal.PlainMonthDay%"),a=le(n.prototype);return CreateTemporalMonthDaySlots(a,e,t,r,o),a}function CreateTemporalYearMonthSlots(e,t,r,o,s){RejectISODate(t,r,s),function RejectYearMonthRange(e,t){RejectToRange(e,-271821,275760),-271821===e?RejectToRange(t,4,12):275760===e&&RejectToRange(t,1,9);}(t,r),CreateSlots(e),SetSlot(e,n,t),SetSlot(e,a,r),SetSlot(e,i,s),SetSlot(e,u,o),SetSlot(e,"slot-year-month-brand",!0);}function CreateTemporalYearMonth(e,t,r=GetISO8601Calendar(),o=1){const n=GetIntrinsic("%Temporal.PlainYearMonth%"),a=le(n.prototype);return CreateTemporalYearMonthSlots(a,e,t,r,o),a}function CreateTemporalZonedDateTimeSlots(e,t,o,n){ValidateEpochNanoseconds(t),CreateSlots(e),SetSlot(e,r,t),SetSlot(e,p,o),SetSlot(e,u,n);const a=new(GetIntrinsic("%Temporal.Instant%"))(GetSlot(e,r));SetSlot(e,T,a);}function CreateTemporalZonedDateTime(e,t,r=GetISO8601Calendar()){const o=GetIntrinsic("%Temporal.ZonedDateTime%"),n=le(o.prototype);return CreateTemporalZonedDateTimeSlots(n,e,t,r),n}function GetISO8601Calendar(){return new(GetIntrinsic("%Temporal.Calendar%"))("iso8601")}function CalendarFields(e,t){let r=t;e.fields&&(r=e.fields(r));const o=[];for(const e of r){if("string"!=typeof e)throw new TypeError("bad return from calendar.fields()");_.call(o,e);}return o}function CalendarMergeFields(e,t,r){const o=e.mergeFields;if(!o)return {...t,...r};const n=Reflect.apply(o,e,[t,r]);if(!IsObject(n))throw new TypeError("bad return from calendar.mergeFields()");return n}function CalendarDateAdd(e,t,r,o,n){let a=n;void 0===a&&(a=e.dateAdd);const i=ce(a,e,[t,r,o]);if(!IsTemporalDate(i))throw new TypeError("invalid result");return i}function CalendarDateUntil(e,t,r,o,n){let a=n;void 0===a&&(a=e.dateUntil);const i=ce(a,e,[t,r,o]);if(!IsTemporalDuration(i))throw new TypeError("invalid result");return i}function CalendarYear(e,t){const r=e.year(t);if(void 0===r)throw new RangeError("calendar year result must be an integer");return ToIntegerThrowOnInfinity(r)}function CalendarMonth(e,t){const r=e.month(t);if(void 0===r)throw new RangeError("calendar month result must be a positive integer");return ToPositiveInteger(r)}function CalendarMonthCode(e,t){const r=e.monthCode(t);if(void 0===r)throw new RangeError("calendar monthCode result must be a string");return ToString(r)}function CalendarDay(e,t){const r=e.day(t);if(void 0===r)throw new RangeError("calendar day result must be a positive integer");return ToPositiveInteger(r)}function CalendarEra(e,t){let r=e.era(t);return void 0!==r&&(r=ToString(r)),r}function CalendarEraYear(e,t){let r=e.eraYear(t);return void 0!==r&&(r=ToIntegerThrowOnInfinity(r)),r}function CalendarDayOfWeek(e,t){return e.dayOfWeek(t)}function CalendarDayOfYear(e,t){return e.dayOfYear(t)}function CalendarWeekOfYear(e,t){return e.weekOfYear(t)}function CalendarDaysInWeek(e,t){return e.daysInWeek(t)}function CalendarDaysInMonth(e,t){return e.daysInMonth(t)}function CalendarDaysInYear(e,t){return e.daysInYear(t)}function CalendarMonthsInYear(e,t){return e.monthsInYear(t)}function CalendarInLeapYear(e,t){return e.inLeapYear(t)}function ToTemporalCalendar(e){let t=e;if(IsObject(t)){if(HasSlot(t,u))return GetSlot(t,u);if(!("calendar"in t))return t;if(t=t.calendar,IsObject(t)&&!("calendar"in t))return t}const r=ToString(t),o=GetIntrinsic("%Temporal.Calendar%");if(IsBuiltinCalendar(r))return new o(r);let n;try{({calendar:n}=ParseISODateTime(r));}catch{throw new RangeError(`Invalid calendar: ${r}`)}return n||(n="iso8601"),new o(n)}function GetTemporalCalendarWithISODefault(e){if(HasSlot(e,u))return GetSlot(e,u);const{calendar:t}=e;return void 0===t?GetISO8601Calendar():ToTemporalCalendar(t)}function CalendarEquals(e,t){if(e===t)return !0;return ToString(e)===ToString(t)}function ConsolidateCalendars(e,t){if(e===t)return t;const r=ToString(e),o=ToString(t);if(r===o||"iso8601"===r)return t;if("iso8601"===o)return e;throw new RangeError("irreconcilable calendars")}function CalendarDateFromFields(e,t,r){const o=e.dateFromFields(t,r);if(!IsTemporalDate(o))throw new TypeError("invalid result");return o}function CalendarYearMonthFromFields(e,t,r){const o=e.yearMonthFromFields(t,r);if(!IsTemporalYearMonth(o))throw new TypeError("invalid result");return o}function CalendarMonthDayFromFields(e,t,r){const o=e.monthDayFromFields(t,r);if(!IsTemporalMonthDay(o))throw new TypeError("invalid result");return o}function ToTemporalTimeZone(e){let t=e;if(IsObject(t)){if(IsTemporalZonedDateTime(t))return GetSlot(t,p);if(!("timeZone"in t))return t;if(t=t.timeZone,IsObject(t)&&!("timeZone"in t))return t}const r=ParseTemporalTimeZone(ToString(t));return new(GetIntrinsic("%Temporal.TimeZone%"))(r)}function TimeZoneEquals(e,t){if(e===t)return !0;return ToString(e)===ToString(t)}function TemporalDateTimeToDate(e){return CreateTemporalDate(GetSlot(e,n),GetSlot(e,a),GetSlot(e,i),GetSlot(e,u))}function TemporalDateTimeToTime(e){return new(GetIntrinsic("%Temporal.PlainTime%"))(GetSlot(e,s),GetSlot(e,l),GetSlot(e,d),GetSlot(e,m),GetSlot(e,c),GetSlot(e,h))}function GetOffsetNanosecondsFor(e,t){let r=e.getOffsetNanosecondsFor;if("function"!=typeof r)throw new TypeError("getOffsetNanosecondsFor not callable");const o=Reflect.apply(r,e,[t]);if("number"!=typeof o)throw new TypeError("bad return from getOffsetNanosecondsFor");if(!IsInteger(o)||K(o)>864e11)throw new RangeError("out-of-range return from getOffsetNanosecondsFor");return o}function BuiltinTimeZoneGetOffsetStringFor(e,t){return FormatTimeZoneOffsetString(GetOffsetNanosecondsFor(e,t))}function BuiltinTimeZoneGetPlainDateTimeFor(e,t,o){const n=GetSlot(t,r),a=GetOffsetNanosecondsFor(e,t);let{year:i,month:s,day:l,hour:d,minute:m,second:c,millisecond:h,microsecond:u,nanosecond:T}=GetISOPartsFromEpoch(n);return ({year:i,month:s,day:l,hour:d,minute:m,second:c,millisecond:h,microsecond:u,nanosecond:T}=BalanceISODateTime(i,s,l,d,m,c,h,u,T+a)),CreateTemporalDateTime(i,s,l,d,m,c,h,u,T,o)}function BuiltinTimeZoneGetInstantFor(e,t,r){return DisambiguatePossibleInstants(GetPossibleInstantsFor(e,t),e,t,r)}function DisambiguatePossibleInstants(t,r,o,T){const p=GetIntrinsic("%Temporal.Instant%"),f=t.length;if(1===f)return t[0];if(f)switch(T){case"compatible":case"earlier":return t[0];case"later":return t[f-1];case"reject":throw new RangeError("multiple instants found")}const y=GetSlot(o,n),S=GetSlot(o,a),w=GetSlot(o,i),g=GetSlot(o,s),I=GetSlot(o,l),D=GetSlot(o,d),G=GetSlot(o,m),v=GetSlot(o,c),O=GetSlot(o,h),C=GetEpochFromISOParts(y,S,w,g,I,D,G,v,O);if(null===C)throw new RangeError("DateTime outside of supported range");const E=new p(JSBI.subtract(C,we)),b=new p(JSBI.add(C,we)),M=GetOffsetNanosecondsFor(r,E),R=GetOffsetNanosecondsFor(r,b)-M;switch(T){case"earlier":{const e=GetSlot(o,u),t=GetIntrinsic("%Temporal.PlainDateTime%"),n=AddDateTime(y,S,w,g,I,D,G,v,O,e,0,0,0,0,0,0,0,0,0,-R,void 0);return GetPossibleInstantsFor(r,new t(n.year,n.month,n.day,n.hour,n.minute,n.second,n.millisecond,n.microsecond,n.nanosecond,e))[0]}case"compatible":case"later":{const e=GetSlot(o,u),t=GetIntrinsic("%Temporal.PlainDateTime%"),n=AddDateTime(y,S,w,g,I,D,G,v,O,e,0,0,0,0,0,0,0,0,0,R,void 0),a=GetPossibleInstantsFor(r,new t(n.year,n.month,n.day,n.hour,n.minute,n.second,n.millisecond,n.microsecond,n.nanosecond,e));return a[a.length-1]}case"reject":throw new RangeError("no such instant found")}}function GetPossibleInstantsFor(e,t){const r=e.getPossibleInstantsFor(t),o=[];for(const e of r){if(!IsTemporalInstant(e))throw new TypeError("bad return from getPossibleInstantsFor");_.call(o,e);}return o}function ISOYearString(e){let t;if(e<0||e>9999){t=(e<0?"-":"+")+`000000${K(e)}`.slice(-6);}else t=`0000${e}`.slice(-4);return t}function ISODateTimePartString(e){return `00${e}`.slice(-2)}function FormatSecondsStringPart(e,t,r,o,n){if("minute"===n)return "";const a=`:${ISODateTimePartString(e)}`;let i,s=1e6*t+1e3*r+o;if("auto"===n){if(0===s)return a;for(i=`${s}`.padStart(9,"0");"0"===i[i.length-1];)i=i.slice(0,-1);}else {if(0===n)return a;i=`${s}`.padStart(9,"0").slice(0,n);}return `${a}.${i}`}function TemporalInstantToString(e,t,r){let o=t;if(void 0===o){o=new(GetIntrinsic("%Temporal.TimeZone%"))("UTC");}const u=BuiltinTimeZoneGetPlainDateTimeFor(o,e,GetISO8601Calendar()),T=ISOYearString(GetSlot(u,n)),p=ISODateTimePartString(GetSlot(u,a)),f=ISODateTimePartString(GetSlot(u,i)),y=ISODateTimePartString(GetSlot(u,s)),S=ISODateTimePartString(GetSlot(u,l)),w=FormatSecondsStringPart(GetSlot(u,d),GetSlot(u,m),GetSlot(u,c),GetSlot(u,h),r);let g="Z";if(void 0!==t){g=FormatISOTimeZoneOffsetString(GetOffsetNanosecondsFor(o,e));}return `${T}-${p}-${f}T${y}:${S}${w}${g}`}function TemporalDurationToString(t,r="auto",o){function formatNumber(t){return t<=ie?t.toString(10):JSBI.BigInt(t).toString(10)}const n=GetSlot(t,f),a=GetSlot(t,y),i=GetSlot(t,S),s=GetSlot(t,w),l=GetSlot(t,g),d=GetSlot(t,I);let m=GetSlot(t,D),c=GetSlot(t,G),h=GetSlot(t,v),u=GetSlot(t,O);const T=DurationSign(n,a,i,s,l,d,m,c,h,u);if(o){const{unit:e,increment:t,roundingMode:r}=o;({seconds:m,milliseconds:c,microseconds:h,nanoseconds:u}=RoundDuration(0,0,0,0,0,0,m,c,h,u,t,e,r));}const p=[];n&&p.push(`${formatNumber(K(n))}Y`),a&&p.push(`${formatNumber(K(a))}M`),i&&p.push(`${formatNumber(K(i))}W`),s&&p.push(`${formatNumber(K(s))}D`);const C=[];l&&C.push(`${formatNumber(K(l))}H`),d&&C.push(`${formatNumber(K(d))}M`);const E=[];let b,M,R,Z,P=TotalDurationNanoseconds(0,0,0,m,c,h,u,0);(({quotient:P,remainder:b}=divmod(P,pe))),({quotient:P,remainder:M}=divmod(P,pe)),({quotient:Z,remainder:R}=divmod(P,pe));const F=1e6*K(JSBI.toNumber(R))+1e3*K(JSBI.toNumber(M))+K(JSBI.toNumber(b));let Y;if("auto"===r){if(0!==F)for(Y=`${F}`.padStart(9,"0");"0"===Y[Y.length-1];)Y=Y.slice(0,-1);}else 0!==r&&(Y=`${F}`.padStart(9,"0").slice(0,r));return Y&&E.unshift(".",Y),JSBI.equal(Z,he)&&!E.length&&"auto"===r||E.unshift(abs(Z).toString()),E.length&&C.push(`${E.join("")}S`),C.length&&C.unshift("T"),p.length||C.length?`${T<0?"-":""}P${p.join("")}${C.join("")}`:"PT0S"}function TemporalDateToString(e,t="auto"){return `${ISOYearString(GetSlot(e,n))}-${ISODateTimePartString(GetSlot(e,a))}-${ISODateTimePartString(GetSlot(e,i))}${FormatCalendarAnnotation(ToString(GetSlot(e,u)),t)}`}function TemporalDateTimeToString(e,t,r="auto",o){let T=GetSlot(e,n),p=GetSlot(e,a),f=GetSlot(e,i),y=GetSlot(e,s),S=GetSlot(e,l),w=GetSlot(e,d),g=GetSlot(e,m),I=GetSlot(e,c),D=GetSlot(e,h);if(o){const{unit:e,increment:t,roundingMode:r}=o;({year:T,month:p,day:f,hour:y,minute:S,second:w,millisecond:g,microsecond:I,nanosecond:D}=RoundISODateTime(T,p,f,y,S,w,g,I,D,t,e,r));}return `${ISOYearString(T)}-${ISODateTimePartString(p)}-${ISODateTimePartString(f)}T${ISODateTimePartString(y)}:${ISODateTimePartString(S)}${FormatSecondsStringPart(w,g,I,D,t)}${FormatCalendarAnnotation(ToString(GetSlot(e,u)),r)}`}function TemporalMonthDayToString(e,t="auto"){let r=`${ISODateTimePartString(GetSlot(e,a))}-${ISODateTimePartString(GetSlot(e,i))}`;const o=ToString(GetSlot(e,u));if("always"===t||"iso8601"!==o){r=`${ISOYearString(GetSlot(e,n))}-${r}`;}const s=FormatCalendarAnnotation(o,t);return s&&(r+=s),r}function TemporalYearMonthToString(e,t="auto"){let r=`${ISOYearString(GetSlot(e,n))}-${ISODateTimePartString(GetSlot(e,a))}`;const o=ToString(GetSlot(e,u));if("always"===t||"iso8601"!==o){r+=`-${ISODateTimePartString(GetSlot(e,i))}`;}const s=FormatCalendarAnnotation(o,t);return s&&(r+=s),r}function TemporalZonedDateTimeToString(e,t,o="auto",f="auto",y="auto",S){let w=GetSlot(e,T);if(S){const{unit:t,increment:o,roundingMode:n}=S,a=RoundInstant(GetSlot(e,r),o,t,n);w=new(GetIntrinsic("%Temporal.Instant%"))(a);}const g=GetSlot(e,p),I=BuiltinTimeZoneGetPlainDateTimeFor(g,w,GetISO8601Calendar());let D=`${ISOYearString(GetSlot(I,n))}-${ISODateTimePartString(GetSlot(I,a))}-${ISODateTimePartString(GetSlot(I,i))}T${ISODateTimePartString(GetSlot(I,s))}:${ISODateTimePartString(GetSlot(I,l))}${FormatSecondsStringPart(GetSlot(I,d),GetSlot(I,m),GetSlot(I,c),GetSlot(I,h),t)}`;if("never"!==y){D+=FormatISOTimeZoneOffsetString(GetOffsetNanosecondsFor(g,w));}"never"!==f&&(D+=`[${g}]`);return D+=FormatCalendarAnnotation(ToString(GetSlot(e,u)),o),D}function TestTimeZoneOffsetString(e){return Be.test(ae(e))}function ParseTimeZoneOffsetString(e){const t=Be.exec(ae(e));if(!t)throw new RangeError(`invalid time zone offset: ${e}`);return ("-"===t[1]||"−"===t[1]?-1:1)*(1e9*(60*(60*+t[2]+ +(t[3]||0))+ +(t[4]||0))+ +((t[5]||0)+"000000000").slice(0,9))}function GetCanonicalTimeZoneIdentifier(e){if(TestTimeZoneOffsetString(e)){return FormatTimeZoneOffsetString(ParseTimeZoneOffsetString(e))}return getIntlDateTimeFormatEnUsForTimeZone(ae(e)).resolvedOptions().timeZone}function GetIANATimeZoneOffsetNanoseconds(t,r){const{year:o,month:n,day:a,hour:i,minute:s,second:l,millisecond:d,microsecond:m,nanosecond:c}=GetIANATimeZoneDateTimeParts(t,r),h=GetEpochFromISOParts(o,n,a,i,s,l,d,m,c);if(null===h)throw new RangeError("Date outside of supported range");return JSBI.toNumber(JSBI.subtract(h,t))}function FormatTimeZoneOffsetString(e){const t=e<0?"-":"+",r=K(e),o=r%1e9,n=Q(r/1e9)%60,a=Q(r/6e10)%60,i=ISODateTimePartString(Q(r/36e11)),s=ISODateTimePartString(a),l=ISODateTimePartString(n);let d="";if(o){let e=`${o}`.padStart(9,"0");for(;"0"===e[e.length-1];)e=e.slice(0,-1);d=`:${l}.${e}`;}else n&&(d=`:${l}`);return `${t}${i}:${s}${d}`}function FormatISOTimeZoneOffsetString(t){let r=JSBI.toNumber(RoundNumberToIncrement(JSBI.BigInt(t),6e10,"halfExpand"));const o=r<0?"-":"+";r=K(r);const n=r/6e10%60;return `${o}${ISODateTimePartString(Q(r/36e11))}:${ISODateTimePartString(n)}`}function GetEpochFromISOParts(t,r,o,n,a,i,s,l,d){const m=new Date;m.setUTCHours(n,a,i,s),m.setUTCFullYear(t,r-1,o);const c=m.getTime();if(re(c))return null;let h=JSBI.multiply(JSBI.BigInt(c),fe);return h=JSBI.add(h,JSBI.multiply(JSBI.BigInt(l),pe)),h=JSBI.add(h,JSBI.BigInt(d)),JSBI.lessThan(h,ge)||JSBI.greaterThan(h,Ie)?null:h}function GetISOPartsFromEpoch(t){const{quotient:r,remainder:o}=divmod(t,fe);let n=JSBI.toNumber(r),a=JSBI.toNumber(o);a<0&&(a+=1e6,n-=1);const i=Q(a/1e3)%1e3,s=a%1e3,l=new Date(n);return {epochMilliseconds:n,year:l.getUTCFullYear(),month:l.getUTCMonth()+1,day:l.getUTCDate(),hour:l.getUTCHours(),minute:l.getUTCMinutes(),second:l.getUTCSeconds(),millisecond:l.getUTCMilliseconds(),microsecond:i,nanosecond:s}}function GetIANATimeZoneDateTimeParts(e,t){const{epochMilliseconds:r,millisecond:o,microsecond:n,nanosecond:a}=GetISOPartsFromEpoch(e),{year:i,month:s,day:l,hour:d,minute:m,second:c}=function GetFormatterParts(e,t){const r=getIntlDateTimeFormatEnUsForTimeZone(e);return function parseFromEnUsFormat(e){const t=e.split(/[^\w]+/);if(7!==t.length)throw new RangeError(`expected 7 parts in "${e}`);const r=+t[0],o=+t[1];let n=+t[2];const a=t[3].toUpperCase();if("B"===a||"BC"===a)n=1-n;else if("A"!==a&&"AD"!==a)throw new RangeError(`Unknown era ${a} in "${e}`);let i=+t[4];24===i&&(i=0);const s=+t[5],l=+t[6];if(!(oe(n)&&oe(r)&&oe(o)&&oe(i)&&oe(s)&&oe(l)))throw new RangeError(`Invalid number in "${e}`);return {year:n,month:r,day:o,hour:i,minute:s,second:l}}(r.format(new Date(t)))}(t,r);return BalanceISODateTime(i,s,l,d,m,c,o,n,a)}function maxJSBI(t,r){return JSBI.lessThan(t,r)?r:t}function afterLatestPossibleTzdbRuleChange(){return JSBI.add($e(),Ge)}function GetIANATimeZonePreviousTransition(t,r){const o=afterLatestPossibleTzdbRuleChange(),n=JSBI.greaterThan(t,o),a=n?JSBI.subtract(t,ve):De;let i=JSBI.subtract(t,ue);const s=GetIANATimeZoneOffsetNanoseconds(i,r);let l=i,d=s;for(;s===d&&JSBI.greaterThan(i,a);)l=JSBI.subtract(i,Oe),d=GetIANATimeZoneOffsetNanoseconds(l,r),s===d&&(i=l);if(s===d){if(n){return GetIANATimeZonePreviousTransition(JSBI.subtract(o,we),r)}return null}return bisect((e=>GetIANATimeZoneOffsetNanoseconds(e,r)),l,i,d,s)}function LeapYear(e){if(void 0===e)return !1;return e%4==0&&(!(e%100==0)||e%400==0)}function ISODaysInMonth(e,t){return {standard:[31,28,31,30,31,30,31,31,30,31,30,31],leapyear:[31,29,31,30,31,30,31,31,30,31,30,31]}[LeapYear(e)?"leapyear":"standard"][t-1]}function DayOfWeek(e,t,r){const o=t+(t<3?10:-2),n=e-(t<3?1:0),a=Q(n/100),i=n-100*a,s=(r+Q(2.6*o-.2)+(i+Q(i/4))+(Q(a/4)-2*a))%7;return s+(s<=0?7:0)}function DayOfYear(e,t,r){let o=r;for(let r=t-1;r>0;r--)o+=ISODaysInMonth(e,r);return o}function DurationSign(e,t,r,o,n,a,i,s,l,d){for(const m of [e,t,r,o,n,a,i,s,l,d])if(0!==m)return m<0?-1:1;return 0}function BalanceISOYearMonth(e,t){let r=e,o=t;if(!oe(r)||!oe(o))throw new RangeError("infinity is out of range");return o-=1,r+=Q(o/12),o%=12,o<0&&(o+=12),o+=1,{year:r,month:o}}function BalanceISODate(e,t,r){let o=e,n=t,a=r;if(!oe(a))throw new RangeError("infinity is out of range");({year:o,month:n}=BalanceISOYearMonth(o,n));let i=0,s=n>2?o:o-1;for(;i=LeapYear(s)?366:365,a<-i;)o-=1,s-=1,a+=i;for(s+=1;i=LeapYear(s)?366:365,a>i;)o+=1,s+=1,a-=i;for(;a<1;)(({year:o,month:n}=BalanceISOYearMonth(o,n-1))),a+=ISODaysInMonth(o,n);for(;a>ISODaysInMonth(o,n);)a-=ISODaysInMonth(o,n),({year:o,month:n}=BalanceISOYearMonth(o,n+1));return {year:o,month:n,day:a}}function BalanceISODateTime(e,t,r,o,n,a,i,s,l){const{deltaDays:d,hour:m,minute:c,second:h,millisecond:u,microsecond:T,nanosecond:p}=BalanceTime(o,n,a,i,s,l),{year:f,month:y,day:S}=BalanceISODate(e,t,r+d);return {year:f,month:y,day:S,hour:m,minute:c,second:h,millisecond:u,microsecond:T,nanosecond:p}}function BalanceTime(e,t,r,o,n,a){let i=e,s=t,l=r,d=o,m=n,c=a;if(!(oe(i)&&oe(s)&&oe(l)&&oe(d)&&oe(m)&&oe(c)))throw new RangeError("infinity is out of range");m+=Q(c/1e3),c=NonNegativeModulo(c,1e3),d+=Q(m/1e3),m=NonNegativeModulo(m,1e3),l+=Q(d/1e3),d=NonNegativeModulo(d,1e3),s+=Q(l/60),l=NonNegativeModulo(l,60),i+=Q(s/60),s=NonNegativeModulo(s,60);const h=Q(i/24);return i=NonNegativeModulo(i,24),{deltaDays:h,hour:i,minute:s,second:l,millisecond:d,microsecond:m,nanosecond:c}}function TotalDurationNanoseconds(t,r,o,n,a,i,s,l){const d=JSBI.BigInt(t);let m=JSBI.BigInt(s);0!==t&&(m=JSBI.subtract(JSBI.BigInt(s),JSBI.BigInt(l)));const c=JSBI.add(JSBI.BigInt(r),JSBI.multiply(d,JSBI.BigInt(24))),h=JSBI.add(JSBI.BigInt(o),JSBI.multiply(c,Te)),u=JSBI.add(JSBI.BigInt(n),JSBI.multiply(h,Te)),T=JSBI.add(JSBI.BigInt(a),JSBI.multiply(u,pe)),p=JSBI.add(JSBI.BigInt(i),JSBI.multiply(T,pe));return JSBI.add(JSBI.BigInt(m),JSBI.multiply(p,pe))}function NanosecondsToDays(t,o){const f=GetIntrinsic("%Temporal.Instant%"),y=ee(JSBI.toNumber(t));let S=JSBI.BigInt(t),w=864e11;if(0===y)return {days:0,nanoseconds:he,dayLengthNs:w};if(!IsTemporalZonedDateTime(o)){let t;return ({quotient:t,remainder:S}=divmod(S,JSBI.BigInt(w))),{days:JSBI.toNumber(t),nanoseconds:S,dayLengthNs:w}}const g=GetSlot(o,r),I=GetSlot(o,T),D=JSBI.add(g,S),G=new f(D),v=GetSlot(o,p),O=GetSlot(o,u),C=BuiltinTimeZoneGetPlainDateTimeFor(v,I,O),E=BuiltinTimeZoneGetPlainDateTimeFor(v,G,O);let{days:b}=DifferenceISODateTime(GetSlot(C,n),GetSlot(C,a),GetSlot(C,i),GetSlot(C,s),GetSlot(C,l),GetSlot(C,d),GetSlot(C,m),GetSlot(C,c),GetSlot(C,h),GetSlot(E,n),GetSlot(E,a),GetSlot(E,i),GetSlot(E,s),GetSlot(E,l),GetSlot(E,d),GetSlot(E,m),GetSlot(E,c),GetSlot(E,h),O,"day",le(null)),M=AddZonedDateTime(I,v,O,0,0,0,b,0,0,0,0,0,0);if(1===y)for(;b>0&&JSBI.greaterThan(M,D);)--b,M=AddZonedDateTime(I,v,O,0,0,0,b,0,0,0,0,0,0);S=JSBI.subtract(D,M);let R=!1,Z=new f(M);do{const t=AddZonedDateTime(Z,v,O,0,0,0,y,0,0,0,0,0,0),o=GetSlot(Z,r);w=JSBI.toNumber(JSBI.subtract(t,o)),R=JSBI.greaterThan(JSBI.multiply(JSBI.subtract(S,JSBI.BigInt(w)),JSBI.BigInt(y)),he),R&&(S=JSBI.subtract(S,JSBI.BigInt(w)),Z=new f(t),b+=y);}while(R);return {days:b,nanoseconds:S,dayLengthNs:K(w)}}function BalanceDuration(t,o,n,a,i,s,l,d,m){let c,h,f,y,S,w,g=t;if(IsTemporalZonedDateTime(m)){const t=AddZonedDateTime(GetSlot(m,T),GetSlot(m,p),GetSlot(m,u),0,0,0,g,o,n,a,i,s,l),d=GetSlot(m,r);c=JSBI.subtract(t,d);}else c=TotalDurationNanoseconds(g,o,n,a,i,s,l,0);"year"===d||"month"===d||"week"===d||"day"===d?({days:g,nanoseconds:c}=NanosecondsToDays(c,m)):g=0;const I=JSBI.lessThan(c,he)?-1:1;switch(c=abs(c),h=f=y=S=w=he,d){case"year":case"month":case"week":case"day":case"hour":(({quotient:h,remainder:c}=divmod(c,pe))),({quotient:f,remainder:h}=divmod(h,pe)),({quotient:y,remainder:f}=divmod(f,pe)),({quotient:S,remainder:y}=divmod(y,Te)),({quotient:w,remainder:S}=divmod(S,Te));break;case"minute":(({quotient:h,remainder:c}=divmod(c,pe))),({quotient:f,remainder:h}=divmod(h,pe)),({quotient:y,remainder:f}=divmod(f,pe)),({quotient:S,remainder:y}=divmod(y,Te));break;case"second":(({quotient:h,remainder:c}=divmod(c,pe))),({quotient:f,remainder:h}=divmod(h,pe)),({quotient:y,remainder:f}=divmod(f,pe));break;case"millisecond":(({quotient:h,remainder:c}=divmod(c,pe))),({quotient:f,remainder:h}=divmod(h,pe));break;case"microsecond":({quotient:h,remainder:c}=divmod(c,pe));break;case"nanosecond":break;default:throw new Error("assert not reached")}return {days:g,hours:JSBI.toNumber(w)*I,minutes:JSBI.toNumber(S)*I,seconds:JSBI.toNumber(y)*I,milliseconds:JSBI.toNumber(f)*I,microseconds:JSBI.toNumber(h)*I,nanoseconds:JSBI.toNumber(c)*I}}function UnbalanceDurationRelative(e,t,r,o,n,a){let i=e,s=t,l=r,d=o;const m=GetIntrinsic("%Temporal.Duration%"),c=DurationSign(i,s,l,d,0,0,0,0,0,0);let h,T;a&&(T=ToTemporalDate(a),h=GetSlot(T,u));const p=new m(c),f=new m(0,c),S=new m(0,0,c);switch(n){case"year":break;case"month":{if(!h)throw new RangeError("a starting point is required for months balancing");const e=h.dateAdd,t=h.dateUntil;let r=T;for(;K(i)>0;){const o=CalendarDateAdd(h,r,p,void 0,e),n=le(null);n.largestUnit="month";const a=GetSlot(CalendarDateUntil(h,r,o,n,t),y);r=o,s+=a,i-=c;}}break;case"week":if(!h)throw new RangeError("a starting point is required for weeks balancing");for(;K(i)>0;){let e;(({relativeTo:T,days:e}=MoveRelativeDate(h,T,p))),d+=e,i-=c;}for(;K(s)>0;){let e;(({relativeTo:T,days:e}=MoveRelativeDate(h,T,f))),d+=e,s-=c;}break;default:for(;K(i)>0;){if(!h)throw new RangeError("a starting point is required for balancing calendar units");let e;(({relativeTo:T,days:e}=MoveRelativeDate(h,T,p))),d+=e,i-=c;}for(;K(s)>0;){if(!h)throw new RangeError("a starting point is required for balancing calendar units");let e;(({relativeTo:T,days:e}=MoveRelativeDate(h,T,f))),d+=e,s-=c;}for(;K(l)>0;){if(!h)throw new RangeError("a starting point is required for balancing calendar units");let e;(({relativeTo:T,days:e}=MoveRelativeDate(h,T,S))),d+=e,l-=c;}}return {years:i,months:s,weeks:l,days:d}}function CalculateOffsetShift(e,t,r,o,n){if(IsTemporalZonedDateTime(e)){const a=GetSlot(e,T),i=GetSlot(e,p),s=GetSlot(e,u),l=GetOffsetNanosecondsFor(i,a),d=AddZonedDateTime(a,i,s,t,r,o,n,0,0,0,0,0,0);return GetOffsetNanosecondsFor(i,new(GetIntrinsic("%Temporal.Instant%"))(d))-l}return 0}function CreateNegatedTemporalDuration(e){return new(GetIntrinsic("%Temporal.Duration%"))(-GetSlot(e,f),-GetSlot(e,y),-GetSlot(e,S),-GetSlot(e,w),-GetSlot(e,g),-GetSlot(e,I),-GetSlot(e,D),-GetSlot(e,G),-GetSlot(e,v),-GetSlot(e,O))}function ConstrainToRange(e,t,r){return V(r,X(t,e))}function ConstrainISODate(e,t,r){const o=ConstrainToRange(t,1,12);return {year:e,month:o,day:ConstrainToRange(r,1,ISODaysInMonth(e,o))}}function RejectToRange(e,t,r){if(e<t||e>r)throw new RangeError(`value out of range: ${t} <= ${e} <= ${r}`)}function RejectISODate(e,t,r){RejectToRange(t,1,12),RejectToRange(r,1,ISODaysInMonth(e,t));}function RejectDateRange(e,t,r){RejectDateTimeRange(e,t,r,12,0,0,0,0,0);}function RejectTime(e,t,r,o,n,a){RejectToRange(e,0,23),RejectToRange(t,0,59),RejectToRange(r,0,59),RejectToRange(o,0,999),RejectToRange(n,0,999),RejectToRange(a,0,999);}function RejectDateTime(e,t,r,o,n,a,i,s,l){RejectISODate(e,t,r),RejectTime(o,n,a,i,s,l);}function RejectDateTimeRange(e,t,r,o,n,a,i,s,l){if(RejectToRange(e,-271821,275760),-271821===e&&null==GetEpochFromISOParts(e,t,r+1,o,n,a,i,s,l-1)||275760===e&&null==GetEpochFromISOParts(e,t,r-1,o,n,a,i,s,l+1))throw new RangeError("DateTime outside of supported range")}function ValidateEpochNanoseconds(t){if(JSBI.lessThan(t,ge)||JSBI.greaterThan(t,Ie))throw new RangeError("Instant outside of supported range")}function RejectDuration(e,t,r,o,n,a,i,s,l,d){const m=DurationSign(e,t,r,o,n,a,i,s,l,d);for(const c of [e,t,r,o,n,a,i,s,l,d]){if(!oe(c))throw new RangeError("infinite values not allowed as duration fields");const e=ee(c);if(0!==e&&e!==m)throw new RangeError("mixed-sign values not allowed as duration fields")}}function DifferenceISODate(e,t,r,o,n,a,i){switch(i){case"year":case"month":{const s=-CompareISODate(e,t,r,o,n,a);if(0===s)return {years:0,months:0,weeks:0,days:0};const l={year:e,month:t,day:r},d={year:o,month:n,day:a};let m=d.year-l.year,c=AddISODate(e,t,r,m,0,0,0,"constrain"),h=-CompareISODate(c.year,c.month,c.day,o,n,a);if(0===h)return "year"===i?{years:m,months:0,weeks:0,days:0}:{years:0,months:12*m,weeks:0,days:0};let u=d.month-l.month;if(h!==s&&(m-=s,u+=12*s),c=AddISODate(e,t,r,m,u,0,0,"constrain"),h=-CompareISODate(c.year,c.month,c.day,o,n,a),0===h)return "year"===i?{years:m,months:u,weeks:0,days:0}:{years:0,months:u+12*m,weeks:0,days:0};h!==s&&(u-=s,u===-s&&(m-=s,u=11*s),c=AddISODate(e,t,r,m,u,0,0,"constrain"));let T=0;return T=c.month===d.month?d.day-c.day:s<0?-c.day-(ISODaysInMonth(d.year,d.month)-d.day):d.day+(ISODaysInMonth(c.year,c.month)-c.day),"month"===i&&(u+=12*m,m=0),{years:m,months:u,weeks:0,days:T}}case"week":case"day":{let s,l,d;CompareISODate(e,t,r,o,n,a)<0?(l={year:e,month:t,day:r},s={year:o,month:n,day:a},d=1):(l={year:o,month:n,day:a},s={year:e,month:t,day:r},d=-1);let m=DayOfYear(s.year,s.month,s.day)-DayOfYear(l.year,l.month,l.day);for(let e=l.year;e<s.year;++e)m+=LeapYear(e)?366:365;let c=0;return "week"===i&&(c=Q(m/7),m%=7),c*=d,m*=d,{years:0,months:0,weeks:c,days:m}}default:throw new Error("assert not reached")}}function DifferenceTime(e,t,r,o,n,a,i,s,l,d,m,c){let h=i-e,u=s-t,T=l-r,p=d-o,f=m-n,y=c-a;const S=DurationSign(0,0,0,0,h,u,T,p,f,y);h*=S,u*=S,T*=S,p*=S,f*=S,y*=S;let w=0;if(({deltaDays:w,hour:h,minute:u,second:T,millisecond:p,microsecond:f,nanosecond:y}=BalanceTime(h,u,T,p,f,y)),0!=w)throw new Error("assertion failure in DifferenceTime: _bt_.[[Days]] should be 0");return h*=S,u*=S,T*=S,p*=S,f*=S,y*=S,{hours:h,minutes:u,seconds:T,milliseconds:p,microseconds:f,nanoseconds:y}}function DifferenceInstant(t,r,o,n,a){const i=JSBI.subtract(r,t),s=JSBI.remainder(i,JSBI.BigInt(864e11)),l=JSBI.subtract(i,s),d=RoundNumberToIncrement(s,Ne[n]*o,a),m=JSBI.add(l,d),c=JSBI.toNumber(JSBI.remainder(m,pe)),h=JSBI.toNumber(JSBI.remainder(JSBI.divide(m,pe),pe)),u=JSBI.toNumber(JSBI.remainder(JSBI.divide(m,fe),pe));return {seconds:JSBI.toNumber(JSBI.divide(m,ye)),milliseconds:u,microseconds:h,nanoseconds:c}}function DifferenceISODateTime(e,t,r,o,n,a,i,s,l,d,m,c,h,u,T,p,f,y,S,w,g){let I=e,D=t,G=r,{hours:v,minutes:O,seconds:C,milliseconds:E,microseconds:b,nanoseconds:M}=DifferenceTime(o,n,a,i,s,l,h,u,T,p,f,y);const R=DurationSign(0,0,0,0,v,O,C,E,b,M);CompareISODate(d,m,c,I,D,G)===-R&&(({year:I,month:D,day:G}=BalanceISODate(I,D,G-R)),({hours:v,minutes:O,seconds:C,milliseconds:E,microseconds:b,nanoseconds:M}=BalanceDuration(-R,v,O,C,E,b,M,w)));const Z=CreateTemporalDate(I,D,G,S),P=CreateTemporalDate(d,m,c,S),F=MergeLargestUnitOption(g,LargerOfTwoTemporalUnits("day",w));let{years:Y,months:j,weeks:$,days:B}=CalendarDateUntil(S,Z,P,F);return ({days:B,hours:v,minutes:O,seconds:C,milliseconds:E,microseconds:b,nanoseconds:M}=BalanceDuration(B,v,O,C,E,b,M,w)),{years:Y,months:j,weeks:$,days:B,hours:v,minutes:O,seconds:C,milliseconds:E,microseconds:b,nanoseconds:M}}function DifferenceZonedDateTime(t,r,o,u,T,p){const f=JSBI.subtract(r,t);if(JSBI.equal(f,he))return {years:0,months:0,weeks:0,days:0,hours:0,minutes:0,seconds:0,milliseconds:0,microseconds:0,nanoseconds:0};const y=GetIntrinsic("%Temporal.Instant%"),S=new y(t),w=new y(r),g=BuiltinTimeZoneGetPlainDateTimeFor(o,S,u),I=BuiltinTimeZoneGetPlainDateTimeFor(o,w,u);let{years:D,months:G,weeks:v,days:O}=DifferenceISODateTime(GetSlot(g,n),GetSlot(g,a),GetSlot(g,i),GetSlot(g,s),GetSlot(g,l),GetSlot(g,d),GetSlot(g,m),GetSlot(g,c),GetSlot(g,h),GetSlot(I,n),GetSlot(I,a),GetSlot(I,i),GetSlot(I,s),GetSlot(I,l),GetSlot(I,d),GetSlot(I,m),GetSlot(I,c),GetSlot(I,h),u,T,p);const C=AddZonedDateTime(S,o,u,D,G,v,0,0,0,0,0,0,0);let E=JSBI.subtract(r,C);const b=CreateTemporalZonedDateTime(C,o,u);({nanoseconds:E,days:O}=NanosecondsToDays(E,b));const{hours:M,minutes:R,seconds:Z,milliseconds:P,microseconds:F,nanoseconds:Y}=BalanceDuration(0,0,0,0,0,0,JSBI.toNumber(E),"hour");return {years:D,months:G,weeks:v,days:O,hours:M,minutes:R,seconds:Z,milliseconds:P,microseconds:F,nanoseconds:Y}}function DifferenceTemporalInstant(e,t,o,n){const a=ToTemporalInstant(o);let i,s;[i,s]="until"===e?[t,a]:[a,t];const l=GetOptionsObject(n),d=GetTemporalUnit(l,"smallestUnit","time","nanosecond"),m=LargerOfTwoTemporalUnits("second",d);let c=GetTemporalUnit(l,"largestUnit","time","auto");if("auto"===c&&(c=m),LargerOfTwoTemporalUnits(c,d)!==c)throw new RangeError(`largestUnit ${c} cannot be smaller than smallestUnit ${d}`);const h=ToTemporalRoundingMode(l,"trunc"),u=ToTemporalRoundingIncrement(l,{hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[d],!1),T=GetSlot(i,r),p=GetSlot(s,r);let f,y,{seconds:S,milliseconds:w,microseconds:g,nanoseconds:I}=DifferenceInstant(T,p,u,d,h);({hours:f,minutes:y,seconds:S,milliseconds:w,microseconds:g,nanoseconds:I}=BalanceDuration(0,0,0,S,w,g,I,c));return new(GetIntrinsic("%Temporal.Duration%"))(0,0,0,0,f,y,S,w,g,I)}function DifferenceTemporalPlainDate(e,t,r,o){const n="since"===e?-1:1,a=ToTemporalDate(r),i=GetSlot(t,u),s=GetSlot(a,u),l=ToString(i),d=ToString(s);if(l!==d)throw new RangeError(`cannot compute difference between dates of ${l} and ${d} calendars`);const m=GetOptionsObject(o),c=GetTemporalUnit(m,"smallestUnit","date","day"),h=LargerOfTwoTemporalUnits("day",c);let T=GetTemporalUnit(m,"largestUnit","date","auto");if("auto"===T&&(T=h),LargerOfTwoTemporalUnits(T,c)!==T)throw new RangeError(`largestUnit ${T} cannot be smaller than smallestUnit ${c}`);let p=ToTemporalRoundingMode(m,"trunc");"since"===e&&(p=NegateTemporalRoundingMode(p));const f=ToTemporalRoundingIncrement(m,void 0,!1),y=MergeLargestUnitOption(m,T);let{years:S,months:w,weeks:g,days:I}=CalendarDateUntil(i,t,a,y);"day"===c&&1===f||({years:S,months:w,weeks:g,days:I}=RoundDuration(S,w,g,I,0,0,0,0,0,0,f,c,p,t));return new(GetIntrinsic("%Temporal.Duration%"))(n*S,n*w,n*g,n*I,0,0,0,0,0,0)}function DifferenceTemporalPlainDateTime(e,t,r,o){const T="since"===e?-1:1,p=ToTemporalDateTime(r),f=GetSlot(t,u),y=GetSlot(p,u),S=ToString(f),w=ToString(y);if(S!==w)throw new RangeError(`cannot compute difference between dates of ${S} and ${w} calendars`);const g=GetOptionsObject(o),I=GetTemporalUnit(g,"smallestUnit","datetime","nanosecond"),D=LargerOfTwoTemporalUnits("day",I);let G=GetTemporalUnit(g,"largestUnit","datetime","auto");if("auto"===G&&(G=D),LargerOfTwoTemporalUnits(G,I)!==G)throw new RangeError(`largestUnit ${G} cannot be smaller than smallestUnit ${I}`);let v=ToTemporalRoundingMode(g,"trunc");"since"===e&&(v=NegateTemporalRoundingMode(v));const O=ToTemporalDateTimeRoundingIncrement(g,I);let{years:C,months:E,weeks:b,days:M,hours:R,minutes:Z,seconds:P,milliseconds:F,microseconds:Y,nanoseconds:j}=DifferenceISODateTime(GetSlot(t,n),GetSlot(t,a),GetSlot(t,i),GetSlot(t,s),GetSlot(t,l),GetSlot(t,d),GetSlot(t,m),GetSlot(t,c),GetSlot(t,h),GetSlot(p,n),GetSlot(p,a),GetSlot(p,i),GetSlot(p,s),GetSlot(p,l),GetSlot(p,d),GetSlot(p,m),GetSlot(p,c),GetSlot(p,h),f,G,g);const $=TemporalDateTimeToDate(t);(({years:C,months:E,weeks:b,days:M,hours:R,minutes:Z,seconds:P,milliseconds:F,microseconds:Y,nanoseconds:j}=RoundDuration(C,E,b,M,R,Z,P,F,Y,j,O,I,v,$))),({days:M,hours:R,minutes:Z,seconds:P,milliseconds:F,microseconds:Y,nanoseconds:j}=BalanceDuration(M,R,Z,P,F,Y,j,G));return new(GetIntrinsic("%Temporal.Duration%"))(T*C,T*E,T*b,T*M,T*R,T*Z,T*P,T*F,T*Y,T*j)}function DifferenceTemporalPlainTime(e,t,r,o){const n="since"===e?-1:1,a=ToTemporalTime(r),i=GetOptionsObject(o);let u=GetTemporalUnit(i,"largestUnit","time","auto");"auto"===u&&(u="hour");const T=GetTemporalUnit(i,"smallestUnit","time","nanosecond");if(LargerOfTwoTemporalUnits(u,T)!==u)throw new RangeError(`largestUnit ${u} cannot be smaller than smallestUnit ${T}`);let p=ToTemporalRoundingMode(i,"trunc");"since"===e&&(p=NegateTemporalRoundingMode(p));const f=ToTemporalRoundingIncrement(i,{hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[T],!1);let{hours:y,minutes:S,seconds:w,milliseconds:g,microseconds:I,nanoseconds:D}=DifferenceTime(GetSlot(t,s),GetSlot(t,l),GetSlot(t,d),GetSlot(t,m),GetSlot(t,c),GetSlot(t,h),GetSlot(a,s),GetSlot(a,l),GetSlot(a,d),GetSlot(a,m),GetSlot(a,c),GetSlot(a,h));(({hours:y,minutes:S,seconds:w,milliseconds:g,microseconds:I,nanoseconds:D}=RoundDuration(0,0,0,0,y,S,w,g,I,D,f,T,p))),({hours:y,minutes:S,seconds:w,milliseconds:g,microseconds:I,nanoseconds:D}=BalanceDuration(0,y,S,w,g,I,D,u));return new(GetIntrinsic("%Temporal.Duration%"))(0,0,0,0,n*y,n*S,n*w,n*g,n*I,n*D)}function DifferenceTemporalPlainYearMonth(e,t,r,o){const n="since"===e?-1:1,a=ToTemporalYearMonth(r),i=GetSlot(t,u),s=GetSlot(a,u),l=ToString(i),d=ToString(s);if(l!==d)throw new RangeError(`cannot compute difference between months of ${l} and ${d} calendars`);const m=GetOptionsObject(o),c=Me.reduce(((e,[t,r,o])=>("date"===o&&"week"!==r&&"day"!==r&&e.push(r,t),e)),[]),h=GetTemporalUnit(m,"smallestUnit","date","month");if("week"===h||"day"===h)throw new RangeError(`smallestUnit must be one of ${c.join(", ")}, not ${h}`);let T=GetTemporalUnit(m,"largestUnit","date","auto");if("week"===T||"day"===T)throw new RangeError(`largestUnit must be one of ${c.join(", ")}, not ${T}`);if("auto"===T&&(T="year"),LargerOfTwoTemporalUnits(T,h)!==T)throw new RangeError(`largestUnit ${T} cannot be smaller than smallestUnit ${h}`);let p=ToTemporalRoundingMode(m,"trunc");"since"===e&&(p=NegateTemporalRoundingMode(p));const f=ToTemporalRoundingIncrement(m,void 0,!1),y=CalendarFields(i,["monthCode","year"]),S=PrepareTemporalFields(a,y,[]);S.day=1;const w=PrepareTemporalFields(t,y,[]);w.day=1;const g=CalendarDateFromFields(i,S),I=CalendarDateFromFields(i,w),D=MergeLargestUnitOption(m,T);let{years:G,months:v}=CalendarDateUntil(i,I,g,D);"month"===h&&1===f||({years:G,months:v}=RoundDuration(G,v,0,0,0,0,0,0,0,0,f,h,p,I));return new(GetIntrinsic("%Temporal.Duration%"))(n*G,n*v,0,0,0,0,0,0,0,0)}function DifferenceTemporalZonedDateTime(e,t,o,n){const a="since"===e?-1:1,i=ToTemporalZonedDateTime(o),s=GetSlot(t,u),l=GetSlot(i,u),d=ToString(s),m=ToString(l);if(d!==m)throw new RangeError(`cannot compute difference between dates of ${d} and ${m} calendars`);const c=GetOptionsObject(n),h=GetTemporalUnit(c,"smallestUnit","datetime","nanosecond"),T=LargerOfTwoTemporalUnits("hour",h);let f=GetTemporalUnit(c,"largestUnit","datetime","auto");if("auto"===f&&(f=T),LargerOfTwoTemporalUnits(f,h)!==f)throw new RangeError(`largestUnit ${f} cannot be smaller than smallestUnit ${h}`);let y=ToTemporalRoundingMode(c,"trunc");"since"===e&&(y=NegateTemporalRoundingMode(y));const S=ToTemporalDateTimeRoundingIncrement(c,h),w=GetSlot(t,r),g=GetSlot(i,r);let I,D,G,v,O,C,E,b,M,R;if("year"!==f&&"month"!==f&&"week"!==f&&"day"!==f)I=0,D=0,G=0,v=0,({seconds:E,milliseconds:b,microseconds:M,nanoseconds:R}=DifferenceInstant(w,g,S,h,y)),({hours:O,minutes:C,seconds:E,milliseconds:b,microseconds:M,nanoseconds:R}=BalanceDuration(0,0,0,E,b,M,R,f));else {const e=GetSlot(t,p);if(!TimeZoneEquals(e,GetSlot(i,p)))throw new RangeError("When calculating difference between time zones, largestUnit must be 'hours' or smaller because day lengths can vary between time zones due to DST or time zone offset changes.");const r=MergeLargestUnitOption(c,f);(({years:I,months:D,weeks:G,days:v,hours:O,minutes:C,seconds:E,milliseconds:b,microseconds:M,nanoseconds:R}=DifferenceZonedDateTime(w,g,e,s,f,r))),({years:I,months:D,weeks:G,days:v,hours:O,minutes:C,seconds:E,milliseconds:b,microseconds:M,nanoseconds:R}=RoundDuration(I,D,G,v,O,C,E,b,M,R,S,h,y,t)),({years:I,months:D,weeks:G,days:v,hours:O,minutes:C,seconds:E,milliseconds:b,microseconds:M,nanoseconds:R}=AdjustRoundedDurationDays(I,D,G,v,O,C,E,b,M,R,S,h,y,t));}return new(GetIntrinsic("%Temporal.Duration%"))(a*I,a*D,a*G,a*v,a*O,a*C,a*E,a*b,a*M,a*R)}function AddISODate(e,t,r,o,n,a,i,s){let l=e,d=t,m=r,c=a,h=i;return l+=o,d+=n,({year:l,month:d}=BalanceISOYearMonth(l,d)),({year:l,month:d,day:m}=RegulateISODate(l,d,m,s)),h+=7*c,m+=h,({year:l,month:d,day:m}=BalanceISODate(l,d,m)),{year:l,month:d,day:m}}function AddTime(e,t,r,o,n,a,i,s,l,d,m,c){let h=e,u=t,T=r,p=o,f=n,y=a;h+=i,u+=s,T+=l,p+=d,f+=m,y+=c;let S=0;return ({deltaDays:S,hour:h,minute:u,second:T,millisecond:p,microsecond:f,nanosecond:y}=BalanceTime(h,u,T,p,f,y)),{deltaDays:S,hour:h,minute:u,second:T,millisecond:p,microsecond:f,nanosecond:y}}function AddDuration(e,t,o,n,a,i,s,l,d,m,c,h,f,y,S,w,g,I,D,G,v){const O=LargerOfTwoTemporalUnits(DefaultTemporalLargestUnit(e,t,o,n,a,i,s,l,d,m),DefaultTemporalLargestUnit(c,h,f,y,S,w,g,I,D,G));let C,E,b,M,R,Z,P,F,Y,j;if(v)if(IsTemporalDate(v)){const r=GetIntrinsic("%Temporal.Duration%"),T=GetSlot(v,u),p=new r(e,t,o,n,0,0,0,0,0,0),$=new r(c,h,f,y,0,0,0,0,0,0),B=T.dateAdd,N=CalendarDateAdd(T,v,p,void 0,B),k=CalendarDateAdd(T,N,$,void 0,B),A=LargerOfTwoTemporalUnits("day",O),U=le(null);U.largestUnit=A,({years:C,months:E,weeks:b,days:M}=CalendarDateUntil(T,v,k,U)),({days:M,hours:R,minutes:Z,seconds:P,milliseconds:F,microseconds:Y,nanoseconds:j}=BalanceDuration(M,a+S,i+w,s+g,l+I,d+D,m+G,O));}else {const $=GetIntrinsic("%Temporal.Instant%"),B=GetSlot(v,p),N=GetSlot(v,u),k=AddZonedDateTime(GetSlot(v,T),B,N,e,t,o,n,a,i,s,l,d,m),A=AddZonedDateTime(new $(k),B,N,c,h,f,y,S,w,g,I,D,G);"year"!==O&&"month"!==O&&"week"!==O&&"day"!==O?(C=0,E=0,b=0,M=0,({seconds:P,milliseconds:F,microseconds:Y,nanoseconds:j}=DifferenceInstant(GetSlot(v,r),A,1,"nanosecond","halfExpand")),({hours:R,minutes:Z,seconds:P,milliseconds:F,microseconds:Y,nanoseconds:j}=BalanceDuration(0,0,0,P,F,Y,j,O))):({years:C,months:E,weeks:b,days:M,hours:R,minutes:Z,seconds:P,milliseconds:F,microseconds:Y,nanoseconds:j}=DifferenceZonedDateTime(GetSlot(v,r),A,B,N,O,le(null)));}else {if("year"===O||"month"===O||"week"===O)throw new RangeError("relativeTo is required for years, months, or weeks arithmetic");C=E=b=0,({days:M,hours:R,minutes:Z,seconds:P,milliseconds:F,microseconds:Y,nanoseconds:j}=BalanceDuration(n+y,a+S,i+w,s+g,l+I,d+D,m+G,O));}return RejectDuration(C,E,b,M,R,Z,P,F,Y,j),{years:C,months:E,weeks:b,days:M,hours:R,minutes:Z,seconds:P,milliseconds:F,microseconds:Y,nanoseconds:j}}function AddInstant(t,r,o,n,a,i,s){let l=he;l=JSBI.add(l,JSBI.BigInt(s)),l=JSBI.add(l,JSBI.multiply(JSBI.BigInt(i),pe)),l=JSBI.add(l,JSBI.multiply(JSBI.BigInt(a),fe)),l=JSBI.add(l,JSBI.multiply(JSBI.BigInt(n),ye)),l=JSBI.add(l,JSBI.multiply(JSBI.BigInt(o),JSBI.BigInt(6e10))),l=JSBI.add(l,JSBI.multiply(JSBI.BigInt(r),JSBI.BigInt(36e11)));const d=JSBI.add(t,l);return ValidateEpochNanoseconds(d),d}function AddDateTime(e,t,r,o,s,l,d,m,c,h,u,T,p,f,y,S,w,g,I,D,G){let v=f,{deltaDays:O,hour:C,minute:E,second:b,millisecond:M,microsecond:R,nanosecond:Z}=AddTime(o,s,l,d,m,c,y,S,w,g,I,D);v+=O;const P=GetIntrinsic("%Temporal.Duration%"),F=CalendarDateAdd(h,CreateTemporalDate(e,t,r,h),new P(u,T,p,v,0,0,0,0,0,0),G);return {year:GetSlot(F,n),month:GetSlot(F,a),day:GetSlot(F,i),hour:C,minute:E,second:b,millisecond:M,microsecond:R,nanosecond:Z}}function AddZonedDateTime(e,t,o,u,T,p,f,y,S,w,g,I,D,G){const v=GetIntrinsic("%Temporal.Duration%");if(0===DurationSign(u,T,p,f,0,0,0,0,0,0))return AddInstant(GetSlot(e,r),y,S,w,g,I,D);const O=BuiltinTimeZoneGetPlainDateTimeFor(t,e,o),C=CalendarDateAdd(o,CreateTemporalDate(GetSlot(O,n),GetSlot(O,a),GetSlot(O,i),o),new v(u,T,p,f,0,0,0,0,0,0),G),E=CreateTemporalDateTime(GetSlot(C,n),GetSlot(C,a),GetSlot(C,i),GetSlot(O,s),GetSlot(O,l),GetSlot(O,d),GetSlot(O,m),GetSlot(O,c),GetSlot(O,h),o);return AddInstant(GetSlot(BuiltinTimeZoneGetInstantFor(t,E,"compatible"),r),y,S,w,g,I,D)}function AddDurationToOrSubtractDurationFromDuration(e,t,r,o){const n="subtract"===e?-1:1;let{years:a,months:i,weeks:s,days:l,hours:d,minutes:m,seconds:c,milliseconds:h,microseconds:u,nanoseconds:T}=ToTemporalDurationRecord(r);const p=ToRelativeTemporalObject(GetOptionsObject(o));({years:a,months:i,weeks:s,days:l,hours:d,minutes:m,seconds:c,milliseconds:h,microseconds:u,nanoseconds:T}=AddDuration(GetSlot(t,f),GetSlot(t,y),GetSlot(t,S),GetSlot(t,w),GetSlot(t,g),GetSlot(t,I),GetSlot(t,D),GetSlot(t,G),GetSlot(t,v),GetSlot(t,O),n*a,n*i,n*s,n*l,n*d,n*m,n*c,n*h,n*u,n*T,p));return new(GetIntrinsic("%Temporal.Duration%"))(a,i,s,l,d,m,c,h,u,T)}function AddDurationToOrSubtractDurationFromInstant(e,t,o){const n="subtract"===e?-1:1,{hours:a,minutes:i,seconds:s,milliseconds:l,microseconds:d,nanoseconds:m}=function ToLimitedTemporalDuration(e,t){let r=ToTemporalDurationRecord(e);for(const e of t)if(0!==r[e])throw new RangeError(`Duration field ${e} not supported by Temporal.Instant. Try Temporal.ZonedDateTime instead.`);return r}(o,["years","months","weeks","days"]),c=AddInstant(GetSlot(t,r),n*a,n*i,n*s,n*l,n*d,n*m);return new(GetIntrinsic("%Temporal.Instant%"))(c)}function AddDurationToOrSubtractDurationFromPlainDateTime(e,t,r,o){const T="subtract"===e?-1:1,{years:p,months:f,weeks:y,days:S,hours:w,minutes:g,seconds:I,milliseconds:D,microseconds:G,nanoseconds:v}=ToTemporalDurationRecord(r),O=GetOptionsObject(o),C=GetSlot(t,u),{year:E,month:b,day:M,hour:R,minute:Z,second:P,millisecond:F,microsecond:Y,nanosecond:j}=AddDateTime(GetSlot(t,n),GetSlot(t,a),GetSlot(t,i),GetSlot(t,s),GetSlot(t,l),GetSlot(t,d),GetSlot(t,m),GetSlot(t,c),GetSlot(t,h),C,T*p,T*f,T*y,T*S,T*w,T*g,T*I,T*D,T*G,T*v,O);return CreateTemporalDateTime(E,b,M,R,Z,P,F,Y,j,C)}function AddDurationToOrSubtractDurationFromPlainTime(e,t,r){const o="subtract"===e?-1:1,{hours:n,minutes:a,seconds:i,milliseconds:u,microseconds:T,nanoseconds:p}=ToTemporalDurationRecord(r);let{hour:f,minute:y,second:S,millisecond:w,microsecond:g,nanosecond:I}=AddTime(GetSlot(t,s),GetSlot(t,l),GetSlot(t,d),GetSlot(t,m),GetSlot(t,c),GetSlot(t,h),o*n,o*a,o*i,o*u,o*T,o*p);({hour:f,minute:y,second:S,millisecond:w,microsecond:g,nanosecond:I}=RegulateTime(f,y,S,w,g,I,"reject"));return new(GetIntrinsic("%Temporal.PlainTime%"))(f,y,S,w,g,I)}function AddDurationToOrSubtractDurationFromPlainYearMonth(e,t,r,o){let n=ToTemporalDurationRecord(r);"subtract"===e&&(n={years:-n.years,months:-n.months,weeks:-n.weeks,days:-n.days,hours:-n.hours,minutes:-n.minutes,seconds:-n.seconds,milliseconds:-n.milliseconds,microseconds:-n.microseconds,nanoseconds:-n.nanoseconds});let{years:a,months:i,weeks:s,days:l,hours:d,minutes:m,seconds:c,milliseconds:h,microseconds:T,nanoseconds:p}=n;({days:l}=BalanceDuration(l,d,m,c,h,T,p,"day"));const f=GetOptionsObject(o),y=GetSlot(t,u),S=CalendarFields(y,["monthCode","year"]),w=PrepareTemporalFields(t,S,[]),g=DurationSign(a,i,s,l,0,0,0,0,0,0);w.day=g<0?ToPositiveInteger(CalendarDaysInMonth(y,t)):1;const I=CalendarDateFromFields(y,w),D=new(GetIntrinsic("%Temporal.Duration%"))(a,i,s,l,0,0,0,0,0,0),G=se(le(null),f);return CalendarYearMonthFromFields(y,PrepareTemporalFields(CalendarDateAdd(y,I,D,f),S,[]),G)}function AddDurationToOrSubtractDurationFromZonedDateTime(e,t,r,o){const n="subtract"===e?-1:1,{years:a,months:i,weeks:s,days:l,hours:d,minutes:m,seconds:c,milliseconds:h,microseconds:f,nanoseconds:y}=ToTemporalDurationRecord(r),S=GetOptionsObject(o),w=GetSlot(t,p),g=GetSlot(t,u);return CreateTemporalZonedDateTime(AddZonedDateTime(GetSlot(t,T),w,g,n*a,n*i,n*s,n*l,n*d,n*m,n*c,n*h,n*f,n*y,S),w,g)}function RoundNumberToIncrement(t,r,o){if(1===r)return t;let{quotient:n,remainder:a}=divmod(t,JSBI.BigInt(r));if(JSBI.equal(a,he))return t;const i=JSBI.lessThan(a,he)?-1:1;switch(o){case"ceil":i>0&&(n=JSBI.add(n,JSBI.BigInt(i)));break;case"floor":i<0&&(n=JSBI.add(n,JSBI.BigInt(i)));break;case"trunc":break;case"halfExpand":JSBI.toNumber(abs(JSBI.multiply(a,JSBI.BigInt(2))))>=r&&(n=JSBI.add(n,JSBI.BigInt(i)));}return JSBI.multiply(n,JSBI.BigInt(r))}function RoundInstant(t,r,o,n){let a=JSBI.remainder(t,JSBI.BigInt(864e11));JSBI.lessThan(a,he)&&(a=JSBI.add(a,JSBI.BigInt(864e11)));const i=JSBI.subtract(t,a),s=RoundNumberToIncrement(a,Ne[o]*r,n);return JSBI.add(i,s)}function RoundISODateTime(e,t,r,o,n,a,i,s,l,d,m,c,h=864e11){const{deltaDays:u,hour:T,minute:p,second:f,millisecond:y,microsecond:S,nanosecond:w}=RoundTime(o,n,a,i,s,l,d,m,c,h),{year:g,month:I,day:D}=BalanceISODate(e,t,r+u);return {year:g,month:I,day:D,hour:T,minute:p,second:f,millisecond:y,microsecond:S,nanosecond:w}}function RoundTime(t,r,o,n,a,i,s,l,d,m=864e11){let c=he;switch(l){case"day":case"hour":c=JSBI.BigInt(t);case"minute":c=JSBI.add(JSBI.multiply(c,Te),JSBI.BigInt(r));case"second":c=JSBI.add(JSBI.multiply(c,Te),JSBI.BigInt(o));case"millisecond":c=JSBI.add(JSBI.multiply(c,pe),JSBI.BigInt(n));case"microsecond":c=JSBI.add(JSBI.multiply(c,pe),JSBI.BigInt(a));case"nanosecond":c=JSBI.add(JSBI.multiply(c,pe),JSBI.BigInt(i));}const h="day"===l?m:Ne[l],u=RoundNumberToIncrement(c,h*s,d),T=JSBI.toNumber(JSBI.divide(u,JSBI.BigInt(h)));switch(l){case"day":return {deltaDays:T,hour:0,minute:0,second:0,millisecond:0,microsecond:0,nanosecond:0};case"hour":return BalanceTime(T,0,0,0,0,0);case"minute":return BalanceTime(t,T,0,0,0,0);case"second":return BalanceTime(t,r,T,0,0,0);case"millisecond":return BalanceTime(t,r,o,T,0,0);case"microsecond":return BalanceTime(t,r,o,n,T,0);case"nanosecond":return BalanceTime(t,r,o,n,a,T);default:throw new Error(`Invalid unit ${l}`)}}function DaysUntil(e,t){return DifferenceISODate(GetSlot(e,n),GetSlot(e,a),GetSlot(e,i),GetSlot(t,n),GetSlot(t,a),GetSlot(t,i),"day").days}function MoveRelativeDate(e,t,r){const o=CalendarDateAdd(e,t,r,void 0);return {relativeTo:o,days:DaysUntil(t,o)}}function MoveRelativeZonedDateTime(e,t,r,o,n){const a=GetSlot(e,p),i=GetSlot(e,u);return CreateTemporalZonedDateTime(AddZonedDateTime(GetSlot(e,T),a,i,t,r,o,n,0,0,0,0,0,0),a,i)}function AdjustRoundedDurationDays(t,r,o,n,a,i,s,l,d,m,c,h,f,y){let S=t,w=r,g=o,I=n,D=a,G=i,v=s,O=l,C=d,E=m;if(!IsTemporalZonedDateTime(y)||"year"===h||"month"===h||"week"===h||"day"===h||"nanosecond"===h&&1===c)return {years:S,months:w,weeks:g,days:I,hours:D,minutes:G,seconds:v,milliseconds:O,microseconds:C,nanoseconds:E};let b=TotalDurationNanoseconds(0,D,G,v,O,C,E,0);const M=ee(JSBI.toNumber(b)),R=GetSlot(y,p),Z=GetSlot(y,u),P=AddZonedDateTime(GetSlot(y,T),R,Z,S,w,g,I,0,0,0,0,0,0),F=AddZonedDateTime(new(GetIntrinsic("%Temporal.Instant%"))(P),R,Z,0,0,0,M,0,0,0,0,0,0),Y=JSBI.subtract(F,P);return JSBI.greaterThanOrEqual(JSBI.multiply(JSBI.subtract(b,Y),JSBI.BigInt(M)),he)&&(({years:S,months:w,weeks:g,days:I}=AddDuration(S,w,g,I,0,0,0,0,0,0,0,0,0,M,0,0,0,0,0,0,y)),b=RoundInstant(JSBI.subtract(b,Y),c,h,f),({hours:D,minutes:G,seconds:v,milliseconds:O,microseconds:C,nanoseconds:E}=BalanceDuration(0,0,0,0,0,0,JSBI.toNumber(b),"hour"))),{years:S,months:w,weeks:g,days:I,hours:D,minutes:G,seconds:v,milliseconds:O,microseconds:C,nanoseconds:E}}function RoundDuration(t,r,o,n,a,i,s,l,d,m,c,h,T,p){let f=t,y=r,S=o,w=n,g=a,I=i,D=s,G=l,v=d,O=JSBI.BigInt(m);const C=GetIntrinsic("%Temporal.Duration%");let E,b,M,R,Z=p;if(Z){if(IsTemporalZonedDateTime(Z))b=Z,Z=ToTemporalDate(Z);else if(!IsTemporalDate(Z))throw new TypeError("starting point must be PlainDate or ZonedDateTime");E=GetSlot(Z,u);}if("year"===h||"month"===h||"week"===h||"day"===h){let t,r,o;O=TotalDurationNanoseconds(0,g,I,D,G,v,m,0),b&&(t=MoveRelativeZonedDateTime(b,f,y,S,w)),({days:r,nanoseconds:O,dayLengthNs:o}=NanosecondsToDays(O,t)),M=JSBI.BigInt(o),w+=r,g=I=D=G=v=0;}switch(h){case"year":{if(!E)throw new RangeError("A starting point is required for years rounding");const t=new C(f),r=E.dateAdd,o=CalendarDateAdd(E,Z,t,void 0,r),n=CalendarDateAdd(E,Z,new C(f,y,S),void 0,r);Z=o,w+=DaysUntil(o,n);const a=CalendarDateAdd(E,Z,{days:w},void 0,r),i=le(null);i.largestUnit="year";const s=CalendarDateUntil(E,Z,a,i).years;f+=s;const l=Z;Z=CalendarDateAdd(E,Z,{years:s},void 0,r);w-=DaysUntil(l,Z);const d=new C(w<0?-1:1);let{days:m}=MoveRelativeDate(E,Z,d);m=K(m);const h=JSBI.multiply(JSBI.BigInt(m),M);O=JSBI.add(JSBI.add(JSBI.multiply(h,JSBI.BigInt(f)),JSBI.multiply(JSBI.BigInt(w),M)),O);const u=RoundNumberToIncrement(O,JSBI.toNumber(JSBI.multiply(h,JSBI.BigInt(c))),T);R=JSBI.toNumber(O)/JSBI.toNumber(h),f=JSBI.toNumber(JSBI.divide(u,h)),O=he,y=S=w=0;break}case"month":{if(!E)throw new RangeError("A starting point is required for months rounding");const t=new C(f,y),r=E.dateAdd,o=CalendarDateAdd(E,Z,t,void 0,r),n=CalendarDateAdd(E,Z,new C(f,y,S),void 0,r);Z=o,w+=DaysUntil(o,n);const a=ee(w),i=new C(0,w<0?-1:1);let s;for(({relativeTo:Z,days:s}=MoveRelativeDate(E,Z,i));K(w)>=K(s);)y+=a,w-=s,({relativeTo:Z,days:s}=MoveRelativeDate(E,Z,i));s=K(s);const l=JSBI.multiply(JSBI.BigInt(s),M);O=JSBI.add(JSBI.add(JSBI.multiply(l,JSBI.BigInt(y)),JSBI.multiply(JSBI.BigInt(w),M)),O);const d=RoundNumberToIncrement(O,JSBI.toNumber(JSBI.multiply(l,JSBI.BigInt(c))),T);R=JSBI.toNumber(O)/JSBI.toNumber(l),y=JSBI.toNumber(JSBI.divide(d,l)),O=he,S=w=0;break}case"week":{if(!E)throw new RangeError("A starting point is required for weeks rounding");const t=ee(w),r=new C(0,0,w<0?-1:1);let o;for(({relativeTo:Z,days:o}=MoveRelativeDate(E,Z,r));K(w)>=K(o);)S+=t,w-=o,({relativeTo:Z,days:o}=MoveRelativeDate(E,Z,r));o=K(o);const n=JSBI.multiply(JSBI.BigInt(o),M);O=JSBI.add(JSBI.add(JSBI.multiply(n,JSBI.BigInt(S)),JSBI.multiply(JSBI.BigInt(w),M)),O);const a=RoundNumberToIncrement(O,JSBI.toNumber(JSBI.multiply(n,JSBI.BigInt(c))),T);R=JSBI.toNumber(O)/JSBI.toNumber(n),S=JSBI.toNumber(JSBI.divide(a,n)),O=he,w=0;break}case"day":{const t=M;O=JSBI.add(JSBI.multiply(t,JSBI.BigInt(w)),O);const r=RoundNumberToIncrement(O,JSBI.toNumber(JSBI.multiply(t,JSBI.BigInt(c))),T);R=JSBI.toNumber(O)/JSBI.toNumber(t),w=JSBI.toNumber(JSBI.divide(r,t)),O=he;break}case"hour":{const t=36e11;let r=JSBI.multiply(JSBI.BigInt(g),JSBI.BigInt(36e11));r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(I),JSBI.BigInt(6e10))),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(D),ye)),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(G),fe)),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(v),pe)),r=JSBI.add(r,O),R=JSBI.toNumber(r)/t;const o=RoundNumberToIncrement(r,t*c,T);g=JSBI.toNumber(JSBI.divide(o,JSBI.BigInt(t))),O=he,I=D=G=v=0;break}case"minute":{const t=6e10;let r=JSBI.multiply(JSBI.BigInt(I),JSBI.BigInt(6e10));r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(D),ye)),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(G),fe)),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(v),pe)),r=JSBI.add(r,O),R=JSBI.toNumber(r)/t;const o=RoundNumberToIncrement(r,t*c,T);I=JSBI.toNumber(JSBI.divide(o,JSBI.BigInt(t))),O=he,D=G=v=0;break}case"second":{const t=1e9;let r=JSBI.multiply(JSBI.BigInt(D),ye);r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(G),fe)),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(v),pe)),r=JSBI.add(r,O),R=JSBI.toNumber(r)/t;const o=RoundNumberToIncrement(r,t*c,T);D=JSBI.toNumber(JSBI.divide(o,JSBI.BigInt(t))),O=he,G=v=0;break}case"millisecond":{const t=1e6;let r=JSBI.multiply(JSBI.BigInt(G),fe);r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(v),pe)),r=JSBI.add(r,O),R=JSBI.toNumber(r)/t;const o=RoundNumberToIncrement(r,t*c,T);G=JSBI.toNumber(JSBI.divide(o,JSBI.BigInt(t))),O=he,v=0;break}case"microsecond":{const t=1e3;let r=JSBI.multiply(JSBI.BigInt(v),pe);r=JSBI.add(r,O),R=JSBI.toNumber(r)/t;const o=RoundNumberToIncrement(r,t*c,T);v=JSBI.toNumber(JSBI.divide(o,JSBI.BigInt(t))),O=he;break}case"nanosecond":R=JSBI.toNumber(O),O=RoundNumberToIncrement(O,c,T);}return {years:f,months:y,weeks:S,days:w,hours:g,minutes:I,seconds:D,milliseconds:G,microseconds:v,nanoseconds:JSBI.toNumber(O),total:R}}function CompareISODate(e,t,r,o,n,a){for(const[i,s]of [[e,o],[t,n],[r,a]])if(i!==s)return ComparisonResult(i-s);return 0}function NonNegativeModulo(e,t){let r=e%t;return me(r,-0)?0:(r<0&&(r+=t),r)}function ToBigIntExternal(e){const t=ToBigInt(e);return void 0!==globalThis.BigInt?globalThis.BigInt(t.toString(10)):t}function ToBigInt(t){if(t instanceof JSBI)return t;let r=t;if("object"==typeof t){const e=t[Symbol.toPrimitive];e&&"function"==typeof e&&(r=ce(e,t,["number"]));}switch(typeof r){case"undefined":case"object":case"number":case"symbol":default:throw new TypeError(`cannot convert ${typeof t} to bigint`);case"string":if(!r.match(/^\s*(?:[+-]?\d+\s*)?$/))throw new SyntaxError("invalid BigInt syntax");case"bigint":try{return JSBI.BigInt(r.toString())}catch(e){if(e instanceof Error&&e.message.startsWith("Invalid integer"))throw new SyntaxError(e.message);throw e}case"boolean":return r?ue:he}}const $e=(()=>{let t=JSBI.BigInt(Date.now()%1e6);return ()=>{const r=JSBI.BigInt(Date.now()),o=JSBI.add(JSBI.multiply(r,fe),t);return t=JSBI.remainder(r,fe),JSBI.greaterThan(o,Ie)?Ie:JSBI.lessThan(o,ge)?ge:o}})();function ComparisonResult(e){return e<0?-1:e>0?1:e}function GetOptionsObject(e){if(void 0===e)return le(null);if(IsObject(e)&&null!==e)return e;throw new TypeError("Options parameter must be an object, not "+(null===e?"null":""+typeof e))}function CreateOnePropObject(e,t){const r=le(null);return r[e]=t,r}function GetOption(e,t,r,o){let n=e[t];if(void 0!==n){if(n=ToString(n),!r.includes(n))throw new RangeError(`${t} must be one of ${r.join(", ")}, not ${n}`);return n}return o}function IsBuiltinCalendar(e){return z.call(Ce,e)}const Be=new RegExp(`^${B.source}$`);function bisect(t,r,o,n=t(r),a=t(o)){let i=JSBI.BigInt(r),s=JSBI.BigInt(o),l=n,d=a;for(;JSBI.greaterThan(JSBI.subtract(s,i),ue);){const r=JSBI.divide(JSBI.add(i,s),JSBI.BigInt(2)),o=t(r);if(o===l)i=r,l=o;else {if(o!==d)throw new Error(`invalid state in bisection ${l} - ${o} - ${d}`);s=r,d=o;}}return s}const Ne={hour:36e11,minute:6e10,second:1e9,millisecond:1e6,microsecond:1e3,nanosecond:1},ke=Symbol("date"),Ae=Symbol("ym"),Ue=Symbol("md"),Le=Symbol("time"),xe=Symbol("datetime"),He=Symbol("zoneddatetime"),qe=Symbol("instant"),We=Symbol("original"),ze=Symbol("timezone"),_e=Symbol("timezone-id-given"),Je=Symbol("calendar-id"),Ve=Symbol("locale"),Xe=Symbol("options"),descriptor=e=>({value:e,enumerable:!0,writable:!1,configurable:!0}),Ke=globalThis.Intl.DateTimeFormat,Qe=Object.assign,et=Object.prototype.hasOwnProperty,tt=Reflect.apply;function getPropLazy(e,t){let r=e[t];return "function"==typeof r&&(r=new Ke(e[Ve],r(e[Xe])),e[t]=r),r}function getResolvedTimeZoneLazy(e){let t=e[ze];return "string"==typeof t&&(t=ToTemporalTimeZone(t),e[ze]=t),t}function DateTimeFormatImpl(e,t={}){if(!(this instanceof DateTimeFormatImpl))return new DateTimeFormatImpl(e,t);const r=void 0!==t,o=r?Qe({},t):{},n=new Ke(e,o),a=n.resolvedOptions();if(r){const e=Qe({},a);for(const t in e)tt(et,o,[t])||delete e[t];this[Xe]=e;}else this[Xe]=o;this[_e]=o.timeZone?o.timeZone:null,this[Ve]=a.locale,this[We]=n,this[ze]=a.timeZone,this[Je]=a.calendar,this[ke]=dateAmend,this[Ae]=yearMonthAmend,this[Ue]=monthDayAmend,this[Le]=timeAmend,this[xe]=datetimeAmend,this[He]=zonedDateTimeAmend,this[qe]=instantAmend;}Object.defineProperty(DateTimeFormatImpl,"name",{writable:!0,value:"DateTimeFormat"}),DateTimeFormatImpl.supportedLocalesOf=function(e,t){return Ke.supportedLocalesOf(e,t)};const rt={resolvedOptions:descriptor((function resolvedOptions(){return this[We].resolvedOptions()})),format:descriptor((function format(e,...t){let{instant:r,formatter:o,timeZone:n}=extractOverrides(e,this);if(r&&o)return o=adjustFormatterTimeZone(o,n),o.format(r.epochMilliseconds);return this[We].format(e,...t)})),formatRange:descriptor((function formatRange(e,t){if(isTemporalObject(e)||isTemporalObject(t)){if(!sameTemporalType(e,t))throw new TypeError("Intl.DateTimeFormat.formatRange accepts two values of the same type");const{instant:r,formatter:o,timeZone:n}=extractOverrides(e,this),{instant:a,formatter:i,timeZone:s}=extractOverrides(t,this);if(n&&s&&n!==s)throw new RangeError("cannot format range between different time zones");if(r&&a&&o&&i&&o===i){return adjustFormatterTimeZone(o,n).formatRange(r.epochMilliseconds,a.epochMilliseconds)}}return this[We].formatRange(e,t)}))};"formatToParts"in Ke.prototype&&(rt.formatToParts=descriptor((function formatToParts(e,...t){let{instant:r,formatter:o,timeZone:n}=extractOverrides(e,this);if(r&&o)return o=adjustFormatterTimeZone(o,n),o.formatToParts(r.epochMilliseconds);return this[We].formatToParts(e,...t)}))),"formatRangeToParts"in Ke.prototype&&(rt.formatRangeToParts=descriptor((function formatRangeToParts(e,t){if(isTemporalObject(e)||isTemporalObject(t)){if(!sameTemporalType(e,t))throw new TypeError("Intl.DateTimeFormat.formatRangeToParts accepts two values of the same type");const{instant:r,formatter:o,timeZone:n}=extractOverrides(e,this),{instant:a,formatter:i,timeZone:s}=extractOverrides(t,this);if(n&&s&&n!==s)throw new RangeError("cannot format range between different time zones");if(r&&a&&o&&i&&o===i){return adjustFormatterTimeZone(o,n).formatRangeToParts(r.epochMilliseconds,a.epochMilliseconds)}}return this[We].formatRangeToParts(e,t)}))),DateTimeFormatImpl.prototype=Object.create(Ke.prototype,rt),Object.defineProperty(DateTimeFormatImpl,"prototype",{writable:!1,enumerable:!1,configurable:!1});const ot=DateTimeFormatImpl;function adjustFormatterTimeZone(e,t){if(!t)return e;const r=e.resolvedOptions();return r.timeZone===t?e:((r.dateStyle||r.timeStyle)&&(delete r.weekday,delete r.era,delete r.year,delete r.month,delete r.day,delete r.hour,delete r.minute,delete r.second,delete r.timeZoneName,delete r.hourCycle,delete r.hour12,delete r.dayPeriod),new Ke(r.locale,{...r,timeZone:t}))}function amend(e={},t={}){const r=Qe({},e);for(const e of ["year","month","day","hour","minute","second","weekday","dayPeriod","timeZoneName","dateStyle","timeStyle"])r[e]=e in t?t[e]:r[e],!1!==r[e]&&void 0!==r[e]||delete r[e];return r}function timeAmend(e){let t=amend(e,{year:!1,month:!1,day:!1,weekday:!1,timeZoneName:!1,dateStyle:!1});return hasTimeOptions(t)||(t=Qe({},t,{hour:"numeric",minute:"numeric",second:"numeric"})),t}function yearMonthAmend(e){let t=amend(e,{day:!1,hour:!1,minute:!1,second:!1,weekday:!1,dayPeriod:!1,timeZoneName:!1,dateStyle:!1,timeStyle:!1});return "year"in t||"month"in t||(t=Qe(t,{year:"numeric",month:"numeric"})),t}function monthDayAmend(e){let t=amend(e,{year:!1,hour:!1,minute:!1,second:!1,weekday:!1,dayPeriod:!1,timeZoneName:!1,dateStyle:!1,timeStyle:!1});return "month"in t||"day"in t||(t=Qe({},t,{month:"numeric",day:"numeric"})),t}function dateAmend(e){let t=amend(e,{hour:!1,minute:!1,second:!1,dayPeriod:!1,timeZoneName:!1,timeStyle:!1});return hasDateOptions(t)||(t=Qe({},t,{year:"numeric",month:"numeric",day:"numeric"})),t}function datetimeAmend(e){let t=amend(e,{timeZoneName:!1});return hasTimeOptions(t)||hasDateOptions(t)||(t=Qe({},t,{year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"})),t}function zonedDateTimeAmend(e){let t=e;return hasTimeOptions(t)||hasDateOptions(t)||(t=Qe({},t,{year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"}),void 0===t.timeZoneName&&(t.timeZoneName="short")),t}function instantAmend(e){let t=e;return hasTimeOptions(t)||hasDateOptions(t)||(t=Qe({},t,{year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"})),t}function hasDateOptions(e){return "year"in e||"month"in e||"day"in e||"weekday"in e||"dateStyle"in e}function hasTimeOptions(e){return "hour"in e||"minute"in e||"second"in e||"timeStyle"in e||"dayPeriod"in e}function isTemporalObject(e){return IsTemporalDate(e)||IsTemporalTime(e)||IsTemporalDateTime(e)||IsTemporalZonedDateTime(e)||IsTemporalYearMonth(e)||IsTemporalMonthDay(e)||IsTemporalInstant(e)}function sameTemporalType(e,t){return !(!isTemporalObject(e)||!isTemporalObject(t))&&(!(IsTemporalTime(e)&&!IsTemporalTime(t))&&(!(IsTemporalDate(e)&&!IsTemporalDate(t))&&(!(IsTemporalDateTime(e)&&!IsTemporalDateTime(t))&&(!(IsTemporalZonedDateTime(e)&&!IsTemporalZonedDateTime(t))&&(!(IsTemporalYearMonth(e)&&!IsTemporalYearMonth(t))&&(!(IsTemporalMonthDay(e)&&!IsTemporalMonthDay(t))&&!(IsTemporalInstant(e)&&!IsTemporalInstant(t))))))))}function extractOverrides(e,t){const r=GetIntrinsic("%Temporal.PlainDateTime%");if(IsTemporalTime(e)){const o=new r(1970,1,1,GetSlot(e,s),GetSlot(e,l),GetSlot(e,d),GetSlot(e,m),GetSlot(e,c),GetSlot(e,h),t[Je]);return {instant:BuiltinTimeZoneGetInstantFor(getResolvedTimeZoneLazy(t),o,"compatible"),formatter:getPropLazy(t,Le)}}if(IsTemporalYearMonth(e)){const o=GetSlot(e,n),s=GetSlot(e,a),l=GetSlot(e,i),d=ToString(GetSlot(e,u));if(d!==t[Je])throw new RangeError(`cannot format PlainYearMonth with calendar ${d} in locale with calendar ${t[Je]}`);const m=new r(o,s,l,12,0,0,0,0,0,d);return {instant:BuiltinTimeZoneGetInstantFor(getResolvedTimeZoneLazy(t),m,"compatible"),formatter:getPropLazy(t,Ae)}}if(IsTemporalMonthDay(e)){const o=GetSlot(e,n),s=GetSlot(e,a),l=GetSlot(e,i),d=ToString(GetSlot(e,u));if(d!==t[Je])throw new RangeError(`cannot format PlainMonthDay with calendar ${d} in locale with calendar ${t[Je]}`);const m=new r(o,s,l,12,0,0,0,0,0,d);return {instant:BuiltinTimeZoneGetInstantFor(getResolvedTimeZoneLazy(t),m,"compatible"),formatter:getPropLazy(t,Ue)}}if(IsTemporalDate(e)){const o=GetSlot(e,n),s=GetSlot(e,a),l=GetSlot(e,i),d=ToString(GetSlot(e,u));if("iso8601"!==d&&d!==t[Je])throw new RangeError(`cannot format PlainDate with calendar ${d} in locale with calendar ${t[Je]}`);const m=new r(o,s,l,12,0,0,0,0,0,t[Je]);return {instant:BuiltinTimeZoneGetInstantFor(getResolvedTimeZoneLazy(t),m,"compatible"),formatter:getPropLazy(t,ke)}}if(IsTemporalDateTime(e)){const o=GetSlot(e,n),T=GetSlot(e,a),p=GetSlot(e,i),f=GetSlot(e,s),y=GetSlot(e,l),S=GetSlot(e,d),w=GetSlot(e,m),g=GetSlot(e,c),I=GetSlot(e,h),D=ToString(GetSlot(e,u));if("iso8601"!==D&&D!==t[Je])throw new RangeError(`cannot format PlainDateTime with calendar ${D} in locale with calendar ${t[Je]}`);let G=e;return "iso8601"===D&&(G=new r(o,T,p,f,y,S,w,g,I,t[Je])),{instant:BuiltinTimeZoneGetInstantFor(getResolvedTimeZoneLazy(t),G,"compatible"),formatter:getPropLazy(t,xe)}}if(IsTemporalZonedDateTime(e)){const r=ToString(GetSlot(e,u));if("iso8601"!==r&&r!==t[Je])throw new RangeError(`cannot format ZonedDateTime with calendar ${r} in locale with calendar ${t[Je]}`);const o=ToString(GetSlot(e,p));if(t[_e]&&t[_e]!==o)throw new RangeError(`timeZone option ${t[_e]} doesn't match actual time zone ${o}`);return {instant:GetSlot(e,T),formatter:getPropLazy(t,He),timeZone:o}}return IsTemporalInstant(e)?{instant:e,formatter:getPropLazy(t,qe)}:{}}class Instant{constructor(e){if(arguments.length<1)throw new TypeError("missing argument: epochNanoseconds is required");const t=ToBigInt(e);ValidateEpochNanoseconds(t),CreateSlots(this),SetSlot(this,r,t);}get epochSeconds(){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");const t=GetSlot(this,r);return JSBI.toNumber(JSBI.divide(t,ye))}get epochMilliseconds(){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");const t=JSBI.BigInt(GetSlot(this,r));return JSBI.toNumber(JSBI.divide(t,fe))}get epochMicroseconds(){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");const t=JSBI.BigInt(GetSlot(this,r));return ToBigIntExternal(JSBI.divide(t,pe))}get epochNanoseconds(){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return ToBigIntExternal(JSBI.BigInt(GetSlot(this,r)))}add(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromInstant("add",this,e)}subtract(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromInstant("subtract",this,e)}until(e,t){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return DifferenceTemporalInstant("until",this,e,t)}since(e,t){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return DifferenceTemporalInstant("since",this,e,t)}round(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");if(void 0===e)throw new TypeError("options parameter is required");const t="string"==typeof e?CreateOnePropObject("smallestUnit",e):GetOptionsObject(e),o=GetTemporalUnit(t,"smallestUnit","time",je),n=ToTemporalRoundingMode(t,"halfExpand"),a=ToTemporalRoundingIncrement(t,{hour:24,minute:1440,second:86400,millisecond:864e5,microsecond:864e8,nanosecond:864e11}[o],!0),i=RoundInstant(GetSlot(this,r),a,o,n);return new Instant(i)}equals(t){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");const o=ToTemporalInstant(t),n=GetSlot(this,r),a=GetSlot(o,r);return JSBI.equal(JSBI.BigInt(n),JSBI.BigInt(a))}toString(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");const t=GetOptionsObject(e);let o=t.timeZone;void 0!==o&&(o=ToTemporalTimeZone(o));const{precision:n,unit:a,increment:i}=ToSecondsStringPrecision(t),s=ToTemporalRoundingMode(t,"trunc"),l=RoundInstant(GetSlot(this,r),i,a,s);return TemporalInstantToString(new Instant(l),o,n)}toJSON(){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return TemporalInstantToString(this,void 0,"auto")}toLocaleString(e,t){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return new ot(e,t).format(this)}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.Instant")}toZonedDateTime(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument in toZonedDateTime");const t=e.calendar;if(void 0===t)throw new TypeError("missing calendar property in toZonedDateTime");const o=ToTemporalCalendar(t),n=e.timeZone;if(void 0===n)throw new TypeError("missing timeZone property in toZonedDateTime");const a=ToTemporalTimeZone(n);return CreateTemporalZonedDateTime(GetSlot(this,r),a,o)}toZonedDateTimeISO(e){let t=e;if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");if(IsObject(t)){const e=t.timeZone;void 0!==e&&(t=e);}const o=ToTemporalTimeZone(t),n=GetISO8601Calendar();return CreateTemporalZonedDateTime(GetSlot(this,r),o,n)}static fromEpochSeconds(t){const r=ToNumber(t),o=JSBI.multiply(JSBI.BigInt(r),ye);return ValidateEpochNanoseconds(o),new Instant(o)}static fromEpochMilliseconds(t){const r=ToNumber(t),o=JSBI.multiply(JSBI.BigInt(r),fe);return ValidateEpochNanoseconds(o),new Instant(o)}static fromEpochMicroseconds(t){const r=ToBigInt(t),o=JSBI.multiply(r,pe);return ValidateEpochNanoseconds(o),new Instant(o)}static fromEpochNanoseconds(e){const t=ToBigInt(e);return ValidateEpochNanoseconds(t),new Instant(t)}static from(e){return IsTemporalInstant(e)?new Instant(GetSlot(e,r)):ToTemporalInstant(e)}static compare(t,o){const n=ToTemporalInstant(t),a=ToTemporalInstant(o),i=GetSlot(n,r),s=GetSlot(a,r);return JSBI.lessThan(i,s)?-1:JSBI.greaterThan(i,s)?1:0}}MakeIntrinsicClass(Instant,"Temporal.Instant");const at=Array.prototype.includes,it=Array.prototype.push,st=globalThis.Intl.DateTimeFormat,lt=Array.prototype.sort,dt=Math.abs,mt=Math.floor,ct=Object.entries,ht=Object.keys,ut={};class Calendar{constructor(e){if(arguments.length<1)throw new RangeError("missing argument: id is required");const t=ToString(e);if(!IsBuiltinCalendar(t))throw new RangeError(`invalid calendar identifier ${t}`);CreateSlots(this),SetSlot(this,C,t);}get id(){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return ToString(this)}dateFromFields(e,t){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid fields");const r=GetOptionsObject(t);return ut[GetSlot(this,C)].dateFromFields(e,r,this)}yearMonthFromFields(e,t){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid fields");const r=GetOptionsObject(t);return ut[GetSlot(this,C)].yearMonthFromFields(e,r,this)}monthDayFromFields(e,t){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid fields");const r=GetOptionsObject(t);return ut[GetSlot(this,C)].monthDayFromFields(e,r,this)}fields(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=[],r=new Set(["year","month","monthCode","day","hour","minute","second","millisecond","microsecond","nanosecond"]);for(const o of e){if("string"!=typeof o)throw new TypeError("invalid fields");if(!r.has(o))throw new RangeError(`invalid field name ${o}`);r.delete(o),it.call(t,o);}return ut[GetSlot(this,C)].fields(t)}mergeFields(e,t){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return ut[GetSlot(this,C)].mergeFields(e,t)}dateAdd(e,t,r){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const o=ToTemporalDate(e),n=ToTemporalDuration(t),a=ToTemporalOverflow(GetOptionsObject(r)),{days:i}=BalanceDuration(GetSlot(n,w),GetSlot(n,g),GetSlot(n,I),GetSlot(n,D),GetSlot(n,G),GetSlot(n,v),GetSlot(n,O),"day");return ut[GetSlot(this,C)].dateAdd(o,GetSlot(n,f),GetSlot(n,y),GetSlot(n,S),i,a,this)}dateUntil(e,t,r){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const o=ToTemporalDate(e),n=ToTemporalDate(t);let a=GetTemporalUnit(GetOptionsObject(r),"largestUnit","date","auto");"auto"===a&&(a="day");const{years:i,months:s,weeks:l,days:d}=ut[GetSlot(this,C)].dateUntil(o,n,a);return new(GetIntrinsic("%Temporal.Duration%"))(i,s,l,d,0,0,0,0,0,0)}year(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),ut[GetSlot(this,C)].year(t)}month(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");if(IsTemporalMonthDay(t))throw new TypeError("use monthCode on PlainMonthDay instead");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),ut[GetSlot(this,C)].month(t)}monthCode(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||IsTemporalMonthDay(t)||(t=ToTemporalDate(t)),ut[GetSlot(this,C)].monthCode(t)}day(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalMonthDay(t)||(t=ToTemporalDate(t)),ut[GetSlot(this,C)].day(t)}era(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),ut[GetSlot(this,C)].era(t)}eraYear(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),ut[GetSlot(this,C)].eraYear(t)}dayOfWeek(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);return ut[GetSlot(this,C)].dayOfWeek(t)}dayOfYear(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);return ut[GetSlot(this,C)].dayOfYear(t)}weekOfYear(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);return ut[GetSlot(this,C)].weekOfYear(t)}daysInWeek(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);return ut[GetSlot(this,C)].daysInWeek(t)}daysInMonth(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),ut[GetSlot(this,C)].daysInMonth(t)}daysInYear(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),ut[GetSlot(this,C)].daysInYear(t)}monthsInYear(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),ut[GetSlot(this,C)].monthsInYear(t)}inLeapYear(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),ut[GetSlot(this,C)].inLeapYear(t)}toString(){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return GetSlot(this,C)}toJSON(){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return ToString(this)}static from(e){return ToTemporalCalendar(e)}}function monthCodeNumberPart(e){if(!e.startsWith("M"))throw new RangeError(`Invalid month code: ${e}.  Month codes must start with M.`);const t=+e.slice(1);if(isNaN(t))throw new RangeError(`Invalid month code: ${e}`);return t}function buildMonthCode(e,t=!1){return `M${e.toString().padStart(2,"0")}${t?"L":""}`}function resolveNonLunisolarMonth(e,t,r=12){let{month:o,monthCode:n}=e;if(void 0===n){if(void 0===o)throw new TypeError("Either month or monthCode are required");"reject"===t&&RejectToRange(o,1,r),"constrain"===t&&(o=ConstrainToRange(o,1,r)),n=buildMonthCode(o);}else {const e=monthCodeNumberPart(n);if(void 0!==o&&o!==e)throw new RangeError(`monthCode ${n} and month ${o} must match if both are present`);if(n!==buildMonthCode(e))throw new RangeError(`Invalid month code: ${n}`);if(o=e,o<1||o>r)throw new RangeError(`Invalid monthCode: ${n}`)}return {...e,month:o,monthCode:n}}MakeIntrinsicClass(Calendar,"Temporal.Calendar"),DefineIntrinsic("Temporal.Calendar.from",Calendar.from),ut.iso8601={dateFromFields(e,t,r){const o=ToTemporalOverflow(t);let n=PrepareTemporalFields(e,["day","month","monthCode","year"],["year","day"]);n=resolveNonLunisolarMonth(n);let{year:a,month:i,day:s}=n;return ({year:a,month:i,day:s}=RegulateISODate(a,i,s,o)),CreateTemporalDate(a,i,s,r)},yearMonthFromFields(e,t,r){const o=ToTemporalOverflow(t);let n=PrepareTemporalFields(e,["month","monthCode","year"],["year"]);n=resolveNonLunisolarMonth(n);let{year:a,month:i}=n;return ({year:a,month:i}=function RegulateISOYearMonth(e,t,r){let o=e,n=t;switch(r){case"reject":RejectISODate(o,n,1);break;case"constrain":({year:o,month:n}=ConstrainISODate(o,n));}return {year:o,month:n}}(a,i,o)),CreateTemporalYearMonth(a,i,r,1)},monthDayFromFields(e,t,r){const o=ToTemporalOverflow(t);let n=PrepareTemporalFields(e,["day","month","monthCode","year"],["day"]);if(void 0!==n.month&&void 0===n.year&&void 0===n.monthCode)throw new TypeError("either year or monthCode required with month");const a=void 0===n.monthCode;n=resolveNonLunisolarMonth(n);let{month:i,day:s,year:l}=n;return ({month:i,day:s}=RegulateISODate(a?l:1972,i,s,o)),CreateTemporalMonthDay(i,s,r,1972)},fields:e=>e,mergeFields(e,t){const r={};for(const t of ht(e))"month"!==t&&"monthCode"!==t&&(r[t]=e[t]);const o=ht(t);for(const e of o)r[e]=t[e];if(!at.call(o,"month")&&!at.call(o,"monthCode")){const{month:t,monthCode:o}=e;void 0!==t&&(r.month=t),void 0!==o&&(r.monthCode=o);}return r},dateAdd(e,t,r,o,s,l,d){let m=GetSlot(e,n),c=GetSlot(e,a),h=GetSlot(e,i);return ({year:m,month:c,day:h}=AddISODate(m,c,h,t,r,o,s,l)),CreateTemporalDate(m,c,h,d)},dateUntil:(e,t,r)=>DifferenceISODate(GetSlot(e,n),GetSlot(e,a),GetSlot(e,i),GetSlot(t,n),GetSlot(t,a),GetSlot(t,i),r),year:e=>GetSlot(e,n),era(){},eraYear(){},month:e=>GetSlot(e,a),monthCode:e=>buildMonthCode(GetSlot(e,a)),day:e=>GetSlot(e,i),dayOfWeek:e=>DayOfWeek(GetSlot(e,n),GetSlot(e,a),GetSlot(e,i)),dayOfYear:e=>DayOfYear(GetSlot(e,n),GetSlot(e,a),GetSlot(e,i)),weekOfYear:e=>function WeekOfYear(e,t,r){const o=DayOfYear(e,t,r),n=DayOfWeek(e,t,r)||7,a=DayOfWeek(e,1,1),i=Q((o-n+10)/7);return i<1?5===a||6===a&&LeapYear(e-1)?53:52:53===i&&(LeapYear(e)?366:365)-o<4-n?1:i}(GetSlot(e,n),GetSlot(e,a),GetSlot(e,i)),daysInWeek:()=>7,daysInMonth:e=>ISODaysInMonth(GetSlot(e,n),GetSlot(e,a)),daysInYear(e){let t=e;return HasSlot(t,n)||(t=ToTemporalDate(t)),LeapYear(GetSlot(t,n))?366:365},monthsInYear:()=>12,inLeapYear(e){let t=e;return HasSlot(t,n)||(t=ToTemporalDate(t)),LeapYear(GetSlot(t,n))}};class OneObjectCache{constructor(e){if(this.map=new Map,this.calls=0,this.hits=0,this.misses=0,this.now=globalThis.performance?globalThis.performance.now():Date.now(),void 0!==e){let t=0;for(const r of e.map.entries()){if(++t>OneObjectCache.MAX_CACHE_ENTRIES)break;this.map.set(...r);}}}get(e){const t=this.map.get(e);return t&&(this.hits++,this.report()),this.calls++,t}set(e,t){this.map.set(e,t),this.misses++,this.report();}report(){}setObject(e){if(OneObjectCache.objectMap.get(e))throw new RangeError("object already cached");OneObjectCache.objectMap.set(e,this),this.report();}static getCacheForObject(e){let t=OneObjectCache.objectMap.get(e);return t||(t=new OneObjectCache,OneObjectCache.objectMap.set(e,t)),t}}function toUtcIsoDateString({isoYear:e,isoMonth:t,isoDay:r}){return `${ISOYearString(e)}-${ISODateTimePartString(t)}-${ISODateTimePartString(r)}T00:00Z`}function simpleDateDiff(e,t){return {years:e.year-t.year,months:e.month-t.month,days:e.day-t.day}}OneObjectCache.objectMap=new WeakMap,OneObjectCache.MAX_CACHE_ENTRIES=1e3;class HelperBase{constructor(){this.eraLength="short",this.hasEra=!0;}getFormatter(){return void 0===this.formatter&&(this.formatter=new st(`en-US-u-ca-${this.id}`,{day:"numeric",month:"numeric",year:"numeric",era:this.eraLength,timeZone:"UTC"})),this.formatter}isoToCalendarDate(e,t){const{year:r,month:o,day:n}=e,a=JSON.stringify({func:"isoToCalendarDate",isoYear:r,isoMonth:o,isoDay:n,id:this.id}),i=t.get(a);if(i)return i;const s=this.getFormatter();let l,d;try{d=toUtcIsoDateString({isoYear:r,isoMonth:o,isoDay:n}),l=s.formatToParts(new Date(d));}catch(e){throw new RangeError(`Invalid ISO date: ${JSON.stringify({isoYear:r,isoMonth:o,isoDay:n})}`)}const m={};for(let{type:e,value:t}of l){if("year"===e&&(m.eraYear=+t),"relatedYear"===e&&(m.eraYear=+t),"month"===e){const e=/^([0-9]*)(.*?)$/.exec(t);if(!e||3!=e.length||!e[1]&&!e[2])throw new RangeError(`Unexpected month: ${t}`);if(m.month=e[1]?+e[1]:1,m.month<1)throw new RangeError(`Invalid month ${t} from ${d}[u-ca-${this.id}] (probably due to https://bugs.chromium.org/p/v8/issues/detail?id=10527)`);if(m.month>13)throw new RangeError(`Invalid month ${t} from ${d}[u-ca-${this.id}] (probably due to https://bugs.chromium.org/p/v8/issues/detail?id=10529)`);e[2]&&(m.monthExtra=e[2]);}"day"===e&&(m.day=+t),this.hasEra&&"era"===e&&null!=t&&""!==t&&(t=t.split(" (")[0],m.era=t.normalize("NFD").replace(/[^-0-9 \p{L}]/gu,"").replace(" ","-").toLowerCase());}if(void 0===m.eraYear)throw new RangeError(`Intl.DateTimeFormat.formatToParts lacks relatedYear in ${this.id} calendar. Try Node 14+ or modern browsers.`);if(this.reviseIntlEra){const{era:t,eraYear:r}=this.reviseIntlEra(m,e);m.era=t,m.eraYear=r;}this.checkIcuBugs&&this.checkIcuBugs(e);const c=this.adjustCalendarDate(m,t,"constrain",!0);if(void 0===c.year)throw new RangeError(`Missing year converting ${JSON.stringify(e)}`);if(void 0===c.month)throw new RangeError(`Missing month converting ${JSON.stringify(e)}`);if(void 0===c.day)throw new RangeError(`Missing day converting ${JSON.stringify(e)}`);return t.set(a,c),["constrain","reject"].forEach((r=>{const o=JSON.stringify({func:"calendarToIsoDate",year:c.year,month:c.month,day:c.day,overflow:r,id:this.id});t.set(o,e);})),c}validateCalendarDate(e){const{era:t,month:r,year:o,day:n,eraYear:a,monthCode:i,monthExtra:s}=e;if(void 0!==s)throw new RangeError("Unexpected `monthExtra` value");if(void 0===o&&void 0===a)throw new TypeError("year or eraYear is required");if(void 0===r&&void 0===i)throw new TypeError("month or monthCode is required");if(void 0===n)throw new RangeError("Missing day");if(void 0!==i){if("string"!=typeof i)throw new RangeError("monthCode must be a string, not "+typeof i);if(!/^M([01]?\d)(L?)$/.test(i))throw new RangeError(`Invalid monthCode: ${i}`)}if(this.constantEra){if(void 0!==t&&t!==this.constantEra)throw new RangeError(`era must be ${this.constantEra}, not ${t}`);if(void 0!==a&&void 0!==o&&a!==o)throw new RangeError(`eraYear ${a} does not match year ${o}`)}}adjustCalendarDate(e,t,r="constrain",o=!1){if("lunisolar"===this.calendarType)throw new RangeError("Override required for lunisolar calendars");let n=e;if(this.validateCalendarDate(n),this.constantEra){const{year:e,eraYear:t}=n;n={...n,era:this.constantEra,year:void 0!==e?e:t,eraYear:void 0!==t?t:e};}const a=this.monthsInYear(n,t);let{month:i,monthCode:s}=n;return ({month:i,monthCode:s}=resolveNonLunisolarMonth(n,r,a)),{...n,month:i,monthCode:s}}regulateMonthDayNaive(e,t,r){const o=this.monthsInYear(e,r);let{month:n,day:a}=e;return "reject"===t?(RejectToRange(n,1,o),RejectToRange(a,1,this.maximumMonthLength(e))):(n=ConstrainToRange(n,1,o),a=ConstrainToRange(a,1,this.maximumMonthLength({...e,month:n}))),{...e,month:n,day:a}}calendarToIsoDate(e,t="constrain",r){const o=e;let n=this.adjustCalendarDate(e,r,t,!1);n=this.regulateMonthDayNaive(n,t,r);const{year:a,month:i,day:s}=n,l=JSON.stringify({func:"calendarToIsoDate",year:a,month:i,day:s,overflow:t,id:this.id});let d,m=r.get(l);if(m)return m;if(void 0!==o.year&&void 0!==o.month&&void 0!==o.day&&(o.year!==n.year||o.month!==n.month||o.day!==n.day)&&(d=JSON.stringify({func:"calendarToIsoDate",year:o.year,month:o.month,day:o.day,overflow:t,id:this.id}),m=r.get(d),m))return m;let c=this.estimateIsoDate({year:a,month:i,day:s});const calculateSameMonthResult=e=>{let o=this.addDaysIso(c,e);if(n.day>this.minimumMonthLength(n)){let e=this.isoToCalendarDate(o,r);for(;e.month!==i||e.year!==a;){if("reject"===t)throw new RangeError(`day ${s} does not exist in month ${i} of year ${a}`);o=this.addDaysIso(o,-1),e=this.isoToCalendarDate(o,r);}}return o};let h=0,u=this.isoToCalendarDate(c,r),T=simpleDateDiff(n,u);if(0!==T.years||0!==T.months||0!==T.days){const e=365*T.years+30*T.months+T.days;c=this.addDaysIso(c,e),u=this.isoToCalendarDate(c,r),T=simpleDateDiff(n,u),0===T.years&&0===T.months?c=calculateSameMonthResult(T.days):h=this.compareCalendarDates(n,u);}let p=8,f=!1;for(;h;){c=this.addDaysIso(c,h*p);const e=u;u=this.isoToCalendarDate(c,r);const a=h;if(h=this.compareCalendarDates(n,u),h)if(T=simpleDateDiff(n,u),0===T.years&&0===T.months)c=calculateSameMonthResult(T.days),h=0,f=n.day>this.minimumMonthLength(n);else if(a&&h!==a)if(p>1)p/=2;else {if("reject"===t)throw new RangeError(`Can't find ISO date from calendar date: ${JSON.stringify({...o})}`);this.compareCalendarDates(u,e)>0&&(c=this.addDaysIso(c,-1)),f=!0,h=0;}}if(r.set(l,c),d&&r.set(d,c),void 0===n.year||void 0===n.month||void 0===n.day||void 0===n.monthCode||this.hasEra&&(void 0===n.era||void 0===n.eraYear))throw new RangeError("Unexpected missing property");if(!f){const e=JSON.stringify({func:"isoToCalendarDate",isoYear:c.year,isoMonth:c.month,isoDay:c.day,id:this.id});r.set(e,n);}return c}temporalToCalendarDate(e,t){const r={year:GetSlot(e,n),month:GetSlot(e,a),day:GetSlot(e,i)};return this.isoToCalendarDate(r,t)}compareCalendarDates(e,t){const r=PrepareTemporalFields(e,["day","month","year"],["day","month","year"]),o=PrepareTemporalFields(t,["day","month","year"],["day","month","year"]);return r.year!==o.year?ComparisonResult(r.year-o.year):r.month!==o.month?ComparisonResult(r.month-o.month):r.day!==o.day?ComparisonResult(r.day-o.day):0}regulateDate(e,t="constrain",r){const o=this.calendarToIsoDate(e,t,r);return this.isoToCalendarDate(o,r)}addDaysIso(e,t){return AddISODate(e.year,e.month,e.day,0,0,0,t,"constrain")}addDaysCalendar(e,t,r){const o=this.calendarToIsoDate(e,"constrain",r),n=this.addDaysIso(o,t);return this.isoToCalendarDate(n,r)}addMonthsCalendar(e,t,r,o){let n=e;const{day:a}=n;for(let e=0,r=dt(t);e<r;e++){const{month:e}=n,r=n,i=t<0?-Math.max(a,this.daysInPreviousMonth(n,o)):this.daysInMonth(n,o),s=this.calendarToIsoDate(n,"constrain",o);let l=this.addDaysIso(s,i);if(n=this.isoToCalendarDate(l,o),t>0){const t=this.monthsInYear(r,o);for(;n.month-1!=e%t;)l=this.addDaysIso(l,-1),n=this.isoToCalendarDate(l,o);}n.day!==a&&(n=this.regulateDate({...n,day:a},"constrain",o));}if("reject"===r&&n.day!==a)throw new RangeError(`Day ${a} does not exist in resulting calendar month`);return n}addCalendar(e,{years:t=0,months:r=0,weeks:o=0,days:n=0},a,i){const{year:s,day:l,monthCode:d}=e,m=this.adjustCalendarDate({year:s+t,monthCode:d,day:l},i),c=this.addMonthsCalendar(m,r,a,i),h=n+7*o;return this.addDaysCalendar(c,h,i)}untilCalendar(e,t,r,o){let n=0,a=0,i=0,s=0;switch(r){case"day":n=this.calendarDaysUntil(e,t,o);break;case"week":{const r=this.calendarDaysUntil(e,t,o);n=r%7,a=(r-n)/7;break}case"month":case"year":{const a=t.year-e.year,l=t.month-e.month,d=t.day-e.day,m=this.compareCalendarDates(t,e);if(!m)return {years:0,months:0,weeks:0,days:0};if("year"===r&&a){s=l*m<0||0===l&&d*m<0?a-m:a;}let c,h=s?this.addCalendar(e,{years:s},"constrain",o):e;do{i+=m,c=h,h=this.addMonthsCalendar(c,m,"constrain",o),h.day!==e.day&&(h=this.regulateDate({...h,day:e.day},"constrain",o));}while(this.compareCalendarDates(t,h)*m>=0);i-=m;n=this.calendarDaysUntil(c,t,o);break}}return {years:s,months:i,weeks:a,days:n}}daysInMonth(e,t){const{day:r}=e,o=this.maximumMonthLength(e),n=this.minimumMonthLength(e);if(n===o)return n;const a=r<=o-n?o:n,i=this.calendarToIsoDate(e,"constrain",t),s=this.addDaysIso(i,a),l=this.isoToCalendarDate(s,t),d=this.addDaysIso(s,-l.day);return this.isoToCalendarDate(d,t).day}daysInPreviousMonth(e,t){const{day:r,month:o,year:n}=e;let a={year:o>1?n:n-1,month:o,day:1};const i=o>1?o-1:this.monthsInYear(a,t);a={...a,month:i};const s=this.minimumMonthLength(a),l=this.maximumMonthLength(a);if(s===l)return l;const d=this.calendarToIsoDate(e,"constrain",t),m=this.addDaysIso(d,-r);return this.isoToCalendarDate(m,t).day}startOfCalendarYear(e){return {year:e.year,month:1,monthCode:"M01",day:1}}startOfCalendarMonth(e){return {year:e.year,month:e.month,day:1}}calendarDaysUntil(e,t,r){const o=this.calendarToIsoDate(e,"constrain",r),n=this.calendarToIsoDate(t,"constrain",r);return this.isoDaysUntil(o,n)}isoDaysUntil(e,t){return DifferenceISODate(e.year,e.month,e.day,t.year,t.month,t.day,"day").days}monthDayFromFields(e,t,r){let o,n,a,i,s,{year:l,month:d,monthCode:m,day:c,era:h,eraYear:u}=e;if(void 0===m){if(void 0===l&&(void 0===h||void 0===u))throw new TypeError("`monthCode`, `year`, or `era` and `eraYear` is required");({monthCode:m,year:l}=this.adjustCalendarDate({year:l,month:d,monthCode:m,day:c,era:h,eraYear:u},r,t));}const{year:T}=this.isoToCalendarDate({year:1972,month:1,day:1},r);for(let e=0;e<100;e++){const l=this.adjustCalendarDate({day:c,monthCode:m,year:T-e},r),d=this.calendarToIsoDate(l,"constrain",r),h=this.isoToCalendarDate(d,r);if(({year:o,month:n,day:a}=d),h.monthCode===m&&h.day===c)return {month:n,day:a,year:o};"constrain"===t&&(void 0===i||h.monthCode===i.monthCode&&h.day>i.day)&&(i=h,s=d);}if("constrain"===t&&void 0!==s)return s;throw new RangeError(`No recent ${this.id} year with monthCode ${m} and day ${c}`)}}class HebrewHelper extends HelperBase{constructor(){super(...arguments),this.id="hebrew",this.calendarType="lunisolar",this.months={Tishri:{leap:1,regular:1,monthCode:"M01",days:30},Heshvan:{leap:2,regular:2,monthCode:"M02",days:{min:29,max:30}},Kislev:{leap:3,regular:3,monthCode:"M03",days:{min:29,max:30}},Tevet:{leap:4,regular:4,monthCode:"M04",days:29},Shevat:{leap:5,regular:5,monthCode:"M05",days:30},Adar:{leap:void 0,regular:6,monthCode:"M06",days:29},"Adar I":{leap:6,regular:void 0,monthCode:"M05L",days:30},"Adar II":{leap:7,regular:void 0,monthCode:"M06",days:29},Nisan:{leap:8,regular:7,monthCode:"M07",days:30},Iyar:{leap:9,regular:8,monthCode:"M08",days:29},Sivan:{leap:10,regular:9,monthCode:"M09",days:30},Tamuz:{leap:11,regular:10,monthCode:"M10",days:29},Av:{leap:12,regular:11,monthCode:"M11",days:30},Elul:{leap:13,regular:12,monthCode:"M12",days:29}},this.hasEra=!1;}inLeapYear(e){const{year:t}=e;return (7*t+1)%19<7}monthsInYear(e){return this.inLeapYear(e)?13:12}minimumMonthLength(e){return this.minMaxMonthLength(e,"min")}maximumMonthLength(e){return this.minMaxMonthLength(e,"max")}minMaxMonthLength(e,t){const{month:r,year:o}=e,n=this.getMonthCode(o,r),a=ct(this.months).find((e=>e[1].monthCode===n));if(void 0===a)throw new RangeError(`unmatched Hebrew month: ${r}`);const i=a[1].days;return "number"==typeof i?i:i[t]}estimateIsoDate(e){const{year:t}=e;return {year:t-3760,month:1,day:1}}getMonthCode(e,t){return this.inLeapYear({year:e})?6===t?buildMonthCode(5,!0):buildMonthCode(t<6?t:t-1):buildMonthCode(t)}adjustCalendarDate(e,t,r="constrain",o=!1){let{year:n,eraYear:a,month:i,monthCode:s,day:l,monthExtra:d}=e;if(void 0===n&&void 0!==a&&(n=a),void 0===a&&void 0!==n&&(a=n),o){if(d){const e=this.months[d];if(!e)throw new RangeError(`Unrecognized month from formatToParts: ${d}`);i=this.inLeapYear({year:n})?e.leap:e.regular;}s=this.getMonthCode(n,i);return {year:n,month:i,day:l,era:void 0,eraYear:a,monthCode:s}}if(this.validateCalendarDate(e),void 0===i)if(s.endsWith("L")){if("M05L"!==s)throw new RangeError(`Hebrew leap month must have monthCode M05L, not ${s}`);if(i=6,!this.inLeapYear({year:n})){if("reject"===r)throw new RangeError(`Hebrew monthCode M05L is invalid in year ${n} which is not a leap year`);i=5,l=30,s="M05";}}else {i=monthCodeNumberPart(s),this.inLeapYear({year:n})&&i>=6&&i++;const e=this.monthsInYear({year:n});if(i<1||i>e)throw new RangeError(`Invalid monthCode: ${s}`)}else if("reject"===r?(RejectToRange(i,1,this.monthsInYear({year:n})),RejectToRange(l,1,this.maximumMonthLength({year:n,month:i}))):(i=ConstrainToRange(i,1,this.monthsInYear({year:n})),l=ConstrainToRange(l,1,this.maximumMonthLength({year:n,month:i}))),void 0===s)s=this.getMonthCode(n,i);else {if(this.getMonthCode(n,i)!==s)throw new RangeError(`monthCode ${s} doesn't correspond to month ${i} in Hebrew year ${n}`)}return {...e,day:l,month:i,monthCode:s,year:n,eraYear:a}}}class IslamicBaseHelper extends HelperBase{constructor(){super(...arguments),this.calendarType="lunar",this.DAYS_PER_ISLAMIC_YEAR=354+11/30,this.DAYS_PER_ISO_YEAR=365.2425,this.constantEra="ah";}inLeapYear(e,t){return 30===this.daysInMonth({year:e.year,month:12,day:1},t)}monthsInYear(){return 12}minimumMonthLength(){return 29}maximumMonthLength(){return 30}estimateIsoDate(e){const{year:t}=this.adjustCalendarDate(e);return {year:mt(t*this.DAYS_PER_ISLAMIC_YEAR/this.DAYS_PER_ISO_YEAR)+622,month:1,day:1}}}class IslamicHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamic";}}class IslamicUmalquraHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamic-umalqura";}}class IslamicTblaHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamic-tbla";}}class IslamicCivilHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamic-civil";}}class IslamicRgsaHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamic-rgsa";}}class IslamicCcHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamicc";}}class PersianHelper extends HelperBase{constructor(){super(...arguments),this.id="persian",this.calendarType="solar",this.constantEra="ap";}inLeapYear(e,t){return IslamicHelper.prototype.inLeapYear.call(this,e,t)}monthsInYear(){return 12}minimumMonthLength(e){const{month:t}=e;return 12===t?29:t<=6?31:30}maximumMonthLength(e){const{month:t}=e;return 12===t?30:t<=6?31:30}estimateIsoDate(e){const{year:t}=this.adjustCalendarDate(e);return {year:t+621,month:1,day:1}}}class IndianHelper extends HelperBase{constructor(){super(...arguments),this.id="indian",this.calendarType="solar",this.constantEra="saka",this.months={1:{length:30,month:3,day:22,leap:{length:31,month:3,day:21}},2:{length:31,month:4,day:21},3:{length:31,month:5,day:22},4:{length:31,month:6,day:22},5:{length:31,month:7,day:23},6:{length:31,month:8,day:23},7:{length:30,month:9,day:23},8:{length:30,month:10,day:23},9:{length:30,month:11,day:22},10:{length:30,month:12,day:22},11:{length:30,month:1,nextYear:!0,day:21},12:{length:30,month:2,nextYear:!0,day:20}},this.vulnerableToBceBug="10/11/-79 Saka"!==new Date("0000-01-01T00:00Z").toLocaleDateString("en-US-u-ca-indian",{timeZone:"UTC"});}inLeapYear(e){return isGregorianLeapYear(e.year+78)}monthsInYear(){return 12}minimumMonthLength(e){return this.getMonthInfo(e).length}maximumMonthLength(e){return this.getMonthInfo(e).length}getMonthInfo(e){const{month:t}=e;let r=this.months[t];if(void 0===r)throw new RangeError(`Invalid month: ${t}`);return this.inLeapYear(e)&&r.leap&&(r=r.leap),r}estimateIsoDate(e){const t=this.adjustCalendarDate(e),r=this.getMonthInfo(t);return AddISODate(t.year+78+(r.nextYear?1:0),r.month,r.day,0,0,0,t.day-1,"constrain")}checkIcuBugs(e){if(this.vulnerableToBceBug&&e.year<1)throw new RangeError(`calendar '${this.id}' is broken for ISO dates before 0001-01-01 (see https://bugs.chromium.org/p/v8/issues/detail?id=10529)`)}}function isGregorianLeapYear(e){return e%4==0&&(e%100!=0||e%400==0)}class GregorianBaseHelper extends HelperBase{constructor(e,t){super(),this.calendarType="solar",this.v8IsVulnerableToJulianBug=new Date("+001001-01-01T00:00Z").toLocaleDateString("en-US-u-ca-japanese",{timeZone:"UTC"}).startsWith("12"),this.calendarIsVulnerableToJulianBug=!1,this.id=e;const{eras:r,anchorEra:o}=function adjustEras(e){let t,r=e;if(0===r.length)throw new RangeError("Invalid era data: eras are required");if(1===r.length&&r[0].reverseOf)throw new RangeError("Invalid era data: anchor era cannot count years backwards");if(1===r.length&&!r[0].name)throw new RangeError("Invalid era data: at least one named era is required");if(r.filter((e=>null!=e.reverseOf)).length>1)throw new RangeError("Invalid era data: only one era can count years backwards");r.forEach((e=>{if(e.isAnchor||!e.anchorEpoch&&!e.reverseOf){if(t)throw new RangeError("Invalid era data: cannot have multiple anchor eras");t=e,e.anchorEpoch={year:e.hasYearZero?0:1};}else if(!e.name)throw new RangeError("If era name is blank, it must be the anchor era")})),r=r.filter((e=>e.name)),r.forEach((e=>{const{reverseOf:t}=e;if(t){const o=r.find((e=>e.name===t));if(void 0===o)throw new RangeError(`Invalid era data: unmatched reverseOf era: ${t}`);e.reverseOf=o,e.anchorEpoch=o.anchorEpoch,e.isoEpoch=o.isoEpoch;}void 0===e.anchorEpoch.month&&(e.anchorEpoch.month=1),void 0===e.anchorEpoch.day&&(e.anchorEpoch.day=1);})),lt.call(r,((e,t)=>{if(e.reverseOf)return 1;if(t.reverseOf)return -1;if(!e.isoEpoch||!t.isoEpoch)throw new RangeError("Invalid era data: missing ISO epoch");return t.isoEpoch.year-e.isoEpoch.year}));const o=r[r.length-1].reverseOf;if(o&&o!==r[r.length-2])throw new RangeError("Invalid era data: invalid reverse-sign era");return r.forEach(((e,t)=>{e.genericName="era"+(r.length-1-t);})),{eras:r,anchorEra:t||r[0]}}(t);this.anchorEra=o,this.eras=r;}inLeapYear(e){const{year:t}=this.estimateIsoDate({month:1,day:1,year:e.year});return isGregorianLeapYear(t)}monthsInYear(){return 12}minimumMonthLength(e){const{month:t}=e;return 2===t?this.inLeapYear(e)?29:28:[4,6,9,11].indexOf(t)>=0?30:31}maximumMonthLength(e){return this.minimumMonthLength(e)}completeEraYear(e){const checkField=(t,r)=>{const o=e[t];if(null!=o&&o!=r)throw new RangeError(`Input ${t} ${o} doesn't match calculated value ${r}`)},eraFromYear=t=>{let r;const o={...e,year:t},n=this.eras.find(((e,n)=>{if(n===this.eras.length-1){if(e.reverseOf){if(t>0)throw new RangeError(`Signed year ${t} is invalid for era ${e.name}`);return r=e.anchorEpoch.year-t,!0}return r=t-e.anchorEpoch.year+(e.hasYearZero?0:1),!0}return this.compareCalendarDates(o,e.anchorEpoch)>=0&&(r=t-e.anchorEpoch.year+(e.hasYearZero?0:1),!0)}));if(!n)throw new RangeError(`Year ${t} was not matched by any era`);return {eraYear:r,era:n.name}};let{year:t,eraYear:r,era:o}=e;if(null!=t)(({eraYear:r,era:o}=eraFromYear(t))),checkField("era",o),checkField("eraYear",r);else {if(null==r)throw new RangeError("Either `year` or `eraYear` and `era` are required");{const e=void 0===o?void 0:this.eras.find((e=>e.name===o||e.genericName===o));if(!e)throw new RangeError(`Era ${o} (ISO year ${r}) was not matched by any era`);if(r<1&&e.reverseOf)throw new RangeError(`Years in ${o} era must be positive, not ${t}`);t=e.reverseOf?e.anchorEpoch.year-r:r+e.anchorEpoch.year-(e.hasYearZero?0:1),checkField("year",t),({eraYear:r,era:o}=eraFromYear(t));}}return {...e,year:t,eraYear:r,era:o}}adjustCalendarDate(e,t,r="constrain"){let o=e;const{month:n,monthCode:a}=o;return void 0===n&&(o={...o,month:monthCodeNumberPart(a)}),this.validateCalendarDate(o),o=this.completeEraYear(o),super.adjustCalendarDate(o,t,r)}estimateIsoDate(e){const t=this.adjustCalendarDate(e),{year:r,month:o,day:n}=t,{anchorEra:a}=this;return RegulateISODate(r+a.isoEpoch.year-(a.hasYearZero?0:1),o,n,"constrain")}checkIcuBugs(e){if(this.calendarIsVulnerableToJulianBug&&this.v8IsVulnerableToJulianBug){if(CompareISODate(e.year,e.month,e.day,1582,10,15)<0)throw new RangeError(`calendar '${this.id}' is broken for ISO dates before 1582-10-15 (see https://bugs.chromium.org/p/chromium/issues/detail?id=1173158)`)}}}class OrthodoxBaseHelper extends GregorianBaseHelper{constructor(e,t){super(e,t);}inLeapYear(e){const{year:t}=e;return (t+1)%4==0}monthsInYear(){return 13}minimumMonthLength(e){const{month:t}=e;return 13===t?this.inLeapYear(e)?6:5:30}maximumMonthLength(e){return this.minimumMonthLength(e)}}class EthioaaHelper extends OrthodoxBaseHelper{constructor(){super("ethioaa",[{name:"era0",isoEpoch:{year:-5492,month:7,day:17}}]);}}class CopticHelper extends OrthodoxBaseHelper{constructor(){super("coptic",[{name:"era1",isoEpoch:{year:284,month:8,day:29}},{name:"era0",reverseOf:"era1"}]);}}class EthiopicHelper extends OrthodoxBaseHelper{constructor(){super("ethiopic",[{name:"era0",isoEpoch:{year:-5492,month:7,day:17}},{name:"era1",isoEpoch:{year:8,month:8,day:27},anchorEpoch:{year:5501}}]);}}class RocHelper extends GregorianBaseHelper{constructor(){super("roc",[{name:"minguo",isoEpoch:{year:1912,month:1,day:1}},{name:"before-roc",reverseOf:"minguo"}]),this.calendarIsVulnerableToJulianBug=!0;}}class BuddhistHelper extends GregorianBaseHelper{constructor(){super("buddhist",[{name:"be",hasYearZero:!0,isoEpoch:{year:-543,month:1,day:1}}]),this.calendarIsVulnerableToJulianBug=!0;}}class GregoryHelper extends GregorianBaseHelper{constructor(){super("gregory",[{name:"ce",isoEpoch:{year:1,month:1,day:1}},{name:"bce",reverseOf:"ce"}]);}reviseIntlEra(e){let{era:t,eraYear:r}=e;return "bc"!==t&&"b"!==t||(t="bce"),"ad"!==t&&"a"!==t||(t="ce"),{era:t,eraYear:r}}}class JapaneseHelper extends GregorianBaseHelper{constructor(){super("japanese",[{name:"reiwa",isoEpoch:{year:2019,month:5,day:1},anchorEpoch:{year:2019,month:5,day:1}},{name:"heisei",isoEpoch:{year:1989,month:1,day:8},anchorEpoch:{year:1989,month:1,day:8}},{name:"showa",isoEpoch:{year:1926,month:12,day:25},anchorEpoch:{year:1926,month:12,day:25}},{name:"taisho",isoEpoch:{year:1912,month:7,day:30},anchorEpoch:{year:1912,month:7,day:30}},{name:"meiji",isoEpoch:{year:1868,month:9,day:8},anchorEpoch:{year:1868,month:9,day:8}},{name:"ce",isoEpoch:{year:1,month:1,day:1}},{name:"bce",reverseOf:"ce"}]),this.calendarIsVulnerableToJulianBug=!0,this.eraLength="long";}reviseIntlEra(e,t){const{era:r,eraYear:o}=e,{year:n}=t;return this.eras.find((e=>e.name===r))?{era:r,eraYear:o}:n<1?{era:"bce",eraYear:1-n}:{era:"ce",eraYear:n}}}class ChineseBaseHelper extends HelperBase{constructor(){super(...arguments),this.calendarType="lunisolar",this.hasEra=!1;}inLeapYear(e,t){const r=this.getMonthList(e.year,t);return 13===ct(r).length}monthsInYear(e,t){return this.inLeapYear(e,t)?13:12}minimumMonthLength(){return 29}maximumMonthLength(){return 30}getMonthList(e,t){if(void 0===e)throw new TypeError("Missing year");const r=JSON.stringify({func:"getMonthList",calendarYear:e,id:this.id}),o=t.get(r);if(o)return o;const n=this.getFormatter(),getCalendarDate=(e,t)=>{const r=toUtcIsoDateString({isoYear:e,isoMonth:2,isoDay:1}),o=new Date(r);o.setUTCDate(t+1);const a=n.formatToParts(o),i=a.find((e=>"month"===e.type)).value,s=+a.find((e=>"day"===e.type)).value;let l=a.find((e=>"relatedYear"===e.type));if(void 0===l)throw new RangeError(`Intl.DateTimeFormat.formatToParts lacks relatedYear in ${this.id} calendar. Try Node 14+ or modern browsers.`);return l=+l.value,{calendarMonthString:i,calendarDay:s,calendarYearToVerify:l}};let a=17,{calendarMonthString:i,calendarDay:s,calendarYearToVerify:l}=getCalendarDate(e,a);"1"!==i&&(a+=29,({calendarMonthString:i,calendarDay:s}=getCalendarDate(e,a))),a-=s-5;const d={};let m,c,h=1,u=!1;do{(({calendarMonthString:i,calendarDay:s,calendarYearToVerify:l}=getCalendarDate(e,a))),m&&(d[c].daysInMonth=m+30-s),l!==e?u=!0:(d[i]={monthIndex:h++},a+=30),m=s,c=i;}while(!u);return d[c].daysInMonth=m+30-s,t.set(r,d),d}estimateIsoDate(e){const{year:t,month:r}=e;return {year:t,month:r>=12?12:r+1,day:1}}adjustCalendarDate(e,t,r="constrain",o=!1){let{year:n,month:a,monthExtra:i,day:s,monthCode:l,eraYear:d}=e;if(o){if(n=d,i&&"bis"!==i)throw new RangeError(`Unexpected leap month suffix: ${i}`);const e=buildMonthCode(a,void 0!==i),r=`${a}${i||""}`,o=this.getMonthList(n,t)[r];if(void 0===o)throw new RangeError(`Unmatched month ${r} in Chinese year ${n}`);return a=o.monthIndex,{year:n,month:a,day:s,era:void 0,eraYear:d,monthCode:e}}if(this.validateCalendarDate(e),void 0===n&&(n=d),void 0===d&&(d=n),void 0===a){const e=this.getMonthList(n,t);let o=l.replace("L","bis").slice(1);"0"===o[0]&&(o=o.slice(1));let i=e[o];if(a=i&&i.monthIndex,void 0===a&&l.endsWith("L")&&!at.call(["M01L","M12L","M13L"],l)&&"constrain"===r){let t=l.slice(1,-1);"0"===t[0]&&(t=t.slice(1)),i=e[t],i&&(({daysInMonth:s,monthIndex:a}=i),l=buildMonthCode(t));}if(void 0===a)throw new RangeError(`Unmatched month ${l} in Chinese year ${n}`)}else if(void 0===l){const e=this.getMonthList(n,t),o=ct(e),i=o.length;"reject"===r?(RejectToRange(a,1,i),RejectToRange(s,1,this.maximumMonthLength())):(a=ConstrainToRange(a,1,i),s=ConstrainToRange(s,1,this.maximumMonthLength()));const d=o.find((([,e])=>e.monthIndex===a));if(void 0===d)throw new RangeError(`Invalid month ${a} in Chinese year ${n}`);l=buildMonthCode(d[0].replace("bis",""),-1!==d[0].indexOf("bis"));}else {const e=this.getMonthList(n,t);let r=l.replace("L","bis").slice(1);"0"===r[0]&&(r=r.slice(1));const o=e[r];if(!o)throw new RangeError(`Unmatched monthCode ${l} in Chinese year ${n}`);if(a!==o.monthIndex)throw new RangeError(`monthCode ${l} doesn't correspond to month ${a} in Chinese year ${n}`)}return {...e,year:n,eraYear:d,month:a,monthCode:l,day:s}}}class ChineseHelper extends ChineseBaseHelper{constructor(){super(...arguments),this.id="chinese";}}class DangiHelper extends ChineseBaseHelper{constructor(){super(...arguments),this.id="dangi";}}const Tt={helper:void 0,dateFromFields(e,t,r){const o=ToTemporalOverflow(t),n=new OneObjectCache,a=PrepareTemporalFields(e,["day","era","eraYear","month","monthCode","year"],["day"]),{year:i,month:s,day:l}=this.helper.calendarToIsoDate(a,o,n),d=CreateTemporalDate(i,s,l,r);return n.setObject(d),d},yearMonthFromFields(e,t,r){const o=ToTemporalOverflow(t),n=new OneObjectCache,a=PrepareTemporalFields(e,["era","eraYear","month","monthCode","year"],[]),{year:i,month:s,day:l}=this.helper.calendarToIsoDate({...a,day:1},o,n),d=CreateTemporalYearMonth(i,s,r,l);return n.setObject(d),d},monthDayFromFields(e,t,r){const o=ToTemporalOverflow(t),n=new OneObjectCache,a=PrepareTemporalFields(e,["day","era","eraYear","month","monthCode","year"],["day"]),{year:i,month:s,day:l}=this.helper.monthDayFromFields(a,o,n),d=CreateTemporalMonthDay(s,l,r,i);return n.setObject(d),d},fields(e){let t=e;return at.call(t,"year")&&(t=[...t,"era","eraYear"]),t},mergeFields(e,t){const r={...e},o={...t},{month:n,monthCode:a,year:i,era:s,eraYear:l,...d}=r,{month:m,monthCode:c,year:h,era:u,eraYear:T}=o;return void 0===m&&void 0===c&&(d.month=n,d.monthCode=a),void 0===h&&void 0===u&&void 0===T&&(d.year=i),{...d,...o}},dateAdd(e,t,r,o,n,a,i){const s=OneObjectCache.getCacheForObject(e),l=this.helper.temporalToCalendarDate(e,s),d=this.helper.addCalendar(l,{years:t,months:r,weeks:o,days:n},a,s),m=this.helper.calendarToIsoDate(d,"constrain",s),{year:c,month:h,day:u}=m,T=CreateTemporalDate(c,h,u,i);return new OneObjectCache(s).setObject(T),T},dateUntil(e,t,r){const o=OneObjectCache.getCacheForObject(e),n=OneObjectCache.getCacheForObject(t),a=this.helper.temporalToCalendarDate(e,o),i=this.helper.temporalToCalendarDate(t,n);return this.helper.untilCalendar(a,i,r,o)},year(e){const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).year},month(e){const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).month},day(e){const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).day},era(e){if(!this.helper.hasEra)return;const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).era},eraYear(e){if(!this.helper.hasEra)return;const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).eraYear},monthCode(e){const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).monthCode},dayOfWeek:e=>ut.iso8601.dayOfWeek(e),dayOfYear(e){const t=OneObjectCache.getCacheForObject(e),r=this.helper.isoToCalendarDate(e,t),o=this.helper.startOfCalendarYear(r);return this.helper.calendarDaysUntil(o,r,t)+1},weekOfYear:e=>ut.iso8601.weekOfYear(e),daysInWeek:e=>ut.iso8601.daysInWeek(e),daysInMonth(e){const t=OneObjectCache.getCacheForObject(e),r=this.helper.temporalToCalendarDate(e,t),o=this.helper.maximumMonthLength(r);if(o===this.helper.minimumMonthLength(r))return o;const n=this.helper.startOfCalendarMonth(r),a=this.helper.addMonthsCalendar(n,1,"constrain",t);return this.helper.calendarDaysUntil(n,a,t)},daysInYear(e){let t=e;HasSlot(t,n)||(t=ToTemporalDate(t));const r=OneObjectCache.getCacheForObject(t),o=this.helper.temporalToCalendarDate(t,r),a=this.helper.startOfCalendarYear(o),i=this.helper.addCalendar(a,{years:1},"constrain",r);return this.helper.calendarDaysUntil(a,i,r)},monthsInYear(e){const t=OneObjectCache.getCacheForObject(e),r=this.helper.temporalToCalendarDate(e,t);return this.helper.monthsInYear(r,t)},inLeapYear(e){let t=e;HasSlot(t,n)||(t=ToTemporalDate(t));const r=OneObjectCache.getCacheForObject(t),o=this.helper.temporalToCalendarDate(t,r);return this.helper.inLeapYear(o,r)}};for(const e of [HebrewHelper,PersianHelper,EthiopicHelper,EthioaaHelper,CopticHelper,ChineseHelper,DangiHelper,RocHelper,IndianHelper,BuddhistHelper,GregoryHelper,JapaneseHelper,IslamicHelper,IslamicUmalquraHelper,IslamicTblaHelper,IslamicCivilHelper,IslamicRgsaHelper,IslamicCcHelper]){const t=new e;ut[t.id]={...Tt,helper:t};}class PlainDate{constructor(e,t,r,o=GetISO8601Calendar()){const n=ToIntegerThrowOnInfinity(e),a=ToIntegerThrowOnInfinity(t),i=ToIntegerThrowOnInfinity(r),s=ToTemporalCalendar(o);if(arguments.length<3)throw new RangeError("missing argument: isoYear, isoMonth and isoDay are required");CreateTemporalDateSlots(this,n,a,i,s);}get calendar(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return GetSlot(this,u)}get era(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarEra(GetSlot(this,u),this)}get eraYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarEraYear(GetSlot(this,u),this)}get year(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarYear(GetSlot(this,u),this)}get month(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarMonth(GetSlot(this,u),this)}get monthCode(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarMonthCode(GetSlot(this,u),this)}get day(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDay(GetSlot(this,u),this)}get dayOfWeek(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDayOfWeek(GetSlot(this,u),this)}get dayOfYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDayOfYear(GetSlot(this,u),this)}get weekOfYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarWeekOfYear(GetSlot(this,u),this)}get daysInWeek(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDaysInWeek(GetSlot(this,u),this)}get daysInMonth(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDaysInMonth(GetSlot(this,u),this)}get daysInYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDaysInYear(GetSlot(this,u),this)}get monthsInYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarMonthsInYear(GetSlot(this,u),this)}get inLeapYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarInLeapYear(GetSlot(this,u),this)}with(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");RejectObjectWithCalendarOrTimeZone(e);const r=GetSlot(this,u),o=CalendarFields(r,["day","month","monthCode","year"]),n=PrepareTemporalFields(e,o,"partial");if(!n)throw new TypeError("invalid date-like");let a=PrepareTemporalFields(this,o,[]);a=CalendarMergeFields(r,a,n),a=PrepareTemporalFields(a,o,[]);return CalendarDateFromFields(r,a,GetOptionsObject(t))}withCalendar(e){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const t=ToTemporalCalendar(e);return new PlainDate(GetSlot(this,n),GetSlot(this,a),GetSlot(this,i),t)}add(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const r=ToTemporalDuration(e),o=GetOptionsObject(t);return CalendarDateAdd(GetSlot(this,u),this,r,o)}subtract(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const r=CreateNegatedTemporalDuration(ToTemporalDuration(e)),o=GetOptionsObject(t);return CalendarDateAdd(GetSlot(this,u),this,r,o)}until(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainDate("until",this,e,t)}since(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainDate("since",this,e,t)}equals(e){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);for(const e of [n,a,i]){if(GetSlot(this,e)!==GetSlot(t,e))return !1}return CalendarEquals(GetSlot(this,u),GetSlot(t,u))}toString(e){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return TemporalDateToString(this,ToShowCalendarOption(GetOptionsObject(e)))}toJSON(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return TemporalDateToString(this)}toLocaleString(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return new ot(e,t).format(this)}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.PlainDate")}toPlainDateTime(e){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const t=GetSlot(this,n),r=GetSlot(this,a),o=GetSlot(this,i),T=GetSlot(this,u);if(void 0===e)return CreateTemporalDateTime(t,r,o,0,0,0,0,0,0,T);const p=ToTemporalTime(e);return CreateTemporalDateTime(t,r,o,GetSlot(p,s),GetSlot(p,l),GetSlot(p,d),GetSlot(p,m),GetSlot(p,c),GetSlot(p,h),T)}toZonedDateTime(e){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");let t,o;if(IsObject(e)){const r=e.timeZone;void 0===r?t=ToTemporalTimeZone(e):(t=ToTemporalTimeZone(r),o=e.plainTime);}else t=ToTemporalTimeZone(e);const T=GetSlot(this,n),p=GetSlot(this,a),f=GetSlot(this,i),y=GetSlot(this,u);let S=0,w=0,g=0,I=0,D=0,G=0;void 0!==o&&(o=ToTemporalTime(o),S=GetSlot(o,s),w=GetSlot(o,l),g=GetSlot(o,d),I=GetSlot(o,m),D=GetSlot(o,c),G=GetSlot(o,h));return CreateTemporalZonedDateTime(GetSlot(BuiltinTimeZoneGetInstantFor(t,CreateTemporalDateTime(T,p,f,S,w,g,I,D,G,y),"compatible"),r),t,y)}toPlainYearMonth(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const e=GetSlot(this,u);return CalendarYearMonthFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["monthCode","year"]),[]))}toPlainMonthDay(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const e=GetSlot(this,u);return CalendarMonthDayFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["day","monthCode"]),[]))}getISOFields(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return {calendar:GetSlot(this,u),isoDay:GetSlot(this,i),isoMonth:GetSlot(this,a),isoYear:GetSlot(this,n)}}static from(e,t){const r=GetOptionsObject(t);return IsTemporalDate(e)?(ToTemporalOverflow(r),CreateTemporalDate(GetSlot(e,n),GetSlot(e,a),GetSlot(e,i),GetSlot(e,u))):ToTemporalDate(e,r)}static compare(e,t){const r=ToTemporalDate(e),o=ToTemporalDate(t);return CompareISODate(GetSlot(r,n),GetSlot(r,a),GetSlot(r,i),GetSlot(o,n),GetSlot(o,a),GetSlot(o,i))}}MakeIntrinsicClass(PlainDate,"Temporal.PlainDate");class PlainDateTime{constructor(e,t,r,o=0,n=0,a=0,i=0,s=0,l=0,d=GetISO8601Calendar()){const m=ToIntegerThrowOnInfinity(e),c=ToIntegerThrowOnInfinity(t),h=ToIntegerThrowOnInfinity(r),u=ToIntegerThrowOnInfinity(o),T=ToIntegerThrowOnInfinity(n),p=ToIntegerThrowOnInfinity(a),f=ToIntegerThrowOnInfinity(i),y=ToIntegerThrowOnInfinity(s),S=ToIntegerThrowOnInfinity(l),w=ToTemporalCalendar(d);if(arguments.length<3)throw new RangeError("missing argument: isoYear, isoMonth and isoDay are required");CreateTemporalDateTimeSlots(this,m,c,h,u,T,p,f,y,S,w);}get calendar(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,u)}get year(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarYear(GetSlot(this,u),this)}get month(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarMonth(GetSlot(this,u),this)}get monthCode(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarMonthCode(GetSlot(this,u),this)}get day(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDay(GetSlot(this,u),this)}get hour(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,s)}get minute(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,l)}get second(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,d)}get millisecond(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,m)}get microsecond(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,c)}get nanosecond(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,h)}get era(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarEra(GetSlot(this,u),this)}get eraYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarEraYear(GetSlot(this,u),this)}get dayOfWeek(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDayOfWeek(GetSlot(this,u),this)}get dayOfYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDayOfYear(GetSlot(this,u),this)}get weekOfYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarWeekOfYear(GetSlot(this,u),this)}get daysInWeek(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInWeek(GetSlot(this,u),this)}get daysInYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInYear(GetSlot(this,u),this)}get daysInMonth(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInMonth(GetSlot(this,u),this)}get monthsInYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarMonthsInYear(GetSlot(this,u),this)}get inLeapYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarInLeapYear(GetSlot(this,u),this)}with(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");RejectObjectWithCalendarOrTimeZone(e);const r=GetOptionsObject(t),o=GetSlot(this,u),n=CalendarFields(o,["day","hour","microsecond","millisecond","minute","month","monthCode","nanosecond","second","year"]),a=PrepareTemporalFields(e,n,"partial");if(!a)throw new TypeError("invalid date-time-like");let i=PrepareTemporalFields(this,n,[]);i=CalendarMergeFields(o,i,a),i=PrepareTemporalFields(i,n,[]);const{year:s,month:l,day:d,hour:m,minute:c,second:h,millisecond:T,microsecond:p,nanosecond:f}=InterpretTemporalDateTimeFields(o,i,r);return CreateTemporalDateTime(s,l,d,m,c,h,T,p,f,o)}withPlainTime(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const t=GetSlot(this,n),r=GetSlot(this,a),o=GetSlot(this,i),T=GetSlot(this,u);if(void 0===e)return CreateTemporalDateTime(t,r,o,0,0,0,0,0,0,T);const p=ToTemporalTime(e);return CreateTemporalDateTime(t,r,o,GetSlot(p,s),GetSlot(p,l),GetSlot(p,d),GetSlot(p,m),GetSlot(p,c),GetSlot(p,h),T)}withPlainDate(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e),r=GetSlot(t,n),o=GetSlot(t,a),T=GetSlot(t,i);let p=GetSlot(t,u);const f=GetSlot(this,s),y=GetSlot(this,l),S=GetSlot(this,d),w=GetSlot(this,m),g=GetSlot(this,c),I=GetSlot(this,h);return p=ConsolidateCalendars(GetSlot(this,u),p),CreateTemporalDateTime(r,o,T,f,y,S,w,g,I,p)}withCalendar(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalCalendar(e);return new PlainDateTime(GetSlot(this,n),GetSlot(this,a),GetSlot(this,i),GetSlot(this,s),GetSlot(this,l),GetSlot(this,d),GetSlot(this,m),GetSlot(this,c),GetSlot(this,h),t)}add(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainDateTime("add",this,e,t)}subtract(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainDateTime("subtract",this,e,t)}until(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainDateTime("until",this,e,t)}since(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainDateTime("since",this,e,t)}round(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");if(void 0===e)throw new TypeError("options parameter is required");const t="string"==typeof e?CreateOnePropObject("smallestUnit",e):GetOptionsObject(e),r=GetTemporalUnit(t,"smallestUnit","time",je,["day"]),o=ToTemporalRoundingMode(t,"halfExpand"),T=ToTemporalRoundingIncrement(t,{day:1,hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[r],!1);let p=GetSlot(this,n),f=GetSlot(this,a),y=GetSlot(this,i),S=GetSlot(this,s),w=GetSlot(this,l),g=GetSlot(this,d),I=GetSlot(this,m),D=GetSlot(this,c),G=GetSlot(this,h);return ({year:p,month:f,day:y,hour:S,minute:w,second:g,millisecond:I,microsecond:D,nanosecond:G}=RoundISODateTime(p,f,y,S,w,g,I,D,G,T,r,o)),CreateTemporalDateTime(p,f,y,S,w,g,I,D,G,GetSlot(this,u))}equals(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalDateTime(e);for(const e of [n,a,i,s,l,d,m,c,h]){if(GetSlot(this,e)!==GetSlot(t,e))return !1}return CalendarEquals(GetSlot(this,u),GetSlot(t,u))}toString(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const t=GetOptionsObject(e),{precision:r,unit:o,increment:n}=ToSecondsStringPrecision(t);return TemporalDateTimeToString(this,r,ToShowCalendarOption(t),{unit:o,increment:n,roundingMode:ToTemporalRoundingMode(t,"trunc")})}toJSON(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return TemporalDateTimeToString(this,"auto")}toLocaleString(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return new ot(e,t).format(this)}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.PlainDateTime")}toZonedDateTime(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const o=ToTemporalTimeZone(e);return CreateTemporalZonedDateTime(GetSlot(BuiltinTimeZoneGetInstantFor(o,this,ToTemporalDisambiguation(GetOptionsObject(t))),r),o,GetSlot(this,u))}toPlainDate(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return TemporalDateTimeToDate(this)}toPlainYearMonth(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const e=GetSlot(this,u);return CalendarYearMonthFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["monthCode","year"]),[]))}toPlainMonthDay(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const e=GetSlot(this,u);return CalendarMonthDayFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["day","monthCode"]),[]))}toPlainTime(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return TemporalDateTimeToTime(this)}getISOFields(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return {calendar:GetSlot(this,u),isoDay:GetSlot(this,i),isoHour:GetSlot(this,s),isoMicrosecond:GetSlot(this,c),isoMillisecond:GetSlot(this,m),isoMinute:GetSlot(this,l),isoMonth:GetSlot(this,a),isoNanosecond:GetSlot(this,h),isoSecond:GetSlot(this,d),isoYear:GetSlot(this,n)}}static from(e,t){const r=GetOptionsObject(t);return IsTemporalDateTime(e)?(ToTemporalOverflow(r),CreateTemporalDateTime(GetSlot(e,n),GetSlot(e,a),GetSlot(e,i),GetSlot(e,s),GetSlot(e,l),GetSlot(e,d),GetSlot(e,m),GetSlot(e,c),GetSlot(e,h),GetSlot(e,u))):ToTemporalDateTime(e,r)}static compare(e,t){const r=ToTemporalDateTime(e),o=ToTemporalDateTime(t);for(const e of [n,a,i,s,l,d,m,c,h]){const t=GetSlot(r,e),n=GetSlot(o,e);if(t!==n)return ComparisonResult(t-n)}return 0}}MakeIntrinsicClass(PlainDateTime,"Temporal.PlainDateTime");class Duration{constructor(e=0,t=0,r=0,o=0,n=0,a=0,i=0,s=0,l=0,d=0){const m=ToIntegerWithoutRounding(e),c=ToIntegerWithoutRounding(t),h=ToIntegerWithoutRounding(r),u=ToIntegerWithoutRounding(o),T=ToIntegerWithoutRounding(n),p=ToIntegerWithoutRounding(a),C=ToIntegerWithoutRounding(i),E=ToIntegerWithoutRounding(s),b=ToIntegerWithoutRounding(l),M=ToIntegerWithoutRounding(d);RejectDuration(m,c,h,u,T,p,C,E,b,M),CreateSlots(this),SetSlot(this,f,m),SetSlot(this,y,c),SetSlot(this,S,h),SetSlot(this,w,u),SetSlot(this,g,T),SetSlot(this,I,p),SetSlot(this,D,C),SetSlot(this,G,E),SetSlot(this,v,b),SetSlot(this,O,M);}get years(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,f)}get months(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,y)}get weeks(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,S)}get days(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,w)}get hours(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,g)}get minutes(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,I)}get seconds(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,D)}get milliseconds(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,G)}get microseconds(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,v)}get nanoseconds(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,O)}get sign(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return DurationSign(GetSlot(this,f),GetSlot(this,y),GetSlot(this,S),GetSlot(this,w),GetSlot(this,g),GetSlot(this,I),GetSlot(this,D),GetSlot(this,G),GetSlot(this,v),GetSlot(this,O))}get blank(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return 0===DurationSign(GetSlot(this,f),GetSlot(this,y),GetSlot(this,S),GetSlot(this,w),GetSlot(this,g),GetSlot(this,I),GetSlot(this,D),GetSlot(this,G),GetSlot(this,v),GetSlot(this,O))}with(e){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");const t=PrepareTemporalFields(e,["days","hours","microseconds","milliseconds","minutes","months","nanoseconds","seconds","weeks","years"],"partial");if(!t)throw new TypeError("invalid duration-like");const{years:r=GetSlot(this,f),months:o=GetSlot(this,y),weeks:n=GetSlot(this,S),days:a=GetSlot(this,w),hours:i=GetSlot(this,g),minutes:s=GetSlot(this,I),seconds:l=GetSlot(this,D),milliseconds:d=GetSlot(this,G),microseconds:m=GetSlot(this,v),nanoseconds:c=GetSlot(this,O)}=t;return new Duration(r,o,n,a,i,s,l,d,m,c)}negated(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return CreateNegatedTemporalDuration(this)}abs(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return new Duration(Math.abs(GetSlot(this,f)),Math.abs(GetSlot(this,y)),Math.abs(GetSlot(this,S)),Math.abs(GetSlot(this,w)),Math.abs(GetSlot(this,g)),Math.abs(GetSlot(this,I)),Math.abs(GetSlot(this,D)),Math.abs(GetSlot(this,G)),Math.abs(GetSlot(this,v)),Math.abs(GetSlot(this,O)))}add(e,t){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromDuration("add",this,e,t)}subtract(e,t){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromDuration("subtract",this,e,t)}round(e){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");if(void 0===e)throw new TypeError("options parameter is required");let t=GetSlot(this,f),r=GetSlot(this,y),o=GetSlot(this,S),n=GetSlot(this,w),a=GetSlot(this,g),i=GetSlot(this,I),s=GetSlot(this,D),l=GetSlot(this,G),d=GetSlot(this,v),m=GetSlot(this,O),c=DefaultTemporalLargestUnit(t,r,o,n,a,i,s,l,d,m);const h="string"==typeof e?CreateOnePropObject("smallestUnit",e):GetOptionsObject(e);let T=GetTemporalUnit(h,"smallestUnit","datetime",void 0),p=!0;T||(p=!1,T="nanosecond"),c=LargerOfTwoTemporalUnits(c,T);let C=GetTemporalUnit(h,"largestUnit","datetime",void 0,["auto"]),E=!0;if(C||(E=!1,C=c),"auto"===C&&(C=c),!p&&!E)throw new RangeError("at least one of smallestUnit or largestUnit is required");if(LargerOfTwoTemporalUnits(C,T)!==C)throw new RangeError(`largestUnit ${C} cannot be smaller than smallestUnit ${T}`);const b=ToTemporalRoundingMode(h,"halfExpand"),M=ToTemporalDateTimeRoundingIncrement(h,T);let R=ToRelativeTemporalObject(h);return ({years:t,months:r,weeks:o,days:n}=UnbalanceDurationRelative(t,r,o,n,C,R)),({years:t,months:r,weeks:o,days:n,hours:a,minutes:i,seconds:s,milliseconds:l,microseconds:d,nanoseconds:m}=RoundDuration(t,r,o,n,a,i,s,l,d,m,M,T,b,R)),({years:t,months:r,weeks:o,days:n,hours:a,minutes:i,seconds:s,milliseconds:l,microseconds:d,nanoseconds:m}=AdjustRoundedDurationDays(t,r,o,n,a,i,s,l,d,m,M,T,b,R)),({years:t,months:r,weeks:o,days:n}=function BalanceDurationRelative(e,t,r,o,n,a){let i=e,s=t,l=r,d=o;const m=GetIntrinsic("%Temporal.Duration%"),c=DurationSign(i,s,l,d,0,0,0,0,0,0);if(0===c)return {years:i,months:s,weeks:l,days:d};let h,T;a&&(T=ToTemporalDate(a),h=GetSlot(T,u));const p=new m(c),f=new m(0,c),S=new m(0,0,c);switch(n){case"year":{if(!h)throw new RangeError("a starting point is required for years balancing");let e,t,r;for(({relativeTo:e,days:t}=MoveRelativeDate(h,T,p));K(d)>=K(t);)d-=t,i+=c,T=e,({relativeTo:e,days:t}=MoveRelativeDate(h,T,p));for(({relativeTo:e,days:r}=MoveRelativeDate(h,T,f));K(d)>=K(r);)d-=r,s+=c,T=e,({relativeTo:e,days:r}=MoveRelativeDate(h,T,f));const o=h.dateAdd;e=CalendarDateAdd(h,T,p,void 0,o);const n=h.dateUntil,a=le(null);a.largestUnit="month";let l=CalendarDateUntil(h,T,e,a,n),m=GetSlot(l,y);for(;K(s)>=K(m);){s-=m,i+=c,T=e,e=CalendarDateAdd(h,T,p,void 0,o);const t=le(null);t.largestUnit="month",l=CalendarDateUntil(h,T,e,t,n),m=GetSlot(l,y);}break}case"month":{if(!h)throw new RangeError("a starting point is required for months balancing");let e,t;for(({relativeTo:e,days:t}=MoveRelativeDate(h,T,f));K(d)>=K(t);)d-=t,s+=c,T=e,({relativeTo:e,days:t}=MoveRelativeDate(h,T,f));break}case"week":{if(!h)throw new RangeError("a starting point is required for weeks balancing");let e,t;for(({relativeTo:e,days:t}=MoveRelativeDate(h,T,S));K(d)>=K(t);)d-=t,l+=c,T=e,({relativeTo:e,days:t}=MoveRelativeDate(h,T,S));break}}return {years:i,months:s,weeks:l,days:d}}(t,r,o,n,C,R)),IsTemporalZonedDateTime(R)&&(R=MoveRelativeZonedDateTime(R,t,r,o,0)),({days:n,hours:a,minutes:i,seconds:s,milliseconds:l,microseconds:d,nanoseconds:m}=BalanceDuration(n,a,i,s,l,d,m,C,R)),new Duration(t,r,o,n,a,i,s,l,d,m)}total(e){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");let t=GetSlot(this,f),r=GetSlot(this,y),o=GetSlot(this,S),n=GetSlot(this,w),a=GetSlot(this,g),i=GetSlot(this,I),s=GetSlot(this,D),l=GetSlot(this,G),d=GetSlot(this,v),m=GetSlot(this,O);if(void 0===e)throw new TypeError("options argument is required");const c="string"==typeof e?CreateOnePropObject("unit",e):GetOptionsObject(e),h=GetTemporalUnit(c,"unit","datetime",je),u=ToRelativeTemporalObject(c);let T;(({years:t,months:r,weeks:o,days:n}=UnbalanceDurationRelative(t,r,o,n,h,u))),IsTemporalZonedDateTime(u)&&(T=MoveRelativeZonedDateTime(u,t,r,o,0)),({days:n,hours:a,minutes:i,seconds:s,milliseconds:l,microseconds:d,nanoseconds:m}=BalanceDuration(n,a,i,s,l,d,m,h,T));const{total:p}=RoundDuration(t,r,o,n,a,i,s,l,d,m,1,h,"trunc",u);return p}toString(e){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");const t=GetOptionsObject(e),{precision:r,unit:o,increment:n}=ToSecondsStringPrecision(t);if("minute"===r)throw new RangeError('smallestUnit must not be "minute"');return TemporalDurationToString(this,r,{unit:o,increment:n,roundingMode:ToTemporalRoundingMode(t,"trunc")})}toJSON(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return TemporalDurationToString(this)}toLocaleString(e,t){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return "undefined"!=typeof Intl&&void 0!==Intl.DurationFormat?new Intl.DurationFormat(e,t).format(this):(console.warn("Temporal.Duration.prototype.toLocaleString() requires Intl.DurationFormat."),TemporalDurationToString(this))}valueOf(){throw new TypeError("use compare() to compare Temporal.Duration")}static from(e){return IsTemporalDuration(e)?new Duration(GetSlot(e,f),GetSlot(e,y),GetSlot(e,S),GetSlot(e,w),GetSlot(e,g),GetSlot(e,I),GetSlot(e,D),GetSlot(e,G),GetSlot(e,v),GetSlot(e,O)):ToTemporalDuration(e)}static compare(t,r,o){const n=ToTemporalDuration(t),a=ToTemporalDuration(r),i=ToRelativeTemporalObject(GetOptionsObject(o)),s=GetSlot(n,f),l=GetSlot(n,y),d=GetSlot(n,S);let m=GetSlot(n,w);const c=GetSlot(n,g),h=GetSlot(n,I),u=GetSlot(n,D),T=GetSlot(n,G),p=GetSlot(n,v);let C=GetSlot(n,O);const E=GetSlot(a,f),b=GetSlot(a,y),M=GetSlot(a,S);let R=GetSlot(a,w);const Z=GetSlot(a,g),P=GetSlot(a,I),F=GetSlot(a,D),Y=GetSlot(a,G),j=GetSlot(a,v);let $=GetSlot(a,O);const B=CalculateOffsetShift(i,s,l,d,m),N=CalculateOffsetShift(i,E,b,M,R);0===s&&0===E&&0===l&&0===b&&0===d&&0===M||(({days:m}=UnbalanceDurationRelative(s,l,d,m,"day",i)),({days:R}=UnbalanceDurationRelative(E,b,M,R,"day",i)));const k=TotalDurationNanoseconds(m,c,h,u,T,p,C,B),A=TotalDurationNanoseconds(R,Z,P,F,Y,j,$,N);return ComparisonResult(JSBI.toNumber(JSBI.subtract(k,A)))}}MakeIntrinsicClass(Duration,"Temporal.Duration");const pt=Object.create;class PlainMonthDay{constructor(e,t,r=GetISO8601Calendar(),o=1972){const n=ToIntegerThrowOnInfinity(e),a=ToIntegerThrowOnInfinity(t),i=ToTemporalCalendar(r),s=ToIntegerThrowOnInfinity(o);if(arguments.length<2)throw new RangeError("missing argument: isoMonth and isoDay are required");CreateTemporalMonthDaySlots(this,n,a,i,s);}get monthCode(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return CalendarMonthCode(GetSlot(this,u),this)}get day(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return CalendarDay(GetSlot(this,u),this)}get calendar(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return GetSlot(this,u)}with(e,t){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");RejectObjectWithCalendarOrTimeZone(e);const r=GetSlot(this,u),o=CalendarFields(r,["day","month","monthCode","year"]),n=PrepareTemporalFields(e,o,"partial");if(!n)throw new TypeError("invalid month-day-like");let a=PrepareTemporalFields(this,o,[]);a=CalendarMergeFields(r,a,n),a=PrepareTemporalFields(a,o,[]);return CalendarMonthDayFromFields(r,a,GetOptionsObject(t))}equals(e){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");const t=ToTemporalMonthDay(e);for(const e of [a,i,n]){if(GetSlot(this,e)!==GetSlot(t,e))return !1}return CalendarEquals(GetSlot(this,u),GetSlot(t,u))}toString(e){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return TemporalMonthDayToString(this,ToShowCalendarOption(GetOptionsObject(e)))}toJSON(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return TemporalMonthDayToString(this)}toLocaleString(e,t){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return new ot(e,t).format(this)}valueOf(){throw new TypeError("use equals() to compare Temporal.PlainMonthDay")}toPlainDate(e){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("argument should be an object");const t=GetSlot(this,u),r=CalendarFields(t,["day","monthCode"]),o=PrepareTemporalFields(this,r,[]),n=CalendarFields(t,["year"]);let a=CalendarMergeFields(t,o,PrepareTemporalFields(e,n,[]));a=PrepareTemporalFields(a,[...new Set([...r,...n])],[]);const i=pt(null);return i.overflow="reject",CalendarDateFromFields(t,a,i)}getISOFields(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return {calendar:GetSlot(this,u),isoDay:GetSlot(this,i),isoMonth:GetSlot(this,a),isoYear:GetSlot(this,n)}}static from(e,t){const r=GetOptionsObject(t);return IsTemporalMonthDay(e)?(ToTemporalOverflow(r),CreateTemporalMonthDay(GetSlot(e,a),GetSlot(e,i),GetSlot(e,u),GetSlot(e,n))):ToTemporalMonthDay(e,r)}}MakeIntrinsicClass(PlainMonthDay,"Temporal.PlainMonthDay");const instant=()=>new(GetIntrinsic("%Temporal.Instant%"))($e()),plainDateTime=(e,t=timeZone())=>{const r=ToTemporalTimeZone(t),o=ToTemporalCalendar(e);return BuiltinTimeZoneGetPlainDateTimeFor(r,instant(),o)},plainDateTimeISO=(e=timeZone())=>{const t=ToTemporalTimeZone(e),r=GetISO8601Calendar();return BuiltinTimeZoneGetPlainDateTimeFor(t,instant(),r)},zonedDateTime=(e,t=timeZone())=>{const r=ToTemporalTimeZone(t),o=ToTemporalCalendar(e);return CreateTemporalZonedDateTime($e(),r,o)},timeZone=()=>function SystemTimeZone(){const e=new J("en-us");return new(GetIntrinsic("%Temporal.TimeZone%"))(ParseTemporalTimeZone(e.resolvedOptions().timeZone))}(),ft={instant,plainDateTime,plainDateTimeISO,plainDate:(e,t=timeZone())=>TemporalDateTimeToDate(plainDateTime(e,t)),plainDateISO:(e=timeZone())=>TemporalDateTimeToDate(plainDateTimeISO(e)),plainTimeISO:(e=timeZone())=>TemporalDateTimeToTime(plainDateTimeISO(e)),timeZone,zonedDateTime,zonedDateTimeISO:(e=timeZone())=>zonedDateTime(GetISO8601Calendar(),e),[Symbol.toStringTag]:"Temporal.Now"};Object.defineProperty(ft,Symbol.toStringTag,{value:"Temporal.Now",writable:!1,enumerable:!1,configurable:!0});const yt=Object.assign;function TemporalTimeToString(e,t,r){let o=GetSlot(e,s),n=GetSlot(e,l),a=GetSlot(e,d),i=GetSlot(e,m),u=GetSlot(e,c),T=GetSlot(e,h);if(r){const{unit:e,increment:t,roundingMode:s}=r;({hour:o,minute:n,second:a,millisecond:i,microsecond:u,nanosecond:T}=RoundTime(o,n,a,i,u,T,t,e,s));}return `${ISODateTimePartString(o)}:${ISODateTimePartString(n)}${FormatSecondsStringPart(a,i,u,T,t)}`}class PlainTime{constructor(e=0,t=0,r=0,o=0,n=0,a=0){const i=ToIntegerThrowOnInfinity(e),T=ToIntegerThrowOnInfinity(t),p=ToIntegerThrowOnInfinity(r),f=ToIntegerThrowOnInfinity(o),y=ToIntegerThrowOnInfinity(n),S=ToIntegerThrowOnInfinity(a);RejectTime(i,T,p,f,y,S),CreateSlots(this),SetSlot(this,s,i),SetSlot(this,l,T),SetSlot(this,d,p),SetSlot(this,m,f),SetSlot(this,c,y),SetSlot(this,h,S),SetSlot(this,u,GetISO8601Calendar());}get calendar(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,u)}get hour(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,s)}get minute(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,l)}get second(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,d)}get millisecond(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,m)}get microsecond(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,c)}get nanosecond(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,h)}with(e,t){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");RejectObjectWithCalendarOrTimeZone(e);const r=ToTemporalTimeRecord(e,"partial"),o=ToTemporalOverflow(GetOptionsObject(t)),n=ToTemporalTimeRecord(this);let{hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m}=yt(n,r);return ({hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m}=RegulateTime(a,i,s,l,d,m,o)),new PlainTime(a,i,s,l,d,m)}add(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainTime("add",this,e)}subtract(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainTime("subtract",this,e)}until(e,t){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainTime("until",this,e,t)}since(e,t){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainTime("since",this,e,t)}round(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");if(void 0===e)throw new TypeError("options parameter is required");const t="string"==typeof e?CreateOnePropObject("smallestUnit",e):GetOptionsObject(e),r=GetTemporalUnit(t,"smallestUnit","time",je),o=ToTemporalRoundingMode(t,"halfExpand"),n=ToTemporalRoundingIncrement(t,{hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[r],!1);let a=GetSlot(this,s),i=GetSlot(this,l),u=GetSlot(this,d),T=GetSlot(this,m),p=GetSlot(this,c),f=GetSlot(this,h);return ({hour:a,minute:i,second:u,millisecond:T,microsecond:p,nanosecond:f}=RoundTime(a,i,u,T,p,f,n,r,o)),new PlainTime(a,i,u,T,p,f)}equals(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");const t=ToTemporalTime(e);for(const e of [s,l,d,m,c,h]){if(GetSlot(this,e)!==GetSlot(t,e))return !1}return !0}toString(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");const t=GetOptionsObject(e),{precision:r,unit:o,increment:n}=ToSecondsStringPrecision(t);return TemporalTimeToString(this,r,{unit:o,increment:n,roundingMode:ToTemporalRoundingMode(t,"trunc")})}toJSON(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return TemporalTimeToString(this,"auto")}toLocaleString(e,t){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return new ot(e,t).format(this)}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.PlainTime")}toPlainDateTime(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e),r=GetSlot(t,n),o=GetSlot(t,a),T=GetSlot(t,i),p=GetSlot(t,u);return CreateTemporalDateTime(r,o,T,GetSlot(this,s),GetSlot(this,l),GetSlot(this,d),GetSlot(this,m),GetSlot(this,c),GetSlot(this,h),p)}toZonedDateTime(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");const t=e.plainDate;if(void 0===t)throw new TypeError("missing date property");const o=ToTemporalDate(t),T=e.timeZone;if(void 0===T)throw new TypeError("missing timeZone property");const p=ToTemporalTimeZone(T),f=GetSlot(o,n),y=GetSlot(o,a),S=GetSlot(o,i),w=GetSlot(o,u),g=GetSlot(this,s),I=GetSlot(this,l),D=GetSlot(this,d),G=GetSlot(this,m),v=GetSlot(this,c),O=GetSlot(this,h);return CreateTemporalZonedDateTime(GetSlot(BuiltinTimeZoneGetInstantFor(p,new(GetIntrinsic("%Temporal.PlainDateTime%"))(f,y,S,g,I,D,G,v,O,w),"compatible"),r),p,w)}getISOFields(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return {calendar:GetSlot(this,u),isoHour:GetSlot(this,s),isoMicrosecond:GetSlot(this,c),isoMillisecond:GetSlot(this,m),isoMinute:GetSlot(this,l),isoNanosecond:GetSlot(this,h),isoSecond:GetSlot(this,d)}}static from(e,t){const r=ToTemporalOverflow(GetOptionsObject(t));return IsTemporalTime(e)?new PlainTime(GetSlot(e,s),GetSlot(e,l),GetSlot(e,d),GetSlot(e,m),GetSlot(e,c),GetSlot(e,h)):ToTemporalTime(e,r)}static compare(e,t){const r=ToTemporalTime(e),o=ToTemporalTime(t);for(const e of [s,l,d,m,c,h]){const t=GetSlot(r,e),n=GetSlot(o,e);if(t!==n)return ComparisonResult(t-n)}return 0}}MakeIntrinsicClass(PlainTime,"Temporal.PlainTime");class TimeZone{constructor(e){if(arguments.length<1)throw new RangeError("missing argument: identifier is required");const t=GetCanonicalTimeZoneIdentifier(e);CreateSlots(this),SetSlot(this,o,t);}get id(){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return ToString(this)}getOffsetNanosecondsFor(e){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");const t=ToTemporalInstant(e),n=GetSlot(this,o);return TestTimeZoneOffsetString(n)?ParseTimeZoneOffsetString(n):GetIANATimeZoneOffsetNanoseconds(GetSlot(t,r),n)}getOffsetStringFor(e){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return BuiltinTimeZoneGetOffsetStringFor(this,ToTemporalInstant(e))}getPlainDateTimeFor(e,t=GetISO8601Calendar()){return BuiltinTimeZoneGetPlainDateTimeFor(this,ToTemporalInstant(e),ToTemporalCalendar(t))}getInstantFor(e,t){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return BuiltinTimeZoneGetInstantFor(this,ToTemporalDateTime(e),ToTemporalDisambiguation(GetOptionsObject(t)))}getPossibleInstantsFor(t){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");const r=ToTemporalDateTime(t),u=GetIntrinsic("%Temporal.Instant%"),T=GetSlot(this,o);if(TestTimeZoneOffsetString(T)){const t=GetEpochFromISOParts(GetSlot(r,n),GetSlot(r,a),GetSlot(r,i),GetSlot(r,s),GetSlot(r,l),GetSlot(r,d),GetSlot(r,m),GetSlot(r,c),GetSlot(r,h));if(null===t)throw new RangeError("DateTime outside of supported range");const o=ParseTimeZoneOffsetString(T);return [new u(JSBI.subtract(t,JSBI.BigInt(o)))]}return function GetIANATimeZoneEpochValue(t,r,o,n,a,i,s,l,d,m){const c=GetEpochFromISOParts(r,o,n,a,i,s,l,d,m);if(null===c)throw new RangeError("DateTime outside of supported range");let h=JSBI.subtract(c,we);JSBI.lessThan(h,ge)&&(h=c);let u=JSBI.add(c,we);JSBI.greaterThan(u,Ie)&&(u=c);const T=GetIANATimeZoneOffsetNanoseconds(h,t),p=GetIANATimeZoneOffsetNanoseconds(u,t);return (T===p?[T]:[T,p]).map((h=>{const u=JSBI.subtract(c,JSBI.BigInt(h)),T=GetIANATimeZoneDateTimeParts(u,t);if(r===T.year&&o===T.month&&n===T.day&&a===T.hour&&i===T.minute&&s===T.second&&l===T.millisecond&&d===T.microsecond&&m===T.nanosecond)return u})).filter((e=>void 0!==e))}(T,GetSlot(r,n),GetSlot(r,a),GetSlot(r,i),GetSlot(r,s),GetSlot(r,l),GetSlot(r,d),GetSlot(r,m),GetSlot(r,c),GetSlot(r,h)).map((e=>new u(e)))}getNextTransition(t){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");const n=ToTemporalInstant(t),a=GetSlot(this,o);if(TestTimeZoneOffsetString(a)||"UTC"===a)return null;let i=GetSlot(n,r);const s=GetIntrinsic("%Temporal.Instant%");return i=function GetIANATimeZoneNextTransition(t,r){const o=JSBI.add(t,ve),n=maxJSBI(afterLatestPossibleTzdbRuleChange(),o);let a=maxJSBI(De,t);const i=GetIANATimeZoneOffsetNanoseconds(a,r);let s=a,l=i;for(;i===l&&JSBI.lessThan(JSBI.BigInt(a),n);)s=JSBI.add(a,Oe),l=GetIANATimeZoneOffsetNanoseconds(s,r),i===l&&(a=s);return i===l?null:bisect((e=>GetIANATimeZoneOffsetNanoseconds(e,r)),a,s,i,l)}(i,a),null===i?null:new s(i)}getPreviousTransition(e){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");const t=ToTemporalInstant(e),n=GetSlot(this,o);if(TestTimeZoneOffsetString(n)||"UTC"===n)return null;let a=GetSlot(t,r);const i=GetIntrinsic("%Temporal.Instant%");return a=GetIANATimeZonePreviousTransition(a,n),null===a?null:new i(a)}toString(){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return ToString(GetSlot(this,o))}toJSON(){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return ToString(this)}static from(e){return ToTemporalTimeZone(e)}}MakeIntrinsicClass(TimeZone,"Temporal.TimeZone");const St=Object.create;class PlainYearMonth{constructor(e,t,r=GetISO8601Calendar(),o=1){const n=ToIntegerThrowOnInfinity(e),a=ToIntegerThrowOnInfinity(t),i=ToTemporalCalendar(r),s=ToIntegerThrowOnInfinity(o);if(arguments.length<2)throw new RangeError("missing argument: isoYear and isoMonth are required");CreateTemporalYearMonthSlots(this,n,a,i,s);}get year(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarYear(GetSlot(this,u),this)}get month(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarMonth(GetSlot(this,u),this)}get monthCode(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarMonthCode(GetSlot(this,u),this)}get calendar(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return GetSlot(this,u)}get era(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarEra(GetSlot(this,u),this)}get eraYear(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarEraYear(GetSlot(this,u),this)}get daysInMonth(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarDaysInMonth(GetSlot(this,u),this)}get daysInYear(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarDaysInYear(GetSlot(this,u),this)}get monthsInYear(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarMonthsInYear(GetSlot(this,u),this)}get inLeapYear(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarInLeapYear(GetSlot(this,u),this)}with(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");RejectObjectWithCalendarOrTimeZone(e);const r=GetSlot(this,u),o=CalendarFields(r,["month","monthCode","year"]),n=PrepareTemporalFields(e,o,"partial");if(!n)throw new TypeError("invalid year-month-like");let a=PrepareTemporalFields(this,o,[]);a=CalendarMergeFields(r,a,n),a=PrepareTemporalFields(a,o,[]);return CalendarYearMonthFromFields(r,a,GetOptionsObject(t))}add(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainYearMonth("add",this,e,t)}subtract(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainYearMonth("subtract",this,e,t)}until(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainYearMonth("until",this,e,t)}since(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainYearMonth("since",this,e,t)}equals(e){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");const t=ToTemporalYearMonth(e);for(const e of [n,a,i]){if(GetSlot(this,e)!==GetSlot(t,e))return !1}return CalendarEquals(GetSlot(this,u),GetSlot(t,u))}toString(e){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return TemporalYearMonthToString(this,ToShowCalendarOption(GetOptionsObject(e)))}toJSON(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return TemporalYearMonthToString(this)}toLocaleString(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return new ot(e,t).format(this)}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.PlainYearMonth")}toPlainDate(e){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("argument should be an object");const t=GetSlot(this,u),r=CalendarFields(t,["monthCode","year"]),o=PrepareTemporalFields(this,r,[]),n=CalendarFields(t,["day"]);let a=CalendarMergeFields(t,o,PrepareTemporalFields(e,n,[]));a=PrepareTemporalFields(a,[...new Set([...r,...n])],[]);const i=St(null);return i.overflow="reject",CalendarDateFromFields(t,a,i)}getISOFields(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return {calendar:GetSlot(this,u),isoDay:GetSlot(this,i),isoMonth:GetSlot(this,a),isoYear:GetSlot(this,n)}}static from(e,t){const r=GetOptionsObject(t);return IsTemporalYearMonth(e)?(ToTemporalOverflow(r),CreateTemporalYearMonth(GetSlot(e,n),GetSlot(e,a),GetSlot(e,u),GetSlot(e,i))):ToTemporalYearMonth(e,r)}static compare(e,t){const r=ToTemporalYearMonth(e),o=ToTemporalYearMonth(t);return CompareISODate(GetSlot(r,n),GetSlot(r,a),GetSlot(r,i),GetSlot(o,n),GetSlot(o,a),GetSlot(o,i))}}MakeIntrinsicClass(PlainYearMonth,"Temporal.PlainYearMonth");class ZonedDateTime{constructor(e,t,r=GetISO8601Calendar()){if(arguments.length<1)throw new TypeError("missing argument: epochNanoseconds is required");CreateTemporalZonedDateTimeSlots(this,ToBigInt(e),ToTemporalTimeZone(t),ToTemporalCalendar(r));}get calendar(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,u)}get timeZone(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,p)}get year(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarYear(GetSlot(this,u),dateTime(this))}get month(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarMonth(GetSlot(this,u),dateTime(this))}get monthCode(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarMonthCode(GetSlot(this,u),dateTime(this))}get day(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDay(GetSlot(this,u),dateTime(this))}get hour(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),s)}get minute(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),l)}get second(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),d)}get millisecond(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),m)}get microsecond(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),c)}get nanosecond(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),h)}get era(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarEra(GetSlot(this,u),dateTime(this))}get eraYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarEraYear(GetSlot(this,u),dateTime(this))}get epochSeconds(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=GetSlot(this,r);return JSBI.toNumber(JSBI.divide(t,ye))}get epochMilliseconds(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=GetSlot(this,r);return JSBI.toNumber(JSBI.divide(t,fe))}get epochMicroseconds(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=GetSlot(this,r);return ToBigIntExternal(JSBI.divide(t,pe))}get epochNanoseconds(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return ToBigIntExternal(GetSlot(this,r))}get dayOfWeek(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDayOfWeek(GetSlot(this,u),dateTime(this))}get dayOfYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDayOfYear(GetSlot(this,u),dateTime(this))}get weekOfYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarWeekOfYear(GetSlot(this,u),dateTime(this))}get hoursInDay(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=dateTime(this),o=GetIntrinsic("%Temporal.PlainDateTime%"),s=GetSlot(t,n),l=GetSlot(t,a),d=GetSlot(t,i),m=new o(s,l,d,0,0,0,0,0,0),c=AddISODate(s,l,d,0,0,0,1,"reject"),h=new o(c.year,c.month,c.day,0,0,0,0,0,0),u=GetSlot(this,p),T=GetSlot(BuiltinTimeZoneGetInstantFor(u,m,"compatible"),r),f=GetSlot(BuiltinTimeZoneGetInstantFor(u,h,"compatible"),r);return JSBI.toNumber(JSBI.subtract(f,T))/36e11}get daysInWeek(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInWeek(GetSlot(this,u),dateTime(this))}get daysInMonth(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInMonth(GetSlot(this,u),dateTime(this))}get daysInYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInYear(GetSlot(this,u),dateTime(this))}get monthsInYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarMonthsInYear(GetSlot(this,u),dateTime(this))}get inLeapYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarInLeapYear(GetSlot(this,u),dateTime(this))}get offset(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return BuiltinTimeZoneGetOffsetStringFor(GetSlot(this,p),GetSlot(this,T))}get offsetNanoseconds(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetOffsetNanosecondsFor(GetSlot(this,p),GetSlot(this,T))}with(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid zoned-date-time-like");RejectObjectWithCalendarOrTimeZone(e);const r=GetOptionsObject(t),o=ToTemporalDisambiguation(r),n=ToTemporalOffset(r,"prefer"),a=GetSlot(this,p),i=GetSlot(this,u),s=ArrayPush(CalendarFields(i,["day","hour","microsecond","millisecond","minute","month","monthCode","nanosecond","second","year"]),"offset"),l=PrepareTemporalFields(e,s,"partial"),d=ArrayPush(s,"timeZone");let m=PrepareTemporalFields(this,d,["timeZone","offset"]);m=CalendarMergeFields(i,m,l),m=PrepareTemporalFields(m,d,["timeZone","offset"]);let{year:c,month:h,day:T,hour:f,minute:y,second:S,millisecond:w,microsecond:g,nanosecond:I}=InterpretTemporalDateTimeFields(i,m,r);return CreateTemporalZonedDateTime(InterpretISODateTimeOffset(c,h,T,f,y,S,w,g,I,"option",ParseTimeZoneOffsetString(m.offset),a,o,n,!1),GetSlot(this,p),i)}withPlainDate(e){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e),o=GetSlot(t,n),T=GetSlot(t,a),f=GetSlot(t,i);let y=GetSlot(t,u);const S=dateTime(this),w=GetSlot(S,s),g=GetSlot(S,l),I=GetSlot(S,d),D=GetSlot(S,m),G=GetSlot(S,c),v=GetSlot(S,h);y=ConsolidateCalendars(GetSlot(this,u),y);const O=GetSlot(this,p);return CreateTemporalZonedDateTime(GetSlot(BuiltinTimeZoneGetInstantFor(O,new(GetIntrinsic("%Temporal.PlainDateTime%"))(o,T,f,w,g,I,D,G,v,y),"compatible"),r),O,y)}withPlainTime(e){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=GetIntrinsic("%Temporal.PlainTime%"),o=void 0===e?new t:ToTemporalTime(e),T=dateTime(this),f=GetSlot(T,n),y=GetSlot(T,a),S=GetSlot(T,i),w=GetSlot(this,u),g=GetSlot(o,s),I=GetSlot(o,l),D=GetSlot(o,d),G=GetSlot(o,m),v=GetSlot(o,c),O=GetSlot(o,h),C=GetSlot(this,p);return CreateTemporalZonedDateTime(GetSlot(BuiltinTimeZoneGetInstantFor(C,new(GetIntrinsic("%Temporal.PlainDateTime%"))(f,y,S,g,I,D,G,v,O,w),"compatible"),r),C,w)}withTimeZone(e){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalTimeZone(e);return CreateTemporalZonedDateTime(GetSlot(this,r),t,GetSlot(this,u))}withCalendar(e){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalCalendar(e);return CreateTemporalZonedDateTime(GetSlot(this,r),GetSlot(this,p),t)}add(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromZonedDateTime("add",this,e,t)}subtract(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromZonedDateTime("subtract",this,e,t)}until(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalZonedDateTime("until",this,e,t)}since(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalZonedDateTime("since",this,e,t)}round(t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");if(void 0===t)throw new TypeError("options parameter is required");const o="string"==typeof t?CreateOnePropObject("smallestUnit",t):GetOptionsObject(t),f=GetTemporalUnit(o,"smallestUnit","time",je,["day"]),y=ToTemporalRoundingMode(o,"halfExpand"),S=ToTemporalRoundingIncrement(o,{day:1,hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[f],!1),w=dateTime(this);let g=GetSlot(w,n),I=GetSlot(w,a),D=GetSlot(w,i),G=GetSlot(w,s),v=GetSlot(w,l),O=GetSlot(w,d),C=GetSlot(w,m),E=GetSlot(w,c),b=GetSlot(w,h);const M=GetIntrinsic("%Temporal.PlainDateTime%"),R=GetSlot(this,p),Z=GetSlot(this,u),P=BuiltinTimeZoneGetInstantFor(R,new M(GetSlot(w,n),GetSlot(w,a),GetSlot(w,i),0,0,0,0,0,0),"compatible"),F=AddZonedDateTime(P,R,Z,0,0,0,1,0,0,0,0,0,0),Y=JSBI.subtract(F,JSBI.BigInt(GetSlot(P,r)));if(JSBI.equal(Y,he))throw new RangeError("cannot round a ZonedDateTime in a calendar with zero-length days");({year:g,month:I,day:D,hour:G,minute:v,second:O,millisecond:C,microsecond:E,nanosecond:b}=RoundISODateTime(g,I,D,G,v,O,C,E,b,S,f,y,JSBI.toNumber(Y)));return CreateTemporalZonedDateTime(InterpretISODateTimeOffset(g,I,D,G,v,O,C,E,b,"option",GetOffsetNanosecondsFor(R,GetSlot(this,T)),R,"compatible","prefer",!1),R,GetSlot(this,u))}equals(t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const o=ToTemporalZonedDateTime(t),n=GetSlot(this,r),a=GetSlot(o,r);return !!JSBI.equal(JSBI.BigInt(n),JSBI.BigInt(a))&&(!!TimeZoneEquals(GetSlot(this,p),GetSlot(o,p))&&CalendarEquals(GetSlot(this,u),GetSlot(o,u)))}toString(e){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=GetOptionsObject(e),{precision:r,unit:o,increment:n}=ToSecondsStringPrecision(t),a=ToTemporalRoundingMode(t,"trunc");return TemporalZonedDateTimeToString(this,r,ToShowCalendarOption(t),function ToShowTimeZoneNameOption(e){return GetOption(e,"timeZoneName",["auto","never"],"auto")}(t),function ToShowOffsetOption(e){return GetOption(e,"offset",["auto","never"],"auto")}(t),{unit:o,increment:n,roundingMode:a})}toLocaleString(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return new ot(e,t).format(this)}toJSON(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return TemporalZonedDateTimeToString(this,"auto")}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.ZonedDateTime")}startOfDay(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const e=dateTime(this),t=GetIntrinsic("%Temporal.PlainDateTime%"),o=GetSlot(this,u),s=new t(GetSlot(e,n),GetSlot(e,a),GetSlot(e,i),0,0,0,0,0,0,o),l=GetSlot(this,p);return CreateTemporalZonedDateTime(GetSlot(BuiltinTimeZoneGetInstantFor(l,s,"compatible"),r),l,o)}toInstant(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return new(GetIntrinsic("%Temporal.Instant%"))(GetSlot(this,r))}toPlainDate(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return TemporalDateTimeToDate(dateTime(this))}toPlainTime(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return TemporalDateTimeToTime(dateTime(this))}toPlainDateTime(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return dateTime(this)}toPlainYearMonth(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const e=GetSlot(this,u);return CalendarYearMonthFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["monthCode","year"]),[]))}toPlainMonthDay(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const e=GetSlot(this,u);return CalendarMonthDayFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["day","monthCode"]),[]))}getISOFields(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const e=dateTime(this),t=GetSlot(this,p);return {calendar:GetSlot(this,u),isoDay:GetSlot(e,i),isoHour:GetSlot(e,s),isoMicrosecond:GetSlot(e,c),isoMillisecond:GetSlot(e,m),isoMinute:GetSlot(e,l),isoMonth:GetSlot(e,a),isoNanosecond:GetSlot(e,h),isoSecond:GetSlot(e,d),isoYear:GetSlot(e,n),offset:BuiltinTimeZoneGetOffsetStringFor(t,GetSlot(this,T)),timeZone:t}}static from(e,t){const o=GetOptionsObject(t);return IsTemporalZonedDateTime(e)?(ToTemporalOverflow(o),ToTemporalDisambiguation(o),ToTemporalOffset(o,"reject"),CreateTemporalZonedDateTime(GetSlot(e,r),GetSlot(e,p),GetSlot(e,u))):ToTemporalZonedDateTime(e,o)}static compare(t,o){const n=ToTemporalZonedDateTime(t),a=ToTemporalZonedDateTime(o),i=GetSlot(n,r),s=GetSlot(a,r);return JSBI.lessThan(JSBI.BigInt(i),JSBI.BigInt(s))?-1:JSBI.greaterThan(JSBI.BigInt(i),JSBI.BigInt(s))?1:0}}function dateTime(e){return BuiltinTimeZoneGetPlainDateTimeFor(GetSlot(e,p),GetSlot(e,T),GetSlot(e,u))}MakeIntrinsicClass(ZonedDateTime,"Temporal.ZonedDateTime");var wt=Object.freeze({__proto__:null,Instant,Calendar,PlainDate,PlainDateTime,Duration,PlainMonthDay,Now:ft,PlainTime,TimeZone,PlainYearMonth,ZonedDateTime});const gt=[Instant,Calendar,PlainDate,PlainDateTime,Duration,PlainMonthDay,PlainTime,TimeZone,PlainYearMonth,ZonedDateTime];for(const e of gt){const t=Object.getOwnPropertyDescriptor(e,"prototype");(t.configurable||t.enumerable||t.writable)&&(t.configurable=!1,t.enumerable=!1,t.writable=!1,Object.defineProperty(e,"prototype",t));}
+  const t={};function MakeIntrinsicClass(e,t){Object.defineProperty(e.prototype,Symbol.toStringTag,{value:t,writable:!1,enumerable:!1,configurable:!0});for(const t of Object.getOwnPropertyNames(e)){const r=Object.getOwnPropertyDescriptor(e,t);r.configurable&&r.enumerable&&(r.enumerable=!1,Object.defineProperty(e,t,r));}for(const t of Object.getOwnPropertyNames(e.prototype)){const r=Object.getOwnPropertyDescriptor(e.prototype,t);r.configurable&&r.enumerable&&(r.enumerable=!1,Object.defineProperty(e.prototype,t,r));}DefineIntrinsic(t,e),DefineIntrinsic(`${t}.prototype`,e.prototype);}function DefineIntrinsic(e,r){const o=`%${e}%`;if(void 0!==t[o])throw new Error(`intrinsic ${e} already exists`);t[o]=r;}function GetIntrinsic(e){return t[e]}var r,o;const n="slot-epochNanoSeconds",a="slot-timezone-identifier",i="slot-year",s="slot-month",l="slot-day",d="slot-hour",m="slot-minute",c="slot-second",h="slot-millisecond",u="slot-microsecond",T="slot-nanosecond",p="slot-calendar",f="slot-date-brand",y="slot-year-month-brand",I="slot-month-day-brand",S="slot-cached-instant",g="slot-time-zone",w="slot-years",D="slot-months",G="slot-weeks",v="slot-days",C="slot-hours",O="slot-minutes",b="slot-seconds",E="slot-milliseconds",M="slot-microseconds",R="slot-nanoseconds",F="slot-calendar-identifier",Y=new WeakMap;const P=Symbol.for("@@Temporal__GetSlots");(r=globalThis)[P]||(r[P]=function _GetSlots(e){return Y.get(e)});const Z=globalThis[P];const B=Symbol.for("@@Temporal__CreateSlots");(o=globalThis)[B]||(o[B]=function _CreateSlots(e){Y.set(e,Object.create(null));});const N=globalThis[B];function HasSlot(e,...t){if(!e||"object"!=typeof e)return !1;const r=Z(e);return !!r&&t.every((e=>e in r))}function GetSlot(e,t){const r=Z(e)?.[t];if(void 0===r)throw new TypeError(`Missing internal slot ${t}`);return r}function SetSlot(e,t,r){const o=Z(e);if(void 0===o)throw new TypeError("Missing slots for the given container");if(o[t])throw new TypeError(`${t} already has set`);o[t]=r;}const j=/\.[-A-Za-z_]|\.\.[-A-Za-z._]{1,12}|\.[-A-Za-z_][-A-Za-z._]{0,12}|[A-Za-z_][-A-Za-z._]{0,13}/,$=new RegExp("(?:"+[`(?:${j.source})(?:\\/(?:${j.source}))*`,"Etc/GMT(?:0|[-+]\\d{1,2})","GMT[-+]?0","EST5EDT","CST6CDT","MST7MDT","PST8PDT",/(?:[+\u2212-][0-2][0-9](?::?[0-5][0-9](?::?[0-5][0-9](?:[.,]\d{1,9})?)?)?)/.source].join("|")+")"),k=/(?:[+\u2212-]\d{6}|\d{4})/,U=/(?:0[1-9]|1[0-2])/,A=/(?:0[1-9]|[12]\d|3[01])/,L$1=new RegExp(`(${k.source})(?:-(${U.source})-(${A.source})|(${U.source})(${A.source}))`),x=/(\d{2})(?::(\d{2})(?::(\d{2})(?:[.,](\d{1,9}))?)?|(\d{2})(?:(\d{2})(?:[.,](\d{1,9}))?)?)?/,W=/([+\u2212-])([01][0-9]|2[0-3])(?::?([0-5][0-9])(?::?([0-5][0-9])(?:[.,](\d{1,9}))?)?)?/,q=new RegExp(`([zZ])|${W.source}?`),H=/\[(!)?([a-z_][a-z0-9_-]*)=([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)\]/g,V=new RegExp([`^${L$1.source}`,`(?:(?:T|\\s+)${x.source}(?:${q.source})?)?`,`(?:\\[!?(${$.source})\\])?`,`((?:${H.source})*)$`].join(""),"i"),z=new RegExp([`^T?${x.source}`,`(?:${q.source})?`,`(?:\\[!?${$.source}\\])?`,`((?:${H.source})*)$`].join(""),"i"),_=new RegExp(`^(${k.source})-?(${U.source})(?:\\[!?${$.source}\\])?((?:${H.source})*)$`),J=new RegExp(`^(?:--)?(${U.source})-?(${A.source})(?:\\[!?${$.source}\\])?((?:${H.source})*)$`),K=/(\d+)(?:[.,](\d{1,9}))?/,X=new RegExp(`(?:${K.source}H)?(?:${K.source}M)?(?:${K.source}S)?`),Q=new RegExp(`^([+−-])?P${/(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)W)?(?:(\d+)D)?/.source}(?:T(?!$)${X.source})?$`,"i"),ee=Array.prototype.includes,te=Array.prototype.push,re=globalThis.Intl.DateTimeFormat,oe=Math.min,ne=Math.max,ae=Math.abs,ie=Math.floor,se=Math.sign,le=Math.trunc,de=Number.isNaN,me=Number.isFinite,ce=Number,he=String,ue=Number.MAX_SAFE_INTEGER,Te=Object.create,pe=Object.getOwnPropertyDescriptor,fe=Reflect.apply,ye=Reflect.ownKeys,Ie=JSBI.BigInt(0),Se=JSBI.BigInt(1),ge=JSBI.BigInt(60),we=JSBI.BigInt(24),De=JSBI.BigInt(1e3),Ge=JSBI.BigInt(1e6),ve=JSBI.BigInt(1e9),Ce=JSBI.BigInt(-1),Oe=JSBI.multiply(JSBI.BigInt(3600),ve),be=JSBI.multiply(ge,ve),Ee=JSBI.multiply(Oe,we),Me=JSBI.multiply(JSBI.BigInt(-86400),JSBI.BigInt(1e17)),Re=JSBI.multiply(JSBI.BigInt(86400),JSBI.BigInt(1e17)),Fe=-271821,Ye=275760,Pe=JSBI.multiply(JSBI.BigInt(-388152),JSBI.BigInt(1e13)),Ze=JSBI.multiply(Ee,JSBI.BigInt(3660)),Be=JSBI.multiply(Ee,JSBI.BigInt(366)),Ne=JSBI.multiply(Ee,JSBI.BigInt(14)),je=["iso8601","hebrew","islamic","islamic-umalqura","islamic-tbla","islamic-civil","islamic-rgsa","islamicc","persian","ethiopic","ethioaa","coptic","chinese","dangi","roc","indian","buddhist","japanese","gregory"];function isZero(t){return JSBI.equal(t,Ie)}function GetMethod(e,t){const r=e[t];if(void 0!==r)return r}function Call(e,t,r){const o=arguments.length>2?r:[];return fe(e,t,o)}function IsObject(e){return "object"==typeof e&&null!==e||"function"==typeof e}function ToNumber(e){if("bigint"==typeof e)throw new TypeError("Cannot convert BigInt to number");return ce(e)}function ToIntegerOrInfinity(e){const t=ToNumber(e);if(de(t)||0===t)return 0;if(!me(t))return t;const r=ie(ae(t));return 0===r?0:se(t)*r}function IsIntegralNumber(e){if("number"!=typeof e||de(e)||!me(e))return !1;const t=ae(e);return ie(t)===t}function ToString(e){if("symbol"==typeof e)throw new TypeError("Cannot convert a Symbol value to a String");return he(e)}function ToIntegerWithTruncation(e){const t=ToNumber(e);if(0===t)return 0;if(de(t)||!me(t))throw new RangeError("invalid number value");const r=le(t);return 0===r?0:r}function ToPositiveIntegerWithTruncation(e,t){const r=ToIntegerWithTruncation(e);if(r<=0){if(void 0!==t)throw new RangeError(`property '${t}' cannot be a a number less than one`);throw new RangeError("Cannot convert a number less than one to a positive integer")}return r}function ToIntegerIfIntegral(e){const t=ToNumber(e);if(!me(t))throw new RangeError("infinity is out of range");if(!IsIntegralNumber(t))throw new RangeError(`unsupported fractional value ${e}`);return 0===t?0:t}function divmod(t,r){return {quotient:JSBI.divide(t,r),remainder:JSBI.remainder(t,r)}}function isNegativeJSBI(t){return JSBI.lessThan(t,Ie)}function signJSBI(e){return isZero(e)?0:isNegativeJSBI(e)?-1:1}function abs(t){return JSBI.lessThan(t,Ie)?JSBI.multiply(t,Ce):t}const $e=new Map([["year",ToIntegerWithTruncation],["month",ToPositiveIntegerWithTruncation],["monthCode",ToString],["day",ToPositiveIntegerWithTruncation],["hour",ToIntegerWithTruncation],["minute",ToIntegerWithTruncation],["second",ToIntegerWithTruncation],["millisecond",ToIntegerWithTruncation],["microsecond",ToIntegerWithTruncation],["nanosecond",ToIntegerWithTruncation],["years",ToIntegerIfIntegral],["months",ToIntegerIfIntegral],["weeks",ToIntegerIfIntegral],["days",ToIntegerIfIntegral],["hours",ToIntegerIfIntegral],["minutes",ToIntegerIfIntegral],["seconds",ToIntegerIfIntegral],["milliseconds",ToIntegerIfIntegral],["microseconds",ToIntegerIfIntegral],["nanoseconds",ToIntegerIfIntegral],["era",ToString],["eraYear",ToIntegerOrInfinity],["offset",ToString]]),ke=new Map([["hour",0],["minute",0],["second",0],["millisecond",0],["microsecond",0],["nanosecond",0]]),Ue=[["years","year","date"],["months","month","date"],["weeks","week","date"],["days","day","date"],["hours","hour","time"],["minutes","minute","time"],["seconds","second","time"],["milliseconds","millisecond","time"],["microseconds","microsecond","time"],["nanoseconds","nanosecond","time"]],Ae=new Map(Ue.map((e=>[e[0],e[1]]))),Le=new Map(Ue.map((([e,t])=>[t,e]))),xe=Ue.map((([,e])=>e)),We=Array.from(Ae.keys()).sort(),qe=new Map;function getIntlDateTimeFormatEnUsForTimeZone(e){let t=qe.get(e);return void 0===t&&(t=new re("en-us",{timeZone:he(e),hour12:!1,era:"short",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"}),qe.set(e,t)),t}function ToObject(e){if(null==e)throw new TypeError(`Expected object not ${e}`);return Object(e)}function CopyDataProperties(e,t,r,o){if(null==t)return;const n=ye(t);for(const a of n)if(!r.some((e=>Object.is(e,a)))&&Object.prototype.propertyIsEnumerable.call(t,a)){const r=t[a];if(o&&o.some((e=>Object.is(e,r))))continue;e[a]=r;}}function IsTemporalInstant(e){return HasSlot(e,n)&&!HasSlot(e,g,p)}function IsTemporalTimeZone(e){return HasSlot(e,a)}function IsTemporalCalendar(e){return HasSlot(e,F)}function IsTemporalDuration(e){return HasSlot(e,w,D,v,C,O,b,E,M,R)}function IsTemporalDate(e){return HasSlot(e,f)}function IsTemporalTime(e){return HasSlot(e,d,m,c,h,u,T)&&!HasSlot(e,i,s,l)}function IsTemporalDateTime(e){return HasSlot(e,i,s,l,d,m,c,h,u,T)}function IsTemporalYearMonth(e){return HasSlot(e,y)}function IsTemporalMonthDay(e){return HasSlot(e,I)}function IsTemporalZonedDateTime(e){return HasSlot(e,n,g,p)}function RejectTemporalLikeObject(e){if(HasSlot(e,p)||HasSlot(e,g))throw new TypeError("with() does not support a calendar or timeZone property");if(IsTemporalTime(e))throw new TypeError("with() does not accept Temporal.PlainTime, use withPlainTime() instead");if(void 0!==e.calendar)throw new TypeError("with() does not support a calendar property");if(void 0!==e.timeZone)throw new TypeError("with() does not support a timeZone property")}function ParseTemporalTimeZone(e){const{ianaName:t,offset:r,z:o}=function ParseTemporalTimeZoneString(e){if(new RegExp(`^${$.source}$`,"i").test(e))return {ianaName:e};try{const t=ParseISODateTime(e);if(t.z||t.offset||t.ianaName)return t}catch{}throw new RangeError(`Invalid time zone: ${e}`)}(e);if(t)return GetCanonicalTimeZoneIdentifier(t);if(o)return "UTC";return FormatTimeZoneOffsetString(ParseTimeZoneOffsetString(r))}function MaybeFormatCalendarAnnotation(e,t){return "never"===t?"":FormatCalendarAnnotation(ToTemporalCalendarIdentifier(e),t)}function FormatCalendarAnnotation(e,t){if("never"===t)return "";if("auto"===t&&"iso8601"===e)return "";return `[${"critical"===t?"!":""}u-ca=${e}]`}function ParseISODateTime(e){const t=V.exec(e);if(!t)throw new RangeError(`invalid ISO 8601 string: ${e}`);let r=t[1];if("−"===r[0]&&(r=`-${r.slice(1)}`),"-000000"===r)throw new RangeError(`invalid ISO 8601 string: ${e}`);const o=ToIntegerOrInfinity(r),n=ToIntegerOrInfinity(t[2]||t[4]),a=ToIntegerOrInfinity(t[3]||t[5]),i=ToIntegerOrInfinity(t[6]),s=void 0!==t[6],l=ToIntegerOrInfinity(t[7]||t[10]);let d=ToIntegerOrInfinity(t[8]||t[11]);60===d&&(d=59);const m=(t[9]||t[12])+"000000000",c=ToIntegerOrInfinity(m.slice(0,3)),h=ToIntegerOrInfinity(m.slice(3,6)),u=ToIntegerOrInfinity(m.slice(6,9));let T,p=!1;if(t[13])T=void 0,p=!0;else if(t[14]&&t[15]){const e="-"===t[14]||"−"===t[14]?"-":"+",r=t[15]||"00",o=t[16]||"00",n=t[17]||"00";let a=t[18]||"0";if(T=`${e}${r}:${o}`,+a){for(;a.endsWith("0");)a=a.slice(0,-1);T+=`:${n}.${a}`;}else +n&&(T+=`:${n}`);"-00:00"===T&&(T="+00:00");}const f=t[19],y=t[20];let I;for(const[,e,t,r]of y.matchAll(H))if("u-ca"===t)void 0===I&&(I=r);else if("!"===e)throw new RangeError(`Unrecognized annotation: !${t}=${r}`);return RejectDateTime(o,n,a,i,l,d,c,h,u),{year:o,month:n,day:a,hasTime:s,hour:i,minute:l,second:d,millisecond:c,microsecond:h,nanosecond:u,ianaName:f,offset:T,z:p,calendar:I}}function ParseTemporalYearMonthString(e){const t=_.exec(e);let r,o,n,a;if(t){let a=t[1];if("−"===a[0]&&(a=`-${a.slice(1)}`),"-000000"===a)throw new RangeError(`invalid ISO 8601 string: ${e}`);r=ToIntegerOrInfinity(a),o=ToIntegerOrInfinity(t[2]);const i=t[3];for(const[,e,t,r]of i.matchAll(H))if("u-ca"===t)void 0===n&&(n=r);else if("!"===e)throw new RangeError(`Unrecognized annotation: !${t}=${r}`);if(void 0!==n&&"iso8601"!==n)throw new RangeError("YYYY-MM format is only valid with iso8601 calendar")}else {let t;if(({year:r,month:o,calendar:n,day:a,z:t}=ParseISODateTime(e)),t)throw new RangeError("Z designator not supported for PlainYearMonth")}return {year:r,month:o,calendar:n,referenceISODay:a}}function ParseTemporalMonthDayString(e){const t=J.exec(e);let r,o,n,a;if(t){r=ToIntegerOrInfinity(t[1]),o=ToIntegerOrInfinity(t[2]);const e=t[3];for(const[,t,r,o]of e.matchAll(H))if("u-ca"===r)void 0===n&&(n=o);else if("!"===t)throw new RangeError(`Unrecognized annotation: !${r}=${o}`);if(void 0!==n&&"iso8601"!==n)throw new RangeError("MM-DD format is only valid with iso8601 calendar")}else {let t;if(({month:r,day:o,calendar:n,year:a,z:t}=ParseISODateTime(e)),t)throw new RangeError("Z designator not supported for PlainMonthDay")}return {month:r,day:o,calendar:n,referenceISOYear:a}}function ParseTemporalInstant(e){let{year:t,month:r,day:o,hour:n,minute:a,second:i,millisecond:s,microsecond:l,nanosecond:d,offset:m,z:c}=function ParseTemporalInstantString(e){const t=ParseISODateTime(e);if(!t.z&&!t.offset)throw new RangeError("Temporal.Instant requires a time zone offset");return t}(e);if(!c&&!m)throw new RangeError("Temporal.Instant requires a time zone offset");const h=c?0:ParseTimeZoneOffsetString(m);({year:t,month:r,day:o,hour:n,minute:a,second:i,millisecond:s,microsecond:l,nanosecond:d}=BalanceISODateTime(t,r,o,n,a,i,s,l,d-h));const u=GetUTCEpochNanoseconds(t,r,o,n,a,i,s,l,d);if(null===u)throw new RangeError("DateTime outside of supported range");return u}function RegulateISODate(e,t,r,o){let n=e,a=t,i=r;switch(o){case"reject":RejectISODate(n,a,i);break;case"constrain":({year:n,month:a,day:i}=ConstrainISODate(n,a,i));}return {year:n,month:a,day:i}}function RegulateTime(e,t,r,o,n,a,i){let s=e,l=t,d=r,m=o,c=n,h=a;switch(i){case"reject":RejectTime(s,l,d,m,c,h);break;case"constrain":({hour:s,minute:l,second:d,millisecond:m,microsecond:c,nanosecond:h}=function ConstrainTime(e,t,r,o,n,a){const i=ConstrainToRange(e,0,23),s=ConstrainToRange(t,0,59),l=ConstrainToRange(r,0,59),d=ConstrainToRange(o,0,999),m=ConstrainToRange(n,0,999),c=ConstrainToRange(a,0,999);return {hour:i,minute:s,second:l,millisecond:d,microsecond:m,nanosecond:c}}(s,l,d,m,c,h));}return {hour:s,minute:l,second:d,millisecond:m,microsecond:c,nanosecond:h}}function ToTemporalDurationRecord(e){if(!IsObject(e))return function ParseTemporalDurationString(e){const t=Q.exec(e);if(!t)throw new RangeError(`invalid duration: ${e}`);if(t.slice(2).every((e=>void 0===e)))throw new RangeError(`invalid duration: ${e}`);const r="-"===t[1]||"−"===t[1]?-1:1,o=void 0===t[2]?0:ToIntegerWithTruncation(t[2])*r,n=void 0===t[3]?0:ToIntegerWithTruncation(t[3])*r,a=void 0===t[4]?0:ToIntegerWithTruncation(t[4])*r,i=void 0===t[5]?0:ToIntegerWithTruncation(t[5])*r,s=void 0===t[6]?0:ToIntegerWithTruncation(t[6])*r,l=t[7],d=t[8],m=t[9],c=t[10],h=t[11];let u=0,T=0,p=0;if(void 0!==l){if(d??m??c??h)throw new RangeError("only the smallest unit can be fractional");p=3600*ToIntegerOrInfinity((l+"000000000").slice(0,9))*r;}else if(u=void 0===d?0:ToIntegerWithTruncation(d)*r,void 0!==m){if(c??h)throw new RangeError("only the smallest unit can be fractional");p=60*ToIntegerOrInfinity((m+"000000000").slice(0,9))*r;}else T=void 0===c?0:ToIntegerWithTruncation(c)*r,void 0!==h&&(p=ToIntegerOrInfinity((h+"000000000").slice(0,9))*r);const f=p%1e3,y=le(p/1e3)%1e3,I=le(p/1e6)%1e3;return T+=le(p/1e9)%60,u+=le(p/6e10),RejectDuration(o,n,a,i,s,u,T,I,y,f),{years:o,months:n,weeks:a,days:i,hours:s,minutes:u,seconds:T,milliseconds:I,microseconds:y,nanoseconds:f}}(ToString(e));if(IsTemporalDuration(e))return {years:GetSlot(e,w),months:GetSlot(e,D),weeks:GetSlot(e,G),days:GetSlot(e,v),hours:GetSlot(e,C),minutes:GetSlot(e,O),seconds:GetSlot(e,b),milliseconds:GetSlot(e,E),microseconds:GetSlot(e,M),nanoseconds:GetSlot(e,R)};const t={years:0,months:0,weeks:0,days:0,hours:0,minutes:0,seconds:0,milliseconds:0,microseconds:0,nanoseconds:0};let r=function ToTemporalPartialDurationRecord(e){if(!IsObject(e))throw new TypeError("invalid duration-like");const t={years:void 0,months:void 0,weeks:void 0,days:void 0,hours:void 0,minutes:void 0,seconds:void 0,milliseconds:void 0,microseconds:void 0,nanoseconds:void 0};let r=!1;for(const o of We){const n=e[o];void 0!==n&&(r=!0,t[o]=ToIntegerIfIntegral(n));}if(!r)throw new TypeError("invalid duration-like");return t}(e);for(const e of We){const o=r[e];void 0!==o&&(t[e]=o);}let{years:o,months:n,weeks:a,days:i,hours:s,minutes:l,seconds:d,milliseconds:m,microseconds:c,nanoseconds:h}=t;return RejectDuration(o,n,a,i,s,l,d,m,c,h),{years:o,months:n,weeks:a,days:i,hours:s,minutes:l,seconds:d,milliseconds:m,microseconds:c,nanoseconds:h}}function ToTemporalOverflow(e){return void 0===e?"constrain":GetOption(e,"overflow",["constrain","reject"],"constrain")}function ToTemporalDisambiguation(e){return void 0===e?"compatible":GetOption(e,"disambiguation",["compatible","earlier","later","reject"],"compatible")}function ToTemporalRoundingMode(e,t){return GetOption(e,"roundingMode",["ceil","floor","expand","trunc","halfCeil","halfFloor","halfExpand","halfTrunc","halfEven"],t)}function ToTemporalOffset(e,t){return void 0===e?t:GetOption(e,"offset",["prefer","use","ignore","reject"],t)}function ToCalendarNameOption(e){return GetOption(e,"calendarName",["auto","always","never","critical"],"auto")}function ToTemporalRoundingIncrement(e){let t=e.roundingIncrement;if(void 0===t)return 1;if(t=ToNumber(t),!me(t))throw new RangeError("roundingIncrement must be finite");const r=le(t);if(r<1||r>1e9)throw new RangeError(`roundingIncrement must be at least 1 and at most 1e9, not ${t}`);return r}function ValidateTemporalRoundingIncrement(e,t,r){const o=r?t:t-1;if(e>o)throw new RangeError(`roundingIncrement must be at least 1 and less than ${o}, not ${e}`);if(t%e!=0)throw new RangeError(`Rounding increment must divide evenly into ${t}`)}function ToFractionalSecondDigits(e){const t=e.fractionalSecondDigits;if(void 0===t)return "auto";if("number"!=typeof t){if("auto"!==ToString(t))throw new RangeError(`fractionalSecondDigits must be 'auto' or 0 through 9, not ${t}`);return "auto"}const r=ie(t);if(!me(r)||r<0||r>9)throw new RangeError(`fractionalSecondDigits must be 'auto' or 0 through 9, not ${t}`);return r}function ToSecondsStringPrecisionRecord(e,t){switch(e){case"minute":return {precision:"minute",unit:"minute",increment:1};case"second":return {precision:0,unit:"second",increment:1};case"millisecond":return {precision:3,unit:"millisecond",increment:1};case"microsecond":return {precision:6,unit:"microsecond",increment:1};case"nanosecond":return {precision:9,unit:"nanosecond",increment:1}}switch(t){case"auto":return {precision:t,unit:"nanosecond",increment:1};case 0:return {precision:t,unit:"second",increment:1};case 1:case 2:case 3:return {precision:t,unit:"millisecond",increment:10**(3-t)};case 4:case 5:case 6:return {precision:t,unit:"microsecond",increment:10**(6-t)};case 7:case 8:case 9:return {precision:t,unit:"nanosecond",increment:10**(9-t)};default:throw new RangeError(`fractionalSecondDigits must be 'auto' or 0 through 9, not ${t}`)}}const He=Symbol("~required~");function GetTemporalUnit(e,t,r,o,n=[]){const a=[];for(const[,e,t]of Ue)"datetime"!==r&&r!==t||a.push(e);a.push(...n);let i=o;i===He?i=void 0:void 0!==i&&a.push(i);const s=[...a];for(const e of a){const t=Le.get(e);void 0!==t&&s.push(t);}let l=GetOption(e,t,s,i);if(void 0===l&&o===He)throw new RangeError(`${t} is required`);return Ae.has(l)?Ae.get(l):l}function ToRelativeTemporalObject(e){const t=e.relativeTo;if(void 0===t)return t;let r,o,n,a,i,s,l,d,m,c,h,u,T="option",p=!1;if(IsObject(t)){if(IsTemporalZonedDateTime(t)||IsTemporalDate(t))return t;if(IsTemporalDateTime(t))return TemporalDateTimeToDate(t);c=GetTemporalCalendarSlotValueWithISODefault(t);const e=CalendarFields(c,["day","hour","microsecond","millisecond","minute","month","monthCode","nanosecond","second","year"]);e.push("timeZone","offset");const p=PrepareTemporalFields(t,e,[]),f=Te(null);f.overflow="constrain",({year:r,month:o,day:n,hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m}=InterpretTemporalDateTimeFields(c,p,f)),u=p.offset,void 0===u&&(T="wall"),h=p.timeZone,void 0!==h&&(h=ToTemporalTimeZoneSlotValue(h));}else {let e,f;if(({year:r,month:o,day:n,hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m,calendar:c,ianaName:e,offset:u,z:f}=ParseISODateTime(ToString(t))),e)h=ToTemporalTimeZoneSlotValue(e),f?T="exact":u||(T="wall"),p=!0;else if(f)throw new RangeError("Z designator not supported for PlainDate relativeTo; either remove the Z or add a bracketed time zone");if(c||(c="iso8601"),!IsBuiltinCalendar(c))throw new RangeError(`invalid calendar identifier ${c}`);c=ASCIILowercase(c);}if(void 0===h)return CreateTemporalDate(r,o,n,c);return CreateTemporalZonedDateTime(InterpretISODateTimeOffset(r,o,n,a,i,s,l,d,m,T,"option"===T?ParseTimeZoneOffsetString(u):0,h,"compatible","reject",p),h,c)}function DefaultTemporalLargestUnit(e,t,r,o,n,a,i,s,l,d){for(const[m,c]of [["years",e],["months",t],["weeks",r],["days",o],["hours",n],["minutes",a],["seconds",i],["milliseconds",s],["microseconds",l],["nanoseconds",d]])if(0!==c)return Ae.get(m);return "nanosecond"}function LargerOfTwoTemporalUnits(e,t){return xe.indexOf(e)>xe.indexOf(t)?t:e}function PrepareTemporalFields(e,t,r,{emptySourceErrorMessage:o}={emptySourceErrorMessage:"no supported properties found"}){const n=Te(null);let a=!1;t.sort();for(const o of t){let t=e[o];if(void 0!==t)a=!0,$e.has(o)&&(t=$e.get(o)(t)),n[o]=t;else if("partial"!==r){if(ee.call(r,o))throw new TypeError(`required property '${o}' missing or undefined`);t=ke.get(o),n[o]=t;}}if("partial"===r&&!a)throw new TypeError(o);return n}function ToTemporalTimeRecord(e,t="complete"){const r=["hour","microsecond","millisecond","minute","nanosecond","second"],o=PrepareTemporalFields(e,r,"partial",{emptySourceErrorMessage:"invalid time-like"}),n={};for(const e of r){const r=pe(o,e);void 0!==r?n[e]=r.value:"complete"===t&&(n[e]=0);}return n}function ToTemporalDate(e,t){let r=e;if(IsObject(r)){if(IsTemporalDate(r))return r;if(IsTemporalZonedDateTime(r)&&(ToTemporalOverflow(t),r=GetPlainDateTimeFor(GetSlot(r,g),GetSlot(r,S),GetSlot(r,p))),IsTemporalDateTime(r))return ToTemporalOverflow(t),CreateTemporalDate(GetSlot(r,i),GetSlot(r,s),GetSlot(r,l),GetSlot(r,p));const e=GetTemporalCalendarSlotValueWithISODefault(r);return CalendarDateFromFields(e,PrepareTemporalFields(r,CalendarFields(e,["day","month","monthCode","year"]),[]),t)}ToTemporalOverflow(t);let{year:o,month:n,day:a,calendar:d,z:m}=function ParseTemporalDateString(e){return ParseISODateTime(e)}(ToString(r));if(m)throw new RangeError("Z designator not supported for PlainDate");if(d||(d="iso8601"),!IsBuiltinCalendar(d))throw new RangeError(`invalid calendar identifier ${d}`);return d=ASCIILowercase(d),CreateTemporalDate(o,n,a,d)}function InterpretTemporalDateTimeFields(e,t,r){let{hour:o,minute:n,second:a,millisecond:d,microsecond:m,nanosecond:c}=ToTemporalTimeRecord(t);const h=ToTemporalOverflow(r),u=CalendarDateFromFields(e,t,r),T=GetSlot(u,i),p=GetSlot(u,s),f=GetSlot(u,l);return ({hour:o,minute:n,second:a,millisecond:d,microsecond:m,nanosecond:c}=RegulateTime(o,n,a,d,m,c,h)),{year:T,month:p,day:f,hour:o,minute:n,second:a,millisecond:d,microsecond:m,nanosecond:c}}function ToTemporalDateTime(e,t){let r,o,n,a,d,m,c,h,u,T;if(IsObject(e)){if(IsTemporalDateTime(e))return e;if(IsTemporalZonedDateTime(e))return ToTemporalOverflow(t),GetPlainDateTimeFor(GetSlot(e,g),GetSlot(e,S),GetSlot(e,p));if(IsTemporalDate(e))return ToTemporalOverflow(t),CreateTemporalDateTime(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l),0,0,0,0,0,0,GetSlot(e,p));T=GetTemporalCalendarSlotValueWithISODefault(e);const f=PrepareTemporalFields(e,CalendarFields(T,["day","hour","microsecond","millisecond","minute","month","monthCode","nanosecond","second","year"]),[]);({year:r,month:o,day:n,hour:a,minute:d,second:m,millisecond:c,microsecond:h,nanosecond:u}=InterpretTemporalDateTimeFields(T,f,t));}else {let i;if(ToTemporalOverflow(t),({year:r,month:o,day:n,hour:a,minute:d,second:m,millisecond:c,microsecond:h,nanosecond:u,calendar:T,z:i}=function ParseTemporalDateTimeString(e){return ParseISODateTime(e)}(ToString(e))),i)throw new RangeError("Z designator not supported for PlainDateTime");if(RejectDateTime(r,o,n,a,d,m,c,h,u),T||(T="iso8601"),!IsBuiltinCalendar(T))throw new RangeError(`invalid calendar identifier ${T}`);T=ASCIILowercase(T);}return CreateTemporalDateTime(r,o,n,a,d,m,c,h,u,T)}function ToTemporalDuration(e){if(IsTemporalDuration(e))return e;let{years:t,months:r,weeks:o,days:n,hours:a,minutes:i,seconds:s,milliseconds:l,microseconds:d,nanoseconds:m}=ToTemporalDurationRecord(e);return new(GetIntrinsic("%Temporal.Duration%"))(t,r,o,n,a,i,s,l,d,m)}function ToTemporalInstant(e){if(IsTemporalInstant(e))return e;if(IsTemporalZonedDateTime(e)){return new(GetIntrinsic("%Temporal.Instant%"))(GetSlot(e,n))}const t=ParseTemporalInstant(ToString(e));return new(GetIntrinsic("%Temporal.Instant%"))(t)}function ToTemporalMonthDay(e,t){let r=e;if(IsObject(r)){if(IsTemporalMonthDay(r))return r;let e,o;if(HasSlot(r,p))e=GetSlot(r,p),o=!1;else {let t=r.calendar;o=void 0===t,void 0===t&&(t="iso8601"),e=ToTemporalCalendarSlotValue(t);}const n=PrepareTemporalFields(r,CalendarFields(e,["day","month","monthCode","year"]),[]);return o&&void 0!==n.month&&void 0===n.monthCode&&void 0===n.year&&(n.year=1972),CalendarMonthDayFromFields(e,n,t)}ToTemporalOverflow(t);let{month:o,day:n,referenceISOYear:a,calendar:i}=ParseTemporalMonthDayString(ToString(r));if(void 0===i&&(i="iso8601"),!IsBuiltinCalendar(i))throw new RangeError(`invalid calendar identifier ${i}`);if(i=ASCIILowercase(i),void 0===a)return RejectISODate(1972,o,n),CreateTemporalMonthDay(o,n,i);return CalendarMonthDayFromFields(i,CreateTemporalMonthDay(o,n,i,a))}function ToTemporalTime(e,t="constrain"){let r,o,n,a,i,s,l=e;if(IsObject(l)){if(IsTemporalTime(l))return l;if(IsTemporalZonedDateTime(l)&&(l=GetPlainDateTimeFor(GetSlot(l,g),GetSlot(l,S),GetSlot(l,p))),IsTemporalDateTime(l)){return new(GetIntrinsic("%Temporal.PlainTime%"))(GetSlot(l,d),GetSlot(l,m),GetSlot(l,c),GetSlot(l,h),GetSlot(l,u),GetSlot(l,T))}(({hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:s}=ToTemporalTimeRecord(l))),({hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:s}=RegulateTime(r,o,n,a,i,s,t));}else (({hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:s}=function ParseTemporalTimeString(e){const t=z.exec(e);let r,o,n,a,i,s,l;if(t){r=ToIntegerOrInfinity(t[1]),o=ToIntegerOrInfinity(t[2]||t[5]),n=ToIntegerOrInfinity(t[3]||t[6]),60===n&&(n=59);const e=(t[4]||t[7])+"000000000";a=ToIntegerOrInfinity(e.slice(0,3)),i=ToIntegerOrInfinity(e.slice(3,6)),s=ToIntegerOrInfinity(e.slice(6,9)),l=t[14];for(const[,e,t,r]of l.matchAll(H))if("u-ca"!==t&&"!"===e)throw new RangeError(`Unrecognized annotation: !${t}=${r}`);if(t[8])throw new RangeError("Z designator not supported for PlainTime")}else {let t,l;if(({hasTime:l,hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:s,z:t}=ParseISODateTime(e)),!l)throw new RangeError(`time is missing in string: ${e}`);if(t)throw new RangeError("Z designator not supported for PlainTime")}if(/[tT ][0-9][0-9]/.test(e))return {hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:s};try{const{month:t,day:r}=ParseTemporalMonthDayString(e);RejectISODate(1972,t,r);}catch{try{const{year:t,month:r}=ParseTemporalYearMonthString(e);RejectISODate(t,r,1);}catch{return {hour:r,minute:o,second:n,millisecond:a,microsecond:i,nanosecond:s}}}throw new RangeError(`invalid ISO 8601 time-only string ${e}; may need a T prefix`)}(ToString(l)))),RejectTime(r,o,n,a,i,s);return new(GetIntrinsic("%Temporal.PlainTime%"))(r,o,n,a,i,s)}function ToTemporalYearMonth(e,t){if(IsObject(e)){if(IsTemporalYearMonth(e))return e;const r=GetTemporalCalendarSlotValueWithISODefault(e);return CalendarYearMonthFromFields(r,PrepareTemporalFields(e,CalendarFields(r,["month","monthCode","year"]),[]),t)}ToTemporalOverflow(t);let{year:r,month:o,referenceISODay:n,calendar:a}=ParseTemporalYearMonthString(ToString(e));if(void 0===a&&(a="iso8601"),!IsBuiltinCalendar(a))throw new RangeError(`invalid calendar identifier ${a}`);if(a=ASCIILowercase(a),void 0===n)return RejectISODate(r,o,1),CreateTemporalYearMonth(r,o,a);return CalendarYearMonthFromFields(a,CreateTemporalYearMonth(r,o,a,n))}function InterpretISODateTimeOffset(t,r,o,i,s,l,d,m,c,h,u,T,p,f,y){const I=new(GetIntrinsic("%Temporal.PlainDateTime%"))(t,r,o,i,s,l,d,m,c);if("wall"===h||"ignore"===f){return GetSlot(GetInstantFor(T,I,p),n)}if("exact"===h||"use"===f){const n=GetUTCEpochNanoseconds(t,r,o,i,s,l,d,m,c);if(null===n)throw new RangeError("ZonedDateTime outside of supported range");return JSBI.subtract(n,JSBI.BigInt(u))}const S=GetPossibleInstantsFor(T,I);for(const t of S){const r=GetOffsetNanosecondsFor(T,t),o=JSBI.toNumber(RoundNumberToIncrement(JSBI.BigInt(r),be,"halfExpand"));if(r===u||y&&o===u)return GetSlot(t,n)}if("reject"===f){const e=FormatTimeZoneOffsetString(u),t=IsTemporalTimeZone(T)?GetSlot(T,a):"time zone";throw new RangeError(`Offset ${e} is invalid for ${I.toString()} in ${t}`)}return GetSlot(DisambiguatePossibleInstants(S,T,I,p),n)}function ToTemporalZonedDateTime(e,t){let r,o,n,a,i,s,l,d,m,c,h,u,T,p,f=!1,y="option";if(IsObject(e)){if(IsTemporalZonedDateTime(e))return e;u=GetTemporalCalendarSlotValueWithISODefault(e);const f=CalendarFields(u,["day","hour","microsecond","millisecond","minute","month","monthCode","nanosecond","second","year"]);f.push("timeZone","offset");const I=PrepareTemporalFields(e,f,["timeZone"]);c=ToTemporalTimeZoneSlotValue(I.timeZone),h=I.offset,void 0===h&&(y="wall"),T=ToTemporalDisambiguation(t),p=ToTemporalOffset(t,"reject"),({year:r,month:o,day:n,hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m}=InterpretTemporalDateTimeFields(u,I,t));}else {let I,S;if(({year:r,month:o,day:n,hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m,ianaName:I,offset:h,z:S,calendar:u}=function ParseTemporalZonedDateTimeString(e){const t=ParseISODateTime(e);if(!t.ianaName)throw new RangeError("Temporal.ZonedDateTime requires a time zone ID in brackets");return t}(ToString(e))),c=ToTemporalTimeZoneSlotValue(I),S?y="exact":h||(y="wall"),u||(u="iso8601"),!IsBuiltinCalendar(u))throw new RangeError(`invalid calendar identifier ${u}`);u=ASCIILowercase(u),f=!0,T=ToTemporalDisambiguation(t),p=ToTemporalOffset(t,"reject"),ToTemporalOverflow(t);}let I=0;"option"===y&&(I=ParseTimeZoneOffsetString(h));return CreateTemporalZonedDateTime(InterpretISODateTimeOffset(r,o,n,a,i,s,l,d,m,y,I,c,T,p,f),c,u)}function CreateTemporalDateSlots(e,t,r,o,n){RejectISODate(t,r,o),RejectDateRange(t,r,o),N(e),SetSlot(e,i,t),SetSlot(e,s,r),SetSlot(e,l,o),SetSlot(e,p,n),SetSlot(e,f,!0);}function CreateTemporalDate(e,t,r,o="iso8601"){const n=GetIntrinsic("%Temporal.PlainDate%"),a=Te(n.prototype);return CreateTemporalDateSlots(a,e,t,r,o),a}function CreateTemporalDateTimeSlots(e,t,r,o,n,a,f,y,I,S,g){RejectDateTime(t,r,o,n,a,f,y,I,S),RejectDateTimeRange(t,r,o,n,a,f,y,I,S),N(e),SetSlot(e,i,t),SetSlot(e,s,r),SetSlot(e,l,o),SetSlot(e,d,n),SetSlot(e,m,a),SetSlot(e,c,f),SetSlot(e,h,y),SetSlot(e,u,I),SetSlot(e,T,S),SetSlot(e,p,g);}function CreateTemporalDateTime(e,t,r,o,n,a,i,s,l,d="iso8601"){const m=GetIntrinsic("%Temporal.PlainDateTime%"),c=Te(m.prototype);return CreateTemporalDateTimeSlots(c,e,t,r,o,n,a,i,s,l,d),c}function CreateTemporalMonthDaySlots(e,t,r,o,n){RejectISODate(n,t,r),RejectDateRange(n,t,r),N(e),SetSlot(e,s,t),SetSlot(e,l,r),SetSlot(e,i,n),SetSlot(e,p,o),SetSlot(e,I,!0);}function CreateTemporalMonthDay(e,t,r="iso8601",o=1972){const n=GetIntrinsic("%Temporal.PlainMonthDay%"),a=Te(n.prototype);return CreateTemporalMonthDaySlots(a,e,t,r,o),a}function CreateTemporalYearMonthSlots(e,t,r,o,n){RejectISODate(t,r,n),function RejectYearMonthRange(e,t){RejectToRange(e,Fe,Ye),e===Fe?RejectToRange(t,4,12):e===Ye&&RejectToRange(t,1,9);}(t,r),N(e),SetSlot(e,i,t),SetSlot(e,s,r),SetSlot(e,l,n),SetSlot(e,p,o),SetSlot(e,y,!0);}function CreateTemporalYearMonth(e,t,r="iso8601",o=1){const n=GetIntrinsic("%Temporal.PlainYearMonth%"),a=Te(n.prototype);return CreateTemporalYearMonthSlots(a,e,t,r,o),a}function CreateTemporalZonedDateTimeSlots(e,t,r,o){ValidateEpochNanoseconds(t),N(e),SetSlot(e,n,t),SetSlot(e,g,r),SetSlot(e,p,o);const a=new(GetIntrinsic("%Temporal.Instant%"))(GetSlot(e,n));SetSlot(e,S,a);}function CreateTemporalZonedDateTime(e,t,r="iso8601"){const o=GetIntrinsic("%Temporal.ZonedDateTime%"),n=Te(o.prototype);return CreateTemporalZonedDateTimeSlots(n,e,t,r),n}function CalendarFields(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.fields%"),r,[t])}const r=Call(GetMethod(e,"fields"),e,[t]),o=[];for(const e of r){if("string"!=typeof e)throw new TypeError("bad return from calendar.fields()");te.call(o,e);}return o}function CalendarMergeFields(e,t,r){if("string"==typeof e){const o=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.mergeFields%"),o,[t,r])}const o=Call(GetMethod(e,"mergeFields"),e,[t,r]);if(!IsObject(o))throw new TypeError("bad return from calendar.mergeFields()");return o}function CalendarDateAdd(e,t,r,o,n){let a=n;if("string"==typeof e){const n=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.dateAdd%"),n,[t,r,o])}void 0===a&&(a=GetMethod(e,"dateAdd"));const i=fe(a,e,[t,r,o]);if(!IsTemporalDate(i))throw new TypeError("invalid result");return i}function CalendarDateUntil(e,t,r,o,n){let a=n;if("string"==typeof e){const n=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.dateUntil%"),n,[t,r,o])}void 0===a&&(a=GetMethod(e,"dateUntil"));const i=fe(a,e,[t,r,o]);if(!IsTemporalDuration(i))throw new TypeError("invalid result");return i}function CalendarYear(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.year%"),r,[t])}let r=Call(GetMethod(e,"year"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar year result must be an integer");if(!IsIntegralNumber(r))throw new RangeError("calendar year result must be an integer");return r}function CalendarMonth(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.month%"),r,[t])}let r=Call(GetMethod(e,"month"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar month result must be a positive integer");if(!IsIntegralNumber(r)||r<1)throw new RangeError("calendar month result must be a positive integer");return r}function CalendarMonthCode(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.monthCode%"),r,[t])}let r=Call(GetMethod(e,"monthCode"),e,[t]);if("string"!=typeof r)throw new TypeError("calendar monthCode result must be a string");return r}function CalendarDay(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.day%"),r,[t])}const r=Call(GetMethod(e,"day"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar day result must be a positive integer");if(!IsIntegralNumber(r)||r<1)throw new RangeError("calendar day result must be a positive integer");return r}function CalendarEra(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.era%"),r,[t])}let r=Call(GetMethod(e,"era"),e,[t]);if(void 0===r)return r;if("string"!=typeof r)throw new TypeError("calendar era result must be a string or undefined");return r}function CalendarEraYear(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.eraYear%"),r,[t])}let r=Call(GetMethod(e,"eraYear"),e,[t]);if(void 0===r)return r;if("number"!=typeof r)throw new TypeError("calendar eraYear result must be an integer or undefined");if(!IsIntegralNumber(r))throw new RangeError("calendar eraYear result must be an integer or undefined");return r}function CalendarDayOfWeek(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.dayOfWeek%"),r,[t])}const r=Call(GetMethod(e,"dayOfWeek"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar dayOfWeek result must be a positive integer");if(!IsIntegralNumber(r)||r<1)throw new RangeError("calendar dayOfWeek result must be a positive integer");return r}function CalendarDayOfYear(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.dayOfYear%"),r,[t])}const r=Call(GetMethod(e,"dayOfYear"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar dayOfYear result must be a positive integer");if(!IsIntegralNumber(r)||r<1)throw new RangeError("calendar dayOfYear result must be a positive integer");return r}function CalendarWeekOfYear(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.weekOfYear%"),r,[t])}const r=Call(GetMethod(e,"weekOfYear"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar weekOfYear result must be a positive integer");if(!IsIntegralNumber(r)||r<1)throw new RangeError("calendar weekOfYear result must be a positive integer");return r}function CalendarYearOfWeek(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.yearOfWeek%"),r,[t])}const r=Call(GetMethod(e,"yearOfWeek"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar yearOfWeek result must be an integer");if(!IsIntegralNumber(r))throw new RangeError("calendar yearOfWeek result must be an integer");return r}function CalendarDaysInWeek(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.daysInWeek%"),r,[t])}const r=Call(GetMethod(e,"daysInWeek"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar daysInWeek result must be a positive integer");if(!IsIntegralNumber(r)||r<1)throw new RangeError("calendar daysInWeek result must be a positive integer");return r}function CalendarDaysInMonth(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.daysInMonth%"),r,[t])}const r=Call(GetMethod(e,"daysInMonth"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar daysInMonth result must be a positive integer");if(!IsIntegralNumber(r)||r<1)throw new RangeError("calendar daysInMonth result must be a positive integer");return r}function CalendarDaysInYear(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.daysInYear%"),r,[t])}const r=Call(GetMethod(e,"daysInYear"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar daysInYear result must be a positive integer");if(!IsIntegralNumber(r)||r<1)throw new RangeError("calendar daysInYear result must be a positive integer");return r}function CalendarMonthsInYear(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.monthsInYear%"),r,[t])}const r=Call(GetMethod(e,"monthsInYear"),e,[t]);if("number"!=typeof r)throw new TypeError("calendar monthsInYear result must be a positive integer");if(!IsIntegralNumber(r)||r<1)throw new RangeError("calendar monthsInYear result must be a positive integer");return r}function CalendarInLeapYear(e,t){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.inLeapYear%"),r,[t])}const r=Call(GetMethod(e,"inLeapYear"),e,[t]);if("boolean"!=typeof r)throw new TypeError("calendar inLeapYear result must be a boolean");return r}function ToTemporalCalendarSlotValue(e){if(IsObject(e)){if(HasSlot(e,p))return GetSlot(e,p);if(!function ObjectImplementsTemporalCalendarProtocol(e){return !!IsTemporalCalendar(e)||"dateAdd"in e&&"dateFromFields"in e&&"dateUntil"in e&&"day"in e&&"dayOfWeek"in e&&"dayOfYear"in e&&"daysInMonth"in e&&"daysInWeek"in e&&"daysInYear"in e&&"fields"in e&&"id"in e&&"inLeapYear"in e&&"mergeFields"in e&&"month"in e&&"monthCode"in e&&"monthDayFromFields"in e&&"monthsInYear"in e&&"weekOfYear"in e&&"year"in e&&"yearMonthFromFields"in e&&"yearOfWeek"in e}(e))throw new TypeError("expected a Temporal.Calendar or object implementing the Temporal.Calendar protocol");return e}const t=ToString(e);if(IsBuiltinCalendar(t))return ASCIILowercase(t);let r;try{({calendar:r}=ParseISODateTime(t));}catch{try{({calendar:r}=ParseTemporalYearMonthString(t));}catch{({calendar:r}=ParseTemporalMonthDayString(t));}}if(r||(r="iso8601"),!IsBuiltinCalendar(r))throw new RangeError(`invalid calendar identifier ${r}`);return ASCIILowercase(r)}function GetTemporalCalendarSlotValueWithISODefault(e){if(HasSlot(e,p))return GetSlot(e,p);const{calendar:t}=e;return void 0===t?"iso8601":ToTemporalCalendarSlotValue(t)}function ToTemporalCalendarIdentifier(e){if("string"==typeof e)return e;const t=e.id;if("string"!=typeof t)throw new TypeError("calendar.id should be a string");return t}function ToTemporalCalendarObject(e){if(IsObject(e))return e;return new(GetIntrinsic("%Temporal.Calendar%"))(e)}function CalendarEquals(e,t){if(e===t)return !0;return ToTemporalCalendarIdentifier(e)===ToTemporalCalendarIdentifier(t)}function ThrowIfCalendarsNotEqual(e,t,r){if(e===t)return;const o=ToTemporalCalendarIdentifier(e),n=ToTemporalCalendarIdentifier(t);if(o!==n)throw new RangeError(`cannot ${r} of ${o} and ${n} calendars`)}function ConsolidateCalendars(e,t){if(e===t)return t;const r=ToTemporalCalendarIdentifier(e),o=ToTemporalCalendarIdentifier(t);if(r===o||"iso8601"===r)return t;if("iso8601"===o)return e;throw new RangeError("irreconcilable calendars")}function CalendarDateFromFields(e,t,r,o){if("string"==typeof e){const o=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.dateFromFields%"),o,[t,r])}const n=Call(o??GetMethod(e,"dateFromFields"),e,[t,r]);if(!IsTemporalDate(n))throw new TypeError("invalid result");return n}function CalendarYearMonthFromFields(e,t,r){if("string"==typeof e){const o=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.yearMonthFromFields%"),o,[t,r])}let o=Call(GetMethod(e,"yearMonthFromFields"),e,[t,r]);if(!IsTemporalYearMonth(o))throw new TypeError("invalid result");return o}function CalendarMonthDayFromFields(e,t,r){if("string"==typeof e){const o=new(GetIntrinsic("%Temporal.Calendar%"))(e);return Call(GetIntrinsic("%Temporal.Calendar.prototype.monthDayFromFields%"),o,[t,r])}let o=Call(GetMethod(e,"monthDayFromFields"),e,[t,r]);if(!IsTemporalMonthDay(o))throw new TypeError("invalid result");return o}function ToTemporalTimeZoneSlotValue(e){if(IsObject(e)){if(IsTemporalZonedDateTime(e))return GetSlot(e,g);if(!function ObjectImplementsTemporalTimeZoneProtocol(e){return !!IsTemporalTimeZone(e)||"getOffsetNanosecondsFor"in e&&"getPossibleInstantsFor"in e&&"id"in e}(e))throw new TypeError("expected a Temporal.TimeZone or object implementing the Temporal.TimeZone protocol");return e}return ParseTemporalTimeZone(ToString(e))}function ToTemporalTimeZoneIdentifier(e){if("string"==typeof e)return e;const t=e.id;if("string"!=typeof t)throw new TypeError("timeZone.id should be a string");return t}function ToTemporalTimeZoneObject(e){if(IsObject(e))return e;return new(GetIntrinsic("%Temporal.TimeZone%"))(e)}function TimeZoneEquals(e,t){if(e===t)return !0;return ToTemporalTimeZoneIdentifier(e)===ToTemporalTimeZoneIdentifier(t)}function TemporalDateTimeToDate(e){return CreateTemporalDate(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l),GetSlot(e,p))}function TemporalDateTimeToTime(e){return new(GetIntrinsic("%Temporal.PlainTime%"))(GetSlot(e,d),GetSlot(e,m),GetSlot(e,c),GetSlot(e,h),GetSlot(e,u),GetSlot(e,T))}function GetOffsetNanosecondsFor(e,t,r){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.TimeZone%"))(e);return Call(GetIntrinsic("%Temporal.TimeZone.prototype.getOffsetNanosecondsFor%"),r,[t])}const o=Call(r??GetMethod(e,"getOffsetNanosecondsFor"),e,[t]);if("number"!=typeof o)throw new TypeError("bad return from getOffsetNanosecondsFor");if(!IsIntegralNumber(o)||ae(o)>=864e11)throw new RangeError("out-of-range return from getOffsetNanosecondsFor");return o}function GetOffsetStringFor(e,t){return FormatTimeZoneOffsetString(GetOffsetNanosecondsFor(e,t))}function GetPlainDateTimeFor(e,t,r){const o=GetSlot(t,n),a=GetOffsetNanosecondsFor(e,t);let{year:i,month:s,day:l,hour:d,minute:m,second:c,millisecond:h,microsecond:u,nanosecond:T}=GetISOPartsFromEpoch(o);return ({year:i,month:s,day:l,hour:d,minute:m,second:c,millisecond:h,microsecond:u,nanosecond:T}=BalanceISODateTime(i,s,l,d,m,c,h,u,T+a)),CreateTemporalDateTime(i,s,l,d,m,c,h,u,T,r)}function GetInstantFor(e,t,r){return DisambiguatePossibleInstants(GetPossibleInstantsFor(e,t),e,t,r)}function DisambiguatePossibleInstants(t,r,o,n){const a=GetIntrinsic("%Temporal.Instant%"),f=t.length;if(1===f)return t[0];if(f)switch(n){case"compatible":case"earlier":return t[0];case"later":return t[f-1];case"reject":throw new RangeError("multiple instants found")}const y=GetSlot(o,i),I=GetSlot(o,s),S=GetSlot(o,l),g=GetSlot(o,d),w=GetSlot(o,m),D=GetSlot(o,c),G=GetSlot(o,h),v=GetSlot(o,u),C=GetSlot(o,T),O=GetUTCEpochNanoseconds(y,I,S,g,w,D,G,v,C);if(null===O)throw new RangeError("DateTime outside of supported range");const b=new a(JSBI.subtract(O,Ee)),E=new a(JSBI.add(O,Ee)),M=GetOffsetNanosecondsFor(r,b),R=GetOffsetNanosecondsFor(r,E)-M;switch(n){case"earlier":{const e=GetSlot(o,p),t=GetIntrinsic("%Temporal.PlainDateTime%"),n=AddDateTime(y,I,S,g,w,D,G,v,C,e,0,0,0,0,0,0,0,0,0,-R,void 0);return GetPossibleInstantsFor(r,new t(n.year,n.month,n.day,n.hour,n.minute,n.second,n.millisecond,n.microsecond,n.nanosecond,e))[0]}case"compatible":case"later":{const e=GetSlot(o,p),t=GetIntrinsic("%Temporal.PlainDateTime%"),n=AddDateTime(y,I,S,g,w,D,G,v,C,e,0,0,0,0,0,0,0,0,0,R,void 0),a=GetPossibleInstantsFor(r,new t(n.year,n.month,n.day,n.hour,n.minute,n.second,n.millisecond,n.microsecond,n.nanosecond,e));return a[a.length-1]}case"reject":throw new RangeError("no such instant found")}}function GetPossibleInstantsFor(e,t,r){if("string"==typeof e){const r=new(GetIntrinsic("%Temporal.TimeZone%"))(e);return Call(GetIntrinsic("%Temporal.TimeZone.prototype.getPossibleInstantsFor%"),r,[t])}const o=Call(r??GetMethod(e,"getPossibleInstantsFor"),e,[t]),n=[];for(const e of o){if(!IsTemporalInstant(e))throw new TypeError("bad return from getPossibleInstantsFor");te.call(n,e);}return n}function ISOYearString(e){let t;if(e<0||e>9999){t=(e<0?"-":"+")+`000000${ae(e)}`.slice(-6);}else t=`0000${e}`.slice(-4);return t}function ISODateTimePartString(e){return `00${e}`.slice(-2)}function FormatSecondsStringPart(e,t,r,o,n){if("minute"===n)return "";const a=`:${ISODateTimePartString(e)}`;let i,s=1e6*t+1e3*r+o;if("auto"===n){if(0===s)return a;for(i=`${s}`.padStart(9,"0");"0"===i[i.length-1];)i=i.slice(0,-1);}else {if(0===n)return a;i=`${s}`.padStart(9,"0").slice(0,n);}return `${a}.${i}`}function TemporalInstantToString(e,t,r){let o=t;void 0===o&&(o="UTC");const n=GetPlainDateTimeFor(o,e,"iso8601"),a=ISOYearString(GetSlot(n,i)),p=ISODateTimePartString(GetSlot(n,s)),f=ISODateTimePartString(GetSlot(n,l)),y=ISODateTimePartString(GetSlot(n,d)),I=ISODateTimePartString(GetSlot(n,m)),S=FormatSecondsStringPart(GetSlot(n,c),GetSlot(n,h),GetSlot(n,u),GetSlot(n,T),r);let g="Z";if(void 0!==t){g=FormatISOTimeZoneOffsetString(GetOffsetNanosecondsFor(o,e));}return `${a}-${p}-${f}T${y}:${I}${S}${g}`}function TemporalDurationToString(t,r="auto",o){function formatNumber(t){return t<=ue?t.toString(10):JSBI.BigInt(t).toString(10)}const n=GetSlot(t,w),a=GetSlot(t,D),i=GetSlot(t,G),s=GetSlot(t,v),l=GetSlot(t,C),d=GetSlot(t,O);let m=GetSlot(t,b),c=GetSlot(t,E),h=GetSlot(t,M),u=GetSlot(t,R);const T=DurationSign(n,a,i,s,l,d,m,c,h,u);if(o){const{unit:e,increment:t,roundingMode:r}=o;({seconds:m,milliseconds:c,microseconds:h,nanoseconds:u}=RoundDuration(0,0,0,0,0,0,m,c,h,u,t,e,r));}const p=[];n&&p.push(`${formatNumber(ae(n))}Y`),a&&p.push(`${formatNumber(ae(a))}M`),i&&p.push(`${formatNumber(ae(i))}W`),s&&p.push(`${formatNumber(ae(s))}D`);const f=[];l&&f.push(`${formatNumber(ae(l))}H`),d&&f.push(`${formatNumber(ae(d))}M`);const y=[];let I,S,g,F,Y=TotalDurationNanoseconds(0,0,0,m,c,h,u,0);(({quotient:Y,remainder:I}=divmod(Y,De))),({quotient:Y,remainder:S}=divmod(Y,De)),({quotient:F,remainder:g}=divmod(Y,De));const P=1e6*ae(JSBI.toNumber(g))+1e3*ae(JSBI.toNumber(S))+ae(JSBI.toNumber(I));let Z;if("auto"===r){if(0!==P)for(Z=`${P}`.padStart(9,"0");"0"===Z[Z.length-1];)Z=Z.slice(0,-1);}else 0!==r&&(Z=`${P}`.padStart(9,"0").slice(0,r));return Z&&y.unshift(".",Z),JSBI.equal(F,Ie)&&!y.length&&"auto"===r||y.unshift(abs(F).toString()),y.length&&f.push(`${y.join("")}S`),f.length&&f.unshift("T"),p.length||f.length?`${T<0?"-":""}P${p.join("")}${f.join("")}`:"PT0S"}function TemporalDateToString(e,t="auto"){return `${ISOYearString(GetSlot(e,i))}-${ISODateTimePartString(GetSlot(e,s))}-${ISODateTimePartString(GetSlot(e,l))}${MaybeFormatCalendarAnnotation(GetSlot(e,p),t)}`}function TemporalDateTimeToString(e,t,r="auto",o){let n=GetSlot(e,i),a=GetSlot(e,s),f=GetSlot(e,l),y=GetSlot(e,d),I=GetSlot(e,m),S=GetSlot(e,c),g=GetSlot(e,h),w=GetSlot(e,u),D=GetSlot(e,T);if(o){const{unit:e,increment:t,roundingMode:r}=o;({year:n,month:a,day:f,hour:y,minute:I,second:S,millisecond:g,microsecond:w,nanosecond:D}=RoundISODateTime(n,a,f,y,I,S,g,w,D,t,e,r));}return `${ISOYearString(n)}-${ISODateTimePartString(a)}-${ISODateTimePartString(f)}T${ISODateTimePartString(y)}:${ISODateTimePartString(I)}${FormatSecondsStringPart(S,g,w,D,t)}${MaybeFormatCalendarAnnotation(GetSlot(e,p),r)}`}function TemporalMonthDayToString(e,t="auto"){let r=`${ISODateTimePartString(GetSlot(e,s))}-${ISODateTimePartString(GetSlot(e,l))}`;const o=ToTemporalCalendarIdentifier(GetSlot(e,p));if("always"===t||"critical"===t||"iso8601"!==o){r=`${ISOYearString(GetSlot(e,i))}-${r}`;}const n=FormatCalendarAnnotation(o,t);return n&&(r+=n),r}function TemporalYearMonthToString(e,t="auto"){let r=`${ISOYearString(GetSlot(e,i))}-${ISODateTimePartString(GetSlot(e,s))}`;const o=ToTemporalCalendarIdentifier(GetSlot(e,p));if("always"===t||"critical"===t||"iso8601"!==o){r+=`-${ISODateTimePartString(GetSlot(e,l))}`;}const n=FormatCalendarAnnotation(o,t);return n&&(r+=n),r}function TemporalZonedDateTimeToString(e,t,r="auto",o="auto",a="auto",f){let y=GetSlot(e,S);if(f){const{unit:t,increment:r,roundingMode:o}=f,a=RoundInstant(GetSlot(e,n),r,t,o);y=new(GetIntrinsic("%Temporal.Instant%"))(a);}const I=GetSlot(e,g),w=GetPlainDateTimeFor(I,y,"iso8601");let D=`${ISOYearString(GetSlot(w,i))}-${ISODateTimePartString(GetSlot(w,s))}-${ISODateTimePartString(GetSlot(w,l))}T${ISODateTimePartString(GetSlot(w,d))}:${ISODateTimePartString(GetSlot(w,m))}${FormatSecondsStringPart(GetSlot(w,c),GetSlot(w,h),GetSlot(w,u),GetSlot(w,T),t)}`;if("never"!==a){D+=FormatISOTimeZoneOffsetString(GetOffsetNanosecondsFor(I,y));}if("never"!==o){D+=`[${"critical"===o?"!":""}${ToTemporalTimeZoneIdentifier(I)}]`;}return D+=MaybeFormatCalendarAnnotation(GetSlot(e,p),r),D}function IsTimeZoneOffsetString(e){return ze.test(he(e))}function ParseTimeZoneOffsetString(e){const t=ze.exec(he(e));if(!t)throw new RangeError(`invalid time zone offset: ${e}`);return ("-"===t[1]||"−"===t[1]?-1:1)*(1e9*(60*(60*+t[2]+ +(t[3]||0))+ +(t[4]||0))+ +((t[5]||0)+"000000000").slice(0,9))}function GetCanonicalTimeZoneIdentifier(e){if(IsTimeZoneOffsetString(e)){return FormatTimeZoneOffsetString(ParseTimeZoneOffsetString(e))}return getIntlDateTimeFormatEnUsForTimeZone(he(e)).resolvedOptions().timeZone}function GetNamedTimeZoneOffsetNanoseconds(t,r){const{year:o,month:n,day:a,hour:i,minute:s,second:l,millisecond:d,microsecond:m,nanosecond:c}=GetNamedTimeZoneDateTimeParts(t,r),h=o%400,u=(o-h)/400,T=JSBI.multiply(JSBI.BigInt(146097),Ee),p=GetUTCEpochNanoseconds(h,n,a,i,s,l,d,m,c),f=JSBI.add(p,JSBI.multiply(T,JSBI.BigInt(u)));return JSBI.toNumber(JSBI.subtract(f,r))}function FormatTimeZoneOffsetString(e){const t=e<0?"-":"+",r=ae(e),o=r%1e9,n=ie(r/1e9)%60,a=ie(r/6e10)%60,i=ISODateTimePartString(ie(r/36e11)),s=ISODateTimePartString(a),l=ISODateTimePartString(n);let d="";if(o){let e=`${o}`.padStart(9,"0");for(;"0"===e[e.length-1];)e=e.slice(0,-1);d=`:${l}.${e}`;}else n&&(d=`:${l}`);return `${t}${i}:${s}${d}`}function FormatISOTimeZoneOffsetString(t){let r=JSBI.toNumber(RoundNumberToIncrement(JSBI.BigInt(t),be,"halfExpand"));const o=r<0?"-":"+";r=ae(r);const n=r/6e10%60;return `${o}${ISODateTimePartString(ie(r/36e11))}:${ISODateTimePartString(n)}`}function GetUTCEpochNanoseconds(t,r,o,n,a,i,s,l,d){const m=new Date;m.setUTCHours(n,a,i,s),m.setUTCFullYear(t,r-1,o);const c=m.getTime();if(de(c))return null;let h=JSBI.multiply(JSBI.BigInt(c),Ge);return h=JSBI.add(h,JSBI.multiply(JSBI.BigInt(l),De)),h=JSBI.add(h,JSBI.BigInt(d)),JSBI.lessThan(h,Me)||JSBI.greaterThan(h,Re)?null:h}function GetISOPartsFromEpoch(t){const{quotient:r,remainder:o}=divmod(t,Ge);let n=JSBI.toNumber(r),a=JSBI.toNumber(o);a<0&&(a+=1e6,n-=1);const i=ie(a/1e3)%1e3,s=a%1e3,l=new Date(n);return {epochMilliseconds:n,year:l.getUTCFullYear(),month:l.getUTCMonth()+1,day:l.getUTCDate(),hour:l.getUTCHours(),minute:l.getUTCMinutes(),second:l.getUTCSeconds(),millisecond:l.getUTCMilliseconds(),microsecond:i,nanosecond:s}}function GetNamedTimeZoneDateTimeParts(e,t){const{epochMilliseconds:r,millisecond:o,microsecond:n,nanosecond:a}=GetISOPartsFromEpoch(t),{year:i,month:s,day:l,hour:d,minute:m,second:c}=function GetFormatterParts(e,t){const r=getIntlDateTimeFormatEnUsForTimeZone(e).format(new Date(t));return function parseFromEnUsFormat(e){const t=e.split(/[^\w]+/);if(7!==t.length)throw new RangeError(`expected 7 parts in "${e}`);const r=+t[0],o=+t[1];let n=+t[2];const a=t[3].toUpperCase();if("B"===a||"BC"===a)n=1-n;else if("A"!==a&&"AD"!==a)throw new RangeError(`Unknown era ${a} in "${e}`);let i=+t[4];24===i&&(i=0);const s=+t[5],l=+t[6];if(!(me(n)&&me(r)&&me(o)&&me(i)&&me(s)&&me(l)))throw new RangeError(`Invalid number in "${e}`);return {year:n,month:r,day:o,hour:i,minute:s,second:l}}(r)}(e,r);return BalanceISODateTime(i,s,l,d,m,c,o,n,a)}function maxJSBI(t,r){return JSBI.lessThan(t,r)?r:t}function afterLatestPossibleTzdbRuleChange(){return JSBI.add(Ve(),Ze)}function GetNamedTimeZoneNextTransition(t,r){if(JSBI.lessThan(r,Pe))return GetNamedTimeZoneNextTransition(t,Pe);const o=JSBI.add(r,Be),n=maxJSBI(afterLatestPossibleTzdbRuleChange(),o);let a=maxJSBI(Pe,r);const i=GetNamedTimeZoneOffsetNanoseconds(t,a);let s=a,l=i;for(;i===l&&JSBI.lessThan(JSBI.BigInt(a),n);){if(s=JSBI.add(a,Ne),JSBI.greaterThan(s,Re))return null;l=GetNamedTimeZoneOffsetNanoseconds(t,s),i===l&&(a=s);}if(i===l)return null;return bisect((e=>GetNamedTimeZoneOffsetNanoseconds(t,e)),a,s,i,l)}function GetNamedTimeZonePreviousTransition(t,r){const o=afterLatestPossibleTzdbRuleChange(),a=JSBI.greaterThan(r,o),i=a?JSBI.subtract(r,Be):Pe;if("Africa/Casablanca"===t||"Africa/El_Aaiun"===t){const o=GetSlot(ToTemporalInstant("2088-01-01T00Z"),n);if(JSBI.lessThan(o,r))return GetNamedTimeZonePreviousTransition(t,o)}let s=JSBI.subtract(r,Se);if(JSBI.lessThan(s,Pe))return null;const l=GetNamedTimeZoneOffsetNanoseconds(t,s);let d=s,m=l;for(;l===m&&JSBI.greaterThan(s,i);){if(d=JSBI.subtract(s,Ne),JSBI.lessThan(d,Pe))return null;m=GetNamedTimeZoneOffsetNanoseconds(t,d),l===m&&(s=d);}if(l===m){if(a){const r=JSBI.subtract(o,Ee);return GetNamedTimeZonePreviousTransition(t,r)}return null}return bisect((e=>GetNamedTimeZoneOffsetNanoseconds(t,e)),d,s,m,l)}function LeapYear(e){if(void 0===e)return !1;return e%4==0&&(!(e%100==0)||e%400==0)}function ISODaysInMonth(e,t){return {standard:[31,28,31,30,31,30,31,31,30,31,30,31],leapyear:[31,29,31,30,31,30,31,31,30,31,30,31]}[LeapYear(e)?"leapyear":"standard"][t-1]}function DayOfWeek(e,t,r){const o=t+(t<3?10:-2),n=e-(t<3?1:0),a=ie(n/100),i=n-100*a,s=(r+ie(2.6*o-.2)+(i+ie(i/4))+(ie(a/4)-2*a))%7;return s+(s<=0?7:0)}function DayOfYear(e,t,r){let o=r;for(let r=t-1;r>0;r--)o+=ISODaysInMonth(e,r);return o}function WeekOfYear(e,t,r){const o=DayOfYear(e,t,r),n=DayOfWeek(e,t,r)||7,a=DayOfWeek(e,1,1),i=ie((o-n+10)/7);return i<1?5===a||6===a&&LeapYear(e-1)?{week:53,year:e-1}:{week:52,year:e-1}:53===i&&(LeapYear(e)?366:365)-o<4-n?{week:1,year:e+1}:{week:i,year:e}}function DurationSign(e,t,r,o,n,a,i,s,l,d){for(const m of [e,t,r,o,n,a,i,s,l,d])if(0!==m)return m<0?-1:1;return 0}function BalanceISOYearMonth(e,t){let r=e,o=t;if(!me(r)||!me(o))throw new RangeError("infinity is out of range");return o-=1,r+=ie(o/12),o%=12,o<0&&(o+=12),o+=1,{year:r,month:o}}function BalanceISODate(e,t,r){let o=e,n=t,a=r;if(!me(a))throw new RangeError("infinity is out of range");({year:o,month:n}=BalanceISOYearMonth(o,n));const i=146097;if(ae(a)>i){const e=le(a/i);o+=400*e,a-=e*i;}let s=0,l=n>2?o:o-1;for(;s=LeapYear(l)?366:365,a<-s;)o-=1,l-=1,a+=s;for(l+=1;s=LeapYear(l)?366:365,a>s;)o+=1,l+=1,a-=s;for(;a<1;)(({year:o,month:n}=BalanceISOYearMonth(o,n-1))),a+=ISODaysInMonth(o,n);for(;a>ISODaysInMonth(o,n);)a-=ISODaysInMonth(o,n),({year:o,month:n}=BalanceISOYearMonth(o,n+1));return {year:o,month:n,day:a}}function BalanceISODateTime(e,t,r,o,n,a,i,s,l){const{deltaDays:d,hour:m,minute:c,second:h,millisecond:u,microsecond:T,nanosecond:p}=BalanceTime(o,n,a,i,s,l),{year:f,month:y,day:I}=BalanceISODate(e,t,r+d);return {year:f,month:y,day:I,hour:m,minute:c,second:h,millisecond:u,microsecond:T,nanosecond:p}}function BalanceTime(t,r,o,n,a,i){let s,l=JSBI.BigInt(t),d=JSBI.BigInt(r),m=JSBI.BigInt(o),c=JSBI.BigInt(n),h=JSBI.BigInt(a),u=JSBI.BigInt(i);return ({quotient:s,remainder:u}=NonNegativeBigIntDivmod(u,De)),h=JSBI.add(h,s),({quotient:s,remainder:h}=NonNegativeBigIntDivmod(h,De)),c=JSBI.add(c,s),({quotient:s,remainder:c}=NonNegativeBigIntDivmod(c,De)),m=JSBI.add(m,s),({quotient:s,remainder:m}=NonNegativeBigIntDivmod(m,ge)),d=JSBI.add(d,s),({quotient:s,remainder:d}=NonNegativeBigIntDivmod(d,ge)),l=JSBI.add(l,s),({quotient:s,remainder:l}=NonNegativeBigIntDivmod(l,we)),{deltaDays:JSBI.toNumber(s),hour:JSBI.toNumber(l),minute:JSBI.toNumber(d),second:JSBI.toNumber(m),millisecond:JSBI.toNumber(c),microsecond:JSBI.toNumber(h),nanosecond:JSBI.toNumber(u)}}function TotalDurationNanoseconds(t,r,o,n,a,i,s,l){const d=JSBI.BigInt(t);let m=JSBI.BigInt(s);0!==t&&(m=JSBI.subtract(JSBI.BigInt(s),JSBI.BigInt(l)));const c=JSBI.add(JSBI.BigInt(r),JSBI.multiply(d,JSBI.BigInt(24))),h=JSBI.add(JSBI.BigInt(o),JSBI.multiply(c,ge)),u=JSBI.add(JSBI.BigInt(n),JSBI.multiply(h,ge)),T=JSBI.add(JSBI.BigInt(a),JSBI.multiply(u,De)),p=JSBI.add(JSBI.BigInt(i),JSBI.multiply(T,De));return JSBI.add(JSBI.BigInt(m),JSBI.multiply(p,De))}function NanosecondsToDays(t,r){const o=GetIntrinsic("%Temporal.Instant%"),a=se(JSBI.toNumber(t));let f=JSBI.BigInt(t),y=864e11;if(0===a)return {days:0,nanoseconds:Ie,dayLengthNs:y};if(!IsTemporalZonedDateTime(r)){let t;return ({quotient:t,remainder:f}=divmod(f,JSBI.BigInt(y))),{days:JSBI.toNumber(t),nanoseconds:f,dayLengthNs:y}}const I=GetSlot(r,n),w=GetSlot(r,S),D=JSBI.add(I,f),G=new o(D),v=GetSlot(r,g),C=GetSlot(r,p),O=GetPlainDateTimeFor(v,w,C),b=GetPlainDateTimeFor(v,G,C);let{days:E}=DifferenceISODateTime(GetSlot(O,i),GetSlot(O,s),GetSlot(O,l),GetSlot(O,d),GetSlot(O,m),GetSlot(O,c),GetSlot(O,h),GetSlot(O,u),GetSlot(O,T),GetSlot(b,i),GetSlot(b,s),GetSlot(b,l),GetSlot(b,d),GetSlot(b,m),GetSlot(b,c),GetSlot(b,h),GetSlot(b,u),GetSlot(b,T),C,"day",Te(null)),M=AddZonedDateTime(w,v,C,0,0,0,E,0,0,0,0,0,0),R=JSBI.BigInt(E);if(1===a)for(;JSBI.greaterThan(R,Ie)&&JSBI.greaterThan(M,D);)R=JSBI.subtract(R,Se),M=AddZonedDateTime(w,v,C,0,0,0,JSBI.toNumber(R),0,0,0,0,0,0);f=JSBI.subtract(D,M);let F=!1,Y=new o(M);do{const t=AddZonedDateTime(Y,v,C,0,0,0,a,0,0,0,0,0,0),r=GetSlot(Y,n);y=JSBI.toNumber(JSBI.subtract(t,r)),F=JSBI.greaterThanOrEqual(JSBI.multiply(JSBI.subtract(f,JSBI.BigInt(y)),JSBI.BigInt(a)),Ie),F&&(f=JSBI.subtract(f,JSBI.BigInt(y)),Y=new o(t),R=JSBI.add(R,JSBI.BigInt(a)));}while(F);if(!isZero(R)&&signJSBI(R)!==a)throw new RangeError("Time zone or calendar converted nanoseconds into a number of days with the opposite sign");if(!isZero(f)&&signJSBI(f)!==a){if(isNegativeJSBI(f)&&1===a)throw new Error("assert not reached");throw new RangeError("Time zone or calendar ended up with a remainder of nanoseconds with the opposite sign")}if(JSBI.greaterThanOrEqual(abs(f),abs(JSBI.BigInt(y))))throw new Error("assert not reached");return {days:JSBI.toNumber(R),nanoseconds:f,dayLengthNs:ae(y)}}function BalanceDuration(e,t,r,o,n,a,i,s,l){let d=BalancePossiblyInfiniteDuration(e,t,r,o,n,a,i,s,l);if("positive overflow"===d||"negative overflow"===d)throw new RangeError("Duration out of range");return d}function BalancePossiblyInfiniteDuration(t,r,o,a,i,s,l,d,m){let c,h,u,T,f,y,I=t;if(IsTemporalZonedDateTime(m)){const t=AddZonedDateTime(GetSlot(m,S),GetSlot(m,g),GetSlot(m,p),0,0,0,I,r,o,a,i,s,l),d=GetSlot(m,n);c=JSBI.subtract(t,d);}else c=TotalDurationNanoseconds(I,r,o,a,i,s,l,0);"year"===d||"month"===d||"week"===d||"day"===d?({days:I,nanoseconds:c}=NanosecondsToDays(c,m)):I=0;const w=JSBI.lessThan(c,Ie)?-1:1;switch(c=abs(c),h=u=T=f=y=Ie,d){case"year":case"month":case"week":case"day":case"hour":(({quotient:h,remainder:c}=divmod(c,De))),({quotient:u,remainder:h}=divmod(h,De)),({quotient:T,remainder:u}=divmod(u,De)),({quotient:f,remainder:T}=divmod(T,ge)),({quotient:y,remainder:f}=divmod(f,ge));break;case"minute":(({quotient:h,remainder:c}=divmod(c,De))),({quotient:u,remainder:h}=divmod(h,De)),({quotient:T,remainder:u}=divmod(u,De)),({quotient:f,remainder:T}=divmod(T,ge));break;case"second":(({quotient:h,remainder:c}=divmod(c,De))),({quotient:u,remainder:h}=divmod(h,De)),({quotient:T,remainder:u}=divmod(u,De));break;case"millisecond":(({quotient:h,remainder:c}=divmod(c,De))),({quotient:u,remainder:h}=divmod(h,De));break;case"microsecond":({quotient:h,remainder:c}=divmod(c,De));break;case"nanosecond":break;default:throw new Error("assert not reached")}const D=JSBI.toNumber(y)*w,G=JSBI.toNumber(f)*w,v=JSBI.toNumber(T)*w,C=JSBI.toNumber(u)*w,O=JSBI.toNumber(h)*w,b=JSBI.toNumber(c)*w;for(const e of [I,D,G,v,C,O,b])if(!me(e))return 1===w?"positive overflow":"negative overflow";return {days:I,hours:D,minutes:G,seconds:v,milliseconds:C,microseconds:O,nanoseconds:b}}function UnbalanceDurationRelative(t,r,o,n,a,i){const s=GetIntrinsic("%Temporal.Duration%"),l=DurationSign(t,r,o,n,0,0,0,0,0,0);if(0===l)return {years:t,months:r,weeks:o,days:n};const d=JSBI.BigInt(l);let m,c,h=JSBI.BigInt(t),u=JSBI.BigInt(r),T=JSBI.BigInt(o),f=JSBI.BigInt(n);i&&(c=ToTemporalDate(i),m=GetSlot(c,p));const y=new s(l),I=new s(0,l),S=new s(0,0,l);switch(a){case"year":break;case"month":{if(!m)throw new RangeError("a starting point is required for months balancing");let t,r;for("string"!=typeof m&&(t=GetMethod(m,"dateAdd"),r=GetMethod(m,"dateUntil"));!isZero(h);){const o=CalendarDateAdd(m,c,y,void 0,t),n=Te(null);n.largestUnit="month";const a=CalendarDateUntil(m,c,o,n,r),i=JSBI.BigInt(GetSlot(a,D));c=o,u=JSBI.add(u,i),h=JSBI.subtract(h,d);}}break;case"week":{if(!m)throw new RangeError("a starting point is required for weeks balancing");const t="string"!=typeof m?GetMethod(m,"dateAdd"):void 0;for(;!isZero(h);){let r;(({relativeTo:c,days:r}=MoveRelativeDate(m,c,y,t))),f=JSBI.add(f,JSBI.BigInt(r)),h=JSBI.subtract(h,d);}for(;!isZero(u);){let r;(({relativeTo:c,days:r}=MoveRelativeDate(m,c,I,t))),f=JSBI.add(f,JSBI.BigInt(r)),u=JSBI.subtract(u,d);}break}default:{if(isZero(h)&&isZero(u)&&isZero(T))break;if(!m)throw new RangeError("a starting point is required for balancing calendar units");const t="string"!=typeof m?GetMethod(m,"dateAdd"):void 0;for(;!isZero(h);){let r;(({relativeTo:c,days:r}=MoveRelativeDate(m,c,y,t))),f=JSBI.add(f,JSBI.BigInt(r)),h=JSBI.subtract(h,d);}for(;!isZero(u);){let r;(({relativeTo:c,days:r}=MoveRelativeDate(m,c,I,t))),f=JSBI.add(f,JSBI.BigInt(r)),u=JSBI.subtract(u,d);}for(;!isZero(T);){let r;(({relativeTo:c,days:r}=MoveRelativeDate(m,c,S,t))),f=JSBI.add(f,JSBI.BigInt(r)),T=JSBI.subtract(T,d);}break}}return {years:JSBI.toNumber(h),months:JSBI.toNumber(u),weeks:JSBI.toNumber(T),days:JSBI.toNumber(f)}}function CalculateOffsetShift(e,t,r,o,n){if(IsTemporalZonedDateTime(e)){const a=GetSlot(e,S),i=GetSlot(e,g),s=GetSlot(e,p),l=GetOffsetNanosecondsFor(i,a),d=AddZonedDateTime(a,i,s,t,r,o,n,0,0,0,0,0,0);return GetOffsetNanosecondsFor(i,new(GetIntrinsic("%Temporal.Instant%"))(d))-l}return 0}function CreateNegatedTemporalDuration(e){return new(GetIntrinsic("%Temporal.Duration%"))(-GetSlot(e,w),-GetSlot(e,D),-GetSlot(e,G),-GetSlot(e,v),-GetSlot(e,C),-GetSlot(e,O),-GetSlot(e,b),-GetSlot(e,E),-GetSlot(e,M),-GetSlot(e,R))}function ConstrainToRange(e,t,r){return oe(r,ne(t,e))}function ConstrainISODate(e,t,r){const o=ConstrainToRange(t,1,12);return {year:e,month:o,day:ConstrainToRange(r,1,ISODaysInMonth(e,o))}}function RejectToRange(e,t,r){if(e<t||e>r)throw new RangeError(`value out of range: ${t} <= ${e} <= ${r}`)}function RejectISODate(e,t,r){RejectToRange(t,1,12),RejectToRange(r,1,ISODaysInMonth(e,t));}function RejectDateRange(e,t,r){RejectDateTimeRange(e,t,r,12,0,0,0,0,0);}function RejectTime(e,t,r,o,n,a){RejectToRange(e,0,23),RejectToRange(t,0,59),RejectToRange(r,0,59),RejectToRange(o,0,999),RejectToRange(n,0,999),RejectToRange(a,0,999);}function RejectDateTime(e,t,r,o,n,a,i,s,l){RejectISODate(e,t,r),RejectTime(o,n,a,i,s,l);}function RejectDateTimeRange(e,t,r,o,n,a,i,s,l){if(RejectToRange(e,Fe,Ye),e===Fe&&null==GetUTCEpochNanoseconds(e,t,r+1,o,n,a,i,s,l-1)||e===Ye&&null==GetUTCEpochNanoseconds(e,t,r-1,o,n,a,i,s,l+1))throw new RangeError("DateTime outside of supported range")}function ValidateEpochNanoseconds(t){if(JSBI.lessThan(t,Me)||JSBI.greaterThan(t,Re))throw new RangeError("Instant outside of supported range")}function RejectDuration(e,t,r,o,n,a,i,s,l,d){const m=DurationSign(e,t,r,o,n,a,i,s,l,d);for(const c of [e,t,r,o,n,a,i,s,l,d]){if(!me(c))throw new RangeError("infinite values not allowed as duration fields");const e=se(c);if(0!==e&&e!==m)throw new RangeError("mixed-sign values not allowed as duration fields")}}function DifferenceISODate(e,t,r,o,n,a,i){switch(i){case"year":case"month":{const s=-CompareISODate(e,t,r,o,n,a);if(0===s)return {years:0,months:0,weeks:0,days:0};const l={year:e,month:t,day:r},d={year:o,month:n,day:a};let m=d.year-l.year,c=AddISODate(e,t,r,m,0,0,0,"constrain"),h=-CompareISODate(c.year,c.month,c.day,o,n,a);if(0===h)return "year"===i?{years:m,months:0,weeks:0,days:0}:{years:0,months:12*m,weeks:0,days:0};let u=d.month-l.month;if(h!==s&&(m-=s,u+=12*s),c=AddISODate(e,t,r,m,u,0,0,"constrain"),h=-CompareISODate(c.year,c.month,c.day,o,n,a),0===h)return "year"===i?{years:m,months:u,weeks:0,days:0}:{years:0,months:u+12*m,weeks:0,days:0};h!==s&&(u-=s,u===-s&&(m-=s,u=11*s),c=AddISODate(e,t,r,m,u,0,0,"constrain"));let T=0;return T=c.month===d.month?d.day-c.day:s<0?-c.day-(ISODaysInMonth(d.year,d.month)-d.day):d.day+(ISODaysInMonth(c.year,c.month)-c.day),"month"===i&&(u+=12*m,m=0),{years:m,months:u,weeks:0,days:T}}case"week":case"day":{let s,l,d;CompareISODate(e,t,r,o,n,a)<0?(l={year:e,month:t,day:r},s={year:o,month:n,day:a},d=1):(l={year:o,month:n,day:a},s={year:e,month:t,day:r},d=-1);let m=DayOfYear(s.year,s.month,s.day)-DayOfYear(l.year,l.month,l.day);for(let e=l.year;e<s.year;++e)m+=LeapYear(e)?366:365;let c=0;return "week"===i&&(c=ie(m/7),m%=7),c*=d,m*=d,{years:0,months:0,weeks:c,days:m}}default:throw new Error("assert not reached")}}function DifferenceTime(e,t,r,o,n,a,i,s,l,d,m,c){let h=i-e,u=s-t,T=l-r,p=d-o,f=m-n,y=c-a;const I=DurationSign(0,0,0,0,h,u,T,p,f,y);h*=I,u*=I,T*=I,p*=I,f*=I,y*=I;let S=0;if(({deltaDays:S,hour:h,minute:u,second:T,millisecond:p,microsecond:f,nanosecond:y}=BalanceTime(h,u,T,p,f,y)),0!=S)throw new Error("assertion failure in DifferenceTime: _bt_.[[Days]] should be 0");return h*=I,u*=I,T*=I,p*=I,f*=I,y*=I,{hours:h,minutes:u,seconds:T,milliseconds:p,microseconds:f,nanoseconds:y}}function DifferenceInstant(t,r,o,n,a,i){const s=JSBI.subtract(r,t);let l=0,d=0,m=JSBI.toNumber(JSBI.remainder(s,De)),c=JSBI.toNumber(JSBI.remainder(JSBI.divide(s,De),De)),h=JSBI.toNumber(JSBI.remainder(JSBI.divide(s,Ge),De)),u=JSBI.toNumber(JSBI.divide(s,ve));return ({hours:l,minutes:d,seconds:u,milliseconds:h,microseconds:c,nanoseconds:m}=RoundDuration(0,0,0,0,0,0,u,h,c,m,o,n,i)),BalanceDuration(0,l,d,u,h,c,m,a)}function DifferenceISODateTime(e,t,r,o,n,a,i,s,l,d,m,c,h,u,T,p,f,y,I,S,g){let w=e,D=t,G=r,{hours:v,minutes:C,seconds:O,milliseconds:b,microseconds:E,nanoseconds:M}=DifferenceTime(o,n,a,i,s,l,h,u,T,p,f,y);const R=DurationSign(0,0,0,0,v,C,O,b,E,M);CompareISODate(d,m,c,w,D,G)===-R&&(({year:w,month:D,day:G}=BalanceISODate(w,D,G-R)),({hours:v,minutes:C,seconds:O,milliseconds:b,microseconds:E,nanoseconds:M}=BalanceDuration(-R,v,C,O,b,E,M,S)));const F=CreateTemporalDate(w,D,G,I),Y=CreateTemporalDate(d,m,c,I),P=LargerOfTwoTemporalUnits("day",S),Z=CopyOptions(g);Z.largestUnit=P;let{years:B,months:N,weeks:j,days:$}=CalendarDateUntil(I,F,Y,Z);return ({days:$,hours:v,minutes:C,seconds:O,milliseconds:b,microseconds:E,nanoseconds:M}=BalanceDuration($,v,C,O,b,E,M,S)),{years:B,months:N,weeks:j,days:$,hours:v,minutes:C,seconds:O,milliseconds:b,microseconds:E,nanoseconds:M}}function DifferenceZonedDateTime(t,r,o,n,a,p){const f=JSBI.subtract(r,t);if(JSBI.equal(f,Ie))return {years:0,months:0,weeks:0,days:0,hours:0,minutes:0,seconds:0,milliseconds:0,microseconds:0,nanoseconds:0};const y=GetIntrinsic("%Temporal.Instant%"),I=new y(t),S=new y(r),g=GetPlainDateTimeFor(o,I,n),w=GetPlainDateTimeFor(o,S,n);let{years:D,months:G,weeks:v,days:C}=DifferenceISODateTime(GetSlot(g,i),GetSlot(g,s),GetSlot(g,l),GetSlot(g,d),GetSlot(g,m),GetSlot(g,c),GetSlot(g,h),GetSlot(g,u),GetSlot(g,T),GetSlot(w,i),GetSlot(w,s),GetSlot(w,l),GetSlot(w,d),GetSlot(w,m),GetSlot(w,c),GetSlot(w,h),GetSlot(w,u),GetSlot(w,T),n,a,p);const O=AddZonedDateTime(I,o,n,D,G,v,0,0,0,0,0,0,0);let b=JSBI.subtract(r,O);const E=CreateTemporalZonedDateTime(O,o,n);({nanoseconds:b,days:C}=NanosecondsToDays(b,E));const{hours:M,minutes:R,seconds:F,milliseconds:Y,microseconds:P,nanoseconds:Z}=BalanceDuration(0,0,0,0,0,0,JSBI.toNumber(b),"hour");return {years:D,months:G,weeks:v,days:C,hours:M,minutes:R,seconds:F,milliseconds:Y,microseconds:P,nanoseconds:Z}}function GetDifferenceSettings(e,t,r,o,n,a){const i=Ue.reduce(((e,t)=>{const n=t[0],a=t[1],i=t[2];return "datetime"!==r&&i!==r||o.includes(a)||e.push(a,n),e}),[]);let s=GetTemporalUnit(t,"largestUnit",r,"auto");if(o.includes(s))throw new RangeError(`largestUnit must be one of ${i.join(", ")}, not ${s}`);const l=ToTemporalRoundingIncrement(t);let d=ToTemporalRoundingMode(t,"trunc");"since"===e&&(d=function NegateTemporalRoundingMode(e){switch(e){case"ceil":return "floor";case"floor":return "ceil";case"halfCeil":return "halfFloor";case"halfFloor":return "halfCeil";default:return e}}(d));const m=GetTemporalUnit(t,"smallestUnit",r,n);if(o.includes(m))throw new RangeError(`smallestUnit must be one of ${i.join(", ")}, not ${m}`);const c=LargerOfTwoTemporalUnits(a,m);if("auto"===s&&(s=c),LargerOfTwoTemporalUnits(s,m)!==s)throw new RangeError(`largestUnit ${s} cannot be smaller than smallestUnit ${m}`);const h={hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[m];return void 0!==h&&ValidateTemporalRoundingIncrement(l,h,!1),{largestUnit:s,roundingIncrement:l,roundingMode:d,smallestUnit:m}}function DifferenceTemporalInstant(e,t,r,o){const a="since"===e?-1:1,i=ToTemporalInstant(r),s=GetDifferenceSettings(e,CopyOptions(o),"time",[],"nanosecond","second"),l=GetSlot(t,n),d=GetSlot(i,n);let{hours:m,minutes:c,seconds:h,milliseconds:u,microseconds:T,nanoseconds:p}=DifferenceInstant(l,d,s.roundingIncrement,s.smallestUnit,s.largestUnit,s.roundingMode);return new(GetIntrinsic("%Temporal.Duration%"))(0,0,0,0,a*m,a*c,a*h,a*u,a*T,a*p)}function DifferenceTemporalPlainDate(e,t,r,o){const n="since"===e?-1:1,a=ToTemporalDate(r),i=GetSlot(t,p);ThrowIfCalendarsNotEqual(i,GetSlot(a,p),"compute difference between dates");const s=CopyOptions(o),l=GetDifferenceSettings(e,s,"date",[],"day","day");s.largestUnit=l.largestUnit;let{years:d,months:m,weeks:c,days:h}=CalendarDateUntil(i,t,a,s);"day"===l.smallestUnit&&1===l.roundingIncrement||({years:d,months:m,weeks:c,days:h}=RoundDuration(d,m,c,h,0,0,0,0,0,0,l.roundingIncrement,l.smallestUnit,l.roundingMode,t));return new(GetIntrinsic("%Temporal.Duration%"))(n*d,n*m,n*c,n*h,0,0,0,0,0,0)}function DifferenceTemporalPlainDateTime(e,t,r,o){const n="since"===e?-1:1,a=ToTemporalDateTime(r),f=GetSlot(t,p);ThrowIfCalendarsNotEqual(f,GetSlot(a,p),"compute difference between dates");const y=CopyOptions(o),I=GetDifferenceSettings(e,y,"datetime",[],"nanosecond","day");let{years:S,months:g,weeks:w,days:D,hours:G,minutes:v,seconds:C,milliseconds:O,microseconds:b,nanoseconds:E}=DifferenceISODateTime(GetSlot(t,i),GetSlot(t,s),GetSlot(t,l),GetSlot(t,d),GetSlot(t,m),GetSlot(t,c),GetSlot(t,h),GetSlot(t,u),GetSlot(t,T),GetSlot(a,i),GetSlot(a,s),GetSlot(a,l),GetSlot(a,d),GetSlot(a,m),GetSlot(a,c),GetSlot(a,h),GetSlot(a,u),GetSlot(a,T),f,I.largestUnit,y);const M=TemporalDateTimeToDate(t);(({years:S,months:g,weeks:w,days:D,hours:G,minutes:v,seconds:C,milliseconds:O,microseconds:b,nanoseconds:E}=RoundDuration(S,g,w,D,G,v,C,O,b,E,I.roundingIncrement,I.smallestUnit,I.roundingMode,M))),({days:D,hours:G,minutes:v,seconds:C,milliseconds:O,microseconds:b,nanoseconds:E}=BalanceDuration(D,G,v,C,O,b,E,I.largestUnit));return new(GetIntrinsic("%Temporal.Duration%"))(n*S,n*g,n*w,n*D,n*G,n*v,n*C,n*O,n*b,n*E)}function DifferenceTemporalPlainTime(e,t,r,o){const n="since"===e?-1:1,a=ToTemporalTime(r),i=GetDifferenceSettings(e,CopyOptions(o),"time",[],"nanosecond","hour");let{hours:s,minutes:l,seconds:p,milliseconds:f,microseconds:y,nanoseconds:I}=DifferenceTime(GetSlot(t,d),GetSlot(t,m),GetSlot(t,c),GetSlot(t,h),GetSlot(t,u),GetSlot(t,T),GetSlot(a,d),GetSlot(a,m),GetSlot(a,c),GetSlot(a,h),GetSlot(a,u),GetSlot(a,T));(({hours:s,minutes:l,seconds:p,milliseconds:f,microseconds:y,nanoseconds:I}=RoundDuration(0,0,0,0,s,l,p,f,y,I,i.roundingIncrement,i.smallestUnit,i.roundingMode))),({hours:s,minutes:l,seconds:p,milliseconds:f,microseconds:y,nanoseconds:I}=BalanceDuration(0,s,l,p,f,y,I,i.largestUnit));return new(GetIntrinsic("%Temporal.Duration%"))(0,0,0,0,n*s,n*l,n*p,n*f,n*y,n*I)}function DifferenceTemporalPlainYearMonth(e,t,r,o){const n="since"===e?-1:1,a=ToTemporalYearMonth(r),i=GetSlot(t,p);ThrowIfCalendarsNotEqual(i,GetSlot(a,p),"compute difference between months");const s=CopyOptions(o),l=GetDifferenceSettings(e,s,"date",["week","day"],"month","year");s.largestUnit=l.largestUnit;const d=CalendarFields(i,["monthCode","year"]),m=PrepareTemporalFields(t,d,[]);m.day=1;const c=CalendarDateFromFields(i,m),h=PrepareTemporalFields(a,d,[]);h.day=1;const u=CalendarDateFromFields(i,h);let{years:T,months:f}=CalendarDateUntil(i,c,u,s);"month"===l.smallestUnit&&1===l.roundingIncrement||({years:T,months:f}=RoundDuration(T,f,0,0,0,0,0,0,0,0,l.roundingIncrement,l.smallestUnit,l.roundingMode,c));return new(GetIntrinsic("%Temporal.Duration%"))(n*T,n*f,0,0,0,0,0,0,0,0)}function DifferenceTemporalZonedDateTime(e,t,r,o){const a="since"===e?-1:1,i=ToTemporalZonedDateTime(r),s=GetSlot(t,p);ThrowIfCalendarsNotEqual(s,GetSlot(i,p),"compute difference between dates");const l=CopyOptions(o),d=GetDifferenceSettings(e,l,"datetime",[],"nanosecond","hour");l.largestUnit=d.largestUnit;const m=GetSlot(t,n),c=GetSlot(i,n);let h,u,T,f,y,I,S,w,D,G;if("year"!==d.largestUnit&&"month"!==d.largestUnit&&"week"!==d.largestUnit&&"day"!==d.largestUnit)h=0,u=0,T=0,f=0,({hours:y,minutes:I,seconds:S,milliseconds:w,microseconds:D,nanoseconds:G}=DifferenceInstant(m,c,d.roundingIncrement,d.smallestUnit,d.largestUnit,d.roundingMode));else {const e=GetSlot(t,g);if(!TimeZoneEquals(e,GetSlot(i,g)))throw new RangeError("When calculating difference between time zones, largestUnit must be 'hours' or smaller because day lengths can vary between time zones due to DST or time zone offset changes.");(({years:h,months:u,weeks:T,days:f,hours:y,minutes:I,seconds:S,milliseconds:w,microseconds:D,nanoseconds:G}=DifferenceZonedDateTime(m,c,e,s,d.largestUnit,l))),({years:h,months:u,weeks:T,days:f,hours:y,minutes:I,seconds:S,milliseconds:w,microseconds:D,nanoseconds:G}=RoundDuration(h,u,T,f,y,I,S,w,D,G,d.roundingIncrement,d.smallestUnit,d.roundingMode,t)),({years:h,months:u,weeks:T,days:f,hours:y,minutes:I,seconds:S,milliseconds:w,microseconds:D,nanoseconds:G}=AdjustRoundedDurationDays(h,u,T,f,y,I,S,w,D,G,d.roundingIncrement,d.smallestUnit,d.roundingMode,t));}return new(GetIntrinsic("%Temporal.Duration%"))(a*h,a*u,a*T,a*f,a*y,a*I,a*S,a*w,a*D,a*G)}function AddISODate(e,t,r,o,n,a,i,s){let l=e,d=t,m=r,c=a,h=i;return l+=o,d+=n,({year:l,month:d}=BalanceISOYearMonth(l,d)),({year:l,month:d,day:m}=RegulateISODate(l,d,m,s)),h+=7*c,m+=h,({year:l,month:d,day:m}=BalanceISODate(l,d,m)),{year:l,month:d,day:m}}function AddTime(e,t,r,o,n,a,i,s,l,d,m,c){let h=e,u=t,T=r,p=o,f=n,y=a;h+=i,u+=s,T+=l,p+=d,f+=m,y+=c;let I=0;return ({deltaDays:I,hour:h,minute:u,second:T,millisecond:p,microsecond:f,nanosecond:y}=BalanceTime(h,u,T,p,f,y)),{deltaDays:I,hour:h,minute:u,second:T,millisecond:p,microsecond:f,nanosecond:y}}function AddDuration(t,r,o,a,i,s,l,d,m,c,h,u,T,f,y,I,w,D,G,v,C){const O=LargerOfTwoTemporalUnits(DefaultTemporalLargestUnit(t,r,o,a,i,s,l,d,m,c),DefaultTemporalLargestUnit(h,u,T,f,y,I,w,D,G,v));let b,E,M,R,F,Y,P,Z,B,N;if(C)if(IsTemporalDate(C)){const n=GetIntrinsic("%Temporal.Duration%"),S=GetSlot(C,p),g=new n(t,r,o,a,0,0,0,0,0,0),j=new n(h,u,T,f,0,0,0,0,0,0),$="string"!=typeof S?GetMethod(S,"dateAdd"):void 0,k=CalendarDateAdd(S,C,g,void 0,$),U=CalendarDateAdd(S,k,j,void 0,$),A=LargerOfTwoTemporalUnits("day",O),L=Te(null);L.largestUnit=A,({years:b,months:E,weeks:M,days:R}=CalendarDateUntil(S,C,U,L)),({days:R,hours:F,minutes:Y,seconds:P,milliseconds:Z,microseconds:B,nanoseconds:N}=BalanceDuration(R,JSBI.add(JSBI.BigInt(i),JSBI.BigInt(y)),JSBI.add(JSBI.BigInt(s),JSBI.BigInt(I)),JSBI.add(JSBI.BigInt(l),JSBI.BigInt(w)),JSBI.add(JSBI.BigInt(d),JSBI.BigInt(D)),JSBI.add(JSBI.BigInt(m),JSBI.BigInt(G)),JSBI.add(JSBI.BigInt(c),JSBI.BigInt(v)),O));}else {const e=GetIntrinsic("%Temporal.Instant%"),j=GetSlot(C,g),$=GetSlot(C,p),k=AddZonedDateTime(GetSlot(C,S),j,$,t,r,o,a,i,s,l,d,m,c),U=AddZonedDateTime(new e(k),j,$,h,u,T,f,y,I,w,D,G,v);"year"!==O&&"month"!==O&&"week"!==O&&"day"!==O?(b=0,E=0,M=0,R=0,({hours:F,minutes:Y,seconds:P,milliseconds:Z,microseconds:B,nanoseconds:N}=DifferenceInstant(GetSlot(C,n),U,1,"nanosecond",O,"halfExpand"))):({years:b,months:E,weeks:M,days:R,hours:F,minutes:Y,seconds:P,milliseconds:Z,microseconds:B,nanoseconds:N}=DifferenceZonedDateTime(GetSlot(C,n),U,j,$,O,Te(null)));}else {if("year"===O||"month"===O||"week"===O)throw new RangeError("relativeTo is required for years, months, or weeks arithmetic");b=E=M=0,({days:R,hours:F,minutes:Y,seconds:P,milliseconds:Z,microseconds:B,nanoseconds:N}=BalanceDuration(a+f,JSBI.add(JSBI.BigInt(i),JSBI.BigInt(y)),JSBI.add(JSBI.BigInt(s),JSBI.BigInt(I)),JSBI.add(JSBI.BigInt(l),JSBI.BigInt(w)),JSBI.add(JSBI.BigInt(d),JSBI.BigInt(D)),JSBI.add(JSBI.BigInt(m),JSBI.BigInt(G)),JSBI.add(JSBI.BigInt(c),JSBI.BigInt(v)),O));}return RejectDuration(b,E,M,R,F,Y,P,Z,B,N),{years:b,months:E,weeks:M,days:R,hours:F,minutes:Y,seconds:P,milliseconds:Z,microseconds:B,nanoseconds:N}}function AddInstant(t,r,o,n,a,i,s){let l=Ie;l=JSBI.add(l,JSBI.BigInt(s)),l=JSBI.add(l,JSBI.multiply(JSBI.BigInt(i),De)),l=JSBI.add(l,JSBI.multiply(JSBI.BigInt(a),Ge)),l=JSBI.add(l,JSBI.multiply(JSBI.BigInt(n),ve)),l=JSBI.add(l,JSBI.multiply(JSBI.BigInt(o),JSBI.BigInt(6e10))),l=JSBI.add(l,JSBI.multiply(JSBI.BigInt(r),JSBI.BigInt(36e11)));const d=JSBI.add(t,l);return ValidateEpochNanoseconds(d),d}function AddDateTime(e,t,r,o,n,a,d,m,c,h,u,T,p,f,y,I,S,g,w,D,G){let v=f,{deltaDays:C,hour:O,minute:b,second:E,millisecond:M,microsecond:R,nanosecond:F}=AddTime(o,n,a,d,m,c,y,I,S,g,w,D);v+=C;const Y=GetIntrinsic("%Temporal.Duration%"),P=CalendarDateAdd(h,CreateTemporalDate(e,t,r,h),new Y(u,T,p,v,0,0,0,0,0,0),G);return {year:GetSlot(P,i),month:GetSlot(P,s),day:GetSlot(P,l),hour:O,minute:b,second:E,millisecond:M,microsecond:R,nanosecond:F}}function AddZonedDateTime(e,t,r,o,a,p,f,y,I,S,g,w,D,G){const v=GetIntrinsic("%Temporal.Duration%");if(0===DurationSign(o,a,p,f,0,0,0,0,0,0))return AddInstant(GetSlot(e,n),y,I,S,g,w,D);const C=GetPlainDateTimeFor(t,e,r),O=CalendarDateAdd(r,CreateTemporalDate(GetSlot(C,i),GetSlot(C,s),GetSlot(C,l),r),new v(o,a,p,f,0,0,0,0,0,0),G),b=CreateTemporalDateTime(GetSlot(O,i),GetSlot(O,s),GetSlot(O,l),GetSlot(C,d),GetSlot(C,m),GetSlot(C,c),GetSlot(C,h),GetSlot(C,u),GetSlot(C,T),r);return AddInstant(GetSlot(GetInstantFor(t,b,"compatible"),n),y,I,S,g,w,D)}function AddDurationToOrSubtractDurationFromDuration(e,t,r,o){const n="subtract"===e?-1:1;let{years:a,months:i,weeks:s,days:l,hours:d,minutes:m,seconds:c,milliseconds:h,microseconds:u,nanoseconds:T}=ToTemporalDurationRecord(r);const p=ToRelativeTemporalObject(GetOptionsObject(o));({years:a,months:i,weeks:s,days:l,hours:d,minutes:m,seconds:c,milliseconds:h,microseconds:u,nanoseconds:T}=AddDuration(GetSlot(t,w),GetSlot(t,D),GetSlot(t,G),GetSlot(t,v),GetSlot(t,C),GetSlot(t,O),GetSlot(t,b),GetSlot(t,E),GetSlot(t,M),GetSlot(t,R),n*a,n*i,n*s,n*l,n*d,n*m,n*c,n*h,n*u,n*T,p));return new(GetIntrinsic("%Temporal.Duration%"))(a,i,s,l,d,m,c,h,u,T)}function AddDurationToOrSubtractDurationFromInstant(e,t,r){const o="subtract"===e?-1:1,{hours:a,minutes:i,seconds:s,milliseconds:l,microseconds:d,nanoseconds:m}=function ToLimitedTemporalDuration(e,t){let r=ToTemporalDurationRecord(e);for(const e of t)if(0!==r[e])throw new RangeError(`Duration field ${e} not supported by Temporal.Instant. Try Temporal.ZonedDateTime instead.`);return r}(r,["years","months","weeks","days"]),c=AddInstant(GetSlot(t,n),o*a,o*i,o*s,o*l,o*d,o*m);return new(GetIntrinsic("%Temporal.Instant%"))(c)}function AddDurationToOrSubtractDurationFromPlainDateTime(e,t,r,o){const n="subtract"===e?-1:1,{years:a,months:f,weeks:y,days:I,hours:S,minutes:g,seconds:w,milliseconds:D,microseconds:G,nanoseconds:v}=ToTemporalDurationRecord(r),C=GetOptionsObject(o),O=GetSlot(t,p),{year:b,month:E,day:M,hour:R,minute:F,second:Y,millisecond:P,microsecond:Z,nanosecond:B}=AddDateTime(GetSlot(t,i),GetSlot(t,s),GetSlot(t,l),GetSlot(t,d),GetSlot(t,m),GetSlot(t,c),GetSlot(t,h),GetSlot(t,u),GetSlot(t,T),O,n*a,n*f,n*y,n*I,n*S,n*g,n*w,n*D,n*G,n*v,C);return CreateTemporalDateTime(b,E,M,R,F,Y,P,Z,B,O)}function AddDurationToOrSubtractDurationFromPlainTime(e,t,r){const o="subtract"===e?-1:1,{hours:n,minutes:a,seconds:i,milliseconds:s,microseconds:l,nanoseconds:p}=ToTemporalDurationRecord(r);let{hour:f,minute:y,second:I,millisecond:S,microsecond:g,nanosecond:w}=AddTime(GetSlot(t,d),GetSlot(t,m),GetSlot(t,c),GetSlot(t,h),GetSlot(t,u),GetSlot(t,T),o*n,o*a,o*i,o*s,o*l,o*p);({hour:f,minute:y,second:I,millisecond:S,microsecond:g,nanosecond:w}=RegulateTime(f,y,I,S,g,w,"reject"));return new(GetIntrinsic("%Temporal.PlainTime%"))(f,y,I,S,g,w)}function AddDurationToOrSubtractDurationFromPlainYearMonth(e,t,r,o){let n=ToTemporalDurationRecord(r);"subtract"===e&&(n={years:-n.years,months:-n.months,weeks:-n.weeks,days:-n.days,hours:-n.hours,minutes:-n.minutes,seconds:-n.seconds,milliseconds:-n.milliseconds,microseconds:-n.microseconds,nanoseconds:-n.nanoseconds});let{years:a,months:i,weeks:s,days:l,hours:d,minutes:m,seconds:c,milliseconds:h,microseconds:u,nanoseconds:T}=n;({days:l}=BalanceDuration(l,d,m,c,h,u,T,"day"));const f=GetOptionsObject(o),y=GetSlot(t,p),I=CalendarFields(y,["monthCode","year"]),S=PrepareTemporalFields(t,I,[]),g=Te(null);CopyDataProperties(g,S,[]),S.day=1;let w=CalendarDateFromFields(y,S);const D=DurationSign(a,i,s,l,0,0,0,0,0,0),G=GetMethod(y,"dateAdd"),v=GetIntrinsic("%Temporal.Duration%");if(D<0){const e=CalendarDateAdd(y,w,new v(0,1,0,0,0,0,0,0,0,0),void 0,G),t=CalendarDateAdd(y,e,new v(0,0,0,-1,0,0,0,0,0,0),void 0,G);g.day=CalendarDay(y,t),w=CalendarDateFromFields(y,g);}const C=new v(a,i,s,l,0,0,0,0,0,0),O=CopyOptions(f);return CalendarYearMonthFromFields(y,PrepareTemporalFields(CalendarDateAdd(y,w,C,f,G),I,[]),O)}function AddDurationToOrSubtractDurationFromZonedDateTime(e,t,r,o){const n="subtract"===e?-1:1,{years:a,months:i,weeks:s,days:l,hours:d,minutes:m,seconds:c,milliseconds:h,microseconds:u,nanoseconds:T}=ToTemporalDurationRecord(r),f=GetOptionsObject(o),y=GetSlot(t,g),I=GetSlot(t,p);return CreateTemporalZonedDateTime(AddZonedDateTime(GetSlot(t,S),y,I,n*a,n*i,n*s,n*l,n*d,n*m,n*c,n*h,n*u,n*T,f),y,I)}function RoundNumberToIncrement(t,r,o){if(JSBI.equal(r,Se))return t;let{quotient:n,remainder:a}=divmod(t,r);if(JSBI.equal(a,Ie))return t;const i=JSBI.lessThan(a,Ie)?-1:1,s=abs(JSBI.multiply(a,JSBI.BigInt(2))),l=JSBI.equal(s,r),d=JSBI.greaterThan(s,r);switch(o){case"ceil":i>0&&(n=JSBI.add(n,JSBI.BigInt(i)));break;case"floor":i<0&&(n=JSBI.add(n,JSBI.BigInt(i)));break;case"expand":n=JSBI.add(n,JSBI.BigInt(i));break;case"trunc":break;case"halfCeil":(d||l&&i>0)&&(n=JSBI.add(n,JSBI.BigInt(i)));break;case"halfFloor":(d||l&&i<0)&&(n=JSBI.add(n,JSBI.BigInt(i)));break;case"halfExpand":(d||l)&&(n=JSBI.add(n,JSBI.BigInt(i)));break;case"halfTrunc":d&&(n=JSBI.add(n,JSBI.BigInt(i)));break;case"halfEven":(d||l&&1===JSBI.toNumber(JSBI.remainder(abs(n),JSBI.BigInt(2))))&&(n=JSBI.add(n,JSBI.BigInt(i)));}return JSBI.multiply(n,r)}function RoundInstant(t,r,o,n){let{remainder:a}=NonNegativeBigIntDivmod(t,Ee);const i=JSBI.subtract(t,a),s=RoundNumberToIncrement(a,JSBI.BigInt(_e[o]*r),n);return JSBI.add(i,s)}function RoundISODateTime(e,t,r,o,n,a,i,s,l,d,m,c,h=864e11){const{deltaDays:u,hour:T,minute:p,second:f,millisecond:y,microsecond:I,nanosecond:S}=RoundTime(o,n,a,i,s,l,d,m,c,h),{year:g,month:w,day:D}=BalanceISODate(e,t,r+u);return {year:g,month:w,day:D,hour:T,minute:p,second:f,millisecond:y,microsecond:I,nanosecond:S}}function RoundTime(t,r,o,n,a,i,s,l,d,m=864e11){let c=Ie;switch(l){case"day":case"hour":c=JSBI.BigInt(t);case"minute":c=JSBI.add(JSBI.multiply(c,ge),JSBI.BigInt(r));case"second":c=JSBI.add(JSBI.multiply(c,ge),JSBI.BigInt(o));case"millisecond":c=JSBI.add(JSBI.multiply(c,De),JSBI.BigInt(n));case"microsecond":c=JSBI.add(JSBI.multiply(c,De),JSBI.BigInt(a));case"nanosecond":c=JSBI.add(JSBI.multiply(c,De),JSBI.BigInt(i));}const h="day"===l?m:_e[l],u=RoundNumberToIncrement(c,JSBI.BigInt(h*s),d),T=JSBI.toNumber(JSBI.divide(u,JSBI.BigInt(h)));switch(l){case"day":return {deltaDays:T,hour:0,minute:0,second:0,millisecond:0,microsecond:0,nanosecond:0};case"hour":return BalanceTime(T,0,0,0,0,0);case"minute":return BalanceTime(t,T,0,0,0,0);case"second":return BalanceTime(t,r,T,0,0,0);case"millisecond":return BalanceTime(t,r,o,T,0,0);case"microsecond":return BalanceTime(t,r,o,n,T,0);case"nanosecond":return BalanceTime(t,r,o,n,a,T);default:throw new Error(`Invalid unit ${l}`)}}function DaysUntil(e,t){return DifferenceISODate(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l),GetSlot(t,i),GetSlot(t,s),GetSlot(t,l),"day").days}function MoveRelativeDate(e,t,r,o){const n=CalendarDateAdd(e,t,r,void 0,o);return {relativeTo:n,days:DaysUntil(t,n)}}function MoveRelativeZonedDateTime(e,t,r,o,n){const a=GetSlot(e,g),i=GetSlot(e,p);return CreateTemporalZonedDateTime(AddZonedDateTime(GetSlot(e,S),a,i,t,r,o,n,0,0,0,0,0,0),a,i)}function AdjustRoundedDurationDays(t,r,o,n,a,i,s,l,d,m,c,h,u,T){let f=t,y=r,I=o,w=n,D=a,G=i,v=s,C=l,O=d,b=m;if(!IsTemporalZonedDateTime(T)||"year"===h||"month"===h||"week"===h||"day"===h||"nanosecond"===h&&1===c)return {years:f,months:y,weeks:I,days:w,hours:D,minutes:G,seconds:v,milliseconds:C,microseconds:O,nanoseconds:b};let E=TotalDurationNanoseconds(0,D,G,v,C,O,b,0);const M=se(JSBI.toNumber(E)),R=GetSlot(T,g),F=GetSlot(T,p),Y=AddZonedDateTime(GetSlot(T,S),R,F,f,y,I,w,0,0,0,0,0,0),P=AddZonedDateTime(new(GetIntrinsic("%Temporal.Instant%"))(Y),R,F,0,0,0,M,0,0,0,0,0,0),Z=JSBI.subtract(P,Y);return JSBI.greaterThanOrEqual(JSBI.multiply(JSBI.subtract(E,Z),JSBI.BigInt(M)),Ie)&&(({years:f,months:y,weeks:I,days:w}=AddDuration(f,y,I,w,0,0,0,0,0,0,0,0,0,M,0,0,0,0,0,0,T)),E=RoundInstant(JSBI.subtract(E,Z),c,h,u),({hours:D,minutes:G,seconds:v,milliseconds:C,microseconds:O,nanoseconds:b}=BalanceDuration(0,0,0,0,0,0,JSBI.toNumber(E),"hour"))),{years:f,months:y,weeks:I,days:w,hours:D,minutes:G,seconds:v,milliseconds:C,microseconds:O,nanoseconds:b}}function RoundDuration(t,r,o,n,a,i,s,l,d,m,c,h,u,T){let f=t,y=r,I=o,S=n,g=a,w=i,D=s,G=l,v=d,C=JSBI.BigInt(m);const O=GetIntrinsic("%Temporal.Duration%");let b,E,M,R,F=T;if(F){if(IsTemporalZonedDateTime(F))E=F,F=ToTemporalDate(F);else if(!IsTemporalDate(F))throw new TypeError("starting point must be PlainDate or ZonedDateTime");b=GetSlot(F,p);}if("year"===h||"month"===h||"week"===h||"day"===h){let t,r,o;C=TotalDurationNanoseconds(0,g,w,D,G,v,m,0),E&&(t=MoveRelativeZonedDateTime(E,f,y,I,S)),({days:r,nanoseconds:C,dayLengthNs:o}=NanosecondsToDays(C,t)),M=JSBI.BigInt(o),S+=r,g=w=D=G=v=0;}switch(h){case"year":{if(!b)throw new RangeError("A starting point is required for years rounding");const t=new O(f),r="string"!=typeof b?GetMethod(b,"dateAdd"):void 0,o=CalendarDateAdd(b,F,t,void 0,r),n=CalendarDateAdd(b,F,new O(f,y,I),void 0,r);F=o,S+=DaysUntil(o,n);const a=CalendarDateAdd(b,F,new O(0,0,0,S),void 0,r),i=Te(null);i.largestUnit="year";const s=CalendarDateUntil(b,F,a,i).years;f+=s;const l=F;F=CalendarDateAdd(b,F,new O(s),void 0,r);S-=DaysUntil(l,F);const d=new O(S<0?-1:1);let{days:m}=MoveRelativeDate(b,F,d,r);m=ae(m);const h=JSBI.multiply(JSBI.BigInt(m),M);C=JSBI.add(JSBI.add(JSBI.multiply(h,JSBI.BigInt(f)),JSBI.multiply(JSBI.BigInt(S),M)),C);const T=RoundNumberToIncrement(C,JSBI.multiply(h,JSBI.BigInt(c)),u);R=BigIntDivideToNumber(C,h),f=JSBI.toNumber(JSBI.divide(T,h)),C=Ie,y=I=S=0;break}case"month":{if(!b)throw new RangeError("A starting point is required for months rounding");const t=new O(f,y),r="string"!=typeof b?GetMethod(b,"dateAdd"):void 0,o=CalendarDateAdd(b,F,t,void 0,r),n=CalendarDateAdd(b,F,new O(f,y,I),void 0,r);F=o,S+=DaysUntil(o,n);const a=se(S),i=new O(0,S<0?-1:1);let s;for(({relativeTo:F,days:s}=MoveRelativeDate(b,F,i,r));ae(S)>=ae(s);)y+=a,S-=s,({relativeTo:F,days:s}=MoveRelativeDate(b,F,i,r));s=ae(s);const l=JSBI.multiply(JSBI.BigInt(s),M);C=JSBI.add(JSBI.add(JSBI.multiply(l,JSBI.BigInt(y)),JSBI.multiply(JSBI.BigInt(S),M)),C);const d=RoundNumberToIncrement(C,JSBI.multiply(l,JSBI.BigInt(c)),u);R=BigIntDivideToNumber(C,l),y=JSBI.toNumber(JSBI.divide(d,l)),C=Ie,I=S=0;break}case"week":{if(!b)throw new RangeError("A starting point is required for weeks rounding");const t=se(S),r=new O(0,0,S<0?-1:1),o="string"!=typeof b?GetMethod(b,"dateAdd"):void 0;let n;for(({relativeTo:F,days:n}=MoveRelativeDate(b,F,r,o));ae(S)>=ae(n);)I+=t,S-=n,({relativeTo:F,days:n}=MoveRelativeDate(b,F,r,o));n=ae(n);const a=JSBI.multiply(JSBI.BigInt(n),M);C=JSBI.add(JSBI.add(JSBI.multiply(a,JSBI.BigInt(I)),JSBI.multiply(JSBI.BigInt(S),M)),C);const i=RoundNumberToIncrement(C,JSBI.multiply(a,JSBI.BigInt(c)),u);R=BigIntDivideToNumber(C,a),I=JSBI.toNumber(JSBI.divide(i,a)),C=Ie,S=0;break}case"day":{const t=M;C=JSBI.add(JSBI.multiply(t,JSBI.BigInt(S)),C);const r=RoundNumberToIncrement(C,JSBI.multiply(t,JSBI.BigInt(c)),u);R=BigIntDivideToNumber(C,t),S=JSBI.toNumber(JSBI.divide(r,t)),C=Ie;break}case"hour":{const t=36e11;let r=JSBI.multiply(JSBI.BigInt(g),JSBI.BigInt(36e11));r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(w),JSBI.BigInt(6e10))),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(D),ve)),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(G),Ge)),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(v),De)),r=JSBI.add(r,C),R=BigIntDivideToNumber(r,JSBI.BigInt(t));const o=RoundNumberToIncrement(r,JSBI.BigInt(t*c),u);g=JSBI.toNumber(JSBI.divide(o,JSBI.BigInt(t))),C=Ie,w=D=G=v=0;break}case"minute":{const t=6e10;let r=JSBI.multiply(JSBI.BigInt(w),JSBI.BigInt(6e10));r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(D),ve)),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(G),Ge)),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(v),De)),r=JSBI.add(r,C),R=BigIntDivideToNumber(r,JSBI.BigInt(t));const o=RoundNumberToIncrement(r,JSBI.BigInt(t*c),u);w=JSBI.toNumber(JSBI.divide(o,JSBI.BigInt(t))),C=Ie,D=G=v=0;break}case"second":{const t=1e9;let r=JSBI.multiply(JSBI.BigInt(D),ve);r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(G),Ge)),r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(v),De)),r=JSBI.add(r,C),R=BigIntDivideToNumber(r,JSBI.BigInt(t));const o=RoundNumberToIncrement(r,JSBI.BigInt(t*c),u);D=JSBI.toNumber(JSBI.divide(o,JSBI.BigInt(t))),C=Ie,G=v=0;break}case"millisecond":{const t=1e6;let r=JSBI.multiply(JSBI.BigInt(G),Ge);r=JSBI.add(r,JSBI.multiply(JSBI.BigInt(v),De)),r=JSBI.add(r,C),R=BigIntDivideToNumber(r,JSBI.BigInt(t));const o=RoundNumberToIncrement(r,JSBI.BigInt(t*c),u);G=JSBI.toNumber(JSBI.divide(o,JSBI.BigInt(t))),C=Ie,v=0;break}case"microsecond":{const t=1e3;let r=JSBI.multiply(JSBI.BigInt(v),De);r=JSBI.add(r,C),R=BigIntDivideToNumber(r,JSBI.BigInt(t));const o=RoundNumberToIncrement(r,JSBI.BigInt(t*c),u);v=JSBI.toNumber(JSBI.divide(o,JSBI.BigInt(t))),C=Ie;break}case"nanosecond":R=JSBI.toNumber(C),C=RoundNumberToIncrement(JSBI.BigInt(C),JSBI.BigInt(c),u);}return {years:f,months:y,weeks:I,days:S,hours:g,minutes:w,seconds:D,milliseconds:G,microseconds:v,nanoseconds:JSBI.toNumber(C),total:R}}function CompareISODate(e,t,r,o,n,a){for(const[i,s]of [[e,o],[t,n],[r,a]])if(i!==s)return ComparisonResult(i-s);return 0}function NonNegativeBigIntDivmod(t,r){let{quotient:o,remainder:n}=divmod(t,r);return JSBI.lessThan(n,Ie)&&(o=JSBI.subtract(o,Se),n=JSBI.add(n,r)),{quotient:o,remainder:n}}function BigIntFloorDiv(t,r){const{quotient:o,remainder:n}=divmod(t,r);return isZero(n)||!isNegativeJSBI(t)==!isNegativeJSBI(r)?o:JSBI.subtract(o,Se)}function BigIntDivideToNumber(t,r){const{quotient:o,remainder:n}=divmod(t,r);return JSBI.toNumber(o)+JSBI.toNumber(n)/JSBI.toNumber(r)}function ToBigIntExternal(e){const t=ToBigInt(e);return void 0!==globalThis.BigInt?globalThis.BigInt(t.toString(10)):t}function ToBigInt(t){let r=t;if("object"==typeof t){const e=t[Symbol.toPrimitive];e&&"function"==typeof e&&(r=fe(e,t,["number"]));}if("number"==typeof r)throw new TypeError("cannot convert number to bigint");return "bigint"==typeof r?JSBI.BigInt(r.toString(10)):JSBI.BigInt(r)}const Ve=(()=>{let t=JSBI.BigInt(Date.now()%1e6);return ()=>{const r=JSBI.BigInt(Date.now()),o=JSBI.add(JSBI.multiply(r,Ge),t);return t=JSBI.remainder(r,Ge),JSBI.greaterThan(o,Re)?Re:JSBI.lessThan(o,Me)?Me:o}})();function DefaultTimeZone(){return (new re).resolvedOptions().timeZone}function ComparisonResult(e){return e<0?-1:e>0?1:e}function GetOptionsObject(e){if(void 0===e)return Te(null);if(IsObject(e)&&null!==e)return e;throw new TypeError("Options parameter must be an object, not "+(null===e?"null":""+typeof e))}function CreateOnePropObject(e,t){const r=Te(null);return r[e]=t,r}function CopyOptions(e){const t=Te(null);return CopyDataProperties(t,GetOptionsObject(e),[]),t}function GetOption(e,t,r,o){let n=e[t];if(void 0!==n){if(n=ToString(n),!r.includes(n))throw new RangeError(`${t} must be one of ${r.join(", ")}, not ${n}`);return n}return o}function IsBuiltinCalendar(e){return je.includes(ASCIILowercase(e))}function ASCIILowercase(e){return e.replace(/[A-Z]/g,(e=>{const t=e.charCodeAt(0);return String.fromCharCode(t+32)}))}const ze=new RegExp(`^${W.source}$`);function bisect(t,r,o,n=t(r),a=t(o)){let i=JSBI.BigInt(r),s=JSBI.BigInt(o),l=n,d=a;for(;JSBI.greaterThan(JSBI.subtract(s,i),Se);){const r=JSBI.divide(JSBI.add(i,s),JSBI.BigInt(2)),o=t(r);if(o===l)i=r,l=o;else {if(o!==d)throw new Error(`invalid state in bisection ${l} - ${o} - ${d}`);s=r,d=o;}}return s}const _e={hour:36e11,minute:6e10,second:1e9,millisecond:1e6,microsecond:1e3,nanosecond:1},Je=Symbol("date"),Ke=Symbol("ym"),Xe=Symbol("md"),Qe=Symbol("time"),et=Symbol("datetime"),tt=Symbol("instant"),rt=Symbol("original"),ot=Symbol("timezone"),nt=Symbol("calendar-id"),at=Symbol("locale"),it=Symbol("options"),descriptor=e=>({value:e,enumerable:!0,writable:!1,configurable:!0}),st=globalThis.Intl.DateTimeFormat,lt=Object.assign,dt=Object.prototype.hasOwnProperty,mt=Reflect.apply;function getPropLazy(e,t){let r=e[t];return "function"==typeof r&&(r=new st(e[at],r(e[it])),e[t]=r),r}function DateTimeFormatImpl(e,t={}){if(!(this instanceof DateTimeFormatImpl))return new DateTimeFormatImpl(e,t);const r=void 0!==t,o=r?lt({},t):{},n=new st(e,o),a=n.resolvedOptions();if(r){const e=lt({},a);for(const t in e)mt(dt,o,[t])||delete e[t];this[it]=e;}else this[it]=o;this[at]=a.locale,this[rt]=n,this[ot]=a.timeZone,this[nt]=a.calendar,this[Je]=dateAmend,this[Ke]=yearMonthAmend,this[Xe]=monthDayAmend,this[Qe]=timeAmend,this[et]=datetimeAmend,this[tt]=instantAmend;}Object.defineProperty(DateTimeFormatImpl,"name",{writable:!0,value:"DateTimeFormat"}),DateTimeFormatImpl.supportedLocalesOf=function(e,t){return st.supportedLocalesOf(e,t)};const ct={resolvedOptions:descriptor((function resolvedOptions(){return this[rt].resolvedOptions()})),format:descriptor((function format(e,...t){let{instant:r,formatter:o}=extractOverrides(e,this);if(r&&o)return o.format(r.epochMilliseconds);return this[rt].format(e,...t)})),formatRange:descriptor((function formatRange(e,t){if(isTemporalObject(e)||isTemporalObject(t)){if(!sameTemporalType(e,t))throw new TypeError("Intl.DateTimeFormat.formatRange accepts two values of the same type");const{instant:r,formatter:o}=extractOverrides(e,this),{instant:n,formatter:a}=extractOverrides(t,this);if(r&&n&&o&&a&&o===a)return o.formatRange(r.epochMilliseconds,n.epochMilliseconds)}return this[rt].formatRange(e,t)}))};"formatToParts"in st.prototype&&(ct.formatToParts=descriptor((function formatToParts(e,...t){let{instant:r,formatter:o}=extractOverrides(e,this);if(r&&o)return o.formatToParts(r.epochMilliseconds);return this[rt].formatToParts(e,...t)}))),"formatRangeToParts"in st.prototype&&(ct.formatRangeToParts=descriptor((function formatRangeToParts(e,t){if(isTemporalObject(e)||isTemporalObject(t)){if(!sameTemporalType(e,t))throw new TypeError("Intl.DateTimeFormat.formatRangeToParts accepts two values of the same type");const{instant:r,formatter:o}=extractOverrides(e,this),{instant:n,formatter:a}=extractOverrides(t,this);if(r&&n&&o&&a&&o===a)return o.formatRangeToParts(r.epochMilliseconds,n.epochMilliseconds)}return this[rt].formatRangeToParts(e,t)}))),DateTimeFormatImpl.prototype=Object.create(st.prototype,ct),Object.defineProperty(DateTimeFormatImpl,"prototype",{writable:!1,enumerable:!1,configurable:!1});const ht=DateTimeFormatImpl;function amend(e={},t={}){const r=lt({},e);for(const e of ["year","month","day","hour","minute","second","weekday","dayPeriod","timeZoneName","dateStyle","timeStyle"])r[e]=e in t?t[e]:r[e],!1!==r[e]&&void 0!==r[e]||delete r[e];return r}function timeAmend(e){let t=amend(e,{year:!1,month:!1,day:!1,weekday:!1,timeZoneName:!1,dateStyle:!1});return hasTimeOptions(t)||(t=lt({},t,{hour:"numeric",minute:"numeric",second:"numeric"})),t}function yearMonthAmend(e){let t=amend(e,{day:!1,hour:!1,minute:!1,second:!1,weekday:!1,dayPeriod:!1,timeZoneName:!1,dateStyle:!1,timeStyle:!1});return "year"in t||"month"in t||(t=lt(t,{year:"numeric",month:"numeric"})),t}function monthDayAmend(e){let t=amend(e,{year:!1,hour:!1,minute:!1,second:!1,weekday:!1,dayPeriod:!1,timeZoneName:!1,dateStyle:!1,timeStyle:!1});return "month"in t||"day"in t||(t=lt({},t,{month:"numeric",day:"numeric"})),t}function dateAmend(e){let t=amend(e,{hour:!1,minute:!1,second:!1,dayPeriod:!1,timeZoneName:!1,timeStyle:!1});return hasDateOptions(t)||(t=lt({},t,{year:"numeric",month:"numeric",day:"numeric"})),t}function datetimeAmend(e){let t=amend(e,{timeZoneName:!1});return hasTimeOptions(t)||hasDateOptions(t)||(t=lt({},t,{year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"})),t}function instantAmend(e){let t=e;return hasTimeOptions(t)||hasDateOptions(t)||(t=lt({},t,{year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"})),t}function hasDateOptions(e){return "year"in e||"month"in e||"day"in e||"weekday"in e||"dateStyle"in e}function hasTimeOptions(e){return "hour"in e||"minute"in e||"second"in e||"timeStyle"in e||"dayPeriod"in e}function isTemporalObject(e){return IsTemporalDate(e)||IsTemporalTime(e)||IsTemporalDateTime(e)||IsTemporalZonedDateTime(e)||IsTemporalYearMonth(e)||IsTemporalMonthDay(e)||IsTemporalInstant(e)}function sameTemporalType(e,t){return !(!isTemporalObject(e)||!isTemporalObject(t))&&(!(IsTemporalTime(e)&&!IsTemporalTime(t))&&(!(IsTemporalDate(e)&&!IsTemporalDate(t))&&(!(IsTemporalDateTime(e)&&!IsTemporalDateTime(t))&&(!(IsTemporalZonedDateTime(e)&&!IsTemporalZonedDateTime(t))&&(!(IsTemporalYearMonth(e)&&!IsTemporalYearMonth(t))&&(!(IsTemporalMonthDay(e)&&!IsTemporalMonthDay(t))&&!(IsTemporalInstant(e)&&!IsTemporalInstant(t))))))))}function extractOverrides(e,t){const r=GetIntrinsic("%Temporal.PlainDateTime%");if(IsTemporalTime(e)){const o=new r(1970,1,1,GetSlot(e,d),GetSlot(e,m),GetSlot(e,c),GetSlot(e,h),GetSlot(e,u),GetSlot(e,T),t[nt]);return {instant:GetInstantFor(t[ot],o,"compatible"),formatter:getPropLazy(t,Qe)}}if(IsTemporalYearMonth(e)){const o=GetSlot(e,i),n=GetSlot(e,s),a=GetSlot(e,l),d=ToTemporalCalendarIdentifier(GetSlot(e,p));if(d!==t[nt])throw new RangeError(`cannot format PlainYearMonth with calendar ${d} in locale with calendar ${t[nt]}`);const m=new r(o,n,a,12,0,0,0,0,0,d);return {instant:GetInstantFor(t[ot],m,"compatible"),formatter:getPropLazy(t,Ke)}}if(IsTemporalMonthDay(e)){const o=GetSlot(e,i),n=GetSlot(e,s),a=GetSlot(e,l),d=ToTemporalCalendarIdentifier(GetSlot(e,p));if(d!==t[nt])throw new RangeError(`cannot format PlainMonthDay with calendar ${d} in locale with calendar ${t[nt]}`);const m=new r(o,n,a,12,0,0,0,0,0,d);return {instant:GetInstantFor(t[ot],m,"compatible"),formatter:getPropLazy(t,Xe)}}if(IsTemporalDate(e)){const o=GetSlot(e,i),n=GetSlot(e,s),a=GetSlot(e,l),d=ToTemporalCalendarIdentifier(GetSlot(e,p));if("iso8601"!==d&&d!==t[nt])throw new RangeError(`cannot format PlainDate with calendar ${d} in locale with calendar ${t[nt]}`);const m=new r(o,n,a,12,0,0,0,0,0,t[nt]);return {instant:GetInstantFor(t[ot],m,"compatible"),formatter:getPropLazy(t,Je)}}if(IsTemporalDateTime(e)){const o=GetSlot(e,i),n=GetSlot(e,s),a=GetSlot(e,l),f=GetSlot(e,d),y=GetSlot(e,m),I=GetSlot(e,c),S=GetSlot(e,h),g=GetSlot(e,u),w=GetSlot(e,T),D=ToTemporalCalendarIdentifier(GetSlot(e,p));if("iso8601"!==D&&D!==t[nt])throw new RangeError(`cannot format PlainDateTime with calendar ${D} in locale with calendar ${t[nt]}`);let G=e;return "iso8601"===D&&(G=new r(o,n,a,f,y,I,S,g,w,t[nt])),{instant:GetInstantFor(t[ot],G,"compatible"),formatter:getPropLazy(t,et)}}if(IsTemporalZonedDateTime(e))throw new TypeError("Temporal.ZonedDateTime not supported in DateTimeFormat methods. Use toLocaleString() instead.");return IsTemporalInstant(e)?{instant:e,formatter:getPropLazy(t,tt)}:{}}class Instant{constructor(e){if(arguments.length<1)throw new TypeError("missing argument: epochNanoseconds is required");const t=ToBigInt(e);ValidateEpochNanoseconds(t),N(this),SetSlot(this,n,t);}get epochSeconds(){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");const t=GetSlot(this,n);return JSBI.toNumber(BigIntFloorDiv(t,ve))}get epochMilliseconds(){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");const t=JSBI.BigInt(GetSlot(this,n));return JSBI.toNumber(BigIntFloorDiv(t,Ge))}get epochMicroseconds(){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return ToBigIntExternal(BigIntFloorDiv(JSBI.BigInt(GetSlot(this,n)),De))}get epochNanoseconds(){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return ToBigIntExternal(JSBI.BigInt(GetSlot(this,n)))}add(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromInstant("add",this,e)}subtract(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromInstant("subtract",this,e)}until(e,t){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return DifferenceTemporalInstant("until",this,e,t)}since(e,t){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return DifferenceTemporalInstant("since",this,e,t)}round(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");if(void 0===e)throw new TypeError("options parameter is required");const t="string"==typeof e?CreateOnePropObject("smallestUnit",e):GetOptionsObject(e),r=ToTemporalRoundingIncrement(t),o=ToTemporalRoundingMode(t,"halfExpand"),a=GetTemporalUnit(t,"smallestUnit","time",He);ValidateTemporalRoundingIncrement(r,{hour:24,minute:1440,second:86400,millisecond:864e5,microsecond:864e8,nanosecond:864e11}[a],!0);const i=RoundInstant(GetSlot(this,n),r,a,o);return new Instant(i)}equals(t){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");const r=ToTemporalInstant(t),o=GetSlot(this,n),a=GetSlot(r,n);return JSBI.equal(JSBI.BigInt(o),JSBI.BigInt(a))}toString(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");const t=GetOptionsObject(e),r=ToFractionalSecondDigits(t),o=ToTemporalRoundingMode(t,"trunc"),a=GetTemporalUnit(t,"smallestUnit","time",void 0);if("hour"===a)throw new RangeError('smallestUnit must be a time unit other than "hour"');let i=t.timeZone;void 0!==i&&(i=ToTemporalTimeZoneSlotValue(i));const{precision:s,unit:l,increment:d}=ToSecondsStringPrecisionRecord(a,r),m=RoundInstant(GetSlot(this,n),d,l,o);return TemporalInstantToString(new Instant(m),i,s)}toJSON(){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return TemporalInstantToString(this,void 0,"auto")}toLocaleString(e,t){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");return new ht(e,t).format(this)}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.Instant")}toZonedDateTime(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument in toZonedDateTime");const t=e.calendar;if(void 0===t)throw new TypeError("missing calendar property in toZonedDateTime");const r=ToTemporalCalendarSlotValue(t),o=e.timeZone;if(void 0===o)throw new TypeError("missing timeZone property in toZonedDateTime");const a=ToTemporalTimeZoneSlotValue(o);return CreateTemporalZonedDateTime(GetSlot(this,n),a,r)}toZonedDateTimeISO(e){if(!IsTemporalInstant(this))throw new TypeError("invalid receiver");const t=ToTemporalTimeZoneSlotValue(e);return CreateTemporalZonedDateTime(GetSlot(this,n),t,"iso8601")}static fromEpochSeconds(t){const r=ToNumber(t),o=JSBI.multiply(JSBI.BigInt(r),ve);return ValidateEpochNanoseconds(o),new Instant(o)}static fromEpochMilliseconds(t){const r=ToNumber(t),o=JSBI.multiply(JSBI.BigInt(r),Ge);return ValidateEpochNanoseconds(o),new Instant(o)}static fromEpochMicroseconds(t){const r=ToBigInt(t),o=JSBI.multiply(r,De);return ValidateEpochNanoseconds(o),new Instant(o)}static fromEpochNanoseconds(e){const t=ToBigInt(e);return ValidateEpochNanoseconds(t),new Instant(t)}static from(e){return IsTemporalInstant(e)?new Instant(GetSlot(e,n)):ToTemporalInstant(e)}static compare(t,r){const o=ToTemporalInstant(t),a=ToTemporalInstant(r),i=GetSlot(o,n),s=GetSlot(a,n);return JSBI.lessThan(i,s)?-1:JSBI.greaterThan(i,s)?1:0}}MakeIntrinsicClass(Instant,"Temporal.Instant");const Tt=Array.prototype.includes,pt=Array.prototype.push,ft=globalThis.Intl.DateTimeFormat,yt=Array.prototype.sort,It=Math.abs,St=Math.floor,gt=Object.create,wt=Object.entries,Dt=Set,Gt=Reflect.ownKeys,vt=Set.prototype.add,Ct=Set.prototype.values,Ot={};class Calendar{constructor(e){if(arguments.length<1)throw new RangeError("missing argument: id is required");const t=ToString(e);if(!IsBuiltinCalendar(t))throw new RangeError(`invalid calendar identifier ${t}`);N(this),SetSlot(this,F,ASCIILowercase(t));}get id(){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return GetSlot(this,F)}dateFromFields(e,t){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid fields");const r=GetOptionsObject(t),o=GetSlot(this,F);return Ot[o].dateFromFields(e,r,o)}yearMonthFromFields(e,t){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid fields");const r=GetOptionsObject(t),o=GetSlot(this,F);return Ot[o].yearMonthFromFields(e,r,o)}monthDayFromFields(e,t){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid fields");const r=GetOptionsObject(t),o=GetSlot(this,F);return Ot[o].monthDayFromFields(e,r,o)}fields(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=[],r=new Set(["year","month","monthCode","day","hour","minute","second","millisecond","microsecond","nanosecond"]);for(const o of e){if("string"!=typeof o)throw new TypeError("invalid fields");if(!r.has(o))throw new RangeError(`invalid field name ${o}`);r.delete(o),pt.call(t,o);}return Ot[GetSlot(this,F)].fields(t)}mergeFields(e,t){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const r=ToObject(e),o=gt(null);CopyDataProperties(o,r,[],[void 0]);const n=ToObject(t),a=gt(null);CopyDataProperties(a,n,[],[void 0]);const i=Gt(a),s=Ot[GetSlot(this,F)].fieldKeysToIgnore(i),l=gt(null),d=Gt(o);for(const e of d){let t;t=Call(Tt,s,[e])?a[e]:o[e],void 0!==t&&(l[e]=t);}return CopyDataProperties(l,a,[]),l}dateAdd(e,t,r){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const o=ToTemporalDate(e),n=ToTemporalDuration(t),a=ToTemporalOverflow(GetOptionsObject(r)),{days:i}=BalanceDuration(GetSlot(n,v),GetSlot(n,C),GetSlot(n,O),GetSlot(n,b),GetSlot(n,E),GetSlot(n,M),GetSlot(n,R),"day"),s=GetSlot(this,F);return Ot[s].dateAdd(o,GetSlot(n,w),GetSlot(n,D),GetSlot(n,G),i,a,s)}dateUntil(e,t,r){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const o=ToTemporalDate(e),n=ToTemporalDate(t);let a=GetTemporalUnit(GetOptionsObject(r),"largestUnit","date","auto");"auto"===a&&(a="day");const{years:i,months:s,weeks:l,days:d}=Ot[GetSlot(this,F)].dateUntil(o,n,a);return new(GetIntrinsic("%Temporal.Duration%"))(i,s,l,d,0,0,0,0,0,0)}year(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),Ot[GetSlot(this,F)].year(t)}month(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");if(IsTemporalMonthDay(t))throw new TypeError("use monthCode on PlainMonthDay instead");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),Ot[GetSlot(this,F)].month(t)}monthCode(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||IsTemporalMonthDay(t)||(t=ToTemporalDate(t)),Ot[GetSlot(this,F)].monthCode(t)}day(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalMonthDay(t)||(t=ToTemporalDate(t)),Ot[GetSlot(this,F)].day(t)}era(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),Ot[GetSlot(this,F)].era(t)}eraYear(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),Ot[GetSlot(this,F)].eraYear(t)}dayOfWeek(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);return Ot[GetSlot(this,F)].dayOfWeek(t)}dayOfYear(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);return Ot[GetSlot(this,F)].dayOfYear(t)}weekOfYear(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);return Ot[GetSlot(this,F)].weekOfYear(t)}yearOfWeek(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);return Ot[GetSlot(this,F)].yearOfWeek(t)}daysInWeek(e){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);return Ot[GetSlot(this,F)].daysInWeek(t)}daysInMonth(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),Ot[GetSlot(this,F)].daysInMonth(t)}daysInYear(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),Ot[GetSlot(this,F)].daysInYear(t)}monthsInYear(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),Ot[GetSlot(this,F)].monthsInYear(t)}inLeapYear(e){let t=e;if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return IsTemporalYearMonth(t)||(t=ToTemporalDate(t)),Ot[GetSlot(this,F)].inLeapYear(t)}toString(){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return GetSlot(this,F)}toJSON(){if(!IsTemporalCalendar(this))throw new TypeError("invalid receiver");return GetSlot(this,F)}static from(e){return ToTemporalCalendarObject(ToTemporalCalendarSlotValue(e))}}function monthCodeNumberPart(e){if(!e.startsWith("M"))throw new RangeError(`Invalid month code: ${e}.  Month codes must start with M.`);const t=+e.slice(1);if(isNaN(t))throw new RangeError(`Invalid month code: ${e}`);return t}function buildMonthCode(e,t=!1){return `M${e.toString().padStart(2,"0")}${t?"L":""}`}function resolveNonLunisolarMonth(e,t,r=12){let{month:o,monthCode:n}=e;if(void 0===n){if(void 0===o)throw new TypeError("Either month or monthCode are required");"reject"===t&&RejectToRange(o,1,r),"constrain"===t&&(o=ConstrainToRange(o,1,r)),n=buildMonthCode(o);}else {const e=monthCodeNumberPart(n);if(void 0!==o&&o!==e)throw new RangeError(`monthCode ${n} and month ${o} must match if both are present`);if(n!==buildMonthCode(e))throw new RangeError(`Invalid month code: ${n}`);if(o=e,o<1||o>r)throw new RangeError(`Invalid monthCode: ${n}`)}return {...e,month:o,monthCode:n}}MakeIntrinsicClass(Calendar,"Temporal.Calendar"),DefineIntrinsic("Temporal.Calendar.from",Calendar.from),DefineIntrinsic("Temporal.Calendar.prototype.dateAdd",Calendar.prototype.dateAdd),DefineIntrinsic("Temporal.Calendar.prototype.dateFromFields",Calendar.prototype.dateFromFields),DefineIntrinsic("Temporal.Calendar.prototype.dateUntil",Calendar.prototype.dateUntil),DefineIntrinsic("Temporal.Calendar.prototype.day",Calendar.prototype.day),DefineIntrinsic("Temporal.Calendar.prototype.dayOfWeek",Calendar.prototype.dayOfWeek),DefineIntrinsic("Temporal.Calendar.prototype.dayOfYear",Calendar.prototype.dayOfYear),DefineIntrinsic("Temporal.Calendar.prototype.daysInMonth",Calendar.prototype.daysInMonth),DefineIntrinsic("Temporal.Calendar.prototype.daysInWeek",Calendar.prototype.daysInWeek),DefineIntrinsic("Temporal.Calendar.prototype.daysInYear",Calendar.prototype.daysInYear),DefineIntrinsic("Temporal.Calendar.prototype.era",Calendar.prototype.era),DefineIntrinsic("Temporal.Calendar.prototype.eraYear",Calendar.prototype.eraYear),DefineIntrinsic("Temporal.Calendar.prototype.fields",Calendar.prototype.fields),DefineIntrinsic("Temporal.Calendar.prototype.inLeapYear",Calendar.prototype.inLeapYear),DefineIntrinsic("Temporal.Calendar.prototype.mergeFields",Calendar.prototype.mergeFields),DefineIntrinsic("Temporal.Calendar.prototype.month",Calendar.prototype.month),DefineIntrinsic("Temporal.Calendar.prototype.monthCode",Calendar.prototype.monthCode),DefineIntrinsic("Temporal.Calendar.prototype.monthDayFromFields",Calendar.prototype.monthDayFromFields),DefineIntrinsic("Temporal.Calendar.prototype.monthsInYear",Calendar.prototype.monthsInYear),DefineIntrinsic("Temporal.Calendar.prototype.weekOfYear",Calendar.prototype.weekOfYear),DefineIntrinsic("Temporal.Calendar.prototype.year",Calendar.prototype.year),DefineIntrinsic("Temporal.Calendar.prototype.yearMonthFromFields",Calendar.prototype.yearMonthFromFields),DefineIntrinsic("Temporal.Calendar.prototype.yearOfWeek",Calendar.prototype.yearOfWeek),Ot.iso8601={dateFromFields(e,t,r){let o=PrepareTemporalFields(e,["day","month","monthCode","year"],["year","day"]);const n=ToTemporalOverflow(t);o=resolveNonLunisolarMonth(o);let{year:a,month:i,day:s}=o;return ({year:a,month:i,day:s}=RegulateISODate(a,i,s,n)),CreateTemporalDate(a,i,s,r)},yearMonthFromFields(e,t,r){let o=PrepareTemporalFields(e,["month","monthCode","year"],["year"]);const n=ToTemporalOverflow(t);o=resolveNonLunisolarMonth(o);let{year:a,month:i}=o;return ({year:a,month:i}=function RegulateISOYearMonth(e,t,r){let o=e,n=t;switch(r){case"reject":RejectISODate(o,n,1);break;case"constrain":({year:o,month:n}=ConstrainISODate(o,n));}return {year:o,month:n}}(a,i,n)),CreateTemporalYearMonth(a,i,r,1)},monthDayFromFields(e,t,r){let o=PrepareTemporalFields(e,["day","month","monthCode","year"],["day"]);const n=ToTemporalOverflow(t);if(void 0!==o.month&&void 0===o.year&&void 0===o.monthCode)throw new TypeError("either year or monthCode required with month");const a=void 0===o.monthCode;o=resolveNonLunisolarMonth(o);let{month:i,day:s,year:l}=o;return ({month:i,day:s}=RegulateISODate(a?l:1972,i,s,n)),CreateTemporalMonthDay(i,s,r,1972)},fields:e=>e,fieldKeysToIgnore(e){const t=new Dt;for(let r=0;r<e.length;r++){const o=e[r];Call(vt,t,[o]),"month"===o?Call(vt,t,["monthCode"]):"monthCode"===o&&Call(vt,t,["month"]);}return [...Call(Ct,t,[])]},dateAdd(e,t,r,o,n,a,d){let m=GetSlot(e,i),c=GetSlot(e,s),h=GetSlot(e,l);return ({year:m,month:c,day:h}=AddISODate(m,c,h,t,r,o,n,a)),CreateTemporalDate(m,c,h,d)},dateUntil:(e,t,r)=>DifferenceISODate(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l),GetSlot(t,i),GetSlot(t,s),GetSlot(t,l),r),year:e=>GetSlot(e,i),era(){},eraYear(){},month:e=>GetSlot(e,s),monthCode:e=>buildMonthCode(GetSlot(e,s)),day:e=>GetSlot(e,l),dayOfWeek:e=>DayOfWeek(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l)),dayOfYear:e=>DayOfYear(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l)),weekOfYear:e=>WeekOfYear(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l)).week,yearOfWeek:e=>WeekOfYear(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l)).year,daysInWeek:()=>7,daysInMonth:e=>ISODaysInMonth(GetSlot(e,i),GetSlot(e,s)),daysInYear(e){let t=e;return HasSlot(t,i)||(t=ToTemporalDate(t)),LeapYear(GetSlot(t,i))?366:365},monthsInYear:()=>12,inLeapYear(e){let t=e;return HasSlot(t,i)||(t=ToTemporalDate(t)),LeapYear(GetSlot(t,i))}};class OneObjectCache{constructor(e){if(this.map=new Map,this.calls=0,this.hits=0,this.misses=0,this.now=globalThis.performance?globalThis.performance.now():Date.now(),void 0!==e){let t=0;for(const r of e.map.entries()){if(++t>OneObjectCache.MAX_CACHE_ENTRIES)break;this.map.set(...r);}}}get(e){const t=this.map.get(e);return t&&(this.hits++,this.report()),this.calls++,t}set(e,t){this.map.set(e,t),this.misses++,this.report();}report(){}setObject(e){if(OneObjectCache.objectMap.get(e))throw new RangeError("object already cached");OneObjectCache.objectMap.set(e,this),this.report();}static getCacheForObject(e){let t=OneObjectCache.objectMap.get(e);return t||(t=new OneObjectCache,OneObjectCache.objectMap.set(e,t)),t}}function toUtcIsoDateString({isoYear:e,isoMonth:t,isoDay:r}){return `${ISOYearString(e)}-${ISODateTimePartString(t)}-${ISODateTimePartString(r)}T00:00Z`}function simpleDateDiff(e,t){return {years:e.year-t.year,months:e.month-t.month,days:e.day-t.day}}OneObjectCache.objectMap=new WeakMap,OneObjectCache.MAX_CACHE_ENTRIES=1e3;class HelperBase{constructor(){this.eraLength="short",this.hasEra=!0,this.erasBeginMidYear=!1;}getFormatter(){return void 0===this.formatter&&(this.formatter=new ft(`en-US-u-ca-${this.id}`,{day:"numeric",month:"numeric",year:"numeric",era:this.eraLength,timeZone:"UTC"})),this.formatter}isoToCalendarDate(e,t){const{year:r,month:o,day:n}=e,a=JSON.stringify({func:"isoToCalendarDate",isoYear:r,isoMonth:o,isoDay:n,id:this.id}),i=t.get(a);if(i)return i;const s=this.getFormatter();let l,d;try{d=toUtcIsoDateString({isoYear:r,isoMonth:o,isoDay:n}),l=s.formatToParts(new Date(d));}catch(e){throw new RangeError(`Invalid ISO date: ${JSON.stringify({isoYear:r,isoMonth:o,isoDay:n})}`)}const m={};for(let{type:e,value:t}of l){if("year"===e&&(m.eraYear=+t),"relatedYear"===e&&(m.eraYear=+t),"month"===e){const e=/^([0-9]*)(.*?)$/.exec(t);if(!e||3!=e.length||!e[1]&&!e[2])throw new RangeError(`Unexpected month: ${t}`);if(m.month=e[1]?+e[1]:1,m.month<1)throw new RangeError(`Invalid month ${t} from ${d}[u-ca-${this.id}] (probably due to https://bugs.chromium.org/p/v8/issues/detail?id=10527)`);if(m.month>13)throw new RangeError(`Invalid month ${t} from ${d}[u-ca-${this.id}] (probably due to https://bugs.chromium.org/p/v8/issues/detail?id=10529)`);e[2]&&(m.monthExtra=e[2]);}"day"===e&&(m.day=+t),this.hasEra&&"era"===e&&null!=t&&""!==t&&(t=t.split(" (")[0],m.era=t.normalize("NFD").replace(/[^-0-9 \p{L}]/gu,"").replace(" ","-").toLowerCase());}if(void 0===m.eraYear)throw new RangeError(`Intl.DateTimeFormat.formatToParts lacks relatedYear in ${this.id} calendar. Try Node 14+ or modern browsers.`);if(this.reviseIntlEra){const{era:t,eraYear:r}=this.reviseIntlEra(m,e);m.era=t,m.eraYear=r;}this.checkIcuBugs&&this.checkIcuBugs(e);const c=this.adjustCalendarDate(m,t,"constrain",!0);if(void 0===c.year)throw new RangeError(`Missing year converting ${JSON.stringify(e)}`);if(void 0===c.month)throw new RangeError(`Missing month converting ${JSON.stringify(e)}`);if(void 0===c.day)throw new RangeError(`Missing day converting ${JSON.stringify(e)}`);return t.set(a,c),["constrain","reject"].forEach((r=>{const o=JSON.stringify({func:"calendarToIsoDate",year:c.year,month:c.month,day:c.day,overflow:r,id:this.id});t.set(o,e);})),c}validateCalendarDate(e){const{era:t,month:r,year:o,day:n,eraYear:a,monthCode:i,monthExtra:s}=e;if(void 0!==s)throw new RangeError("Unexpected `monthExtra` value");if(void 0===o&&void 0===a)throw new TypeError("year or eraYear is required");if(void 0===r&&void 0===i)throw new TypeError("month or monthCode is required");if(void 0===n)throw new RangeError("Missing day");if(void 0!==i){if("string"!=typeof i)throw new RangeError("monthCode must be a string, not "+typeof i);if(!/^M([01]?\d)(L?)$/.test(i))throw new RangeError(`Invalid monthCode: ${i}`)}if(this.constantEra){if(void 0!==t&&t!==this.constantEra)throw new RangeError(`era must be ${this.constantEra}, not ${t}`);if(void 0!==a&&void 0!==o&&a!==o)throw new RangeError(`eraYear ${a} does not match year ${o}`)}if(this.hasEra&&void 0===e.era!=(void 0===e.eraYear))throw new RangeError("properties 'era' and 'eraYear' must be provided together")}adjustCalendarDate(e,t,r="constrain",o=!1){if("lunisolar"===this.calendarType)throw new RangeError("Override required for lunisolar calendars");let n=e;if(this.validateCalendarDate(n),this.constantEra){const{year:e,eraYear:t}=n;n={...n,era:this.constantEra,year:void 0!==e?e:t,eraYear:void 0!==t?t:e};}const a=this.monthsInYear(n,t);let{month:i,monthCode:s}=n;return ({month:i,monthCode:s}=resolveNonLunisolarMonth(n,r,a)),{...n,month:i,monthCode:s}}regulateMonthDayNaive(e,t,r){const o=this.monthsInYear(e,r);let{month:n,day:a}=e;return "reject"===t?(RejectToRange(n,1,o),RejectToRange(a,1,this.maximumMonthLength(e))):(n=ConstrainToRange(n,1,o),a=ConstrainToRange(a,1,this.maximumMonthLength({...e,month:n}))),{...e,month:n,day:a}}calendarToIsoDate(e,t="constrain",r){const o=e;let n=this.adjustCalendarDate(e,r,t,!1);n=this.regulateMonthDayNaive(n,t,r);const{year:a,month:i,day:s}=n,l=JSON.stringify({func:"calendarToIsoDate",year:a,month:i,day:s,overflow:t,id:this.id});let d,m=r.get(l);if(m)return m;if(void 0!==o.year&&void 0!==o.month&&void 0!==o.day&&(o.year!==n.year||o.month!==n.month||o.day!==n.day)&&(d=JSON.stringify({func:"calendarToIsoDate",year:o.year,month:o.month,day:o.day,overflow:t,id:this.id}),m=r.get(d),m))return m;let c=this.estimateIsoDate({year:a,month:i,day:s});const calculateSameMonthResult=e=>{let o=this.addDaysIso(c,e);if(n.day>this.minimumMonthLength(n)){let e=this.isoToCalendarDate(o,r);for(;e.month!==i||e.year!==a;){if("reject"===t)throw new RangeError(`day ${s} does not exist in month ${i} of year ${a}`);o=this.addDaysIso(o,-1),e=this.isoToCalendarDate(o,r);}}return o};let h=0,u=this.isoToCalendarDate(c,r),T=simpleDateDiff(n,u);if(0!==T.years||0!==T.months||0!==T.days){const e=365*T.years+30*T.months+T.days;c=this.addDaysIso(c,e),u=this.isoToCalendarDate(c,r),T=simpleDateDiff(n,u),0===T.years&&0===T.months?c=calculateSameMonthResult(T.days):h=this.compareCalendarDates(n,u);}let p=8;for(;h;){c=this.addDaysIso(c,h*p);const e=u;u=this.isoToCalendarDate(c,r);const a=h;if(h=this.compareCalendarDates(n,u),h)if(T=simpleDateDiff(n,u),0===T.years&&0===T.months)c=calculateSameMonthResult(T.days),h=0;else if(a&&h!==a)if(p>1)p/=2;else {if("reject"===t)throw new RangeError(`Can't find ISO date from calendar date: ${JSON.stringify({...o})}`);this.compareCalendarDates(u,e)>0&&(c=this.addDaysIso(c,-1)),h=0;}}if(r.set(l,c),d&&r.set(d,c),void 0===n.year||void 0===n.month||void 0===n.day||void 0===n.monthCode||this.hasEra&&(void 0===n.era||void 0===n.eraYear))throw new RangeError("Unexpected missing property");return c}temporalToCalendarDate(e,t){const r={year:GetSlot(e,i),month:GetSlot(e,s),day:GetSlot(e,l)};return this.isoToCalendarDate(r,t)}compareCalendarDates(e,t){const r=PrepareTemporalFields(e,["day","month","year"],["day","month","year"]),o=PrepareTemporalFields(t,["day","month","year"],["day","month","year"]);return r.year!==o.year?ComparisonResult(r.year-o.year):r.month!==o.month?ComparisonResult(r.month-o.month):r.day!==o.day?ComparisonResult(r.day-o.day):0}regulateDate(e,t="constrain",r){const o=this.calendarToIsoDate(e,t,r);return this.isoToCalendarDate(o,r)}addDaysIso(e,t){return AddISODate(e.year,e.month,e.day,0,0,0,t,"constrain")}addDaysCalendar(e,t,r){const o=this.calendarToIsoDate(e,"constrain",r),n=this.addDaysIso(o,t);return this.isoToCalendarDate(n,r)}addMonthsCalendar(e,t,r,o){let n=e;const{day:a}=n;for(let e=0,r=It(t);e<r;e++){const{month:e}=n,r=n,i=t<0?-Math.max(a,this.daysInPreviousMonth(n,o)):this.daysInMonth(n,o),s=this.calendarToIsoDate(n,"constrain",o);let l=this.addDaysIso(s,i);if(n=this.isoToCalendarDate(l,o),t>0){const t=this.monthsInYear(r,o);for(;n.month-1!=e%t;)l=this.addDaysIso(l,-1),n=this.isoToCalendarDate(l,o);}n.day!==a&&(n=this.regulateDate({...n,day:a},"constrain",o));}if("reject"===r&&n.day!==a)throw new RangeError(`Day ${a} does not exist in resulting calendar month`);return n}addCalendar(e,{years:t=0,months:r=0,weeks:o=0,days:n=0},a,i){const{year:s,day:l,monthCode:d}=e,m=this.adjustCalendarDate({year:s+t,monthCode:d,day:l},i),c=this.addMonthsCalendar(m,r,a,i),h=n+7*o;return this.addDaysCalendar(c,h,i)}untilCalendar(e,t,r,o){let n=0,a=0,i=0,s=0;switch(r){case"day":n=this.calendarDaysUntil(e,t,o);break;case"week":{const r=this.calendarDaysUntil(e,t,o);n=r%7,a=(r-n)/7;break}case"month":case"year":{const a=this.compareCalendarDates(t,e);if(!a)return {years:0,months:0,weeks:0,days:0};const l=t.year-e.year,d=t.day-e.day;if("year"===r&&l){let r=0;t.monthCode>e.monthCode&&(r=1),t.monthCode<e.monthCode&&(r=-1),r||(r=Math.sign(d));s=r*a<0?l-a:l;}let m,c=s?this.addCalendar(e,{years:s},"constrain",o):e;do{i+=a,m=c,c=this.addMonthsCalendar(m,a,"constrain",o),c.day!==e.day&&(c=this.regulateDate({...c,day:e.day},"constrain",o));}while(this.compareCalendarDates(t,c)*a>=0);i-=a;n=this.calendarDaysUntil(m,t,o);break}}return {years:s,months:i,weeks:a,days:n}}daysInMonth(e,t){const{day:r}=e,o=this.maximumMonthLength(e),n=this.minimumMonthLength(e);if(n===o)return n;const a=r<=o-n?o:n,i=this.calendarToIsoDate(e,"constrain",t),s=this.addDaysIso(i,a),l=this.isoToCalendarDate(s,t),d=this.addDaysIso(s,-l.day);return this.isoToCalendarDate(d,t).day}daysInPreviousMonth(e,t){const{day:r,month:o,year:n}=e;let a={year:o>1?n:n-1,month:o,day:1};const i=o>1?o-1:this.monthsInYear(a,t);a={...a,month:i};const s=this.minimumMonthLength(a),l=this.maximumMonthLength(a);if(s===l)return l;const d=this.calendarToIsoDate(e,"constrain",t),m=this.addDaysIso(d,-r);return this.isoToCalendarDate(m,t).day}startOfCalendarYear(e){return {year:e.year,month:1,monthCode:"M01",day:1}}startOfCalendarMonth(e){return {year:e.year,month:e.month,day:1}}calendarDaysUntil(e,t,r){const o=this.calendarToIsoDate(e,"constrain",r),n=this.calendarToIsoDate(t,"constrain",r);return this.isoDaysUntil(o,n)}isoDaysUntil(e,t){return DifferenceISODate(e.year,e.month,e.day,t.year,t.month,t.day,"day").days}monthDayFromFields(e,t,r){let o,n,a,i,s,{monthCode:l,day:d}=e;if(void 0===l){let{year:o,era:n,eraYear:a}=e;if(void 0===o&&(void 0===n||void 0===a))throw new TypeError("when `monthCode` is omitted, `year` (or `era` and `eraYear`) and `month` are required");({monthCode:l,day:d}=this.isoToCalendarDate(this.calendarToIsoDate(e,t,r),r));}const m=this.isoToCalendarDate({year:1972,month:12,day:31},r),c=m.monthCode>l||m.monthCode===l&&m.day>=d?m.year:m.year-1;for(let e=0;e<100;e++){const m=this.adjustCalendarDate({day:d,monthCode:l,year:c-e},r),h=this.calendarToIsoDate(m,"constrain",r),u=this.isoToCalendarDate(h,r);if(({year:o,month:n,day:a}=h),u.monthCode===l&&u.day===d)return {month:n,day:a,year:o};"constrain"===t&&(void 0===i||u.monthCode===i.monthCode&&u.day>i.day)&&(i=u,s=h);}if("constrain"===t&&void 0!==s)return s;throw new RangeError(`No recent ${this.id} year with monthCode ${l} and day ${d}`)}}class HebrewHelper extends HelperBase{constructor(){super(...arguments),this.id="hebrew",this.calendarType="lunisolar",this.months={Tishri:{leap:1,regular:1,monthCode:"M01",days:30},Heshvan:{leap:2,regular:2,monthCode:"M02",days:{min:29,max:30}},Kislev:{leap:3,regular:3,monthCode:"M03",days:{min:29,max:30}},Tevet:{leap:4,regular:4,monthCode:"M04",days:29},Shevat:{leap:5,regular:5,monthCode:"M05",days:30},Adar:{leap:void 0,regular:6,monthCode:"M06",days:29},"Adar I":{leap:6,regular:void 0,monthCode:"M05L",days:30},"Adar II":{leap:7,regular:void 0,monthCode:"M06",days:29},Nisan:{leap:8,regular:7,monthCode:"M07",days:30},Iyar:{leap:9,regular:8,monthCode:"M08",days:29},Sivan:{leap:10,regular:9,monthCode:"M09",days:30},Tamuz:{leap:11,regular:10,monthCode:"M10",days:29},Av:{leap:12,regular:11,monthCode:"M11",days:30},Elul:{leap:13,regular:12,monthCode:"M12",days:29}},this.hasEra=!1;}inLeapYear(e){const{year:t}=e;return (7*t+1)%19<7}monthsInYear(e){return this.inLeapYear(e)?13:12}minimumMonthLength(e){return this.minMaxMonthLength(e,"min")}maximumMonthLength(e){return this.minMaxMonthLength(e,"max")}minMaxMonthLength(e,t){const{month:r,year:o}=e,n=this.getMonthCode(o,r),a=wt(this.months).find((e=>e[1].monthCode===n));if(void 0===a)throw new RangeError(`unmatched Hebrew month: ${r}`);const i=a[1].days;return "number"==typeof i?i:i[t]}estimateIsoDate(e){const{year:t}=e;return {year:t-3760,month:1,day:1}}getMonthCode(e,t){return this.inLeapYear({year:e})?6===t?buildMonthCode(5,!0):buildMonthCode(t<6?t:t-1):buildMonthCode(t)}adjustCalendarDate(e,t,r="constrain",o=!1){let{year:n,eraYear:a,month:i,monthCode:s,day:l,monthExtra:d}=e;if(void 0===n&&void 0!==a&&(n=a),void 0===a&&void 0!==n&&(a=n),o){if(d){const e=this.months[d];if(!e)throw new RangeError(`Unrecognized month from formatToParts: ${d}`);i=this.inLeapYear({year:n})?e.leap:e.regular;}s=this.getMonthCode(n,i);return {year:n,month:i,day:l,era:void 0,eraYear:a,monthCode:s}}if(this.validateCalendarDate(e),void 0===i)if(s.endsWith("L")){if("M05L"!==s)throw new RangeError(`Hebrew leap month must have monthCode M05L, not ${s}`);if(i=6,!this.inLeapYear({year:n})){if("reject"===r)throw new RangeError(`Hebrew monthCode M05L is invalid in year ${n} which is not a leap year`);i=6,s="M06";}}else {i=monthCodeNumberPart(s),this.inLeapYear({year:n})&&i>=6&&i++;const e=this.monthsInYear({year:n});if(i<1||i>e)throw new RangeError(`Invalid monthCode: ${s}`)}else if("reject"===r?(RejectToRange(i,1,this.monthsInYear({year:n})),RejectToRange(l,1,this.maximumMonthLength({year:n,month:i}))):(i=ConstrainToRange(i,1,this.monthsInYear({year:n})),l=ConstrainToRange(l,1,this.maximumMonthLength({year:n,month:i}))),void 0===s)s=this.getMonthCode(n,i);else {if(this.getMonthCode(n,i)!==s)throw new RangeError(`monthCode ${s} doesn't correspond to month ${i} in Hebrew year ${n}`)}return {...e,day:l,month:i,monthCode:s,year:n,eraYear:a}}}class IslamicBaseHelper extends HelperBase{constructor(){super(...arguments),this.calendarType="lunar",this.DAYS_PER_ISLAMIC_YEAR=354+11/30,this.DAYS_PER_ISO_YEAR=365.2425,this.constantEra="ah";}inLeapYear(e,t){return 30===this.daysInMonth({year:e.year,month:12,day:1},t)}monthsInYear(){return 12}minimumMonthLength(){return 29}maximumMonthLength(){return 30}estimateIsoDate(e){const{year:t}=this.adjustCalendarDate(e);return {year:St(t*this.DAYS_PER_ISLAMIC_YEAR/this.DAYS_PER_ISO_YEAR)+622,month:1,day:1}}}class IslamicHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamic";}}class IslamicUmalquraHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamic-umalqura";}}class IslamicTblaHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamic-tbla";}}class IslamicCivilHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamic-civil";}}class IslamicRgsaHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamic-rgsa";}}class IslamicCcHelper extends IslamicBaseHelper{constructor(){super(...arguments),this.id="islamicc";}}class PersianHelper extends HelperBase{constructor(){super(...arguments),this.id="persian",this.calendarType="solar",this.constantEra="ap";}inLeapYear(e,t){return IslamicHelper.prototype.inLeapYear.call(this,e,t)}monthsInYear(){return 12}minimumMonthLength(e){const{month:t}=e;return 12===t?29:t<=6?31:30}maximumMonthLength(e){const{month:t}=e;return 12===t?30:t<=6?31:30}estimateIsoDate(e){const{year:t}=this.adjustCalendarDate(e);return {year:t+621,month:1,day:1}}}class IndianHelper extends HelperBase{constructor(){super(...arguments),this.id="indian",this.calendarType="solar",this.constantEra="saka",this.months={1:{length:30,month:3,day:22,leap:{length:31,month:3,day:21}},2:{length:31,month:4,day:21},3:{length:31,month:5,day:22},4:{length:31,month:6,day:22},5:{length:31,month:7,day:23},6:{length:31,month:8,day:23},7:{length:30,month:9,day:23},8:{length:30,month:10,day:23},9:{length:30,month:11,day:22},10:{length:30,month:12,day:22},11:{length:30,month:1,nextYear:!0,day:21},12:{length:30,month:2,nextYear:!0,day:20}},this.vulnerableToBceBug="10/11/-79 Saka"!==new Date("0000-01-01T00:00Z").toLocaleDateString("en-US-u-ca-indian",{timeZone:"UTC"});}inLeapYear(e){return isGregorianLeapYear(e.year+78)}monthsInYear(){return 12}minimumMonthLength(e){return this.getMonthInfo(e).length}maximumMonthLength(e){return this.getMonthInfo(e).length}getMonthInfo(e){const{month:t}=e;let r=this.months[t];if(void 0===r)throw new RangeError(`Invalid month: ${t}`);return this.inLeapYear(e)&&r.leap&&(r=r.leap),r}estimateIsoDate(e){const t=this.adjustCalendarDate(e),r=this.getMonthInfo(t);return AddISODate(t.year+78+(r.nextYear?1:0),r.month,r.day,0,0,0,t.day-1,"constrain")}checkIcuBugs(e){if(this.vulnerableToBceBug&&e.year<1)throw new RangeError(`calendar '${this.id}' is broken for ISO dates before 0001-01-01 (see https://bugs.chromium.org/p/v8/issues/detail?id=10529)`)}}function isGregorianLeapYear(e){return e%4==0&&(e%100!=0||e%400==0)}class GregorianBaseHelper extends HelperBase{constructor(e,t){super(),this.calendarType="solar",this.v8IsVulnerableToJulianBug=new Date("+001001-01-01T00:00Z").toLocaleDateString("en-US-u-ca-japanese",{timeZone:"UTC"}).startsWith("12"),this.calendarIsVulnerableToJulianBug=!1,this.id=e;const{eras:r,anchorEra:o}=function adjustEras(e){let t,r=e;if(0===r.length)throw new RangeError("Invalid era data: eras are required");if(1===r.length&&r[0].reverseOf)throw new RangeError("Invalid era data: anchor era cannot count years backwards");if(1===r.length&&!r[0].name)throw new RangeError("Invalid era data: at least one named era is required");if(r.filter((e=>null!=e.reverseOf)).length>1)throw new RangeError("Invalid era data: only one era can count years backwards");r.forEach((e=>{if(e.isAnchor||!e.anchorEpoch&&!e.reverseOf){if(t)throw new RangeError("Invalid era data: cannot have multiple anchor eras");t=e,e.anchorEpoch={year:e.hasYearZero?0:1};}else if(!e.name)throw new RangeError("If era name is blank, it must be the anchor era")})),r=r.filter((e=>e.name)),r.forEach((e=>{const{reverseOf:t}=e;if(t){const o=r.find((e=>e.name===t));if(void 0===o)throw new RangeError(`Invalid era data: unmatched reverseOf era: ${t}`);e.reverseOf=o,e.anchorEpoch=o.anchorEpoch,e.isoEpoch=o.isoEpoch;}void 0===e.anchorEpoch.month&&(e.anchorEpoch.month=1),void 0===e.anchorEpoch.day&&(e.anchorEpoch.day=1);})),yt.call(r,((e,t)=>{if(e.reverseOf)return 1;if(t.reverseOf)return -1;if(!e.isoEpoch||!t.isoEpoch)throw new RangeError("Invalid era data: missing ISO epoch");return t.isoEpoch.year-e.isoEpoch.year}));const o=r[r.length-1].reverseOf;if(o&&o!==r[r.length-2])throw new RangeError("Invalid era data: invalid reverse-sign era");return r.forEach(((e,t)=>{e.genericName="era"+(r.length-1-t);})),{eras:r,anchorEra:t||r[0]}}(t);this.anchorEra=o,this.eras=r;}inLeapYear(e){const{year:t}=this.estimateIsoDate({month:1,day:1,year:e.year});return isGregorianLeapYear(t)}monthsInYear(){return 12}minimumMonthLength(e){const{month:t}=e;return 2===t?this.inLeapYear(e)?29:28:[4,6,9,11].indexOf(t)>=0?30:31}maximumMonthLength(e){return this.minimumMonthLength(e)}completeEraYear(e){const checkField=(t,r)=>{const o=e[t];if(null!=o&&o!=r)throw new RangeError(`Input ${t} ${o} doesn't match calculated value ${r}`)},eraFromYear=t=>{let r;const o={...e,year:t},n=this.eras.find(((e,n)=>{if(n===this.eras.length-1){if(e.reverseOf){if(t>0)throw new RangeError(`Signed year ${t} is invalid for era ${e.name}`);return r=e.anchorEpoch.year-t,!0}return r=t-e.anchorEpoch.year+(e.hasYearZero?0:1),!0}return this.compareCalendarDates(o,e.anchorEpoch)>=0&&(r=t-e.anchorEpoch.year+(e.hasYearZero?0:1),!0)}));if(!n)throw new RangeError(`Year ${t} was not matched by any era`);return {eraYear:r,era:n.name}};let{year:t,eraYear:r,era:o}=e;if(null!=t)(({eraYear:r,era:o}=eraFromYear(t))),checkField("era",o),checkField("eraYear",r);else {if(null==r)throw new RangeError("Either `year` or `eraYear` and `era` are required");{const e=void 0===o?void 0:this.eras.find((e=>e.name===o||e.genericName===o));if(!e)throw new RangeError(`Era ${o} (ISO year ${r}) was not matched by any era`);if(r<1&&e.reverseOf)throw new RangeError(`Years in ${o} era must be positive, not ${t}`);t=e.reverseOf?e.anchorEpoch.year-r:r+e.anchorEpoch.year-(e.hasYearZero?0:1),checkField("year",t),({eraYear:r,era:o}=eraFromYear(t));}}return {...e,year:t,eraYear:r,era:o}}adjustCalendarDate(e,t,r="constrain"){let o=e;const{month:n,monthCode:a}=o;return void 0===n&&(o={...o,month:monthCodeNumberPart(a)}),this.validateCalendarDate(o),o=this.completeEraYear(o),super.adjustCalendarDate(o,t,r)}estimateIsoDate(e){const t=this.adjustCalendarDate(e),{year:r,month:o,day:n}=t,{anchorEra:a}=this;return RegulateISODate(r+a.isoEpoch.year-(a.hasYearZero?0:1),o,n,"constrain")}checkIcuBugs(e){if(this.calendarIsVulnerableToJulianBug&&this.v8IsVulnerableToJulianBug){if(CompareISODate(e.year,e.month,e.day,1582,10,15)<0)throw new RangeError(`calendar '${this.id}' is broken for ISO dates before 1582-10-15 (see https://bugs.chromium.org/p/chromium/issues/detail?id=1173158)`)}}}class OrthodoxBaseHelper extends GregorianBaseHelper{constructor(e,t){super(e,t);}inLeapYear(e){const{year:t}=e;return (t+1)%4==0}monthsInYear(){return 13}minimumMonthLength(e){const{month:t}=e;return 13===t?this.inLeapYear(e)?6:5:30}maximumMonthLength(e){return this.minimumMonthLength(e)}}class EthioaaHelper extends OrthodoxBaseHelper{constructor(){super("ethioaa",[{name:"era0",isoEpoch:{year:-5492,month:7,day:17}}]);}}class CopticHelper extends OrthodoxBaseHelper{constructor(){super("coptic",[{name:"era1",isoEpoch:{year:284,month:8,day:29}},{name:"era0",reverseOf:"era1"}]);}}class EthiopicHelper extends OrthodoxBaseHelper{constructor(){super("ethiopic",[{name:"era0",isoEpoch:{year:-5492,month:7,day:17}},{name:"era1",isoEpoch:{year:8,month:8,day:27},anchorEpoch:{year:5501}}]);}}class RocHelper extends GregorianBaseHelper{constructor(){super("roc",[{name:"minguo",isoEpoch:{year:1912,month:1,day:1}},{name:"before-roc",reverseOf:"minguo"}]),this.calendarIsVulnerableToJulianBug=!0;}}class BuddhistHelper extends GregorianBaseHelper{constructor(){super("buddhist",[{name:"be",hasYearZero:!0,isoEpoch:{year:-543,month:1,day:1}}]),this.calendarIsVulnerableToJulianBug=!0;}}class GregoryHelper extends GregorianBaseHelper{constructor(){super("gregory",[{name:"ce",isoEpoch:{year:1,month:1,day:1}},{name:"bce",reverseOf:"ce"}]);}reviseIntlEra(e){let{era:t,eraYear:r}=e;return "bc"!==t&&"b"!==t||(t="bce"),"ad"!==t&&"a"!==t||(t="ce"),{era:t,eraYear:r}}}class JapaneseHelper extends GregorianBaseHelper{constructor(){super("japanese",[{name:"reiwa",isoEpoch:{year:2019,month:5,day:1},anchorEpoch:{year:2019,month:5,day:1}},{name:"heisei",isoEpoch:{year:1989,month:1,day:8},anchorEpoch:{year:1989,month:1,day:8}},{name:"showa",isoEpoch:{year:1926,month:12,day:25},anchorEpoch:{year:1926,month:12,day:25}},{name:"taisho",isoEpoch:{year:1912,month:7,day:30},anchorEpoch:{year:1912,month:7,day:30}},{name:"meiji",isoEpoch:{year:1868,month:9,day:8},anchorEpoch:{year:1868,month:9,day:8}},{name:"ce",isoEpoch:{year:1,month:1,day:1}},{name:"bce",reverseOf:"ce"}]),this.calendarIsVulnerableToJulianBug=!0,this.eraLength="long",this.erasBeginMidYear=!0;}reviseIntlEra(e,t){const{era:r,eraYear:o}=e,{year:n}=t;return this.eras.find((e=>e.name===r))?{era:r,eraYear:o}:n<1?{era:"bce",eraYear:1-n}:{era:"ce",eraYear:n}}}class ChineseBaseHelper extends HelperBase{constructor(){super(...arguments),this.calendarType="lunisolar",this.hasEra=!1;}inLeapYear(e,t){const r=this.getMonthList(e.year,t);return 13===wt(r).length}monthsInYear(e,t){return this.inLeapYear(e,t)?13:12}minimumMonthLength(){return 29}maximumMonthLength(){return 30}getMonthList(e,t){if(void 0===e)throw new TypeError("Missing year");const r=JSON.stringify({func:"getMonthList",calendarYear:e,id:this.id}),o=t.get(r);if(o)return o;const n=this.getFormatter(),getCalendarDate=(e,t)=>{const r=toUtcIsoDateString({isoYear:e,isoMonth:2,isoDay:1}),o=new Date(r);o.setUTCDate(t+1);const a=n.formatToParts(o),i=a.find((e=>"month"===e.type)).value,s=+a.find((e=>"day"===e.type)).value;let l=a.find((e=>"relatedYear"===e.type));if(void 0===l)throw new RangeError(`Intl.DateTimeFormat.formatToParts lacks relatedYear in ${this.id} calendar. Try Node 14+ or modern browsers.`);return l=+l.value,{calendarMonthString:i,calendarDay:s,calendarYearToVerify:l}};let a=17,{calendarMonthString:i,calendarDay:s,calendarYearToVerify:l}=getCalendarDate(e,a);"1"!==i&&(a+=29,({calendarMonthString:i,calendarDay:s}=getCalendarDate(e,a))),a-=s-5;const d={};let m,c,h=1,u=!1;do{(({calendarMonthString:i,calendarDay:s,calendarYearToVerify:l}=getCalendarDate(e,a))),m&&(d[c].daysInMonth=m+30-s),l!==e?u=!0:(d[i]={monthIndex:h++},a+=30),m=s,c=i;}while(!u);return d[c].daysInMonth=m+30-s,t.set(r,d),d}estimateIsoDate(e){const{year:t,month:r}=e;return {year:t,month:r>=12?12:r+1,day:1}}adjustCalendarDate(e,t,r="constrain",o=!1){let{year:n,month:a,monthExtra:i,day:s,monthCode:l,eraYear:d}=e;if(o){if(n=d,i&&"bis"!==i)throw new RangeError(`Unexpected leap month suffix: ${i}`);const e=buildMonthCode(a,void 0!==i),r=`${a}${i||""}`,o=this.getMonthList(n,t)[r];if(void 0===o)throw new RangeError(`Unmatched month ${r} in Chinese year ${n}`);return a=o.monthIndex,{year:n,month:a,day:s,era:void 0,eraYear:d,monthCode:e}}if(this.validateCalendarDate(e),void 0===n&&(n=d),void 0===d&&(d=n),void 0===a){const e=this.getMonthList(n,t);let o=l.replace("L","bis").slice(1);"0"===o[0]&&(o=o.slice(1));let i=e[o];if(a=i&&i.monthIndex,void 0===a&&l.endsWith("L")&&"M13L"!=l&&"constrain"===r){let t=l.slice(1,-1);"0"===t[0]&&(t=t.slice(1)),i=e[t],i&&(a=i.monthIndex,l=buildMonthCode(t));}if(void 0===a)throw new RangeError(`Unmatched month ${l} in Chinese year ${n}`)}else if(void 0===l){const e=this.getMonthList(n,t),o=wt(e),i=o.length;"reject"===r?(RejectToRange(a,1,i),RejectToRange(s,1,this.maximumMonthLength())):(a=ConstrainToRange(a,1,i),s=ConstrainToRange(s,1,this.maximumMonthLength()));const d=o.find((([,e])=>e.monthIndex===a));if(void 0===d)throw new RangeError(`Invalid month ${a} in Chinese year ${n}`);l=buildMonthCode(d[0].replace("bis",""),-1!==d[0].indexOf("bis"));}else {const e=this.getMonthList(n,t);let r=l.replace("L","bis").slice(1);"0"===r[0]&&(r=r.slice(1));const o=e[r];if(!o)throw new RangeError(`Unmatched monthCode ${l} in Chinese year ${n}`);if(a!==o.monthIndex)throw new RangeError(`monthCode ${l} doesn't correspond to month ${a} in Chinese year ${n}`)}return {...e,year:n,eraYear:d,month:a,monthCode:l,day:s}}}class ChineseHelper extends ChineseBaseHelper{constructor(){super(...arguments),this.id="chinese";}}class DangiHelper extends ChineseBaseHelper{constructor(){super(...arguments),this.id="dangi";}}class NonIsoCalendar{constructor(e){this.helper=e;}dateFromFields(e,t,r){const o=new OneObjectCache,n=PrepareTemporalFields(e,this.fields(["day","month","monthCode","year"]),[]),a=ToTemporalOverflow(t),{year:i,month:s,day:l}=this.helper.calendarToIsoDate(n,a,o),d=CreateTemporalDate(i,s,l,r);return o.setObject(d),d}yearMonthFromFields(e,t,r){const o=new OneObjectCache,n=PrepareTemporalFields(e,this.fields(["month","monthCode","year"]),[]),a=ToTemporalOverflow(t),{year:i,month:s,day:l}=this.helper.calendarToIsoDate({...n,day:1},a,o),d=CreateTemporalYearMonth(i,s,r,l);return o.setObject(d),d}monthDayFromFields(e,t,r){const o=new OneObjectCache,n=PrepareTemporalFields(e,this.fields(["day","month","monthCode","year"]),[]),a=ToTemporalOverflow(t),{year:i,month:s,day:l}=this.helper.monthDayFromFields(n,a,o),d=CreateTemporalMonthDay(s,l,r,i);return o.setObject(d),d}fields(e){let t=e;return Tt.call(t,"year")&&(t=[...t,"era","eraYear"]),t}fieldKeysToIgnore(e){const t=new Dt;for(let r=0;r<e.length;r++){const o=e[r];switch(Call(vt,t,[o]),o){case"era":Call(vt,t,["eraYear"]),Call(vt,t,["year"]);break;case"eraYear":Call(vt,t,["era"]),Call(vt,t,["year"]);break;case"year":Call(vt,t,["era"]),Call(vt,t,["eraYear"]);break;case"month":Call(vt,t,["monthCode"]),this.helper.erasBeginMidYear&&(Call(vt,t,["era"]),Call(vt,t,["eraYear"]));break;case"monthCode":Call(vt,t,["month"]),this.helper.erasBeginMidYear&&(Call(vt,t,["era"]),Call(vt,t,["eraYear"]));break;case"day":this.helper.erasBeginMidYear&&(Call(vt,t,["era"]),Call(vt,t,["eraYear"]));}}return [...Call(Ct,t,[])]}dateAdd(e,t,r,o,n,a,i){const s=OneObjectCache.getCacheForObject(e),l=this.helper.temporalToCalendarDate(e,s),d=this.helper.addCalendar(l,{years:t,months:r,weeks:o,days:n},a,s),m=this.helper.calendarToIsoDate(d,"constrain",s),{year:c,month:h,day:u}=m,T=CreateTemporalDate(c,h,u,i);return new OneObjectCache(s).setObject(T),T}dateUntil(e,t,r){const o=OneObjectCache.getCacheForObject(e),n=OneObjectCache.getCacheForObject(t),a=this.helper.temporalToCalendarDate(e,o),i=this.helper.temporalToCalendarDate(t,n);return this.helper.untilCalendar(a,i,r,o)}year(e){const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).year}month(e){const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).month}day(e){const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).day}era(e){if(!this.helper.hasEra)return;const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).era}eraYear(e){if(!this.helper.hasEra)return;const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).eraYear}monthCode(e){const t=OneObjectCache.getCacheForObject(e);return this.helper.temporalToCalendarDate(e,t).monthCode}dayOfWeek(e){return Ot.iso8601.dayOfWeek(e)}dayOfYear(e){const t=OneObjectCache.getCacheForObject(e),r=this.helper.isoToCalendarDate(e,t),o=this.helper.startOfCalendarYear(r);return this.helper.calendarDaysUntil(o,r,t)+1}weekOfYear(e){return Ot.iso8601.weekOfYear(e)}yearOfWeek(e){return Ot.iso8601.yearOfWeek(e)}daysInWeek(e){return Ot.iso8601.daysInWeek(e)}daysInMonth(e){const t=OneObjectCache.getCacheForObject(e),r=this.helper.temporalToCalendarDate(e,t),o=this.helper.maximumMonthLength(r);if(o===this.helper.minimumMonthLength(r))return o;const n=this.helper.startOfCalendarMonth(r),a=this.helper.addMonthsCalendar(n,1,"constrain",t);return this.helper.calendarDaysUntil(n,a,t)}daysInYear(e){let t=e;HasSlot(t,i)||(t=ToTemporalDate(t));const r=OneObjectCache.getCacheForObject(t),o=this.helper.temporalToCalendarDate(t,r),n=this.helper.startOfCalendarYear(o),a=this.helper.addCalendar(n,{years:1},"constrain",r);return this.helper.calendarDaysUntil(n,a,r)}monthsInYear(e){const t=OneObjectCache.getCacheForObject(e),r=this.helper.temporalToCalendarDate(e,t);return this.helper.monthsInYear(r,t)}inLeapYear(e){let t=e;HasSlot(t,i)||(t=ToTemporalDate(t));const r=OneObjectCache.getCacheForObject(t),o=this.helper.temporalToCalendarDate(t,r);return this.helper.inLeapYear(o,r)}}for(const e of [HebrewHelper,PersianHelper,EthiopicHelper,EthioaaHelper,CopticHelper,ChineseHelper,DangiHelper,RocHelper,IndianHelper,BuddhistHelper,GregoryHelper,JapaneseHelper,IslamicHelper,IslamicUmalquraHelper,IslamicTblaHelper,IslamicCivilHelper,IslamicRgsaHelper,IslamicCcHelper]){const t=new e;Ot[t.id]=new NonIsoCalendar(t);}class PlainDate{constructor(e,t,r,o="iso8601"){CreateTemporalDateSlots(this,ToIntegerWithTruncation(e),ToIntegerWithTruncation(t),ToIntegerWithTruncation(r),ToTemporalCalendarSlotValue(o));}get calendarId(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return ToTemporalCalendarIdentifier(GetSlot(this,p))}get era(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarEra(GetSlot(this,p),this)}get eraYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarEraYear(GetSlot(this,p),this)}get year(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarYear(GetSlot(this,p),this)}get month(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarMonth(GetSlot(this,p),this)}get monthCode(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarMonthCode(GetSlot(this,p),this)}get day(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDay(GetSlot(this,p),this)}get dayOfWeek(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDayOfWeek(GetSlot(this,p),this)}get dayOfYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDayOfYear(GetSlot(this,p),this)}get weekOfYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarWeekOfYear(GetSlot(this,p),this)}get yearOfWeek(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarYearOfWeek(GetSlot(this,p),this)}get daysInWeek(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDaysInWeek(GetSlot(this,p),this)}get daysInMonth(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDaysInMonth(GetSlot(this,p),this)}get daysInYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarDaysInYear(GetSlot(this,p),this)}get monthsInYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarMonthsInYear(GetSlot(this,p),this)}get inLeapYear(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return CalendarInLeapYear(GetSlot(this,p),this)}with(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");RejectTemporalLikeObject(e);const r=GetOptionsObject(t),o=GetSlot(this,p),n=CalendarFields(o,["day","month","monthCode","year"]);let a=PrepareTemporalFields(this,n,[]);return a=CalendarMergeFields(o,a,PrepareTemporalFields(e,n,"partial")),a=PrepareTemporalFields(a,n,[]),CalendarDateFromFields(o,a,r)}withCalendar(e){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const t=ToTemporalCalendarSlotValue(e);return new PlainDate(GetSlot(this,i),GetSlot(this,s),GetSlot(this,l),t)}add(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const r=ToTemporalDuration(e),o=GetOptionsObject(t);return CalendarDateAdd(GetSlot(this,p),this,r,o)}subtract(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const r=CreateNegatedTemporalDuration(ToTemporalDuration(e)),o=GetOptionsObject(t);return CalendarDateAdd(GetSlot(this,p),this,r,o)}until(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainDate("until",this,e,t)}since(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainDate("since",this,e,t)}equals(e){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e);for(const e of [i,s,l]){if(GetSlot(this,e)!==GetSlot(t,e))return !1}return CalendarEquals(GetSlot(this,p),GetSlot(t,p))}toString(e){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return TemporalDateToString(this,ToCalendarNameOption(GetOptionsObject(e)))}toJSON(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return TemporalDateToString(this)}toLocaleString(e,t){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return new ht(e,t).format(this)}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.PlainDate")}toPlainDateTime(e){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const t=GetSlot(this,i),r=GetSlot(this,s),o=GetSlot(this,l),n=GetSlot(this,p);if(void 0===e)return CreateTemporalDateTime(t,r,o,0,0,0,0,0,0,n);const a=ToTemporalTime(e);return CreateTemporalDateTime(t,r,o,GetSlot(a,d),GetSlot(a,m),GetSlot(a,c),GetSlot(a,h),GetSlot(a,u),GetSlot(a,T),n)}toZonedDateTime(e){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");let t,r;if(IsObject(e))if(IsTemporalTimeZone(e))t=e;else {const o=e.timeZone;void 0===o?t=ToTemporalTimeZoneSlotValue(e):(t=ToTemporalTimeZoneSlotValue(o),r=e.plainTime);}else t=ToTemporalTimeZoneSlotValue(e);const o=GetSlot(this,i),a=GetSlot(this,s),f=GetSlot(this,l),y=GetSlot(this,p);let I=0,S=0,g=0,w=0,D=0,G=0;void 0!==r&&(r=ToTemporalTime(r),I=GetSlot(r,d),S=GetSlot(r,m),g=GetSlot(r,c),w=GetSlot(r,h),D=GetSlot(r,u),G=GetSlot(r,T));return CreateTemporalZonedDateTime(GetSlot(GetInstantFor(t,CreateTemporalDateTime(o,a,f,I,S,g,w,D,G,y),"compatible"),n),t,y)}toPlainYearMonth(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const e=GetSlot(this,p);return CalendarYearMonthFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["monthCode","year"]),[]))}toPlainMonthDay(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");const e=GetSlot(this,p);return CalendarMonthDayFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["day","monthCode"]),[]))}getISOFields(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return {calendar:GetSlot(this,p),isoDay:GetSlot(this,l),isoMonth:GetSlot(this,s),isoYear:GetSlot(this,i)}}getCalendar(){if(!IsTemporalDate(this))throw new TypeError("invalid receiver");return ToTemporalCalendarObject(GetSlot(this,p))}static from(e,t){const r=GetOptionsObject(t);return IsTemporalDate(e)?(ToTemporalOverflow(r),CreateTemporalDate(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l),GetSlot(e,p))):ToTemporalDate(e,r)}static compare(e,t){const r=ToTemporalDate(e),o=ToTemporalDate(t);return CompareISODate(GetSlot(r,i),GetSlot(r,s),GetSlot(r,l),GetSlot(o,i),GetSlot(o,s),GetSlot(o,l))}}MakeIntrinsicClass(PlainDate,"Temporal.PlainDate");class PlainDateTime{constructor(e,t,r,o=0,n=0,a=0,i=0,s=0,l=0,d="iso8601"){CreateTemporalDateTimeSlots(this,ToIntegerWithTruncation(e),ToIntegerWithTruncation(t),ToIntegerWithTruncation(r),void 0===o?0:ToIntegerWithTruncation(o),void 0===n?0:ToIntegerWithTruncation(n),void 0===a?0:ToIntegerWithTruncation(a),void 0===i?0:ToIntegerWithTruncation(i),void 0===s?0:ToIntegerWithTruncation(s),void 0===l?0:ToIntegerWithTruncation(l),ToTemporalCalendarSlotValue(d));}get calendarId(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return ToTemporalCalendarIdentifier(GetSlot(this,p))}get year(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarYear(GetSlot(this,p),this)}get month(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarMonth(GetSlot(this,p),this)}get monthCode(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarMonthCode(GetSlot(this,p),this)}get day(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDay(GetSlot(this,p),this)}get hour(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,d)}get minute(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,m)}get second(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,c)}get millisecond(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,h)}get microsecond(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,u)}get nanosecond(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return GetSlot(this,T)}get era(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarEra(GetSlot(this,p),this)}get eraYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarEraYear(GetSlot(this,p),this)}get dayOfWeek(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDayOfWeek(GetSlot(this,p),this)}get dayOfYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDayOfYear(GetSlot(this,p),this)}get weekOfYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarWeekOfYear(GetSlot(this,p),this)}get yearOfWeek(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarYearOfWeek(GetSlot(this,p),this)}get daysInWeek(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInWeek(GetSlot(this,p),this)}get daysInYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInYear(GetSlot(this,p),this)}get daysInMonth(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInMonth(GetSlot(this,p),this)}get monthsInYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarMonthsInYear(GetSlot(this,p),this)}get inLeapYear(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return CalendarInLeapYear(GetSlot(this,p),this)}with(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");RejectTemporalLikeObject(e);const r=GetOptionsObject(t),o=GetSlot(this,p),n=CalendarFields(o,["day","hour","microsecond","millisecond","minute","month","monthCode","nanosecond","second","year"]);let a=PrepareTemporalFields(this,n,[]);a=CalendarMergeFields(o,a,PrepareTemporalFields(e,n,"partial")),a=PrepareTemporalFields(a,n,[]);const{year:i,month:s,day:l,hour:d,minute:m,second:c,millisecond:h,microsecond:u,nanosecond:T}=InterpretTemporalDateTimeFields(o,a,r);return CreateTemporalDateTime(i,s,l,d,m,c,h,u,T,o)}withPlainTime(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const t=GetSlot(this,i),r=GetSlot(this,s),o=GetSlot(this,l),n=GetSlot(this,p);if(void 0===e)return CreateTemporalDateTime(t,r,o,0,0,0,0,0,0,n);const a=ToTemporalTime(e);return CreateTemporalDateTime(t,r,o,GetSlot(a,d),GetSlot(a,m),GetSlot(a,c),GetSlot(a,h),GetSlot(a,u),GetSlot(a,T),n)}withPlainDate(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e),r=GetSlot(t,i),o=GetSlot(t,s),n=GetSlot(t,l);let a=GetSlot(t,p);const f=GetSlot(this,d),y=GetSlot(this,m),I=GetSlot(this,c),S=GetSlot(this,h),g=GetSlot(this,u),w=GetSlot(this,T);return a=ConsolidateCalendars(GetSlot(this,p),a),CreateTemporalDateTime(r,o,n,f,y,I,S,g,w,a)}withCalendar(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalCalendarSlotValue(e);return new PlainDateTime(GetSlot(this,i),GetSlot(this,s),GetSlot(this,l),GetSlot(this,d),GetSlot(this,m),GetSlot(this,c),GetSlot(this,h),GetSlot(this,u),GetSlot(this,T),t)}add(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainDateTime("add",this,e,t)}subtract(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainDateTime("subtract",this,e,t)}until(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainDateTime("until",this,e,t)}since(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainDateTime("since",this,e,t)}round(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");if(void 0===e)throw new TypeError("options parameter is required");const t="string"==typeof e?CreateOnePropObject("smallestUnit",e):GetOptionsObject(e),r=ToTemporalRoundingIncrement(t),o=ToTemporalRoundingMode(t,"halfExpand"),n=GetTemporalUnit(t,"smallestUnit","time",He,["day"]),a={day:1,hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[n];ValidateTemporalRoundingIncrement(r,a,1===a);let f=GetSlot(this,i),y=GetSlot(this,s),I=GetSlot(this,l),S=GetSlot(this,d),g=GetSlot(this,m),w=GetSlot(this,c),D=GetSlot(this,h),G=GetSlot(this,u),v=GetSlot(this,T);return ({year:f,month:y,day:I,hour:S,minute:g,second:w,millisecond:D,microsecond:G,nanosecond:v}=RoundISODateTime(f,y,I,S,g,w,D,G,v,r,n,o)),CreateTemporalDateTime(f,y,I,S,g,w,D,G,v,GetSlot(this,p))}equals(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalDateTime(e);for(const e of [i,s,l,d,m,c,h,u,T]){if(GetSlot(this,e)!==GetSlot(t,e))return !1}return CalendarEquals(GetSlot(this,p),GetSlot(t,p))}toString(e){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const t=GetOptionsObject(e),r=ToCalendarNameOption(t),o=ToFractionalSecondDigits(t),n=ToTemporalRoundingMode(t,"trunc"),a=GetTemporalUnit(t,"smallestUnit","time",void 0);if("hour"===a)throw new RangeError('smallestUnit must be a time unit other than "hour"');const{precision:i,unit:s,increment:l}=ToSecondsStringPrecisionRecord(a,o);return TemporalDateTimeToString(this,i,r,{unit:s,increment:l,roundingMode:n})}toJSON(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return TemporalDateTimeToString(this,"auto")}toLocaleString(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return new ht(e,t).format(this)}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.PlainDateTime")}toZonedDateTime(e,t){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const r=ToTemporalTimeZoneSlotValue(e);return CreateTemporalZonedDateTime(GetSlot(GetInstantFor(r,this,ToTemporalDisambiguation(GetOptionsObject(t))),n),r,GetSlot(this,p))}toPlainDate(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return TemporalDateTimeToDate(this)}toPlainYearMonth(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const e=GetSlot(this,p);return CalendarYearMonthFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["monthCode","year"]),[]))}toPlainMonthDay(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");const e=GetSlot(this,p);return CalendarMonthDayFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["day","monthCode"]),[]))}toPlainTime(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return TemporalDateTimeToTime(this)}getISOFields(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return {calendar:GetSlot(this,p),isoDay:GetSlot(this,l),isoHour:GetSlot(this,d),isoMicrosecond:GetSlot(this,u),isoMillisecond:GetSlot(this,h),isoMinute:GetSlot(this,m),isoMonth:GetSlot(this,s),isoNanosecond:GetSlot(this,T),isoSecond:GetSlot(this,c),isoYear:GetSlot(this,i)}}getCalendar(){if(!IsTemporalDateTime(this))throw new TypeError("invalid receiver");return ToTemporalCalendarObject(GetSlot(this,p))}static from(e,t){const r=GetOptionsObject(t);return IsTemporalDateTime(e)?(ToTemporalOverflow(r),CreateTemporalDateTime(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l),GetSlot(e,d),GetSlot(e,m),GetSlot(e,c),GetSlot(e,h),GetSlot(e,u),GetSlot(e,T),GetSlot(e,p))):ToTemporalDateTime(e,r)}static compare(e,t){const r=ToTemporalDateTime(e),o=ToTemporalDateTime(t);for(const e of [i,s,l,d,m,c,h,u,T]){const t=GetSlot(r,e),n=GetSlot(o,e);if(t!==n)return ComparisonResult(t-n)}return 0}}MakeIntrinsicClass(PlainDateTime,"Temporal.PlainDateTime");class Duration{constructor(e=0,t=0,r=0,o=0,n=0,a=0,i=0,s=0,l=0,d=0){const m=void 0===e?0:ToIntegerIfIntegral(e),c=void 0===t?0:ToIntegerIfIntegral(t),h=void 0===r?0:ToIntegerIfIntegral(r),u=void 0===o?0:ToIntegerIfIntegral(o),T=void 0===n?0:ToIntegerIfIntegral(n),p=void 0===a?0:ToIntegerIfIntegral(a),f=void 0===i?0:ToIntegerIfIntegral(i),y=void 0===s?0:ToIntegerIfIntegral(s),I=void 0===l?0:ToIntegerIfIntegral(l),S=void 0===d?0:ToIntegerIfIntegral(d);RejectDuration(m,c,h,u,T,p,f,y,I,S),N(this),SetSlot(this,w,m),SetSlot(this,D,c),SetSlot(this,G,h),SetSlot(this,v,u),SetSlot(this,C,T),SetSlot(this,O,p),SetSlot(this,b,f),SetSlot(this,E,y),SetSlot(this,M,I),SetSlot(this,R,S);}get years(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,w)}get months(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,D)}get weeks(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,G)}get days(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,v)}get hours(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,C)}get minutes(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,O)}get seconds(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,b)}get milliseconds(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,E)}get microseconds(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,M)}get nanoseconds(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return GetSlot(this,R)}get sign(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return DurationSign(GetSlot(this,w),GetSlot(this,D),GetSlot(this,G),GetSlot(this,v),GetSlot(this,C),GetSlot(this,O),GetSlot(this,b),GetSlot(this,E),GetSlot(this,M),GetSlot(this,R))}get blank(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return 0===DurationSign(GetSlot(this,w),GetSlot(this,D),GetSlot(this,G),GetSlot(this,v),GetSlot(this,C),GetSlot(this,O),GetSlot(this,b),GetSlot(this,E),GetSlot(this,M),GetSlot(this,R))}with(e){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");const t=PrepareTemporalFields(e,["days","hours","microseconds","milliseconds","minutes","months","nanoseconds","seconds","weeks","years"],"partial"),{years:r=GetSlot(this,w),months:o=GetSlot(this,D),weeks:n=GetSlot(this,G),days:a=GetSlot(this,v),hours:i=GetSlot(this,C),minutes:s=GetSlot(this,O),seconds:l=GetSlot(this,b),milliseconds:d=GetSlot(this,E),microseconds:m=GetSlot(this,M),nanoseconds:c=GetSlot(this,R)}=t;return new Duration(r,o,n,a,i,s,l,d,m,c)}negated(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return CreateNegatedTemporalDuration(this)}abs(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return new Duration(Math.abs(GetSlot(this,w)),Math.abs(GetSlot(this,D)),Math.abs(GetSlot(this,G)),Math.abs(GetSlot(this,v)),Math.abs(GetSlot(this,C)),Math.abs(GetSlot(this,O)),Math.abs(GetSlot(this,b)),Math.abs(GetSlot(this,E)),Math.abs(GetSlot(this,M)),Math.abs(GetSlot(this,R)))}add(e,t){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromDuration("add",this,e,t)}subtract(e,t){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromDuration("subtract",this,e,t)}round(t){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");if(void 0===t)throw new TypeError("options parameter is required");let r=GetSlot(this,w),o=GetSlot(this,D),n=GetSlot(this,G),a=GetSlot(this,v),i=GetSlot(this,C),s=GetSlot(this,O),l=GetSlot(this,b),d=GetSlot(this,E),m=GetSlot(this,M),c=GetSlot(this,R),h=DefaultTemporalLargestUnit(r,o,n,a,i,s,l,d,m,c);const u="string"==typeof t?CreateOnePropObject("smallestUnit",t):GetOptionsObject(t);let T=GetTemporalUnit(u,"largestUnit","datetime",void 0,["auto"]),f=ToRelativeTemporalObject(u);const y=ToTemporalRoundingIncrement(u),I=ToTemporalRoundingMode(u,"halfExpand");let S=GetTemporalUnit(u,"smallestUnit","datetime",void 0),g=!0;S||(g=!1,S="nanosecond"),h=LargerOfTwoTemporalUnits(h,S);let F=!0;if(T||(F=!1,T=h),"auto"===T&&(T=h),!g&&!F)throw new RangeError("at least one of smallestUnit or largestUnit is required");if(LargerOfTwoTemporalUnits(T,S)!==T)throw new RangeError(`largestUnit ${T} cannot be smaller than smallestUnit ${S}`);const Y={hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[S];return void 0!==Y&&ValidateTemporalRoundingIncrement(y,Y,!1),({years:r,months:o,weeks:n,days:a}=UnbalanceDurationRelative(r,o,n,a,T,f)),({years:r,months:o,weeks:n,days:a,hours:i,minutes:s,seconds:l,milliseconds:d,microseconds:m,nanoseconds:c}=RoundDuration(r,o,n,a,i,s,l,d,m,c,y,S,I,f)),({years:r,months:o,weeks:n,days:a,hours:i,minutes:s,seconds:l,milliseconds:d,microseconds:m,nanoseconds:c}=AdjustRoundedDurationDays(r,o,n,a,i,s,l,d,m,c,y,S,I,f)),({days:a,hours:i,minutes:s,seconds:l,milliseconds:d,microseconds:m,nanoseconds:c}=BalanceDuration(a,i,s,l,d,m,c,T,f)),({years:r,months:o,weeks:n,days:a}=function BalanceDurationRelative(t,r,o,n,a,i){const s=GetIntrinsic("%Temporal.Duration%"),l=DurationSign(t,r,o,n,0,0,0,0,0,0);if(0===l)return {years:t,months:r,weeks:o,days:n};const d=JSBI.BigInt(l);let m,c,h=JSBI.BigInt(t),u=JSBI.BigInt(r),T=JSBI.BigInt(o),f=JSBI.BigInt(n);i&&(c=ToTemporalDate(i),m=GetSlot(c,p));const y=new s(l),I=new s(0,l),S=new s(0,0,l);switch(a){case"year":{if(!m)throw new RangeError("a starting point is required for years balancing");const t="string"!=typeof m?GetMethod(m,"dateAdd"):void 0;let r,o,n;for(({relativeTo:r,days:o}=MoveRelativeDate(m,c,y,t));JSBI.greaterThanOrEqual(abs(f),JSBI.BigInt(ae(o)));)f=JSBI.subtract(f,JSBI.BigInt(o)),h=JSBI.add(h,d),c=r,({relativeTo:r,days:o}=MoveRelativeDate(m,c,y,t));for(({relativeTo:r,days:n}=MoveRelativeDate(m,c,I,t));JSBI.greaterThanOrEqual(abs(f),JSBI.BigInt(ae(n)));)f=JSBI.subtract(f,JSBI.BigInt(n)),u=JSBI.add(u,d),c=r,({relativeTo:r,days:n}=MoveRelativeDate(m,c,I,t));r=CalendarDateAdd(m,c,y,void 0,t);const a="string"!=typeof m?GetMethod(m,"dateUntil"):void 0,i=Te(null);i.largestUnit="month";let s=CalendarDateUntil(m,c,r,i,a),l=GetSlot(s,D);for(;JSBI.greaterThanOrEqual(abs(u),JSBI.BigInt(ae(l)));){u=JSBI.subtract(u,JSBI.BigInt(l)),h=JSBI.add(h,d),c=r,r=CalendarDateAdd(m,c,y,void 0,t);const o=Te(null);o.largestUnit="month",s=CalendarDateUntil(m,c,r,o,a),l=GetSlot(s,D);}break}case"month":{if(!m)throw new RangeError("a starting point is required for months balancing");const t="string"!=typeof m?GetMethod(m,"dateAdd"):void 0;let r,o;for(({relativeTo:r,days:o}=MoveRelativeDate(m,c,I,t));JSBI.greaterThanOrEqual(abs(f),JSBI.BigInt(ae(o)));)f=JSBI.subtract(f,JSBI.BigInt(o)),u=JSBI.add(u,d),c=r,({relativeTo:r,days:o}=MoveRelativeDate(m,c,I,t));break}case"week":{if(!m)throw new RangeError("a starting point is required for weeks balancing");const t="string"!=typeof m?GetMethod(m,"dateAdd"):void 0;let r,o;for(({relativeTo:r,days:o}=MoveRelativeDate(m,c,S,t));JSBI.greaterThanOrEqual(abs(f),JSBI.BigInt(ae(o)));)f=JSBI.subtract(f,JSBI.BigInt(o)),T=JSBI.add(T,d),c=r,({relativeTo:r,days:o}=MoveRelativeDate(m,c,S,t));break}}return {years:JSBI.toNumber(h),months:JSBI.toNumber(u),weeks:JSBI.toNumber(T),days:JSBI.toNumber(f)}}(r,o,n,a,T,f)),new Duration(r,o,n,a,i,s,l,d,m,c)}total(e){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");let t=GetSlot(this,w),r=GetSlot(this,D),o=GetSlot(this,G),n=GetSlot(this,v),a=GetSlot(this,C),i=GetSlot(this,O),s=GetSlot(this,b),l=GetSlot(this,E),d=GetSlot(this,M),m=GetSlot(this,R);if(void 0===e)throw new TypeError("options argument is required");const c="string"==typeof e?CreateOnePropObject("unit",e):GetOptionsObject(e),h=ToRelativeTemporalObject(c),u=GetTemporalUnit(c,"unit","datetime",He);let T;(({years:t,months:r,weeks:o,days:n}=UnbalanceDurationRelative(t,r,o,n,u,h))),IsTemporalZonedDateTime(h)&&(T=MoveRelativeZonedDateTime(h,t,r,o,0));let p=BalancePossiblyInfiniteDuration(n,a,i,s,l,d,m,u,T);if("positive overflow"===p)return 1/0;if("negative overflow"===p)return -1/0;({days:n,hours:a,minutes:i,seconds:s,milliseconds:l,microseconds:d,nanoseconds:m}=p);const{total:f}=RoundDuration(t,r,o,n,a,i,s,l,d,m,1,u,"trunc",h);return f}toString(e){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");const t=GetOptionsObject(e),r=ToFractionalSecondDigits(t),o=ToTemporalRoundingMode(t,"trunc"),n=GetTemporalUnit(t,"smallestUnit","time",void 0);if("hour"===n||"minute"===n)throw new RangeError('smallestUnit must be a time unit other than "hours" or "minutes"');const{precision:a,unit:i,increment:s}=ToSecondsStringPrecisionRecord(n,r);return TemporalDurationToString(this,a,{unit:i,increment:s,roundingMode:o})}toJSON(){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return TemporalDurationToString(this)}toLocaleString(e,t){if(!IsTemporalDuration(this))throw new TypeError("invalid receiver");return "undefined"!=typeof Intl&&void 0!==Intl.DurationFormat?new Intl.DurationFormat(e,t).format(this):(console.warn("Temporal.Duration.prototype.toLocaleString() requires Intl.DurationFormat."),TemporalDurationToString(this))}valueOf(){throw new TypeError("use compare() to compare Temporal.Duration")}static from(e){return IsTemporalDuration(e)?new Duration(GetSlot(e,w),GetSlot(e,D),GetSlot(e,G),GetSlot(e,v),GetSlot(e,C),GetSlot(e,O),GetSlot(e,b),GetSlot(e,E),GetSlot(e,M),GetSlot(e,R)):ToTemporalDuration(e)}static compare(t,r,o){const n=ToTemporalDuration(t),a=ToTemporalDuration(r),i=ToRelativeTemporalObject(GetOptionsObject(o)),s=GetSlot(n,w),l=GetSlot(n,D),d=GetSlot(n,G);let m=GetSlot(n,v);const c=GetSlot(n,C),h=GetSlot(n,O),u=GetSlot(n,b),T=GetSlot(n,E),p=GetSlot(n,M);let f=GetSlot(n,R);const y=GetSlot(a,w),I=GetSlot(a,D),S=GetSlot(a,G);let g=GetSlot(a,v);const F=GetSlot(a,C),Y=GetSlot(a,O),P=GetSlot(a,b),Z=GetSlot(a,E),B=GetSlot(a,M);let N=GetSlot(a,R);const j=CalculateOffsetShift(i,s,l,d,m),$=CalculateOffsetShift(i,y,I,S,g);0===s&&0===y&&0===l&&0===I&&0===d&&0===S||(({days:m}=UnbalanceDurationRelative(s,l,d,m,"day",i)),({days:g}=UnbalanceDurationRelative(y,I,S,g,"day",i)));const k=TotalDurationNanoseconds(m,c,h,u,T,p,f,j),U=TotalDurationNanoseconds(g,F,Y,P,Z,B,N,$);return ComparisonResult(JSBI.toNumber(JSBI.subtract(k,U)))}}MakeIntrinsicClass(Duration,"Temporal.Duration");const bt=Object.create;class PlainMonthDay{constructor(e,t,r="iso8601",o=1972){CreateTemporalMonthDaySlots(this,ToIntegerWithTruncation(e),ToIntegerWithTruncation(t),ToTemporalCalendarSlotValue(r),ToIntegerWithTruncation(o));}get monthCode(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return CalendarMonthCode(GetSlot(this,p),this)}get day(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return CalendarDay(GetSlot(this,p),this)}get calendarId(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return ToTemporalCalendarIdentifier(GetSlot(this,p))}with(e,t){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");RejectTemporalLikeObject(e);const r=GetOptionsObject(t),o=GetSlot(this,p),n=CalendarFields(o,["day","month","monthCode","year"]);let a=PrepareTemporalFields(this,n,[]);return a=CalendarMergeFields(o,a,PrepareTemporalFields(e,n,"partial")),a=PrepareTemporalFields(a,n,[]),CalendarMonthDayFromFields(o,a,r)}equals(e){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");const t=ToTemporalMonthDay(e);for(const e of [s,l,i]){if(GetSlot(this,e)!==GetSlot(t,e))return !1}return CalendarEquals(GetSlot(this,p),GetSlot(t,p))}toString(e){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return TemporalMonthDayToString(this,ToCalendarNameOption(GetOptionsObject(e)))}toJSON(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return TemporalMonthDayToString(this)}toLocaleString(e,t){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return new ht(e,t).format(this)}valueOf(){throw new TypeError("use equals() to compare Temporal.PlainMonthDay")}toPlainDate(e){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("argument should be an object");const t=GetSlot(this,p),r=CalendarFields(t,["day","monthCode"]),o=PrepareTemporalFields(this,r,[]),n=CalendarFields(t,["year"]);let a=CalendarMergeFields(t,o,PrepareTemporalFields(e,n,[]));a=PrepareTemporalFields(a,[...new Set([...r,...n])],[]);const i=bt(null);return i.overflow="reject",CalendarDateFromFields(t,a,i)}getISOFields(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return {calendar:GetSlot(this,p),isoDay:GetSlot(this,l),isoMonth:GetSlot(this,s),isoYear:GetSlot(this,i)}}getCalendar(){if(!IsTemporalMonthDay(this))throw new TypeError("invalid receiver");return ToTemporalCalendarObject(GetSlot(this,p))}static from(e,t){const r=GetOptionsObject(t);return IsTemporalMonthDay(e)?(ToTemporalOverflow(r),CreateTemporalMonthDay(GetSlot(e,s),GetSlot(e,l),GetSlot(e,p),GetSlot(e,i))):ToTemporalMonthDay(e,r)}}MakeIntrinsicClass(PlainMonthDay,"Temporal.PlainMonthDay");const instant=()=>new(GetIntrinsic("%Temporal.Instant%"))(Ve()),plainDateTime=(e,t=DefaultTimeZone())=>{const r=ToTemporalTimeZoneSlotValue(t),o=ToTemporalCalendarSlotValue(e);return GetPlainDateTimeFor(r,instant(),o)},plainDateTimeISO=(e=DefaultTimeZone())=>GetPlainDateTimeFor(ToTemporalTimeZoneSlotValue(e),instant(),"iso8601"),zonedDateTime=(e,t=DefaultTimeZone())=>{const r=ToTemporalTimeZoneSlotValue(t),o=ToTemporalCalendarSlotValue(e);return CreateTemporalZonedDateTime(Ve(),r,o)},Et={instant,plainDateTime,plainDateTimeISO,plainDate:(e,t=DefaultTimeZone())=>TemporalDateTimeToDate(plainDateTime(e,t)),plainDateISO:(e=DefaultTimeZone())=>TemporalDateTimeToDate(plainDateTimeISO(e)),plainTimeISO:(e=DefaultTimeZone())=>TemporalDateTimeToTime(plainDateTimeISO(e)),timeZoneId:()=>DefaultTimeZone(),zonedDateTime,zonedDateTimeISO:(e=DefaultTimeZone())=>zonedDateTime("iso8601",e),[Symbol.toStringTag]:"Temporal.Now"};Object.defineProperty(Et,Symbol.toStringTag,{value:"Temporal.Now",writable:!1,enumerable:!1,configurable:!0});const Mt=Object.assign;function TemporalTimeToString(e,t,r){let o=GetSlot(e,d),n=GetSlot(e,m),a=GetSlot(e,c),i=GetSlot(e,h),s=GetSlot(e,u),l=GetSlot(e,T);if(r){const{unit:e,increment:t,roundingMode:d}=r;({hour:o,minute:n,second:a,millisecond:i,microsecond:s,nanosecond:l}=RoundTime(o,n,a,i,s,l,t,e,d));}return `${ISODateTimePartString(o)}:${ISODateTimePartString(n)}${FormatSecondsStringPart(a,i,s,l,t)}`}class PlainTime{constructor(e=0,t=0,r=0,o=0,n=0,a=0){const i=void 0===e?0:ToIntegerWithTruncation(e),s=void 0===t?0:ToIntegerWithTruncation(t),l=void 0===r?0:ToIntegerWithTruncation(r),p=void 0===o?0:ToIntegerWithTruncation(o),f=void 0===n?0:ToIntegerWithTruncation(n),y=void 0===a?0:ToIntegerWithTruncation(a);RejectTime(i,s,l,p,f,y),N(this),SetSlot(this,d,i),SetSlot(this,m,s),SetSlot(this,c,l),SetSlot(this,h,p),SetSlot(this,u,f),SetSlot(this,T,y);}get hour(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,d)}get minute(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,m)}get second(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,c)}get millisecond(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,h)}get microsecond(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,u)}get nanosecond(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return GetSlot(this,T)}with(e,t){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");RejectTemporalLikeObject(e);const r=ToTemporalOverflow(GetOptionsObject(t)),o=ToTemporalTimeRecord(e,"partial"),n=ToTemporalTimeRecord(this);let{hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m}=Mt(n,o);return ({hour:a,minute:i,second:s,millisecond:l,microsecond:d,nanosecond:m}=RegulateTime(a,i,s,l,d,m,r)),new PlainTime(a,i,s,l,d,m)}add(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainTime("add",this,e)}subtract(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainTime("subtract",this,e)}until(e,t){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainTime("until",this,e,t)}since(e,t){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainTime("since",this,e,t)}round(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");if(void 0===e)throw new TypeError("options parameter is required");const t="string"==typeof e?CreateOnePropObject("smallestUnit",e):GetOptionsObject(e),r=ToTemporalRoundingIncrement(t),o=ToTemporalRoundingMode(t,"halfExpand"),n=GetTemporalUnit(t,"smallestUnit","time",He);ValidateTemporalRoundingIncrement(r,{hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[n],!1);let a=GetSlot(this,d),i=GetSlot(this,m),s=GetSlot(this,c),l=GetSlot(this,h),p=GetSlot(this,u),f=GetSlot(this,T);return ({hour:a,minute:i,second:s,millisecond:l,microsecond:p,nanosecond:f}=RoundTime(a,i,s,l,p,f,r,n,o)),new PlainTime(a,i,s,l,p,f)}equals(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");const t=ToTemporalTime(e);for(const e of [d,m,c,h,u,T]){if(GetSlot(this,e)!==GetSlot(t,e))return !1}return !0}toString(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");const t=GetOptionsObject(e),r=ToFractionalSecondDigits(t),o=ToTemporalRoundingMode(t,"trunc"),n=GetTemporalUnit(t,"smallestUnit","time",void 0);if("hour"===n)throw new RangeError('smallestUnit must be a time unit other than "hour"');const{precision:a,unit:i,increment:s}=ToSecondsStringPrecisionRecord(n,r);return TemporalTimeToString(this,a,{unit:i,increment:s,roundingMode:o})}toJSON(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return TemporalTimeToString(this,"auto")}toLocaleString(e,t){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return new ht(e,t).format(this)}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.PlainTime")}toPlainDateTime(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e),r=GetSlot(t,i),o=GetSlot(t,s),n=GetSlot(t,l),a=GetSlot(t,p);return CreateTemporalDateTime(r,o,n,GetSlot(this,d),GetSlot(this,m),GetSlot(this,c),GetSlot(this,h),GetSlot(this,u),GetSlot(this,T),a)}toZonedDateTime(e){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");const t=e.plainDate;if(void 0===t)throw new TypeError("missing date property");const r=ToTemporalDate(t),o=e.timeZone;if(void 0===o)throw new TypeError("missing timeZone property");const a=ToTemporalTimeZoneSlotValue(o),f=GetSlot(r,i),y=GetSlot(r,s),I=GetSlot(r,l),S=GetSlot(r,p),g=GetSlot(this,d),w=GetSlot(this,m),D=GetSlot(this,c),G=GetSlot(this,h),v=GetSlot(this,u),C=GetSlot(this,T);return CreateTemporalZonedDateTime(GetSlot(GetInstantFor(a,new(GetIntrinsic("%Temporal.PlainDateTime%"))(f,y,I,g,w,D,G,v,C,S),"compatible"),n),a,S)}getISOFields(){if(!IsTemporalTime(this))throw new TypeError("invalid receiver");return {isoHour:GetSlot(this,d),isoMicrosecond:GetSlot(this,u),isoMillisecond:GetSlot(this,h),isoMinute:GetSlot(this,m),isoNanosecond:GetSlot(this,T),isoSecond:GetSlot(this,c)}}static from(e,t){const r=ToTemporalOverflow(GetOptionsObject(t));return IsTemporalTime(e)?new PlainTime(GetSlot(e,d),GetSlot(e,m),GetSlot(e,c),GetSlot(e,h),GetSlot(e,u),GetSlot(e,T)):ToTemporalTime(e,r)}static compare(e,t){const r=ToTemporalTime(e),o=ToTemporalTime(t);for(const e of [d,m,c,h,u,T]){const t=GetSlot(r,e),n=GetSlot(o,e);if(t!==n)return ComparisonResult(t-n)}return 0}}MakeIntrinsicClass(PlainTime,"Temporal.PlainTime");class TimeZone{constructor(e){if(arguments.length<1)throw new RangeError("missing argument: identifier is required");const t=GetCanonicalTimeZoneIdentifier(e);N(this),SetSlot(this,a,t);}get id(){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return GetSlot(this,a)}getOffsetNanosecondsFor(e){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");const t=ToTemporalInstant(e),r=GetSlot(this,a);return IsTimeZoneOffsetString(r)?ParseTimeZoneOffsetString(r):GetNamedTimeZoneOffsetNanoseconds(r,GetSlot(t,n))}getOffsetStringFor(e){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return GetOffsetStringFor(this,ToTemporalInstant(e))}getPlainDateTimeFor(e,t="iso8601"){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return GetPlainDateTimeFor(this,ToTemporalInstant(e),ToTemporalCalendarSlotValue(t))}getInstantFor(e,t){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return GetInstantFor(this,ToTemporalDateTime(e),ToTemporalDisambiguation(GetOptionsObject(t)))}getPossibleInstantsFor(t){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");const r=ToTemporalDateTime(t),o=GetIntrinsic("%Temporal.Instant%"),n=GetSlot(this,a);if(IsTimeZoneOffsetString(n)){const t=GetUTCEpochNanoseconds(GetSlot(r,i),GetSlot(r,s),GetSlot(r,l),GetSlot(r,d),GetSlot(r,m),GetSlot(r,c),GetSlot(r,h),GetSlot(r,u),GetSlot(r,T));if(null===t)throw new RangeError("DateTime outside of supported range");const a=ParseTimeZoneOffsetString(n);return [new o(JSBI.subtract(t,JSBI.BigInt(a)))]}const p=function GetNamedTimeZoneEpochNanoseconds(t,r,o,n,a,i,s,l,d,m){const c=GetUTCEpochNanoseconds(r,o,n,a,i,s,l,d,m);if(null===c)throw new RangeError("DateTime outside of supported range");let h=JSBI.subtract(c,Ee);JSBI.lessThan(h,Me)&&(h=c);let u=JSBI.add(c,Ee);JSBI.greaterThan(u,Re)&&(u=c);const T=GetNamedTimeZoneOffsetNanoseconds(t,h),p=GetNamedTimeZoneOffsetNanoseconds(t,u);return (T===p?[T]:[T,p]).map((h=>{const u=JSBI.subtract(c,JSBI.BigInt(h)),T=GetNamedTimeZoneDateTimeParts(t,u);if(r===T.year&&o===T.month&&n===T.day&&a===T.hour&&i===T.minute&&s===T.second&&l===T.millisecond&&d===T.microsecond&&m===T.nanosecond)return u})).filter((e=>void 0!==e))}(n,GetSlot(r,i),GetSlot(r,s),GetSlot(r,l),GetSlot(r,d),GetSlot(r,m),GetSlot(r,c),GetSlot(r,h),GetSlot(r,u),GetSlot(r,T));return p.map((e=>new o(e)))}getNextTransition(e){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");const t=ToTemporalInstant(e),r=GetSlot(this,a);if(IsTimeZoneOffsetString(r)||"UTC"===r)return null;let o=GetSlot(t,n);const i=GetIntrinsic("%Temporal.Instant%");return o=GetNamedTimeZoneNextTransition(r,o),null===o?null:new i(o)}getPreviousTransition(e){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");const t=ToTemporalInstant(e),r=GetSlot(this,a);if(IsTimeZoneOffsetString(r)||"UTC"===r)return null;let o=GetSlot(t,n);const i=GetIntrinsic("%Temporal.Instant%");return o=GetNamedTimeZonePreviousTransition(r,o),null===o?null:new i(o)}toString(){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return GetSlot(this,a)}toJSON(){if(!IsTemporalTimeZone(this))throw new TypeError("invalid receiver");return GetSlot(this,a)}static from(e){return ToTemporalTimeZoneObject(ToTemporalTimeZoneSlotValue(e))}}MakeIntrinsicClass(TimeZone,"Temporal.TimeZone"),DefineIntrinsic("Temporal.TimeZone.prototype.getOffsetNanosecondsFor",TimeZone.prototype.getOffsetNanosecondsFor),DefineIntrinsic("Temporal.TimeZone.prototype.getPossibleInstantsFor",TimeZone.prototype.getPossibleInstantsFor);const Rt=Object.create;class PlainYearMonth{constructor(e,t,r="iso8601",o=1){CreateTemporalYearMonthSlots(this,ToIntegerWithTruncation(e),ToIntegerWithTruncation(t),ToTemporalCalendarSlotValue(r),ToIntegerWithTruncation(o));}get year(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarYear(GetSlot(this,p),this)}get month(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarMonth(GetSlot(this,p),this)}get monthCode(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarMonthCode(GetSlot(this,p),this)}get calendarId(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return ToTemporalCalendarIdentifier(GetSlot(this,p))}get era(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarEra(GetSlot(this,p),this)}get eraYear(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarEraYear(GetSlot(this,p),this)}get daysInMonth(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarDaysInMonth(GetSlot(this,p),this)}get daysInYear(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarDaysInYear(GetSlot(this,p),this)}get monthsInYear(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarMonthsInYear(GetSlot(this,p),this)}get inLeapYear(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return CalendarInLeapYear(GetSlot(this,p),this)}with(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid argument");RejectTemporalLikeObject(e);const r=GetOptionsObject(t),o=GetSlot(this,p),n=CalendarFields(o,["month","monthCode","year"]);let a=PrepareTemporalFields(this,n,[]);return a=CalendarMergeFields(o,a,PrepareTemporalFields(e,n,"partial")),a=PrepareTemporalFields(a,n,[]),CalendarYearMonthFromFields(o,a,r)}add(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainYearMonth("add",this,e,t)}subtract(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromPlainYearMonth("subtract",this,e,t)}until(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainYearMonth("until",this,e,t)}since(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return DifferenceTemporalPlainYearMonth("since",this,e,t)}equals(e){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");const t=ToTemporalYearMonth(e);for(const e of [i,s,l]){if(GetSlot(this,e)!==GetSlot(t,e))return !1}return CalendarEquals(GetSlot(this,p),GetSlot(t,p))}toString(e){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return TemporalYearMonthToString(this,ToCalendarNameOption(GetOptionsObject(e)))}toJSON(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return TemporalYearMonthToString(this)}toLocaleString(e,t){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return new ht(e,t).format(this)}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.PlainYearMonth")}toPlainDate(e){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("argument should be an object");const t=GetSlot(this,p),r=CalendarFields(t,["monthCode","year"]),o=PrepareTemporalFields(this,r,[]),n=CalendarFields(t,["day"]);let a=CalendarMergeFields(t,o,PrepareTemporalFields(e,n,[]));a=PrepareTemporalFields(a,[...new Set([...r,...n])],[]);const i=Rt(null);return i.overflow="reject",CalendarDateFromFields(t,a,i)}getISOFields(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return {calendar:GetSlot(this,p),isoDay:GetSlot(this,l),isoMonth:GetSlot(this,s),isoYear:GetSlot(this,i)}}getCalendar(){if(!IsTemporalYearMonth(this))throw new TypeError("invalid receiver");return ToTemporalCalendarObject(GetSlot(this,p))}static from(e,t){const r=GetOptionsObject(t);return IsTemporalYearMonth(e)?(ToTemporalOverflow(r),CreateTemporalYearMonth(GetSlot(e,i),GetSlot(e,s),GetSlot(e,p),GetSlot(e,l))):ToTemporalYearMonth(e,r)}static compare(e,t){const r=ToTemporalYearMonth(e),o=ToTemporalYearMonth(t);return CompareISODate(GetSlot(r,i),GetSlot(r,s),GetSlot(r,l),GetSlot(o,i),GetSlot(o,s),GetSlot(o,l))}}MakeIntrinsicClass(PlainYearMonth,"Temporal.PlainYearMonth");const Ft=ht.prototype.resolvedOptions,Yt=Object.create;class ZonedDateTime{constructor(e,t,r="iso8601"){if(arguments.length<1)throw new TypeError("missing argument: epochNanoseconds is required");CreateTemporalZonedDateTimeSlots(this,ToBigInt(e),ToTemporalTimeZoneSlotValue(t),ToTemporalCalendarSlotValue(r));}get calendarId(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return ToTemporalCalendarIdentifier(GetSlot(this,p))}get timeZoneId(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return ToTemporalTimeZoneIdentifier(GetSlot(this,g))}get year(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarYear(GetSlot(this,p),dateTime(this))}get month(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarMonth(GetSlot(this,p),dateTime(this))}get monthCode(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarMonthCode(GetSlot(this,p),dateTime(this))}get day(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDay(GetSlot(this,p),dateTime(this))}get hour(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),d)}get minute(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),m)}get second(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),c)}get millisecond(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),h)}get microsecond(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),u)}get nanosecond(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetSlot(dateTime(this),T)}get era(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarEra(GetSlot(this,p),dateTime(this))}get eraYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarEraYear(GetSlot(this,p),dateTime(this))}get epochSeconds(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=GetSlot(this,n);return JSBI.toNumber(BigIntFloorDiv(t,ve))}get epochMilliseconds(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=GetSlot(this,n);return JSBI.toNumber(BigIntFloorDiv(t,Ge))}get epochMicroseconds(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return ToBigIntExternal(BigIntFloorDiv(GetSlot(this,n),De))}get epochNanoseconds(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return ToBigIntExternal(GetSlot(this,n))}get dayOfWeek(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDayOfWeek(GetSlot(this,p),dateTime(this))}get dayOfYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDayOfYear(GetSlot(this,p),dateTime(this))}get weekOfYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarWeekOfYear(GetSlot(this,p),dateTime(this))}get yearOfWeek(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarYearOfWeek(GetSlot(this,p),dateTime(this))}get hoursInDay(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=dateTime(this),r=GetIntrinsic("%Temporal.PlainDateTime%"),o=GetSlot(t,i),a=GetSlot(t,s),d=GetSlot(t,l),m=new r(o,a,d,0,0,0,0,0,0),c=AddISODate(o,a,d,0,0,0,1,"reject"),h=new r(c.year,c.month,c.day,0,0,0,0,0,0),u=GetSlot(this,g),T=GetSlot(GetInstantFor(u,m,"compatible"),n),p=GetSlot(GetInstantFor(u,h,"compatible"),n);return BigIntDivideToNumber(JSBI.subtract(p,T),Oe)}get daysInWeek(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInWeek(GetSlot(this,p),dateTime(this))}get daysInMonth(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInMonth(GetSlot(this,p),dateTime(this))}get daysInYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarDaysInYear(GetSlot(this,p),dateTime(this))}get monthsInYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarMonthsInYear(GetSlot(this,p),dateTime(this))}get inLeapYear(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return CalendarInLeapYear(GetSlot(this,p),dateTime(this))}get offset(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetOffsetStringFor(GetSlot(this,g),GetSlot(this,S))}get offsetNanoseconds(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return GetOffsetNanosecondsFor(GetSlot(this,g),GetSlot(this,S))}with(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");if(!IsObject(e))throw new TypeError("invalid zoned-date-time-like");RejectTemporalLikeObject(e);const r=GetOptionsObject(t),o=GetSlot(this,p);let n=CalendarFields(o,["day","hour","microsecond","millisecond","minute","month","monthCode","nanosecond","second","year"]);n.push("offset");let a=PrepareTemporalFields(this,n,["offset"]);a=CalendarMergeFields(o,a,PrepareTemporalFields(e,n,"partial")),a=PrepareTemporalFields(a,n,["offset"]);const i=ToTemporalDisambiguation(r),s=ToTemporalOffset(r,"prefer");let{year:l,month:d,day:m,hour:c,minute:h,second:u,millisecond:T,microsecond:f,nanosecond:y}=InterpretTemporalDateTimeFields(o,a,r);const I=ParseTimeZoneOffsetString(a.offset),S=GetSlot(this,g);return CreateTemporalZonedDateTime(InterpretISODateTimeOffset(l,d,m,c,h,u,T,f,y,"option",I,S,i,s,!1),S,o)}withPlainDate(e){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalDate(e),r=GetSlot(t,i),o=GetSlot(t,s),a=GetSlot(t,l);let f=GetSlot(t,p);const y=dateTime(this),I=GetSlot(y,d),S=GetSlot(y,m),w=GetSlot(y,c),D=GetSlot(y,h),G=GetSlot(y,u),v=GetSlot(y,T);f=ConsolidateCalendars(GetSlot(this,p),f);const C=GetSlot(this,g);return CreateTemporalZonedDateTime(GetSlot(GetInstantFor(C,new(GetIntrinsic("%Temporal.PlainDateTime%"))(r,o,a,I,S,w,D,G,v,f),"compatible"),n),C,f)}withPlainTime(e){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=GetIntrinsic("%Temporal.PlainTime%"),r=void 0===e?new t:ToTemporalTime(e),o=dateTime(this),a=GetSlot(o,i),f=GetSlot(o,s),y=GetSlot(o,l),I=GetSlot(this,p),S=GetSlot(r,d),w=GetSlot(r,m),D=GetSlot(r,c),G=GetSlot(r,h),v=GetSlot(r,u),C=GetSlot(r,T),O=GetSlot(this,g);return CreateTemporalZonedDateTime(GetSlot(GetInstantFor(O,new(GetIntrinsic("%Temporal.PlainDateTime%"))(a,f,y,S,w,D,G,v,C,I),"compatible"),n),O,I)}withTimeZone(e){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalTimeZoneSlotValue(e);return CreateTemporalZonedDateTime(GetSlot(this,n),t,GetSlot(this,p))}withCalendar(e){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=ToTemporalCalendarSlotValue(e);return CreateTemporalZonedDateTime(GetSlot(this,n),GetSlot(this,g),t)}add(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromZonedDateTime("add",this,e,t)}subtract(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return AddDurationToOrSubtractDurationFromZonedDateTime("subtract",this,e,t)}until(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalZonedDateTime("until",this,e,t)}since(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return DifferenceTemporalZonedDateTime("since",this,e,t)}round(t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");if(void 0===t)throw new TypeError("options parameter is required");const r="string"==typeof t?CreateOnePropObject("smallestUnit",t):GetOptionsObject(t),o=ToTemporalRoundingIncrement(r),a=ToTemporalRoundingMode(r,"halfExpand"),f=GetTemporalUnit(r,"smallestUnit","time",He,["day"]),y={day:1,hour:24,minute:60,second:60,millisecond:1e3,microsecond:1e3,nanosecond:1e3}[f];ValidateTemporalRoundingIncrement(o,y,1===y);const I=dateTime(this);let w=GetSlot(I,i),D=GetSlot(I,s),G=GetSlot(I,l),v=GetSlot(I,d),C=GetSlot(I,m),O=GetSlot(I,c),b=GetSlot(I,h),E=GetSlot(I,u),M=GetSlot(I,T);const R=GetIntrinsic("%Temporal.PlainDateTime%"),F=GetSlot(this,g),Y=GetSlot(this,p),P=GetInstantFor(F,new R(GetSlot(I,i),GetSlot(I,s),GetSlot(I,l),0,0,0,0,0,0),"compatible"),Z=AddZonedDateTime(P,F,Y,0,0,0,1,0,0,0,0,0,0),B=JSBI.subtract(Z,JSBI.BigInt(GetSlot(P,n)));if(JSBI.lessThanOrEqual(B,Ie))throw new RangeError("cannot round a ZonedDateTime in a calendar with zero or negative length days");({year:w,month:D,day:G,hour:v,minute:C,second:O,millisecond:b,microsecond:E,nanosecond:M}=RoundISODateTime(w,D,G,v,C,O,b,E,M,o,f,a,JSBI.toNumber(B)));return CreateTemporalZonedDateTime(InterpretISODateTimeOffset(w,D,G,v,C,O,b,E,M,"option",GetOffsetNanosecondsFor(F,GetSlot(this,S)),F,"compatible","prefer",!1),F,GetSlot(this,p))}equals(t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const r=ToTemporalZonedDateTime(t),o=GetSlot(this,n),a=GetSlot(r,n);return !!JSBI.equal(JSBI.BigInt(o),JSBI.BigInt(a))&&(!!TimeZoneEquals(GetSlot(this,g),GetSlot(r,g))&&CalendarEquals(GetSlot(this,p),GetSlot(r,p)))}toString(e){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const t=GetOptionsObject(e),r=ToCalendarNameOption(t),o=ToFractionalSecondDigits(t),n=function ToShowOffsetOption(e){return GetOption(e,"offset",["auto","never"],"auto")}(t),a=ToTemporalRoundingMode(t,"trunc"),i=GetTemporalUnit(t,"smallestUnit","time",void 0);if("hour"===i)throw new RangeError('smallestUnit must be a time unit other than "hour"');const s=function ToTimeZoneNameOption(e){return GetOption(e,"timeZoneName",["auto","never","critical"],"auto")}(t),{precision:l,unit:d,increment:m}=ToSecondsStringPrecisionRecord(i,o);return TemporalZonedDateTimeToString(this,l,r,s,n,{unit:d,increment:m,roundingMode:a})}toLocaleString(e,t){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const r=GetOptionsObject(t),o=Yt(null);if(CopyDataProperties(o,r,["timeZone"]),void 0!==r.timeZone)throw new TypeError("ZonedDateTime toLocaleString does not accept a timeZone option");void 0===o.year&&void 0===o.month&&void 0===o.day&&void 0===o.weekday&&void 0===o.dateStyle&&void 0===o.hour&&void 0===o.minute&&void 0===o.second&&void 0===o.timeStyle&&void 0===o.dayPeriod&&void 0===o.timeZoneName&&(o.timeZoneName="short");let n=ToTemporalTimeZoneIdentifier(GetSlot(this,g));if(IsTimeZoneOffsetString(n))throw new RangeError("toLocaleString does not support offset string time zones");n=GetCanonicalTimeZoneIdentifier(n),o.timeZone=n;const a=new ht(e,o),i=Call(Ft,a,[]).calendar,s=ToTemporalCalendarIdentifier(GetSlot(this,p));if("iso8601"!==s&&"iso8601"!==i&&i!==s)throw new RangeError(`cannot format ZonedDateTime with calendar ${s} in locale with calendar ${i}`);return a.format(GetSlot(this,S))}toJSON(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return TemporalZonedDateTimeToString(this,"auto")}valueOf(){throw new TypeError("use compare() or equals() to compare Temporal.ZonedDateTime")}startOfDay(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const e=dateTime(this),t=GetIntrinsic("%Temporal.PlainDateTime%"),r=GetSlot(this,p),o=new t(GetSlot(e,i),GetSlot(e,s),GetSlot(e,l),0,0,0,0,0,0,r),a=GetSlot(this,g);return CreateTemporalZonedDateTime(GetSlot(GetInstantFor(a,o,"compatible"),n),a,r)}toInstant(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return new(GetIntrinsic("%Temporal.Instant%"))(GetSlot(this,n))}toPlainDate(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return TemporalDateTimeToDate(dateTime(this))}toPlainTime(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return TemporalDateTimeToTime(dateTime(this))}toPlainDateTime(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return dateTime(this)}toPlainYearMonth(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const e=GetSlot(this,p);return CalendarYearMonthFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["monthCode","year"]),[]))}toPlainMonthDay(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const e=GetSlot(this,p);return CalendarMonthDayFromFields(e,PrepareTemporalFields(this,CalendarFields(e,["day","monthCode"]),[]))}getISOFields(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");const e=dateTime(this),t=GetSlot(this,g);return {calendar:GetSlot(this,p),isoDay:GetSlot(e,l),isoHour:GetSlot(e,d),isoMicrosecond:GetSlot(e,u),isoMillisecond:GetSlot(e,h),isoMinute:GetSlot(e,m),isoMonth:GetSlot(e,s),isoNanosecond:GetSlot(e,T),isoSecond:GetSlot(e,c),isoYear:GetSlot(e,i),offset:GetOffsetStringFor(t,GetSlot(this,S)),timeZone:t}}getCalendar(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return ToTemporalCalendarObject(GetSlot(this,p))}getTimeZone(){if(!IsTemporalZonedDateTime(this))throw new TypeError("invalid receiver");return ToTemporalTimeZoneObject(GetSlot(this,g))}static from(e,t){const r=GetOptionsObject(t);return IsTemporalZonedDateTime(e)?(ToTemporalDisambiguation(r),ToTemporalOffset(r,"reject"),ToTemporalOverflow(r),CreateTemporalZonedDateTime(GetSlot(e,n),GetSlot(e,g),GetSlot(e,p))):ToTemporalZonedDateTime(e,r)}static compare(t,r){const o=ToTemporalZonedDateTime(t),a=ToTemporalZonedDateTime(r),i=GetSlot(o,n),s=GetSlot(a,n);return JSBI.lessThan(JSBI.BigInt(i),JSBI.BigInt(s))?-1:JSBI.greaterThan(JSBI.BigInt(i),JSBI.BigInt(s))?1:0}}function dateTime(e){return GetPlainDateTimeFor(GetSlot(e,g),GetSlot(e,S),GetSlot(e,p))}MakeIntrinsicClass(ZonedDateTime,"Temporal.ZonedDateTime");var Pt=Object.freeze({__proto__:null,Calendar,Duration,Instant,Now:Et,PlainDate,PlainDateTime,PlainMonthDay,PlainTime,PlainYearMonth,TimeZone,ZonedDateTime});const Zt=[Instant,Calendar,PlainDate,PlainDateTime,Duration,PlainMonthDay,PlainTime,TimeZone,PlainYearMonth,ZonedDateTime];for(const e of Zt){const t=Object.getOwnPropertyDescriptor(e,"prototype");(t.configurable||t.enumerable||t.writable)&&(t.configurable=!1,t.enumerable=!1,t.writable=!1,Object.defineProperty(e,"prototype",t));}
 
   const TextField = x$1(forwardElementRef(function TextField({ type, ...props }, ref) {
       switch (type) {
@@ -14491,9 +15379,9 @@
       }
       return (o$3(TextFieldBase, { ref: ref, capture: e => {
               if (e.currentTarget.valueAsDate)
-                  return wt.Instant.fromEpochMilliseconds(+e.currentTarget.valueAsDate);
+                  return Pt.Instant.fromEpochMilliseconds(+e.currentTarget.valueAsDate);
               if (e.currentTarget.valueAsNumber != null && isFinite(e.currentTarget.valueAsNumber))
-                  return wt.Instant.fromEpochMilliseconds(e.currentTarget.valueAsNumber);
+                  return Pt.Instant.fromEpochMilliseconds(e.currentTarget.valueAsNumber);
               return null;
           }, iconEnd: iconEnd, iconStart: iconStart, loadingLabel: loadingLabel ?? "Please wait while the operation completes", readonly: readonly ?? false, size: size ?? null, throttle: throttle ?? 0, debounce: debounce ?? 0, resizeable: false, rows: 1, disabled: disabled ?? false, inputMode: inputMode ?? null, placeholder: placeholder ?? null, autocomplete: autocomplete ?? null, label: label, labelPosition: labelPosition, onValueChange: onValueChangeDateTime, propsInput: useMergedProps(props, { type: "datetime-local" }), propsLabel: {}, value: value2, marginBottom: marginBottom }));
   }));
@@ -14503,7 +15391,7 @@
               //if (e.currentTarget.valueAsDate)
               //    return Temporal.PlainDate.from(e.currentTarget.valueAsDate.toISOString());
               if (e.currentTarget.value)
-                  return wt.PlainDate.from(e.currentTarget.value);
+                  return Pt.PlainDate.from(e.currentTarget.value);
               return null;
           }, 
           // capture={e => e.currentTarget.valueAsDate ? Temporal.PlainDate.from(e.currentTarget.valueAsDate.toISOString()) : null}
@@ -14516,12 +15404,12 @@
                   let value = e.currentTarget.value;
                   const [hour, minute, second] = value.split(":").map(s => +s);
                   if (second == undefined)
-                      return wt.PlainTime.from({
+                      return Pt.PlainTime.from({
                           hour,
                           minute
                       });
                   else
-                      return wt.PlainTime.from({
+                      return Pt.PlainTime.from({
                           hour,
                           minute,
                           second
@@ -14635,8 +15523,8 @@
           throttle: throttle ?? undefined
       });*/
       const isTextArea = (resizeable || (rows || 0) > 1);
-      return (o$3(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onValueChange, capture: capture, debounce: debounce ?? 500, throttle: throttle ?? 1000, tagIndicator: "span", render: progressInfo => {
-              const { asyncHandlerReturn: { pending: p, debouncingAsync, callCount, debouncingSync, currentCapture, syncHandler, invocationResult }, propsIndicator } = progressInfo;
+      return (o$3(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onValueChange, capture: capture, debounce: debounce ?? 500, throttle: throttle ?? 1000, tagProgressIndicator: "span", render: progressInfo => {
+              const { asyncHandlerReturn: { pending: p, debouncingAsync, callCount, debouncingSync, currentCapture, syncHandler, invocationResult }, propsProgressIndicator } = progressInfo;
               const showSpinner = (p || debouncingAsync || debouncingSync);
               const updateDOMValue = useStableCallback((newValue) => {
                   if (getCurrentFocusedInner())
@@ -14741,10 +15629,10 @@
               if (!withinInputGroup) {
                   return (o$3("div", { ...useMergedProps({
                           className: clsx("form-text-field", otherClasses, `mb-${marginBottom ?? 3}`, `form-text-field-type-${propsInput.type}`, !!iconStart && "form-text-field-with-icon-start", (!!iconEnd || showSpinner) && "form-text-field-with-icon-end", showSpinner && "pending")
-                      }, otherProps || {}), children: [labelPosition == "before" && labelJsx, o$3("div", { class: clsx("form-text-field-control-container", labelPosition == "floating" && "form-floating"), children: [iconStart && o$3("span", { class: clsx("form-control-icon-start form-control-icon show"), children: iconStart }), labelPosition == "tooltip" ? o$3(Tooltip, { tooltip: label, absolutePositioning: true, children: finalInputJsx }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && o$3("span", { class: clsx("form-control-icon-end form-control-icon", !showSpinner && "show"), children: iconEnd }), o$3(TextFieldSpinner, { callCount: callCount, containerClass: "form-control-icon-end form-control-icon", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsIndicator })] }), labelPosition == "after" && labelJsx] }));
+                      }, otherProps || {}), children: [labelPosition == "before" && labelJsx, o$3("div", { class: clsx("form-text-field-control-container", labelPosition == "floating" && "form-floating"), children: [iconStart && o$3("span", { class: clsx("form-control-icon-start form-control-icon show"), children: iconStart }), labelPosition == "tooltip" ? o$3(Tooltip, { tooltip: label, absolutePositioning: true, children: finalInputJsx }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && o$3("span", { class: clsx("form-control-icon-end form-control-icon", !showSpinner && "show"), children: iconEnd }), o$3(TextFieldSpinner, { callCount: callCount, containerClass: "form-control-icon-end form-control-icon", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator })] }), labelPosition == "after" && labelJsx] }));
               }
               else {
-                  return (o$3(_$3, { children: [labelPosition == "before" && labelJsx, iconStart && o$3("span", { class: clsx("input-group-text"), children: iconStart }), labelPosition == "tooltip" ? o$3(Tooltip, { tooltip: label, absolutePositioning: true, children: finalInputJsx }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && o$3("span", { class: clsx("input-group-text", !showSpinner && "show"), children: iconEnd }), o$3(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsIndicator }), labelPosition == "after" && labelJsx] }));
+                  return (o$3(_$3, { children: [labelPosition == "before" && labelJsx, iconStart && o$3("span", { class: clsx("input-group-text"), children: iconStart }), labelPosition == "tooltip" ? o$3(Tooltip, { tooltip: label, absolutePositioning: true, children: finalInputJsx }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && o$3("span", { class: clsx("input-group-text", !showSpinner && "show"), children: iconEnd }), o$3(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), labelPosition == "after" && labelJsx] }));
               }
           } }));
   }));
@@ -14753,7 +15641,7 @@
           return null;
       let pendingDisplayType = ((debouncingAsync || debouncingSync) ? 2 : p ? 1 : 0);
       const withinInputGroup = q$2(WithinInputGroup);
-      const ret = (o$3(_$3, { children: [o$3(Fade, { show: (pendingDisplayType == 1), animateOnMount: true, exitVisibility: "removed", children: o$3("span", { class: clsx(containerClass, `spinner-container`, "show"), children: o$3("span", { class: clsx(`spinner spinner-border spinner-border-sm`), ...((pendingDisplayType == 1) ? propsIndicator : {}) }) }) }), o$3(Fade, { show: (pendingDisplayType == 2), animateOnMount: true, exitVisibility: "removed", children: o$3("span", { class: clsx(containerClass, `spinner-container`, "show"), children: o$3("span", { class: clsx(`spinner spinner-grow spinner-grow-sm`), ...((pendingDisplayType == 2) ? propsIndicator : {}) }) }) })] }));
+      const ret = (o$3(_$3, { children: [o$3(Fade, { show: (pendingDisplayType == 1), animateOnMount: false, exitVisibility: "removed", children: o$3("span", { class: clsx(containerClass, `spinner-container`, "show"), children: o$3("span", { class: clsx(`spinner spinner-border spinner-border-sm`), ...((pendingDisplayType == 1) ? propsIndicator : {}) }) }) }), o$3(Fade, { show: (pendingDisplayType == 2), animateOnMount: false, exitVisibility: "removed", children: o$3("span", { class: clsx(containerClass, `spinner-container`, "show"), children: o$3("span", { class: clsx(`spinner spinner-grow spinner-grow-sm`), ...((pendingDisplayType == 2) ? propsIndicator : {}) }) }) })] }));
       if (!withinInputGroup) {
           return ret;
       }
@@ -14899,9 +15787,9 @@
       "textPartLanguage"
   ];
   function RichTextField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }) {
-      return (o$3(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagIndicator: "div", render: progressInfo => {
+      return (o$3(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagProgressIndicator: "div", render: progressInfo => {
               const [getFocused, setFocused] = usePassiveState(null, returnFalse);
-              const { asyncHandlerReturn, propsIndicator, propsRegion } = progressInfo;
+              const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
               const { pending: p, callCount, debouncingAsync, debouncingSync, currentCapture, syncHandler, invocationResult } = asyncHandlerReturn;
               const pending = (p || debouncingAsync || debouncingSync);
               useCommitTextField({
@@ -14916,15 +15804,15 @@
                   value: valueHtml
               });
               const editorHandle = _$1(null);
-              return (o$3("div", { class: clsx("rich-text-field", pending && "pending"), children: [o$3(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsIndicator }), o$3(CkEditorWrapper, { editorHandle: editorHandle, implementation: implementation ?? globalThis.CKEDITOR?.ClassicEditor ?? globalThis.ClassicEditor, toolbarItems: toolbarItems ?? RTFDefaultItems, onFocusChange: setFocused, onValueChange: value => {
+              return (o$3("div", { class: clsx("rich-text-field", pending && "pending"), children: [o$3(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), o$3(CkEditorWrapper, { editorHandle: editorHandle, implementation: implementation ?? globalThis.CKEDITOR?.ClassicEditor ?? globalThis.ClassicEditor, toolbarItems: toolbarItems ?? RTFDefaultItems, onFocusChange: setFocused, onValueChange: value => {
                               syncHandler(value);
                           }, valueHtml: (pending ? currentCapture : valueHtml) || "", ...props, children: o$3("textarea", {}) })] }));
           } }));
   }
   function DocumentField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }) {
-      return (o$3(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagIndicator: "div", render: progressInfo => {
+      return (o$3(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagProgressIndicator: "div", render: progressInfo => {
               const [getFocused, setFocused] = usePassiveState(null, returnFalse);
-              const { asyncHandlerReturn, propsIndicator, propsRegion } = progressInfo;
+              const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
               const { pending: p, callCount, debouncingAsync, debouncingSync, currentCapture, syncHandler, invocationResult } = asyncHandlerReturn;
               const pending = (p || debouncingAsync || debouncingSync);
               useCommitTextField({
@@ -14939,7 +15827,7 @@
                   value: valueHtml
               });
               const editorHandle = _$1(null);
-              return (o$3("div", { class: clsx("document-field shadow-sm", pending && "pending"), children: [o$3(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsIndicator }), o$3("div", { class: "document-field__toolbar shadow-sm" }), o$3("div", { class: "document-field__editable-container", children: o$3(CkEditorWrapper, { implementation: implementation ?? globalThis.CKEDITOR?.DecoupledEditor ?? globalThis.DecoupledEditor, toolbarItems: toolbarItems ?? DFDefaultItems, editorHandle: editorHandle, onFocusChange: setFocused, onValueChange: value => {
+              return (o$3("div", { class: clsx("document-field shadow-sm", pending && "pending"), children: [o$3(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), o$3("div", { class: "document-field__toolbar shadow-sm" }), o$3("div", { class: "document-field__editable-container", children: o$3(CkEditorWrapper, { implementation: implementation ?? globalThis.CKEDITOR?.DecoupledEditor ?? globalThis.DecoupledEditor, toolbarItems: toolbarItems ?? DFDefaultItems, editorHandle: editorHandle, onFocusChange: setFocused, onValueChange: value => {
                                   syncHandler(value);
                               }, valueHtml: (pending ? currentCapture : valueHtml) || "", onReady: editor => {
                                   const toolbarContainer = document.querySelector('.document-field__toolbar');
@@ -14948,7 +15836,7 @@
           } }));
   }
 
-  /*! @license DOMPurify 3.0.2 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.0.2/LICENSE */
+  /*! @license DOMPurify 3.0.5 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.0.5/LICENSE */
 
   const {
     entries,
@@ -15024,7 +15912,9 @@
   /* Add properties to a lookup table */
 
   function addToSet(set, array, transformCaseFunc) {
-    transformCaseFunc = transformCaseFunc ? transformCaseFunc : stringToLowerCase;
+    var _transformCaseFunc;
+
+    transformCaseFunc = (_transformCaseFunc = transformCaseFunc) !== null && _transformCaseFunc !== void 0 ? _transformCaseFunc : stringToLowerCase;
 
     if (setPrototypeOf) {
       // Make 'in' and truthy checks like Boolean(set.constructor)
@@ -15098,12 +15988,12 @@
   const html$1 = freeze(['a', 'abbr', 'acronym', 'address', 'area', 'article', 'aside', 'audio', 'b', 'bdi', 'bdo', 'big', 'blink', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'content', 'data', 'datalist', 'dd', 'decorator', 'del', 'details', 'dfn', 'dialog', 'dir', 'div', 'dl', 'dt', 'element', 'em', 'fieldset', 'figcaption', 'figure', 'font', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'i', 'img', 'input', 'ins', 'kbd', 'label', 'legend', 'li', 'main', 'map', 'mark', 'marquee', 'menu', 'menuitem', 'meter', 'nav', 'nobr', 'ol', 'optgroup', 'option', 'output', 'p', 'picture', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'section', 'select', 'shadow', 'small', 'source', 'spacer', 'span', 'strike', 'strong', 'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead', 'time', 'tr', 'track', 'tt', 'u', 'ul', 'var', 'video', 'wbr']); // SVG
 
   const svg$1 = freeze(['svg', 'a', 'altglyph', 'altglyphdef', 'altglyphitem', 'animatecolor', 'animatemotion', 'animatetransform', 'circle', 'clippath', 'defs', 'desc', 'ellipse', 'filter', 'font', 'g', 'glyph', 'glyphref', 'hkern', 'image', 'line', 'lineargradient', 'marker', 'mask', 'metadata', 'mpath', 'path', 'pattern', 'polygon', 'polyline', 'radialgradient', 'rect', 'stop', 'style', 'switch', 'symbol', 'text', 'textpath', 'title', 'tref', 'tspan', 'view', 'vkern']);
-  const svgFilters = freeze(['feBlend', 'feColorMatrix', 'feComponentTransfer', 'feComposite', 'feConvolveMatrix', 'feDiffuseLighting', 'feDisplacementMap', 'feDistantLight', 'feFlood', 'feFuncA', 'feFuncB', 'feFuncG', 'feFuncR', 'feGaussianBlur', 'feImage', 'feMerge', 'feMergeNode', 'feMorphology', 'feOffset', 'fePointLight', 'feSpecularLighting', 'feSpotLight', 'feTile', 'feTurbulence']); // List of SVG elements that are disallowed by default.
+  const svgFilters = freeze(['feBlend', 'feColorMatrix', 'feComponentTransfer', 'feComposite', 'feConvolveMatrix', 'feDiffuseLighting', 'feDisplacementMap', 'feDistantLight', 'feDropShadow', 'feFlood', 'feFuncA', 'feFuncB', 'feFuncG', 'feFuncR', 'feGaussianBlur', 'feImage', 'feMerge', 'feMergeNode', 'feMorphology', 'feOffset', 'fePointLight', 'feSpecularLighting', 'feSpotLight', 'feTile', 'feTurbulence']); // List of SVG elements that are disallowed by default.
   // We still need to know them so that we can do namespace
   // checks properly in case one wants to add them to
   // allow-list.
 
-  const svgDisallowed = freeze(['animate', 'color-profile', 'cursor', 'discard', 'fedropshadow', 'font-face', 'font-face-format', 'font-face-name', 'font-face-src', 'font-face-uri', 'foreignobject', 'hatch', 'hatchpath', 'mesh', 'meshgradient', 'meshpatch', 'meshrow', 'missing-glyph', 'script', 'set', 'solidcolor', 'unknown', 'use']);
+  const svgDisallowed = freeze(['animate', 'color-profile', 'cursor', 'discard', 'font-face', 'font-face-format', 'font-face-name', 'font-face-src', 'font-face-uri', 'foreignobject', 'hatch', 'hatchpath', 'mesh', 'meshgradient', 'meshpatch', 'meshrow', 'missing-glyph', 'script', 'set', 'solidcolor', 'unknown', 'use']);
   const mathMl$1 = freeze(['math', 'menclose', 'merror', 'mfenced', 'mfrac', 'mglyph', 'mi', 'mlabeledtr', 'mmultiscripts', 'mn', 'mo', 'mover', 'mpadded', 'mphantom', 'mroot', 'mrow', 'ms', 'mspace', 'msqrt', 'mstyle', 'msub', 'msup', 'msubsup', 'mtable', 'mtd', 'mtext', 'mtr', 'munder', 'munderover', 'mprescripts']); // Similarly to SVG, we want to know all MathML elements,
   // even those that we disallow by default.
 
@@ -15148,13 +16038,13 @@
    * Creates a no-op policy for internal use only.
    * Don't export this function outside this module!
    * @param {?TrustedTypePolicyFactory} trustedTypes The policy factory.
-   * @param {Document} document The document object (to determine policy name suffix)
+   * @param {HTMLScriptElement} purifyHostElement The Script element used to load DOMPurify (to determine policy name suffix).
    * @return {?TrustedTypePolicy} The policy created (or null, if Trusted Types
-   * are not supported).
+   * are not supported or creating the policy failed).
    */
 
 
-  const _createTrustedTypesPolicy = function _createTrustedTypesPolicy(trustedTypes, document) {
+  const _createTrustedTypesPolicy = function _createTrustedTypesPolicy(trustedTypes, purifyHostElement) {
     if (typeof trustedTypes !== 'object' || typeof trustedTypes.createPolicy !== 'function') {
       return null;
     } // Allow the callers to control the unique policy name
@@ -15165,8 +16055,8 @@
     let suffix = null;
     const ATTR_NAME = 'data-tt-policy-suffix';
 
-    if (document.currentScript && document.currentScript.hasAttribute(ATTR_NAME)) {
-      suffix = document.currentScript.getAttribute(ATTR_NAME);
+    if (purifyHostElement && purifyHostElement.hasAttribute(ATTR_NAME)) {
+      suffix = purifyHostElement.getAttribute(ATTR_NAME);
     }
 
     const policyName = 'dompurify' + (suffix ? '#' + suffix : '');
@@ -15201,7 +16091,7 @@
      */
 
 
-    DOMPurify.version = '3.0.2';
+    DOMPurify.version = '3.0.5';
     /**
      * Array of elements that DOMPurify removed during sanitation.
      * Empty if nothing was removed.
@@ -15217,6 +16107,7 @@
     }
 
     const originalDocument = window.document;
+    const currentScript = originalDocument.currentScript;
     let {
       document
     } = window;
@@ -15250,9 +16141,8 @@
       }
     }
 
-    const trustedTypesPolicy = _createTrustedTypesPolicy(trustedTypes, originalDocument);
-
-    const emptyHTML = trustedTypesPolicy ? trustedTypesPolicy.createHTML('') : '';
+    let trustedTypesPolicy;
+    let emptyHTML = '';
     const {
       implementation,
       createNodeIterator,
@@ -15267,7 +16157,7 @@
      * Expose whether this browser supports running the full DOMPurify.
      */
 
-    DOMPurify.isSupported = typeof entries === 'function' && typeof getParentNode === 'function' && implementation && typeof implementation.createHTMLDocument !== 'undefined';
+    DOMPurify.isSupported = typeof entries === 'function' && typeof getParentNode === 'function' && implementation && implementation.createHTMLDocument !== undefined;
     const {
       MUSTACHE_EXPR,
       ERB_EXPR,
@@ -15614,6 +16504,31 @@
       if (ALLOWED_TAGS.table) {
         addToSet(ALLOWED_TAGS, ['tbody']);
         delete FORBID_TAGS.tbody;
+      }
+
+      if (cfg.TRUSTED_TYPES_POLICY) {
+        if (typeof cfg.TRUSTED_TYPES_POLICY.createHTML !== 'function') {
+          throw typeErrorCreate('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');
+        }
+
+        if (typeof cfg.TRUSTED_TYPES_POLICY.createScriptURL !== 'function') {
+          throw typeErrorCreate('TRUSTED_TYPES_POLICY configuration option must provide a "createScriptURL" hook.');
+        } // Overwrite existing TrustedTypes policy.
+
+
+        trustedTypesPolicy = cfg.TRUSTED_TYPES_POLICY; // Sign local variables required by `sanitize`.
+
+        emptyHTML = trustedTypesPolicy.createHTML('');
+      } else {
+        // Uninitialized policy, attempt to initialize the internal dompurify policy.
+        if (trustedTypesPolicy === undefined) {
+          trustedTypesPolicy = _createTrustedTypesPolicy(trustedTypes, currentScript);
+        } // If creating the internal policy succeeded sign internal variables.
+
+
+        if (trustedTypesPolicy !== null && typeof emptyHTML === 'string') {
+          emptyHTML = trustedTypesPolicy.createHTML('');
+        }
       } // Prevent further manipulation of configuration.
       // Not available in IE8, Safari 5, etc.
 
@@ -15985,10 +16900,10 @@
 
         return true;
       }
-      /* Make sure that older browsers don't get noscript mXSS */
+      /* Make sure that older browsers don't get fallback-tag mXSS */
 
 
-      if ((tagName === 'noscript' || tagName === 'noembed') && regExpTest(/<\/no(script|embed)/i, currentNode.innerHTML)) {
+      if ((tagName === 'noscript' || tagName === 'noembed' || tagName === 'noframes') && regExpTest(/<\/no(script|embed|frames)/i, currentNode.innerHTML)) {
         _forceRemove(currentNode);
 
         return true;
@@ -16050,9 +16965,9 @@
         }
         /* Check value is safe. First, is attr inert? If so, is safe */
 
-      } else if (URI_SAFE_ATTRIBUTES[lcName]) ; else if (regExpTest(IS_ALLOWED_URI$1, stringReplace(value, ATTR_WHITESPACE, ''))) ; else if ((lcName === 'src' || lcName === 'xlink:href' || lcName === 'href') && lcTag !== 'script' && stringIndexOf(value, 'data:') === 0 && DATA_URI_TAGS[lcTag]) ; else if (ALLOW_UNKNOWN_PROTOCOLS && !regExpTest(IS_SCRIPT_OR_DATA, stringReplace(value, ATTR_WHITESPACE, ''))) ; else if (!value) ; else {
+      } else if (URI_SAFE_ATTRIBUTES[lcName]) ; else if (regExpTest(IS_ALLOWED_URI$1, stringReplace(value, ATTR_WHITESPACE, ''))) ; else if ((lcName === 'src' || lcName === 'xlink:href' || lcName === 'href') && lcTag !== 'script' && stringIndexOf(value, 'data:') === 0 && DATA_URI_TAGS[lcTag]) ; else if (ALLOW_UNKNOWN_PROTOCOLS && !regExpTest(IS_SCRIPT_OR_DATA, stringReplace(value, ATTR_WHITESPACE, ''))) ; else if (value) {
         return false;
-      }
+      } else ;
 
       return true;
     };
@@ -16182,12 +17097,16 @@
           if (namespaceURI) ; else {
             switch (trustedTypes.getAttributeType(lcTag, lcName)) {
               case 'TrustedHTML':
-                value = trustedTypesPolicy.createHTML(value);
-                break;
+                {
+                  value = trustedTypesPolicy.createHTML(value);
+                  break;
+                }
 
               case 'TrustedScriptURL':
-                value = trustedTypesPolicy.createScriptURL(value);
-                break;
+                {
+                  value = trustedTypesPolicy.createScriptURL(value);
+                  break;
+                }
             }
           }
         }
@@ -16280,15 +17199,14 @@
 
 
       if (typeof dirty !== 'string' && !_isNode(dirty)) {
-        // eslint-disable-next-line no-negated-condition
-        if (typeof dirty.toString !== 'function') {
-          throw typeErrorCreate('toString is not a function');
-        } else {
+        if (typeof dirty.toString === 'function') {
           dirty = dirty.toString();
 
           if (typeof dirty !== 'string') {
             throw typeErrorCreate('dirty is not a string, aborting');
           }
+        } else {
+          throw typeErrorCreate('toString is not a function');
         }
       }
       /* Return dirty HTML if DOMPurify cannot run */
@@ -16403,7 +17321,7 @@
           returnNode = body;
         }
 
-        if (ALLOWED_ATTR.shadowroot || ALLOWED_ATTR.shadowrootmod) {
+        if (ALLOWED_ATTR.shadowroot || ALLOWED_ATTR.shadowrootmode) {
           /*
             AdoptNode() is not used because internal state is not reset
             (e.g. the past names map of a HTMLFormElement), this is safe
@@ -16595,7 +17513,8 @@
       const { syncHandler, pending, hasError, currentCapture } = useAsyncHandler({
           asyncHandler: async (v, e) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); },
           capture,
-          debounce: debounceSetting == true ? 1500 : debounceSetting != false ? debounceSetting : undefined
+          debounce: debounceSetting == true ? 1500 : debounceSetting != false ? debounceSetting : undefined,
+          throttle: undefined
       });
       const onValueChangeSync = syncHandler; // as UseSliderThumbArguments<HTMLInputElement>["onValueChange"];
       const valueFromParent = q$2(ValueContext);
@@ -17091,7 +18010,7 @@
       const [text, setTextSync] = useState("initial text");
       const [richText, setRichTextSync] = useState("<p>initial text</p>");
       const [number, setNumberSync] = useState(5);
-      const [dateTime, setDateTimeSync] = useState(wt.Instant.fromEpochMilliseconds(+new Date()));
+      const [dateTime, setDateTimeSync] = useState(Pt.Instant.fromEpochMilliseconds(+new Date()));
       const [date, setDateSync] = useState(null);
       const [time, setTimeSync] = useState(null);
       const setTextAsync = useStableCallback(async (value) => {

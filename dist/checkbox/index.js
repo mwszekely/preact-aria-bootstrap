@@ -37,18 +37,18 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
             else {
                 return e[EventDetail].checked;
             }
-        }, debounce: debounce, throttle: throttle, tagIndicator: "span", render: progressInfo => {
-            const { asyncHandlerReturn, propsIndicator, propsRegion } = progressInfo;
+        }, debounce: debounce, throttle: throttle, tagProgressIndicator: "span", render: progressInfo => {
+            const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
             const { pending: p, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
             const pending = (p || debouncingAsync || debouncingSync);
-            const loadingJsx = (_jsx(Fade, { show: p, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border spinner-border-sm", ...propsIndicator }) }));
+            const loadingJsx = (_jsx(Fade, { show: p, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border spinner-border-sm", ...propsProgressIndicator }) }));
             const defaultDisabled = useContext(DisabledContext);
             const disabledType = useContext(DefaultDisabledType);
             let disabled = userDisabled;
             disabled ||= defaultDisabled;
             //disabled ||= pending;
             const d = disabled ? disabledType : false;
-            return (_jsx(AriaCheckbox, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, ref: imperativeHandle, render: info => {
+            return (_jsx(AriaCheckbox, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, imperativeHandle: imperativeHandle, render: info => {
                     debugger;
                     const inputJsx = _jsx("input", { ...useMergedProps(info.propsInput, propsInput || {}, { class: clsx("form-check-input", w && "mt-0") }) });
                     const visibleLabel = _jsx("label", { ...useMergedProps(info.propsLabel, propsLabel || {}, { class: "form-check-label" }), children: label });

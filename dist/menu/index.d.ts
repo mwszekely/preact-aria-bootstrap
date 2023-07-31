@@ -1,5 +1,6 @@
 import { ComponentChildren, Ref, VNode } from "preact";
-import { UseMenubarSubInfo, UseMenuReturnType } from "preact-aria-widgets";
+import { UseMenuReturnType, UseMenubarSubInfo } from "preact-aria-widgets";
+import { EventType } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children"> {
     forceOpen?: boolean | null | undefined;
@@ -18,7 +19,7 @@ export interface MenuItemProps extends GlobalAttributes<HTMLDivElement> {
     index: number;
     children: ComponentChildren;
     disabled?: boolean;
-    onPress?: (closeMenu: () => void) => (void | Promise<void>);
+    onPress?: (closeMenu: (e: EventType<any, any>) => void) => (void | Promise<void>);
     getSortValue?: () => unknown;
     loadingLabel?: string;
 }

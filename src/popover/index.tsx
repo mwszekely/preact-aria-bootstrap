@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { ComponentChildren, Ref } from "preact";
-import { defaultRenderPortal, ParentDepthContext, useDefault, useMenuSurface, UseMenuSurfaceReturnType } from "preact-aria-widgets";
+import { ParentDepthContext, UseMenuSurfaceReturnType, useDefault, useDefaultRenderPortal, useMenuSurface } from "preact-aria-widgets";
 import { useMergedProps, useRandomId, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { ZoomFade } from "preact-transition";
 import { useCallback, useContext, useImperativeHandle } from "preact/hooks";
@@ -84,19 +84,18 @@ export function Popover({
     const { propsSource: randomIdProps, randomIdReturn: { id: surfaceId } } = useRandomId({ randomIdParameters: { prefix: "popover-surface-", otherReferencerProp: "aria-controls" } })
 
     const info = useMenuSurface<HTMLDivElement, HTMLDivElement, HTMLButtonElement>({
-        dismissParameters: { closeOnBackdrop: true, closeOnEscape: true, closeOnLostFocus: true, onClose, open: menuOpen },
-        escapeDismissParameters: { getWindow: useDefault("getWindow", undefined), parentDepth: defaultParentDepth },
+        activeElementParameters: {
+            getDocument: useDefault("getDocument", undefined),
+            onActiveElementChange: null,
+            onLastActiveElementChange: null,
+            onWindowFocusedChange: null
+        },
+        modalParameters: { active: menuOpen },
+        dismissParameters: { onDismiss: onClose },
+        escapeDismissParameters: { parentDepth: defaultParentDepth },
         focusTrapParameters: { focusPopup: useStableCallback((e, f) => f()?.focus()) },
         menuSurfaceParameters: { role: "dialog", surfaceId },
     });
-
-    const a = (
-        <div class="popover bs-popover-auto fade show" role="tooltip" id="popover644101" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(961.45px, 1546.58px);" data-popper-placement="right">
-            <div class="popover-arrow" style="position: absolute; top: 0px; transform: translate(0px, 46.9px);"></div>
-            <h3 class="popover-header">Popover title</h3>
-            <div class="popover-body">And here's some amazing content. It's very engaging. Right?</div>
-        </div>
-    )
 
     return (
         <>
@@ -110,7 +109,7 @@ export function Popover({
                 {...useMergedProps<HTMLButtonElement>({ class: popperOpen ? "active" : "", ref }, props, info.propsTrigger, propsSource) as {}}>
                 {label}
             </Button>
-            {defaultRenderPortal({
+            {useDefaultRenderPortal({
                 portalId,
                 children: (
                     <ParentDepthContext.Provider value={myDepth}>

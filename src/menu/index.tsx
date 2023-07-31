@@ -1,10 +1,10 @@
 import { clsx } from "clsx";
 import { ComponentChildren, Ref, VNode } from "preact";
-import { defaultRenderPortal, Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenubarSubInfo, UseMenuItemReturnType, UseMenuReturnType } from "preact-aria-widgets";
-import { EventDetail, returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
+import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenuItemReturnType, UseMenuReturnType, UseMenubarSubInfo, useDefaultRenderPortal } from "preact-aria-widgets";
+import { EventDetail, EventType, returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { Fade, ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
-import { useCallback, useImperativeHandle, useRef } from "preact/hooks";
+import { useCallback, useRef } from "preact/hooks";
 import { usePopper } from "../popper/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -57,17 +57,17 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
     return (
         <AriaMenu<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLButtonElement>
             onOpen={onOpen}
-            onClose={onClose}
-            open={menuOpen}
+            onDismiss={onClose}
+            active={menuOpen}
             openDirection="down"
             orientation="vertical"
             selectionMode="activation"
             ariaPropName="aria-selected"
             selectedIndex={selectedIndex}
+            imperativeHandle={imperativeHandle}
             onSelectedIndexChange={useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex))}
 
             render={(info) => {
-                useImperativeHandle(imperativeHandle!, () => info);
                 const portalId = usePortalId("menu");
                 const { propsArrow, propsPopup, propsSource, propsData } = usePopper<HTMLButtonElement, HTMLDivElement, HTMLDivElement>({
                     popperParameters: {
@@ -86,7 +86,7 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
                             class: popperOpen ? "active" : ""
                         } as {}, props, info.propsTrigger, propsSource) as {}, ref)}
 
-                        {defaultRenderPortal({
+                        {useDefaultRenderPortal({
                             portalId,
                             children: (
                                 <div {...useMergedProps(propsPopup, { className: "popper-menu" })}>
@@ -113,7 +113,7 @@ export interface MenuItemProps extends GlobalAttributes<HTMLDivElement> {
     index: number;
     children: ComponentChildren;
     disabled?: boolean;
-    onPress?: (closeMenu: () => void) => (void | Promise<void>);
+    onPress?: (closeMenu: (e: EventType<any, any>) => void) => (void | Promise<void>);
     //selected?: boolean;
     //iconStart?: ComponentChildren | null | undefined;
     //iconEnd?: ComponentChildren | null | undefined;
@@ -133,21 +133,21 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
             }}
             ariaLabel={loadingLabel || "The operation is in progress"}
             capture={returnUndefined}
-            tagIndicator="div"
+            tagProgressIndicator="div"
             render={progressInfo => {
 
                 const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
 
                 return (
                     <AriaMenuItem<HTMLDivElement>
-                        ref={imperativeHandle}
+                        imperativeHandle={imperativeHandle}
                         index={index}
                         getSortValue={getSortValue ?? returnZero}
                         unselectable={disabled || showSpinner}
                         onPress={progressInfo.asyncHandlerReturn.syncHandler}
                         render={menuInfo => {
 
-                            const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsIndicator} class={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
+                            const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsProgressIndicator} class={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
 
                             return (
                                 <div {...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props)}>

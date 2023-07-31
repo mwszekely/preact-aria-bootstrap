@@ -10,7 +10,7 @@ import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
 import { LabelledProps } from "../utility/types.js";
 
-export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
+export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     inline?: boolean;
     checked: boolean | "mixed";
     onValueChange(checked: boolean, event: TargetedCheckboxChangeEvent): void | Promise<void>;
@@ -75,15 +75,15 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
             debounce={debounce}
             throttle={throttle}
 
-            tagIndicator="span"
+            tagProgressIndicator="span"
             render={progressInfo => {
-                const { asyncHandlerReturn, propsIndicator, propsRegion } = progressInfo;
+                const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
                 const { pending: p, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
 
                 const pending = (p || debouncingAsync || debouncingSync);
 
                 const loadingJsx = (
-                    <Fade show={p} exitVisibility="removed"><span class="spinner-border spinner-border-sm" {...propsIndicator} /></Fade>
+                    <Fade show={p} exitVisibility="removed"><span class="spinner-border spinner-border-sm" {...propsProgressIndicator} /></Fade>
                 )
 
                 const defaultDisabled = useContext(DisabledContext);
@@ -102,7 +102,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                         tagInput="input"
                         tagLabel="label"
                         disabled={d}
-                        ref={imperativeHandle}
+                        imperativeHandle={imperativeHandle}
 
 
                         render={info => {

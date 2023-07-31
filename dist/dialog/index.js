@@ -1,6 +1,6 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { defaultRenderPortal, Dialog as AriaDialog, Heading } from "preact-aria-widgets";
+import { Dialog as AriaDialog, Heading, useDefaultRenderPortal } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
 import { SlideFade } from "preact-transition";
 import { memo } from "preact/compat";
@@ -14,11 +14,11 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
     if (headerPosition == "hidden") {
         console.assert(typeof header == "string", `A dialog whose label is hidden must provide the label to use as a string to the header`);
     }
-    return (_jsx(AriaDialog, { ariaLabel: headerPosition == "hidden" ? header : null, open: open, onClose: onClose, focusPopup: (e, f) => f()?.focus?.(), closeOnBackdrop: modal ? false : true, closeOnEscape: modal ? false : true, render: info => {
-            const headingJsx = (_jsxs(_Fragment, { children: [_jsx("span", { class: "modal-title", children: header }), _jsx(Button, { class: "btn-close", onPress: () => onClose("escape"), "aria-label": "Close" })] }));
+    return (_jsx(AriaDialog, { ariaLabel: headerPosition == "hidden" ? header : null, active: open, onDismiss: onClose, focusPopup: (e, f) => f()?.focus?.(), dismissBackdropActive: modal ? false : true, dismissEscapeActive: modal ? false : true, render: info => {
+            const headingJsx = (_jsxs(_Fragment, { children: [_jsx("span", { class: "modal-title", children: header }), _jsx(Button, { class: "btn-close", onPress: (_pressed, e) => onClose(e, "escape"), "aria-label": "Close" })] }));
             const bodyJsx = (_jsx("span", { class: "modal-body", children: children }));
             const footerJsx = (_jsx("span", { class: "modal-footer", children: footer }));
-            return (_jsxs(_Fragment, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), defaultRenderPortal({
+            return (_jsxs(_Fragment, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), useDefaultRenderPortal({
                         portalId: usePortalId("dialog"),
                         children: (_jsx("div", { ...useMergedProps(info.propsFocusContainer, propsPortal || {}), children: _jsxs("div", { ...useMergedProps(info.propsDialog, {
                                     tabIndex: -1,

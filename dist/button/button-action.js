@@ -18,7 +18,7 @@ export const Button = memo(forwardElementRef(function Button({ tag: Tag, tooltip
     variantSize ??= defaultSize ?? undefined;
     const { currentCapture, pending: individualPending, syncHandler, callCount } = useAsyncHandler({
         asyncHandler: onPressAsync,
-        capture: (e) => e[EventDetail].pressed,
+        capture: (e) => e[EventDetail].pressed ?? null,
         debounce,
         throttle
     });
@@ -45,7 +45,8 @@ export const Button = memo(forwardElementRef(function Button({ tag: Tag, tooltip
     }
     else {
         return (_jsx(ToolbarChild, { index: buttonGroupIndex ?? 0, getSortValue: returnZero, disabledProp: "disabled", render: toolbarChildInfo => {
-                return (_jsx(ButtonStructure, { ref: ref, Tag: (Tag), tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne, callCount: callCount, onPress: (e) => {
+                return (_jsx(ButtonStructure, { ref: ref, Tag: (Tag), tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne || false, callCount: callCount, onPress: (e) => {
+                        debugger;
                         toolbarChildInfo.pressParameters.onPressSync?.(e);
                         return syncHandler?.(e);
                     }, otherProps: useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable) }));
@@ -56,12 +57,13 @@ export const Button = memo(forwardElementRef(function Button({ tag: Tag, tooltip
  * A "raw" button -- just the markup.
  */
 const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ Tag, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
-    return (_jsx(AriaButton, { tagButton: (Tag), disabled: disabled, onPress: onPress, pressed: pressed, render: buttonInfo => {
-            return (_jsx(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagIndicator: "span", render: progressInfo => {
-                    const { propsIndicator, propsRegion } = progressInfo;
-                    const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border", ...propsIndicator }) }));
-                    if (pressed !== null)
+    return (_jsx(AriaButton, { tagButton: (Tag), disabled: disabled, onPressSync: onPress, pressed: pressed, render: buttonInfo => {
+            return (_jsx(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagProgressIndicator: "span", render: progressInfo => {
+                    const { propsProgressIndicator, propsProgressRegion } = progressInfo;
+                    const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border", ...propsProgressIndicator }) }));
+                    if (pressed != null)
                         variantFill ??= (pressed ? "fill" : "outline");
+                    console.log(`Button rendered pressed ${pressed} and fill ${variantFill}`);
                     const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
                     const ret = (h(Tag, useMergedProps(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx));
                     if (tooltip) {

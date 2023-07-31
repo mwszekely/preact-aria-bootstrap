@@ -38,7 +38,7 @@ export function CheckboxGroupChild({ checked, label, labelPosition, onValueChang
         }), untabbable: untabbable, render: info => {
             return (_jsx(Checkbox, { checked: checked, label: label, inline: inline, loadingLabel: loadingLabel, tristate: tristate, debounce: debounce, throttle: throttle, disabled: pendingFromParent || disabled, labelPosition: labelPosition, imperativeHandle: imperativeHandle, onValueChange: useStableCallback(async (checked, event) => {
                     await onValueChange?.(checked, event);
-                    info.checkboxGroupChild.onChildCheckedChange(checked);
+                    info.checkboxGroupChildReturn.onChildCheckedChange(checked);
                 }), propsInput: useMergedProps(props, info.propsChild, info.propsTabbable) }));
         } }));
 }

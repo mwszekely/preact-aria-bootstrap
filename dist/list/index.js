@@ -2,7 +2,7 @@ import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-ru
 import { clsx } from "clsx";
 import { createContext } from "preact";
 import { Gridlist, GridlistChild, GridlistRow, ProgressWithHandler } from "preact-aria-widgets";
-import { EventDetail, returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
+import { EventDetail, returnUndefined, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useContext, useRef } from "preact/hooks";
@@ -46,8 +46,8 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
         refElementReturn
     });
     const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
-    const { propsIndicator, propsRegion } = progressInfo;
-    const loadingJsx = (_jsx(Fade, { show: progressInfo.asyncHandlerReturn.pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsIndicator }) }));
+    const { propsProgressIndicator, propsProgressRegion } = progressInfo;
+    const loadingJsx = (_jsx(Fade, { show: progressInfo.asyncHandlerReturn.pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border spinner-border-sm text-secondary", ...propsProgressIndicator }) }));
     //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
     const finalPropsForText = useMergedProps(p1, p2);
     const finalPropsForDiv = useMergedProps(infoRow.props, { ...props, ref: ref2 }, {
@@ -65,8 +65,8 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
     const defaultDisabled = useContext(DefaultDisabled);
     disabled ||= defaultDisabled;
     let everShownPaginated = useRef(false);
-    return (_jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onPress ?? null, capture: returnUndefined, tagIndicator: "span", render: progressInfo => {
-            return (_jsx(GridlistRow, { index: index, getSortValue: getSortValue ?? returnZero, unselectable: disabled, noTypeahead: true, getText: useCallback((e) => { return e?.querySelector(".gridlist-item-text")?.textContent || ""; }, []), render: infoRow => {
+    return (_jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onPress ?? null, capture: returnUndefined, tagProgressIndicator: "span", render: progressInfo => {
+            return (_jsx(GridlistRow, { index: index, unselectable: disabled, noTypeahead: true, getText: useCallback((e) => { return e?.querySelector(".gridlist-item-text")?.textContent || ""; }, []), render: infoRow => {
                     if (infoRow.paginatedChildReturn.hideBecausePaginated && everShownPaginated.current == false)
                         return _jsx("div", {}, "hide-because-paginated");
                     everShownPaginated.current = true;

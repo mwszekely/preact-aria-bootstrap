@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { cloneElement } from "preact";
-import { defaultRenderPortal, Tooltip as AriaTooltip } from "preact-aria-widgets";
+import { Tooltip as AriaTooltip, useDefaultRenderPortal } from "preact-aria-widgets";
 import { useMergedProps, useState } from "preact-prop-helpers";
 import { SlideFade } from "preact-transition";
 import { useCallback, useEffect } from "preact/hooks";
@@ -57,7 +57,8 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
             // The tooltip must remain non-hidden to assistive technologies even when closed.
             // Don't set hidden or inert or anything like that when is's closed!
             const tooltipContent = _jsx("div", { ...useMergedProps(propsPopup, {}), children: _jsx(SlideFade, { exitVisibility: "visible", exclusivityKey: "tooltip", duration: transitionDuration, show: hidden ? false : (tooltip == null ? false : (status != null)), slideTargetBlock: slideTargetBlock, slideTargetInline: slideTargetInline, children: _jsxs("div", { ...useMergedProps(propsData, { style: maxWidth ? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup), children: [_jsx("div", { ...useMergedProps(propsArrow, { className: "tooltip-arrow" }) }), _jsx("div", { class: "tooltip-inner", children: tooltip })] }) }) });
-            const portalJsx = absolutePositioning ? tooltipContent : defaultRenderPortal({ children: tooltipContent, portalId });
+            let contentIfRelative = useDefaultRenderPortal({ children: tooltipContent, portalId });
+            const portalJsx = absolutePositioning ? tooltipContent : contentIfRelative;
             if (forward) {
                 const vnode = children;
                 console.assert(!!vnode.type);

@@ -55,7 +55,8 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
     const { syncHandler, pending, hasError, currentCapture } = useAsyncHandler({
         asyncHandler: async (v, e) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); },
         capture,
-        debounce: debounceSetting == true ? 1500 : debounceSetting != false ? debounceSetting : undefined
+        debounce: debounceSetting == true ? 1500 : debounceSetting != false ? debounceSetting : undefined,
+        throttle: undefined
     });
     const onValueChangeSync = syncHandler; // as UseSliderThumbArguments<HTMLInputElement>["onValueChange"];
     const valueFromParent = useContext(ValueContext);

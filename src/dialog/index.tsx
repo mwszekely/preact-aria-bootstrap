@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { ComponentChildren, h, Ref, VNode } from "preact";
-import { defaultRenderPortal, Dialog as AriaDialog, DialogProps as AriaDialogProps, Heading } from "preact-aria-widgets";
+import { Dialog as AriaDialog, DialogProps as AriaDialogProps, Heading, useDefaultRenderPortal } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
 import { SlideFade } from "preact-transition";
 import { memo } from "preact/compat";
@@ -12,7 +12,7 @@ import { usePortalId } from "../utility/use-portal-id.js";
 
 export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     open: boolean;
-    onClose: AriaDialogProps<HTMLSpanElement, HTMLSpanElement, HTMLSpanElement, HTMLSpanElement>["onClose"];
+    onClose: AriaDialogProps<HTMLSpanElement, HTMLSpanElement, HTMLSpanElement, HTMLSpanElement>["onDismiss"];
     headerPosition?: "hidden" | "start";
     header: ComponentChildren;
     anchor: VNode;
@@ -40,16 +40,16 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
         <AriaDialog<HTMLDivElement, HTMLSpanElement, HTMLDivElement, HTMLSpanElement>
 
             ariaLabel={headerPosition == "hidden" ? header as string : null}
-            open={open}
-            onClose={onClose}
+            active={open}
+            onDismiss={onClose}
             focusPopup={(e, f) => f()?.focus?.()}
-            closeOnBackdrop={modal ? false : true}
-            closeOnEscape={modal ? false : true}
+            dismissBackdropActive={modal ? false : true}
+            dismissEscapeActive={modal ? false : true}
 
             render={info => {
                 const headingJsx = (<>
                     <span class="modal-title">{header}</span>
-                    <Button class="btn-close" onPress={() => onClose("escape")} aria-label="Close" />
+                    <Button class="btn-close" onPress={(_pressed, e) => onClose(e, "escape")} aria-label="Close" />
                 </>)
                 const bodyJsx = (<span class="modal-body">{children}</span>);
                 const footerJsx = (<span class="modal-footer">{footer}</span>)
@@ -57,7 +57,7 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
                 return (
                     <>
                         {useClonedElement(anchor, useMergedProps(info.propsSource, props), ref)}
-                        {defaultRenderPortal({
+                        {useDefaultRenderPortal({
                             portalId: usePortalId("dialog"),
                             children: (
                                 <div {...useMergedProps(info.propsFocusContainer, propsPortal || {})}>

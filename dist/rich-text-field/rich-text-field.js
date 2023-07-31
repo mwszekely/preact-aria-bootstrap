@@ -21,9 +21,9 @@ const DFDefaultItems = [
     "textPartLanguage"
 ];
 export function RichTextField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }) {
-    return (_jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagIndicator: "div", render: progressInfo => {
+    return (_jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagProgressIndicator: "div", render: progressInfo => {
             const [getFocused, setFocused] = usePassiveState(null, returnFalse);
-            const { asyncHandlerReturn, propsIndicator, propsRegion } = progressInfo;
+            const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
             const { pending: p, callCount, debouncingAsync, debouncingSync, currentCapture, syncHandler, invocationResult } = asyncHandlerReturn;
             const pending = (p || debouncingAsync || debouncingSync);
             useCommitTextField({
@@ -38,15 +38,15 @@ export function RichTextField({ implementation, toolbarItems, onValueChange, val
                 value: valueHtml
             });
             const editorHandle = useRef(null);
-            return (_jsxs("div", { class: clsx("rich-text-field", pending && "pending"), children: [_jsx(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsIndicator }), _jsx(CkEditorWrapper, { editorHandle: editorHandle, implementation: implementation ?? globalThis.CKEDITOR?.ClassicEditor ?? globalThis.ClassicEditor, toolbarItems: toolbarItems ?? RTFDefaultItems, onFocusChange: setFocused, onValueChange: value => {
+            return (_jsxs("div", { class: clsx("rich-text-field", pending && "pending"), children: [_jsx(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), _jsx(CkEditorWrapper, { editorHandle: editorHandle, implementation: implementation ?? globalThis.CKEDITOR?.ClassicEditor ?? globalThis.ClassicEditor, toolbarItems: toolbarItems ?? RTFDefaultItems, onFocusChange: setFocused, onValueChange: value => {
                             syncHandler(value);
                         }, valueHtml: (pending ? currentCapture : valueHtml) || "", ...props, children: _jsx("textarea", {}) })] }));
         } }));
 }
 export function DocumentField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }) {
-    return (_jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagIndicator: "div", render: progressInfo => {
+    return (_jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagProgressIndicator: "div", render: progressInfo => {
             const [getFocused, setFocused] = usePassiveState(null, returnFalse);
-            const { asyncHandlerReturn, propsIndicator, propsRegion } = progressInfo;
+            const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
             const { pending: p, callCount, debouncingAsync, debouncingSync, currentCapture, syncHandler, invocationResult } = asyncHandlerReturn;
             const pending = (p || debouncingAsync || debouncingSync);
             useCommitTextField({
@@ -61,7 +61,7 @@ export function DocumentField({ implementation, toolbarItems, onValueChange, val
                 value: valueHtml
             });
             const editorHandle = useRef(null);
-            return (_jsxs("div", { class: clsx("document-field shadow-sm", pending && "pending"), children: [_jsx(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsIndicator }), _jsx("div", { class: "document-field__toolbar shadow-sm" }), _jsx("div", { class: "document-field__editable-container", children: _jsx(CkEditorWrapper, { implementation: implementation ?? globalThis.CKEDITOR?.DecoupledEditor ?? globalThis.DecoupledEditor, toolbarItems: toolbarItems ?? DFDefaultItems, editorHandle: editorHandle, onFocusChange: setFocused, onValueChange: value => {
+            return (_jsxs("div", { class: clsx("document-field shadow-sm", pending && "pending"), children: [_jsx(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), _jsx("div", { class: "document-field__toolbar shadow-sm" }), _jsx("div", { class: "document-field__editable-container", children: _jsx(CkEditorWrapper, { implementation: implementation ?? globalThis.CKEDITOR?.DecoupledEditor ?? globalThis.DecoupledEditor, toolbarItems: toolbarItems ?? DFDefaultItems, editorHandle: editorHandle, onFocusChange: setFocused, onValueChange: value => {
                                 syncHandler(value);
                             }, valueHtml: (pending ? currentCapture : valueHtml) || "", onReady: editor => {
                                 const toolbarContainer = document.querySelector('.document-field__toolbar');

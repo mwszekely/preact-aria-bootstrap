@@ -1,10 +1,10 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { defaultRenderPortal, Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler } from "preact-aria-widgets";
+import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, useDefaultRenderPortal } from "preact-aria-widgets";
 import { EventDetail, returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { Fade, ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
-import { useCallback, useImperativeHandle, useRef } from "preact/hooks";
+import { useCallback, useRef } from "preact/hooks";
 import { usePopper } from "../popper/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -34,8 +34,7 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
         callback: () => setMenuOpen(popperOpen),
         triggerIndex: popperOpen
     });
-    return (_jsx(AriaMenu, { onOpen: onOpen, onClose: onClose, open: menuOpen, openDirection: "down", orientation: "vertical", selectionMode: "activation", ariaPropName: "aria-selected", selectedIndex: selectedIndex, onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
-            useImperativeHandle(imperativeHandle, () => info);
+    return (_jsx(AriaMenu, { onOpen: onOpen, onDismiss: onClose, active: menuOpen, openDirection: "down", orientation: "vertical", selectionMode: "activation", ariaPropName: "aria-selected", selectedIndex: selectedIndex, imperativeHandle: imperativeHandle, onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
             const portalId = usePortalId("menu");
             const { propsArrow, propsPopup, propsSource, propsData } = usePopper({
                 popperParameters: {
@@ -48,7 +47,7 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
             return (_jsxs(_Fragment, { children: [useClonedElement(anchor, useMergedProps({
                         onPress: onAnchorPress,
                         class: popperOpen ? "active" : ""
-                    }, props, info.propsTrigger, propsSource), ref), defaultRenderPortal({
+                    }, props, info.propsTrigger, propsSource), ref), useDefaultRenderPortal({
                         portalId,
                         children: (_jsxs("div", { ...useMergedProps(propsPopup, { className: "popper-menu" }), children: [_jsx("div", { ...propsArrow }), _jsx(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: _jsx(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: _jsxs("div", { ...useMergedProps(info.propsSurface, { className: clsx("dropdown-menu shadow show") }), children: [_jsx("div", { ...info.propsSentinel }), _jsx("div", { ...useMergedProps(info.propsTarget, { className: "dropdown-menu-list" }), children: children }), _jsx("div", { ...info.propsSentinel })] }) }) })] }))
                     })] }));
@@ -59,10 +58,10 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
     return (_jsx(ProgressWithHandler, { asyncHandler: () => {
             console.assert(!!imperativeHandle.current);
             return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu);
-        }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagIndicator: "div", render: progressInfo => {
+        }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
             const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
-            return (_jsx(AriaMenuItem, { ref: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, unselectable: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
-                    const spinnerJsx = (_jsx(Fade, { show: showSpinner, exitVisibility: "removed", children: _jsx("div", { ...progressInfo.propsIndicator, class: clsx("spinner-border", "spinner-border-sm") }) }));
+            return (_jsx(AriaMenuItem, { imperativeHandle: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, unselectable: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
+                    const spinnerJsx = (_jsx(Fade, { show: showSpinner, exitVisibility: "removed", children: _jsx("div", { ...progressInfo.propsProgressIndicator, class: clsx("spinner-border", "spinner-border-sm") }) }));
                     return (_jsxs("div", { ...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props), children: [children, _jsx("div", { class: "dropdown-item-icon dropdown-item-icon-end", children: spinnerJsx })] }));
                 } }));
         } }));

@@ -14,7 +14,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
         onChange?.(start, end);
         return () => onChange(null, null);
     }, [page, windowSize]);
-    return (_jsx(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "focus", selectedIndex: page, onSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
+    return (_jsx(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "activation", selectedIndex: page, onSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
             const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
             return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx("nav", { "aria-label": labelPosition == 'hidden' ? label : undefined, children: _jsx("ul", { ...useMergedProps(info.propsToolbar, { class: "pagination" }), children: _jsx(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }), labelPosition == "after" && labelJsx] }));
         } }));
@@ -43,7 +43,17 @@ const PaginationButtonLast = memo(forwardElementRef(({ index, onFocus }, ref) =>
 const PaginationButton = memo(forwardElementRef(function PaginationButton({ index, children, onFocus }, ref) {
     return (_jsx(ToolbarChild, { index: index, disabledProp: "disabled", getSortValue: useStableGetter(index), render: info => {
             const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
-            const { pressReturn, props: propsPress } = usePress({ pressParameters: { onPressSync: null, allowRepeatPresses: false, excludeEnter: null, excludePointer: null, excludeSpace: null, longPressThreshold: null, onPressingChange: null, focusSelf: useCallback((e) => { e.focus(); }, []) }, refElementReturn });
+            const { pressReturn, props: propsPress } = usePress({
+                pressParameters: {
+                    ...info.pressParameters,
+                    allowRepeatPresses: false,
+                    excludeEnter: null,
+                    excludePointer: null,
+                    longPressThreshold: null,
+                    onPressingChange: null,
+                    focusSelf: useCallback((e) => { e.focus(); }, [])
+                }, refElementReturn
+            });
             return (_jsx("li", { class: "page-item", children: _jsx("button", { ...useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {}), children: children }) }));
         } }));
 }));

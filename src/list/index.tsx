@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
 import { Gridlist, GridlistCellInfo, GridlistChild, GridlistRow, GridlistRowInfo, ProgressWithHandler, UseGridlistRowReturnType, UseProgressWithHandlerReturnType } from "preact-aria-widgets";
-import { AsyncHandler, EventDetail, returnUndefined, returnZero, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
+import { AsyncHandler, EventDetail, returnUndefined, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useContext, useRef } from "preact/hooks";
@@ -88,7 +88,7 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
     )
 }
 
-const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, iconEnd, iconStart, variantTheme, selected, children, props, ref2 }: Pick<ListItemProps, "children" | "selected" | "badge" | "variantTheme" | "disabled" | "iconStart" | "iconEnd"> & { props: h.JSX.HTMLAttributes<HTMLDivElement>, ref2: Ref<HTMLDivElement>, progressInfo: UseProgressWithHandlerReturnType<any, any, HTMLSpanElement, HTMLLabelElement>, infoRow: UseGridlistRowReturnType<HTMLDivElement, HTMLDivElement, GridlistRowInfo<HTMLDivElement, HTMLDivElement>, GridlistCellInfo<HTMLDivElement>> }) => {
+const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, iconEnd, iconStart, variantTheme, selected, children, props, ref2 }: Pick<ListItemProps, "children" | "selected" | "badge" | "variantTheme" | "disabled" | "iconStart" | "iconEnd"> & { props: h.JSX.HTMLAttributes<HTMLDivElement>, ref2: Ref<HTMLDivElement>, progressInfo: UseProgressWithHandlerReturnType<any, any, HTMLSpanElement, HTMLLabelElement>, infoRow: UseGridlistRowReturnType<HTMLDivElement, HTMLDivElement, GridlistRowInfo<HTMLDivElement>, GridlistCellInfo<HTMLDivElement>> }) => {
     useUpdateRenderCounter("GridlistRow");
     const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
     const { pressReturn: { longPress, pressing }, props: p1 } = usePress<HTMLDivElement>({
@@ -107,8 +107,8 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
     });
 
     const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
-    const { propsIndicator, propsRegion } = progressInfo;
-    const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending} exitVisibility="removed"><span class="spinner-border spinner-border-sm text-secondary" {...propsIndicator} /></Fade>)
+    const { propsProgressIndicator, propsProgressRegion } = progressInfo;
+    const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending} exitVisibility="removed"><span class="spinner-border spinner-border-sm text-secondary" {...propsProgressIndicator} /></Fade>)
     //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
     const finalPropsForText = useMergedProps(p1, p2);
     const finalPropsForDiv = useMergedProps(
@@ -171,12 +171,11 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
             asyncHandler={onPress ?? null}
             capture={returnUndefined}
 
-            tagIndicator="span"
+            tagProgressIndicator="span"
             render={progressInfo => {
                 return (
                     <GridlistRow<HTMLDivElement, HTMLDivElement>
                         index={index}
-                        getSortValue={getSortValue ?? returnZero}
                         unselectable={disabled}
                         noTypeahead={true}
                         getText={useCallback((e: HTMLDivElement) => { return e?.querySelector(".gridlist-item-text")?.textContent || "" }, [])}

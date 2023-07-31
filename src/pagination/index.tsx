@@ -22,7 +22,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
         <Toolbar<HTMLUListElement, HTMLButtonElement, HTMLLabelElement>
             ariaLabel={labelPosition == "hidden" ? label : null}
             ariaPropName="aria-current-page"
-            selectionMode="focus"
+            selectionMode="activation"
             selectedIndex={page}
             onSelectedIndexChange={useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, [])}
             orientation="horizontal"
@@ -56,7 +56,6 @@ const PaginationChildren = memo(({ childCount, windowSize }: { windowSize: numbe
     return (
         <>
             <PaginationButtonFirst index={firstIndex} onFocus={useCallback(() => { centerFirstRef.current?.scrollIntoView({ behavior: "smooth" }) }, [])} />
-
             <span class="pagination-center scroll-shadows scroll-shadows-x">
                 {Array.from(function* () {
                     for (let page = 1; page < lastIndex - 1; ++page) {
@@ -87,7 +86,17 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
 
             render={info => {
                 const { refElementReturn, propsStable } = useRefElement<HTMLButtonElement>({ refElementParameters: {} })
-                const { pressReturn, props: propsPress } = usePress<HTMLButtonElement>({ pressParameters: { onPressSync: null, allowRepeatPresses: false, excludeEnter: null, excludePointer: null, excludeSpace: null, longPressThreshold: null, onPressingChange: null, focusSelf: useCallback((e) => { e.focus(); }, []) }, refElementReturn })
+                const { pressReturn, props: propsPress } = usePress<HTMLButtonElement>({ 
+                    pressParameters: { 
+                        ...info.pressParameters,
+                        allowRepeatPresses: false, 
+                        excludeEnter: null, 
+                        excludePointer: null, 
+                        longPressThreshold: null, 
+                        onPressingChange: null, 
+                        focusSelf: useCallback((e) => { e.focus(); }, []) 
+                    }, refElementReturn })
+                
                 return (
                     <li class="page-item">
                         <button {...useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined }, {})}>{children}</button>

@@ -117,7 +117,7 @@ export function CheckboxGroupChild({ checked, label, labelPosition, onValueChang
                         imperativeHandle={imperativeHandle}
                         onValueChange={useStableCallback(async (checked, event) => {
                             await onValueChange?.(checked, event);
-                            info.checkboxGroupChild.onChildCheckedChange(checked);
+                            info.checkboxGroupChildReturn.onChildCheckedChange(checked);
                         })}
                         propsInput={...(useMergedProps(props, info.propsChild, info.propsTabbable) as any)}
                     />

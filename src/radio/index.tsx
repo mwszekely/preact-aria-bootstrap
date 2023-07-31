@@ -11,7 +11,9 @@ import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { LabelledProps } from "../utility/types.js";
 
 
-export interface RadioGroupProps<V extends string | number> extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
+export interface RadioGroupProps<V extends string | number> extends
+    Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">,
+    Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     selectedValue: V | null;
     onValueChange: (value: V, event: Event) => (void | Promise<void>);
     disabled?: boolean;
@@ -28,7 +30,7 @@ export const RadioGroupContext = createContext<RadioGroupContext<string | number
 
 export function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
     labelPosition ??= "after";
-    
+
     const imperativeHandle = useRef<UseRadioGroupReturnType<V, HTMLSpanElement, HTMLLabelElement, HTMLInputElement>>(null);
 
     // Note: We use useAsync, instead of useAsyncHandler, because the actual event handler isn't here.
@@ -52,7 +54,7 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
                 <AriaRadioGroup<V, HTMLSpanElement, HTMLLabelElement, HTMLInputElement>
                     ariaLabel={labelPosition == 'hidden' ? label : null}
                     selectedValue={pendingValue ?? selectedValue}
-                    ref={imperativeHandle}
+                    imperativeHandle={imperativeHandle}
                     name={name}
                     onSelectedValueChange={onSelectedIndexChangeSync}
                     arrowKeyDirection={inline ? "horizontal" : "vertical"}
@@ -62,7 +64,7 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
                             <>
                                 {labelPosition == "before" && visibleLabel}
                                 <KeyboardAssistIcon leftRight={!!inline} upDown={!inline} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != "none"}>
-                                    <span {...useMergedProps({ className: clsx("radio-group"), ref, "aria-busy": (pending ? "true" : undefined) }, info.propsRadioGroup, props)}>
+                                    <span {...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props)}>
                                         {labelPosition == "within" && visibleLabel}
                                         {children}
                                     </span>
@@ -77,7 +79,9 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
     )
 }
 
-export interface RadioProps<V extends number | string> extends Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle"> {
+export interface RadioProps<V extends number | string> extends
+    Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">,
+    Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     //inline?: boolean;
     //checked: boolean | "mixed";
     //onValueChange(checked: boolean, event: RadioChangeEvent<HTMLInputElement>): void | Promise<void>;
@@ -98,9 +102,9 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
         <Progress<HTMLSpanElement, HTMLLabelElement>
             ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
             value={singleSelectPending ? "indeterminate" : "disabled"}
-            tagIndicator="span"
+            tagProgressIndicator="span"
             render={progressInfo => {
-                const { propsIndicator, propsRegion, propsLabel } = progressInfo;
+                const { propsProgressIndicator, propsProgressRegion, propsProgressLabel } = progressInfo;
 
 
 
@@ -118,7 +122,7 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                 const pending = singleSelectPending;//(pendingValue != null);
 
                 const loadingJsx = (
-                    <Fade show={pending} exitVisibility="removed"><span  {...useMergedProps(propsIndicator, { class: "spinner-border" })} /></Fade>
+                    <Fade show={pending} exitVisibility="removed"><span  {...useMergedProps(propsProgressIndicator, { class: "spinner-border" })} /></Fade>
                 );
 
                 return (
