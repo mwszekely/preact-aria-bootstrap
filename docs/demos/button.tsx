@@ -115,14 +115,14 @@ function MSB({ index }: { index: number }) {
 
     const onToggleSync = useCallback(async (pressed: boolean | null) => {
         debugger;
-        setPressed(!pressed);
+        setPressed(!!pressed);
     }, [])
     const onToggleAsync = useCallback(async (pressed: boolean | null) => {
         await new Promise(resolve => setTimeout(resolve, 1000 + (3000 * Math.random())));
         onToggleSync(pressed);
     }, [])
 
-    return <ButtonAction buttonGroupIndex={index} onPress={index % 2 == 0 ? onToggleAsync : onToggleSync} pressed={pressed}>Toggle me ({index % 2 == 0 ? "a" : ""}sync, #{index})</ButtonAction>
+    return <ButtonAction buttonGroupIndex={index} onPress={index % 2 == 0 ? onToggleAsync : onToggleSync} pressed={pressed}>Toggle me ({index % 2 == 0 ? "a" : ""}sync, #{index}, {pressed?.toString() || "null"})</ButtonAction>
 }
 
 function SSB({ index }: { index: number }) {

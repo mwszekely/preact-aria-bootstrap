@@ -17997,13 +17997,13 @@
       const [pressed, setPressed] = useState(false);
       const onToggleSync = T$2(async (pressed) => {
           debugger;
-          setPressed(!pressed);
+          setPressed(!!pressed);
       }, []);
       const onToggleAsync = T$2(async (pressed) => {
           await new Promise(resolve => setTimeout(resolve, 1000 + (3000 * Math.random())));
           onToggleSync(pressed);
       }, []);
-      return o$3(Button, { buttonGroupIndex: index, onPress: index % 2 == 0 ? onToggleAsync : onToggleSync, pressed: pressed, children: ["Toggle me (", index % 2 == 0 ? "a" : "", "sync, #", index, ")"] });
+      return o$3(Button, { buttonGroupIndex: index, onPress: index % 2 == 0 ? onToggleAsync : onToggleSync, pressed: pressed, children: ["Toggle me (", index % 2 == 0 ? "a" : "", "sync, #", index, ", ", pressed?.toString() || "null", ")"] });
   }
   function SSB({ index }) {
       /*const onToggleSync = useStableCallback((pressed: boolean | null) => {
