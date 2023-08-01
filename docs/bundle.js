@@ -14910,19 +14910,32 @@
               disabled ||= defaultDisabled;
               const d = disabled ? disabledType : false;
               return (o$3(Checkbox$1, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, imperativeHandle: imperativeHandle, render: info => {
-                      const inputJsx = o$3(StructureCheckboxInput, { ...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {}) });
+                      let inputJsx = o$3(StructureCheckboxInput, { ...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {}) });
                       const visibleLabel = o$3(StructureCheckboxLabel, { ...useMergedProps(info.propsLabel, propsLabel || {}), children: label });
+                      if (labelPosition == 'tooltip') {
+                          inputJsx = o$3(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx });
+                          labelPosition = "hidden";
+                      }
                       if (!withinInputGroup) {
-                          return (o$3("div", { ...useMergedProps({
-                                  className: clsx("form-check", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse")
-                              }, props, { ref }), children: [loadingJsx, labelPosition == "before" && visibleLabel, labelPosition == "tooltip" ? o$3(Tooltip, { forceOpen: info.pressReturn.longPress || false, forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && visibleLabel] }));
+                          return (o$3(StructureCheckboxNormalOuter, { inline: inline || false, pending: pending, isSwitch: isSwitch, labelPosition: labelPosition || "before", childrenInput: inputJsx, childrenLabel: visibleLabel, childrenProgressIndicator: loadingJsx, childrenTooltip: label }));
                       }
                       else {
-                          return (o$3(k$3, { children: [labelPosition == "before" && o$3("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel }), o$3("div", { ...useMergedProps({ className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline") }, props, { ref }), children: labelPosition == "tooltip" ? o$3(Tooltip, { forceOpen: info.pressReturn.longPress || false, forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx }), labelPosition == "after" && o$3("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel })] }));
+                          return (o$3(StructureCheckboxInputGroupOuter, { inline: inline || false, pending: pending, isSwitch: isSwitch, labelPosition: labelPosition || "before", childrenInput: inputJsx, childrenLabel: visibleLabel, childrenProgressIndicator: loadingJsx, childrenTooltip: label }));
                       }
                   } }));
           } }));
   }
+  const StructureCheckboxNormalOuter = memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({
+              className: clsx("form-check", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse")
+          }, { ...props, ref }), children: [loadingJsx, labelPosition == "before" && visibleLabel, inputJsx, labelPosition == "after" && visibleLabel] }));
+  });
+  const StructureCheckboxInputGroupOuter = memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }, ref) {
+      const label2 = o$3("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel });
+      return (o$3(k$3, { children: [labelPosition == "before" && label2, o$3("div", { ...useMergedProps({
+                      className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline")
+                  }, props, { ref }), children: inputJsx }), labelPosition == "after" && label2] }));
+  });
 
   function CheckboxGroup({ orientation, children, label, labelPosition, debounce, loadingLabel, throttle, disabled, inline, getSortValue }) {
       return (o$3(CheckboxGroup$1, { orientation: orientation, render: info => {

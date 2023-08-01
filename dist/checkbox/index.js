@@ -7,6 +7,7 @@ import { useContext } from "preact/hooks";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
+import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { StructureCheckboxInput, StructureCheckboxLabel } from "./structure.js";
 function nextTristate(checked) {
     if (checked == false)
@@ -43,17 +44,30 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
             disabled ||= defaultDisabled;
             const d = disabled ? disabledType : false;
             return (_jsx(AriaCheckbox, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, imperativeHandle: imperativeHandle, render: info => {
-                    const inputJsx = _jsx(StructureCheckboxInput, { ...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {}) });
+                    let inputJsx = _jsx(StructureCheckboxInput, { ...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {}) });
                     const visibleLabel = _jsx(StructureCheckboxLabel, { ...useMergedProps(info.propsLabel, propsLabel || {}), children: label });
+                    if (labelPosition == 'tooltip') {
+                        inputJsx = _jsx(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx });
+                        labelPosition = "hidden";
+                    }
                     if (!withinInputGroup) {
-                        return (_jsxs("div", { ...useMergedProps({
-                                className: clsx("form-check", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse")
-                            }, props, { ref }), children: [loadingJsx, labelPosition == "before" && visibleLabel, labelPosition == "tooltip" ? _jsx(Tooltip, { forceOpen: info.pressReturn.longPress || false, forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && visibleLabel] }));
+                        return (_jsx(StructureCheckboxNormalOuter, { inline: inline || false, pending: pending, isSwitch: isSwitch, labelPosition: labelPosition || "before", childrenInput: inputJsx, childrenLabel: visibleLabel, childrenProgressIndicator: loadingJsx, childrenTooltip: label }));
                     }
                     else {
-                        return (_jsxs(_Fragment, { children: [labelPosition == "before" && _jsx("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel }), _jsx("div", { ...useMergedProps({ className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline") }, props, { ref }), children: labelPosition == "tooltip" ? _jsx(Tooltip, { forceOpen: info.pressReturn.longPress || false, forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx }), labelPosition == "after" && _jsx("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel })] }));
+                        return (_jsx(StructureCheckboxInputGroupOuter, { inline: inline || false, pending: pending, isSwitch: isSwitch, labelPosition: labelPosition || "before", childrenInput: inputJsx, childrenLabel: visibleLabel, childrenProgressIndicator: loadingJsx, childrenTooltip: label }));
                     }
                 } }));
         } }));
 }
+export const StructureCheckboxNormalOuter = memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }, ref) {
+    return (_jsxs("div", { ...useMergedProps({
+            className: clsx("form-check", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse")
+        }, { ...props, ref }), children: [loadingJsx, labelPosition == "before" && visibleLabel, inputJsx, labelPosition == "after" && visibleLabel] }));
+});
+export const StructureCheckboxInputGroupOuter = memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }, ref) {
+    const label2 = _jsx("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel });
+    return (_jsxs(_Fragment, { children: [labelPosition == "before" && label2, _jsx("div", { ...useMergedProps({
+                    className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline")
+                }, props, { ref }), children: inputJsx }), labelPosition == "after" && label2] }));
+});
 //# sourceMappingURL=index.js.map

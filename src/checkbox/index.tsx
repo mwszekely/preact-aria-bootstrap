@@ -1,6 +1,6 @@
 
 import { clsx } from "clsx";
-import { h, Ref } from "preact";
+import { ComponentChildren, h, Ref } from "preact";
 import { Checkbox as AriaCheckbox, CheckboxCheckedType, EventDetail, ProgressWithHandler, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets";
 import { UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
@@ -8,6 +8,7 @@ import { useContext } from "preact/hooks";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
+import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { LabelledProps } from "../utility/types.js";
 import { StructureCheckboxInput, StructureCheckboxLabel } from "./structure.js";
 
@@ -36,12 +37,12 @@ export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children
 }
 
 function nextTristate(checked: CheckboxCheckedType) {
-        if (checked == false)
-            return "mixed" as unknown as boolean;
-        else if (checked === "mixed")
-            return true;
-        else
-            return false;
+    if (checked == false)
+        return "mixed" as unknown as boolean;
+    else if (checked === "mixed")
+        return true;
+    else
+        return false;
 }
 
 export function Checkbox({ label, labelPosition, checked, tristate, onValueChange, loadingLabel, debounce, forciblyPending, throttle, inline, disabled: userDisabled, imperativeHandle, propsInput, propsLabel, ...props }: LabelledProps<CheckboxProps, "tooltip">, ref?: Ref<any>) {
@@ -57,15 +58,15 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
             ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
             forciblyPending={forciblyPending}
             asyncHandler={(next, event) => {
-                if (tristate) 
+                if (tristate)
                     return onValueChange(nextTristate(checked), event);
-                else 
+                else
                     return onValueChange?.(next, event);
             }}
             capture={e => {
-                if (tristate) 
+                if (tristate)
                     return nextTristate(checked);
-                else 
+                else
                     return e[EventDetail].checked as boolean;
             }}
             debounce={debounce}
@@ -102,36 +103,41 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
 
                         render={info => {
 
-                            const inputJsx = <StructureCheckboxInput {...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {})} />
+                            let inputJsx = <StructureCheckboxInput {...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {})} />
                             const visibleLabel = <StructureCheckboxLabel {...useMergedProps(info.propsLabel, propsLabel || {})}>{label}</StructureCheckboxLabel>
+
+                            if (labelPosition == 'tooltip') {
+                                inputJsx = <Tooltip forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip>;
+                                labelPosition = "hidden";
+                            }
 
                             if (!withinInputGroup) {
                                 return (
-                                    <div {...useMergedProps({
-                                        className: clsx(
-                                            "form-check",
-                                            pending && "pending",
-                                            isSwitch && "form-switch",
-                                            inline && "form-check-inline",
-                                            labelPosition == "before" && "form-check-reverse"
-                                        )
-                                    }, props, { ref })}>
-                                        {loadingJsx}
-                                        {labelPosition == "before" && visibleLabel}
-                                        {labelPosition == "tooltip" ? <Tooltip forceOpen={info.pressReturn.longPress || false} forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
-                                        {labelPosition == "after" && visibleLabel}
-                                    </div>
+                                    <StructureCheckboxNormalOuter
+                                        inline={inline || false}
+                                        pending={pending}
+                                        isSwitch={isSwitch}
+                                        labelPosition={labelPosition || "before"}
+                                        childrenInput={inputJsx}
+                                        childrenLabel={visibleLabel}
+                                        childrenProgressIndicator={loadingJsx}
+                                        childrenTooltip={label}
+                                    />
+
                                 )
                             }
                             else {
                                 return (
-                                    <>
-                                        {labelPosition == "before" && <div {...({ className: clsx("input-group-text", pending && "pending") })}>{visibleLabel}</div>}
-                                        <div {...useMergedProps({ className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline") }, props, { ref })}>
-                                            {labelPosition == "tooltip" ? <Tooltip forceOpen={info.pressReturn.longPress || false} forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
-                                        </div>
-                                        {labelPosition == "after" && <div {...({ className: clsx("input-group-text", pending && "pending") })}>{visibleLabel}</div>}
-                                    </>
+                                    <StructureCheckboxInputGroupOuter
+                                        inline={inline || false}
+                                        pending={pending}
+                                        isSwitch={isSwitch}
+                                        labelPosition={labelPosition || "before"}
+                                        childrenInput={inputJsx}
+                                        childrenLabel={visibleLabel}
+                                        childrenProgressIndicator={loadingJsx}
+                                        childrenTooltip={label}
+                                    />
                                 )
                             }
 
@@ -144,3 +150,68 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
     )
 }
 
+export interface StructureCheckboxNormalOuterProps {
+    labelPosition: "before" | "after" | "hidden";
+    isSwitch: boolean;
+    pending: boolean;
+    inline: boolean;
+    childrenProgressIndicator: ComponentChildren;
+    childrenLabel: ComponentChildren;
+    childrenInput: ComponentChildren;
+    childrenTooltip: ComponentChildren;
+}
+
+export const StructureCheckboxNormalOuter = memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) {
+    return (
+        <div {...useMergedProps({
+            className: clsx(
+                "form-check",
+                pending && "pending",
+                isSwitch && "form-switch",
+                inline && "form-check-inline",
+                labelPosition == "before" && "form-check-reverse"
+            )
+        }, { ...props, ref })}>
+            {loadingJsx}
+            {labelPosition == "before" && visibleLabel}
+            {inputJsx}
+            {labelPosition == "after" && visibleLabel}
+        </div>
+    )
+})
+
+
+
+
+
+
+export interface StructureCheckboxInputGroupOuterProps {
+    labelPosition: "before" | "after" | "hidden";
+    isSwitch: boolean;
+    pending: boolean;
+    inline: boolean;
+    childrenProgressIndicator: ComponentChildren;
+    childrenLabel: ComponentChildren;
+    childrenInput: ComponentChildren;
+    childrenTooltip: ComponentChildren;
+}
+
+export const StructureCheckboxInputGroupOuter = memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) {
+    const label2 = <div {...({ className: clsx("input-group-text", pending && "pending") })}>{visibleLabel}</div>;
+    return (
+        <>
+            {labelPosition == "before" && label2}
+            <div {...useMergedProps({
+                className: clsx(
+                    "input-group-text",
+                    pending && "pending",
+                    isSwitch && "form-switch",
+                    inline && "form-check-inline"
+                )
+            }, props, { ref })}>
+                {inputJsx}
+            </div>
+            {labelPosition == "after" && label2}
+        </>
+    )
+})

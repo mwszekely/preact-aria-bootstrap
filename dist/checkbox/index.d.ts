@@ -1,4 +1,4 @@
-import { h, Ref } from "preact";
+import { ComponentChildren, h, Ref } from "preact";
 import { TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets";
 import { UseAsyncHandlerParameters } from "preact-prop-helpers";
 import { LabelledProps } from "../utility/types.js";
@@ -21,4 +21,26 @@ export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children
     propsLabel?: h.JSX.HTMLAttributes<HTMLLabelElement>;
 }
 export declare function Checkbox({ label, labelPosition, checked, tristate, onValueChange, loadingLabel, debounce, forciblyPending, throttle, inline, disabled: userDisabled, imperativeHandle, propsInput, propsLabel, ...props }: LabelledProps<CheckboxProps, "tooltip">, ref?: Ref<any>): import("preact").JSX.Element;
+export interface StructureCheckboxNormalOuterProps {
+    labelPosition: "before" | "after" | "hidden";
+    isSwitch: boolean;
+    pending: boolean;
+    inline: boolean;
+    childrenProgressIndicator: ComponentChildren;
+    childrenLabel: ComponentChildren;
+    childrenInput: ComponentChildren;
+    childrenTooltip: ComponentChildren;
+}
+export declare const StructureCheckboxNormalOuter: ({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
+export interface StructureCheckboxInputGroupOuterProps {
+    labelPosition: "before" | "after" | "hidden";
+    isSwitch: boolean;
+    pending: boolean;
+    inline: boolean;
+    childrenProgressIndicator: ComponentChildren;
+    childrenLabel: ComponentChildren;
+    childrenInput: ComponentChildren;
+    childrenTooltip: ComponentChildren;
+}
+export declare const StructureCheckboxInputGroupOuter: ({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
 //# sourceMappingURL=index.d.ts.map
