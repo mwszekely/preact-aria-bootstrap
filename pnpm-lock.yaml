@@ -30,7 +30,7 @@ dependencies:
     version: 10.13.2
   preact-aria-widgets:
     specifier: github:mwszekely/preact-aria-widgets
-    version: github.com/mwszekely/preact-aria-widgets/928463d82dc0e48db7ca0f3ba3b49feb9aac245c(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/mwszekely/preact-aria-widgets/c3c9c474b8f4532fd54d22dcdc31218b92f8bbe7(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
   preact-prop-helpers:
     specifier: github:mwszekely/preact-prop-helpers
     version: github.com/mwszekely/preact-prop-helpers/a4e782a4c7d59da3905f54a4c6a5c74e38dd85ce(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
@@ -1085,9 +1085,9 @@ packages:
     version: 1.0.0
     dev: false
 
-  github.com/mwszekely/preact-aria-widgets/928463d82dc0e48db7ca0f3ba3b49feb9aac245c(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/928463d82dc0e48db7ca0f3ba3b49feb9aac245c}
-    id: github.com/mwszekely/preact-aria-widgets/928463d82dc0e48db7ca0f3ba3b49feb9aac245c
+  github.com/mwszekely/preact-aria-widgets/c3c9c474b8f4532fd54d22dcdc31218b92f8bbe7(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/c3c9c474b8f4532fd54d22dcdc31218b92f8bbe7}
+    id: github.com/mwszekely/preact-aria-widgets/c3c9c474b8f4532fd54d22dcdc31218b92f8bbe7
     name: preact-aria-widgets
     version: 0.0.1
     peerDependencies:

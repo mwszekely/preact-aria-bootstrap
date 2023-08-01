@@ -126,29 +126,5 @@ function MSB({ index }: { index: number }) {
 }
 
 function SSB({ index }: { index: number }) {
-
-    /*const onToggleSync = useStableCallback((pressed: boolean | null) => {
-        debugger;
-        setSelectedIndexSync(pressed ? index : null);
-    })
-    const onToggleAsync = useStableCallback(async (pressed: boolean | null) => {
-        //await new Promise(resolve => setTimeout(resolve, 1000 + (3000 * Math.random())));
-        await setSelectedIndexAsync(pressed ? index : null);
-        //onToggleSync(pressed);
-    })*/
-
     return <ButtonAction buttonGroupIndex={index} onPress={null}>Toggle me</ButtonAction>
 }
-/*
-function DemoButton({ tag, disabled }: { tag: string, disabled: boolean | "soft" | "hard" }) {
-    const onPress = () => { alert("Button clicked") }
-
-    return (
-        <Button<HTMLButtonElement>
-            disabled={disabled}
-            tagButton={tag as any}
-            onPress={onPress}
-            render={info => (<button {...info.props}>{`${tag} ${disabled ? ` disabled (${disabled == "soft" ? "soft" : "hard"})` : ""}` }</button>)}
-        />
-    )
-}*/

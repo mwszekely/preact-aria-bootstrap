@@ -1,7 +1,7 @@
 
 import { clsx } from "clsx";
 import { h, Ref } from "preact";
-import { Checkbox as AriaCheckbox, EventDetail, ProgressWithHandler, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets";
+import { Checkbox as AriaCheckbox, CheckboxCheckedType, EventDetail, ProgressWithHandler, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets";
 import { UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { useContext } from "preact/hooks";
@@ -9,6 +9,7 @@ import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
 import { LabelledProps } from "../utility/types.js";
+import { StructureCheckboxInput, StructureCheckboxLabel } from "./structure.js";
 
 export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     inline?: boolean;
@@ -34,43 +35,38 @@ export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children
     propsLabel?: h.JSX.HTMLAttributes<HTMLLabelElement>;
 }
 
+function nextTristate(checked: CheckboxCheckedType) {
+        if (checked == false)
+            return "mixed" as unknown as boolean;
+        else if (checked === "mixed")
+            return true;
+        else
+            return false;
+}
+
 export function Checkbox({ label, labelPosition, checked, tristate, onValueChange, loadingLabel, debounce, forciblyPending, throttle, inline, disabled: userDisabled, imperativeHandle, propsInput, propsLabel, ...props }: LabelledProps<CheckboxProps, "tooltip">, ref?: Ref<any>) {
     labelPosition ??= "after"
     const isSwitch = (props as { _isSwitch: boolean })._isSwitch;
     if (isSwitch)
         delete (props as any)._isSwitch;
 
-    const w = useContext(WithinInputGroup);
+    const withinInputGroup = useContext(WithinInputGroup);
 
     return (
         <ProgressWithHandler<TargetedCheckboxChangeEvent, boolean, HTMLSpanElement, HTMLLabelElement>
             ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
             forciblyPending={forciblyPending}
             asyncHandler={(next, event) => {
-                if (tristate) {
-                    if (checked == false)
-                        return onValueChange?.("mixed" as unknown as boolean, event);
-                    else if (checked === "mixed")
-                        return onValueChange?.(true, event);
-                    else
-                        return onValueChange?.(false, event);
-                }
-                else {
+                if (tristate) 
+                    return onValueChange(nextTristate(checked), event);
+                else 
                     return onValueChange?.(next, event);
-                }
             }}
             capture={e => {
-                if (tristate) {
-                    if (checked == false)
-                        return "mixed" as unknown as boolean;
-                    else if (checked === "mixed")
-                        return true;
-                    else
-                        return false;
-                }
-                else {
-                    return e[EventDetail].checked as boolean
-                }
+                if (tristate) 
+                    return nextTristate(checked);
+                else 
+                    return e[EventDetail].checked as boolean;
             }}
             debounce={debounce}
             throttle={throttle}
@@ -90,7 +86,6 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                 const disabledType = useContext(DefaultDisabledType);
                 let disabled = userDisabled;
                 disabled ||= defaultDisabled;
-                //disabled ||= pending;
                 const d = disabled ? disabledType : false;
 
                 return (
@@ -106,11 +101,11 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
 
 
                         render={info => {
-                            debugger;
-                            const inputJsx = <input {...useMergedProps(info.propsInput, propsInput || {}, { class: clsx("form-check-input", w && "mt-0") })} />
-                            const visibleLabel = <label {...useMergedProps(info.propsLabel, propsLabel || {}, { class: "form-check-label" })}>{label}</label>;
 
-                            if (!w) {
+                            const inputJsx = <StructureCheckboxInput {...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {})} />
+                            const visibleLabel = <StructureCheckboxLabel {...useMergedProps(info.propsLabel, propsLabel || {})}>{label}</StructureCheckboxLabel>
+
+                            if (!withinInputGroup) {
                                 return (
                                     <div {...useMergedProps({
                                         className: clsx(
@@ -123,7 +118,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                                     }, props, { ref })}>
                                         {loadingJsx}
                                         {labelPosition == "before" && visibleLabel}
-                                        {labelPosition == "tooltip" ? <Tooltip forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
+                                        {labelPosition == "tooltip" ? <Tooltip forceOpen={info.pressReturn.longPress || false} forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
                                         {labelPosition == "after" && visibleLabel}
                                     </div>
                                 )
@@ -133,7 +128,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                                     <>
                                         {labelPosition == "before" && <div {...({ className: clsx("input-group-text", pending && "pending") })}>{visibleLabel}</div>}
                                         <div {...useMergedProps({ className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline") }, props, { ref })}>
-                                            {labelPosition == "tooltip" ? <Tooltip forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
+                                            {labelPosition == "tooltip" ? <Tooltip forceOpen={info.pressReturn.longPress || false} forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
                                         </div>
                                         {labelPosition == "after" && <div {...({ className: clsx("input-group-text", pending && "pending") })}>{visibleLabel}</div>}
                                     </>
@@ -148,3 +143,4 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
         />
     )
 }
+

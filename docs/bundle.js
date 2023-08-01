@@ -10698,6 +10698,8 @@
               clearTimeout(hoverTimeoutHandle.current);
               hoverTimeoutHandle.current = null;
           }
+          if (nextState == null)
+              inputState.current = null;
           switch (nextState) {
               case "focused-popup":
               case "focused-trigger":
@@ -10716,13 +10718,16 @@
       let { propsReferencer: propsTrigger, propsSource: propsPopup } = useRandomId({ randomIdParameters: { prefix: Prefices.tooltip, otherReferencerProp: (tooltipSemanticType == "description" ? "aria-describedby" : "aria-labelledby") } });
       const { refElementReturn: { getElement: getTriggerElement }, propsStable: triggerRefProps } = useRefElement({ refElementParameters: {} });
       const { refElementReturn: { getElement: getPopupElement }, propsStable: popupRefProps } = useRefElement({ refElementParameters: {} });
-      const stateIsMouse = T$2(() => (getState()?.startsWith("h") || false), []);
-      const stateIsFocus = T$2(() => (getState()?.startsWith("f") || false), []);
+      //let inputState = useRef<"hover" | "keyboard" | "longpress">()
+      //const stateIsMouse = useCallback(() => (getState()?.startsWith("h") || false), []);
+      //const stateIsFocus = useCallback(() => (getState()?.startsWith("f") || false), []);
+      let inputState = _$1(null);
       let hoverTimeoutHandle = _$1(null);
       const onHoverChanged = useStableCallback((hovering, which) => {
           if (hoverTimeoutHandle.current)
               clearTimeout(hoverTimeoutHandle.current);
           if (hovering) {
+              inputState.current = "hover";
               hoverTimeoutHandle.current = setTimeout(() => {
                   setState(`hovering-${which}`);
                   hoverTimeoutHandle.current = null;
@@ -10733,8 +10738,9 @@
           }
       });
       const onCurrentFocusedInnerChanged = T$2((focused, which) => {
-          if (!stateIsMouse()) {
+          if (inputState.current != "hover") {
               if (focused) {
+                  inputState.current = 'focus';
                   setState(`focused-${which}`);
               }
               else {
@@ -10744,7 +10750,7 @@
           else {
               setState(null);
           }
-      }, [stateIsMouse]);
+      }, []);
       const onTriggerCurrentFocusedInnerChanged = T$2((focused) => onCurrentFocusedInnerChanged(focused, "trigger"), [onCurrentFocusedInnerChanged]);
       const onPopupCurrentFocusedInnerChanged = T$2((focused) => onCurrentFocusedInnerChanged(focused, "popup"), [onCurrentFocusedInnerChanged]);
       const { hasCurrentFocusReturn: triggerFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: onTriggerCurrentFocusedInnerChanged }, refElementReturn: { getElement: getTriggerElement } });
@@ -10777,7 +10783,8 @@
       };
       const otherTriggerProps = {
           onPointerEnter: T$2(() => { onHoverChanged(true, "trigger"); }, []),
-          onClick: T$2((e) => { if (e.currentTarget && "focus" in e.currentTarget)
+          onPointerUp: T$2(() => { onHoverChanged(false, "trigger"); }, []),
+          onClick: T$2((e) => { onHoverChanged(true, "trigger"); if (e.currentTarget && "focus" in e.currentTarget)
               focus(e.currentTarget); }, []),
           //onPointerLeave: useCallback(() => { onHoverChanged(false, "trigger") }, [])
       };
@@ -10787,7 +10794,7 @@
           const mouseElement = e.target;
           let overPopup = (popupElement?.contains(mouseElement));
           let overTrigger = (triggerElement?.contains(mouseElement));
-          if (!overPopup && !overTrigger && stateIsMouse()) {
+          if (!overPopup && !overTrigger && inputState.current == 'hover') {
               onHoverChanged(false, "popup");
           }
       }), { capture: true, passive: true });
@@ -10796,8 +10803,8 @@
           propsTrigger: useMergedProps(triggerRefProps, propsTrigger, triggerFocusReturn.propsStable, { onClick: useStableCallback(e => focus(e.currentTarget)) }, otherTriggerProps, propsStableSource),
           tooltipReturn: {
               getState,
-              stateIsFocus,
-              stateIsMouse
+              //stateIsFocus,
+              //stateIsMouse
           }
       };
   }
@@ -14408,6 +14415,11 @@
 
   // TODO: This should be on `globalThis` in case this library is imported multiple times.
   const otherTooltipCloses = new Set();
+  /**
+   * General TODO for tooltip: It should be possible for the hover element and the target element to be different.
+   *
+   * E.G. a checkbox is TINY and can be hard to hover over, but we can't add ::after pseudo elements to increase its size because it's replaced.
+   */
   const Tooltip = forwardElementRef$1(function Tooltip({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, hoverDelay, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }, ref) {
       if (forward == null && typeof children == "object" && children.props) {
           forward = true;
@@ -14856,36 +14868,37 @@
 
   const WithinInputGroup = G$1(false);
 
+  const StructureCheckboxInput = memoForwardRef(function StructureCheckboxInput({ ...props }, ref) {
+      return (o$3("input", { ...useMergedProps({ class: clsx("form-check-input") }, { ...props, ref }) }));
+  });
+  const StructureCheckboxLabel = memoForwardRef(function StructureCheckboxLabel({ children, ...props }, ref) {
+      return (o$3("label", { ...useMergedProps({ class: "form-check-label" }, { ...props, ref }), children: children }));
+  });
+
+  function nextTristate(checked) {
+      if (checked == false)
+          return "mixed";
+      else if (checked === "mixed")
+          return true;
+      else
+          return false;
+  }
   function Checkbox({ label, labelPosition, checked, tristate, onValueChange, loadingLabel, debounce, forciblyPending, throttle, inline, disabled: userDisabled, imperativeHandle, propsInput, propsLabel, ...props }, ref) {
       labelPosition ??= "after";
       const isSwitch = props._isSwitch;
       if (isSwitch)
           delete props._isSwitch;
-      const w = q$2(WithinInputGroup);
+      const withinInputGroup = q$2(WithinInputGroup);
       return (o$3(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", forciblyPending: forciblyPending, asyncHandler: (next, event) => {
-              if (tristate) {
-                  if (checked == false)
-                      return onValueChange?.("mixed", event);
-                  else if (checked === "mixed")
-                      return onValueChange?.(true, event);
-                  else
-                      return onValueChange?.(false, event);
-              }
-              else {
+              if (tristate)
+                  return onValueChange(nextTristate(checked), event);
+              else
                   return onValueChange?.(next, event);
-              }
           }, capture: e => {
-              if (tristate) {
-                  if (checked == false)
-                      return "mixed";
-                  else if (checked === "mixed")
-                      return true;
-                  else
-                      return false;
-              }
-              else {
+              if (tristate)
+                  return nextTristate(checked);
+              else
                   return e[EventDetail].checked;
-              }
           }, debounce: debounce, throttle: throttle, tagProgressIndicator: "span", render: progressInfo => {
               const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
               const { pending: p, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
@@ -14895,19 +14908,17 @@
               const disabledType = q$2(DefaultDisabledType);
               let disabled = userDisabled;
               disabled ||= defaultDisabled;
-              //disabled ||= pending;
               const d = disabled ? disabledType : false;
               return (o$3(Checkbox$1, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, imperativeHandle: imperativeHandle, render: info => {
-                      debugger;
-                      const inputJsx = o$3("input", { ...useMergedProps(info.propsInput, propsInput || {}, { class: clsx("form-check-input", w && "mt-0") }) });
-                      const visibleLabel = o$3("label", { ...useMergedProps(info.propsLabel, propsLabel || {}, { class: "form-check-label" }), children: label });
-                      if (!w) {
+                      const inputJsx = o$3(StructureCheckboxInput, { ...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {}) });
+                      const visibleLabel = o$3(StructureCheckboxLabel, { ...useMergedProps(info.propsLabel, propsLabel || {}), children: label });
+                      if (!withinInputGroup) {
                           return (o$3("div", { ...useMergedProps({
                                   className: clsx("form-check", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse")
-                              }, props, { ref }), children: [loadingJsx, labelPosition == "before" && visibleLabel, labelPosition == "tooltip" ? o$3(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && visibleLabel] }));
+                              }, props, { ref }), children: [loadingJsx, labelPosition == "before" && visibleLabel, labelPosition == "tooltip" ? o$3(Tooltip, { forceOpen: info.pressReturn.longPress || false, forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && visibleLabel] }));
                       }
                       else {
-                          return (o$3(k$3, { children: [labelPosition == "before" && o$3("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel }), o$3("div", { ...useMergedProps({ className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline") }, props, { ref }), children: labelPosition == "tooltip" ? o$3(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx }), labelPosition == "after" && o$3("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel })] }));
+                          return (o$3(k$3, { children: [labelPosition == "before" && o$3("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel }), o$3("div", { ...useMergedProps({ className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline") }, props, { ref }), children: labelPosition == "tooltip" ? o$3(Tooltip, { forceOpen: info.pressReturn.longPress || false, forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx }), labelPosition == "after" && o$3("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel })] }));
                       }
                   } }));
           } }));
@@ -18006,15 +18017,6 @@
       return o$3(Button, { buttonGroupIndex: index, onPress: index % 2 == 0 ? onToggleAsync : onToggleSync, pressed: pressed, children: ["Toggle me (", index % 2 == 0 ? "a" : "", "sync, #", index, ", ", pressed?.toString() || "null", ")"] });
   }
   function SSB({ index }) {
-      /*const onToggleSync = useStableCallback((pressed: boolean | null) => {
-          debugger;
-          setSelectedIndexSync(pressed ? index : null);
-      })
-      const onToggleAsync = useStableCallback(async (pressed: boolean | null) => {
-          //await new Promise(resolve => setTimeout(resolve, 1000 + (3000 * Math.random())));
-          await setSelectedIndexAsync(pressed ? index : null);
-          //onToggleSync(pressed);
-      })*/
       return o$3(Button, { buttonGroupIndex: index, onPress: null, children: "Toggle me" });
   }
 

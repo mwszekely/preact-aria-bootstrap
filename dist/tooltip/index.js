@@ -10,6 +10,11 @@ import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { usePortalId } from "../utility/use-portal-id.js";
 // TODO: This should be on `globalThis` in case this library is imported multiple times.
 const otherTooltipCloses = new Set();
+/**
+ * General TODO for tooltip: It should be possible for the hover element and the target element to be different.
+ *
+ * E.G. a checkbox is TINY and can be hard to hover over, but we can't add ::after pseudo elements to increase its size because it's replaced.
+ */
 export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, hoverDelay, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }, ref) {
     if (forward == null && typeof children == "object" && children.props) {
         forward = true;
