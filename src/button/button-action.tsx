@@ -1,21 +1,21 @@
 import { clsx } from "clsx";
 import { ComponentChildren, h, Ref, VNode } from "preact";
-import { Button as AriaButton, ElementToTag, EventDetail, Progress, TargetedButtonPressEvent, ToolbarChild } from "preact-aria-widgets";
+import { Button as AriaButton, EventDetail, Progress, TargetedButtonPressEvent, ToolbarChild } from "preact-aria-widgets";
 import { Nullable, returnZero, useAsyncHandler, UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext } from "preact/hooks";
 import { ButtonFills, ButtonSizes, ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip, TooltipProps } from "../tooltip/index.js";
-import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
+import { GlobalAttributes } from "../utility/types.js";
 import { ButtonGroupChildProps, ButtonGroupContext } from "./button-group.js";
 
 
-export interface ButtonProps<E extends HTMLElement> extends
-    Pick<h.JSX.HTMLAttributes<E>, "children" | "style" | "class" | "className">,
+export interface ButtonProps extends
+    GlobalAttributes<HTMLButtonElement, "children" | "ref">,
     Partial<ButtonGroupChildProps>,
     Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
-    ref?: Ref<E>;
 
     disabled?: boolean;
 
@@ -25,9 +25,7 @@ export interface ButtonProps<E extends HTMLElement> extends
 
     tooltipPlacement?: TooltipProps["placement"];
 
-    onPress: null | ((pressed: boolean | null, event: TargetedButtonPressEvent<E>) => (void | Promise<void>));
-
-    tag?: ElementToTag<E>;
+    onPress: null | ((pressed: boolean | null, event: TargetedButtonPressEvent<HTMLButtonElement>) => (void | Promise<void>));
 
     badge?: Nullable<VNode>;
 
@@ -49,8 +47,8 @@ export interface ButtonProps<E extends HTMLElement> extends
     pressed?: Nullable<boolean>;
 }
 
-export const Button = memo(forwardElementRef(function Button<E extends HTMLElement>({ tag: Tag, tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps<E>, ref?: Ref<E>) {
-    Tag ??= "button" as never;
+export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) {
+    //Tag ??= "button" as never;
 
     let defaultTheme = useContext(DefaultButtonTheme);
     let defaultSize = useContext(DefaultButtonSize);
@@ -87,9 +85,9 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
 
     if (buttonGroupInfo == null) {
         return (
-            <ButtonStructure<E>
+            <ButtonStructure
                 ref={ref}
-                Tag={(Tag) as never}
+                //Tag={(Tag) as never}
                 tooltip={tooltip}
                 disabled={d}
                 pending={pending}
@@ -109,14 +107,14 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
     }
     else {
         return (
-            <ToolbarChild<E>
+            <ToolbarChild<HTMLButtonElement>
                 index={buttonGroupIndex ?? 0}
                 getSortValue={returnZero}
                 disabledProp="disabled"
                 render={toolbarChildInfo => {
-                    return (<ButtonStructure<E>
+                    return (<ButtonStructure
                         ref={ref}
-                        Tag={(Tag) as never}
+                        //Tag={(Tag) as never}
                         tooltip={tooltip}
                         disabled={d}
                         pending={pending}
@@ -130,7 +128,6 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
                         pressed={toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne || false}
                         callCount={callCount}
                         onPress={(e) => {
-                            debugger;
                             toolbarChildInfo.pressParameters.onPressSync?.(e);
                             return syncHandler?.(e);
                         }}
@@ -140,15 +137,15 @@ export const Button = memo(forwardElementRef(function Button<E extends HTMLEleme
             />
         )
     }
-}))
+})
 
 /**
  * A "raw" button -- just the markup.
  */
-const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extends Element>({ Tag, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }: { ref: Ref<E> | undefined, callCount: number, variantDropdown: "joined" | "split" | null; variantSize: "sm" | "md" | "lg" | undefined; variantFill: "fill" | "outline" | null; tooltip: ComponentChildren | undefined, children: ComponentChildren, variantTheme: ButtonThemes, pending: boolean, loadingLabel: string | null, Tag: string, disabled: boolean | "soft" | "hard", tooltipPlacement: TooltipProps["placement"], pressed: null | boolean, onPress: null | ((e: TargetedButtonPressEvent<E>) => void), otherProps: h.JSX.HTMLAttributes<E> }, ref?: Ref<E>) {
+const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }: { ref: Ref<HTMLButtonElement> | undefined, callCount: number, variantDropdown: "joined" | "split" | null; variantSize: "sm" | "md" | "lg" | undefined; variantFill: "fill" | "outline" | null; tooltip: ComponentChildren | undefined, children: ComponentChildren, variantTheme: ButtonThemes, pending: boolean, loadingLabel: string | null, disabled: boolean | "soft" | "hard", tooltipPlacement: TooltipProps["placement"], pressed: null | boolean, onPress: null | ((e: TargetedButtonPressEvent<HTMLButtonElement>) => void), otherProps: h.JSX.HTMLAttributes<HTMLButtonElement> }, ref?: Ref<HTMLButtonElement>) {
     return (
-        <AriaButton<E>
-            tagButton={(Tag) as never}
+        <AriaButton<HTMLButtonElement>
+            tagButton="button"
             disabled={disabled}
             onPressSync={onPress}
             pressed={pressed}
@@ -169,7 +166,8 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extend
 
                             const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
 
-                            const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx))
+                            //const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx))
+                            const ret = <StructureButtonButton {...useMergedProps<any>(otherProps, buttonInfo.props, { className: buttonClass, ref })}>{children}{loadingJsx}</StructureButtonButton>
                             if (tooltip) {
                                 return <Tooltip forward alignMode="element" semanticType="label" absolutePositioning={true} placement={tooltipPlacement || "top"} tooltip={tooltip}>{ret}</Tooltip>
                             }
@@ -183,3 +181,28 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure<E extend
         />
     )
 }))
+
+export interface StructureButtonProps extends GlobalAttributes<HTMLButtonElement, "children"> {
+
+}
+
+export interface StructureButtonProgressIndicatorProps extends GlobalAttributes<HTMLProgressElement> { }
+export interface StructureButtonProgressLabelProps extends GlobalAttributes<HTMLLabelElement, "children"> { }
+
+const StructureButtonButton = memoForwardRef(function ButtonStructure({ children, ...props }: StructureButtonProps, ref: Ref<HTMLButtonElement>) {
+    return (
+        <button {...useMergedProps({ class: "btn" }, { ...props, ref })}>{children}</button>
+    )
+})
+
+const StructureButtonProgressLabel = memoForwardRef(function StructureButtonProgress({ children, ...props }: StructureButtonProgressLabelProps, ref: Ref<HTMLLabelElement>) {
+    return (
+        <label {...useMergedProps({ class: "btn-progress-label" }, { ...props, ref })}>{children}</label>
+    )
+})
+
+const StructureButtonProgressIndicator = memoForwardRef(function StructureButtonProgress({ ...props }: StructureButtonProgressIndicatorProps, ref: Ref<HTMLProgressElement>) {
+    return (
+        <progress {...useMergedProps({ class: "btn-progress-indicator" }, { ...props, ref })} />
+    )
+})

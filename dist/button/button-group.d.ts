@@ -7,7 +7,7 @@ export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElem
     disabled?: boolean;
     selectedIndex?: number | null;
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
-    variantSize?: ButtonProps<any>["variantSize"];
+    variantSize?: ButtonProps["variantSize"];
     variantTheme?: ButtonThemes;
     orientation?: ToolbarProps<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>["orientation"];
     /**

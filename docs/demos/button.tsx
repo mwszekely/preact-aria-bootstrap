@@ -114,7 +114,8 @@ function MSB({ index }: { index: number }) {
     const [pressed, setPressed] = useState(false);
 
     const onToggleSync = useCallback(async (pressed: boolean | null) => {
-        setPressed(pressed ?? false);
+        debugger;
+        setPressed(!pressed);
     }, [])
     const onToggleAsync = useCallback(async (pressed: boolean | null) => {
         await new Promise(resolve => setTimeout(resolve, 1000 + (3000 * Math.random())));

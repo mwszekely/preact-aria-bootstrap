@@ -2418,7 +2418,8 @@
   const EventDetail = Symbol("event-detail");
   function enhanceEvent(e, detail) {
       const event = (e ?? {});
-      event[EventDetail] = detail;
+      event[EventDetail] ??= {};
+      Object.assign(event[EventDetail], detail);
       return event;
   }
 
@@ -3159,7 +3160,7 @@
   /**
    * Returns a function that retrieves the stack at the time this hook was called (in development mode only).
    *
-   *
+   * @remarks The global variable `_generate_setState_stacks` must be true, or no stack will be generated.
    */
   function useStack() {
       {
@@ -3272,14 +3273,14 @@
   /**
    * Debug function that yells at you if your forgot to use the props a hook returns.
    *
-   * @remarks Like other debug hooks, only has any effect IFF there is a global variable called `"development"` and it contains the value `"development"`.
+   * @remarks Like other debug hooks, only has any effect IFF there is a global variable called `"development"` and it contains the value `"development"`, AND there is a global variable called `_generate_useTagProps_tags` set to true, and stacks are only generated if `_generate_setState_stacks` is true..
    *
    * @param props - The props to return a modified copy of
    * @param tag - Should be unique
    * @returns A modified copy of the given props
    */
   function useTagProps(props, tag) {
-      {
+      if (window._generate_useTagProps_tags) {
           const [id] = h$2(() => ++idIndex);
           const propsIdTag = `data-props-${tag}-${id}`;
           const getStack = useStack();
@@ -3301,6 +3302,9 @@
           return F$2(() => {
               return { ...props, [propsIdTag]: true /*, [tag as never]: true*/ };
           }, [props, tag]);
+      }
+      else {
+          return props;
       }
   }
 
@@ -3740,7 +3744,7 @@
       // the "currently selected" (or whatever) index.  The two cases we're looking for:
       // 1. The currently selected child unmounted
       // 2. A child mounted, and it mounts with the index we're looking for
-      const reevaluateClosestFit = useStableCallback(() => {
+      const reevaluateClosestFit = useStableCallback((reason) => {
           const children = getChildren();
           const requestedIndex = getRequestedIndex();
           const currentIndex = getCurrentIndex();
@@ -3748,7 +3752,7 @@
           if (requestedIndex != null && closestFit && (requestedIndex != currentIndex || currentChild == null || !isValid(currentChild))) {
               console.assert(typeof requestedIndex == "number", "closestFit can only be used when each child has a numeric index, and cannot be used when children use string indices instead.");
               const closestFitIndex = getClosestFit(requestedIndex);
-              setCurrentIndex(closestFitIndex, undefined);
+              setCurrentIndex(closestFitIndex, reason);
               if (currentChild)
                   setAt(currentChild, false, closestFitIndex, currentIndex);
               if (closestFitIndex != null) {
@@ -3762,9 +3766,11 @@
               }
           }
       });
+      const reasonRef = _$1(undefined);
       const changeIndex = T$2((arg, reason) => {
           const children = getChildren();
           const requestedIndex = (arg instanceof Function ? arg(getRequestedIndex()) : arg);
+          reasonRef.current = reason;
           setRequestedIndex(requestedIndex, reason);
           const currentIndex = getCurrentIndex();
           if (currentIndex == requestedIndex)
@@ -3810,7 +3816,7 @@
       }, []);
       // Run once, on mount
       y$2(() => {
-          changeIndex(initialIndex ?? null, undefined);
+          changeIndex(initialIndex ?? null, reasonRef.current);
       }, []);
       return { changeIndex, reevaluateClosestFit, getCurrentIndex };
   }
@@ -3902,7 +3908,7 @@
               // Whether or not we're currently tabbable, make sure that when we switch from untabbable to tabbable,
               // that we know which index to switch back to.
               if (nextIndex != null)
-                  setLastNonNullIndex(nextIndex);
+                  setLastNonNullIndex(nextIndex, reason);
               // If we're untabbable, then any attempt to set a new index simply fails and sets it to `null`.
               if (untabbable) {
                   // Focus the parent, since it's what's in the tab order right now
@@ -3940,7 +3946,7 @@
               }
               // TODO: Redundant?
               if (nextIndex != null)
-                  setLastNonNullIndex(nextIndex);
+                  setLastNonNullIndex(nextIndex, reason);
               // Finally, return the value the user requested the index be set to.
               return nextIndex ?? 0;
           }, reason);
@@ -4022,7 +4028,7 @@
           giveParentFocusedElement: T$2((e) => { lastFocused.current = e; }, [])
       });
       return {
-          managedChildrenParameters: { onChildrenMountChange: reevaluateClosestFit, },
+          managedChildrenParameters: { onChildrenMountChange: T$2(() => { reevaluateClosestFit(undefined); }, [reevaluateClosestFit]), },
           rovingTabIndexReturn: { setTabbableIndex, getTabbableIndex, focusSelf },
           context: useMemoObject({ rovingTabIndexContext }),
           props: useTagProps({
@@ -4058,7 +4064,7 @@
       monitorCallCount(useRovingTabIndexChild);
       const [tabbable, setTabbable, getTabbable] = useState(getInitiallyTabbedIndex() === index);
       p$2(() => {
-          reevaluateClosestFit();
+          reevaluateClosestFit(undefined);
       }, [!!iAmUntabbable]);
       p$2(() => {
           if (tabbable) {
@@ -4537,7 +4543,7 @@
               untabbable: allChildCellsAreUntabbable || rowIsUntabbableAndSoAreCells,
               initiallyTabbedIndex,
               onTabbableIndexChange: useStableCallback((v, p, r) => {
-                  setTabbableColumn({ ideal: v, actual: v });
+                  setTabbableColumn({ ideal: v, actual: v }, r);
                   onTabbableIndexChange?.(v, p, r);
               })
           },
@@ -4604,7 +4610,7 @@
       });
       return {
           info: infoLs,
-          props: useMergedProps(props, { onClick: () => setTabbableColumn(prev => ({ ideal: index, actual: (prev?.actual ?? index) })) }),
+          props: useMergedProps(props, { onClick: (e) => setTabbableColumn(prev => ({ ideal: index, actual: (prev?.actual ?? index) }), e) }),
           rovingTabIndexChildReturn,
           textContentReturn,
           pressParameters,
@@ -4832,7 +4838,7 @@
           context: useMemoObject({
               singleSelectionContext: useMemoObject({
                   getSelectedIndex,
-                  onSelectedIndexChange: onSelectedIndexChange,
+                  onSelectedIndexChange,
                   ariaPropName,
                   selectionMode
               }),
@@ -4856,17 +4862,16 @@
   function useSingleSelectionChild({ context: { singleSelectionContext: { getSelectedIndex, onSelectedIndexChange, ariaPropName, selectionMode, ...void1 }, ...void2 }, info: { index, unselectable, ...void3 }, ...void4 }) {
       monitorCallCount(useSingleSelectionChild);
       useEnsureStability("useSingleSelectionChild", getSelectedIndex, onSelectedIndexChange);
-      //const getUnselectable = useStableGetter(unselectable);
       const [localSelected, setLocalSelected, getLocalSelected] = useState(getSelectedIndex() == index);
       const [direction, setDirection, getDirection] = useState(getSelectedIndex() == null ? null : (getSelectedIndex() - index));
       const onCurrentFocusedInnerChanged = useStableCallback((focused, _prev, e) => {
           if (selectionMode == 'focus' && focused && !unselectable) {
-              onSelectedIndexChange?.(enhanceEvent(e, { selectedIndex: index }));
+              onSelectedIndexChange(enhanceEvent(e, { selectedIndex: index }));
           }
       });
       const onPressSync = useStableCallback((e) => {
           if (selectionMode == 'activation' && !unselectable)
-              onSelectedIndexChange?.(enhanceEvent(e, { selectedIndex: index }));
+              onSelectedIndexChange(enhanceEvent(e, { selectedIndex: index }));
       });
       const propParts = ariaPropName?.split("-") ?? [];
       return {
@@ -4888,7 +4893,7 @@
               [`${propParts[0]}-${propParts[1]}`]: (localSelected ? (propParts[1] == "current" ? `${propParts[2]}` : `true`) : "false")
           }, "data-single-selection-child"),
           hasCurrentFocusParameters: { onCurrentFocusedInnerChanged },
-          pressParameters: { onPressSync: onSelectedIndexChange ? onPressSync : null }
+          pressParameters: { onPressSync }
       };
   }
   /**
@@ -4896,8 +4901,13 @@
    */
   function useSingleSelectionDeclarative({ singleSelectionReturn: { changeSelectedIndex }, singleSelectionDeclarativeParameters: { selectedIndex, onSelectedIndexChange } }) {
       let s = (selectedIndex ?? null);
-      p$2(() => { changeSelectedIndex(s); }, [s]);
-      return { singleSelectionParameters: { onSelectedIndexChange } };
+      let reasonRef = _$1(undefined);
+      p$2(() => { changeSelectedIndex(s, reasonRef.current); }, [s]);
+      const osic = T$2((e) => {
+          reasonRef.current = e;
+          return onSelectedIndexChange?.(e);
+      }, [onSelectedIndexChange]);
+      return { singleSelectionParameters: { onSelectedIndexChange: osic } };
   }
 
   /**
@@ -4964,7 +4974,7 @@
           },
           managedChildrenParameters,
           pressParameters: { onPressSync, excludeSpace },
-          hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: useStableCallback((hasFocus, hadFocus) => { ocfic1?.(hasFocus, hadFocus); ocfic2?.(hasFocus, hadFocus); }) },
+          hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: useStableCallback((hasFocus, hadFocus, reason) => { ocfic1?.(hasFocus, hadFocus, reason); ocfic2?.(hasFocus, hadFocus, reason); }) },
           props: useMergedProps(propsGridNavigation, propsSingleSelection),
           rovingTabIndexChildReturn,
           rovingTabIndexReturn,
@@ -5141,6 +5151,18 @@
           sortableChildrenReturn,
           ...restLN
       };
+  }
+  /**
+   * @compositeParams
+   */
+  function useListNavigationSingleSelectionSortableChild({ info, context, refElementReturn, textContentParameters, ...void1 }) {
+      monitorCallCount(useListNavigationSingleSelectionSortableChild);
+      return useListNavigationSingleSelectionChild({
+          info,
+          context,
+          refElementReturn,
+          textContentParameters,
+      });
   }
 
   /**
@@ -5374,7 +5396,7 @@
       });
       useActiveElement({
           activeElementParameters: {
-              onLastActiveElementChange: useStableCallback((a, b) => { olaec2?.(a, b); olaec1?.(a, b); }),
+              onLastActiveElementChange: useStableCallback((a, b, r) => { olaec2?.(a, b, r); olaec1?.(a, b, r); }),
               onActiveElementChange,
               onWindowFocusedChange,
               getDocument
@@ -6595,9 +6617,9 @@
                   onLastActiveElementChange?.(e, prev, reason);
                   if (e) {
                       if (enabled)
-                          setLastActiveWhenOpen(e);
+                          setLastActiveWhenOpen(e, reason);
                       else
-                          setLastActiveWhenClosed(e);
+                          setLastActiveWhenClosed(e, reason);
                   }
               })
           }
@@ -6984,20 +7006,14 @@
       }, []);
       p$2(() => {
           return () => {
-              setFocused(false);
-              setFocusedInner(false);
+              setFocused(false, undefined);
+              setFocusedInner(false, undefined);
           };
       }, []);
       const propsStable = _$1({
           [onfocusin]: onFocusIn,
           [onfocusout]: onFocusOut
       });
-      p$2(() => {
-          return () => {
-              setFocused(false);
-              setFocusedInner(false);
-          };
-      }, []);
       return {
           hasCurrentFocusReturn: {
               propsStable: propsStable.current,
@@ -7127,10 +7143,10 @@
           refElementReturn,
           hasCurrentFocusParameters: {
               onCurrentFocusedChanged: ocfc1,
-              onCurrentFocusedInnerChanged: useStableCallback((focused, prevFocused) => {
+              onCurrentFocusedInnerChanged: useStableCallback((focused, prevFocused, reason) => {
                   // Call grid navigation's focus change
-                  ocfic1?.(focused, prevFocused);
-                  ocfic3?.(focused, prevFocused);
+                  ocfic1?.(focused, prevFocused, reason);
+                  ocfic3?.(focused, prevFocused, reason);
               }),
           }
       });
@@ -7303,7 +7319,7 @@
       if (untabbable)
           unselectable = true;
       const { refElementReturn, propsStable, ...void6 } = useRefElement({ refElementParameters });
-      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1, ...void3 }, pressParameters: { excludeSpace, onPressSync, ...void2 }, textContentReturn, singleSelectionChildReturn, info: infoFromListNav, rovingTabIndexChildReturn, propsChild, propsTabbable, ...void4 } = useListNavigationSingleSelectionChild({
+      const { hasCurrentFocusParameters: { onCurrentFocusedInnerChanged: ocfic1, ...void3 }, pressParameters: { excludeSpace, onPressSync, ...void2 }, textContentReturn, singleSelectionChildReturn, info: infoFromListNav, rovingTabIndexChildReturn, propsChild, propsTabbable, ...void4 } = useListNavigationSingleSelectionSortableChild({
           info: { index, unselectable, untabbable },
           context: { rovingTabIndexContext, singleSelectionContext, typeaheadNavigationContext },
           refElementReturn,
@@ -7845,7 +7861,7 @@
           e.stopPropagation();
           const hovering = getHovering();
           const pointerDownStartedHere = getPointerDownStartedHere();
-          setJustHandled(true);
+          setJustHandled(true, e);
           if (pointerDownStartedHere && hovering) {
               handlePress(e);
           }
@@ -7889,7 +7905,7 @@
           const hovering = getHovering();
           const pointerDownStartedHere = getPointerDownStartedHere();
           if (!excludePointer()) {
-              setJustHandled(true);
+              setJustHandled(true, e);
               if (pointerDownStartedHere && hovering) {
                   handlePress(e);
                   e.preventDefault();
@@ -8366,7 +8382,7 @@
       }, []);
       const { refElementReturn, ...rest } = useRefElement({
           refElementParameters: {
-              onElementChange: T$2((e, p) => { needANewObserver(e, getObserveBox?.()); onElementChange?.(e, p); }, []),
+              onElementChange: T$2((e, p, r) => { needANewObserver(e, getObserveBox?.()); onElementChange?.(e, p, r); }, []),
               onMount,
               onUnmount
           }
@@ -8565,7 +8581,7 @@
           initialIndex = localStorageIndex;
       const { managedChildrenReturn, context: { managedChildContext } } = useManagedChildren({
           managedChildrenParameters: {
-              onChildrenMountChange: useStableCallback((m, u) => { ocmc2(); ocmc1?.(m, u); }),
+              onChildrenMountChange: useStableCallback((m, u) => { ocmc2(undefined); ocmc1?.(m, u); }),
               onAfterChildLayoutEffect,
               onChildrenCountChange,
               ...managedChildrenParameters
@@ -8620,8 +8636,8 @@
               }
           })
       });
-      const changeExpandedIndex = useStableCallback((value) => {
-          changeExpandedIndexLocalOnly(value);
+      const changeExpandedIndex = useStableCallback((value, r) => {
+          changeExpandedIndexLocalOnly(value, r);
           setLocalStorageIndex(value);
       });
       const rovingTabIndexReturn = useMemoObject({
@@ -8688,9 +8704,9 @@
           refElementReturn: { getElement: useStableCallback(() => { return refElementHeaderButtonReturn.getElement(); }) },
           hasCurrentFocusParameters: {
               onCurrentFocusedChanged: null,
-              onCurrentFocusedInnerChanged: useStableCallback(focused => {
+              onCurrentFocusedInnerChanged: useStableCallback((focused, prev) => {
                   if (focused) {
-                      setCurrentFocusedIndex(index);
+                      setCurrentFocusedIndex(index, undefined);
                       setMostRecentlyTabbed(true);
                   }
               })
@@ -8729,11 +8745,11 @@
               disabled,
               tagButton,
               onPressSync: (e) => {
-                  setCurrentFocusedIndex(index);
+                  setCurrentFocusedIndex(index, e);
                   if (getOpenFromParent())
-                      changeExpandedIndex(null);
+                      changeExpandedIndex(null, e);
                   else
-                      changeExpandedIndex(index);
+                      changeExpandedIndex(index, e);
                   userOnPress?.(e);
               },
               ...buttonParameters
@@ -8896,12 +8912,12 @@
       });
       const [ariaControls, setControls] = useState("");
       y$2(() => {
-          setControlsSetterOnParentCheckbox(() => setControls);
+          setControlsSetterOnParentCheckbox(() => setControls, undefined);
       }, [setControls]);
       monitorCallCount(useCheckboxGroupParent);
       const [checked, setChecked] = useState(false);
       p$2(() => {
-          setSetParentCheckboxChecked(() => setChecked);
+          setSetParentCheckboxChecked(() => setChecked, undefined);
       }, []);
       const checkboxGroupParentReturn = { checked, onParentCheckedChange: onCheckboxGroupParentInput, getPercent: useStableCallback(() => { return getPercentChecked(getTotalChecked(), getTotalChildren()); }) };
       return {
@@ -8939,7 +8955,7 @@
       const getChecked = useStableGetter(checked);
       const [getLastUserChecked, setLastUserChecked] = usePassiveState(null, returnFalse);
       const onChildCheckedChange = useStableCallback((checked) => {
-          setLastUserChecked(checked);
+          setLastUserChecked(checked, undefined);
       });
       const onControlIdChanged = T$2((next, prev) => {
           if (prev)
@@ -8947,17 +8963,17 @@
           if (next)
               allIds.add(next);
           if (!!next || !!prev) {
-              setUpdateIndex(i => ((i ?? 0) + 1));
+              setUpdateIndex(i => ((i ?? 0) + 1), undefined);
           }
       }, []);
       p$2(() => {
-          setTotalChildren(c => ((c ?? 0) + 1));
-          return () => setTotalChildren(c => ((c ?? 0) - 1));
+          setTotalChildren(c => ((c ?? 0) + 1), undefined);
+          return () => setTotalChildren(c => ((c ?? 0) - 1), undefined);
       }, []);
       p$2(() => {
           if (checked) {
-              setTotalChecked(c => ((c ?? 0) + 1));
-              return () => setTotalChecked(c => ((c ?? 0) - 1));
+              setTotalChecked(c => ((c ?? 0) + 1), undefined);
+              return () => setTotalChecked(c => ((c ?? 0) - 1), undefined);
           }
       }, [checked]);
       const { hasCurrentFocusReturn, managedChildReturn, refElementReturn, textContentReturn, propsChild, propsTabbable, singleSelectionChildReturn: _singleSelectionChildReturn, staggeredChildReturn, paginatedChildReturn, rovingTabIndexChildReturn, pressParameters, ...void2 } = useCompleteListNavigationChild({
@@ -10360,7 +10376,7 @@
       // Those are in useTabList itself.
       const { context: managedChildContext, managedChildrenReturn: panelChildrenReturn } = useManagedChildren({
           managedChildrenParameters: {
-              onChildrenMountChange: useStableCallback((_m, _u) => { reevaluateClosestFit(); })
+              onChildrenMountChange: useStableCallback((_m, _u) => { reevaluateClosestFit(undefined); })
           }
       });
       const { changeIndex: changeVisiblePanel, getCurrentIndex: getVisibleIndex, reevaluateClosestFit } = useChildrenFlag({
@@ -10374,7 +10390,7 @@
           onIndexChange: null
       });
       y$2(() => {
-          changeVisiblePanel(initiallySelectedIndex ?? null);
+          changeVisiblePanel(initiallySelectedIndex ?? null, undefined);
       }, []);
       const { propsInput, propsLabel, randomIdInputReturn: { id: _inputId }, randomIdLabelReturn: { id: _labelId }, } = useLabelSynthetic({
           labelParameters: { ...labelParameters, onLabelClick: useStableCallback(() => listNavRet1.rovingTabIndexReturn.focusSelf()) },
@@ -10387,9 +10403,9 @@
           singleSelectionParameters: {
               onSelectedIndexChange: useStableCallback((e) => {
                   ssi?.(e);
-                  changeVisiblePanel(e[EventDetail].selectedIndex);
+                  changeVisiblePanel(e[EventDetail].selectedIndex, e);
                   setLocalStorageIndex(e[EventDetail].selectedIndex);
-                  changeSelectedIndex(e[EventDetail].selectedIndex);
+                  changeSelectedIndex(e[EventDetail].selectedIndex, e);
               }),
               ariaPropName: "aria-selected",
               selectionMode: selectionMode ?? "focus",
@@ -14684,7 +14700,6 @@
       const pendingIndex = (pending ? capturedIndex : null);
       const classBase = (separated ? "btn-toolbar" : "btn-group");
       return (o$3(DefaultButtonSize.Provider, { value: variantSize ?? null, children: o$3(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(ButtonGroupContext.Provider, { value: F$2(() => ({ pendingIndex }), [pendingIndex]), children: o$3(Toolbar, { onSelectedIndexChange: (...e) => {
-                              debugger;
                               onSelectedIndexChangeSync(...e);
                           }, imperativeHandle: imperativeHandle, ariaPropName: "aria-pressed", selectionMode: "activation", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
                           , pageNavigationSize: 0, orientation: orientation || "horizontal", ariaLabel: labelPosition == 'hidden' ? label : null, selectedIndex: pendingIndex ?? selectedIndex, render: info => {
@@ -14693,8 +14708,8 @@
                           } }) }) }) }) }));
   }
 
-  const Button = x$1(forwardElementRef$1(function Button({ tag: Tag, tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }, ref) {
-      Tag ??= "button";
+  const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }, ref) {
+      //Tag ??= "button" as never;
       let defaultTheme = q$2(DefaultButtonTheme);
       let defaultSize = q$2(DefaultButtonSize);
       variantTheme ??= defaultTheme ?? undefined;
@@ -14724,23 +14739,26 @@
       const d = disabled ? disabledType : false;
       children = o$3(k$3, { children: [children, badge] });
       if (buttonGroupInfo == null) {
-          return (o$3(ButtonStructure, { ref: ref, Tag: (Tag), tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isThePressedOne, onPress: syncHandler ?? null, otherProps: props, variantFill: variantFill ?? null }));
+          return (o$3(ButtonStructure, { ref: ref, 
+              //Tag={(Tag) as never}
+              tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isThePressedOne, onPress: syncHandler ?? null, otherProps: props, variantFill: variantFill ?? null }));
       }
       else {
           return (o$3(ToolbarChild, { index: buttonGroupIndex ?? 0, getSortValue: returnZero, disabledProp: "disabled", render: toolbarChildInfo => {
-                  return (o$3(ButtonStructure, { ref: ref, Tag: (Tag), tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne || false, callCount: callCount, onPress: (e) => {
-                          debugger;
+                  return (o$3(ButtonStructure, { ref: ref, 
+                      //Tag={(Tag) as never}
+                      tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne || false, callCount: callCount, onPress: (e) => {
                           toolbarChildInfo.pressParameters.onPressSync?.(e);
                           return syncHandler?.(e);
                       }, otherProps: useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable) }));
               } }));
       }
-  }));
+  });
   /**
    * A "raw" button -- just the markup.
    */
-  const ButtonStructure = x$1(forwardElementRef$1(function ButtonStructure({ Tag, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
-      return (o$3(Button$1, { tagButton: (Tag), disabled: disabled, onPressSync: onPress, pressed: pressed, render: buttonInfo => {
+  const ButtonStructure = x$1(forwardElementRef$1(function ButtonStructure({ tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
+      return (o$3(Button$1, { tagButton: "button", disabled: disabled, onPressSync: onPress, pressed: pressed, render: buttonInfo => {
               return (o$3(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagProgressIndicator: "span", render: progressInfo => {
                       const { propsProgressIndicator, propsProgressRegion } = progressInfo;
                       const loadingJsx = (o$3(Fade, { show: pending, exitVisibility: "removed", children: o$3("span", { class: "spinner-border", ...propsProgressIndicator }) }));
@@ -14748,7 +14766,8 @@
                           variantFill ??= (pressed ? "fill" : "outline");
                       console.log(`Button rendered pressed ${pressed} and fill ${variantFill}`);
                       const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
-                      const ret = (y$3(Tag, useMergedProps(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx));
+                      //const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx))
+                      const ret = o$3(StructureButtonButton, { ...useMergedProps(otherProps, buttonInfo.props, { className: buttonClass, ref }), children: [children, loadingJsx] });
                       if (tooltip) {
                           return o$3(Tooltip, { forward: true, alignMode: "element", semanticType: "label", absolutePositioning: true, placement: tooltipPlacement || "top", tooltip: tooltip, children: ret });
                       }
@@ -14758,6 +14777,15 @@
                   } }));
           } }));
   }));
+  const StructureButtonButton = memoForwardRef(function ButtonStructure({ children, ...props }, ref) {
+      return (o$3("button", { ...useMergedProps({ class: "btn" }, { ...props, ref }), children: children }));
+  });
+  memoForwardRef(function StructureButtonProgress({ children, ...props }, ref) {
+      return (o$3("label", { ...useMergedProps({ class: "btn-progress-label" }, { ...props, ref }), children: children }));
+  });
+  memoForwardRef(function StructureButtonProgress({ ...props }, ref) {
+      return (o$3("progress", { ...useMergedProps({ class: "btn-progress-indicator" }, { ...props, ref }) }));
+  });
 
   x$1(forwardElementRef$1(function Card(p, ref) {
       let { children, title, subtitle, variantTheme, ...props } = p;
@@ -17968,7 +17996,8 @@
   function MSB({ index }) {
       const [pressed, setPressed] = useState(false);
       const onToggleSync = T$2(async (pressed) => {
-          setPressed(pressed ?? false);
+          debugger;
+          setPressed(!pressed);
       }, []);
       const onToggleAsync = T$2(async (pressed) => {
           await new Promise(resolve => setTimeout(resolve, 1000 + (3000 * Math.random())));
@@ -18094,6 +18123,7 @@
           }()) }));
   });
 
+  window._generate_setState_stacks = true;
   /*
   let originalEvents = options.event;
   options.event = (e, ...args) => {

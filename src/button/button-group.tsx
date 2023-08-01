@@ -12,7 +12,7 @@ export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElem
     disabled?: boolean;
     selectedIndex?: number | null;
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
-    variantSize?: ButtonProps<any>["variantSize"];
+    variantSize?: ButtonProps["variantSize"];
     variantTheme?: ButtonThemes;
     orientation?: ToolbarProps<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>["orientation"];
 
@@ -67,7 +67,6 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                     <ButtonGroupContext.Provider value={useMemo(() => ({ pendingIndex }), [pendingIndex])}>
                         <Toolbar<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement>
                             onSelectedIndexChange={(...e) => {
-                                debugger;
                                 onSelectedIndexChangeSync(...e);
                             }}
                             imperativeHandle={imperativeHandle}

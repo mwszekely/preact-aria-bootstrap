@@ -8,10 +8,10 @@ export interface PopoverProps {
     children: ComponentChildren;
     selectedIndex?: number | null;
     align?: "start" | "end";
-    buttonVariantSize?: ButtonProps<HTMLButtonElement>["variantSize"];
-    buttonVariantFill?: ButtonProps<HTMLButtonElement>["variantFill"];
-    buttonVariantTheme?: ButtonProps<HTMLButtonElement>["variantTheme"];
-    buttonVariantDropdown?: ButtonProps<HTMLButtonElement>["variantDropdown"];
+    buttonVariantSize?: ButtonProps["variantSize"];
+    buttonVariantFill?: ButtonProps["variantFill"];
+    buttonVariantTheme?: ButtonProps["variantTheme"];
+    buttonVariantDropdown?: ButtonProps["variantDropdown"];
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
     header?: ComponentChildren;
     imperativeHandle?: Ref<UseMenuSurfaceReturnType<HTMLDivElement, HTMLDivElement, HTMLButtonElement>>;

@@ -1,6 +1,5 @@
 import { Fragment as _Fragment, jsxs as _jsxs, jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { h } from "preact";
 import { Button as AriaButton, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets";
 import { returnZero, useAsyncHandler, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
@@ -8,10 +7,10 @@ import { memo } from "preact/compat";
 import { useContext } from "preact/hooks";
 import { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
-import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { ButtonGroupContext } from "./button-group.js";
-export const Button = memo(forwardElementRef(function Button({ tag: Tag, tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }, ref) {
-    Tag ??= "button";
+export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }, ref) {
+    //Tag ??= "button" as never;
     let defaultTheme = useContext(DefaultButtonTheme);
     let defaultSize = useContext(DefaultButtonSize);
     variantTheme ??= defaultTheme ?? undefined;
@@ -41,23 +40,26 @@ export const Button = memo(forwardElementRef(function Button({ tag: Tag, tooltip
     const d = disabled ? disabledType : false;
     children = _jsxs(_Fragment, { children: [children, badge] });
     if (buttonGroupInfo == null) {
-        return (_jsx(ButtonStructure, { ref: ref, Tag: (Tag), tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isThePressedOne, onPress: syncHandler ?? null, otherProps: props, variantFill: variantFill ?? null }));
+        return (_jsx(ButtonStructure, { ref: ref, 
+            //Tag={(Tag) as never}
+            tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isThePressedOne, onPress: syncHandler ?? null, otherProps: props, variantFill: variantFill ?? null }));
     }
     else {
         return (_jsx(ToolbarChild, { index: buttonGroupIndex ?? 0, getSortValue: returnZero, disabledProp: "disabled", render: toolbarChildInfo => {
-                return (_jsx(ButtonStructure, { ref: ref, Tag: (Tag), tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne || false, callCount: callCount, onPress: (e) => {
-                        debugger;
+                return (_jsx(ButtonStructure, { ref: ref, 
+                    //Tag={(Tag) as never}
+                    tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne || false, callCount: callCount, onPress: (e) => {
                         toolbarChildInfo.pressParameters.onPressSync?.(e);
                         return syncHandler?.(e);
                     }, otherProps: useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable) }));
             } }));
     }
-}));
+});
 /**
  * A "raw" button -- just the markup.
  */
-const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ Tag, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
-    return (_jsx(AriaButton, { tagButton: (Tag), disabled: disabled, onPressSync: onPress, pressed: pressed, render: buttonInfo => {
+const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
+    return (_jsx(AriaButton, { tagButton: "button", disabled: disabled, onPressSync: onPress, pressed: pressed, render: buttonInfo => {
             return (_jsx(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagProgressIndicator: "span", render: progressInfo => {
                     const { propsProgressIndicator, propsProgressRegion } = progressInfo;
                     const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border", ...propsProgressIndicator }) }));
@@ -65,7 +67,8 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ Tag, t
                         variantFill ??= (pressed ? "fill" : "outline");
                     console.log(`Button rendered pressed ${pressed} and fill ${variantFill}`);
                     const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
-                    const ret = (h(Tag, useMergedProps(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx));
+                    //const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx))
+                    const ret = _jsxs(StructureButtonButton, { ...useMergedProps(otherProps, buttonInfo.props, { className: buttonClass, ref }), children: [children, loadingJsx] });
                     if (tooltip) {
                         return _jsx(Tooltip, { forward: true, alignMode: "element", semanticType: "label", absolutePositioning: true, placement: tooltipPlacement || "top", tooltip: tooltip, children: ret });
                     }
@@ -75,4 +78,13 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ Tag, t
                 } }));
         } }));
 }));
+const StructureButtonButton = memoForwardRef(function ButtonStructure({ children, ...props }, ref) {
+    return (_jsx("button", { ...useMergedProps({ class: "btn" }, { ...props, ref }), children: children }));
+});
+const StructureButtonProgressLabel = memoForwardRef(function StructureButtonProgress({ children, ...props }, ref) {
+    return (_jsx("label", { ...useMergedProps({ class: "btn-progress-label" }, { ...props, ref }), children: children }));
+});
+const StructureButtonProgressIndicator = memoForwardRef(function StructureButtonProgress({ ...props }, ref) {
+    return (_jsx("progress", { ...useMergedProps({ class: "btn-progress-indicator" }, { ...props, ref }) }));
+});
 //# sourceMappingURL=button-action.js.map

@@ -1,17 +1,16 @@
-import { ComponentChildren, h, Ref, VNode } from "preact";
-import { ElementToTag, TargetedButtonPressEvent } from "preact-aria-widgets";
+import { ComponentChildren, Ref, VNode } from "preact";
+import { TargetedButtonPressEvent } from "preact-aria-widgets";
 import { Nullable, UseAsyncHandlerParameters } from "preact-prop-helpers";
 import { ButtonFills, ButtonSizes, ButtonThemes } from "../context.js";
 import { TooltipProps } from "../tooltip/index.js";
+import { GlobalAttributes } from "../utility/types.js";
 import { ButtonGroupChildProps } from "./button-group.js";
-export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttributes<E>, "children" | "style" | "class" | "className">, Partial<ButtonGroupChildProps>, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
-    ref?: Ref<E>;
+export interface ButtonProps extends GlobalAttributes<HTMLButtonElement, "children" | "ref">, Partial<ButtonGroupChildProps>, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     disabled?: boolean;
     loadingLabel?: string;
     tooltip?: ComponentChildren;
     tooltipPlacement?: TooltipProps["placement"];
-    onPress: null | ((pressed: boolean | null, event: TargetedButtonPressEvent<E>) => (void | Promise<void>));
-    tag?: ElementToTag<E>;
+    onPress: null | ((pressed: boolean | null, event: TargetedButtonPressEvent<HTMLButtonElement>) => (void | Promise<void>));
     badge?: Nullable<VNode>;
     variantTheme?: Nullable<ButtonThemes>;
     variantFill?: Nullable<ButtonFills>;
@@ -28,5 +27,11 @@ export interface ButtonProps<E extends HTMLElement> extends Pick<h.JSX.HTMLAttri
      */
     pressed?: Nullable<boolean>;
 }
-export declare const Button: <E extends HTMLElement>({ tag: Tag, tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps<E>, ref?: Ref<E> | undefined) => import("preact").JSX.Element;
+export declare const Button: ({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) => import("preact").JSX.Element;
+export interface StructureButtonProps extends GlobalAttributes<HTMLButtonElement, "children"> {
+}
+export interface StructureButtonProgressIndicatorProps extends GlobalAttributes<HTMLProgressElement> {
+}
+export interface StructureButtonProgressLabelProps extends GlobalAttributes<HTMLLabelElement, "children"> {
+}
 //# sourceMappingURL=button-action.d.ts.map

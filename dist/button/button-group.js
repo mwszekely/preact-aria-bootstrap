@@ -19,7 +19,6 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     const pendingIndex = (pending ? capturedIndex : null);
     const classBase = (separated ? "btn-toolbar" : "btn-group");
     return (_jsx(DefaultButtonSize.Provider, { value: variantSize ?? null, children: _jsx(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: _jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(ButtonGroupContext.Provider, { value: useMemo(() => ({ pendingIndex }), [pendingIndex]), children: _jsx(Toolbar, { onSelectedIndexChange: (...e) => {
-                            debugger;
                             onSelectedIndexChangeSync(...e);
                         }, imperativeHandle: imperativeHandle, ariaPropName: "aria-pressed", selectionMode: "activation", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
                         , pageNavigationSize: 0, orientation: orientation || "horizontal", ariaLabel: labelPosition == 'hidden' ? label : null, selectedIndex: pendingIndex ?? selectedIndex, render: info => {
