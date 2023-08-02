@@ -9,6 +9,9 @@ export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children
     anchor: VNode;
     footer?: null | undefined | ComponentChildren;
     variantSize?: "xs" | "sm" | "md" | "lg" | "xl" | "unbounded";
+    /**
+     * The size at which this dialog becomes fullscreen, or just `true` to make it always fullscreen
+     */
     fullscreen?: boolean | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
     /** Props are spread to the anchor element. If you need to have a class name or style set on the dialog itself, pass those here. */
     propsPortal?: h.JSX.HTMLAttributes<HTMLDivElement>;

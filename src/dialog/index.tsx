@@ -1,14 +1,12 @@
-import { clsx } from "clsx";
 import { ComponentChildren, h, Ref, VNode } from "preact";
-import { Dialog as AriaDialog, DialogProps as AriaDialogProps, Heading, useDefaultRenderPortal } from "preact-aria-widgets";
+import { Dialog as AriaDialog, DialogProps as AriaDialogProps, useDefaultRenderPortal } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
-import { SlideFade } from "preact-transition";
 import { memo } from "preact/compat";
-import { Button } from "../button/button-action.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 import { usePortalId } from "../utility/use-portal-id.js";
+import { StructureDialogBackdrop, StructureDialogModal, StructureDialogModalBody, StructureDialogModalCloseButton, StructureDialogModalContent, StructureDialogModalDialog, StructureDialogModalFooter, StructureDialogModalTitle, StructureDialogPortalRoot } from "./structure.js";
 
 export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     open: boolean;
@@ -18,6 +16,10 @@ export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children
     anchor: VNode;
     footer?: null | undefined | ComponentChildren;
     variantSize?: "xs" | "sm" | "md" | "lg" | "xl" | "unbounded";
+
+    /**
+     * The size at which this dialog becomes fullscreen, or just `true` to make it always fullscreen
+     */
     fullscreen?: boolean | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 
     /** Props are spread to the anchor element. If you need to have a class name or style set on the dialog itself, pass those here. */
@@ -48,11 +50,11 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
 
             render={info => {
                 const headingJsx = (<>
-                    <span class="modal-title">{header}</span>
-                    <Button class="btn-close" onPress={(_pressed, e) => onClose(e, "escape")} aria-label="Close" />
+                    <StructureDialogModalTitle>{header}</StructureDialogModalTitle>
+                    <StructureDialogModalCloseButton onClose={onClose} />
                 </>)
-                const bodyJsx = (<span class="modal-body">{children}</span>);
-                const footerJsx = (<span class="modal-footer">{footer}</span>)
+                const bodyJsx = <StructureDialogModalBody>{children}</StructureDialogModalBody>
+                const footerJsx = (<StructureDialogModalFooter>{footer}</StructureDialogModalFooter>);
 
                 return (
                     <>
@@ -60,27 +62,19 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
                         {useDefaultRenderPortal({
                             portalId: usePortalId("dialog"),
                             children: (
-                                <div {...useMergedProps(info.propsFocusContainer, propsPortal || {})}>
-                                    <div {...useMergedProps(info.propsDialog, {
-                                        tabIndex: -1,
-                                        className: clsx(
-                                            "modal modal-dialog-scrollable overflow-hidden",
-                                            open ? "d-block" : "d-hidden",
-                                            variantSize && `modal-${variantSize}`,
-                                            fullscreen && (fullscreen === true ? "modal-fullscreen" : `modal-fullscreen-${fullscreen}`)
-                                        )
-                                    })}>
-                                        <div class={clsx("dialog-backdrop", open && "visible", modal && "dialog-backdrop-blur")} role="presentation"></div>
-                                        <SlideFade animateOnMount={true} delayMountUntilShown={true} show={open} slideTargetBlock={0.125 * (open ? 1 : -1)}>
-                                            <div class="modal-dialog">
-                                                <span class="modal-content">
-                                                    {headerPosition == "start" ? <Heading class="modal-header" heading={headingJsx}>{bodyJsx}</Heading> : bodyJsx}
-                                                    {footer && footerJsx}
-                                                </span>
-                                            </div>
-                                        </SlideFade>
-                                    </div>
-                                </div>
+                                <StructureDialogPortalRoot {...useMergedProps(info.propsFocusContainer, propsPortal || {})}>
+                                    <StructureDialogModal fullscreen={fullscreen} open={open} variantSize={variantSize} {...(info.propsDialog as {})}>
+                                        <StructureDialogBackdrop open={open} modal={modal} />
+                                        <StructureDialogModalDialog open={open} header={header}>
+                                            <StructureDialogModalContent
+                                                childrenHeading={headingJsx}
+                                                childrenBody={bodyJsx}
+                                                childrenFooter={footerJsx}
+                                                headerPosition={headerPosition}
+                                            />
+                                        </StructureDialogModalDialog>
+                                    </StructureDialogModal>
+                                </StructureDialogPortalRoot>
                             )
                         })}
                     </>
@@ -89,3 +83,4 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
         />
     )
 }))
+

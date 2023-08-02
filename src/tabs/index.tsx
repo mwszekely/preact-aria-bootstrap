@@ -5,7 +5,7 @@ import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "prea
 import { PersistentStates, returnZero, useMergedProps, useState, useTimeout } from "preact-prop-helpers";
 import { SlideZoomFade, Swappable } from "preact-transition";
 import { memo, useContext } from "preact/compat";
-import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { GlobalAttributes, LabelledProps } from "../utility/types.js";
 
@@ -51,7 +51,7 @@ export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, l
                                     {tabs}
                                 </ul>
                             </KeyboardAssistIcon>
-                            {labelPosition == "before" && labelJsx}
+                            {labelPosition == "after" && labelJsx}
                             <Swappable>
                                 <div {...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {})}>
                                     {panels}
@@ -132,4 +132,42 @@ const TabPanelChildren = memo(function TabPanelChildren({ children, visible }: {
         triggerIndex: visible,
     })
     return <>{delayedVisible && children}</>;
+})
+
+export interface StructureTabsProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> { }
+export interface StructureTabPanelsContainerProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> { }
+
+export interface StructureTabListProps extends GlobalAttributes<HTMLLIElement, "children">, Pick<TabsProps, "orientation"> { childrenLabel: ComponentChildren; labelPosition: "before" | "after" | "hidden"; typeaheadActive: boolean; }
+
+export const StructureTabs = memoForwardRef(function StructureTabs({ orientation, children, ...props }: StructureTabsProps, ref: Ref<HTMLDivElement>) {
+    return (
+        <div {...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref })}>
+            {children}
+        </div>
+    )
+})
+
+export const StructureTabPanelsContainer = memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }: StructureTabPanelsContainerProps, ref: Ref<HTMLDivElement>) {
+    return (
+        <Swappable>
+            <div {...useMergedProps({ class: "tab-panels-container" }, { ...props, ref })}>
+                {panels}
+            </div>
+        </Swappable>
+    )
+})
+
+
+export const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadActive, labelPosition, childrenLabel: labelJsx, children: tabs, ...props }: StructureTabListProps, ref: Ref<HTMLUListElement>) {
+    return (
+        <>
+            {labelPosition == "before" && labelJsx}
+            <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={true} typeaheadActive={typeaheadActive}>
+                <ul {...useMergedProps({ className: clsx(`nav nav-tabs`) }, { ...props, ref })}>
+                    {tabs}
+                </ul>
+            </KeyboardAssistIcon>
+            {labelPosition == "after" && labelJsx}
+        </>
+    )
 })

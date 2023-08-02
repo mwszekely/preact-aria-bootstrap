@@ -10698,8 +10698,6 @@
               clearTimeout(hoverTimeoutHandle.current);
               hoverTimeoutHandle.current = null;
           }
-          if (nextState == null)
-              inputState.current = null;
           switch (nextState) {
               case "focused-popup":
               case "focused-trigger":
@@ -10718,16 +10716,13 @@
       let { propsReferencer: propsTrigger, propsSource: propsPopup } = useRandomId({ randomIdParameters: { prefix: Prefices.tooltip, otherReferencerProp: (tooltipSemanticType == "description" ? "aria-describedby" : "aria-labelledby") } });
       const { refElementReturn: { getElement: getTriggerElement }, propsStable: triggerRefProps } = useRefElement({ refElementParameters: {} });
       const { refElementReturn: { getElement: getPopupElement }, propsStable: popupRefProps } = useRefElement({ refElementParameters: {} });
-      //let inputState = useRef<"hover" | "keyboard" | "longpress">()
-      //const stateIsMouse = useCallback(() => (getState()?.startsWith("h") || false), []);
-      //const stateIsFocus = useCallback(() => (getState()?.startsWith("f") || false), []);
-      let inputState = _$1(null);
+      const stateIsMouse = T$2(() => (getState()?.startsWith("h") || false), []);
+      const stateIsFocus = T$2(() => (getState()?.startsWith("f") || false), []);
       let hoverTimeoutHandle = _$1(null);
       const onHoverChanged = useStableCallback((hovering, which) => {
           if (hoverTimeoutHandle.current)
               clearTimeout(hoverTimeoutHandle.current);
           if (hovering) {
-              inputState.current = "hover";
               hoverTimeoutHandle.current = setTimeout(() => {
                   setState(`hovering-${which}`);
                   hoverTimeoutHandle.current = null;
@@ -10738,9 +10733,8 @@
           }
       });
       const onCurrentFocusedInnerChanged = T$2((focused, which) => {
-          if (inputState.current != "hover") {
+          if (!stateIsMouse()) {
               if (focused) {
-                  inputState.current = 'focus';
                   setState(`focused-${which}`);
               }
               else {
@@ -10750,7 +10744,7 @@
           else {
               setState(null);
           }
-      }, []);
+      }, [stateIsMouse]);
       const onTriggerCurrentFocusedInnerChanged = T$2((focused) => onCurrentFocusedInnerChanged(focused, "trigger"), [onCurrentFocusedInnerChanged]);
       const onPopupCurrentFocusedInnerChanged = T$2((focused) => onCurrentFocusedInnerChanged(focused, "popup"), [onCurrentFocusedInnerChanged]);
       const { hasCurrentFocusReturn: triggerFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: onTriggerCurrentFocusedInnerChanged }, refElementReturn: { getElement: getTriggerElement } });
@@ -10783,8 +10777,7 @@
       };
       const otherTriggerProps = {
           onPointerEnter: T$2(() => { onHoverChanged(true, "trigger"); }, []),
-          onPointerUp: T$2(() => { onHoverChanged(false, "trigger"); }, []),
-          onClick: T$2((e) => { onHoverChanged(true, "trigger"); if (e.currentTarget && "focus" in e.currentTarget)
+          onClick: T$2((e) => { if (e.currentTarget && "focus" in e.currentTarget)
               focus(e.currentTarget); }, []),
           //onPointerLeave: useCallback(() => { onHoverChanged(false, "trigger") }, [])
       };
@@ -10794,7 +10787,7 @@
           const mouseElement = e.target;
           let overPopup = (popupElement?.contains(mouseElement));
           let overTrigger = (triggerElement?.contains(mouseElement));
-          if (!overPopup && !overTrigger && inputState.current == 'hover') {
+          if (!overPopup && !overTrigger && stateIsMouse()) {
               onHoverChanged(false, "popup");
           }
       }), { capture: true, passive: true });
@@ -10803,8 +10796,8 @@
           propsTrigger: useMergedProps(triggerRefProps, propsTrigger, triggerFocusReturn.propsStable, { onClick: useStableCallback(e => focus(e.currentTarget)) }, otherTriggerProps, propsStableSource),
           tooltipReturn: {
               getState,
-              //stateIsFocus,
-              //stateIsMouse
+              stateIsFocus,
+              stateIsMouse
           }
       };
   }
@@ -14977,6 +14970,36 @@
           } }));
   }
 
+  const StructureDialogPortalRoot = memoForwardRef(function StructureDialogPortalRoot({ children, ...props }, ref) { return (o$3("div", { ...props, ref: ref, children: children })); });
+  const StructureDialogBackdrop = memoForwardRef(function StructureDialogBackdrop({ open, modal, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({ class: clsx("dialog-backdrop", open && "visible", modal && "dialog-backdrop-blur"), role: "presentation" }, { ...props, ref }) }));
+  });
+  const StructureDialogModalTitle = memoForwardRef(function StructureDialogModalTitle({ children, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({ class: "modal-title" }, { ...props, ref }), children: children }));
+  });
+  const StructureDialogModalCloseButton = memoForwardRef(function StructureDialogModalCloseButton({ onClose, ...props }, ref) {
+      return (o$3(Button, { onPress: (_pressed, e) => onClose(e, "escape"), ...useMergedProps({ class: "btn-close", "aria-label": "Close" }, { ...props, ref }) }));
+  });
+  const StructureDialogModalBody = memoForwardRef(function StructureDialogModalBody({ children, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({ class: "modal-body" }, { ...props, ref }), children: children }));
+  });
+  const StructureDialogModalFooter = memoForwardRef(function StructureDialogModalFooter({ children, ...props }, ref) {
+      return (children == null ? null : o$3("div", { ...useMergedProps({ class: "modal-footer" }, { ...props, ref }), children: children }));
+  });
+  const StructureDialogModalDialog = memoForwardRef(function StructureDialogModalDialog({ open, children, header, ...props }, ref) {
+      return (o$3(SlideFade, { animateOnMount: true, delayMountUntilShown: true, show: open, slideTargetBlock: 0.125 * (open ? 1 : -1), children: o$3("div", { ...useMergedProps({ class: "modal-dialog" }, { ...props, ref }), children: children }) }));
+  });
+  const StructureDialogModalContent = memoForwardRef(function StructureDialogModalContent({ childrenHeading, childrenBody, childrenFooter, headerPosition, ...props }, ref) {
+      return (o$3("span", { ...useMergedProps({ class: "modal-content" }, { ...props, ref }), children: [headerPosition == "start" ? o$3(Heading, { class: "modal-header", heading: childrenHeading, children: childrenBody }) : childrenBody, childrenFooter] }));
+  });
+  const StructureDialogModal = memoForwardRef(function StructureDialogModal({ open, variantSize, fullscreen, children, ...props }, ref) {
+      const otherProps = {
+          tabIndex: -1,
+          className: clsx("modal modal-dialog-scrollable overflow-hidden", open ? "d-block" : "d-hidden", variantSize && `modal-${variantSize}`, fullscreen && (fullscreen === true ? "modal-fullscreen" : `modal-fullscreen-${fullscreen}`))
+      };
+      return (o$3("div", { ...useMergedProps(otherProps, { ...props, ref }), children: children }));
+  });
+
   const Dialog = x$1(forwardElementRef$1(function Dialog({ open, fullscreen, variantSize, header, headerPosition, footer, onClose, anchor, modal, children, propsPortal, ...props }, ref) {
       variantSize ??= "xl";
       headerPosition ??= "start";
@@ -14984,15 +15007,12 @@
           console.assert(typeof header == "string", `A dialog whose label is hidden must provide the label to use as a string to the header`);
       }
       return (o$3(Dialog$1, { ariaLabel: headerPosition == "hidden" ? header : null, active: open, onDismiss: onClose, focusPopup: (e, f) => f()?.focus?.(), dismissBackdropActive: modal ? false : true, dismissEscapeActive: modal ? false : true, render: info => {
-              const headingJsx = (o$3(k$3, { children: [o$3("span", { class: "modal-title", children: header }), o$3(Button, { class: "btn-close", onPress: (_pressed, e) => onClose(e, "escape"), "aria-label": "Close" })] }));
-              const bodyJsx = (o$3("span", { class: "modal-body", children: children }));
-              const footerJsx = (o$3("span", { class: "modal-footer", children: footer }));
+              const headingJsx = (o$3(k$3, { children: [o$3(StructureDialogModalTitle, { children: header }), o$3(StructureDialogModalCloseButton, { onClose: onClose })] }));
+              const bodyJsx = o$3(StructureDialogModalBody, { children: children });
+              const footerJsx = (o$3(StructureDialogModalFooter, { children: footer }));
               return (o$3(k$3, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), useDefaultRenderPortal({
                           portalId: usePortalId("dialog"),
-                          children: (o$3("div", { ...useMergedProps(info.propsFocusContainer, propsPortal || {}), children: o$3("div", { ...useMergedProps(info.propsDialog, {
-                                      tabIndex: -1,
-                                      className: clsx("modal modal-dialog-scrollable overflow-hidden", open ? "d-block" : "d-hidden", variantSize && `modal-${variantSize}`, fullscreen && (fullscreen === true ? "modal-fullscreen" : `modal-fullscreen-${fullscreen}`))
-                                  }), children: [o$3("div", { class: clsx("dialog-backdrop", open && "visible", modal && "dialog-backdrop-blur"), role: "presentation" }), o$3(SlideFade, { animateOnMount: true, delayMountUntilShown: true, show: open, slideTargetBlock: 0.125 * (open ? 1 : -1), children: o$3("div", { class: "modal-dialog", children: o$3("span", { class: "modal-content", children: [headerPosition == "start" ? o$3(Heading, { class: "modal-header", heading: headingJsx, children: bodyJsx }) : bodyJsx, footer && footerJsx] }) }) })] }) }))
+                          children: (o$3(StructureDialogPortalRoot, { ...useMergedProps(info.propsFocusContainer, propsPortal || {}), children: o$3(StructureDialogModal, { fullscreen: fullscreen, open: open, variantSize: variantSize, ...info.propsDialog, children: [o$3(StructureDialogBackdrop, { open: open, modal: modal }), o$3(StructureDialogModalDialog, { open: open, header: header, children: o$3(StructureDialogModalContent, { childrenHeading: headingJsx, childrenBody: bodyJsx, childrenFooter: footerJsx, headerPosition: headerPosition }) })] }) }))
                       })] }));
           } }));
   }));
@@ -15379,6 +15399,30 @@
           } }));
   }));
 
+  const StructureOffcanvasPortalRoot = memoForwardRef(function StructureOffcanvasPortalRoot({ children, ...props }, ref) { return (o$3("div", { ...props, ref: ref, children: children })); });
+  const StructureOffcanvasBackdrop = memoForwardRef(function StructureOffcanvasBackdrop({ open, ...props }, ref) {
+      return (o$3(Fade, { show: open, fadeMax: 0.25, duration: 350, children: o$3("div", { ...useMergedProps({ class: "offcanvas-backdrop" }, { ...props, ref }) }) }));
+  });
+  const StructureOffcanvasModalTitle = memoForwardRef(function StructureOffcanvasModalTitle({ children, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({ class: "offcanvas-title" }, { ...props, ref }), children: children }));
+  });
+  const StructureOffcanvasModalCloseButton = memoForwardRef(function StructureOffcanvasModalCloseButton({ onClose, ...props }, ref) {
+      return (o$3(Button, { onPress: (_pressed, e) => onClose(e, "escape"), ...useMergedProps({ class: "btn-close", "aria-label": "Close" }, { ...props, ref }) }));
+  });
+  const StructureOffcanvasModalBody = memoForwardRef(function StructureOffcanvasModalBody({ children, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({ class: "offcanvas-body" }, { ...props, ref }), children: children }));
+  });
+  const StructureOffcanvasModalHeader = memoForwardRef(function StructureOffcanvasModalHeader({ children, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({ class: "offcanvas-header" }, { ...props, ref }), children: children }));
+  });
+  const StructureOffcanvasModal = memoForwardRef(function StructureOffcanvasModal({ open, children, ...props }, ref) {
+      const otherProps = {
+          tabIndex: -1,
+          className: clsx("offcanvas")
+      };
+      return (o$3(Slide, { show: open, slideTargetInline: -1, duration: 350, children: o$3("div", { ...useMergedProps(otherProps, { ...props, ref }), children: children }) }));
+  });
+
   const Offcanvas = x$1(forwardElementRef$1(function Offcanvas({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }, ref) {
       headerPosition ??= "start";
       if (headerPosition == "hidden") {
@@ -15387,7 +15431,7 @@
       return (o$3(Dialog$1, { ariaLabel: headerPosition == "hidden" ? header : null, active: open, onDismiss: onClose, focusPopup: (e, f) => f()?.focus?.(), dismissBackdropActive: true, dismissEscapeActive: true, render: info => {
               return (o$3(k$3, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), useDefaultRenderPortal({
                           portalId: usePortalId("offcanvas"),
-                          children: (o$3("div", { ...useMergedProps(info.propsFocusContainer, propsPortal || {}), children: [o$3(Slide, { show: open, slideTargetInline: -1, duration: 500, children: o$3("div", { ...useMergedProps(info.propsDialog, { class: clsx("offcanvas"), tabIndex: -1 }), children: [o$3("div", { ...useMergedProps({ class: "offcanvas-header" }), children: [o$3("h5", { ...useMergedProps(info.propsTitle, { class: "offcanvas-title" }), children: header }), o$3(Button, { class: "btn-close", "aria-label": "Close", onPress: (_pressed, e) => onClose(e, "escape") })] }), o$3("div", { class: "offcanvas-body", children: children })] }) }), o$3(Fade, { show: open, fadeMax: 0.25, duration: 1000, children: o$3("div", { class: clsx("offcanvas-backdrop") }) })] }))
+                          children: (o$3(StructureOffcanvasPortalRoot, { ...useMergedProps(info.propsFocusContainer, propsPortal || {}), children: [o$3(StructureOffcanvasModal, { open: open, ...info.propsDialog, children: [o$3(StructureOffcanvasModalHeader, { children: [o$3(StructureOffcanvasModalTitle, { ...info.propsTitle, children: header }), o$3(StructureOffcanvasModalCloseButton, { onClose: onClose })] }), o$3(StructureOffcanvasModalBody, { children: children })] }), o$3(StructureOffcanvasBackdrop, { open: open })] }))
                       })] }));
           } }));
   }));
@@ -17836,7 +17880,7 @@
       labelPosition ??= "before";
       return (o$3(OrientationContext.Provider, { value: orientation, children: o$3(Tabs$1, { localStorageKey: localStorageKey, orientation: orientation, ariaLabel: labelPosition == "hidden" ? label : null, pageNavigationSize: 0, render: info => {
                   const labelJsx = o$3("label", { ...info.propsLabel, children: label });
-                  return (o$3("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: o$3("ul", { ...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) }), children: tabs }) }), labelPosition == "before" && labelJsx, o$3(Swappable, { children: o$3("div", { ...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {}), children: panels }) })] }));
+                  return (o$3("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: o$3("ul", { ...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) }), children: tabs }) }), labelPosition == "after" && labelJsx, o$3(Swappable, { children: o$3("div", { ...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {}), children: panels }) })] }));
               } }) }));
   }));
   const Tab = x$1(forwardElementRef$1(function Tab({ index, getSortValue, children, ...props }, ref) {
@@ -17877,6 +17921,15 @@
           triggerIndex: visible,
       });
       return o$3(k$3, { children: delayedVisible && children });
+  });
+  memoForwardRef(function StructureTabs({ orientation, children, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: children }));
+  });
+  memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }, ref) {
+      return (o$3(Swappable, { children: o$3("div", { ...useMergedProps({ class: "tab-panels-container" }, { ...props, ref }), children: panels }) }));
+  });
+  memoForwardRef(function StructureTabList({ orientation, typeaheadActive, labelPosition, childrenLabel: labelJsx, children: tabs, ...props }, ref) {
+      return (o$3(k$3, { children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: typeaheadActive, children: o$3("ul", { ...useMergedProps({ className: clsx(`nav nav-tabs`) }, { ...props, ref }), children: tabs }) }), labelPosition == "after" && labelJsx] }));
   });
 
   const PushToastContext = G$1(null);

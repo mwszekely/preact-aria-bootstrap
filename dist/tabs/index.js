@@ -5,7 +5,7 @@ import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "prea
 import { returnZero, useMergedProps, useState, useTimeout } from "preact-prop-helpers";
 import { SlideZoomFade, Swappable } from "preact-transition";
 import { memo, useContext } from "preact/compat";
-import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 const OrientationContext = createContext("horizontal");
 export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }, ref) {
@@ -13,7 +13,7 @@ export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, l
     labelPosition ??= "before";
     return (_jsx(OrientationContext.Provider, { value: orientation, children: _jsx(AriaTabs, { localStorageKey: localStorageKey, orientation: orientation, ariaLabel: labelPosition == "hidden" ? label : null, pageNavigationSize: 0, render: info => {
                 const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
-                return (_jsxs("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: [labelPosition == "before" && labelJsx, _jsx(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: _jsx("ul", { ...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) }), children: tabs }) }), labelPosition == "before" && labelJsx, _jsx(Swappable, { children: _jsx("div", { ...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {}), children: panels }) })] }));
+                return (_jsxs("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: [labelPosition == "before" && labelJsx, _jsx(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: _jsx("ul", { ...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) }), children: tabs }) }), labelPosition == "after" && labelJsx, _jsx(Swappable, { children: _jsx("div", { ...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {}), children: panels }) })] }));
             } }) }));
 }));
 export const Tab = memo(forwardElementRef(function Tab({ index, getSortValue, children, ...props }, ref) {
@@ -54,5 +54,14 @@ const TabPanelChildren = memo(function TabPanelChildren({ children, visible }) {
         triggerIndex: visible,
     });
     return _jsx(_Fragment, { children: delayedVisible && children });
+});
+export const StructureTabs = memoForwardRef(function StructureTabs({ orientation, children, ...props }, ref) {
+    return (_jsx("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: children }));
+});
+export const StructureTabPanelsContainer = memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }, ref) {
+    return (_jsx(Swappable, { children: _jsx("div", { ...useMergedProps({ class: "tab-panels-container" }, { ...props, ref }), children: panels }) }));
+});
+export const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadActive, labelPosition, childrenLabel: labelJsx, children: tabs, ...props }, ref) {
+    return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: typeaheadActive, children: _jsx("ul", { ...useMergedProps({ className: clsx(`nav nav-tabs`) }, { ...props, ref }), children: tabs }) }), labelPosition == "after" && labelJsx] }));
 });
 //# sourceMappingURL=index.js.map

@@ -1,14 +1,12 @@
-import { clsx } from "clsx";
 import { ComponentChildren, h, Ref, VNode } from "preact";
 import { Dialog as AriaDialog, DialogProps as AriaDialogProps, useDefaultRenderPortal } from "preact-aria-widgets";
 import { useMergedProps } from "preact-prop-helpers";
-import { Fade, Slide } from "preact-transition";
 import { memo } from "preact/compat";
-import { Button } from "../button/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 import { usePortalId } from "../utility/use-portal-id.js";
+import { StructureOffcanvasBackdrop, StructureOffcanvasModal, StructureOffcanvasModalBody, StructureOffcanvasModalCloseButton, StructureOffcanvasModalHeader, StructureOffcanvasModalTitle, StructureOffcanvasPortalRoot } from "./structure.js";
 
 export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     open: boolean;
@@ -19,11 +17,6 @@ export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "child
 
     /** Props are spread to the anchor element. If you need to have a class name or style set on the dialog itself, pass those here. */
     propsPortal?: h.JSX.HTMLAttributes<HTMLDivElement>;
-
-    /**
-     * If true, this dialog cannot be closed with the Escape key or by clicking the backdrop.
-     */
-    //modal?: boolean;
 }
 
 export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }: OffcanvasProps, ref?: Ref<HTMLSpanElement>) {
@@ -49,20 +42,16 @@ export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, heade
                         {useDefaultRenderPortal({
                             portalId: usePortalId("offcanvas"),
                             children: (
-                                <div {...useMergedProps(info.propsFocusContainer, propsPortal || {})}>
-                                    <Slide show={open} slideTargetInline={-1} duration={500}>
-                                        <div {...useMergedProps(info.propsDialog, { class: clsx("offcanvas"), tabIndex: -1 })}>
-                                            <div {...useMergedProps({ class: "offcanvas-header" })}>
-                                                <h5 {...useMergedProps(info.propsTitle, { class: "offcanvas-title" })}>{header}</h5>
-                                                <Button class="btn-close" aria-label="Close" onPress={(_pressed, e) => onClose(e, "escape")} />
-                                            </div>
-                                            <div class="offcanvas-body">{children}</div>
-                                        </div>
-                                    </Slide>
-                                    <Fade show={open} fadeMax={0.25} duration={1000}>
-                                        <div class={clsx("offcanvas-backdrop")}></div>
-                                    </Fade>
-                                </div>
+                                <StructureOffcanvasPortalRoot {...useMergedProps(info.propsFocusContainer, propsPortal || {})}>
+                                    <StructureOffcanvasModal open={open} {...info.propsDialog as {}}>
+                                        <StructureOffcanvasModalHeader>
+                                            <StructureOffcanvasModalTitle {...info.propsTitle}>{header}</StructureOffcanvasModalTitle>
+                                            <StructureOffcanvasModalCloseButton onClose={onClose} />
+                                        </StructureOffcanvasModalHeader>
+                                        <StructureOffcanvasModalBody>{children}</StructureOffcanvasModalBody>
+                                    </StructureOffcanvasModal>
+                                    <StructureOffcanvasBackdrop open={open} />
+                                </StructureOffcanvasPortalRoot>
                             )
                         })}
                     </>
@@ -71,19 +60,3 @@ export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, heade
         />
     )
 }))
-
-/*
-
-
-<div class="offcanvas offcanvas-start show" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasLabel">Offcanvas</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    Content for the offcanvas goes here. You can place just about any Bootstrap component or custom elements here.
-  </div>
-</div>
-
-
- */
