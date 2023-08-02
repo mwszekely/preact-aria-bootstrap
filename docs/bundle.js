@@ -4870,7 +4870,9 @@
           }
       });
       const onPressSync = useStableCallback((e) => {
-          if (selectionMode == 'activation' && !unselectable)
+          // We allow press events for selectionMode == 'focus' because
+          // press generally causes a focus anyway (except when it doesn't, iOS Safari...)
+          if (selectionMode != 'disabled' && !unselectable)
               onSelectedIndexChange(enhanceEvent(e, { selectedIndex: index }));
       });
       const propParts = ariaPropName?.split("-") ?? [];
@@ -9616,14 +9618,21 @@
    *
    * @compositeParams
    */
-  function useToolbar({ linearNavigationParameters, toolbarParameters: { orientation, role, selectedIndex, onSelectedIndexChange, disabled }, labelParameters, rovingTabIndexParameters, ...listNavParameters }) {
+  function useToolbar({ linearNavigationParameters, toolbarParameters: { orientation, role, selectedIndex, onSelectedIndexChange, disabled, selectionLimit, ...void1 }, labelParameters, rovingTabIndexParameters, singleSelectionParameters: { selectionMode, ...singleSelectionParameters }, ...listNavParameters }) {
       monitorCallCount(useToolbar);
+      if (selectionLimit != 'single') {
+          console.assert(selectedIndex == null);
+          console.assert(selectionMode == 'disabled');
+          selectedIndex = null;
+          selectionMode = 'disabled';
+      }
       const { context, props, ...listNavReturn } = useCompleteListNavigationDeclarative({
           ...listNavParameters,
           rovingTabIndexParameters: { ...rovingTabIndexParameters, untabbable: disabled, focusSelfParent: focus },
           singleSelectionDeclarativeParameters: { selectedIndex, onSelectedIndexChange: disabled ? null : onSelectedIndexChange },
           paginatedChildrenParameters: { paginationMax: null, paginationMin: null },
           linearNavigationParameters: { ...linearNavigationParameters, arrowKeyDirection: orientation },
+          singleSelectionParameters: { selectionMode, ...singleSelectionParameters },
       });
       const { propsInput: propsToolbar, propsLabel, randomIdInputReturn, randomIdLabelReturn } = useLabelSynthetic({
           labelParameters: { ...labelParameters, onLabelClick: listNavReturn.rovingTabIndexReturn.focusSelf },
@@ -9649,9 +9658,9 @@
   /**
    * @compositeParams
    */
-  function useToolbarChild({ info, toolbarChildParameters: { disabledProp }, ...args }) {
+  function useToolbarChild({ context: { toolbarContext, ...context }, info, toolbarChildParameters: { disabledProp }, ...args }) {
       monitorCallCount(useToolbarChild);
-      const { propsChild, propsTabbable, ...listNavReturn } = useCompleteListNavigationChild({ info, ...args });
+      const { propsChild, propsTabbable, ...listNavReturn } = useCompleteListNavigationChild({ info, context, ...args });
       return {
           propsChild: useMergedProps(propsChild, { [disabledProp]: info.unselectable ? true : undefined }),
           propsTabbable,
@@ -10673,6 +10682,27 @@
       };
   }
 
+  // Intentionally (?) unused
+  matchMedia("(any-hover: hover)");
+  // Track if the current input has hover capabilities
+  // (This is responsive to whatever the "primary" device is)
+  let mediaQuery = matchMedia("(hover: hover)");
+  let pageCurrentlyUsingHover = mediaQuery.matches;
+  let allCallbacks = new Set();
+  mediaQuery.onchange = ev => { pageCurrentlyUsingHover = ev.matches; allCallbacks.forEach(fn => fn(ev.matches)); };
+  //setTimeout(() => alert(`Hover: ${pageCurrentlyUsingHover.toString()}`), 1000);
+  /*
+  //let delayedAlert2 = debounce(delayedAlert3, 4000);
+  let messages = new Set<string>();
+  const delayedAlert2 = debounce(function delayedAlert3() {
+      alert([...messages].join("\n"));
+      messages.clear();
+  }, 2500);
+
+  function delayedAlert(message: string) {
+      messages.add(message);
+      delayedAlert2();
+  }*/
   /**
    * Implements a [Tooltip](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/) pattern.
    *
@@ -10680,13 +10710,19 @@
    *
    * @compositeParams
    */
-  function useTooltip({ tooltipParameters: { onStatus, tooltipSemanticType, hoverDelay }, activeElementParameters, escapeDismissParameters, ...void1 }) {
+  function useTooltip({ tooltipParameters: { onStatus, tooltipSemanticType, hoverDelay, usesLongPress }, activeElementParameters, escapeDismissParameters, pressReturn: { longPress, ...void2 }, ...void1 }) {
       monitorCallCount(useTooltip);
       useGlobalHandler(window, "mouseout", T$2((e) => {
           console.log(e);
           if (e.relatedTarget == null)
               onHoverChanged(false, "popup");
       }, []));
+      const [usesHover, setUsesHover] = useState(pageCurrentlyUsingHover);
+      p$2(() => {
+          let handler = (ev) => { setUsesHover(ev.matches); };
+          mediaQuery.addEventListener("change", handler, { passive: true });
+          return () => mediaQuery.removeEventListener("change", handler, {});
+      });
       /**
        * Whether the hover/focus-popup/trigger state we have results in us showing this tooltip.
        *
@@ -10694,10 +10730,13 @@
        */
       const [openLocal, setOpenLocal] = useState(false);
       const [getState, setState] = usePassiveState(useStableCallback((nextState, prevState) => {
+          //delayedAlert(`${prevState ?? "null"} to ${nextState}`);
           if (hoverTimeoutHandle.current) {
               clearTimeout(hoverTimeoutHandle.current);
               hoverTimeoutHandle.current = null;
           }
+          if (nextState == null)
+              inputState.current = null;
           switch (nextState) {
               case "focused-popup":
               case "focused-trigger":
@@ -10716,35 +10755,47 @@
       let { propsReferencer: propsTrigger, propsSource: propsPopup } = useRandomId({ randomIdParameters: { prefix: Prefices.tooltip, otherReferencerProp: (tooltipSemanticType == "description" ? "aria-describedby" : "aria-labelledby") } });
       const { refElementReturn: { getElement: getTriggerElement }, propsStable: triggerRefProps } = useRefElement({ refElementParameters: {} });
       const { refElementReturn: { getElement: getPopupElement }, propsStable: popupRefProps } = useRefElement({ refElementParameters: {} });
-      const stateIsMouse = T$2(() => (getState()?.startsWith("h") || false), []);
-      const stateIsFocus = T$2(() => (getState()?.startsWith("f") || false), []);
+      let inputState = _$1(null);
       let hoverTimeoutHandle = _$1(null);
       const onHoverChanged = useStableCallback((hovering, which) => {
           if (hoverTimeoutHandle.current)
               clearTimeout(hoverTimeoutHandle.current);
+          //delayedAlert(`onHoverChanged(${hovering.toString()}, ${which}) with inputState == ${inputState.current}`)
+          // Ignore emulated cursor hover events when we're not even using a pointer
+          // if ()
+          //    return;
           if (hovering) {
-              hoverTimeoutHandle.current = setTimeout(() => {
-                  setState(`hovering-${which}`);
-                  hoverTimeoutHandle.current = null;
-              }, hoverDelay || 0);
+              inputState.current = "hover";
+              if (usesLongPress && !usesHover) ;
+              else {
+                  hoverTimeoutHandle.current = setTimeout(() => {
+                      setState(`hovering-${which}`);
+                      hoverTimeoutHandle.current = null;
+                  }, hoverDelay || 0);
+              }
           }
           else {
               setState(null);
+              inputState.current = null;
           }
       });
       const onCurrentFocusedInnerChanged = T$2((focused, which) => {
-          if (!stateIsMouse()) {
+          // delayedAlert(`onFocusedChanged(${focused.toString()}, ${which}) with inputState == ${inputState.current}`)
+          if (inputState.current != "hover") {
               if (focused) {
+                  inputState.current = 'focus';
                   setState(`focused-${which}`);
               }
               else {
                   setState(null);
+                  inputState.current = null;
               }
           }
           else {
               setState(null);
+              inputState.current = null;
           }
-      }, [stateIsMouse]);
+      }, []);
       const onTriggerCurrentFocusedInnerChanged = T$2((focused) => onCurrentFocusedInnerChanged(focused, "trigger"), [onCurrentFocusedInnerChanged]);
       const onPopupCurrentFocusedInnerChanged = T$2((focused) => onCurrentFocusedInnerChanged(focused, "popup"), [onCurrentFocusedInnerChanged]);
       const { hasCurrentFocusReturn: triggerFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: onTriggerCurrentFocusedInnerChanged }, refElementReturn: { getElement: getTriggerElement } });
@@ -10777,8 +10828,27 @@
       };
       const otherTriggerProps = {
           onPointerEnter: T$2(() => { onHoverChanged(true, "trigger"); }, []),
-          onClick: T$2((e) => { if (e.currentTarget && "focus" in e.currentTarget)
-              focus(e.currentTarget); }, []),
+          onPointerUp: T$2(() => { onHoverChanged(false, "trigger"); }, []),
+          onClick: useStableCallback((e) => {
+              // When we click/tap the trigger,
+              // if we can't hover it
+              if (!usesHover) {
+                  // We can't hover the trigger we just tapped
+                  if (usesLongPress) ;
+                  else {
+                      // Presumably static text content or something else -- focus it so the tooltip will show
+                      onCurrentFocusedInnerChanged(true, "trigger");
+                      focus(e.currentTarget);
+                  }
+              }
+              else {
+                  // We're using a mouse or other hovering pointer (so not a stylus/touchscreen)
+                  onHoverChanged(true, "trigger");
+              }
+              /*onHoverChanged(true, "trigger");
+              if (e.currentTarget && "focus" in e.currentTarget)
+              focus(e.currentTarget as HTMLElement); */
+          }),
           //onPointerLeave: useCallback(() => { onHoverChanged(false, "trigger") }, [])
       };
       useGlobalHandler(document, "pointermove", !openLocal ? null : (e => {
@@ -10787,17 +10857,28 @@
           const mouseElement = e.target;
           let overPopup = (popupElement?.contains(mouseElement));
           let overTrigger = (triggerElement?.contains(mouseElement));
-          if (!overPopup && !overTrigger && stateIsMouse()) {
+          if (!overPopup && !overTrigger && inputState.current == 'hover') {
               onHoverChanged(false, "popup");
           }
       }), { capture: true, passive: true });
+      p$2(() => {
+          // When a long press starts, if we use those and we're on a touch device,
+          // then show the tooltip by focusing the trigger.
+          if (usesLongPress && !usesHover) {
+              if (longPress) {
+                  inputState.current = null;
+                  onCurrentFocusedInnerChanged(true, "trigger");
+                  focus(getTriggerElement());
+              }
+          }
+      }, [longPress, usesHover, usesLongPress]);
       return {
           propsPopup: useMergedProps(popupRefProps, propsPopup, popupFocusReturn.propsStable, { role: "tooltip" }, otherPopupProps, propsStablePopup),
           propsTrigger: useMergedProps(triggerRefProps, propsTrigger, triggerFocusReturn.propsStable, { onClick: useStableCallback(e => focus(e.currentTarget)) }, otherTriggerProps, propsStableSource),
           tooltipReturn: {
               getState,
-              stateIsFocus,
-              stateIsMouse
+              //stateIsFocus,
+              //stateIsMouse
           }
       };
   }
@@ -11283,7 +11364,7 @@
   const AriaPropNameContext$1 = G$1("aria-selected");
   const SelectionModeContext$2 = G$1("focus");
   const MenuItemContext = G$1(null);
-  function Menu$1({ collator, disableHomeEndKeys, noTypeahead, typeaheadTimeout, orientation, ariaPropName, selectionMode, untabbable, active, onDismiss, onElementChange, onMount, onUnmount, openDirection, onTabbableIndexChange, compare, getIndex, selectedIndex, navigatePastEnd, navigatePastStart, onSelectedIndexChange, pageNavigationSize, parentDepth, disabled, staggered, onOpen, onNavigateLinear, onNavigateTypeahead, getDocument, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, render, imperativeHandle, ...void1 }) {
+  function Menu$1({ collator, disableHomeEndKeys, noTypeahead, typeaheadTimeout, orientation, ariaPropName, selectionMode, selectionLimit, untabbable, active, onDismiss, onElementChange, onMount, onUnmount, openDirection, onTabbableIndexChange, compare, getIndex, selectedIndex, navigatePastEnd, navigatePastStart, onSelectedIndexChange, pageNavigationSize, parentDepth, disabled, staggered, onOpen, onNavigateLinear, onNavigateTypeahead, getDocument, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, render, imperativeHandle, ...void1 }) {
       const defaultParentDepth = q$2(ParentDepthContext);
       let myDepth = (parentDepth ?? defaultParentDepth) + 1;
       ariaPropName ||= "aria-selected";
@@ -11335,7 +11416,8 @@
                               orientation,
                               selectedIndex,
                               onSelectedIndexChange,
-                              disabled: disabled || false
+                              disabled: disabled || false,
+                              selectionLimit
                           },
                           singleSelectionParameters: {
                               ariaPropName: ariaPropName || "aria-selected",
@@ -11371,7 +11453,7 @@
   }
 
   const MenubarItemContext = G$1(null);
-  x$1(function Menubar({ render, collator, disableHomeEndKeys, navigatePastEnd, navigatePastStart, pageNavigationSize, orientation, staggered, noTypeahead, untabbable, onTabbableIndexChange, compare, getIndex, disabled, selectedIndex, onSelectedIndexChange, typeaheadTimeout, role, ariaLabel, ariaPropName, selectionMode, onNavigateLinear, onNavigateTypeahead, imperativeHandle, onElementChange, onMount, onUnmount, ...void1 }) {
+  x$1(function Menubar({ render, collator, disableHomeEndKeys, navigatePastEnd, navigatePastStart, pageNavigationSize, orientation, staggered, noTypeahead, untabbable, onTabbableIndexChange, compare, getIndex, disabled, selectedIndex, onSelectedIndexChange, typeaheadTimeout, role, ariaLabel, ariaPropName, selectionMode, onNavigateLinear, onNavigateTypeahead, imperativeHandle, onElementChange, onMount, onUnmount, selectionLimit, ...void1 }) {
       ariaPropName ||= "aria-selected";
       selectionMode ||= "activation";
       untabbable ||= false;
@@ -11386,6 +11468,7 @@
           toolbarParameters: {
               orientation,
               selectedIndex,
+              selectionLimit,
               onSelectedIndexChange,
               role: role ?? "menubar",
               disabled: disabled || false
@@ -11705,41 +11788,40 @@
   const AriaPropNameContext = G$1("aria-selected");
   const SelectionModeContext = G$1("focus");
   const ToolbarContext = G$1(null);
-  const Toolbar = x$1(function ToolbarU({ render, role, collator, disableHomeEndKeys, disabled, compare, getIndex, navigatePastEnd, navigatePastStart, pageNavigationSize, selectedIndex, onSelectedIndexChange, orientation, noTypeahead, onTabbableIndexChange, typeaheadTimeout, staggered, ariaLabel, ariaPropName, selectionMode, untabbable, onNavigateLinear, onNavigateTypeahead, onElementChange, onMount, onUnmount }, ref) {
+  const Toolbar = x$1(function ToolbarU({ render, role, collator, disableHomeEndKeys, disabled, compare, getIndex, navigatePastEnd, navigatePastStart, pageNavigationSize, selectedIndex, onSelectedIndexChange, orientation, noTypeahead, onTabbableIndexChange, typeaheadTimeout, staggered, ariaLabel, ariaPropName, selectionMode, untabbable, onNavigateLinear, onNavigateTypeahead, onElementChange, onMount, onUnmount, selectionLimit, imperativeHandle, ...void1 }) {
       ariaPropName ??= "aria-selected";
       selectionMode ??= "activation";
       untabbable ||= false;
-      const listboxReturnType = useToolbar({
-          rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
-          sortableChildrenParameters: { compare: compare },
-          linearNavigationParameters: {
-              onNavigateLinear,
-              disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
-              navigatePastEnd: navigatePastEnd ?? "wrap",
-              navigatePastStart: navigatePastStart ?? "wrap",
-              pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
-          },
-          toolbarParameters: {
-              orientation,
-              disabled: disabled || false,
-              role: role ?? "toolbar",
-              selectedIndex,
-              onSelectedIndexChange
-          },
-          staggeredChildrenParameters: { staggered: staggered || false },
-          rovingTabIndexParameters: { onTabbableIndexChange, untabbable },
-          typeaheadNavigationParameters: {
-              onNavigateTypeahead,
-              collator: useDefault("collator", collator),
-              noTypeahead: useDefault("noTypeahead", noTypeahead),
-              typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
-          },
-          labelParameters: { ariaLabel },
-          singleSelectionParameters: { ariaPropName: ariaPropName, selectionMode },
-          refElementParameters: { onElementChange, onMount, onUnmount },
-      });
-      A$1(ref, () => listboxReturnType);
-      return (o$3(AriaPropNameContext.Provider, { value: ariaPropName, children: o$3(SelectionModeContext.Provider, { value: selectionMode, children: o$3(UntabbableContext.Provider, { value: untabbable, children: o$3(ToolbarContext.Provider, { value: listboxReturnType.context, children: render(listboxReturnType) }) }) }) }));
+      return (o$3(AriaPropNameContext.Provider, { value: ariaPropName, children: o$3(SelectionModeContext.Provider, { value: selectionMode, children: o$3(UntabbableContext.Provider, { value: untabbable, children: useComponent(imperativeHandle, render, ToolbarContext, useToolbar({
+                      rearrangeableChildrenParameters: { getIndex: useDefault("getIndex", getIndex) },
+                      sortableChildrenParameters: { compare: compare },
+                      linearNavigationParameters: {
+                          onNavigateLinear,
+                          disableHomeEndKeys: useDefault("disableHomeEndKeys", disableHomeEndKeys),
+                          navigatePastEnd: navigatePastEnd ?? "wrap",
+                          navigatePastStart: navigatePastStart ?? "wrap",
+                          pageNavigationSize: useDefault("pageNavigationSize", pageNavigationSize)
+                      },
+                      toolbarParameters: {
+                          orientation,
+                          disabled: disabled || false,
+                          role: role ?? "toolbar",
+                          selectedIndex,
+                          onSelectedIndexChange,
+                          selectionLimit
+                      },
+                      staggeredChildrenParameters: { staggered: staggered || false },
+                      rovingTabIndexParameters: { onTabbableIndexChange, untabbable },
+                      typeaheadNavigationParameters: {
+                          onNavigateTypeahead,
+                          collator: useDefault("collator", collator),
+                          noTypeahead: useDefault("noTypeahead", noTypeahead),
+                          typeaheadTimeout: useDefault("typeaheadTimeout", typeaheadTimeout)
+                      },
+                      labelParameters: { ariaLabel },
+                      singleSelectionParameters: { ariaPropName: ariaPropName, selectionMode },
+                      refElementParameters: { onElementChange, onMount, onUnmount },
+                  })) }) }) }));
   });
   function ToolbarChild({ index, render, focusSelf, getSortValue, getText, unselectable, disabledProp, untabbable, onElementChange, onMount, onUnmount, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, imperativeHandle, info: uinfo }) {
       const context = useContextWithWarning(ToolbarContext, "toolbar");
@@ -11764,7 +11846,7 @@
       return (o$3(k$3, { children: render(info) }));
   }
 
-  const Tooltip$1 = x$1(function TooltipU({ onStatus, getDocument, parentDepth, hoverDelay, render, imperativeHandle, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, tooltipSemanticType, ...void1 }) {
+  const Tooltip$1 = x$1(function TooltipU({ onStatus, getDocument, parentDepth, hoverDelay, render, imperativeHandle, onActiveElementChange, onLastActiveElementChange, onWindowFocusedChange, tooltipSemanticType, usesLongPress, longPress, ...void1 }) {
       const defaultParentDepth = q$2(ParentDepthContext);
       let myDepth = (parentDepth ?? defaultParentDepth) + 1;
       return (o$3(ParentDepthContext.Provider, { value: myDepth, children: useComponent(imperativeHandle, render, null, useTooltip({
@@ -11781,8 +11863,10 @@
               tooltipParameters: {
                   onStatus,
                   tooltipSemanticType,
-                  hoverDelay: hoverDelay ?? null
-              }
+                  hoverDelay: hoverDelay ?? null,
+                  usesLongPress: usesLongPress || false
+              },
+              pressReturn: { longPress: longPress || false }
           })) }));
   });
 
@@ -14693,7 +14777,8 @@
   });
 
   const ButtonGroupContext = G$1(null);
-  function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, ...props }, ref) {
+  const ButtonGroupSelectionLimitContext = G$1(null);
+  function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionLimit, ...props }, ref) {
       labelPosition ??= "before";
       const imperativeHandle = _$1(null);
       const [capturedIndex, setCapturedIndex] = useState(null);
@@ -14704,13 +14789,13 @@
       });
       const pendingIndex = (pending ? capturedIndex : null);
       const classBase = (separated ? "btn-toolbar" : "btn-group");
-      return (o$3(DefaultButtonSize.Provider, { value: variantSize ?? null, children: o$3(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(ButtonGroupContext.Provider, { value: F$2(() => ({ pendingIndex }), [pendingIndex]), children: o$3(Toolbar, { onSelectedIndexChange: (...e) => {
-                              onSelectedIndexChangeSync(...e);
-                          }, imperativeHandle: imperativeHandle, ariaPropName: "aria-pressed", selectionMode: "activation", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
-                          , pageNavigationSize: 0, orientation: orientation || "horizontal", ariaLabel: labelPosition == 'hidden' ? label : null, selectedIndex: pendingIndex ?? selectedIndex, render: info => {
-                              const visibleLabel = o$3("label", { ...info.propsLabel, children: label });
-                              return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: false, typeaheadActive: false, children: o$3("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
-                          } }) }) }) }) }));
+      return (o$3(DefaultButtonSize.Provider, { value: variantSize ?? null, children: o$3(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(ButtonGroupSelectionLimitContext.Provider, { value: selectionLimit, children: o$3(ButtonGroupContext.Provider, { value: F$2(() => ({ pendingIndex }), [pendingIndex]), children: o$3(Toolbar, { onSelectedIndexChange: (...e) => {
+                                  onSelectedIndexChangeSync(...e);
+                              }, imperativeHandle: imperativeHandle, ariaPropName: "aria-pressed", selectionMode: selectionLimit == "single" ? "activation" : "disabled", selectionLimit: selectionLimit, role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
+                              , pageNavigationSize: 0, orientation: orientation || "horizontal", ariaLabel: labelPosition == 'hidden' ? label : null, selectedIndex: pendingIndex ?? selectedIndex, render: info => {
+                                  const visibleLabel = o$3("label", { ...info.propsLabel, children: label });
+                                  return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: false, typeaheadActive: false, children: o$3("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
+                              } }) }) }) }) }) }));
   }
 
   const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }, ref) {
@@ -14731,11 +14816,28 @@
       // * The onPress handler is an async handler that sets the button to pressed/unpressed, in which case we show it in that state until the handler completes.
       const buttonGroupInfo = q$2(ButtonGroupContext);
       const { pendingIndex } = (buttonGroupInfo ?? {});
-      const isThePressedOne = ((pendingIndex == null ? (individualPending ? currentCapture : standaloneOrMultiSelectPressed) : (pendingIndex === buttonGroupIndex)) ?? null);
-      const singleSelectPending = pendingIndex != null && isThePressedOne;
+      //const isThePressedOne = ((pendingIndex == null ? (individualPending ? currentCapture : standaloneOrMultiSelectPressed) : (pendingIndex === buttonGroupIndex)) ?? null);
+      //const singleSelectPending = pendingIndex != null && isThePressedOne;
+      let selectionLimit = q$2(ButtonGroupSelectionLimitContext);
+      let isPendingForMultiSelect = null;
+      let isPendingForSingleSelect = null;
+      let isPressedForMultiSelect = null;
+      let isPressedForSingleSelect = null; // This one we won't know until we render ToolbarChild
+      if (individualPending) {
+          isPendingForMultiSelect = true;
+      }
+      if (pendingIndex != null && pendingIndex == buttonGroupIndex) {
+          isPendingForSingleSelect = true;
+      }
+      if (individualPending)
+          isPressedForMultiSelect = currentCapture ?? null;
+      else
+          isPressedForMultiSelect = standaloneOrMultiSelectPressed ?? null;
+      //let isPressed = null;
+      let pending = (selectionLimit == 'multi' ? isPendingForMultiSelect : selectionLimit == 'single' ? isPendingForSingleSelect : individualPending) || false;
       const defaultDisabled = q$2(DisabledContext$1);
       const disabledType = q$2(DefaultDisabledType);
-      const pending = ((individualPending || singleSelectPending) ?? false);
+      //const pending = ((individualPending || singleSelectPending) ?? false);
       //variantSize ??= "md";
       let disabled = userDisabled;
       disabled ||= defaultDisabled;
@@ -14744,15 +14846,19 @@
       const d = disabled ? disabledType : false;
       children = o$3(k$3, { children: [children, badge] });
       if (buttonGroupInfo == null) {
+          console.assert(selectionLimit != "single");
+          let isPressed = (selectionLimit == 'single' ? null : isPressedForMultiSelect) ?? null;
           return (o$3(ButtonStructure, { ref: ref, 
               //Tag={(Tag) as never}
-              tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isThePressedOne, onPress: syncHandler ?? null, otherProps: props, variantFill: variantFill ?? null }));
+              tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isPressed, onPress: syncHandler ?? null, otherProps: props, variantFill: variantFill ?? null }));
       }
       else {
           return (o$3(ToolbarChild, { index: buttonGroupIndex ?? 0, getSortValue: returnZero, disabledProp: "disabled", render: toolbarChildInfo => {
+                  isPressedForSingleSelect = (toolbarChildInfo.singleSelectionChildReturn.selected);
+                  let isPressed = (selectionLimit == 'single' ? isPressedForSingleSelect : isPressedForMultiSelect);
                   return (o$3(ButtonStructure, { ref: ref, 
                       //Tag={(Tag) as never}
-                      tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne || false, callCount: callCount, onPress: (e) => {
+                      tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: isPressed, callCount: callCount, onPress: (e) => {
                           toolbarChildInfo.pressParameters.onPressSync?.(e);
                           return syncHandler?.(e);
                       }, otherProps: useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable) }));
@@ -15145,7 +15251,7 @@
           onChange?.(start, end);
           return () => onChange(null, null);
       }, [page, windowSize]);
-      return (o$3(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "activation", selectedIndex: page, onSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
+      return (o$3(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, ariaPropName: "aria-current-page", selectionMode: "activation", selectionLimit: "single", selectedIndex: page, onSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
               const labelJsx = o$3("label", { ...info.propsLabel, children: label });
               return (o$3(k$3, { children: [labelPosition == "before" && labelJsx, o$3("nav", { "aria-label": labelPosition == 'hidden' ? label : undefined, children: o$3("ul", { ...useMergedProps(info.propsToolbar, { class: "pagination" }), children: o$3(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }), labelPosition == "after" && labelJsx] }));
           } }));
@@ -15366,7 +15472,7 @@
           callback: () => setMenuOpen(popperOpen),
           triggerIndex: popperOpen
       });
-      return (o$3(Menu$1, { onOpen: onOpen, onDismiss: onClose, active: menuOpen, openDirection: "down", orientation: "vertical", selectionMode: "activation", ariaPropName: "aria-selected", selectedIndex: selectedIndex, imperativeHandle: imperativeHandle, onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
+      return (o$3(Menu$1, { onOpen: onOpen, onDismiss: onClose, active: menuOpen, openDirection: "down", orientation: "vertical", selectionMode: "activation", selectionLimit: "single", ariaPropName: "aria-selected", selectedIndex: selectedIndex, imperativeHandle: imperativeHandle, onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
               const portalId = usePortalId("menu");
               const { propsArrow, propsPopup, propsSource, propsData } = usePopper({
                   popperParameters: {
@@ -17874,42 +17980,24 @@
           } }));
   }));
 
-  const OrientationContext = G$1("horizontal");
-  const Tabs = x$1(forwardElementRef$1(function Tabs({ orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }, ref) {
-      orientation ??= "horizontal";
-      labelPosition ??= "before";
-      return (o$3(OrientationContext.Provider, { value: orientation, children: o$3(Tabs$1, { localStorageKey: localStorageKey, orientation: orientation, ariaLabel: labelPosition == "hidden" ? label : null, pageNavigationSize: 0, render: info => {
-                  const labelJsx = o$3("label", { ...info.propsLabel, children: label });
-                  return (o$3("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: o$3("ul", { ...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) }), children: tabs }) }), labelPosition == "after" && labelJsx, o$3(Swappable, { children: o$3("div", { ...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {}), children: panels }) })] }));
-              } }) }));
-  }));
-  const Tab = x$1(forwardElementRef$1(function Tab({ index, getSortValue, children, ...props }, ref) {
-      return (o$3(Tab$1, { index: index, getSortValue: getSortValue || returnZero, render: info => {
-              return (o$3("li", { ...useMergedProps(props, { ref, className: `nav-item` }), children: o$3("span", { ...useMergedProps(info.props, { className: clsx(`nav-link`, info.singleSelectionChildReturn.selected && "active") }), children: children }) }));
-          } }));
-  }));
-  const TabPanel = x$1(forwardElementRef$1(function TabPanel({ index, children, ...props }, ref) {
-      const orientation = q$2(OrientationContext);
+  const StructureTabPanel = memoForwardRef(function StructureTabPanel({ orientation, visibleOffset, visible, children, ...props }, ref) {
       // Get the names of the properties on the transition that are correct for the `orientation` the parent uses.
       // (i.e. if make the transition slide on the X axis for "horizontal" and the Y axis for "vertical")
       const zeroValued = (orientation == "horizontal" ? "slideTargetBlock" : "slideTargetInline");
       const offsetted = (orientation == "horizontal" ? "slideTargetInline" : "slideTargetBlock");
       const originZero = (orientation == "horizontal" ? "zoomOriginBlock" : "zoomOriginInline");
       const originOffset = (orientation == "horizontal" ? "zoomOriginInline" : "zoomOriginBlock");
-      return (o$3(TabPanel$1, { index: index, render: info => {
-              // These use the 
-              const transitionProps = {
-                  [zeroValued]: 0,
-                  [offsetted]: Math.sign(info.tabPanelReturn.visibleOffset ?? 0) * (1 / 24),
-                  [originZero]: 0,
-                  [originOffset]: 0.5
-              };
-              // IMPORTANT: exitVisibility is "removed" instead of "hidden"
-              // because "hidden" can still cause a lot of layout stuff to happen on hidden tabs,
-              // which is bad if one tab is heavier than others -- it'll still affect them even when closed.
-              return (o$3(SlideZoomFade, { ...{ "data-index": index }, exitVisibility: "removed", delayMountUntilShown: true, duration: 500, show: info.tabPanelReturn.visible, zoomMin: (11 / 12), ...transitionProps, children: o$3("div", { ...useMergedProps(info.props, props, { ref, className: clsx("tab-panel scroll-shadows scroll-shadows-y") }), children: o$3(TabPanelChildren, { visible: info.tabPanelReturn.visible || false, children: children }) }) }));
-          } }));
-  }));
+      const transitionProps = {
+          [zeroValued]: 0,
+          [offsetted]: Math.sign(visibleOffset ?? 0) * (1 / 24),
+          [originZero]: 0,
+          [originOffset]: 0.5
+      };
+      // IMPORTANT: exitVisibility is "removed" instead of "hidden"
+      // because "hidden" can still cause a lot of layout stuff to happen on hidden tabs,
+      // which is bad if one tab is heavier than others -- it'll still affect them even when closed.
+      return (o$3(SlideZoomFade, { exitVisibility: "removed", delayMountUntilShown: true, duration: 500, show: visible, zoomMin: (11 / 12), ...transitionProps, children: o$3("div", { ...useMergedProps({ className: clsx("tab-panel scroll-shadows scroll-shadows-y") }, { ...props, ref }), children: o$3(TabPanelChildren, { visible: visible, children: children }) }) }));
+  });
   const TabPanelChildren = x$1(function TabPanelChildren({ children, visible }) {
       // It's more than likely that any given panel's children will be heavy to render,
       // but we *really* don't want that to block the transition animation
@@ -17922,15 +18010,60 @@
       });
       return o$3(k$3, { children: delayedVisible && children });
   });
-  memoForwardRef(function StructureTabs({ orientation, children, ...props }, ref) {
+  const StructureTabs = memoForwardRef(function StructureTabs({ orientation, children, ...props }, ref) {
       return (o$3("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: children }));
   });
-  memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }, ref) {
+  const StructureTabPanelsContainer = memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }, ref) {
       return (o$3(Swappable, { children: o$3("div", { ...useMergedProps({ class: "tab-panels-container" }, { ...props, ref }), children: panels }) }));
   });
-  memoForwardRef(function StructureTabList({ orientation, typeaheadActive, labelPosition, childrenLabel: labelJsx, children: tabs, ...props }, ref) {
-      return (o$3(k$3, { children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: typeaheadActive, children: o$3("ul", { ...useMergedProps({ className: clsx(`nav nav-tabs`) }, { ...props, ref }), children: tabs }) }), labelPosition == "after" && labelJsx] }));
+  const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, ...props }, ref) {
+      let typeaheadActive = (typeaheadStatus && typeaheadStatus != 'none');
+      return (o$3(k$3, { children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: typeaheadActive, children: o$3("ul", { ...useMergedProps({ className: clsx(`nav nav-tabs`, `typeahead-status-${typeaheadStatus}`) }, { ...props, ref }), children: tabs }) }), labelPosition == "after" && labelJsx] }));
   });
+
+  const OrientationContext = G$1("horizontal");
+  const Tabs = x$1(forwardElementRef$1(function Tabs({ orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }, ref) {
+      orientation ??= "horizontal";
+      labelPosition ??= "before";
+      return (o$3(OrientationContext.Provider, { value: orientation, children: o$3(Tabs$1, { localStorageKey: localStorageKey, orientation: orientation, ariaLabel: labelPosition == "hidden" ? label : null, pageNavigationSize: 0, render: info => {
+                  const labelJsx = o$3("label", { ...info.propsLabel, children: label });
+                  return (o$3(StructureTabs, { orientation: orientation, ref: ref, ...props, children: [o$3(StructureTabList, { ...info.propsContainer, childrenLabel: labelJsx, labelPosition: labelPosition, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, orientation: orientation, children: tabs }), o$3(StructureTabPanelsContainer, { children: panels })] }));
+                  /*return (
+                      <div {...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref })}>
+                          {labelPosition == "before" && labelJsx}
+                          <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != "none"}>
+                              <ul {...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) })}>
+                                  {tabs}
+                              </ul>
+                          </KeyboardAssistIcon>
+                          {labelPosition == "after" && labelJsx}
+                          <Swappable>
+                              <div {...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {})}>
+                                  {panels}
+                              </div>
+                          </Swappable>
+                      </div>
+                  )*/
+              } }) }));
+  }));
+  const Tab = x$1(forwardElementRef$1(function Tab({ index, getSortValue, children, ...props }, ref) {
+      return (o$3(Tab$1, { index: index, getSortValue: getSortValue || returnZero, render: info => {
+              return (o$3("li", { ...useMergedProps(props, { ref, className: `nav-item` }), children: o$3("span", { ...useMergedProps(info.props, { className: clsx(`nav-link`, info.singleSelectionChildReturn.selected && "active") }), children: children }) }));
+          } }));
+  }));
+  const TabPanel = x$1(forwardElementRef$1(function TabPanel({ index, ...props }, ref) {
+      const orientation = q$2(OrientationContext);
+      return (o$3(TabPanel$1, { index: index, render: info => {
+              return (o$3(StructureTabPanel, { ref: ref, visible: info.tabPanelReturn.visible || false, visibleOffset: info.tabPanelReturn.visibleOffset || 0, orientation: orientation, ...useMergedProps(info.props, props) }));
+              /*return (
+                  <SlideZoomFade {...{ "data-index": index } as {}} exitVisibility="removed" delayMountUntilShown duration={500} show={info.tabPanelReturn.visible} zoomMin={(11 / 12)} {...transitionProps}>
+                      <div {...useMergedProps(info.props, props, { ref, className: clsx("tab-panel scroll-shadows scroll-shadows-y") })}>
+                          <TabPanelChildren visible={info.tabPanelReturn.visible || false}>{children}</TabPanelChildren>
+                      </div>
+                  </SlideZoomFade>
+              )*/
+          } }));
+  }));
 
   const PushToastContext = G$1(null);
   const UpdateToastContext = G$1(null);
@@ -18068,12 +18201,11 @@
           await new Promise(resolve => setTimeout(resolve, 1000 + (3000 * Math.random())));
           setSelectedIndexSync(index);
       }, []);
-      return (o$3(k$3, { children: [o$3(Heading, { heading: "Button Props", children: o$3("ul", { children: [o$3("li", { children: [o$3("code", { children: "variantTheme" }), " controls the color of a the background/border (primary, secondary, success, etc.)"] }), o$3("li", { children: [o$3("code", { children: "variantOutline" }), " controls whether the style is filled (default) or outlined."] }), o$3("li", { children: [o$3("code", { children: "variantSize" }), " Can be \"sm\", \"md\" (default), or \"lg\""] }), o$3("li", { children: [o$3("code", { children: "variantDropdown" }), " Styles a button to have a dropdown menu icon"] }), o$3("li", { children: [o$3("code", { children: "pressed" }), " Can be ", o$3("code", { children: "null" }), " (default), but if a ", o$3("code", { children: "boolean" }), ", then this button is pressed. This shouldn't be used in single-select ", o$3("code", { children: "ButtonGroups" }), ", because that handles this prop for you."] }), o$3("li", { children: [o$3("code", { children: "onPress" }), " ", o$3("em", { children: [o$3("code", { children: "async" }), " compatible."] }), " Controls what happens when the button is clicked (or activated in others ways)."] }), o$3("li", { children: [o$3("code", { children: "wrap" }), " Allows the text of a button to wrap, which is disallowed by default"] }), o$3("li", { children: [o$3("code", { children: "index" }), " Only used if contained within a ", o$3("code", { children: "ButtonGroup" }), ", in which case this is the 0-based index of this child in that group."] })] }) }), o$3(Heading, { heading: "ButtonGroup Props", children: o$3("ul", { children: [o$3("li", { children: [o$3("code", { children: "orientation" }), ": Whether this group is horizontal (default) or vertical. Affects both visuals and keyboard navigation"] }), o$3("li", { children: [o$3("code", { children: "selectedIndex" }), ": If non-", o$3("code", { children: "null" }), ", this controls which button in the group is currently pressed. Mutually exclusive with giving a ", o$3("code", { children: "Button" }), " its own ", o$3("code", { children: "pressed" }), " prop."] }), o$3("li", { children: [o$3("code", { children: "onSelectedIndexChange" }), ": When a ", o$3("code", { children: "Button" }), " is pressed, that request is sent here."] }), o$3("li", { children: [o$3("code", { children: "label" }), ": Button groups must be labelled, even with a hidden one \u2014 this is will be placed in the label, and what will be announced to assistive technologies even if ", o$3("code", { children: "labelPosition" }), " is \"hidden\"."] }), o$3("li", { children: [o$3("code", { children: "labelPosition" }), ": Controls where ", o$3("code", { children: "label" }), " is placed relative to the checkbox itself. If \"hidden\", ", o$3("code", { children: "label" }), " ", o$3("em", { children: "must" }), " be a simple string."] })] }) }), o$3(Blurb$4, {}), o$3(Code$4, {}), o$3("div", { children: ["# of times pressed: ", pressCount] }), o$3(Button, { variantTheme: "secondary", onPress: onPressSync, badge: o$3(Badge, { position: "top-end", children: "(sync)" }), children: "Press me" }), o$3(Button, { variantTheme: "info", onPress: onPressAsync, badge: o$3(Badge, { position: "top-end", children: "(sync)" }), children: "Press me" }), o$3(Button, { variantFill: "outline", onPress: onPressSync, children: o$3(BootstrapIcon, { label: "Press me (icon demo)", icon: "plus-circle" }) }), o$3(Button, { variantFill: "fill", onPress: onPressSync, tooltip: "Press me (w/ tooltip)", children: o$3(BootstrapIcon, { label: null, icon: "plus-circle" }) }), o$3(Button, { variantSize: "sm", onPress: onPressAsync, disabled: true, children: "Press me (disabled)" }), o$3(Button, { variantSize: "lg", onPress: onToggleSync, pressed: pressed, children: "Toggle me (sync)" }), o$3(Button, { variantSize: "md", onPress: onToggleAsync, pressed: pressed, children: "Toggle me (async)" }), o$3(ButtonGroup, { label: "Multi-select button group example", orientation: "horizontal", labelPosition: "before", children: [o$3(MSB, { index: 0 }), o$3(MSB, { index: 1 }), o$3(MSB, { index: 2 }), o$3(MSB, { index: 3 })] }), o$3(ButtonGroup, { label: `Single-select button group example (selected index: ${selectedIndex ?? "null"})`, selectedIndex: selectedIndex, onSelectedIndexChange: setSelectedIndexAsync, orientation: "horizontal", labelPosition: "before", children: [o$3(SSB, { index: 0 }), o$3(SSB, { index: 1 }), o$3(SSB, { index: 2 }), o$3(SSB, { index: 3 })] })] }));
+      return (o$3(k$3, { children: [o$3(Heading, { heading: "Button Props", children: o$3("ul", { children: [o$3("li", { children: [o$3("code", { children: "variantTheme" }), " controls the color of a the background/border (primary, secondary, success, etc.)"] }), o$3("li", { children: [o$3("code", { children: "variantOutline" }), " controls whether the style is filled (default) or outlined."] }), o$3("li", { children: [o$3("code", { children: "variantSize" }), " Can be \"sm\", \"md\" (default), or \"lg\""] }), o$3("li", { children: [o$3("code", { children: "variantDropdown" }), " Styles a button to have a dropdown menu icon"] }), o$3("li", { children: [o$3("code", { children: "pressed" }), " Can be ", o$3("code", { children: "null" }), " (default), but if a ", o$3("code", { children: "boolean" }), ", then this button is pressed. This shouldn't be used in single-select ", o$3("code", { children: "ButtonGroups" }), ", because that handles this prop for you."] }), o$3("li", { children: [o$3("code", { children: "onPress" }), " ", o$3("em", { children: [o$3("code", { children: "async" }), " compatible."] }), " Controls what happens when the button is clicked (or activated in others ways)."] }), o$3("li", { children: [o$3("code", { children: "wrap" }), " Allows the text of a button to wrap, which is disallowed by default"] }), o$3("li", { children: [o$3("code", { children: "index" }), " Only used if contained within a ", o$3("code", { children: "ButtonGroup" }), ", in which case this is the 0-based index of this child in that group."] })] }) }), o$3(Heading, { heading: "ButtonGroup Props", children: o$3("ul", { children: [o$3("li", { children: [o$3("code", { children: "orientation" }), ": Whether this group is horizontal (default) or vertical. Affects both visuals and keyboard navigation"] }), o$3("li", { children: [o$3("code", { children: "selectedIndex" }), ": If non-", o$3("code", { children: "null" }), ", this controls which button in the group is currently pressed. Mutually exclusive with giving a ", o$3("code", { children: "Button" }), " its own ", o$3("code", { children: "pressed" }), " prop."] }), o$3("li", { children: [o$3("code", { children: "onSelectedIndexChange" }), ": When a ", o$3("code", { children: "Button" }), " is pressed, that request is sent here."] }), o$3("li", { children: [o$3("code", { children: "label" }), ": Button groups must be labelled, even with a hidden one \u2014 this is will be placed in the label, and what will be announced to assistive technologies even if ", o$3("code", { children: "labelPosition" }), " is \"hidden\"."] }), o$3("li", { children: [o$3("code", { children: "labelPosition" }), ": Controls where ", o$3("code", { children: "label" }), " is placed relative to the checkbox itself. If \"hidden\", ", o$3("code", { children: "label" }), " ", o$3("em", { children: "must" }), " be a simple string."] })] }) }), o$3(Blurb$4, {}), o$3(Code$4, {}), o$3("div", { children: ["# of times pressed: ", pressCount] }), o$3(Button, { variantTheme: "secondary", onPress: onPressSync, badge: o$3(Badge, { position: "top-end", children: "(sync)" }), children: "Press me" }), o$3(Button, { variantTheme: "info", onPress: onPressAsync, badge: o$3(Badge, { position: "top-end", children: "(sync)" }), children: "Press me" }), o$3(Button, { variantFill: "outline", onPress: onPressSync, children: o$3(BootstrapIcon, { label: "Press me (icon demo)", icon: "plus-circle" }) }), o$3(Button, { variantFill: "fill", onPress: onPressSync, tooltip: "Press me (w/ tooltip)", children: o$3(BootstrapIcon, { label: null, icon: "plus-circle" }) }), o$3(Button, { variantSize: "sm", onPress: onPressAsync, disabled: true, children: "Press me (disabled)" }), o$3(Button, { variantSize: "lg", onPress: onToggleSync, pressed: pressed, children: "Toggle me (sync)" }), o$3(Button, { variantSize: "md", onPress: onToggleAsync, pressed: pressed, children: "Toggle me (async)" }), o$3(ButtonGroup, { label: "Multi-select button group example", orientation: "horizontal", labelPosition: "before", selectionLimit: "multi", children: [o$3(MSB, { index: 0 }), o$3(MSB, { index: 1 }), o$3(MSB, { index: 2 }), o$3(MSB, { index: 3 })] }), o$3(ButtonGroup, { label: `Single-select button group example (selected index: ${selectedIndex ?? "null"})`, selectedIndex: selectedIndex, onSelectedIndexChange: setSelectedIndexAsync, orientation: "horizontal", labelPosition: "before", selectionLimit: "single", children: [o$3(SSB, { index: 0 }), o$3(SSB, { index: 1 }), o$3(SSB, { index: 2 }), o$3(SSB, { index: 3 })] })] }));
   }
   function MSB({ index }) {
       const [pressed, setPressed] = useState(false);
       const onToggleSync = T$2(async (pressed) => {
-          debugger;
           setPressed(!!pressed);
       }, []);
       const onToggleAsync = T$2(async (pressed) => {

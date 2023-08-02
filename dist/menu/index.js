@@ -34,7 +34,7 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
         callback: () => setMenuOpen(popperOpen),
         triggerIndex: popperOpen
     });
-    return (_jsx(AriaMenu, { onOpen: onOpen, onDismiss: onClose, active: menuOpen, openDirection: "down", orientation: "vertical", selectionMode: "activation", ariaPropName: "aria-selected", selectedIndex: selectedIndex, imperativeHandle: imperativeHandle, onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
+    return (_jsx(AriaMenu, { onOpen: onOpen, onDismiss: onClose, active: menuOpen, openDirection: "down", orientation: "vertical", selectionMode: "activation", selectionLimit: "single", ariaPropName: "aria-selected", selectedIndex: selectedIndex, imperativeHandle: imperativeHandle, onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
             const portalId = usePortalId("menu");
             const { propsArrow, propsPopup, propsSource, propsData } = usePopper({
                 popperParameters: {

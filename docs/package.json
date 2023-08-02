@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "A small set of hooks and other functions related to modifying Preact props.",
     "main": "index.tsx",
-    "packageManager": "pnpm@8.5.1",
+    "packageManager": "pnpm@8.6.11",
     "browserslist": "defaults, iOS >= 12",
     "scripts": {
         "build": "npx npm-run-all --npm-path npm -sc build:js build:sass build:css",

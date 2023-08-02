@@ -5,11 +5,19 @@ import { LabelledProps } from "../utility/types.js";
 import { ButtonProps } from "./button-action.js";
 export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className"> {
     disabled?: boolean;
+    /** Only valid when `selectionLimit` is `"single"` */
     selectedIndex?: number | null;
+    /** Only valid when `selectionLimit` is `"single"` */
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
     variantSize?: ButtonProps["variantSize"];
     variantTheme?: ButtonThemes;
     orientation?: ToolbarProps<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>["orientation"];
+    /**
+     * Is this button group single-select, multi-select, or action-only?
+     *
+     * `selectedIndex` and `onSelectedIndexChange` are only valid when this is `"single"`.
+     */
+    selectionLimit: ToolbarProps<any, any, any, any>["selectionLimit"];
     /**
      * When true, each button in the group will have a gap between them and each have their own borders,
      * as opposed to all being connected.
@@ -34,6 +42,7 @@ export interface ButtonGroupContext {
     pendingIndex: number | null;
 }
 export declare const ButtonGroupContext: import("preact").Context<ButtonGroupContext | null>;
-export declare function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>): import("preact").JSX.Element;
+export declare const ButtonGroupSelectionLimitContext: import("preact").Context<"none" | "single" | "multi" | null>;
+export declare function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionLimit, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>): import("preact").JSX.Element;
 export declare function ButtonGroupGroup({ label, labelPosition, children, ...props }: LabelledProps<Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "class" | "className" | "style" | "children">, "within">, ref?: Ref<HTMLSpanElement>): import("preact").JSX.Element;
 //# sourceMappingURL=button-group.d.ts.map

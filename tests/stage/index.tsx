@@ -89,7 +89,7 @@ function TestsContainer() {
             <>
                 <p><strong>No test selected</strong>. View any of the available bases below:</p>
                 <ul>{Object.entries(TestBases).map(([name, component]) => <li><code><a href={`?test-base=${name}`}>{name}</a></code></li>)}</ul>
-                <button onClick={() => setBool(b => { debugger; return !b; })}>Currently {(bool ?? "null").toString()}</button>
+                <button onClick={() => setBool(b => { return !b; })}>Currently {(bool ?? "null").toString()}</button>
             </>
         );
     }

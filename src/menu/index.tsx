@@ -62,6 +62,7 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
             openDirection="down"
             orientation="vertical"
             selectionMode="activation"
+            selectionLimit="single"
             ariaPropName="aria-selected"
             selectedIndex={selectedIndex}
             imperativeHandle={imperativeHandle}

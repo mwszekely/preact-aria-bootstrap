@@ -23,6 +23,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
             ariaLabel={labelPosition == "hidden" ? label : null}
             ariaPropName="aria-current-page"
             selectionMode="activation"
+            selectionLimit="single"
             selectedIndex={page}
             onSelectedIndexChange={useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, [])}
             orientation="horizontal"

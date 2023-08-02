@@ -9,7 +9,7 @@ import { ButtonFills, ButtonSizes, ButtonThemes, DefaultButtonSize, DefaultButto
 import { Tooltip, TooltipProps } from "../tooltip/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
-import { ButtonGroupChildProps, ButtonGroupContext } from "./button-group.js";
+import { ButtonGroupChildProps, ButtonGroupContext, ButtonGroupSelectionLimitContext } from "./button-group.js";
 
 
 export interface ButtonProps extends
@@ -68,11 +68,41 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
     // * The onPress handler is an async handler that sets the button to pressed/unpressed, in which case we show it in that state until the handler completes.
     const buttonGroupInfo = useContext(ButtonGroupContext);
     const { pendingIndex } = (buttonGroupInfo ?? {});
-    const isThePressedOne = ((pendingIndex == null ? (individualPending ? currentCapture : standaloneOrMultiSelectPressed) : (pendingIndex === buttonGroupIndex)) ?? null);
-    const singleSelectPending = pendingIndex != null && isThePressedOne;
+    //const isThePressedOne = ((pendingIndex == null ? (individualPending ? currentCapture : standaloneOrMultiSelectPressed) : (pendingIndex === buttonGroupIndex)) ?? null);
+    //const singleSelectPending = pendingIndex != null && isThePressedOne;
+
+    let selectionLimit = useContext(ButtonGroupSelectionLimitContext)
+
+    let isPendingForMultiSelect: boolean | null = null;
+    let isPendingForSingleSelect: boolean | null = null;
+    let isPressedForMultiSelect: boolean | null = null;
+    let isPressedForSingleSelect: boolean | null = null;    // This one we won't know until we render ToolbarChild
+
+    if (individualPending) {
+        isPendingForMultiSelect = true;
+    }
+    if (pendingIndex != null && pendingIndex == buttonGroupIndex) {
+        isPendingForSingleSelect = true;
+    }
+
+    if (individualPending) 
+        isPressedForMultiSelect = currentCapture ?? null;
+    else 
+        isPressedForMultiSelect = standaloneOrMultiSelectPressed ?? null;
+
+
+   //let isPressed = null;
+
+
+
+
+    let pending = (selectionLimit == 'multi'? isPendingForMultiSelect : selectionLimit == 'single'? isPendingForSingleSelect : individualPending) || false;
+
     const defaultDisabled = useContext(DisabledContext);
     const disabledType = useContext(DefaultDisabledType);
-    const pending = ((individualPending || singleSelectPending) ?? false);
+    //const pending = ((individualPending || singleSelectPending) ?? false);
+
+
     //variantSize ??= "md";
     let disabled = userDisabled;
     disabled ||= defaultDisabled;
@@ -84,6 +114,8 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
 
 
     if (buttonGroupInfo == null) {
+        console.assert(selectionLimit != "single")
+        let isPressed = (selectionLimit == 'single'? null : isPressedForMultiSelect) ?? null;
         return (
             <ButtonStructure
                 ref={ref}
@@ -98,7 +130,7 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
                 variantTheme={variantTheme ?? "primary"}
                 variantSize={variantSize}
                 variantDropdown={variantDropdown || null}
-                pressed={isThePressedOne}
+                pressed={isPressed}
                 onPress={syncHandler ?? null}
                 otherProps={props}
                 variantFill={variantFill ?? null}
@@ -112,6 +144,10 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
                 getSortValue={returnZero}
                 disabledProp="disabled"
                 render={toolbarChildInfo => {
+                    isPressedForSingleSelect = (toolbarChildInfo.singleSelectionChildReturn.selected);
+
+                    let isPressed = (selectionLimit == 'single'? isPressedForSingleSelect : isPressedForMultiSelect);
+
                     return (<ButtonStructure
                         ref={ref}
                         //Tag={(Tag) as never}
@@ -125,7 +161,7 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
                         variantFill={variantFill ?? null}
                         variantSize={variantSize ?? "md"}
                         variantDropdown={variantDropdown || null}
-                        pressed={toolbarChildInfo.singleSelectionChildReturn.selected || isThePressedOne || false}
+                        pressed={isPressed}
                         callCount={callCount}
                         onPress={(e) => {
                             toolbarChildInfo.pressParameters.onPressSync?.(e);
