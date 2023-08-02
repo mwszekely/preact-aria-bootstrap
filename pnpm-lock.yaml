@@ -34,10 +34,10 @@ dependencies:
     version: 10.13.2
   preact-aria-widgets:
     specifier: github:mwszekely/preact-aria-widgets
-    version: github.com/mwszekely/preact-aria-widgets/fc392946eb66164ff14fdaedc9720cd1e6fbb263(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/mwszekely/preact-aria-widgets/4019f652c6a3b80558430d552c0600a08d6493c3(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
   preact-prop-helpers:
     specifier: github:mwszekely/preact-prop-helpers
-    version: github.com/mwszekely/preact-prop-helpers/0c1d1a23369518fe1516acbed9777c2b83c5790a(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/mwszekely/preact-prop-helpers/ca4ed2cc7111292fc926665a35aedbc78a8f7f90(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
   preact-transition:
     specifier: github:mwszekely/preact-transition
     version: github.com/mwszekely/preact-transition/17bc5b7b60752d82f305951302d1194ba325788e(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
@@ -1089,9 +1089,9 @@ packages:
     version: 1.0.0
     dev: false
 
-  github.com/mwszekely/preact-aria-widgets/fc392946eb66164ff14fdaedc9720cd1e6fbb263(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/fc392946eb66164ff14fdaedc9720cd1e6fbb263}
-    id: github.com/mwszekely/preact-aria-widgets/fc392946eb66164ff14fdaedc9720cd1e6fbb263
+  github.com/mwszekely/preact-aria-widgets/4019f652c6a3b80558430d552c0600a08d6493c3(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/4019f652c6a3b80558430d552c0600a08d6493c3}
+    id: github.com/mwszekely/preact-aria-widgets/4019f652c6a3b80558430d552c0600a08d6493c3
     name: preact-aria-widgets
     version: 0.0.1
     peerDependencies:
@@ -1100,15 +1100,15 @@ packages:
       clsx: 2.0.0
       lodash-es: 4.17.21
       preact: 10.13.2
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/0c1d1a23369518fe1516acbed9777c2b83c5790a(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/ca4ed2cc7111292fc926665a35aedbc78a8f7f90(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom
     dev: false
 
-  github.com/mwszekely/preact-prop-helpers/0c1d1a23369518fe1516acbed9777c2b83c5790a(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/0c1d1a23369518fe1516acbed9777c2b83c5790a}
-    id: github.com/mwszekely/preact-prop-helpers/0c1d1a23369518fe1516acbed9777c2b83c5790a
+  github.com/mwszekely/preact-prop-helpers/ca4ed2cc7111292fc926665a35aedbc78a8f7f90(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/ca4ed2cc7111292fc926665a35aedbc78a8f7f90}
+    id: github.com/mwszekely/preact-prop-helpers/ca4ed2cc7111292fc926665a35aedbc78a8f7f90
     name: preact-prop-helpers
     version: 0.0.1
     peerDependencies:
@@ -1139,7 +1139,7 @@ packages:
       clsx: 2.0.0
       lodash-es: 4.17.21
       preact: 10.13.2
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/0c1d1a23369518fe1516acbed9777c2b83c5790a(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/ca4ed2cc7111292fc926665a35aedbc78a8f7f90(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom

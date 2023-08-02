@@ -1,12 +1,12 @@
 import { clsx } from "clsx";
 import { ComponentChildren, Ref, VNode } from "preact";
-import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenuItemReturnType, UseMenuReturnType, UseMenubarSubInfo, useDefaultRenderPortal } from "preact-aria-widgets";
-import { EventDetail, EventType, returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
+import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenuItemReturnType, useDefaultRenderPortal } from "preact-aria-widgets";
+import { EventDetail, EventType, UseTypeaheadNavigationReturnTypeSelf, returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { Fade, ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useRef } from "preact/hooks";
 import { usePopper } from "../popper/index.js";
-import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
@@ -19,7 +19,6 @@ export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children
     selectedIndex?: number | null;
     align?: "start" | "end";
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
-    imperativeHandle?: Ref<UseMenuReturnType<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLButtonElement, UseMenubarSubInfo<HTMLDivElement>>>;
 
     /**
      * This **MUST** be a `Button` or something that accepts `onPress` as a prop.
@@ -27,7 +26,7 @@ export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children
     anchor: VNode;
 }
 
-export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, onSelectedIndexChange, imperativeHandle, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) {
+export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) {
     const [openFromAnchor, setOpenFromAnchor, getOpenFromAnchor] = useState(forceOpen ?? false);
     const onOpen = useCallback(() => { setOpenFromAnchor(true); }, []);
     const onClose = useCallback(() => { setOpenFromAnchor(false); }, []);
@@ -64,7 +63,6 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
             singleSelectionMode="activation"
             singleSelectionAriaPropName="aria-selected"
             singleSelectedIndex={selectedIndex}
-            imperativeHandle={imperativeHandle}
             onSingleSelectedIndexChange={useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex))}
 
             render={(info) => {
@@ -89,35 +87,67 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
                         {useDefaultRenderPortal({
                             portalId,
                             children: (
-                                <div {...useMergedProps(propsPopup, { className: "popper-menu" })}>
-                                    <div {...propsArrow} />
-                                    <ZoomFade show={popperOpen} delayMountUntilShown exitVisibility="removed" zoomOriginInline={0} zoomOriginBlock={0} zoomMinInline={0.85} zoomMinBlock={0.85}>
-                                        <KeyboardAssistIcon leftRight={false} upDown={true} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != "none"}>
-                                            <div {...useMergedProps(info.propsSurface, { className: clsx("dropdown-menu shadow show") })}>
-                                                <div {...info.propsSentinel} />
-                                                <div {...useMergedProps(info.propsTarget, { className: "dropdown-menu-list" })}>{children}</div>
-                                                <div {...info.propsSentinel} />
-                                            </div></KeyboardAssistIcon>
-                                    </ZoomFade>
-                                </div>
+                                <StructureMenuPopper {...propsPopup}>
+                                    <StructureMenuArrow {...propsArrow} />
+                                    <StructureMenuRoot {...info.propsSurface} popperOpen={popperOpen} typeaheadStatus={info.typeaheadNavigationReturn.typeaheadStatus}>
+                                        <StructureMenuFocusSentinel {...info.propsSentinel} />
+                                        <StructureMenuList {...info.propsTarget}>{children}</StructureMenuList>
+                                        <StructureMenuFocusSentinel {...info.propsSentinel} />
+                                    </StructureMenuRoot>
+                                </StructureMenuPopper>
                             )
                         })}
                     </>
                 );
-            }
-            } />
+            }}
+        />
     )
 }))
+
+export interface StructureMenuPopperProps extends GlobalAttributes<HTMLDivElement, "children"> { }
+
+export const StructureMenuPopper = memoForwardRef(function StructureMenuPopper({ children, ...props }: StructureMenuPopperProps, ref: Ref<HTMLDivElement>) {
+    return (<div {...useMergedProps({ className: "popper-menu" }, { ...props, ref })}>{children}</div>)
+});
+
+export interface StructureMenuRootProps extends GlobalAttributes<HTMLDivElement, "children"> {
+    popperOpen: boolean;
+    typeaheadStatus: UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"];
+}
+
+export const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, ...props }: StructureMenuRootProps, ref: Ref<HTMLDivElement>) {
+    return (
+        <ZoomFade show={popperOpen} delayMountUntilShown exitVisibility="removed" zoomOriginInline={0} zoomOriginBlock={0} zoomMinInline={0.85} zoomMinBlock={0.85}>
+            <KeyboardAssistIcon leftRight={false} upDown={true} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={typeaheadStatus != "none"}>
+                <div {...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref })}>
+                    {children}
+                </div>
+            </KeyboardAssistIcon>
+        </ZoomFade>
+    )
+})
+
+export interface StructureMenuListProps extends GlobalAttributes<HTMLDivElement, "children"> { }
+
+export const StructureMenuList = memoForwardRef(function StructureMenuList({ children, ...props }: StructureMenuListProps, ref: Ref<HTMLDivElement>) {
+    return (
+        <div {...useMergedProps({ className: "dropdown-menu-list" }, { ...props, ref })}>{children}</div>
+    )
+})
+
+export const StructureMenuArrow = memoForwardRef(function StructureMenuArrow(props: GlobalAttributes<HTMLDivElement>, ref: Ref<HTMLDivElement>) {
+    return (<div {...props} ref={ref} />)
+})
+
+export const StructureMenuFocusSentinel = memoForwardRef(function StructureMenuFocusSentinel(props: GlobalAttributes<HTMLDivElement>, ref: Ref<HTMLDivElement>) {
+    return (<div {...props} ref={ref} />)
+})
 
 export interface MenuItemProps extends GlobalAttributes<HTMLDivElement> {
     index: number;
     children: ComponentChildren;
     disabled?: boolean;
     onPress?: (closeMenu: (e: EventType<any, any>) => void) => (void | Promise<void>);
-    //selected?: boolean;
-    //iconStart?: ComponentChildren | null | undefined;
-    //iconEnd?: ComponentChildren | null | undefined;
-    //onSelectedChange?: null | ((selected: boolean) => (void | Promise<void>));
     getSortValue?: () => unknown;
     loadingLabel?: string;
 }
@@ -147,18 +177,55 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                         onPress={progressInfo.asyncHandlerReturn.syncHandler}
                         render={menuInfo => {
 
-                            const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsProgressIndicator} class={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
+                            return (
+                                <StructureMenuItem {...useMergedProps(menuInfo.props, { ...props, ref })} showSpinner={showSpinner} disabled={(!!disabled) as never} pressing={menuInfo.pressReturn.pressing}>
+                                    {children}
+                                    <StructureMenuItemSpinner showSpinner={showSpinner} {...progressInfo.propsProgressIndicator} />
+                                </StructureMenuItem>
+                            )
 
+                            /*const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsProgressIndicator} class={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
+            
                             return (
                                 <div {...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props)}>
                                     {children}
                                     <div class="dropdown-item-icon dropdown-item-icon-end">{spinnerJsx}</div>
                                 </div>
-                            )
+                            )*/
                         }}
                     />
                 )
             }}
         />
     )
-}))
+}));
+
+export interface StructureMenuItemProps extends GlobalAttributes<HTMLDivElement, "children"> {
+    showSpinner: boolean;
+    disabled: boolean;
+    pressing: boolean;
+}
+
+export interface StructureMenuItemSpinnerProps extends GlobalAttributes<HTMLDivElement> {
+    showSpinner: boolean;
+}
+
+const StructureMenuItem = memoForwardRef(function StructureMenuItem({ children, showSpinner, disabled, pressing, ...props }: StructureMenuItemProps, ref: Ref<HTMLDivElement>) {
+    return (
+        <div {...useMergedProps({ className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", pressing && "active") }, { ...props, ref })}>
+            {children}
+        </div>
+    )
+});
+
+
+const StructureMenuItemSpinner = memoForwardRef(function StructureMenuItemSpinner({ showSpinner, ...props }: StructureMenuItemSpinnerProps, ref: Ref<HTMLDivElement>) {
+
+    return (
+        <div class="dropdown-item-icon dropdown-item-icon-end">
+            <Fade show={showSpinner} exitVisibility="removed">
+                <div {...useMergedProps({ class: clsx("spinner-border", "spinner-border-sm") }, { ...props, ref })} />
+            </Fade>
+        </div>
+    )
+});

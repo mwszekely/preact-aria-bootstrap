@@ -24,7 +24,7 @@ export const Accordion = memo(forwardElementRef(function Accordion({ children, .
       orientation="vertical"
       render={info => {
         return (
-          <StructureAccordion {...useMergedProps(info.props, { ...props, ref })}>{children}</StructureAccordion>
+          <StructureAccordion {...useMergedProps({ ...props, ref })}>{children}</StructureAccordion>
         )
       }} />
   )

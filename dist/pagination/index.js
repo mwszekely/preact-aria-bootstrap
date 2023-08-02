@@ -21,24 +21,24 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
 }
 const PaginationChildren = memo(({ childCount, windowSize }) => {
     const firstIndex = 0;
-    const lastIndex = Math.ceil((childCount + 0.000001) / windowSize - 1) - 1;
+    const lastIndex = Math.ceil((childCount) / windowSize) - 1; // INCLUSIVE! Not exclusive as usual for ending points.
     const firstRef = useRef(null);
     const lastRef = useRef(null);
     const centerFirstRef = useRef(null);
     const centerLastRef = useRef(null);
     return (_jsxs(_Fragment, { children: [_jsx(PaginationButtonFirst, { index: firstIndex, onFocus: useCallback(() => { centerFirstRef.current?.scrollIntoView({ behavior: "smooth" }); }, []) }), _jsx("span", { class: "pagination-center scroll-shadows scroll-shadows-x", children: Array.from(function* () {
-                    for (let page = 1; page < lastIndex - 1; ++page) {
+                    for (let page = firstIndex + 1; page <= lastIndex - 1; ++page) {
                         const start = ((page + 0) * windowSize);
                         const end = ((page + 1) * windowSize);
-                        yield _jsx(PaginationButton, { index: page, ref: page == 1 ? centerFirstRef : page == (lastIndex - 1 - 1) ? centerLastRef : undefined, children: page + 1 }, `${start}-${end}`);
+                        yield _jsx(PaginationButton, { index: page, ref: page == 1 ? centerFirstRef : page == (lastIndex - 1) ? centerLastRef : undefined, children: page + 1 }, `${start}-${end}`);
                     }
                 }()) }), _jsx(PaginationButtonLast, { index: lastIndex, onFocus: useCallback(() => { centerLastRef.current?.scrollIntoView({ behavior: "smooth" }); }, []) })] }));
 });
 const PaginationButtonFirst = memo(forwardElementRef(({ index, onFocus }, ref) => {
-    return (_jsxs(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: [_jsx(BootstrapIcon, { icon: "chevron-bar-left", label: null }), " First"] }));
+    return (_jsxs(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: [_jsx(BootstrapIcon, { icon: "chevron-bar-left", label: null }), " ", index + 1] }));
 }));
 const PaginationButtonLast = memo(forwardElementRef(({ index, onFocus }, ref) => {
-    return (_jsxs(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: ["Last ", _jsx(BootstrapIcon, { icon: "chevron-bar-right", label: null })] }));
+    return (_jsxs(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: [index + 1, " ", _jsx(BootstrapIcon, { icon: "chevron-bar-right", label: null })] }));
 }));
 const PaginationButton = memo(forwardElementRef(function PaginationButton({ index, children, onFocus }, ref) {
     return (_jsx(ToolbarChild, { index: index, disabledProp: "disabled", getSortValue: useStableGetter(index), render: info => {

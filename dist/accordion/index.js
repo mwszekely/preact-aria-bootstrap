@@ -6,7 +6,7 @@ import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { StructureAccordion, StructureAccordionSection, StructureAccordionSectionBody, StructureAccordionSectionHeader, StructureAccordionSectionHeaderButton } from "./structure.js";
 export const Accordion = memo(forwardElementRef(function Accordion({ children, ...props }, ref) {
     return (_jsx(AriaAccordion, { orientation: "vertical", render: info => {
-            return (_jsx(StructureAccordion, { ...useMergedProps(info.props, { ...props, ref }), children: children }));
+            return (_jsx(StructureAccordion, { ...useMergedProps({ ...props, ref }), children: children }));
         } }));
 }));
 export const AccordionSection = memo(forwardElementRef(function AccordionSection({ index, children, header, bodyRole, disabled, untabbable, open, ...props }, ref) {

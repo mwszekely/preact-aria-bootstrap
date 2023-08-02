@@ -8935,7 +8935,7 @@
   /**
    * Implements a [Button](https://www.w3.org/WAI/ARIA/apg/patterns/button/) pattern.
    *
-   * @remarks The press handler can be async or sync&mdash;either way, pass it to `asyncHandlerParameters.asyncHandler`
+   * @remarks The press handler is sync by default. See `useProgressWithHandler` to turn an async function into a sync function with a progress bar.
    *
    * @compositeParams
    */
@@ -8973,9 +8973,11 @@
   /**
    * Implements an [Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) pattern.
    *
-   * @remarks For some reason, accordions don't have a parent element, and don't have a roving tab index, but do implement keyboard navigation.
+   * @remarks Accordions can be single-select or multi-select. For multi-select accordions, give each child its own `open` prop. For single-select accordions, just have their `open` prop be `null`.
    *
-   * This makes their implementation a little bit messy. Each child individually handles keyboard navigation even though the parent orchestrates it.
+   * For some reason, accordions don't require a parent element, and don't have a roving tab index, but do implement keyboard navigation.
+   *
+   * This makes their implementation a little bit messy. Each child individually handles keyboard navigation even though the parent component (but not element) orchestrates it.
    *
    * @compositeParams
    *
@@ -9003,7 +9005,7 @@
           }
           return false;
       }, []);
-      const { propsStable, refElementReturn: { getElement } } = useRefElement({ refElementParameters });
+      //const { propsStable, refElementReturn: { getElement } } = useRefElement<any>({ refElementParameters })
       // Keep track of the one expanded index (if there is only one expanded index)
       const { changeIndex: changeExpandedIndexLocalOnly, getCurrentIndex: getCurrentExpandedIndex } = useChildrenFlag({
           initialIndex,
@@ -9032,11 +9034,19 @@
               }
           }, []),
           onClosestFit: useStableCallback((index) => {
+              // After needing to do a closest fit, we still need to handle focus:
               if (document.activeElement == null || document.activeElement == document.body) {
                   if (index != null) {
-                      const element = getChildren().getAt(index)?.getElement();
-                      if (index == null)
-                          findBackupFocus(getElement()).focus();
+                      let backupIndex = 0;
+                      let usedBackup = false;
+                      let element = getChildren().getAt(index)?.getElement();
+                      while (element == null && backupIndex <= getChildren().getHighestIndex()) {
+                          element = getChildren().getAt(backupIndex)?.getElement();
+                          ++backupIndex;
+                          usedBackup = true;
+                      }
+                      if (usedBackup)
+                          findBackupFocus(element).focus();
                       else if (element)
                           getChildren().getAt(index)?.focusSelf(element);
                   }
@@ -9063,12 +9073,11 @@
           }
       });
       return {
-          props: propsStable,
           typeaheadNavigationReturn,
           context: useMemoObject({
               managedChildContext,
               typeaheadNavigationContext,
-              accordionSectionParameters: useMemoObject({
+              accordionSectionContext: useMemoObject({
                   changeExpandedIndex,
                   changeTabbedIndex,
                   getExpandedIndex: getCurrentExpandedIndex,
@@ -9098,11 +9107,11 @@
   /**
    * @compositeParams
    */
-  function useAccordionSection({ buttonParameters: { disabled, tagButton, onPressSync: userOnPress, ...buttonParameters }, accordionSectionParameters: { open: openFromUser, bodyRole, ...accordionSectionParameters }, info: { index, untabbable, ...void4 }, textContentParameters: { getText, ...textContentParameters }, context, refElementBodyParameters, refElementHeaderButtonParameters, pressParameters: { focusSelf, ...pressParameters }, ...void1 }) {
+  function useAccordionSection({ buttonParameters: { disabled, tagButton, onPressSync: userOnPress, ...buttonParameters }, accordionSectionParameters: { open: openFromUser, bodyRole, ...void3 }, info: { index, untabbable, ...void4 }, textContentParameters: { getText, ...void5 }, context, refElementBodyParameters, refElementHeaderButtonParameters, pressParameters: { focusSelf, ...pressParameters }, ...void1 }) {
       monitorCallCount(useAccordionSection);
       const [openFromParent, setOpenFromParent, getOpenFromParent] = useState(null);
       const [mostRecentlyTabbed, setMostRecentlyTabbed, getMostRecentlyTabbed] = useState(null);
-      const { accordionSectionParameters: { changeExpandedIndex, changeTabbedIndex: setCurrentFocusedIndex, getTabbedIndex: getCurrentFocusedIndex, stableTypeaheadProps }, linearNavigationParameters, rovingTabIndexReturn, } = context;
+      const { accordionSectionContext: { changeExpandedIndex, changeTabbedIndex: setCurrentFocusedIndex, getTabbedIndex: getCurrentFocusedIndex, stableTypeaheadProps }, linearNavigationParameters, rovingTabIndexReturn, } = context;
       const { randomIdReturn: _bodyIdReturn, propsSource: propsBodySource, propsReferencer: propsHeadReferencer } = useRandomId({ randomIdParameters: { prefix: Prefices.accordionSectionHeaderButton, otherReferencerProp: "aria-controls" } });
       const { randomIdReturn: _headIdReturn, propsSource: propsHeadSource, propsReferencer: propsBodyReferencer } = useRandomId({ randomIdParameters: { prefix: Prefices.accordionSectionBody, otherReferencerProp: "aria-labelledby" } });
       const open = ((openFromUser ?? openFromParent) ?? false);
@@ -9194,6 +9203,19 @@
 
   /**
    * Allows a parent checkbox to control a number of child checkboxes, in accordance with the [Checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) pattern.
+   *
+   * @remarks `useCheckboxGroup` and its child hooks **do not** call `useCheckbox`. These hooks are for creating CheckboxGroup-like functionality&mdash;in theory, this could be implemented in a listbox.
+   *
+   * A checkbox group is made up of the "Parent" checkbox and the "Child" checkboxes.  Of course, all of them are children of the group as a whole, but the "Parent" checkbox is the one that, when clicked, toggles the checked state of all the "Child" checkboxes.
+   *
+   * A checkbox group's parent, when clicked, toggles between three states:
+   * ```md-literal
+   * * Unchecked (all children become unchecked)
+   * * Mixed (all children become the last user-input value)
+   * * Checked (all children become checked)
+   * ```
+   *
+   * This functions even if it takes an `async` amount of time to complete the "cause the child checkbox to change its state" action.
    *
    * @compositeParams
    *
@@ -9490,7 +9512,9 @@
       e.preventDefault();
   }
   /**
-   * Handles any component where there's:
+   * Handles any component that's "checkbox-like" (checkboxes, radios, switches, etc.)
+   *
+   * @remarks Handles any component where there's:
    * ```md-literal
    * 1. Some kind of an on/off binary/trinary input element that needs event handlers
    * 2. Some kind of label for that input element
@@ -9894,16 +9918,9 @@
       else {
           props.role = "listbox";
       }
-      //if (selectionLimit == "multi")
-      //    console.assert(singleSelectionReturn.getSingleSelectedIndex() == null)
       return {
           ...restRet,
-          context: useMemoObject({
-              ...context,
-              listboxContext: useMemoObject({
-              //selectionLimit
-              })
-          }),
+          context,
           rovingTabIndexReturn,
           propsListbox: useMergedProps(props, propsLabelList, { "aria-multiselectable": (multiSelectionMode != "disabled" ? true : undefined) }),
           propsListboxLabel: propsLabelLabel
@@ -9912,15 +9929,13 @@
   /**
    * @compositeParams
    */
-  function useListboxItem({ context: { listboxContext: {}, ...context }, listboxParameters: {}, pressParameters: { allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange, ...void1 }, singleSelectionChildParameters: { singleSelectionDisabled }, ...restParams }) {
+  function useListboxItem({ context, listboxParameters: {}, pressParameters: { allowRepeatPresses, excludeEnter, excludePointer, longPressThreshold, onPressingChange, ...void1 }, singleSelectionChildParameters: { singleSelectionDisabled }, ...restParams }) {
       monitorCallCount(useListboxItem);
       const { propsChild, propsTabbable, refElementReturn, pressParameters: { onPressSync, excludeSpace, ...void2 }, ...restRet } = useCompleteListNavigationChildDeclarative({
           context,
           singleSelectionChildParameters: { singleSelectionDisabled },
           ...restParams
       });
-      //if (context.multiSelectionContext.multiSelectionMode == "disabled")
-      //    console.assert(selected == null);
       propsChild.role = "option";
       propsChild["aria-disabled"] = singleSelectionDisabled ? "true" : undefined;
       const { pressReturn, props: propsPress } = usePress({
@@ -10001,7 +10016,7 @@
       };
   }
   /**
-   * A focus sentinal is a hidden but focusable element that comes at the start or end
+   * A focus sentinel is a hidden but focusable element that comes at the start or end
    * of the out-of-place-focusable component that, when activated or focused over, closes the component
    * (if focused within 100ms of the open prop changing, instead of
    * closing, focusing the sentinel immediately asks it to focus itself).
@@ -10332,7 +10347,8 @@
   /**
    * Provides props for a progress bar based on the progress of an async event handler, and notifies ATs when the operation has started/finished.
    *
-   * @remarks
+   * @remarks This hook is meant to be combined with other hooks, generally wrapping around the other hook.
+   * You don't actually need an entire progress bar element as long as your `notify*` parameters are good.
    *
    * @compositeParams
    */
@@ -10379,6 +10395,8 @@
 
   /**
    * Implements a [Radio Group](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) pattern.
+   *
+   * @remarks Which radio is the selected one is controlled by the `selectedValue` parameter on the parent.
    *
    * @compositeParams
    *
@@ -10466,6 +10484,8 @@
       };
   }
   /**
+   * Implements a single radio button, as part of a radio group.
+   *
    * @compositeParams
    */
   function useRadio({ radioParameters: { value, ...void5 }, checkboxLikeParameters: { disabled, ...void4 }, labelParameters, info, context, textContentParameters, pressParameters: { longPressThreshold, ...void3 }, hasCurrentFocusParameters, refElementParameters, ...void1 }) {
@@ -10590,6 +10610,8 @@
 
   /**
    * Creates a sortable data table in a [Grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) pattern.
+   *
+   * @remarks Note that in many cases this is overkill. If you don't need sorting and navigation between cells of interactive content, then you can just use a regular &lt;table&gt;
    *
    * @compositeParams
    *
@@ -10796,6 +10818,9 @@
   /**
    * Implements a [Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) pattern.
    *
+   * @remarks Tabs consist of both a list of tabs and a list of tab panels.
+   * A Tab and a TabPanel that share the same index are linked together; when that tab is selected that panel is shown.
+   *
    * @compositeParams
    *
    * @hasChild {@link useTab}
@@ -10881,6 +10906,10 @@
       };
   }
   /**
+   * Implements a single tab of a Tabs component.
+   *
+   * The index that this child uses controls which TabPanel it shows when selected.
+   *
    * @compositeParams
    */
   function useTab({ info: { focusSelf: focusSelfParent, index, untabbable, getSortValue, ...info }, textContentParameters, pressParameters: { focusSelf: focusSelfChild, longPressThreshold, onPressingChange, ...void2 }, context, hasCurrentFocusParameters, refElementParameters, singleSelectionChildParameters, ...void3 }) {
@@ -10913,6 +10942,11 @@
       };
   }
   /**
+   * Implements the TabPanel a Tab controls.
+   *
+   * @remarks A hidden tab panel is made `inert` so that it cannot be interacted with, so you can just set `opacity: 0` on your hidden panels if that's how you want to style them.
+   * They'll still be properly removed from the tab order (i.e. you don't **also** need `display: none`).
+   *
    * @compositeParams
    */
   function useTabPanel({ info, context }) {
@@ -13256,7 +13290,7 @@
 
   const Accordion = x$1(forwardElementRef$1(function Accordion({ children, ...props }, ref) {
       return (o$3(Accordion$1, { orientation: "vertical", render: info => {
-              return (o$3(StructureAccordion, { ...useMergedProps(info.props, { ...props, ref }), children: children }));
+              return (o$3(StructureAccordion, { ...useMergedProps({ ...props, ref }), children: children }));
           } }));
   }));
   const AccordionSection = x$1(forwardElementRef$1(function AccordionSection({ index, children, header, bodyRole, disabled, untabbable, open, ...props }, ref) {
@@ -15698,24 +15732,24 @@
   }
   const PaginationChildren = x$1(({ childCount, windowSize }) => {
       const firstIndex = 0;
-      const lastIndex = Math.ceil((childCount + 0.000001) / windowSize - 1) - 1;
+      const lastIndex = Math.ceil((childCount) / windowSize) - 1; // INCLUSIVE! Not exclusive as usual for ending points.
       _$1(null);
       _$1(null);
       const centerFirstRef = _$1(null);
       const centerLastRef = _$1(null);
       return (o$3(k$3, { children: [o$3(PaginationButtonFirst, { index: firstIndex, onFocus: T$2(() => { centerFirstRef.current?.scrollIntoView({ behavior: "smooth" }); }, []) }), o$3("span", { class: "pagination-center scroll-shadows scroll-shadows-x", children: Array.from(function* () {
-                      for (let page = 1; page < lastIndex - 1; ++page) {
+                      for (let page = firstIndex + 1; page <= lastIndex - 1; ++page) {
                           const start = ((page + 0) * windowSize);
                           const end = ((page + 1) * windowSize);
-                          yield o$3(PaginationButton, { index: page, ref: page == 1 ? centerFirstRef : page == (lastIndex - 1 - 1) ? centerLastRef : undefined, children: page + 1 }, `${start}-${end}`);
+                          yield o$3(PaginationButton, { index: page, ref: page == 1 ? centerFirstRef : page == (lastIndex - 1) ? centerLastRef : undefined, children: page + 1 }, `${start}-${end}`);
                       }
                   }()) }), o$3(PaginationButtonLast, { index: lastIndex, onFocus: T$2(() => { centerLastRef.current?.scrollIntoView({ behavior: "smooth" }); }, []) })] }));
   });
   const PaginationButtonFirst = x$1(forwardElementRef$1(({ index, onFocus }, ref) => {
-      return (o$3(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: [o$3(BootstrapIcon, { icon: "chevron-bar-left", label: null }), " First"] }));
+      return (o$3(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: [o$3(BootstrapIcon, { icon: "chevron-bar-left", label: null }), " ", index + 1] }));
   }));
   const PaginationButtonLast = x$1(forwardElementRef$1(({ index, onFocus }, ref) => {
-      return (o$3(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: ["Last ", o$3(BootstrapIcon, { icon: "chevron-bar-right", label: null })] }));
+      return (o$3(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: [index + 1, " ", o$3(BootstrapIcon, { icon: "chevron-bar-right", label: null })] }));
   }));
   const PaginationButton = x$1(forwardElementRef$1(function PaginationButton({ index, children, onFocus }, ref) {
       return (o$3(ToolbarChild, { index: index, disabledProp: "disabled", getSortValue: useStableGetter(index), render: info => {
@@ -15888,7 +15922,7 @@
           } }));
   });
 
-  const Menu = x$1(forwardElementRef$1(function Menu({ anchor, forceOpen, children, selectedIndex, align, onSelectedIndexChange, imperativeHandle, ...props }, ref) {
+  const Menu = x$1(forwardElementRef$1(function Menu({ anchor, forceOpen, children, selectedIndex, align, onSelectedIndexChange, ...props }, ref) {
       const [openFromAnchor, setOpenFromAnchor, getOpenFromAnchor] = useState(forceOpen ?? false);
       const onOpen = T$2(() => { setOpenFromAnchor(true); }, []);
       const onClose = T$2(() => { setOpenFromAnchor(false); }, []);
@@ -15912,7 +15946,7 @@
           callback: () => setMenuOpen(popperOpen),
           triggerIndex: popperOpen
       });
-      return (o$3(Menu$1, { onOpen: onOpen, onDismiss: onClose, active: menuOpen, openDirection: "down", orientation: "vertical", singleSelectionMode: "activation", singleSelectionAriaPropName: "aria-selected", singleSelectedIndex: selectedIndex, imperativeHandle: imperativeHandle, onSingleSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
+      return (o$3(Menu$1, { onOpen: onOpen, onDismiss: onClose, active: menuOpen, openDirection: "down", orientation: "vertical", singleSelectionMode: "activation", singleSelectionAriaPropName: "aria-selected", singleSelectedIndex: selectedIndex, onSingleSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
               const portalId = usePortalId("menu");
               const { propsArrow, propsPopup, propsSource, propsData } = usePopper({
                   popperParameters: {
@@ -15927,10 +15961,25 @@
                           class: popperOpen ? "active" : ""
                       }, props, info.propsTrigger, propsSource), ref), useDefaultRenderPortal({
                           portalId,
-                          children: (o$3("div", { ...useMergedProps(propsPopup, { className: "popper-menu" }), children: [o$3("div", { ...propsArrow }), o$3(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: o$3(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: o$3("div", { ...useMergedProps(info.propsSurface, { className: clsx("dropdown-menu shadow show") }), children: [o$3("div", { ...info.propsSentinel }), o$3("div", { ...useMergedProps(info.propsTarget, { className: "dropdown-menu-list" }), children: children }), o$3("div", { ...info.propsSentinel })] }) }) })] }))
+                          children: (o$3(StructureMenuPopper, { ...propsPopup, children: [o$3(StructureMenuArrow, { ...propsArrow }), o$3(StructureMenuRoot, { ...info.propsSurface, popperOpen: popperOpen, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, children: [o$3(StructureMenuFocusSentinel, { ...info.propsSentinel }), o$3(StructureMenuList, { ...info.propsTarget, children: children }), o$3(StructureMenuFocusSentinel, { ...info.propsSentinel })] })] }))
                       })] }));
           } }));
   }));
+  const StructureMenuPopper = memoForwardRef(function StructureMenuPopper({ children, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({ className: "popper-menu" }, { ...props, ref }), children: children }));
+  });
+  const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, ...props }, ref) {
+      return (o$3(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: o$3(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: typeaheadStatus != "none", children: o$3("div", { ...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref }), children: children }) }) }));
+  });
+  const StructureMenuList = memoForwardRef(function StructureMenuList({ children, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({ className: "dropdown-menu-list" }, { ...props, ref }), children: children }));
+  });
+  const StructureMenuArrow = memoForwardRef(function StructureMenuArrow(props, ref) {
+      return (o$3("div", { ...props, ref: ref }));
+  });
+  const StructureMenuFocusSentinel = memoForwardRef(function StructureMenuFocusSentinel(props, ref) {
+      return (o$3("div", { ...props, ref: ref }));
+  });
   const MenuItem = x$1(forwardElementRef$1(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }, ref) {
       const imperativeHandle = _$1(null);
       return (o$3(ProgressWithHandler, { asyncHandler: () => {
@@ -15939,11 +15988,24 @@
           }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
               const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
               return (o$3(MenuItem$1, { imperativeHandle: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, singleSelectionDisabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
-                      const spinnerJsx = (o$3(Fade, { show: showSpinner, exitVisibility: "removed", children: o$3("div", { ...progressInfo.propsProgressIndicator, class: clsx("spinner-border", "spinner-border-sm") }) }));
-                      return (o$3("div", { ...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props), children: [children, o$3("div", { class: "dropdown-item-icon dropdown-item-icon-end", children: spinnerJsx })] }));
+                      return (o$3(StructureMenuItem, { ...useMergedProps(menuInfo.props, { ...props, ref }), showSpinner: showSpinner, disabled: (!!disabled), pressing: menuInfo.pressReturn.pressing, children: [children, o$3(StructureMenuItemSpinner, { showSpinner: showSpinner, ...progressInfo.propsProgressIndicator })] }));
+                      /*const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsProgressIndicator} class={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
+      
+                      return (
+                          <div {...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props)}>
+                              {children}
+                              <div class="dropdown-item-icon dropdown-item-icon-end">{spinnerJsx}</div>
+                          </div>
+                      )*/
                   } }));
           } }));
   }));
+  const StructureMenuItem = memoForwardRef(function StructureMenuItem({ children, showSpinner, disabled, pressing, ...props }, ref) {
+      return (o$3("div", { ...useMergedProps({ className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", pressing && "active") }, { ...props, ref }), children: children }));
+  });
+  const StructureMenuItemSpinner = memoForwardRef(function StructureMenuItemSpinner({ showSpinner, ...props }, ref) {
+      return (o$3("div", { class: "dropdown-item-icon dropdown-item-icon-end", children: o$3(Fade, { show: showSpinner, exitVisibility: "removed", children: o$3("div", { ...useMergedProps({ class: clsx("spinner-border", "spinner-border-sm") }, { ...props, ref }) }) }) }));
+  });
 
   const StructureOffcanvasPortalRoot = memoForwardRef(function StructureOffcanvasPortalRoot({ children, ...props }, ref) { return (o$3("div", { ...props, ref: ref, children: children })); });
   const StructureOffcanvasBackdrop = memoForwardRef(function StructureOffcanvasBackdrop({ open, ...props }, ref) {
@@ -18746,7 +18808,7 @@
           }()) }));
   });
 
-  window._generate_setState_stacks = true;
+  //(window as any)._generate_setState_stacks = true;
   /*
   let originalEvents = options.event;
   options.event = (e, ...args) => {

@@ -11,7 +11,7 @@ import * as TextFieldD from "./demos/text-field";
 import * as Tooltip from "./demos/tooltip";
 
 
-(window as any)._generate_setState_stacks = true;
+//(window as any)._generate_setState_stacks = true;
 
 
 /*
