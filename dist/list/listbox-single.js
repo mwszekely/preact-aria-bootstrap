@@ -18,18 +18,18 @@ export function ListboxSingle({ selectedIndex, onSelectedIndexChange, children, 
     const [paginationMax, setPaginationMax] = useState(paginationSize);
     if (paginationSize)
         paginationLocation ||= "before";
-    return (_jsx(Listbox, { selectedIndex: selectedIndex, selectionLimit: "single", onSelectedIndexChange: useStableCallback((e) => { onSelectedIndexChange(e[EventDetail].selectedIndex, e); }), staggered: staggered, paginationMin: paginationMin, paginationMax: paginationMax, ariaLabel: labelPosition == "hidden" ? label : null, render: info => {
+    return (_jsx(Listbox, { singleSelectedIndex: selectedIndex, singleSelectionMode: "activation", onSingleSelectedIndexChange: useStableCallback((e) => { debugger; onSelectedIndexChange(e[EventDetail].selectedIndex, e); }), staggered: staggered, paginationMin: paginationMin, paginationMax: paginationMax, ariaLabel: labelPosition == "hidden" ? label : null, render: info => {
             const labelJsx = (_jsx("label", { ...info.propsListboxLabel, children: label }));
             return (_jsxs(_Fragment, { children: [labelPosition == 'before' && labelJsx, _jsx(Paginated, { paginationSize: paginationSize, childCount: info.paginatedChildrenReturn.childCount || 0, setPaginationEnd: setPaginationMax, setPaginationStart: setPaginationMin, paginationLabel: paginationLabel, paginationLocation: paginationLocation, children: _jsx("ol", { ...useMergedProps(info.propsListbox, { className: "list-group" }), children: children }) }), labelPosition == 'after' && labelJsx] }));
         } }));
 }
 export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleItem({ index, disabled, children, ...props }, ref) {
-    return (_jsx(ListboxItem, { getSortValue: returnZero, index: index, selected: null, unselectable: disabled, render: info => {
+    return (_jsx(ListboxItem, { getSortValue: returnZero, index: index, multiSelected: undefined, singleSelectionDisabled: disabled, render: info => {
             if (info.staggeredChildReturn.hideBecauseStaggered)
                 return _jsx("li", { class: "d-none" });
             if (info.paginatedChildReturn.hideBecausePaginated)
                 return _jsx("li", { class: "d-none" });
-            return (_jsx(ListboxSingleItemStatic, { ...useMergedProps(info.props, { ...props, ref }), disabled: disabled, selected: info.singleSelectionChildReturn.selected, children: children }));
+            return (_jsx(ListboxSingleItemStatic, { ...useMergedProps(info.props, { ...props, ref }), disabled: disabled, selected: info.singleSelectionChildReturn.singleSelected, children: children }));
         } }));
 }));
 const ListboxSingleItemStatic = memo(forwardElementRef(function ListboxSingleItemStatic({ selected, children, disabled, ...props }, ref) {

@@ -11937,6 +11937,11 @@ textarea.form-control-lg {
   background-color: var(--bs-btn-focus-bg, var(--bs-btn-hover-bg));
   border-color: var(--bs-btn-focus-border-color, var(--bs-btn-hover-border-color));
 }
+.btn:focus-visible:hover {
+  color: var(--bs-btn-focus-color, var(--bs-btn-hover-color));
+  background-color: var(--bs-btn-focus-bg, var(--bs-btn-hover-bg));
+  border-color: var(--bs-btn-focus-border-color, var(--bs-btn-hover-border-color));
+}
 @media (any-hover: hover) {
   .btn:focus-visible:hover {
     color: var(--bs-btn-hover-color);

@@ -21,11 +21,11 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
     return (
         <Toolbar<HTMLUListElement, HTMLButtonElement, HTMLLabelElement>
             ariaLabel={labelPosition == "hidden" ? label : null}
-            ariaPropName="aria-current-page"
-            selectionMode="activation"
-            selectionLimit="single"
-            selectedIndex={page}
-            onSelectedIndexChange={useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, [])}
+            singleSelectionAriaPropName="aria-current-page"
+            singleSelectionMode="activation"
+            singleSelectedIndex={page}
+            multiSelectionMode="disabled"
+            onSingleSelectedIndexChange={useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, [])}
             orientation="horizontal"
             render={info => {
                 const labelJsx = <label {...info.propsLabel}>{label}</label>

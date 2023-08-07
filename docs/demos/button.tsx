@@ -94,13 +94,13 @@ export function Demo() {
             <ButtonAction variantSize="sm" onPress={onPressAsync} disabled>Press me (disabled)</ButtonAction>
             <ButtonAction variantSize="lg" onPress={onToggleSync} pressed={pressed}>Toggle me (sync)</ButtonAction>
             <ButtonAction variantSize="md" onPress={onToggleAsync} pressed={pressed}>Toggle me (async)</ButtonAction>
-            <ButtonGroup label="Multi-select button group example" orientation="horizontal" labelPosition="before" selectionLimit="multi">
+            <ButtonGroup label="Multi-select button group example" orientation="horizontal" labelPosition="before" selectionMode="multi">
                 <MSB index={0} />
                 <MSB index={1} />
                 <MSB index={2} />
                 <MSB index={3} />
             </ButtonGroup>
-            <ButtonGroup label={`Single-select button group example (selected index: ${selectedIndex ?? "null"})`} selectedIndex={selectedIndex} onSelectedIndexChange={setSelectedIndexAsync} orientation="horizontal" labelPosition="before" selectionLimit="single">
+            <ButtonGroup label={`Single-select button group example (selected index: ${selectedIndex ?? "null"})`} selectedIndex={selectedIndex} onSelectedIndexChange={setSelectedIndexAsync} orientation="horizontal" labelPosition="before" selectionMode="single">
                 <SSB index={0} />
                 <SSB index={1} />
                 <SSB index={2} />

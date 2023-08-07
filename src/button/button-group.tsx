@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { createContext, h, Ref } from "preact";
 import { Toolbar, ToolbarProps, useLabelSynthetic, UseToolbarParameters, UseToolbarReturnType, UseToolbarSubInfo } from "preact-aria-widgets";
-import { EventDetail, useAsync, useMergedProps, useState } from "preact-prop-helpers";
+import { EventDetail, Nullable, useAsync, useMergedProps, useState } from "preact-prop-helpers";
 import { useMemo, useRef } from "preact/hooks";
 import { ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DisabledContext } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -9,21 +9,42 @@ import { LabelledProps } from "../utility/types.js";
 import { ButtonProps } from "./button-action.js";
 
 export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className"> {
+    /**
+     * Disables all buttons in the group together (buttons cannot individually override this)
+     */
     disabled?: boolean;
-    /** Only valid when `selectionLimit` is `"single"` */
+
+    /**
+     * When `selectionMode` is `"single"`, this is the index of the child that's currently selected.
+     */
     selectedIndex?: number | null;
+
     /** Only valid when `selectionLimit` is `"single"` */
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
+
+    /**
+     * The size of each button in this group (buttons cannot individually override this; it is the same for all buttons)
+     */
     variantSize?: ButtonProps["variantSize"];
+
+    /**
+     * The default theme for each button in this group (if a button specifies its own theme, the individual button's theme takes priority)
+     */
     variantTheme?: ButtonThemes;
+
+    /**
+     * Is this button group arranged horizontally (default) or vertically?
+     */
     orientation?: ToolbarProps<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>["orientation"];
 
     /**
-     * Is this button group single-select, multi-select, or action-only?
+     * Controls whether this button group allows selection, and how many children can be selected.
      * 
-     * `selectedIndex` and `onSelectedIndexChange` are only valid when this is `"single"`.
+     * * `"single"`: One child is selected with the `selectedIndex` prop.
+     * * `"multi"`: Any number of children are selected on their individual `selected` props.
+     * * `"off"`: Selection is disabled, implying this is a group of action buttons. 
      */
-    selectionLimit: ToolbarProps<any, any, any, any>["selectionLimit"];
+    selectionMode?: Nullable<"single" | "multi" | "off">;
 
     /**
      * When true, each button in the group will have a gap between them and each have their own borders,
@@ -51,12 +72,11 @@ export interface ButtonGroupChildProps {
 }
 export interface ButtonGroupContext { pendingIndex: number | null }
 export const ButtonGroupContext = createContext<ButtonGroupContext | null>(null);
-export const ButtonGroupSelectionLimitContext = createContext<ButtonGroupProps["selectionLimit"] | null>(null);
-export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionLimit, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>) {
+export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>) {
     labelPosition ??= "before";
 
     const imperativeHandle = useRef<UseToolbarReturnType<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>>(null);
-    type OSSI = UseToolbarParameters<HTMLSpanElement, HTMLButtonElement, UseToolbarSubInfo<HTMLButtonElement>>["toolbarParameters"]["onSelectedIndexChange"];
+    type OSSI = UseToolbarParameters<HTMLSpanElement, HTMLButtonElement, UseToolbarSubInfo<HTMLButtonElement>>["singleSelectionDeclarativeParameters"]["onSingleSelectedIndexChange"];
     const [capturedIndex, setCapturedIndex] = useState(null as number | null);
     const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync<Parameters<NonNullable<OSSI>>, void | Promise<void>>(
         (e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); },
@@ -74,38 +94,37 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
         <DefaultButtonSize.Provider value={variantSize ?? null}>
             <DefaultButtonTheme.Provider value={variantTheme ?? null}>
                 <DisabledContext.Provider value={disabled ?? false}>
-                    <ButtonGroupSelectionLimitContext.Provider value={selectionLimit}>
-                        <ButtonGroupContext.Provider value={useMemo(() => ({ pendingIndex }), [pendingIndex])}>
-                            <Toolbar<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement>
-                                onSelectedIndexChange={(...e) => {
-                                    onSelectedIndexChangeSync(...e);
-                                }}
-                                imperativeHandle={imperativeHandle}
-                                ariaPropName="aria-pressed"
-                                selectionMode={selectionLimit == "single" ? "activation" : "disabled"}
-                                selectionLimit={selectionLimit}
-                                role="toolbar"  // TODO: Was group, but that doesn't count as an application, I think?
-                                pageNavigationSize={0}
-                                orientation={orientation || "horizontal"}
-                                ariaLabel={labelPosition == 'hidden' ? label : null}
-                                selectedIndex={pendingIndex ?? selectedIndex}
-                                render={info => {
-                                    const visibleLabel = <label {...info.propsLabel}>{label}</label>
-                                    return (
-                                        <>
-                                            {labelPosition == "before" && visibleLabel}
-                                            <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={false} typeaheadActive={false}>
-                                                <span {...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref })}>
-                                                    {labelPosition == "within" && visibleLabel}
-                                                    {children}
-                                                </span>
-                                            </KeyboardAssistIcon>
-                                            {labelPosition == "after" && visibleLabel}
-                                        </>
-                                    )
-                                }} />
-                        </ButtonGroupContext.Provider>
-                    </ButtonGroupSelectionLimitContext.Provider>
+                    <ButtonGroupContext.Provider value={useMemo(() => ({ pendingIndex }), [pendingIndex])}>
+                        <Toolbar<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement>
+                            onSingleSelectedIndexChange={(...e) => {
+                                onSelectedIndexChangeSync(...e);
+                            }}
+                            imperativeHandle={imperativeHandle}
+                            singleSelectionAriaPropName="aria-pressed"
+                            singleSelectionMode={selectionMode == "single" ? "activation" : "disabled"}
+                            multiSelectionMode={selectionMode == "multi"? "activation" : "disabled"}
+
+                            role="toolbar"  // TODO: Was group, but that doesn't count as an application, I think?
+                            pageNavigationSize={0}
+                            orientation={orientation || "horizontal"}
+                            ariaLabel={labelPosition == 'hidden' ? label : null}
+                            singleSelectedIndex={selectionMode == "single" ? (pendingIndex ?? selectedIndex) : undefined}
+                            render={info => {
+                                const visibleLabel = <label {...info.propsLabel}>{label}</label>
+                                return (
+                                    <>
+                                        {labelPosition == "before" && visibleLabel}
+                                        <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={false} typeaheadActive={false}>
+                                            <span {...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref })}>
+                                                {labelPosition == "within" && visibleLabel}
+                                                {children}
+                                            </span>
+                                        </KeyboardAssistIcon>
+                                        {labelPosition == "after" && visibleLabel}
+                                    </>
+                                )
+                            }} />
+                    </ButtonGroupContext.Provider>
                 </DisabledContext.Provider>
             </DefaultButtonTheme.Provider>
         </DefaultButtonSize.Provider>

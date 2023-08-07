@@ -8,7 +8,7 @@ import { useContext } from "preact/hooks";
 import { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
-import { ButtonGroupContext, ButtonGroupSelectionLimitContext } from "./button-group.js";
+import { ButtonGroupContext } from "./button-group.js";
 export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }, ref) {
     //Tag ??= "button" as never;
     let defaultTheme = useContext(DefaultButtonTheme);
@@ -29,7 +29,6 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
     const { pendingIndex } = (buttonGroupInfo ?? {});
     //const isThePressedOne = ((pendingIndex == null ? (individualPending ? currentCapture : standaloneOrMultiSelectPressed) : (pendingIndex === buttonGroupIndex)) ?? null);
     //const singleSelectPending = pendingIndex != null && isThePressedOne;
-    let selectionLimit = useContext(ButtonGroupSelectionLimitContext);
     let isPendingForMultiSelect = null;
     let isPendingForSingleSelect = null;
     let isPressedForMultiSelect = null;
@@ -45,28 +44,36 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
     else
         isPressedForMultiSelect = standaloneOrMultiSelectPressed ?? null;
     //let isPressed = null;
-    let pending = (selectionLimit == 'multi' ? isPendingForMultiSelect : selectionLimit == 'single' ? isPendingForSingleSelect : individualPending) || false;
     const defaultDisabled = useContext(DisabledContext);
     const disabledType = useContext(DefaultDisabledType);
     //const pending = ((individualPending || singleSelectPending) ?? false);
-    //variantSize ??= "md";
-    let disabled = userDisabled;
-    disabled ||= defaultDisabled;
-    //disabled ||= (pendingIndex != null);
-    disabled ||= pending;
-    const d = disabled ? disabledType : false;
     children = _jsxs(_Fragment, { children: [children, badge] });
     if (buttonGroupInfo == null) {
-        console.assert(selectionLimit != "single");
-        let isPressed = (selectionLimit == 'single' ? null : isPressedForMultiSelect) ?? null;
+        //variantSize ??= "md";
+        let pending = individualPending;
+        let disabled = userDisabled;
+        disabled ||= defaultDisabled;
+        //disabled ||= (pendingIndex != null);
+        disabled ||= pending;
+        const d = disabled ? disabledType : false;
+        let isPressed = (isPressedForMultiSelect) ?? null;
         return (_jsx(ButtonStructure, { ref: ref, 
             //Tag={(Tag) as never}
             tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isPressed, onPress: syncHandler ?? null, otherProps: props, variantFill: variantFill ?? null }));
     }
     else {
         return (_jsx(ToolbarChild, { index: buttonGroupIndex ?? 0, getSortValue: returnZero, disabledProp: "disabled", render: toolbarChildInfo => {
-                isPressedForSingleSelect = (toolbarChildInfo.singleSelectionChildReturn.selected);
-                let isPressed = (selectionLimit == 'single' ? isPressedForSingleSelect : isPressedForMultiSelect);
+                //let pending = (toolbarChildInfo.multiSelectionChildReturn? isPendingForMultiSelect : selectionLimit == 'single'? isPendingForSingleSelect : individualPending) || false;
+                let pending = (toolbarChildInfo.singleSelectionChildReturn.singleSelectionMode != "disabled" ? isPendingForSingleSelect :
+                    toolbarChildInfo.multiSelectionChildReturn.multiSelectionMode != "disabled" ? isPendingForMultiSelect :
+                        individualPending) || false;
+                let disabled = userDisabled;
+                disabled ||= defaultDisabled;
+                //disabled ||= (pendingIndex != null);
+                disabled ||= pending;
+                const d = disabled ? disabledType : false;
+                isPressedForSingleSelect = (toolbarChildInfo.singleSelectionChildReturn.singleSelected);
+                let isPressed = toolbarChildInfo.singleSelectionChildReturn.singleSelected || toolbarChildInfo.multiSelectionChildReturn.multiSelected;
                 return (_jsx(ButtonStructure, { ref: ref, 
                     //Tag={(Tag) as never}
                     tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: isPressed, callCount: callCount, onPress: (e) => {

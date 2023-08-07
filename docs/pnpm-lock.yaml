@@ -19,7 +19,7 @@ dependencies:
     version: 10.16.0
   preact-transition:
     specifier: github:mwszekely/preact-transition
-    version: github.com/mwszekely/preact-transition/f8c89c7d9740e845bbd131fe889706e174958a9b(preact@10.16.0)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/mwszekely/preact-transition/17bc5b7b60752d82f305951302d1194ba325788e(preact@10.16.0)(react-dom@18.2.0)(react@18.2.0)
   tslib:
     specifier: ^2.6.1
     version: 2.6.1
@@ -200,7 +200,7 @@ packages:
       '@babel/helper-plugin-utils': 7.22.5
       debug: 4.3.4
       lodash.debounce: 4.0.8
-      resolve: 1.22.2
+      resolve: 1.22.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1379,7 +1379,7 @@ packages:
       deepmerge: 4.3.1
       is-builtin-module: 3.2.1
       is-module: 1.0.0
-      resolve: 1.22.2
+      resolve: 1.22.4
       rollup: 3.27.0
     dev: true
 
@@ -1411,7 +1411,7 @@ packages:
         optional: true
     dependencies:
       '@rollup/pluginutils': 5.0.2(rollup@3.27.0)
-      resolve: 1.22.2
+      resolve: 1.22.4
       rollup: 3.27.0
       tslib: 2.6.1
       typescript: 5.1.6
@@ -1561,7 +1561,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.10
-      caniuse-lite: 1.0.30001518
+      caniuse-lite: 1.0.30001519
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1670,8 +1670,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001518
-      electron-to-chromium: 1.4.480
+      caniuse-lite: 1.0.30001519
+      electron-to-chromium: 1.4.485
       node-releases: 2.0.13
       update-browserslist-db: 1.0.11(browserslist@4.21.10)
     dev: true
@@ -1698,8 +1698,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /caniuse-lite@1.0.30001518:
-    resolution: {integrity: sha512-rup09/e3I0BKjncL+FesTayKtPrdwKhUufQFd3riFw1hHg8JmIFoInYfB102cFcY/pPgGmdyl/iy+jgiDi2vdA==}
+  /caniuse-lite@1.0.30001519:
+    resolution: {integrity: sha512-0QHgqR+Jv4bxHMp8kZ1Kn8CH55OikjKJ6JmKkZYP1F3D7w+lnFXF70nG5eNfsZS89jadi5Ywy5UCSKLAglIRkg==}
     dev: true
 
   /chalk-template@0.4.0:
@@ -1922,8 +1922,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /electron-to-chromium@1.4.480:
-    resolution: {integrity: sha512-IXTgg+bITkQv/FLP9FjX6f9KFCs5hQWeh5uNSKxB9mqYj/JXhHDbu+ekS43LVvbkL3eW6/oZy4+r9Om6lan1Uw==}
+  /electron-to-chromium@1.4.485:
+    resolution: {integrity: sha512-1ndQ5IBNEnFirPwvyud69GHL+31FkE09gH/CJ6m3KCbkx3i0EVOrjwz4UNxRmN9H8OVHbC6vMRZGN1yCvjSs9w==}
     dev: true
 
   /emoji-regex@8.0.0:
@@ -2270,8 +2270,8 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /immutable@4.3.1:
-    resolution: {integrity: sha512-lj9cnmB/kVS0QHsJnYKD1uo3o39nrbKxszjnqS9Fr6NB7bZzW45U6WSGBPKXDL/CvDKqDNPA4r3DoDQ8GTxo2A==}
+  /immutable@4.3.2:
+    resolution: {integrity: sha512-oGXzbEDem9OOpDWZu88jGiYCvIsLHMvGw+8OXlpsvTFvIQplQbjg1B1cvKg8f7Hoch6+NGjpPsH1Fr+Mc2D1aA==}
     dev: true
 
   /inflight@1.0.6:
@@ -2343,8 +2343,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /is-core-module@2.12.1:
-    resolution: {integrity: sha512-Q4ZuBAe2FUsKtyQJoQHlvP8OvBERxO3jEmy1I7hcRXcJBGGHFh/aJBswbXuS9sgrDH2QUO8ilkwNPHvHMd8clg==}
+  /is-core-module@2.13.0:
+    resolution: {integrity: sha512-Z7dk6Qo8pOCp3l4tsX2C5ZVas4V+UxwQodwZhLopL91TX8UyyHEXafPcyoeeWuLrwzHcr3igO78wNLwHJHsMCQ==}
     dependencies:
       has: 1.0.3
     dev: true
@@ -2650,7 +2650,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.22.2
+      resolve: 1.22.4
       semver: 5.7.2
       validate-npm-package-license: 3.0.4
     dev: true
@@ -3006,11 +3006,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /resolve@1.22.2:
-    resolution: {integrity: sha512-Sb+mjNHOULsBv818T40qSPeRiuWLyaGMa5ewydRLFimneixmVy2zdivRl+AF6jaYPC8ERxGDmFSiqui6SfPd+g==}
+  /resolve@1.22.4:
+    resolution: {integrity: sha512-PXNdCiPqDqeUou+w1C2eTQbNfxKSuMxqTCuvlmmMsk1NWHL5fRrhY6Pl0qEYYc6+QqGClco1Qj8XnjPego4wfg==}
     hasBin: true
     dependencies:
-      is-core-module: 2.12.1
+      is-core-module: 2.13.0
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
     dev: true
@@ -3081,7 +3081,7 @@ packages:
     hasBin: true
     dependencies:
       chokidar: 3.5.3
-      immutable: 4.3.1
+      immutable: 4.3.2
       source-map-js: 1.0.2
     dev: true
 
@@ -3590,9 +3590,9 @@ packages:
     version: 1.0.0
     dev: false
 
-  github.com/mwszekely/preact-prop-helpers/5bbd978aa36993f1cb1cf7bb127db5be2978322f(preact@10.16.0)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/5bbd978aa36993f1cb1cf7bb127db5be2978322f}
-    id: github.com/mwszekely/preact-prop-helpers/5bbd978aa36993f1cb1cf7bb127db5be2978322f
+  github.com/mwszekely/preact-prop-helpers/0c1d1a23369518fe1516acbed9777c2b83c5790a(preact@10.16.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/0c1d1a23369518fe1516acbed9777c2b83c5790a}
+    id: github.com/mwszekely/preact-prop-helpers/0c1d1a23369518fe1516acbed9777c2b83c5790a
     name: preact-prop-helpers
     version: 0.0.1
     peerDependencies:
@@ -3612,9 +3612,9 @@ packages:
       wicg-inert: 3.1.2
     dev: false
 
-  github.com/mwszekely/preact-transition/f8c89c7d9740e845bbd131fe889706e174958a9b(preact@10.16.0)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/f8c89c7d9740e845bbd131fe889706e174958a9b}
-    id: github.com/mwszekely/preact-transition/f8c89c7d9740e845bbd131fe889706e174958a9b
+  github.com/mwszekely/preact-transition/17bc5b7b60752d82f305951302d1194ba325788e(preact@10.16.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/17bc5b7b60752d82f305951302d1194ba325788e}
+    id: github.com/mwszekely/preact-transition/17bc5b7b60752d82f305951302d1194ba325788e
     name: preact-transition
     version: 0.1.0
     peerDependencies:
@@ -3623,7 +3623,7 @@ packages:
       clsx: 2.0.0
       lodash-es: 4.17.21
       preact: 10.16.0
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/5bbd978aa36993f1cb1cf7bb127db5be2978322f(preact@10.16.0)(react-dom@18.2.0)(react@18.2.0)
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/0c1d1a23369518fe1516acbed9777c2b83c5790a(preact@10.16.0)(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom

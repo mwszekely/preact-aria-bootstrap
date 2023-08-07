@@ -262,9 +262,6 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
                     step: usedStep,
                     list: useContext(GetListContext)
                 })} />
-            {/*<div class="form-range-tooltip-container">
-                <div ref={tooltipRootRef} class="form-range-tooltip-root" style={{ "--range-value": `${valuePercent}` }} />
-            </div>*/}
             <div class="form-range-track-fill-background" style={{ "--form-range-value-percent": clampedValuePercent }} />
         </>
     );

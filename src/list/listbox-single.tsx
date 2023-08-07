@@ -34,9 +34,9 @@ export function ListboxSingle({ selectedIndex, onSelectedIndexChange, children, 
 
     return (
         <Listbox<HTMLOListElement, HTMLLIElement, HTMLLabelElement>
-            selectedIndex={selectedIndex}
-            selectionLimit="single"
-            onSelectedIndexChange={useStableCallback((e) => { onSelectedIndexChange(e[EventDetail].selectedIndex, e) })}
+            singleSelectedIndex={selectedIndex}
+            singleSelectionMode="activation"
+            onSingleSelectedIndexChange={useStableCallback((e) => { debugger; onSelectedIndexChange(e[EventDetail].selectedIndex, e) })}
             staggered={staggered}
             paginationMin={paginationMin}
             paginationMax={paginationMax}
@@ -66,8 +66,8 @@ export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleIt
         <ListboxItem<HTMLLIElement>
             getSortValue={returnZero}
             index={index}
-            selected={null}
-            unselectable={disabled}
+            multiSelected={undefined}
+            singleSelectionDisabled={disabled}
             render={info => {
                 if (info.staggeredChildReturn.hideBecauseStaggered)
                     return <li class="d-none" />;
@@ -75,7 +75,7 @@ export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleIt
                     return <li class="d-none" />;
 
                 return (
-                    <ListboxSingleItemStatic {...useMergedProps(info.props, { ...props, ref })} disabled={disabled} selected={info.singleSelectionChildReturn.selected as boolean}>{children}</ListboxSingleItemStatic>
+                    <ListboxSingleItemStatic {...useMergedProps(info.props, { ...props, ref })} disabled={disabled} selected={info.singleSelectionChildReturn.singleSelected as boolean}>{children}</ListboxSingleItemStatic>
                 )
             }}
         />

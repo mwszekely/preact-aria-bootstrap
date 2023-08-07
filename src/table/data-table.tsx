@@ -32,7 +32,7 @@ export const DataTable = memo(forwardElementRef(function DataTable({ staggered, 
             <AriaTable<HTMLTableElement, HTMLTableCaptionElement>
                 ariaLabel={captionPosition == "hidden" ? caption : null}
 
-                selectionLimit="single"
+                singleSelectionMode="activation"
                 tagTable="table"
                 render={info => {
                     useUpdateRenderCounter("DataTable");

@@ -61,12 +61,11 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
             active={menuOpen}
             openDirection="down"
             orientation="vertical"
-            selectionMode="activation"
-            selectionLimit="single"
-            ariaPropName="aria-selected"
-            selectedIndex={selectedIndex}
+            singleSelectionMode="activation"
+            singleSelectionAriaPropName="aria-selected"
+            singleSelectedIndex={selectedIndex}
             imperativeHandle={imperativeHandle}
-            onSelectedIndexChange={useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex))}
+            onSingleSelectedIndexChange={useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex))}
 
             render={(info) => {
                 const portalId = usePortalId("menu");
@@ -144,7 +143,7 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                         imperativeHandle={imperativeHandle}
                         index={index}
                         getSortValue={getSortValue ?? returnZero}
-                        unselectable={disabled || showSpinner}
+                        singleSelectionDisabled={disabled || showSpinner}
                         onPress={progressInfo.asyncHandlerReturn.syncHandler}
                         render={menuInfo => {
 

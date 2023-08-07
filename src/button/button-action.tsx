@@ -9,7 +9,7 @@ import { ButtonFills, ButtonSizes, ButtonThemes, DefaultButtonSize, DefaultButto
 import { Tooltip, TooltipProps } from "../tooltip/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
-import { ButtonGroupChildProps, ButtonGroupContext, ButtonGroupSelectionLimitContext } from "./button-group.js";
+import { ButtonGroupChildProps, ButtonGroupContext } from "./button-group.js";
 
 
 export interface ButtonProps extends
@@ -71,7 +71,6 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
     //const isThePressedOne = ((pendingIndex == null ? (individualPending ? currentCapture : standaloneOrMultiSelectPressed) : (pendingIndex === buttonGroupIndex)) ?? null);
     //const singleSelectPending = pendingIndex != null && isThePressedOne;
 
-    let selectionLimit = useContext(ButtonGroupSelectionLimitContext)
 
     let isPendingForMultiSelect: boolean | null = null;
     let isPendingForSingleSelect: boolean | null = null;
@@ -85,37 +84,37 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
         isPendingForSingleSelect = true;
     }
 
-    if (individualPending) 
+    if (individualPending)
         isPressedForMultiSelect = currentCapture ?? null;
-    else 
+    else
         isPressedForMultiSelect = standaloneOrMultiSelectPressed ?? null;
 
 
-   //let isPressed = null;
+    //let isPressed = null;
 
 
 
 
-    let pending = (selectionLimit == 'multi'? isPendingForMultiSelect : selectionLimit == 'single'? isPendingForSingleSelect : individualPending) || false;
 
     const defaultDisabled = useContext(DisabledContext);
     const disabledType = useContext(DefaultDisabledType);
     //const pending = ((individualPending || singleSelectPending) ?? false);
 
 
-    //variantSize ??= "md";
-    let disabled = userDisabled;
-    disabled ||= defaultDisabled;
-    //disabled ||= (pendingIndex != null);
-    disabled ||= pending;
-    const d = disabled ? disabledType : false;
 
     children = <>{children}{badge}</>
 
 
     if (buttonGroupInfo == null) {
-        console.assert(selectionLimit != "single")
-        let isPressed = (selectionLimit == 'single'? null : isPressedForMultiSelect) ?? null;
+        //variantSize ??= "md";
+        let pending = individualPending;
+        let disabled = userDisabled;
+        disabled ||= defaultDisabled;
+        //disabled ||= (pendingIndex != null);
+        disabled ||= pending;
+        const d = disabled ? disabledType : false;
+        
+        let isPressed = (isPressedForMultiSelect) ?? null;
         return (
             <ButtonStructure
                 ref={ref}
@@ -138,15 +137,31 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
         )
     }
     else {
+        
         return (
             <ToolbarChild<HTMLButtonElement>
                 index={buttonGroupIndex ?? 0}
                 getSortValue={returnZero}
                 disabledProp="disabled"
                 render={toolbarChildInfo => {
-                    isPressedForSingleSelect = (toolbarChildInfo.singleSelectionChildReturn.selected);
 
-                    let isPressed = (selectionLimit == 'single'? isPressedForSingleSelect : isPressedForMultiSelect);
+                    
+        //let pending = (toolbarChildInfo.multiSelectionChildReturn? isPendingForMultiSelect : selectionLimit == 'single'? isPendingForSingleSelect : individualPending) || false;
+
+        let pending = (toolbarChildInfo.singleSelectionChildReturn.singleSelectionMode != "disabled"? isPendingForSingleSelect : 
+        toolbarChildInfo.multiSelectionChildReturn.multiSelectionMode != "disabled"? isPendingForMultiSelect :
+        individualPending) || false;
+
+        let disabled = userDisabled;
+        disabled ||= defaultDisabled;
+        //disabled ||= (pendingIndex != null);
+        disabled ||= pending;
+        const d = disabled ? disabledType : false;
+
+
+                    isPressedForSingleSelect = (toolbarChildInfo.singleSelectionChildReturn.singleSelected);
+
+                    let isPressed = toolbarChildInfo.singleSelectionChildReturn.singleSelected || toolbarChildInfo.multiSelectionChildReturn.multiSelected;
 
                     return (<ButtonStructure
                         ref={ref}

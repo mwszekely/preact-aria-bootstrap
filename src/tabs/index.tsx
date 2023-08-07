@@ -48,23 +48,6 @@ export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, l
                             <StructureTabPanelsContainer>{panels}</StructureTabPanelsContainer>
                         </StructureTabs>
                     );
-
-                    /*return (
-                        <div {...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref })}>
-                            {labelPosition == "before" && labelJsx}
-                            <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != "none"}>
-                                <ul {...useMergedProps(info.propsContainer, propsTabsContainer ?? {}, { className: clsx(`nav nav-tabs`, `typeahead-status-${info.typeaheadNavigationReturn.typeaheadStatus}`) })}>
-                                    {tabs}
-                                </ul>
-                            </KeyboardAssistIcon>
-                            {labelPosition == "after" && labelJsx}
-                            <Swappable>
-                                <div {...useMergedProps({ class: "tab-panels-container" }, propsPanelsContainer ?? {})}>
-                                    {panels}
-                                </div>
-                            </Swappable>
-                        </div>
-                    )*/
                 }}
             />
         </OrientationContext.Provider>
@@ -80,7 +63,7 @@ export const Tab = memo(forwardElementRef(function Tab({ index, getSortValue, ch
             render={info => {
                 return (
                     <li {...useMergedProps<HTMLLIElement>(props, { ref, className: `nav-item` })}>
-                        <span {...useMergedProps(info.props, { className: clsx(`nav-link`, info.singleSelectionChildReturn.selected && "active") })}>
+                        <span {...useMergedProps(info.props, { className: clsx(`nav-link`, info.singleSelectionChildReturn.singleSelected && "active") })}>
                             {children}
                         </span>
                     </li>
@@ -106,15 +89,7 @@ export const TabPanel = memo(forwardElementRef(function TabPanel({ index, ...pro
                         visibleOffset={info.tabPanelReturn.visibleOffset || 0}
                         orientation={orientation}
                         {...useMergedProps(info.props, props)} />
-                )
-
-                /*return (
-                    <SlideZoomFade {...{ "data-index": index } as {}} exitVisibility="removed" delayMountUntilShown duration={500} show={info.tabPanelReturn.visible} zoomMin={(11 / 12)} {...transitionProps}>
-                        <div {...useMergedProps(info.props, props, { ref, className: clsx("tab-panel scroll-shadows scroll-shadows-y") })}>
-                            <TabPanelChildren visible={info.tabPanelReturn.visible || false}>{children}</TabPanelChildren>
-                        </div>
-                    </SlideZoomFade>
-                )*/
+                );
             }}
         />
     )

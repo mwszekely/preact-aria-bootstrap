@@ -9,6 +9,7 @@ import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { LabelledProps } from "../utility/types.js";
+import { StructureRadioWrapper } from "./structure.js";
 
 
 export interface RadioGroupProps<V extends string | number> extends
@@ -139,14 +140,14 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                             const inputJsx = <input class="form-check-input" {...useMergedProps(info.propsInput, props, { ref })} />;
 
                             return (
-                                <span {...useMergedProps({ className: clsx(labelPosition == "after" && ".form-check-reverse", "form-check", pending && "pending", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse") })}>
+                                <StructureRadioWrapper inline={inline || false} pending={pending} labelPosition={labelPosition!}>
                                     {loadingJsx}
                                     <label class="form-check-label" {...info.propsLabel}>
                                         {labelPosition == "before" && label}
                                         {labelPosition == "tooltip" ? <Tooltip forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
                                         {labelPosition == "after" && label}
                                     </label>
-                                </span>
+                                </StructureRadioWrapper>
                             )
                         }}
                     />

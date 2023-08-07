@@ -34,7 +34,7 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
         callback: () => setMenuOpen(popperOpen),
         triggerIndex: popperOpen
     });
-    return (_jsx(AriaMenu, { onOpen: onOpen, onDismiss: onClose, active: menuOpen, openDirection: "down", orientation: "vertical", selectionMode: "activation", selectionLimit: "single", ariaPropName: "aria-selected", selectedIndex: selectedIndex, imperativeHandle: imperativeHandle, onSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
+    return (_jsx(AriaMenu, { onOpen: onOpen, onDismiss: onClose, active: menuOpen, openDirection: "down", orientation: "vertical", singleSelectionMode: "activation", singleSelectionAriaPropName: "aria-selected", singleSelectedIndex: selectedIndex, imperativeHandle: imperativeHandle, onSingleSelectedIndexChange: useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex)), render: (info) => {
             const portalId = usePortalId("menu");
             const { propsArrow, propsPopup, propsSource, propsData } = usePopper({
                 popperParameters: {
@@ -60,7 +60,7 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
             return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu);
         }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
             const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
-            return (_jsx(AriaMenuItem, { imperativeHandle: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, unselectable: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
+            return (_jsx(AriaMenuItem, { imperativeHandle: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, singleSelectionDisabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
                     const spinnerJsx = (_jsx(Fade, { show: showSpinner, exitVisibility: "removed", children: _jsx("div", { ...progressInfo.propsProgressIndicator, class: clsx("spinner-border", "spinner-border-sm") }) }));
                     return (_jsxs("div", { ...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props), children: [children, _jsx("div", { class: "dropdown-item-icon dropdown-item-icon-end", children: spinnerJsx })] }));
                 } }));

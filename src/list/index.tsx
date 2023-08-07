@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
 import { Gridlist, GridlistCellInfo, GridlistChild, GridlistRow, GridlistRowInfo, ProgressWithHandler, UseGridlistRowReturnType, UseProgressWithHandlerReturnType } from "preact-aria-widgets";
-import { AsyncHandler, EventDetail, returnUndefined, useHasCurrentFocus, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
+import { AsyncHandler, EventDetail, Nullable, returnUndefined, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useContext, useRef } from "preact/hooks";
@@ -16,36 +16,86 @@ export { ListboxSingle, ListboxSingleItem, ListboxSingleItemProps, ListboxSingle
 
 
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
-    /** Used to determine if left/right arrow key navigation is shown as an option */
-    columns?: number;
+    /**
+     * Disables the entire list if set, allowing no selection or press events to occur.
+     */
     disabled?: boolean;
+    /**
+     * Controls whether this list allows selection, and how many children can be selected.
+     * 
+     * * `"single"`: One child is selected with the `selectedIndex` prop.
+     * * `"multi"`: Any number of children are selected on their individual `selected` props.
+     * * `"off"`: Selection is disabled, implying this is a list of action items. 
+     */
+    selectionMode?: Nullable<"single" | "multi" | "off">;
+    /**
+     * When `selectionMode` is `"single"`, this is the index of the child that's currently selected.
+     */
     selectedIndex?: number | null;
+    /**
+     * Delays rendering any given list item until the one before it renders. Recommended for long lists.
+     */
     staggered?: boolean;
+    /**
+     * When `selectionMode` is `"single"`, this is called to change the selected index.
+     */
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
 }
 
 export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "children"> {
+    /**
+     * A unique integer for this child, relative to other children.
+     */
     index: number;
+    /**
+     * The color of this list item's background
+     */
     variantTheme?: ButtonThemes;
+    /**
+     * Disables this list item if set
+     */
     disabled?: boolean;
+    /**
+     * **Multi-selection only**, i.e. if the parent List's `selectionMode` is `"multi"`.
+     */
     selected?: boolean;
-    iconStart?: ComponentChildren | null | undefined;
-    iconEnd?: ComponentChildren | null | undefined;
+    /**
+     * **Multi-selection only**, i.e. if the parent List's `selectionMode` is `"multi"`.
+     */
     onSelectedChange?: null | ((selected: boolean) => (void | Promise<void>));
+    /**
+     * Optional child on the left side of the list item
+     */
+    iconStart?: ComponentChildren | null | undefined;
+    /**
+     * Optional child on the right side of the list item
+     */
+    iconEnd?: ComponentChildren | null | undefined;
+    /**
+     * If this list is sortable, this is the value that will be used for sorting.
+     */
     getSortValue?: () => unknown;
+
+    /**
+     * A visual indicator in the corner of the list item. Read out alongside the main contents as one long string, so label it well.
+     */
     badge?: VNode;
 
     loadingLabel?: string;
+
+    /**
+     * Optional. Only necessary if this is an "action-only" list; it's not needed for selection behavior.
+     */
     onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>
 }
 
 const DefaultDisabled = createContext(false);
 
-export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
+export function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
     labelPosition ??= "before";
-    const [focusedInner, setFocusedInner] = useState(false);
-    const { refElementReturn, propsStable } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
-    const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLDivElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn })
+    //const [focusedInner, setFocusedInner] = useState(false);
+    //const { refElementReturn, propsStable } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
+    //const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLDivElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged }, refElementReturn })
     const [paginationStart, setPaginationStart] = useState<number | null>(paginationSize == null ? null : 0);
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
 
@@ -55,15 +105,16 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
     return (
         <DefaultDisabled.Provider value={disabled ?? false}>
             <Gridlist<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLLabelElement>
-                selectedIndex={selectedIndex ?? null}
-                ariaPropName="aria-selected"
-                onSelectedIndexChange={useStableCallback(e => onSelectedIndexChange?.(e[EventDetail].selectedIndex))}
+                singleSelectedIndex={selectedIndex ?? null}
+                singleSelectionAriaPropName="aria-selected"
+                onSingleSelectedIndexChange={useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex)})}
                 paginationMin={paginationStart}
                 paginationMax={paginationEnd}
                 staggered={staggered || false}
                 ariaLabel={labelPosition == "hidden" ? label : null}
                 groupingType="without-groups"
-                selectionLimit={selectedIndex === undefined ? "multi" : "single"}
+                singleSelectionMode={selectionMode == "single"? "activation" : "disabled"}
+                multiSelectionMode={selectionMode == "multi"? "activation" : "disabled"}
                 render={info => {
 
                     useUpdateRenderCounter("Gridlist");
@@ -75,7 +126,7 @@ export function List({ columns, disabled, selectedIndex, onSelectedIndexChange, 
                             {labelPosition == "before" && labelJsx}
                             <Paginated childCount={info.paginatedChildrenReturn.childCount ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
 
-                                <div {...useMergedProps(props, propsStable, hasCurrentFocusReturn.propsStable, info.propsGridlist, { class: `list-group gridlist-group` })}>{children}</div>
+                                <div {...useMergedProps(props, info.propsGridlist, { class: `list-group gridlist-group` })}>{children}</div>
 
                             </Paginated>
                             {labelPosition == "after" && labelJsx}
@@ -127,7 +178,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
                 !!badge && "list-group-item-with-badge",
                 !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending",
                 disabled && "disabled",
-                (infoRow.singleSelectionChildReturn.selected || selected) && `active`
+                (infoRow.singleSelectionChildReturn.singleSelected || selected) && `active`
             )
         }
     );
@@ -176,7 +227,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                 return (
                     <GridlistRow<HTMLDivElement, HTMLDivElement>
                         index={index}
-                        unselectable={disabled}
+                        singleSelectionDisabled={disabled}
                         noTypeahead={true}
                         getText={useCallback((e: HTMLDivElement) => { return e?.querySelector(".gridlist-item-text")?.textContent || "" }, [])}
 

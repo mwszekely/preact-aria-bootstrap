@@ -61,6 +61,12 @@ $value in $theme-colors {
         color: var(--#{$prefix}btn-focus-color, var(--#{$prefix}btn-hover-color));
         @include gradient-bg(var(--#{$prefix}btn-focus-bg, var(--#{$prefix}btn-hover-bg)));
         border-color: var(--#{$prefix}btn-focus-border-color, var(--#{$prefix}btn-hover-border-color));
+        
+        &:hover {
+            color: var(--#{$prefix}btn-focus-color, var(--#{$prefix}btn-hover-color));
+            @include gradient-bg(var(--#{$prefix}btn-focus-bg, var(--#{$prefix}btn-hover-bg)));
+            border-color: var(--#{$prefix}btn-focus-border-color, var(--#{$prefix}btn-hover-border-color));
+        }
 
         @media (any-hover: hover) {
             &:hover {
