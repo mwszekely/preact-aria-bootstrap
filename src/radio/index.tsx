@@ -90,7 +90,8 @@ export interface RadioProps<V extends number | string> extends
 }
 
 export function Radio<V extends number | string>({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }: LabelledProps<RadioProps<V>, "tooltip">, ref?: Ref<any>) {
-
+    
+    labelPosition ||= "after";
 
     const radioGroupInfo = useContext(RadioGroupContext);
     const { pendingValue, inline } = (radioGroupInfo ?? {});

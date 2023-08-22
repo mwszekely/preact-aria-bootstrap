@@ -30,6 +30,7 @@ export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, name, ch
                 } }) }) }));
 }
 export function Radio({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }, ref) {
+    labelPosition ||= "after";
     const radioGroupInfo = useContext(RadioGroupContext);
     const { pendingValue, inline } = (radioGroupInfo ?? {});
     const singleSelectPending = pendingValue != null && (pendingValue === value);

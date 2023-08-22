@@ -16111,6 +16111,7 @@
                   } }) }) }));
   }
   function Radio({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }, ref) {
+      labelPosition ||= "after";
       const radioGroupInfo = q$2(RadioGroupContext);
       const { pendingValue, inline } = (radioGroupInfo ?? {});
       const singleSelectPending = pendingValue != null && (pendingValue === value);
