@@ -8,13 +8,18 @@ export interface RadioGroupProps<V extends string | number> extends Pick<h.JSX.H
     disabled?: boolean;
     inline?: boolean;
     name: string;
+    /**
+     * Radio buttons generally auto-activate when they're focused,
+     * but you can set that behavior to be manual activation (e.g. with the mouse, spacebar, etc.) instead.
+     */
+    selectionMode?: "activation" | "focus";
 }
 export interface RadioGroupContext<V extends string | number> {
     pendingValue: V | null;
     inline: boolean;
 }
 export declare const RadioGroupContext: import("preact").Context<RadioGroupContext<string | number> | null>;
-export declare function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, fieldset, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>): import("preact").JSX.Element;
+export declare function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>): import("preact").JSX.Element;
 export interface RadioProps<V extends number | string> extends Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     loadingLabel?: string;
     disabled?: boolean;

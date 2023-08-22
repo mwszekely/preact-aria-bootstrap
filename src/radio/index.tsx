@@ -21,6 +21,12 @@ export interface RadioGroupProps<V extends string | number> extends
     disabled?: boolean;
     inline?: boolean;
     name: string;
+
+    /**
+     * Radio buttons generally auto-activate when they're focused,
+     * but you can set that behavior to be manual activation (e.g. with the mouse, spacebar, etc.) instead.
+     */
+    selectionMode?: "activation" | "focus";
 }
 
 
@@ -30,8 +36,9 @@ export interface RadioGroupContext<V extends string | number> {
 }
 export const RadioGroupContext = createContext<RadioGroupContext<string | number> | null>(null);
 
-export function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, fieldset, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
+export function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
     labelPosition ??= (fieldset? "within" : "after");
+    selectionMode ??= "focus";
 
     const imperativeHandle = useRef<UseRadioGroupReturnType<V, HTMLSpanElement, HTMLLabelElement, HTMLInputElement>>(null);
 
@@ -60,6 +67,7 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
                     name={name}
                     onSelectedValueChange={onSelectedIndexChangeSync}
                     arrowKeyDirection={inline ? "horizontal" : "vertical"}
+                    singleSelectionMode={selectionMode}
                     render={info => {
                         const E = (fieldset? "fieldset" : "span");
                         const L = (fieldset? "legend" : "label") as "label";

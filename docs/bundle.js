@@ -10418,7 +10418,7 @@
    *
    * @hasChild {@link useRadio}
    */
-  function useRadioGroup({ labelParameters, radioGroupParameters: { name, selectedValue, onSelectedValueChange, ...void2 }, rovingTabIndexParameters, linearNavigationParameters, rearrangeableChildrenParameters, sortableChildrenParameters, staggeredChildrenParameters, typeaheadNavigationParameters, refElementParameters, ...void1 }) {
+  function useRadioGroup({ labelParameters, radioGroupParameters: { name, selectedValue, onSelectedValueChange, ...void2 }, rovingTabIndexParameters, linearNavigationParameters, rearrangeableChildrenParameters, sortableChildrenParameters, staggeredChildrenParameters, typeaheadNavigationParameters, refElementParameters, singleSelectionParameters: { singleSelectionMode, ...void4 }, ...void1 }) {
       monitorCallCount(useRadioGroup);
       // TODO: The way this is structured causes 1 extra re-render on the parent
       // when the selectedValue changes to selectedIndex.
@@ -10452,7 +10452,7 @@
                   onSelectedValueChange?.(enhanceEvent(e, { selectedValue: indexToName.current.get(e[EventDetail].selectedIndex) }));
               }),
           },
-          singleSelectionParameters: { singleSelectionMode: "focus", singleSelectionAriaPropName: null },
+          singleSelectionParameters: { singleSelectionMode, singleSelectionAriaPropName: null },
           multiSelectionParameters: { multiSelectionMode: "disabled", multiSelectionAriaPropName: null, onSelectionChange: null },
           paginatedChildrenParameters: { paginationMin: null, paginationMax: null },
           rovingTabIndexParameters: { ...rovingTabIndexParameters, focusSelfParent: focus },
@@ -10507,9 +10507,6 @@
   function useRadio({ radioParameters: { value, ...void5 }, checkboxLikeParameters: { disabled, ...void4 }, labelParameters, info, context, textContentParameters, pressParameters: { longPressThreshold, ...void3 }, hasCurrentFocusParameters, refElementParameters, ...void1 }) {
       monitorCallCount(useRadio);
       const index = info.index;
-      /*const onInput = useStableCallback((e: EventType<InputElement, Event>) => {
-          onPressSync?.(e as PressEventReason<any>);
-      });*/
       const { name, indexToName, nameToIndex } = context.radioContext;
       const { tagInput, labelPosition } = labelParameters;
       const { pressParameters: { excludeSpace, onPressSync }, singleSelectionChildReturn, propsTabbable, propsChild: listNavigationSingleSelectionChildProps, ...listNavRet } = useCompleteListNavigationChildDeclarative({
@@ -12017,9 +12014,10 @@
   });
 
   const RadioContext = G$1(null);
-  const RadioGroup$1 = x$1(function RadioGroup({ render, name, collator, disableHomeEndKeys, arrowKeyDirection, noTypeahead, typeaheadTimeout, ariaLabel, compare, staggered, getIndex, navigatePastEnd, navigatePastStart, selectedValue, untabbable, onTabbableIndexChange, onNavigateLinear, onNavigateTypeahead, pageNavigationSize, onElementChange, onMount, onUnmount, imperativeHandle, onSelectedValueChange, ...void1 }) {
+  const RadioGroup$1 = x$1(function RadioGroup({ render, name, collator, disableHomeEndKeys, arrowKeyDirection, noTypeahead, typeaheadTimeout, ariaLabel, compare, staggered, getIndex, navigatePastEnd, navigatePastStart, selectedValue, untabbable, onTabbableIndexChange, onNavigateLinear, onNavigateTypeahead, pageNavigationSize, onElementChange, onMount, onUnmount, imperativeHandle, onSelectedValueChange, singleSelectionMode, ...void1 }) {
       untabbable ??= false;
       return useComponent(imperativeHandle, render, RadioContext, useRadioGroup({
+          singleSelectionParameters: { singleSelectionMode: singleSelectionMode ?? "focus" },
           linearNavigationParameters: {
               onNavigateLinear,
               arrowKeyDirection: arrowKeyDirection ?? "either",
@@ -16091,8 +16089,9 @@
   });
 
   const RadioGroupContext = G$1(null);
-  function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, fieldset, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
+  function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
       labelPosition ??= (fieldset ? "within" : "after");
+      selectionMode ??= "focus";
       const imperativeHandle = _$1(null);
       // Note: We use useAsync, instead of useAsyncHandler, because the actual event handler isn't here.
       // If we were listening for the individual radios' onInput events, we would do that, but
@@ -16105,7 +16104,7 @@
       });
       const pendingValue = (pending ? capturedValue : null);
       inline ??= false;
-      return (o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(RadioGroupContext.Provider, { value: F$2(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: o$3(RadioGroup$1, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, imperativeHandle: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", render: info => {
+      return (o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(RadioGroupContext.Provider, { value: F$2(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: o$3(RadioGroup$1, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, imperativeHandle: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", singleSelectionMode: selectionMode, render: info => {
                       const E = (fieldset ? "fieldset" : "span");
                       const L = (fieldset ? "legend" : "label");
                       const visibleLabel = o$3(L, { ...useMergedProps({ class: clsx("form-label radio-group-label") }, info.propsRadioGroupLabel), children: label });

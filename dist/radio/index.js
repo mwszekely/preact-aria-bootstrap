@@ -10,8 +10,9 @@ import { Tooltip } from "../tooltip/index.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { StructureRadioWrapper } from "./structure.js";
 export const RadioGroupContext = createContext(null);
-export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, fieldset, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
+export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
     labelPosition ??= (fieldset ? "within" : "after");
+    selectionMode ??= "focus";
     const imperativeHandle = useRef(null);
     // Note: We use useAsync, instead of useAsyncHandler, because the actual event handler isn't here.
     // If we were listening for the individual radios' onInput events, we would do that, but
@@ -24,7 +25,7 @@ export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, fieldset
     });
     const pendingValue = (pending ? capturedValue : null);
     inline ??= false;
-    return (_jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(RadioGroupContext.Provider, { value: useMemo(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: _jsx(AriaRadioGroup, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, imperativeHandle: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", render: info => {
+    return (_jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(RadioGroupContext.Provider, { value: useMemo(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: _jsx(AriaRadioGroup, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, imperativeHandle: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", singleSelectionMode: selectionMode, render: info => {
                     const E = (fieldset ? "fieldset" : "span");
                     const L = (fieldset ? "legend" : "label");
                     const visibleLabel = _jsx(L, { ...useMergedProps({ class: clsx("form-label radio-group-label") }, info.propsRadioGroupLabel), children: label });
