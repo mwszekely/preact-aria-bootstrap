@@ -11953,6 +11953,12 @@ textarea.form-control-lg {
   border-color: var(--bs-btn-focus-border-color, var(--bs-btn-hover-border-color));
 }
 
+/*@each $color, $value in $theme-colors {
+    .btn-outline-# { $ color} {
+       // @include button-outline-variant($value, );
+       background-color: color.scale(color-contrast($value), $alpha: -50%);
+    }
+}*/
 .badge {
   z-index: 1;
 }

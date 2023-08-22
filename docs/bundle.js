@@ -1952,7 +1952,13 @@
   // (i.e. in a way that doesn't throw an error but has isDevMode be a constant)
   globalThis["process"] ??= {};
   globalThis["process"]["env"] ??= {};
-  globalThis["process"]["env"]["NODE_ENV"] ??= "production";
+  /**
+   * Controls other development hooks by checking the value of a global variable called `"development"`.
+   *
+   * @remarks Bundlers like Rollup will actually no-op out development code if `"development" !== "development"`
+   * (which, of course, covers the default case where `"development"` just doesn't exist).
+   */
+  const BuildMode = globalThis["process"]["env"]["NODE_ENV"] = (globalThis["process"]["env"]["NODE_ENV"] || "production");
 
   // TODO: This shouldn't be in every build, I don't think it's in core-js? I think?
   // And it's extremely small anyway and basically does nothing.
@@ -1966,6 +1972,8 @@
    * @remarks Re-renders and such are all collected together when the table is printed to the console with `requestIdleCallback`.
    */
   function monitorCallCount(hook) {
+      if (BuildMode !== 'development')
+          return;
       const name = hook.name;
       if (filters.has(name))
           return;
@@ -2089,6 +2097,8 @@
    * @remarks Eventually, when useEvent lands, we hopefully won't need this.
    */
   function useEnsureStability(parentHookName, ...values) {
+      if (BuildMode !== 'development')
+          return;
       const helperToEnsureStability = _$1([]);
       const shownError = _$1([]);
       useHelper(values.length, -1);
@@ -3147,7 +3157,7 @@
   };
 
   function generateStack() {
-      if (window._generate_setState_stacks) {
+      if (BuildMode === 'development' && window._generate_setState_stacks) {
           try {
               throw new Error();
           }
@@ -3163,19 +3173,23 @@
    * @remarks The global variable `_generate_setState_stacks` must be true, or no stack will be generated.
    */
   function useStack() {
-      {
+      if (BuildMode === "development") {
           const stack = F$2(generateStack, []);
           const getStack = T$2(() => stack, []);
           return getStack;
       }
+      else {
+          return returnEmptyString;
+      }
   }
+  function returnEmptyString() { return ""; }
 
   /**
    * If you want a single place to put a debugger for tracking focus,
    * here:
    */
   function focus(e) {
-      if (window.LOG_FOCUS_CHANGES === true) {
+      if (BuildMode === 'development' && window.LOG_FOCUS_CHANGES === true) {
           console.log(`Focus changed to ${(e?.tagName || "").toLowerCase().padStart(6)}:`, e);
           console.log(generateStack());
       }
@@ -3280,7 +3294,7 @@
    * @returns A modified copy of the given props
    */
   function useTagProps(props, tag) {
-      if (window._generate_useTagProps_tags) {
+      if (BuildMode === 'development' && window._generate_useTagProps_tags) {
           const [id] = h$2(() => ++idIndex);
           const propsIdTag = `data-props-${tag}-${id}`;
           const getStack = useStack();
@@ -3838,7 +3852,7 @@
       // Hijack the normal setter function 
       // to also set our ref to the new value
       const setState = T$2(value => {
-          {
+          if (BuildMode === 'development') {
               window._setState_stack = getStack();
           }
           if (typeof value === "function") {
@@ -8940,6 +8954,8 @@
    * @compositeParams
    */
   function useButton({ buttonParameters: { tagButton, disabled, pressed, role, onPressSync, ...void1 }, pressParameters: { focusSelf, allowRepeatPresses, longPressThreshold, onPressingChange, excludeSpace, ...void3 }, refElementParameters, ...void2 }) {
+      if (tagButton != "button")
+          debugger;
       monitorCallCount(useButton);
       const { refElementReturn, propsStable: propsRef, ...void5 } = useRefElement({ refElementParameters });
       const { pressReturn, props: propsPress, ...void4 } = usePress({
@@ -8962,7 +8978,7 @@
       });
       const baseProps = { "aria-pressed": (pressed === true ? "true" : pressed === false ? "false" : undefined) };
       const buttonProps = { ...baseProps, disabled: (disabled && disabled != "soft") ? true : false, "aria-disabled": (disabled === 'soft' ? 'true' : undefined), role: role == "button" ? undefined : role };
-      const divProps = { ...baseProps, tabIndex: (disabled === "hard" ? -1 : 0), role, "aria-disabled": disabled ? "true" : undefined };
+      const divProps = { ...baseProps, tabIndex: (disabled === "hard" ? -1 : 0), role: role || "button", "aria-disabled": disabled ? "true" : undefined };
       return {
           pressReturn,
           props: useMergedProps(propsPress, propsRef, (tagButton == 'button' ? buttonProps : divProps)),
@@ -10496,7 +10512,7 @@
       });*/
       const { name, indexToName, nameToIndex } = context.radioContext;
       const { tagInput, labelPosition } = labelParameters;
-      const { propsChild: listNavigationSingleSelectionChildProps, propsTabbable, singleSelectionChildReturn, pressParameters: { onPressSync, excludeSpace, ...void2 }, ...listNavRet } = useCompleteListNavigationChild({
+      const { pressParameters: { excludeSpace, onPressSync }, singleSelectionChildReturn, propsTabbable, propsChild: listNavigationSingleSelectionChildProps, ...listNavRet } = useCompleteListNavigationChildDeclarative({
           info: {
               focusSelf: useStableCallback((e) => { return checkboxLikeRet.checkboxLikeReturn.focusSelf(); }),
               ...info
@@ -10506,7 +10522,8 @@
           hasCurrentFocusParameters,
           refElementParameters,
           singleSelectionChildParameters: { singleSelectionDisabled: !!disabled },
-          multiSelectionChildParameters: { initiallyMultiSelected: false, multiSelectionDisabled: true, onMultiSelectChange: null }
+          multiSelectionChildParameters: { multiSelectionDisabled: true },
+          multiSelectionChildDeclarativeParameters: { multiSelected: false, onMultiSelectedChange: null }
       });
       const { singleSelected: checked } = singleSelectionChildReturn;
       const { refElementReturn: refElementInputReturn, propsStable: propsRefInput } = useRefElement({ refElementParameters: {} });
@@ -10544,13 +10561,14 @@
       const propsInput2 = useMergedProps(propsRefInput, labelPosition != "wrapping" ? propsIfInputHandlesFocus : propsInput);
       const propsIfLabelHandlesFocus = useMergedProps(listNavigationSingleSelectionChildProps, propsTabbable, propsLabel);
       const propsLabel2 = useMergedProps(propsRefLabel, labelPosition == "wrapping" ? propsIfLabelHandlesFocus : propsLabel);
-      return {
+      const ret = {
           propsInput: propsInput2,
           propsLabel: propsLabel2,
           singleSelectionChildReturn,
           ...checkboxLikeRet,
           ...listNavRet
       };
+      return ret;
   }
 
   /**
@@ -13048,11 +13066,13 @@
   /**
    * Creates a set of props that implement a Flip transition. Like all `useCreate*Props` hooks, must be used in tandem with a `Transitionable` component (or `useTransition`).
    */
-  function useBasePropsFlip({ flipParameters: { flipAngleBlock, flipAngleInline, flipPerspective } }) {
+  function useBasePropsFlip({ flipParameters: { flipAngleBlock, flipAngleInline, flipPerspective, flipOrigin, flipOriginInline, flipOriginBlock } }) {
       const { GetBaseClass } = useCssClasses();
       return {
           className: `${GetBaseClass()}-flip`,
           style: {
+              [`--${GetBaseClass()}-flip-origin-inline`]: `${(flipOriginInline ?? flipOrigin ?? 0.5)}`,
+              [`--${GetBaseClass()}-flip-origin-block`]: `${(flipOriginBlock ?? flipOrigin ?? 0.5)}`,
               [`--${GetBaseClass()}-flip-angle-inline`]: `${(useLastNonNullValue(flipAngleInline) ?? 0)}deg`,
               [`--${GetBaseClass()}-flip-angle-block`]: `${(useLastNonNullValue(flipAngleBlock) ?? 0)}deg`,
               [`--${GetBaseClass()}-perspective`]: `${(flipPerspective ?? 800)}px`
@@ -13071,7 +13091,7 @@
    *
    * @see `Transitionable`
    */
-  x$1(forwardElementRef(function Flip({ duration, exclusivityKey, easing, easingIn, easingOut, delayMountUntilShown, flipAngleInline, flipAngleBlock, flipPerspective, show, animateOnMount, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
+  x$1(forwardElementRef(function Flip({ duration, exclusivityKey, easing, easingIn, easingOut, delayMountUntilShown, flipAngleInline, flipAngleBlock, flipPerspective, flipOrigin, flipOriginInline, flipOriginBlock, show, animateOnMount, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
           refElementParameters: { onElementChange, onMount, onUnmount },
           transitionParameters: {
@@ -13085,10 +13105,30 @@
               easing,
               easingIn,
               easingOut,
-              propsIncoming: useMergedProps(useBasePropsFlip({ flipParameters: { flipAngleBlock, flipAngleInline, flipPerspective } }), { ref, ...rest })
+              propsIncoming: useMergedProps(useBasePropsFlip({ flipParameters: { flipAngleBlock, flipAngleInline, flipPerspective, flipOrigin, flipOriginInline, flipOriginBlock } }), { ref, ...rest })
           },
           exclusiveTransitionParameters: { exclusivityKey }
       });
+  }));
+
+  x$1(forwardElementRef(function FlipFade({ duration, exclusivityKey, easing, easingIn, easingOut, fadeMin, fadeMax, show, animateOnMount, delayMountUntilShown, flipAngleInline, flipAngleBlock, flipPerspective, flipOrigin, flipOriginInline, flipOriginBlock, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
+      return (useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
+          transitionParameters: {
+              measure: false,
+              show,
+              duration,
+              animateOnMount,
+              exitVisibility,
+              delayMountUntilShown,
+              onVisibilityChange,
+              easing,
+              easingIn,
+              easingOut,
+              propsIncoming: useMergedProps(useBasePropsFade({ fadeParameters: { fadeMax, fadeMin } }), useBasePropsFlip({ flipParameters: { flipAngleInline, flipAngleBlock, flipPerspective, flipOrigin, flipOriginInline, flipOriginBlock } }), { ref, ...rest })
+          },
+          exclusiveTransitionParameters: { exclusivityKey }
+      }));
   }));
 
   /**
@@ -13197,26 +13237,6 @@
       }));
   }));
 
-  x$1(forwardElementRef(function SlideZoom({ duration, exclusivityKey, easing, easingIn, easingOut, zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline, show, animateOnMount, delayMountUntilShown, slideTargetBlock, slideTargetInline, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
-      return useTransition({
-          refElementParameters: { onElementChange, onMount, onUnmount },
-          transitionParameters: {
-              measure: false,
-              show,
-              duration,
-              animateOnMount,
-              exitVisibility,
-              delayMountUntilShown,
-              onVisibilityChange,
-              easing,
-              easingIn,
-              easingOut,
-              propsIncoming: useMergedProps({ ref, ...rest }, useBasePropsZoom({ zoomParameters: { zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline } }), useBasePropsSlide({ slideParameters: { slideTargetBlock, slideTargetInline } }))
-          },
-          exclusiveTransitionParameters: { exclusivityKey }
-      });
-  }));
-
   const SlideZoomFade = x$1(forwardElementRef(function SlideZoomFade({ duration, exclusivityKey, easing, easingIn, easingOut, zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline, show, animateOnMount, delayMountUntilShown, slideTargetBlock, slideTargetInline, fadeMax, fadeMin, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
       return useTransition({
           refElementParameters: { onElementChange, onMount, onUnmount },
@@ -13232,6 +13252,26 @@
               easingIn,
               easingOut,
               propsIncoming: useMergedProps(useBasePropsZoom({ zoomParameters: { zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline } }), useBasePropsSlide({ slideParameters: { slideTargetBlock, slideTargetInline } }), useBasePropsFade({ fadeParameters: { fadeMax, fadeMin } }), { ref, ...rest })
+          },
+          exclusiveTransitionParameters: { exclusivityKey }
+      });
+  }));
+
+  x$1(forwardElementRef(function SlideZoom({ duration, exclusivityKey, easing, easingIn, easingOut, zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline, show, animateOnMount, delayMountUntilShown, slideTargetBlock, slideTargetInline, exitVisibility, onVisibilityChange, onElementChange, onMount, onUnmount, ...rest }, ref) {
+      return useTransition({
+          refElementParameters: { onElementChange, onMount, onUnmount },
+          transitionParameters: {
+              measure: false,
+              show,
+              duration,
+              animateOnMount,
+              exitVisibility,
+              delayMountUntilShown,
+              onVisibilityChange,
+              easing,
+              easingIn,
+              easingOut,
+              propsIncoming: useMergedProps({ ref, ...rest }, useBasePropsZoom({ zoomParameters: { zoomMin, zoomMinBlock, zoomMinInline, zoomOrigin, zoomOriginBlock, zoomOriginInline } }), useBasePropsSlide({ slideParameters: { slideTargetBlock, slideTargetInline } }))
           },
           exclusiveTransitionParameters: { exclusivityKey }
       });
@@ -15982,9 +16022,9 @@
   });
   const MenuItem = x$1(forwardElementRef$1(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }, ref) {
       const imperativeHandle = _$1(null);
-      return (o$3(ProgressWithHandler, { asyncHandler: () => {
+      return (o$3(ProgressWithHandler, { asyncHandler: (_unused, e) => {
               console.assert(!!imperativeHandle.current);
-              return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu);
+              return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu, e);
           }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
               const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
               return (o$3(MenuItem$1, { imperativeHandle: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, singleSelectionDisabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
@@ -18504,7 +18544,7 @@
       // IMPORTANT: exitVisibility is "removed" instead of "hidden"
       // because "hidden" can still cause a lot of layout stuff to happen on hidden tabs,
       // which is bad if one tab is heavier than others -- it'll still affect them even when closed.
-      return (o$3(SlideZoomFade, { exitVisibility: "removed", delayMountUntilShown: true, duration: 500, show: visible, zoomMin: (11 / 12), ...transitionProps, children: o$3("div", { ...useMergedProps({ className: clsx("tab-panel scroll-shadows scroll-shadows-y") }, { ...props, ref }), children: o$3(TabPanelChildren, { visible: visible, children: children }) }) }));
+      return (o$3(SlideZoomFade, { delayMountUntilShown: true, exitVisibility: "removed", duration: 500, show: visible, zoomMin: (11 / 12), ...transitionProps, children: o$3("div", { ...useMergedProps({ className: clsx("tab-panel scroll-shadows scroll-shadows-y") }, { ...props, ref }), children: o$3(TabPanelChildren, { visible: visible || false, children: children }) }) }));
   });
   const TabPanelChildren = x$1(function TabPanelChildren({ children, visible }) {
       // It's more than likely that any given panel's children will be heavy to render,
@@ -18546,7 +18586,7 @@
   const TabPanel = x$1(forwardElementRef$1(function TabPanel({ index, ...props }, ref) {
       const orientation = q$2(OrientationContext);
       return (o$3(TabPanel$1, { index: index, render: info => {
-              return (o$3(StructureTabPanel, { ref: ref, visible: info.tabPanelReturn.visible || false, visibleOffset: info.tabPanelReturn.visibleOffset || 0, orientation: orientation, ...useMergedProps(info.props, props) }));
+              return (o$3(StructureTabPanel, { ref: ref, visible: info.tabPanelReturn.visible, visibleOffset: info.tabPanelReturn.visibleOffset || 0, orientation: orientation, ...useMergedProps(info.props, props) }));
           } }));
   }));
 

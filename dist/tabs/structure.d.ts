@@ -4,7 +4,7 @@ import { GlobalAttributes } from "../utility/types.js";
 import type { TabsProps } from "./index.js";
 export interface StructureTabPanelProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> {
     visibleOffset: number;
-    visible: boolean;
+    visible: boolean | null;
 }
 export declare const StructureTabPanel: ({ orientation, visibleOffset, visible, children, ...props }: StructureTabPanelProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
 export interface StructureTabsProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> {

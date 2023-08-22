@@ -85,7 +85,7 @@ export const TabPanel = memo(forwardElementRef(function TabPanel({ index, ...pro
                 return (
                     <StructureTabPanel
                         ref={ref}
-                        visible={info.tabPanelReturn.visible || false}
+                        visible={info.tabPanelReturn.visible}
                         visibleOffset={info.tabPanelReturn.visibleOffset || 0}
                         orientation={orientation}
                         {...useMergedProps(info.props, props)} />

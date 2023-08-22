@@ -10,7 +10,7 @@ import { GlobalAttributes } from "../utility/types.js";
 import type { TabsProps } from "./index.js";
 
 
-export interface StructureTabPanelProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> { visibleOffset: number; visible: boolean; }
+export interface StructureTabPanelProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> { visibleOffset: number; visible: boolean | null; }
 
 export const StructureTabPanel = memoForwardRef(function StructureTabPanel({ orientation, visibleOffset, visible, children, ...props }: StructureTabPanelProps, ref: Ref<HTMLDivElement>) {
 
@@ -33,9 +33,9 @@ export const StructureTabPanel = memoForwardRef(function StructureTabPanel({ ori
     // because "hidden" can still cause a lot of layout stuff to happen on hidden tabs,
     // which is bad if one tab is heavier than others -- it'll still affect them even when closed.
     return (
-        <SlideZoomFade exitVisibility="removed" delayMountUntilShown duration={500} show={visible} zoomMin={(11 / 12)} {...transitionProps}>
+        <SlideZoomFade delayMountUntilShown exitVisibility="removed" duration={500} show={visible} zoomMin={(11 / 12)} {...transitionProps}>
             <div {...useMergedProps({ className: clsx("tab-panel scroll-shadows scroll-shadows-y") }, { ...props, ref })}>
-                <TabPanelChildren visible={visible}>{children}</TabPanelChildren>
+                <TabPanelChildren visible={visible || false}>{children}</TabPanelChildren>
             </div>
         </SlideZoomFade>
     );

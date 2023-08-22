@@ -23,7 +23,7 @@ export const Tab = memo(forwardElementRef(function Tab({ index, getSortValue, ch
 export const TabPanel = memo(forwardElementRef(function TabPanel({ index, ...props }, ref) {
     const orientation = useContext(OrientationContext);
     return (_jsx(AriaTabPanel, { index: index, render: info => {
-            return (_jsx(StructureTabPanel, { ref: ref, visible: info.tabPanelReturn.visible || false, visibleOffset: info.tabPanelReturn.visibleOffset || 0, orientation: orientation, ...useMergedProps(info.props, props) }));
+            return (_jsx(StructureTabPanel, { ref: ref, visible: info.tabPanelReturn.visible, visibleOffset: info.tabPanelReturn.visibleOffset || 0, orientation: orientation, ...useMergedProps(info.props, props) }));
         } }));
 }));
 //# sourceMappingURL=index.js.map

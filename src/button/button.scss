@@ -1,4 +1,5 @@
 @use "bootstrap-sass-variables/bootstrap.scss" as *;
+@use "sass:color";
 
 .btn {
     position: relative;
@@ -56,12 +57,13 @@ $value in $theme-colors {
     }
 }
 
+// continuation from the above, this is still for fixing the "hover and focus look the same" deal
 .btn {
     &:focus-visible {
         color: var(--#{$prefix}btn-focus-color, var(--#{$prefix}btn-hover-color));
         @include gradient-bg(var(--#{$prefix}btn-focus-bg, var(--#{$prefix}btn-hover-bg)));
         border-color: var(--#{$prefix}btn-focus-border-color, var(--#{$prefix}btn-hover-border-color));
-        
+
         &:hover {
             color: var(--#{$prefix}btn-focus-color, var(--#{$prefix}btn-hover-color));
             @include gradient-bg(var(--#{$prefix}btn-focus-bg, var(--#{$prefix}btn-hover-bg)));
@@ -81,3 +83,11 @@ $value in $theme-colors {
         border-color: var(--#{$prefix}btn-focus-border-color, var(--#{$prefix}btn-hover-border-color));
     }
 }
+
+// This is a separate thing -- to make hover states not look like active states
+/*@each $color, $value in $theme-colors {
+    .btn-outline-# { $ color} {
+       // @include button-outline-variant($value, );
+       background-color: color.scale(color-contrast($value), $alpha: -50%);
+    }
+}*/

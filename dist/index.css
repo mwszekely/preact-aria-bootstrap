@@ -11953,6 +11953,12 @@ textarea.form-control-lg {
   border-color: var(--bs-btn-focus-border-color, var(--bs-btn-hover-border-color));
 }
 
+/*@each $color, $value in $theme-colors {
+    .btn-outline-# { $ color} {
+       // @include button-outline-variant($value, );
+       background-color: color.scale(color-contrast($value), $alpha: -50%);
+    }
+}*/
 .badge {
   z-index: 1;
 }
@@ -12778,8 +12784,9 @@ textarea.form-control-lg {
 .ptl.ptl-flip {
   backface-visibility: hidden;
   --ptl-properties: transform;
-  --ptl-origin-x: calc(0 + var(--ptl-origin-inline));
-  --ptl-origin-y: calc(0 + var(--ptl-origin-block));
+  transform-origin: calc(var(--ptl-flip-origin-x) * 100%) calc(var(--ptl-flip-origin-y) * 100%);
+  --ptl-flip-origin-x: calc(0 + var(--ptl-flip-origin-inline));
+  --ptl-flip-origin-y: calc(0 + var(--ptl-flip-origin-block));
 }
 .ptl.ptl-flip.ptl-n-i, .ptl.ptl-flip.ptl-x-t, .ptl.ptl-flip.ptl-x-f {
   transform: perspective(var(--ptl-perspective, 800px)) rotate3d(1, 0, 0, calc(var(--ptl-flip-angle-x, 0))) rotate3d(0, 1, 0, calc(var(--ptl-flip-angle-y, 0)));
@@ -12815,6 +12822,10 @@ textarea.form-control-lg {
 }
 .ptl.ptl-flip.ptl-inline-direction-btt {
   --ptl-flip-angle-y: calc(-1 * var(--ptl-flip-angle-inline));
+}
+
+.ptl.ptl-flip.ptl-fade {
+  --ptl-properties: transform, opacity;
 }
 
 .ptl.ptl-collapse {

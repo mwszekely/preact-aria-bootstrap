@@ -30,7 +30,7 @@ export interface MenuItemProps extends GlobalAttributes<HTMLDivElement> {
     index: number;
     children: ComponentChildren;
     disabled?: boolean;
-    onPress?: (closeMenu: (e: EventType<any, any>) => void) => (void | Promise<void>);
+    onPress?: (closeMenu: (e: EventType<any, any>) => void, e: EventType<any, any>) => (void | Promise<void>);
     getSortValue?: () => unknown;
     loadingLabel?: string;
 }

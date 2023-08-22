@@ -21,7 +21,7 @@ export const StructureTabPanel = memoForwardRef(function StructureTabPanel({ ori
     // IMPORTANT: exitVisibility is "removed" instead of "hidden"
     // because "hidden" can still cause a lot of layout stuff to happen on hidden tabs,
     // which is bad if one tab is heavier than others -- it'll still affect them even when closed.
-    return (_jsx(SlideZoomFade, { exitVisibility: "removed", delayMountUntilShown: true, duration: 500, show: visible, zoomMin: (11 / 12), ...transitionProps, children: _jsx("div", { ...useMergedProps({ className: clsx("tab-panel scroll-shadows scroll-shadows-y") }, { ...props, ref }), children: _jsx(TabPanelChildren, { visible: visible, children: children }) }) }));
+    return (_jsx(SlideZoomFade, { delayMountUntilShown: true, exitVisibility: "removed", duration: 500, show: visible, zoomMin: (11 / 12), ...transitionProps, children: _jsx("div", { ...useMergedProps({ className: clsx("tab-panel scroll-shadows scroll-shadows-y") }, { ...props, ref }), children: _jsx(TabPanelChildren, { visible: visible || false, children: children }) }) }));
 });
 const TabPanelChildren = memo(function TabPanelChildren({ children, visible }) {
     // It's more than likely that any given panel's children will be heavy to render,

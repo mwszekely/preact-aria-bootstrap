@@ -70,9 +70,9 @@ export const StructureMenuFocusSentinel = memoForwardRef(function StructureMenuF
 });
 export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }, ref) {
     const imperativeHandle = useRef(null);
-    return (_jsx(ProgressWithHandler, { asyncHandler: () => {
+    return (_jsx(ProgressWithHandler, { asyncHandler: (_unused, e) => {
             console.assert(!!imperativeHandle.current);
-            return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu);
+            return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu, e);
         }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
             const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
             return (_jsx(AriaMenuItem, { imperativeHandle: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, singleSelectionDisabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {

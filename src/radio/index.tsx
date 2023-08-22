@@ -83,9 +83,6 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
 export interface RadioProps<V extends number | string> extends
     Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">,
     Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
-    //inline?: boolean;
-    //checked: boolean | "mixed";
-    //onValueChange(checked: boolean, event: RadioChangeEvent<HTMLInputElement>): void | Promise<void>;
     loadingLabel?: string;
     disabled?: boolean;
     value: V;
