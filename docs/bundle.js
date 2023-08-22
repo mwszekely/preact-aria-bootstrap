@@ -16091,8 +16091,8 @@
   });
 
   const RadioGroupContext = G$1(null);
-  function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
-      labelPosition ??= "after";
+  function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, fieldset, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
+      labelPosition ??= (fieldset ? "within" : "after");
       const imperativeHandle = _$1(null);
       // Note: We use useAsync, instead of useAsyncHandler, because the actual event handler isn't here.
       // If we were listening for the individual radios' onInput events, we would do that, but
@@ -16106,8 +16106,10 @@
       const pendingValue = (pending ? capturedValue : null);
       inline ??= false;
       return (o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(RadioGroupContext.Provider, { value: F$2(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: o$3(RadioGroup$1, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, imperativeHandle: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", render: info => {
-                      const visibleLabel = o$3("label", { ...info.propsRadioGroupLabel, children: label });
-                      return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: o$3("span", { ...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
+                      const E = (fieldset ? "fieldset" : "span");
+                      const L = (fieldset ? "legend" : "label");
+                      const visibleLabel = o$3(L, { ...useMergedProps({ class: clsx("form-label radio-group-label") }, info.propsRadioGroupLabel), children: label });
+                      return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: o$3(E, { ...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
                   } }) }) }));
   }
   function Radio({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }, ref) {

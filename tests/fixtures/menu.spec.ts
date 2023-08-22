@@ -7,11 +7,11 @@ test('Opens when button clicked', async ({ page, menu: { menuButton }, shared: {
 });
 
 test('Menu items can be pressed', async ({ page, menu: { menuButton }, shared: { getCounter, install, run, locator } }) => {
-    await install("Menu", "onMenuItem", async (closeMenu, index) => { 
+    await install("Menu", "onMenuItem", async (closeMenu, index, e) => { 
        await new Promise(resolve => setTimeout(resolve, 500));  
        await window.increment(); 
        if (index == 0)
-        closeMenu(); 
+        closeMenu(e); 
     });
 
     await menuButton.click();

@@ -16,6 +16,7 @@ export interface RadioGroupProps<V extends string | number> extends
     Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">,
     Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     selectedValue: V | null;
+    fieldset?: boolean;
     onValueChange: (value: V, event: Event) => (void | Promise<void>);
     disabled?: boolean;
     inline?: boolean;
@@ -29,8 +30,8 @@ export interface RadioGroupContext<V extends string | number> {
 }
 export const RadioGroupContext = createContext<RadioGroupContext<string | number> | null>(null);
 
-export function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
-    labelPosition ??= "after";
+export function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, fieldset, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
+    labelPosition ??= (fieldset? "within" : "after");
 
     const imperativeHandle = useRef<UseRadioGroupReturnType<V, HTMLSpanElement, HTMLLabelElement, HTMLInputElement>>(null);
 
@@ -60,15 +61,17 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
                     onSelectedValueChange={onSelectedIndexChangeSync}
                     arrowKeyDirection={inline ? "horizontal" : "vertical"}
                     render={info => {
-                        const visibleLabel = <label {...info.propsRadioGroupLabel}>{label}</label>
+                        const E = (fieldset? "fieldset" : "span");
+                        const L = (fieldset? "legend" : "label") as "label";
+                        const visibleLabel = <L {...useMergedProps({ class: clsx("form-label radio-group-label") }, info.propsRadioGroupLabel)}>{label}</L>
                         return (
                             <>
                                 {labelPosition == "before" && visibleLabel}
                                 <KeyboardAssistIcon leftRight={!!inline} upDown={!inline} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != "none"}>
-                                    <span {...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props)}>
+                                    <E {...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props)}>
                                         {labelPosition == "within" && visibleLabel}
                                         {children}
-                                    </span>
+                                    </E>
                                 </KeyboardAssistIcon>
                                 {labelPosition == "after" && visibleLabel}
                             </>
@@ -90,7 +93,7 @@ export interface RadioProps<V extends number | string> extends
 }
 
 export function Radio<V extends number | string>({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }: LabelledProps<RadioProps<V>, "tooltip">, ref?: Ref<any>) {
-    
+
     labelPosition ||= "after";
 
     const radioGroupInfo = useContext(RadioGroupContext);
