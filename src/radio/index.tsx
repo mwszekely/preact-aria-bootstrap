@@ -134,6 +134,7 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                 const loadingJsx = (
                     <Fade show={pending} exitVisibility="removed"><span  {...useMergedProps(propsProgressIndicator, { class: "spinner-border" })} /></Fade>
                 );
+                const labelRef = useRef<HTMLLabelElement>(null);
 
                 return (
                     <AriaRadio<LabelPosition, V, HTMLInputElement, HTMLLabelElement>
@@ -144,6 +145,7 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                         tagInput="input"
                         tagLabel="label"
                         disabled={d}
+                        getText={() => labelRef.current?.textContent || `${value}` || ""}
 
                         render={info => {
                             const inputJsx = <input class="form-check-input" {...useMergedProps(info.propsInput, props, { ref })} />;
@@ -151,7 +153,7 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                             return (
                                 <StructureRadioWrapper inline={inline || false} pending={pending} labelPosition={labelPosition!}>
                                     {loadingJsx}
-                                    <label class="form-check-label" {...info.propsLabel}>
+                                    <label {...useMergedProps({ class: "form-check-label", ref: labelRef }, info.propsLabel)}>
                                         {labelPosition == "before" && label}
                                         {labelPosition == "tooltip" ? <Tooltip forward tooltip={label} alignMode="element" absolutePositioning={true}>{inputJsx}</Tooltip> : inputJsx}
                                         {labelPosition == "after" && label}
