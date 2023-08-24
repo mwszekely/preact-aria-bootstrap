@@ -1958,7 +1958,8 @@
    * @remarks Bundlers like Rollup will actually no-op out development code if `"development" !== "development"`
    * (which, of course, covers the default case where `"development"` just doesn't exist).
    */
-  const BuildMode = globalThis["process"]["env"]["NODE_ENV"] = (globalThis["process"]["env"]["NODE_ENV"] || "production");
+  const BuildMode = "development" ;
+  process.env.NODE_ENV = BuildMode;
 
   // TODO: This shouldn't be in every build, I don't think it's in core-js? I think?
   // And it's extremely small anyway and basically does nothing.
@@ -1972,8 +1973,6 @@
    * @remarks Re-renders and such are all collected together when the table is printed to the console with `requestIdleCallback`.
    */
   function monitorCallCount(hook) {
-      if (BuildMode !== 'development')
-          return;
       const name = hook.name;
       if (filters.has(name))
           return;
@@ -2097,8 +2096,6 @@
    * @remarks Eventually, when useEvent lands, we hopefully won't need this.
    */
   function useEnsureStability(parentHookName, ...values) {
-      if (BuildMode !== 'development')
-          return;
       const helperToEnsureStability = _$1([]);
       const shownError = _$1([]);
       useHelper(values.length, -1);
@@ -3157,7 +3154,7 @@
   };
 
   function generateStack() {
-      if (BuildMode === 'development' && window._generate_setState_stacks) {
+      if (window._generate_setState_stacks) {
           try {
               throw new Error();
           }
@@ -3173,23 +3170,19 @@
    * @remarks The global variable `_generate_setState_stacks` must be true, or no stack will be generated.
    */
   function useStack() {
-      if (BuildMode === "development") {
+      {
           const stack = F$2(generateStack, []);
           const getStack = T$2(() => stack, []);
           return getStack;
       }
-      else {
-          return returnEmptyString;
-      }
   }
-  function returnEmptyString() { return ""; }
 
   /**
    * If you want a single place to put a debugger for tracking focus,
    * here:
    */
   function focus(e) {
-      if (BuildMode === 'development' && window.LOG_FOCUS_CHANGES === true) {
+      if (window.LOG_FOCUS_CHANGES === true) {
           console.log(`Focus changed to ${(e?.tagName || "").toLowerCase().padStart(6)}:`, e);
           console.log(generateStack());
       }
@@ -3294,7 +3287,7 @@
    * @returns A modified copy of the given props
    */
   function useTagProps(props, tag) {
-      if (BuildMode === 'development' && window._generate_useTagProps_tags) {
+      if (window._generate_useTagProps_tags) {
           const [id] = h$2(() => ++idIndex);
           const propsIdTag = `data-props-${tag}-${id}`;
           const getStack = useStack();
@@ -3852,7 +3845,7 @@
       // Hijack the normal setter function 
       // to also set our ref to the new value
       const setState = T$2(value => {
-          if (BuildMode === 'development') {
+          {
               window._setState_stack = getStack();
           }
           if (typeof value === "function") {
@@ -15938,6 +15931,9 @@
       //const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLDivElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged }, refElementReturn })
       const [paginationStart, setPaginationStart] = useState(paginationSize == null ? null : 0);
       const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
+      if (selectedIndex != null) {
+          console.assert(selectionMode == "single", `selectedIndex was specified even though selection is not enabled. Use the selectionMode prop to enable selection.`);
+      }
       if (paginationSize)
           paginationLocation ||= "before";
       return (o$3(DefaultDisabled.Provider, { value: disabled ?? false, children: o$3(Gridlist, { singleSelectedIndex: selectedIndex ?? null, singleSelectionAriaPropName: "aria-selected", onSingleSelectedIndexChange: useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex); }), paginationMin: paginationStart, paginationMax: paginationEnd, staggered: staggered || false, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", render: info => {
