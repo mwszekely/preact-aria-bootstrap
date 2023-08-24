@@ -99,7 +99,7 @@ export function List({ disabled, selectedIndex, selectionMode, onSelectedIndexCh
     const [paginationStart, setPaginationStart] = useState<number | null>(paginationSize == null ? null : 0);
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
 
-    if (selectedIndex != null) {
+    if (selectedIndex != null || onSelectedIndexChange != null) {
         console.assert(selectionMode == "single", `selectedIndex was specified even though selection is not enabled. Use the selectionMode prop to enable selection.`);
     }
 

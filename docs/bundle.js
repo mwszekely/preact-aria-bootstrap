@@ -15931,7 +15931,7 @@
       //const { hasCurrentFocusReturn } = useHasCurrentFocus<HTMLDivElement>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged }, refElementReturn })
       const [paginationStart, setPaginationStart] = useState(paginationSize == null ? null : 0);
       const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
-      if (selectedIndex != null) {
+      if (selectedIndex != null || onSelectedIndexChange != null) {
           console.assert(selectionMode == "single", `selectedIndex was specified even though selection is not enabled. Use the selectionMode prop to enable selection.`);
       }
       if (paginationSize)
