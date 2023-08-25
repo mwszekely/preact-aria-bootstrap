@@ -4568,15 +4568,13 @@
           setTabbableColumn,
           setTabbableCell: setTabbableIndex
       });
-      // TODO: propsLN2 (awful name) is just the tabIndex=0 or -1 from rovingTabIndex, which flips around when `untabbable` flips.
-      // We can ignore it here, because our tabIndex is entirely controlled by our own list navigation,
-      // but it shouldn't just be ignored wholesale like this.
-      propsLN.tabIndex = propsLN.tabIndex ?? propsLNC.tabIndex;
+      // These will often have conflicting values, but we always use -1 for rows no matter what,
+      // so instead of negotiating a resolution we can just give a straight answer.
+      propsLN.tabIndex = propsLNC.tabIndex = -1;
       const props = useMergedProps(propsLN, propsLNC, {
           // Ensure that if the browser focuses the row for whatever reason, we transfer the focus to a child cell.
           onFocus: useStableCallback(e => whenThisRowIsFocused(e.currentTarget))
       });
-      props.tabIndex = -1;
       const contextToChildren = useMemoObject({
           gridNavigationCellContext,
           ...contextULN
@@ -5060,7 +5058,7 @@
           hasCurrentFocusParameters: {
               onCurrentFocusedInnerChanged
           },
-          props: { [multiSelectionAriaPropName || "aria-selected"]: localSelected ? "true" : "false" },
+          props: { [multiSelectionAriaPropName || "aria-selected"]: multiSelectionMode == "disabled" ? undefined : (localSelected ? "true" : "false") },
           info: {
               getMultiSelected: getLocalSelected,
               setSelectedFromParent,
@@ -9917,16 +9915,17 @@
    */
   function useGridlistCell({ pressParameters: { onPressSync, longPressThreshold, onPressingChange, ...void1 }, ...p }) {
       monitorCallCount(useGridlistCell);
-      const { props, ...info } = useCompleteGridNavigationCell(p);
+      const { props, refElementReturn, ...info } = useCompleteGridNavigationCell(p);
       const { pressReturn, props: propsPress } = usePress({
           pressParameters: { onPressSync, focusSelf: p.info.focusSelf, allowRepeatPresses: false, excludeEnter: null, excludePointer: null, excludeSpace: info.pressParameters.excludeSpace, longPressThreshold, onPressingChange },
-          refElementReturn: info.refElementReturn
+          refElementReturn,
       });
       return {
           ...info,
           propsPress,
           propsCell: { role: "gridcell" },
           propsTabbable: props,
+          refElementReturn,
           pressReturn
       };
   }
@@ -10419,16 +10418,18 @@
       monitorCallCount(useProgressWithHandler);
       const notify = useNotify();
       const asyncInfo = useAsyncHandler({
-          ...asyncHandlerParameters, asyncHandler: async (...args) => {
+          ...asyncHandlerParameters,
+          asyncHandler: (...args) => {
               try {
                   let promiseOrValue = asyncHandler?.(...args);
                   if (promiseOrValue && "then" in promiseOrValue) {
                       if (notifyPending)
                           notify("assertive", notifyPending);
-                      let value = await promiseOrValue;
-                      if (notifySuccess)
-                          notify("assertive", notifySuccess);
-                      return value;
+                      return promiseOrValue.then((value) => {
+                          if (notifySuccess)
+                              notify("assertive", notifySuccess);
+                          return value;
+                      });
                   }
                   return promiseOrValue;
               }
@@ -11244,7 +11245,6 @@
   function useTooltip({ tooltipParameters: { onStatus, tooltipSemanticType, hoverDelay, usesLongPress }, activeElementParameters, escapeDismissParameters, pressReturn: { longPress, ...void2 }, ...void1 }) {
       monitorCallCount(useTooltip);
       useGlobalHandler(window, "mouseout", T$2((e) => {
-          console.log(e);
           if (e.relatedTarget == null)
               onHoverChanged(false, "popup");
       }, []));
@@ -15333,6 +15333,7 @@
   const ButtonGroupContext = G$1(null);
   function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }, ref) {
       labelPosition ??= "before";
+      orientation ||= "horizontal";
       const imperativeHandle = _$1(null);
       const [capturedIndex, setCapturedIndex] = useState(null);
       const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); }, {
@@ -15345,9 +15346,9 @@
       return (o$3(DefaultButtonSize.Provider, { value: variantSize ?? null, children: o$3(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: o$3(DisabledContext$1.Provider, { value: disabled ?? false, children: o$3(ButtonGroupContext.Provider, { value: F$2(() => ({ pendingIndex }), [pendingIndex]), children: o$3(Toolbar, { onSingleSelectedIndexChange: (...e) => {
                               onSelectedIndexChangeSync(...e);
                           }, imperativeHandle: imperativeHandle, singleSelectionAriaPropName: "aria-pressed", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
-                          , pageNavigationSize: 0, orientation: orientation || "horizontal", ariaLabel: labelPosition == 'hidden' ? label : null, singleSelectedIndex: selectionMode == "single" ? (pendingIndex ?? selectedIndex) : undefined, render: info => {
+                          , pageNavigationSize: 0, orientation: orientation, ariaLabel: labelPosition == 'hidden' ? label : null, singleSelectedIndex: selectionMode == "single" ? (pendingIndex ?? selectedIndex) : undefined, render: info => {
                               const visibleLabel = o$3("label", { ...info.propsLabel, children: label });
-                              return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: false, typeaheadActive: false, children: o$3("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
+                              return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != 'none', children: o$3("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
                           } }) }) }) }) }));
   }
 

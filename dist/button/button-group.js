@@ -9,6 +9,7 @@ import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 export const ButtonGroupContext = createContext(null);
 export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }, ref) {
     labelPosition ??= "before";
+    orientation ||= "horizontal";
     const imperativeHandle = useRef(null);
     const [capturedIndex, setCapturedIndex] = useState(null);
     const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); }, {
@@ -21,9 +22,9 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     return (_jsx(DefaultButtonSize.Provider, { value: variantSize ?? null, children: _jsx(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: _jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(ButtonGroupContext.Provider, { value: useMemo(() => ({ pendingIndex }), [pendingIndex]), children: _jsx(Toolbar, { onSingleSelectedIndexChange: (...e) => {
                             onSelectedIndexChangeSync(...e);
                         }, imperativeHandle: imperativeHandle, singleSelectionAriaPropName: "aria-pressed", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
-                        , pageNavigationSize: 0, orientation: orientation || "horizontal", ariaLabel: labelPosition == 'hidden' ? label : null, singleSelectedIndex: selectionMode == "single" ? (pendingIndex ?? selectedIndex) : undefined, render: info => {
+                        , pageNavigationSize: 0, orientation: orientation, ariaLabel: labelPosition == 'hidden' ? label : null, singleSelectedIndex: selectionMode == "single" ? (pendingIndex ?? selectedIndex) : undefined, render: info => {
                             const visibleLabel = _jsx("label", { ...info.propsLabel, children: label });
-                            return (_jsxs(_Fragment, { children: [labelPosition == "before" && visibleLabel, _jsx(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: false, typeaheadActive: false, children: _jsxs("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
+                            return (_jsxs(_Fragment, { children: [labelPosition == "before" && visibleLabel, _jsx(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != 'none', children: _jsxs("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
                         } }) }) }) }) }));
 }
 export function ButtonGroupGroup({ label, labelPosition, children, ...props }, ref) {

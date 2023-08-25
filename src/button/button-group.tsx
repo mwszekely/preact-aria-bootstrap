@@ -74,6 +74,7 @@ export interface ButtonGroupContext { pendingIndex: number | null }
 export const ButtonGroupContext = createContext<ButtonGroupContext | null>(null);
 export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>) {
     labelPosition ??= "before";
+    orientation ||= "horizontal";
 
     const imperativeHandle = useRef<UseToolbarReturnType<HTMLSpanElement, HTMLButtonElement, HTMLLabelElement, any>>(null);
     type OSSI = UseToolbarParameters<HTMLSpanElement, HTMLButtonElement, UseToolbarSubInfo<HTMLButtonElement>>["singleSelectionDeclarativeParameters"]["onSingleSelectedIndexChange"];
@@ -106,7 +107,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
 
                             role="toolbar"  // TODO: Was group, but that doesn't count as an application, I think?
                             pageNavigationSize={0}
-                            orientation={orientation || "horizontal"}
+                            orientation={orientation}
                             ariaLabel={labelPosition == 'hidden' ? label : null}
                             singleSelectedIndex={selectionMode == "single" ? (pendingIndex ?? selectedIndex) : undefined}
                             render={info => {
@@ -114,7 +115,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                                 return (
                                     <>
                                         {labelPosition == "before" && visibleLabel}
-                                        <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={false} typeaheadActive={false}>
+                                        <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != 'none'}>
                                             <span {...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref })}>
                                                 {labelPosition == "within" && visibleLabel}
                                                 {children}
