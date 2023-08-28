@@ -18668,7 +18668,7 @@
           } }));
   }
   function defaultErrorToToast(error) {
-      return o$3(Toast, { timeout: Infinity, children: error instanceof Error ? error.message : JSON.stringify(error) });
+      return o$3(Toast, { timeout: Infinity, children: error instanceof Error ? o$3("details", { children: [o$3("summary", { children: error.message }), o$3("pre", { children: o$3("code", { children: error.stack }) })] }) : JSON.stringify(error) });
   }
   /**
    * A component that will catch any errors thrown during render

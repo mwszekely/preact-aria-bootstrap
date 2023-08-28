@@ -35,7 +35,7 @@ export function Toast({ timeout, politeness, children, ...p }) {
         } }));
 }
 function defaultErrorToToast(error) {
-    return _jsx(Toast, { timeout: Infinity, children: error instanceof Error ? error.message : JSON.stringify(error) });
+    return _jsx(Toast, { timeout: Infinity, children: error instanceof Error ? _jsxs("details", { children: [_jsx("summary", { children: error.message }), _jsx("pre", { children: _jsx("code", { children: error.stack }) })] }) : JSON.stringify(error) });
 }
 /**
  * A component that will catch any errors thrown during render

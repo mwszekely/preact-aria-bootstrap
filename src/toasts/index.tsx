@@ -1,4 +1,4 @@
-import {clsx} from "clsx";
+import { clsx } from "clsx";
 import { ComponentChildren, createContext, h } from "preact";
 import { Toast as AriaToast, ToastProps as AriaToastProps, Toasts as AriaToasts } from "preact-aria-widgets";
 import { PushPortalChild, UpdatePortalChild, useMergedProps, usePortalChildren } from "preact-prop-helpers";
@@ -85,7 +85,7 @@ export function Toast({ timeout, politeness, children, ...p }: Omit<ToastProps, 
 }
 
 function defaultErrorToToast(error: any) {
-    return <Toast timeout={Infinity}>{error instanceof Error ? error.message : JSON.stringify(error)}</Toast>
+    return <Toast timeout={Infinity}>{error instanceof Error ? <details><summary>{error.message}</summary><pre><code>{error.stack}</code></pre></details> : JSON.stringify(error)}</Toast>
 }
 
 /**
