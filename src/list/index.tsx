@@ -2,6 +2,7 @@ import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
 import { Gridlist, GridlistCellInfo, GridlistChild, GridlistRow, GridlistRowInfo, ProgressWithHandler, UseGridlistRowReturnType, UseProgressWithHandlerReturnType } from "preact-aria-widgets";
 import { AsyncHandler, EventDetail, Nullable, returnUndefined, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
+import { UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers/react";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useContext, useRef } from "preact/hooks";
@@ -90,6 +91,7 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
 }
 
 const DefaultDisabled = createContext(false);
+const TypeaheadStatus = createContext<UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"]>("none");
 
 export function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
     labelPosition ??= "before";
@@ -126,7 +128,7 @@ export function List({ disabled, selectedIndex, selectionMode, onSelectedIndexCh
                     const labelJsx = <label {...info.propsGridlistLabel}>{label}</label>
 
                     return (
-                        <>
+                        <TypeaheadStatus.Provider value={info.typeaheadNavigationReturn.typeaheadStatus}>
                             {labelPosition == "before" && labelJsx}
                             <Paginated childCount={info.paginatedChildrenReturn.childCount ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
 
@@ -134,7 +136,7 @@ export function List({ disabled, selectedIndex, selectionMode, onSelectedIndexCh
 
                             </Paginated>
                             {labelPosition == "after" && labelJsx}
-                        </>
+                        </TypeaheadStatus.Provider>
                     )
                 }}
 
@@ -200,6 +202,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
         else
             return <div aria-busy="true" class="gridlist-item gridlist-item-placeholder"><span class={clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow")}><span class="placeholder w-100"></span></span></div>;
 
+            const typeaheadStatus = useContext(TypeaheadStatus);
 
     return (
         <KeyboardAssistIcon 
@@ -207,8 +210,8 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
         upDown={true} 
         homeEnd={true} 
         pageKeys={true} 
-        typeaheadStatus={infoRow.typeaheadNavigationReturn.typeaheadStatus}
-        activateSpace={infoRow.typeaheadNavigationReturn.typeaheadStatus == 'none'}
+        typeaheadStatus={typeaheadStatus}
+        activateSpace={typeaheadStatus == 'none'}
         activateEnter={true}
         description={keyboardControlsDescription ?? "Select a list item:"}>
             <div

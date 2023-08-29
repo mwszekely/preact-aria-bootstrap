@@ -15963,6 +15963,7 @@
   }));
 
   const DefaultDisabled = G$1(false);
+  const TypeaheadStatus = G$1("none");
   function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }) {
       labelPosition ??= "before";
       //const [focusedInner, setFocusedInner] = useState(false);
@@ -15978,7 +15979,7 @@
       return (o$3(DefaultDisabled.Provider, { value: disabled ?? false, children: o$3(Gridlist, { singleSelectedIndex: selectedIndex ?? null, singleSelectionAriaPropName: "aria-selected", onSingleSelectedIndexChange: useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex); }), paginationMin: paginationStart, paginationMax: paginationEnd, staggered: staggered || false, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", render: info => {
                   useUpdateRenderCounter("Gridlist");
                   const labelJsx = o$3("label", { ...info.propsGridlistLabel, children: label });
-                  return (o$3(k$3, { children: [labelPosition == "before" && labelJsx, o$3(Paginated, { childCount: info.paginatedChildrenReturn.childCount ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: o$3("div", { ...useMergedProps(props, info.propsGridlist, { class: `list-group gridlist-group` }), children: children }) }), labelPosition == "after" && labelJsx] }));
+                  return (o$3(TypeaheadStatus.Provider, { value: info.typeaheadNavigationReturn.typeaheadStatus, children: [labelPosition == "before" && labelJsx, o$3(Paginated, { childCount: info.paginatedChildrenReturn.childCount ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: o$3("div", { ...useMergedProps(props, info.propsGridlist, { class: `list-group gridlist-group` }), children: children }) }), labelPosition == "after" && labelJsx] }));
               } }) }));
   }
   const ListItemNonPaginated = x$1(({ infoRow, progressInfo, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }) => {
@@ -16012,7 +16013,8 @@
               return null;
           else
               return o$3("div", { "aria-busy": "true", class: "gridlist-item gridlist-item-placeholder", children: o$3("span", { class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"), children: o$3("span", { class: "placeholder w-100" }) }) });
-      return (o$3(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: infoRow.typeaheadNavigationReturn.typeaheadStatus, activateSpace: infoRow.typeaheadNavigationReturn.typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select a list item:", children: o$3("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
+      const typeaheadStatus = q$2(TypeaheadStatus);
+      return (o$3(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select a list item:", children: o$3("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
   });
   const ListItem = x$1(forwardElementRef$1(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
       const defaultDisabled = q$2(DefaultDisabled);
