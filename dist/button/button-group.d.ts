@@ -9,6 +9,7 @@ export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElem
      * Disables all buttons in the group together (buttons cannot individually override this)
      */
     disabled?: boolean;
+    keyboardControlsDescription?: string;
     /**
      * When `selectionMode` is `"single"`, this is the index of the child that's currently selected.
      */
@@ -59,6 +60,6 @@ export interface ButtonGroupContext {
     pendingIndex: number | null;
 }
 export declare const ButtonGroupContext: import("preact").Context<ButtonGroupContext | null>;
-export declare function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>): import("preact").JSX.Element;
+export declare function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, keyboardControlsDescription, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>): import("preact").JSX.Element;
 export declare function ButtonGroupGroup({ label, labelPosition, children, ...props }: LabelledProps<Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "class" | "className" | "style" | "children">, "within">, ref?: Ref<HTMLSpanElement>): import("preact").JSX.Element;
 //# sourceMappingURL=button-group.d.ts.map

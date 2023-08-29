@@ -59,6 +59,7 @@ interface CkEditorMentionFeed {
 
 export interface CkEditorWrapperProps {
 
+    keyboardControlsDescription?: string;
 
     editorHandle?: Ref<any>;
 
@@ -228,7 +229,7 @@ interface CkEditorHtmlSupportAllowDisallow {
     attributes: Record<string, true | string | RegExp> | Array<string> | true;
 }
 
-export const CkEditorWrapper = memo(forwardElementRef(function CkEditorWrapper({ children, implementation, valueHtml, onValueChange: ovcu, onFocusChange: ofcu, onReady: oru, editorHandle, toolbarItems, placeholder, fontFamilies, mention, fontSizes, htmlEmbed, htmlSupport, link, typing, onCharacterCountChange, onWordCountChange, ...props }: CkEditorWrapperProps, ref2?: Ref<any>) {
+export const CkEditorWrapper = memo(forwardElementRef(function CkEditorWrapper({ children, keyboardControlsDescription, implementation, valueHtml, onValueChange: ovcu, onFocusChange: ofcu, onReady: oru, editorHandle, toolbarItems, placeholder, fontFamilies, mention, fontSizes, htmlEmbed, htmlSupport, link, typing, onCharacterCountChange, onWordCountChange, ...props }: CkEditorWrapperProps, ref2?: Ref<any>) {
 
     fontSizes ||= [10, 12, 14, 'default', 18, 20, 22];
 
@@ -356,7 +357,7 @@ export const CkEditorWrapper = memo(forwardElementRef(function CkEditorWrapper({
     }, []);
     // dangerouslySetInnerHTML={{__html: valueHtml}}
     return (
-        <KeyboardAssistIcon homeEnd={true} leftRight={true} upDown={true} pageKeys={true} textF10={true} typeahead={false} typeaheadActive={false}>
+        <KeyboardAssistIcon homeEnd={true} leftRight={true} upDown={true} pageKeys={true} textF10={true} typeahead={false} typeaheadActive={false} description={keyboardControlsDescription ?? "Control the editor:"}>
             <div class="ck-editor-wrapper">
                 {useClonedElement(children, { ...props, ref: ref2 }, ref)}
             </div>

@@ -10,6 +10,7 @@ interface CkEditorMentionFeed {
     minimumCharacters: number;
 }
 export interface CkEditorWrapperProps {
+    keyboardControlsDescription?: string;
     editorHandle?: Ref<any>;
     /**
      * The value to display in the editor.
@@ -147,6 +148,6 @@ interface CkEditorHtmlSupportAllowDisallow {
     classes: Array<String | RegExp> | true;
     attributes: Record<string, true | string | RegExp> | Array<string> | true;
 }
-export declare const CkEditorWrapper: ({ children, implementation, valueHtml, onValueChange: ovcu, onFocusChange: ofcu, onReady: oru, editorHandle, toolbarItems, placeholder, fontFamilies, mention, fontSizes, htmlEmbed, htmlSupport, link, typing, onCharacterCountChange, onWordCountChange, ...props }: CkEditorWrapperProps, ref2?: Ref<any>) => import("preact").JSX.Element;
+export declare const CkEditorWrapper: ({ children, keyboardControlsDescription, implementation, valueHtml, onValueChange: ovcu, onFocusChange: ofcu, onReady: oru, editorHandle, toolbarItems, placeholder, fontFamilies, mention, fontSizes, htmlEmbed, htmlSupport, link, typing, onCharacterCountChange, onWordCountChange, ...props }: CkEditorWrapperProps, ref2?: Ref<any>) => import("preact").JSX.Element;
 export {};
 //# sourceMappingURL=ck-editor-wrapper.d.ts.map

@@ -1,5 +1,5 @@
 import { ComponentChild, ComponentChildren, createContext, Ref, VNode } from "preact";
-import { generateRandomId, useGlobalHandler, useHasCurrentFocus, useMergedProps, usePersistentState, useRefElement, useState } from "preact-prop-helpers";
+import { generateRandomId, useGlobalHandler, useHasCurrentFocus, useMergedProps, usePersistentState, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { CollapseFade, SlideZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext, useEffect, useLayoutEffect, useRef } from "preact/hooks";
@@ -16,7 +16,7 @@ declare module 'preact-prop-helpers' {
 
 const Both = [false, true] as const;
 
-export interface KeyboardAssistIconProps { visible: boolean, leftRight: boolean, upDown: boolean, pageKeys: boolean, homeEnd: boolean, typeahead: boolean, leaveF2?: boolean; textF10?: boolean; }
+export interface KeyboardAssistIconProps { visible: boolean, description: string, leftRight: boolean, upDown: boolean, pageKeys: boolean, homeEnd: boolean, typeahead: boolean, leaveF2?: boolean; textF10?: boolean; }
 interface KeyboardAssistContext {
     addLeftRight(id: string): void;
     addUpDown(id: string): void;
@@ -25,6 +25,8 @@ interface KeyboardAssistContext {
     addTypeahead(id: string): void;
     addLeaveF2(id: string): void;
     addTextF10(id: string): void;
+
+    setDescription(desc: string): void;
 
     removeLeftRight(id: string): void;
     removeUpDown(id: string): void;
@@ -40,12 +42,22 @@ interface KeyboardAssistContext {
     id: string;
 }
 const KeyboardAssistContext = createContext<null | KeyboardAssistContext>(null);
-export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & { children: VNode, typeaheadActive: boolean; }, ref?: Ref<any>) {
-    const { id: figureDescriptionId, addHomeEnd, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = useContext(KeyboardAssistContext)!;
+export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ description, leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & { children: VNode, typeaheadActive: boolean; }, ref?: Ref<any>) {
+    const { id: figureDescriptionId, addHomeEnd, setDescription, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = useContext(KeyboardAssistContext)!;
     const [randomId] = useState(() => generateRandomId());
     const [focusedInner, setFocusedInner] = useState(false);
     const { refElementReturn, propsStable } = useRefElement<any>({ refElementParameters: {} });
-    const { hasCurrentFocusReturn } = useHasCurrentFocus<any>({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn });
+    const { hasCurrentFocusReturn } = useHasCurrentFocus<any>({
+        hasCurrentFocusParameters: {
+            onCurrentFocusedChanged: null,
+            onCurrentFocusedInnerChanged: useStableCallback((focused) => {
+                setFocusedInner(focused);
+                if (focused)
+                    setDescription(description);
+            })
+        },
+        refElementReturn
+    });
 
     leftRight &&= focusedInner;
     upDown &&= focusedInner;
@@ -189,16 +201,18 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
         removeTextF10: (id) => { textF10Set.current.delete(id); setTextF10(textF10Set.current.size > 0) },
         removeUpDown: (id) => { upDownSet.current.delete(id); setUpDown(upDownSet.current.size > 0) },
         setHasStartedTypeahead: () => setHeardTab(true),
+        setDescription: desc => setDescription(desc),
         id: id
     });
+
+    const [description, setDescription] = useState("Keyboard controls available:");
 
     const [heardTab, setHeardTab] = useState(false);
     const stateKey = `keyboard-assist-lr_${leftRightDisplay.toString()}-ud_${upDownDisplay.toString()}-pg_${pageKeysDisplay.toString()}-he_${homeEndDisplay.toString()}-tp_${typeaheadDisplay.toString()}-tp_${leaveF22.toString()}-tp_${textF102.toString()}`;
     const [userHasHidden, setUserHasHidden, getUserHasHidden] = usePersistentState(stateKey as "keyboard-assist-lr_false-ud_false-pg_false-he_false-tp_false", false);
     const [userHasHiddenAny, setUserHasHiddenAny] = usePersistentState("keyboard-assist-hidden-any", false);
 
-
-
+    //const [currentDescription, setCurrentDescription] = useState("Keyboard controls available:");
 
     useGlobalHandler(document, "keydown", event => {
         if ((event as KeyboardEvent).key == "Tab") {
@@ -241,13 +255,13 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
 
     return (
         <KeyboardAssistContext.Provider value={context.current}>
-            <KeyboardAssistIconDisplay id={id} heardTab={heardTab} userHasHidden={userHasHidden} homeEnd={homeEndDisplay} leftRight={leftRightDisplay} upDown={upDownDisplay} pageKeys={pageKeysDisplay} typeahead={typeaheadDisplay} visible={visible} leaveF2={leaveF2Display} textF10={textF10Display} />
+            <KeyboardAssistIconDisplay id={id} description={description} heardTab={heardTab} userHasHidden={userHasHidden} homeEnd={homeEndDisplay} leftRight={leftRightDisplay} upDown={upDownDisplay} pageKeys={pageKeysDisplay} typeahead={typeaheadDisplay} visible={visible} leaveF2={leaveF2Display} textF10={textF10Display} />
             {children}
         </KeyboardAssistContext.Provider>
     )
 }
 
-function KeyboardAssistIconDisplay({ heardTab, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, typeahead, visible, id }: KeyboardAssistIconProps & { id: string, heardTab: boolean, userHasHidden: boolean }) {
+function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, typeahead, visible, id }: KeyboardAssistIconProps & { id: string, heardTab: boolean, userHasHidden: boolean }) {
 
     const labelParts = ([
         leftRight && upDown ? "the arrow keys" : leftRight ? "the left and right arrow keys" : upDown ? "the up and down arrow keys" : null,
@@ -279,7 +293,7 @@ function KeyboardAssistIconDisplay({ heardTab, userHasHidden, leftRight, upDown,
             <div id={id} class="visually-hidden">{label}</div>
             <SlideZoomFade show={show} zoomMin={0.875} zoomOriginInline={1} zoomOriginBlock={1} slideTargetBlock={0.125} slideTargetInline={0.125}>
                 <div class="keyboard-assist-icon-container" role="figure" aria-labelledby={id}>
-                    <div class="keyboard-assist-instructions">Keyboard controls available:</div>
+                    <div class="keyboard-assist-instructions">{description}</div>
                     <KeyboardAssistIconArrowKeys leftRight={leftRight} upDown={upDown} />
                     <KeyboardAssistIconHomeEnd enabled={homeEnd} />
                     <KeyboardAssistIconPageKeys enabled={pageKeys} />

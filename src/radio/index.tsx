@@ -21,6 +21,7 @@ export interface RadioGroupProps<V extends string | number> extends
     disabled?: boolean;
     inline?: boolean;
     name: string;
+    keyboardControlsDescription?: string;
 
     /**
      * Radio buttons generally auto-activate when they're focused,
@@ -36,7 +37,7 @@ export interface RadioGroupContext<V extends string | number> {
 }
 export const RadioGroupContext = createContext<RadioGroupContext<string | number> | null>(null);
 
-export function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
+export function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, keyboardControlsDescription, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
     labelPosition ??= (fieldset? "within" : "after");
     selectionMode ??= "focus";
 
@@ -75,7 +76,7 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
                         return (
                             <>
                                 {labelPosition == "before" && visibleLabel}
-                                <KeyboardAssistIcon leftRight={!!inline} upDown={!inline} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != "none"}>
+                                <KeyboardAssistIcon leftRight={!!inline} upDown={!inline} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != "none"} description={keyboardControlsDescription ?? "Select an option:"}>
                                     <E {...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props)}>
                                         {labelPosition == "within" && visibleLabel}
                                         {children}

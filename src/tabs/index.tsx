@@ -15,6 +15,7 @@ export interface TabsProps extends GlobalAttributes<HTMLDivElement> {
     localStorageKey: keyof PersistentStates | null;
     propsTabsContainer?: h.JSX.HTMLAttributes<HTMLUListElement>;
     propsPanelsContainer?: h.JSX.HTMLAttributes<HTMLDivElement>;
+    keyboardControlsDescription?: string;
 }
 
 export interface TabProps extends GlobalAttributes<HTMLLIElement, "children"> {
@@ -30,7 +31,7 @@ export interface TabPanelProps extends GlobalAttributes<HTMLDivElement, "childre
 
 const OrientationContext = createContext<"horizontal" | "vertical">("horizontal");
 
-export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }: LabelledProps<TabsProps, never>, ref: Ref<HTMLDivElement>) {
+export const Tabs = memo(forwardElementRef(function Tabs({ keyboardControlsDescription, orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }: LabelledProps<TabsProps, never>, ref: Ref<HTMLDivElement>) {
     orientation ??= "horizontal"
     labelPosition ??= "before";
     return (
@@ -44,7 +45,7 @@ export const Tabs = memo(forwardElementRef(function Tabs({ orientation, label, l
                     const labelJsx = <label {...info.propsLabel}>{label}</label>;
                     return (
                         <StructureTabs orientation={orientation} ref={ref} {...props}>
-                            <StructureTabList {...info.propsContainer} childrenLabel={labelJsx} labelPosition={labelPosition!} typeaheadStatus={info.typeaheadNavigationReturn.typeaheadStatus} orientation={orientation}>{tabs}</StructureTabList>
+                            <StructureTabList {...info.propsContainer} childrenLabel={labelJsx} labelPosition={labelPosition!} typeaheadStatus={info.typeaheadNavigationReturn.typeaheadStatus} orientation={orientation} keyboardControlsDescription={keyboardControlsDescription ?? "Move to a tab:"}>{tabs}</StructureTabList>
                             <StructureTabPanelsContainer>{panels}</StructureTabPanelsContainer>
                         </StructureTabs>
                     );

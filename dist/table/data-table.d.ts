@@ -7,6 +7,7 @@ export interface DataTableProps extends TableProps {
 }
 export declare const DataTable: ({ staggered, caption, captionPosition, bordered, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }: PaginatedProps<CaptionedProps<DataTableProps>>, ref?: Ref<HTMLTableElement>) => import("preact").JSX.Element;
 interface DataTableSectionProps extends TableSectionProps {
+    keyboardControlsDescription?: string;
 }
 export interface DataTableHeadProps extends Omit<DataTableSectionProps, "location">, GlobalAttributes<HTMLTableSectionElement> {
     ref?: Ref<HTMLTableSectionElement>;

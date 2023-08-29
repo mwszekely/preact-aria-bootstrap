@@ -15118,12 +15118,22 @@
   }
 
   const KeyboardAssistContext = G$1(null);
-  const KeyboardAssistIcon = forwardElementRef$1(function KeyboardAssistIcon({ leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }, ref) {
-      const { id: figureDescriptionId, addHomeEnd, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = q$2(KeyboardAssistContext);
+  const KeyboardAssistIcon = forwardElementRef$1(function KeyboardAssistIcon({ description, leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }, ref) {
+      const { id: figureDescriptionId, addHomeEnd, setDescription, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = q$2(KeyboardAssistContext);
       const [randomId] = useState(() => generateRandomId());
       const [focusedInner, setFocusedInner] = useState(false);
       const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
-      const { hasCurrentFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn });
+      const { hasCurrentFocusReturn } = useHasCurrentFocus({
+          hasCurrentFocusParameters: {
+              onCurrentFocusedChanged: null,
+              onCurrentFocusedInnerChanged: useStableCallback((focused) => {
+                  setFocusedInner(focused);
+                  if (focused)
+                      setDescription(description);
+              })
+          },
+          refElementReturn
+      });
       leftRight &&= focusedInner;
       upDown &&= focusedInner;
       homeEnd &&= focusedInner;
@@ -15239,12 +15249,15 @@
           removeTextF10: (id) => { textF10Set.current.delete(id); setTextF10(textF10Set.current.size > 0); },
           removeUpDown: (id) => { upDownSet.current.delete(id); setUpDown(upDownSet.current.size > 0); },
           setHasStartedTypeahead: () => setHeardTab(true),
+          setDescription: desc => setDescription(desc),
           id: id
       });
+      const [description, setDescription] = useState("Keyboard controls available:");
       const [heardTab, setHeardTab] = useState(false);
       const stateKey = `keyboard-assist-lr_${leftRightDisplay.toString()}-ud_${upDownDisplay.toString()}-pg_${pageKeysDisplay.toString()}-he_${homeEndDisplay.toString()}-tp_${typeaheadDisplay.toString()}-tp_${leaveF22.toString()}-tp_${textF102.toString()}`;
       const [userHasHidden, setUserHasHidden, getUserHasHidden] = usePersistentState(stateKey, false);
       const [userHasHiddenAny, setUserHasHiddenAny] = usePersistentState("keyboard-assist-hidden-any", false);
+      //const [currentDescription, setCurrentDescription] = useState("Keyboard controls available:");
       useGlobalHandler(document, "keydown", event => {
           if (event.key == "Tab") {
               setHeardTab(true);
@@ -15281,9 +15294,9 @@
               }
           }
       }, { capture: true });
-      return (o$3(KeyboardAssistContext.Provider, { value: context.current, children: [o$3(KeyboardAssistIconDisplay, { id: id, heardTab: heardTab, userHasHidden: userHasHidden, homeEnd: homeEndDisplay, leftRight: leftRightDisplay, upDown: upDownDisplay, pageKeys: pageKeysDisplay, typeahead: typeaheadDisplay, visible: visible, leaveF2: leaveF2Display, textF10: textF10Display }), children] }));
+      return (o$3(KeyboardAssistContext.Provider, { value: context.current, children: [o$3(KeyboardAssistIconDisplay, { id: id, description: description, heardTab: heardTab, userHasHidden: userHasHidden, homeEnd: homeEndDisplay, leftRight: leftRightDisplay, upDown: upDownDisplay, pageKeys: pageKeysDisplay, typeahead: typeaheadDisplay, visible: visible, leaveF2: leaveF2Display, textF10: textF10Display }), children] }));
   }
-  function KeyboardAssistIconDisplay({ heardTab, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, typeahead, visible, id }) {
+  function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, typeahead, visible, id }) {
       const labelParts = [
           leftRight && upDown ? "the arrow keys" : leftRight ? "the left and right arrow keys" : upDown ? "the up and down arrow keys" : null,
           pageKeys ? "the Page Up and Down keys" : null,
@@ -15306,7 +15319,7 @@
       }
       label = `Navigate using ${label}. Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
       const show = (heardTab && !userHasHidden && visible);
-      return (o$3(k$3, { children: [o$3("div", { id: id, class: "visually-hidden", children: label }), o$3(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: o$3("div", { class: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [o$3("div", { class: "keyboard-assist-instructions", children: "Keyboard controls available:" }), o$3(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), o$3(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), o$3(KeyboardAssistIconPageKeys, { enabled: pageKeys }), o$3(KeyboardAssistIconTypeahead, { enabled: typeahead }), o$3(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), o$3(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), o$3("div", { class: "keyboard-assist-dismiss-message", children: ["Press ", o$3("kbd", { children: "F7" }), " to dismiss these instructions.", o$3("br", {}), "To show again, press ", o$3("kbd", { children: "Shift+F7" }), "."] })] }) })] }));
+      return (o$3(k$3, { children: [o$3("div", { id: id, class: "visually-hidden", children: label }), o$3(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: o$3("div", { class: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [o$3("div", { class: "keyboard-assist-instructions", children: description }), o$3(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), o$3(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), o$3(KeyboardAssistIconPageKeys, { enabled: pageKeys }), o$3(KeyboardAssistIconTypeahead, { enabled: typeahead }), o$3(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), o$3(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), o$3("div", { class: "keyboard-assist-dismiss-message", children: ["Press ", o$3("kbd", { children: "F7" }), " to dismiss these instructions.", o$3("br", {}), "To show again, press ", o$3("kbd", { children: "Shift+F7" }), "."] })] }) })] }));
   }
   const KeyboardAssistIconArrowKeys = x$1(function KeyboardAssistIconArrowKeys({ leftRight, upDown }) {
       return (o$3("div", { class: "keyboard-assist-arrow-keys", children: [o$3(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-up", children: "\u2191" }), o$3(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-left", children: "\u2190" }), o$3(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-down", children: "\u2193" }), o$3(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-right", children: "\u2192" })] }));
@@ -15331,7 +15344,7 @@
   });
 
   const ButtonGroupContext = G$1(null);
-  function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }, ref) {
+  function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, keyboardControlsDescription, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }, ref) {
       labelPosition ??= "before";
       orientation ||= "horizontal";
       const imperativeHandle = _$1(null);
@@ -15348,7 +15361,7 @@
                           }, imperativeHandle: imperativeHandle, singleSelectionAriaPropName: "aria-pressed", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
                           , pageNavigationSize: 0, orientation: orientation, ariaLabel: labelPosition == 'hidden' ? label : null, singleSelectedIndex: selectionMode == "single" ? (pendingIndex ?? selectedIndex) : undefined, render: info => {
                               const visibleLabel = o$3("label", { ...info.propsLabel, children: label });
-                              return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != 'none', children: o$3("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
+                              return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != 'none', description: keyboardControlsDescription || "Keyboard controls for these buttons:", children: o$3("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
                           } }) }) }) }) }));
   }
 
@@ -15943,7 +15956,7 @@
                   return (o$3(k$3, { children: [labelPosition == "before" && labelJsx, o$3(Paginated, { childCount: info.paginatedChildrenReturn.childCount ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: o$3("div", { ...useMergedProps(props, info.propsGridlist, { class: `list-group gridlist-group` }), children: children }) }), labelPosition == "after" && labelJsx] }));
               } }) }));
   }
-  const ListItemNonPaginated = x$1(({ infoRow, progressInfo, badge, disabled, iconEnd, iconStart, variantTheme, selected, children, props, ref2 }) => {
+  const ListItemNonPaginated = x$1(({ infoRow, progressInfo, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }) => {
       useUpdateRenderCounter("GridlistRow");
       const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement({ refElementParameters: {} });
       const { pressReturn: { longPress, pressing }, props: p1 } = usePress({
@@ -15974,7 +15987,7 @@
               return null;
           else
               return o$3("div", { "aria-busy": "true", class: "gridlist-item gridlist-item-placeholder", children: o$3("span", { class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"), children: o$3("span", { class: "placeholder w-100" }) }) });
-      return (o$3(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: false, children: o$3("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
+      return (o$3(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: false, description: keyboardControlsDescription ?? "Select a list item:", children: o$3("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
   });
   const ListItem = x$1(forwardElementRef$1(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
       const defaultDisabled = q$2(DefaultDisabled);
@@ -16011,7 +16024,7 @@
           } }));
   });
 
-  const Menu = x$1(forwardElementRef$1(function Menu({ anchor, forceOpen, children, selectedIndex, align, onSelectedIndexChange, ...props }, ref) {
+  const Menu = x$1(forwardElementRef$1(function Menu({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }, ref) {
       const [openFromAnchor, setOpenFromAnchor, getOpenFromAnchor] = useState(forceOpen ?? false);
       const onOpen = T$2(() => { setOpenFromAnchor(true); }, []);
       const onClose = T$2(() => { setOpenFromAnchor(false); }, []);
@@ -16050,15 +16063,15 @@
                           class: popperOpen ? "active" : ""
                       }, props, info.propsTrigger, propsSource), ref), useDefaultRenderPortal({
                           portalId,
-                          children: (o$3(StructureMenuPopper, { ...propsPopup, children: [o$3(StructureMenuArrow, { ...propsArrow }), o$3(StructureMenuRoot, { ...info.propsSurface, popperOpen: popperOpen, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, children: [o$3(StructureMenuFocusSentinel, { ...info.propsSentinel }), o$3(StructureMenuList, { ...info.propsTarget, children: children }), o$3(StructureMenuFocusSentinel, { ...info.propsSentinel })] })] }))
+                          children: (o$3(StructureMenuPopper, { ...propsPopup, children: [o$3(StructureMenuArrow, { ...propsArrow }), o$3(StructureMenuRoot, { ...info.propsSurface, popperOpen: popperOpen, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, keyboardControlsDescription: keyboardControlsDescription ?? "Move to a menu item:", children: [o$3(StructureMenuFocusSentinel, { ...info.propsSentinel }), o$3(StructureMenuList, { ...info.propsTarget, children: children }), o$3(StructureMenuFocusSentinel, { ...info.propsSentinel })] })] }))
                       })] }));
           } }));
   }));
   const StructureMenuPopper = memoForwardRef(function StructureMenuPopper({ children, ...props }, ref) {
       return (o$3("div", { ...useMergedProps({ className: "popper-menu" }, { ...props, ref }), children: children }));
   });
-  const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, ...props }, ref) {
-      return (o$3(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: o$3(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: typeaheadStatus != "none", children: o$3("div", { ...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref }), children: children }) }) }));
+  const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }, ref) {
+      return (o$3(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: o$3(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: typeaheadStatus != "none", description: keyboardControlsDescription, children: o$3("div", { ...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref }), children: children }) }) }));
   });
   const StructureMenuList = memoForwardRef(function StructureMenuList({ children, ...props }, ref) {
       return (o$3("div", { ...useMergedProps({ className: "dropdown-menu-list" }, { ...props, ref }), children: children }));
@@ -16140,7 +16153,7 @@
   });
 
   const RadioGroupContext = G$1(null);
-  function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
+  function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, keyboardControlsDescription, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
       labelPosition ??= (fieldset ? "within" : "after");
       selectionMode ??= "focus";
       const imperativeHandle = _$1(null);
@@ -16159,7 +16172,7 @@
                       const E = (fieldset ? "fieldset" : "span");
                       const L = (fieldset ? "legend" : "label");
                       const visibleLabel = o$3(L, { ...useMergedProps({ class: clsx("form-label radio-group-label") }, info.propsRadioGroupLabel), children: label });
-                      return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", children: o$3(E, { ...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
+                      return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", description: keyboardControlsDescription ?? "Select an option:", children: o$3(E, { ...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
                   } }) }) }));
   }
   function Radio({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }, ref) {
@@ -16489,7 +16502,7 @@
       }
   });
 
-  const CkEditorWrapper = x$1(forwardElementRef$1(function CkEditorWrapper({ children, implementation, valueHtml, onValueChange: ovcu, onFocusChange: ofcu, onReady: oru, editorHandle, toolbarItems, placeholder, fontFamilies, mention, fontSizes, htmlEmbed, htmlSupport, link, typing, onCharacterCountChange, onWordCountChange, ...props }, ref2) {
+  const CkEditorWrapper = x$1(forwardElementRef$1(function CkEditorWrapper({ children, keyboardControlsDescription, implementation, valueHtml, onValueChange: ovcu, onFocusChange: ofcu, onReady: oru, editorHandle, toolbarItems, placeholder, fontFamilies, mention, fontSizes, htmlEmbed, htmlSupport, link, typing, onCharacterCountChange, onWordCountChange, ...props }, ref2) {
       fontSizes ||= [10, 12, 14, 'default', 18, 20, 22];
       fontFamilies ||= [
           'default',
@@ -16608,7 +16621,7 @@
           }
       }, []);
       // dangerouslySetInnerHTML={{__html: valueHtml}}
-      return (o$3(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: true, pageKeys: true, textF10: true, typeahead: false, typeaheadActive: false, children: o$3("div", { class: "ck-editor-wrapper", children: useClonedElement(children, { ...props, ref: ref2 }, ref) }) }));
+      return (o$3(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: true, pageKeys: true, textF10: true, typeahead: false, typeaheadActive: false, description: keyboardControlsDescription ?? "Control the editor:", children: o$3("div", { class: "ck-editor-wrapper", children: useClonedElement(children, { ...props, ref: ref2 }, ref) }) }));
   }));
 
   const RTFDefaultItems = ["undo", "redo", "|", "heading", "|", "bold", "italic", "underline", "strikethrough", "highlight", "|", "link", "code", "subscript", "superscript", "|", "removeFormat"];
@@ -18499,7 +18512,7 @@
   const DataTableHead = x$1(forwardElementRef$1(function DataTableHead(props, ref) { return (o$3(DataTableSection, { ref: ref, location: "head", ...props })); }));
   const DataTableBody = x$1(forwardElementRef$1(function DataTableBody(props, ref) { return (o$3(DataTableSection, { ref: ref, location: "body", ...props })); }));
   x$1(forwardElementRef$1(function DataTableFoot(props, ref) { return (o$3(DataTableSection, { ref: ref, location: "head", ...props })); }));
-  const DataTableSection = x$1(forwardElementRef$1(function DataTableSection({ children, location, variantTheme, divider, ...props }, ref) {
+  const DataTableSection = x$1(forwardElementRef$1(function DataTableSection({ children, keyboardControlsDescription, location, variantTheme, divider, ...props }, ref) {
       useEnsureStability("DataTableSection", location);
       const { paginationMax, paginationMin, staggered, setChildCount } = q$2(TableContext);
       return (o$3(IsTableHeadContext.Provider, { value: location == "head", children: o$3(TableSection$1, { staggered: location == "body" && staggered, location: location, getIndex: vnode => vnode.props.row, tagTableSection: `t${location}`, paginationMin: location == "body" ? paginationMin : null, paginationMax: location == "body" ? paginationMax : null, render: info => {
@@ -18510,7 +18523,7 @@
                       if (info.paginatedChildrenReturn.childCount != null)
                           setChildCount?.(info.paginatedChildrenReturn.childCount);
                   }, [setChildCount, info.paginatedChildrenReturn.childCount]);
-                  return (o$3(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeahead: false, typeaheadActive: false, children: o$3(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: children }) }));
+                  return (o$3(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeahead: false, typeaheadActive: false, description: keyboardControlsDescription ?? "Navigate the table:", children: o$3(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: children }) }));
               } }) }));
   }));
   const DataTableRow = x$1(forwardElementRef$1(function DataTableRow({ row, children, variantTheme, ...props }, ref) {
@@ -18618,18 +18631,18 @@
   const StructureTabPanelsContainer = memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }, ref) {
       return (o$3(Swappable, { children: o$3("div", { ...useMergedProps({ class: "tab-panels-container" }, { ...props, ref }), children: panels }) }));
   });
-  const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, ...props }, ref) {
+  const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, keyboardControlsDescription, ...props }, ref) {
       let typeaheadActive = (typeaheadStatus && typeaheadStatus != 'none');
-      return (o$3(k$3, { children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: typeaheadActive, children: o$3("ul", { ...useMergedProps({ className: clsx(`nav nav-tabs`, `typeahead-status-${typeaheadStatus}`) }, { ...props, ref }), children: tabs }) }), labelPosition == "after" && labelJsx] }));
+      return (o$3(k$3, { children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: typeaheadActive, description: keyboardControlsDescription ?? "Select at tab:", children: o$3("ul", { ...useMergedProps({ className: clsx(`nav nav-tabs`, `typeahead-status-${typeaheadStatus}`) }, { ...props, ref }), children: tabs }) }), labelPosition == "after" && labelJsx] }));
   });
 
   const OrientationContext = G$1("horizontal");
-  const Tabs = x$1(forwardElementRef$1(function Tabs({ orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }, ref) {
+  const Tabs = x$1(forwardElementRef$1(function Tabs({ keyboardControlsDescription, orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }, ref) {
       orientation ??= "horizontal";
       labelPosition ??= "before";
       return (o$3(OrientationContext.Provider, { value: orientation, children: o$3(Tabs$1, { localStorageKey: localStorageKey, orientation: orientation, ariaLabel: labelPosition == "hidden" ? label : null, pageNavigationSize: 0, render: info => {
                   const labelJsx = o$3("label", { ...info.propsLabel, children: label });
-                  return (o$3(StructureTabs, { orientation: orientation, ref: ref, ...props, children: [o$3(StructureTabList, { ...info.propsContainer, childrenLabel: labelJsx, labelPosition: labelPosition, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, orientation: orientation, children: tabs }), o$3(StructureTabPanelsContainer, { children: panels })] }));
+                  return (o$3(StructureTabs, { orientation: orientation, ref: ref, ...props, children: [o$3(StructureTabList, { ...info.propsContainer, childrenLabel: labelJsx, labelPosition: labelPosition, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, orientation: orientation, keyboardControlsDescription: keyboardControlsDescription ?? "Move to a tab:", children: tabs }), o$3(StructureTabPanelsContainer, { children: panels })] }));
               } }) }));
   }));
   const Tab = x$1(forwardElementRef$1(function Tab({ index, getSortValue, children, ...props }, ref) {

@@ -15,8 +15,9 @@ export interface StructureTabListProps extends GlobalAttributes<HTMLUListElement
     childrenLabel: ComponentChildren;
     labelPosition: "before" | "after" | "hidden";
     typeaheadStatus: UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"];
+    keyboardControlsDescription: string;
 }
 export declare const StructureTabs: ({ orientation, children, ...props }: StructureTabsProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
 export declare const StructureTabPanelsContainer: ({ orientation, children: panels, ...props }: StructureTabPanelsContainerProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
-export declare const StructureTabList: ({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, ...props }: StructureTabListProps, ref: Ref<HTMLUListElement>) => import("preact").JSX.Element;
+export declare const StructureTabList: ({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, keyboardControlsDescription, ...props }: StructureTabListProps, ref: Ref<HTMLUListElement>) => import("preact").JSX.Element;
 //# sourceMappingURL=structure.d.ts.map

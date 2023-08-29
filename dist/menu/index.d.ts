@@ -6,21 +6,23 @@ export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children
     children: ComponentChildren;
     selectedIndex?: number | null;
     align?: "start" | "end";
+    keyboardControlsDescription?: string;
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
     /**
      * This **MUST** be a `Button` or something that accepts `onPress` as a prop.
      */
     anchor: VNode;
 }
-export declare const Menu: ({ anchor, forceOpen, children, selectedIndex, align, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) => import("preact").JSX.Element;
+export declare const Menu: ({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) => import("preact").JSX.Element;
 export interface StructureMenuPopperProps extends GlobalAttributes<HTMLDivElement, "children"> {
 }
 export declare const StructureMenuPopper: ({ children, ...props }: StructureMenuPopperProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
 export interface StructureMenuRootProps extends GlobalAttributes<HTMLDivElement, "children"> {
     popperOpen: boolean;
     typeaheadStatus: UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"];
+    keyboardControlsDescription: string;
 }
-export declare const StructureMenuRoot: ({ popperOpen, typeaheadStatus, children, ...props }: StructureMenuRootProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
+export declare const StructureMenuRoot: ({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }: StructureMenuRootProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
 export interface StructureMenuListProps extends GlobalAttributes<HTMLDivElement, "children"> {
 }
 export declare const StructureMenuList: ({ children, ...props }: StructureMenuListProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;

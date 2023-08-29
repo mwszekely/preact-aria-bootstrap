@@ -18,6 +18,7 @@ export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children
     children: ComponentChildren;
     selectedIndex?: number | null;
     align?: "start" | "end";
+    keyboardControlsDescription?: string;
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
 
     /**
@@ -26,7 +27,7 @@ export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children
     anchor: VNode;
 }
 
-export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) {
+export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) {
     const [openFromAnchor, setOpenFromAnchor, getOpenFromAnchor] = useState(forceOpen ?? false);
     const onOpen = useCallback(() => { setOpenFromAnchor(true); }, []);
     const onClose = useCallback(() => { setOpenFromAnchor(false); }, []);
@@ -89,7 +90,7 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
                             children: (
                                 <StructureMenuPopper {...propsPopup}>
                                     <StructureMenuArrow {...propsArrow} />
-                                    <StructureMenuRoot {...info.propsSurface} popperOpen={popperOpen} typeaheadStatus={info.typeaheadNavigationReturn.typeaheadStatus}>
+                                    <StructureMenuRoot {...info.propsSurface} popperOpen={popperOpen} typeaheadStatus={info.typeaheadNavigationReturn.typeaheadStatus} keyboardControlsDescription={keyboardControlsDescription ?? "Move to a menu item:"}>
                                         <StructureMenuFocusSentinel {...info.propsSentinel} />
                                         <StructureMenuList {...info.propsTarget}>{children}</StructureMenuList>
                                         <StructureMenuFocusSentinel {...info.propsSentinel} />
@@ -113,12 +114,13 @@ export const StructureMenuPopper = memoForwardRef(function StructureMenuPopper({
 export interface StructureMenuRootProps extends GlobalAttributes<HTMLDivElement, "children"> {
     popperOpen: boolean;
     typeaheadStatus: UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"];
+    keyboardControlsDescription: string;
 }
 
-export const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, ...props }: StructureMenuRootProps, ref: Ref<HTMLDivElement>) {
+export const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }: StructureMenuRootProps, ref: Ref<HTMLDivElement>) {
     return (
         <ZoomFade show={popperOpen} delayMountUntilShown exitVisibility="removed" zoomOriginInline={0} zoomOriginBlock={0} zoomMinInline={0.85} zoomMinBlock={0.85}>
-            <KeyboardAssistIcon leftRight={false} upDown={true} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={typeaheadStatus != "none"}>
+            <KeyboardAssistIcon leftRight={false} upDown={true} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={typeaheadStatus != "none"} description={keyboardControlsDescription}>
                 <div {...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref })}>
                     {children}
                 </div>

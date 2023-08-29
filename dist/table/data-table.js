@@ -26,7 +26,7 @@ export const DataTable = memo(forwardElementRef(function DataTable({ staggered, 
 export const DataTableHead = memo(forwardElementRef(function DataTableHead(props, ref) { return (_jsx(DataTableSection, { ref: ref, location: "head", ...props })); }));
 export const DataTableBody = memo(forwardElementRef(function DataTableBody(props, ref) { return (_jsx(DataTableSection, { ref: ref, location: "body", ...props })); }));
 export const DataTableFoot = memo(forwardElementRef(function DataTableFoot(props, ref) { return (_jsx(DataTableSection, { ref: ref, location: "head", ...props })); }));
-const DataTableSection = memo(forwardElementRef(function DataTableSection({ children, location, variantTheme, divider, ...props }, ref) {
+const DataTableSection = memo(forwardElementRef(function DataTableSection({ children, keyboardControlsDescription, location, variantTheme, divider, ...props }, ref) {
     useEnsureStability("DataTableSection", location);
     const { paginationMax, paginationMin, staggered, setChildCount } = useContext(TableContext);
     return (_jsx(IsTableHeadContext.Provider, { value: location == "head", children: _jsx(AriaTableSection, { staggered: location == "body" && staggered, location: location, getIndex: vnode => vnode.props.row, tagTableSection: `t${location}`, paginationMin: location == "body" ? paginationMin : null, paginationMax: location == "body" ? paginationMax : null, render: info => {
@@ -37,7 +37,7 @@ const DataTableSection = memo(forwardElementRef(function DataTableSection({ chil
                     if (info.paginatedChildrenReturn.childCount != null)
                         setChildCount?.(info.paginatedChildrenReturn.childCount);
                 }, [setChildCount, info.paginatedChildrenReturn.childCount]);
-                return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeahead: false, typeaheadActive: false, children: _jsx(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: children }) }));
+                return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeahead: false, typeaheadActive: false, description: keyboardControlsDescription ?? "Navigate the table:", children: _jsx(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: children }) }));
             } }) }));
 }));
 export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, children, variantTheme, ...props }, ref) {

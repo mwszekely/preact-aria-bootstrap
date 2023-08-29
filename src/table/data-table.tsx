@@ -68,6 +68,7 @@ export const DataTable = memo(forwardElementRef(function DataTable({ staggered, 
 }))
 
 interface DataTableSectionProps extends TableSectionProps {
+    keyboardControlsDescription?: string;
 }
 
 
@@ -80,7 +81,7 @@ export const DataTableBody = memo(forwardElementRef(function DataTableBody(props
 export const DataTableFoot = memo(forwardElementRef(function DataTableFoot(props: DataTableFootProps, ref?: Ref<HTMLTableSectionElement>) { return (<DataTableSection ref={ref} location="head" {...props} />) }));
 
 
-const DataTableSection = memo(forwardElementRef(function DataTableSection({ children, location, variantTheme, divider, ...props }: DataTableSectionProps, ref?: Ref<HTMLTableSectionElement>) {
+const DataTableSection = memo(forwardElementRef(function DataTableSection({ children, keyboardControlsDescription, location, variantTheme, divider, ...props }: DataTableSectionProps, ref?: Ref<HTMLTableSectionElement>) {
     useEnsureStability("DataTableSection", location);
     const { paginationMax, paginationMin, staggered, setChildCount } = useContext(TableContext);
     return (
@@ -102,7 +103,7 @@ const DataTableSection = memo(forwardElementRef(function DataTableSection({ chil
                             setChildCount?.(info.paginatedChildrenReturn.childCount);
                     }, [setChildCount, info.paginatedChildrenReturn.childCount])
                     return (
-                        <KeyboardAssistIcon homeEnd={true} leftRight={true} upDown={location == "body"} pageKeys={true} typeahead={false} typeaheadActive={false}>
+                        <KeyboardAssistIcon homeEnd={true} leftRight={true} upDown={location == "body"} pageKeys={true} typeahead={false} typeaheadActive={false} description={keyboardControlsDescription ?? "Navigate the table:"}>
                             <TableSection location={location} variantTheme={variantTheme} divider={divider} {...useMergedProps(info.propsTableSection, { ref, ...props })}>{children}</TableSection>
                         </KeyboardAssistIcon>
                     );

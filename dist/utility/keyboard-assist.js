@@ -1,6 +1,6 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
 import { createContext } from "preact";
-import { generateRandomId, useGlobalHandler, useHasCurrentFocus, useMergedProps, usePersistentState, useRefElement, useState } from "preact-prop-helpers";
+import { generateRandomId, useGlobalHandler, useHasCurrentFocus, useMergedProps, usePersistentState, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { CollapseFade, SlideZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext, useEffect, useLayoutEffect, useRef } from "preact/hooks";
@@ -8,12 +8,22 @@ import { forwardElementRef } from "./forward-element-ref.js";
 import { useClonedElement } from "./use-cloned-element.js";
 const Both = [false, true];
 const KeyboardAssistContext = createContext(null);
-export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }, ref) {
-    const { id: figureDescriptionId, addHomeEnd, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = useContext(KeyboardAssistContext);
+export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ description, leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }, ref) {
+    const { id: figureDescriptionId, addHomeEnd, setDescription, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = useContext(KeyboardAssistContext);
     const [randomId] = useState(() => generateRandomId());
     const [focusedInner, setFocusedInner] = useState(false);
     const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
-    const { hasCurrentFocusReturn } = useHasCurrentFocus({ hasCurrentFocusParameters: { onCurrentFocusedChanged: null, onCurrentFocusedInnerChanged: setFocusedInner }, refElementReturn });
+    const { hasCurrentFocusReturn } = useHasCurrentFocus({
+        hasCurrentFocusParameters: {
+            onCurrentFocusedChanged: null,
+            onCurrentFocusedInnerChanged: useStableCallback((focused) => {
+                setFocusedInner(focused);
+                if (focused)
+                    setDescription(description);
+            })
+        },
+        refElementReturn
+    });
     leftRight &&= focusedInner;
     upDown &&= focusedInner;
     homeEnd &&= focusedInner;
@@ -129,12 +139,15 @@ export function KeyboardAssistProvider({ children }) {
         removeTextF10: (id) => { textF10Set.current.delete(id); setTextF10(textF10Set.current.size > 0); },
         removeUpDown: (id) => { upDownSet.current.delete(id); setUpDown(upDownSet.current.size > 0); },
         setHasStartedTypeahead: () => setHeardTab(true),
+        setDescription: desc => setDescription(desc),
         id: id
     });
+    const [description, setDescription] = useState("Keyboard controls available:");
     const [heardTab, setHeardTab] = useState(false);
     const stateKey = `keyboard-assist-lr_${leftRightDisplay.toString()}-ud_${upDownDisplay.toString()}-pg_${pageKeysDisplay.toString()}-he_${homeEndDisplay.toString()}-tp_${typeaheadDisplay.toString()}-tp_${leaveF22.toString()}-tp_${textF102.toString()}`;
     const [userHasHidden, setUserHasHidden, getUserHasHidden] = usePersistentState(stateKey, false);
     const [userHasHiddenAny, setUserHasHiddenAny] = usePersistentState("keyboard-assist-hidden-any", false);
+    //const [currentDescription, setCurrentDescription] = useState("Keyboard controls available:");
     useGlobalHandler(document, "keydown", event => {
         if (event.key == "Tab") {
             setHeardTab(true);
@@ -171,9 +184,9 @@ export function KeyboardAssistProvider({ children }) {
             }
         }
     }, { capture: true });
-    return (_jsxs(KeyboardAssistContext.Provider, { value: context.current, children: [_jsx(KeyboardAssistIconDisplay, { id: id, heardTab: heardTab, userHasHidden: userHasHidden, homeEnd: homeEndDisplay, leftRight: leftRightDisplay, upDown: upDownDisplay, pageKeys: pageKeysDisplay, typeahead: typeaheadDisplay, visible: visible, leaveF2: leaveF2Display, textF10: textF10Display }), children] }));
+    return (_jsxs(KeyboardAssistContext.Provider, { value: context.current, children: [_jsx(KeyboardAssistIconDisplay, { id: id, description: description, heardTab: heardTab, userHasHidden: userHasHidden, homeEnd: homeEndDisplay, leftRight: leftRightDisplay, upDown: upDownDisplay, pageKeys: pageKeysDisplay, typeahead: typeaheadDisplay, visible: visible, leaveF2: leaveF2Display, textF10: textF10Display }), children] }));
 }
-function KeyboardAssistIconDisplay({ heardTab, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, typeahead, visible, id }) {
+function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, typeahead, visible, id }) {
     const labelParts = [
         leftRight && upDown ? "the arrow keys" : leftRight ? "the left and right arrow keys" : upDown ? "the up and down arrow keys" : null,
         pageKeys ? "the Page Up and Down keys" : null,
@@ -196,7 +209,7 @@ function KeyboardAssistIconDisplay({ heardTab, userHasHidden, leftRight, upDown,
     }
     label = `Navigate using ${label}. Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
     const show = (heardTab && !userHasHidden && visible);
-    return (_jsxs(_Fragment, { children: [_jsx("div", { id: id, class: "visually-hidden", children: label }), _jsx(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: _jsxs("div", { class: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [_jsx("div", { class: "keyboard-assist-instructions", children: "Keyboard controls available:" }), _jsx(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), _jsx(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), _jsx(KeyboardAssistIconPageKeys, { enabled: pageKeys }), _jsx(KeyboardAssistIconTypeahead, { enabled: typeahead }), _jsx(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), _jsx(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), _jsxs("div", { class: "keyboard-assist-dismiss-message", children: ["Press ", _jsx("kbd", { children: "F7" }), " to dismiss these instructions.", _jsx("br", {}), "To show again, press ", _jsx("kbd", { children: "Shift+F7" }), "."] })] }) })] }));
+    return (_jsxs(_Fragment, { children: [_jsx("div", { id: id, class: "visually-hidden", children: label }), _jsx(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: _jsxs("div", { class: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [_jsx("div", { class: "keyboard-assist-instructions", children: description }), _jsx(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), _jsx(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), _jsx(KeyboardAssistIconPageKeys, { enabled: pageKeys }), _jsx(KeyboardAssistIconTypeahead, { enabled: typeahead }), _jsx(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), _jsx(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), _jsxs("div", { class: "keyboard-assist-dismiss-message", children: ["Press ", _jsx("kbd", { children: "F7" }), " to dismiss these instructions.", _jsx("br", {}), "To show again, press ", _jsx("kbd", { children: "Shift+F7" }), "."] })] }) })] }));
 }
 const KeyboardAssistIconArrowKeys = memo(function KeyboardAssistIconArrowKeys({ leftRight, upDown }) {
     return (_jsxs("div", { class: "keyboard-assist-arrow-keys", children: [_jsx(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-up", children: "\u2191" }), _jsx(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-left", children: "\u2190" }), _jsx(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-down", children: "\u2193" }), _jsx(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-right", children: "\u2192" })] }));

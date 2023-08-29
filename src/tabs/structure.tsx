@@ -57,7 +57,12 @@ const TabPanelChildren = memo(function TabPanelChildren({ children, visible }: {
 export interface StructureTabsProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> { }
 export interface StructureTabPanelsContainerProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> { }
 
-export interface StructureTabListProps extends GlobalAttributes<HTMLUListElement, "children">, Pick<TabsProps, "orientation"> { childrenLabel: ComponentChildren; labelPosition: "before" | "after" | "hidden"; typeaheadStatus: UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"] }
+export interface StructureTabListProps extends GlobalAttributes<HTMLUListElement, "children">, Pick<TabsProps, "orientation"> { 
+    childrenLabel: ComponentChildren; 
+    labelPosition: "before" | "after" | "hidden"; 
+    typeaheadStatus: UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"],
+    keyboardControlsDescription: string;
+ }
 
 export const StructureTabs = memoForwardRef(function StructureTabs({ orientation, children, ...props }: StructureTabsProps, ref: Ref<HTMLDivElement>) {
     return (
@@ -78,12 +83,12 @@ export const StructureTabPanelsContainer = memoForwardRef(function StructureTabP
 })
 
 
-export const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, ...props }: StructureTabListProps, ref: Ref<HTMLUListElement>) {
+export const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, keyboardControlsDescription, ...props }: StructureTabListProps, ref: Ref<HTMLUListElement>) {
     let typeaheadActive = (typeaheadStatus && typeaheadStatus != 'none');
     return (
         <>
             {labelPosition == "before" && labelJsx}
-            <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={true} typeaheadActive={typeaheadActive}>
+            <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={true} typeaheadActive={typeaheadActive} description={keyboardControlsDescription ?? "Select at tab:"}>
                 <ul {...useMergedProps({ className: clsx(`nav nav-tabs`, `typeahead-status-${typeaheadStatus}`) }, { ...props, ref })}>
                     {tabs}
                 </ul>

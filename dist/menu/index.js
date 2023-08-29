@@ -10,7 +10,7 @@ import { forwardElementRef, memoForwardRef } from "../utility/forward-element-re
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 import { usePortalId } from "../utility/use-portal-id.js";
-export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, onSelectedIndexChange, ...props }, ref) {
+export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }, ref) {
     const [openFromAnchor, setOpenFromAnchor, getOpenFromAnchor] = useState(forceOpen ?? false);
     const onOpen = useCallback(() => { setOpenFromAnchor(true); }, []);
     const onClose = useCallback(() => { setOpenFromAnchor(false); }, []);
@@ -49,15 +49,15 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
                         class: popperOpen ? "active" : ""
                     }, props, info.propsTrigger, propsSource), ref), useDefaultRenderPortal({
                         portalId,
-                        children: (_jsxs(StructureMenuPopper, { ...propsPopup, children: [_jsx(StructureMenuArrow, { ...propsArrow }), _jsxs(StructureMenuRoot, { ...info.propsSurface, popperOpen: popperOpen, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, children: [_jsx(StructureMenuFocusSentinel, { ...info.propsSentinel }), _jsx(StructureMenuList, { ...info.propsTarget, children: children }), _jsx(StructureMenuFocusSentinel, { ...info.propsSentinel })] })] }))
+                        children: (_jsxs(StructureMenuPopper, { ...propsPopup, children: [_jsx(StructureMenuArrow, { ...propsArrow }), _jsxs(StructureMenuRoot, { ...info.propsSurface, popperOpen: popperOpen, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, keyboardControlsDescription: keyboardControlsDescription ?? "Move to a menu item:", children: [_jsx(StructureMenuFocusSentinel, { ...info.propsSentinel }), _jsx(StructureMenuList, { ...info.propsTarget, children: children }), _jsx(StructureMenuFocusSentinel, { ...info.propsSentinel })] })] }))
                     })] }));
         } }));
 }));
 export const StructureMenuPopper = memoForwardRef(function StructureMenuPopper({ children, ...props }, ref) {
     return (_jsx("div", { ...useMergedProps({ className: "popper-menu" }, { ...props, ref }), children: children }));
 });
-export const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, ...props }, ref) {
-    return (_jsx(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: _jsx(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: typeaheadStatus != "none", children: _jsx("div", { ...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref }), children: children }) }) }));
+export const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }, ref) {
+    return (_jsx(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: _jsx(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: typeaheadStatus != "none", description: keyboardControlsDescription, children: _jsx("div", { ...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref }), children: children }) }) }));
 });
 export const StructureMenuList = memoForwardRef(function StructureMenuList({ children, ...props }, ref) {
     return (_jsx("div", { ...useMergedProps({ className: "dropdown-menu-list" }, { ...props, ref }), children: children }));

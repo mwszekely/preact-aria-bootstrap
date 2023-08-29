@@ -7,6 +7,7 @@ declare module 'preact-prop-helpers' {
 }
 export interface KeyboardAssistIconProps {
     visible: boolean;
+    description: string;
     leftRight: boolean;
     upDown: boolean;
     pageKeys: boolean;
@@ -15,7 +16,7 @@ export interface KeyboardAssistIconProps {
     leaveF2?: boolean;
     textF10?: boolean;
 }
-export declare const KeyboardAssistIcon: ({ leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & {
+export declare const KeyboardAssistIcon: ({ description, leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & {
     children: VNode;
     typeaheadActive: boolean;
 }, ref?: Ref<any>) => import("preact").JSX.Element;
