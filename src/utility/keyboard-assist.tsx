@@ -197,7 +197,7 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
     const [upDown2, setUpDown] = useState(false);
     const [homeEnd2, setHomeEnd] = useState(false);
     const [pageKeys2, setPageKeys] = useState(false);
-    const [typeahead2, setTypeahead] = useState(false);
+    //const [typeahead2, setTypeahead] = useState(false);
     const [leaveF22, setLeaveF2] = useState(false);
     const [textF102, setTextF10] = useState(false);
     const [activateEnter, setActivateEnter] = useState(false);
@@ -222,12 +222,12 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
     const activateEnterSet = useRef<Set<string>>(new Set<string>());
     const activateSpaceSet = useRef<Set<string>>(new Set<string>());
 
-    const visible = (leftRight2 || upDown2 || homeEnd2 || pageKeys2 || typeahead2);
+    const visible = (leftRight2 || upDown2 || homeEnd2 || pageKeys2);
 
     const typeaheadDisplay = (typeaheadStatus != null);
 
     useLayoutEffect(() => {
-        const visible = (leftRight2 || upDown2 || homeEnd2 || pageKeys2 || typeahead2);
+        const visible = (leftRight2 || upDown2 || homeEnd2 || pageKeys2);
         if (visible) {
             setLeftRightDisplay(leftRight2);
             setUpDownDisplay(upDown2);
@@ -237,7 +237,7 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
             setLeaveF2Display(leaveF22);
             setTextF10Display(textF102);
         }
-    }, [leftRight2, upDown2, homeEnd2, pageKeys2, typeahead2, leaveF22, textF102])
+    }, [leftRight2, upDown2, homeEnd2, pageKeys2, leaveF22, textF102])
 
 
     // TODO: Mutation during render, but this is kinda intentional?
@@ -253,7 +253,7 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
         addHomeEnd: (id) => { homeEndSet.current.add(id); setHomeEnd(homeEndSet.current.size > 0) },
         addLeftRight: (id) => { leftRightSet.current.add(id); setLeftRight(leftRightSet.current.size > 0) },
         addPageKeys: (id) => { pageKeysSet.current.add(id); setPageKeys(pageKeysSet.current.size > 0) },
-        setTypeaheadStatus: (status) => { setTypeaheadStatus(status); setHeardTab(true); },
+        setTypeaheadStatus: (status) => { setTypeaheadStatus(status); /*if (status != null && status != 'none') setHeardTab(true);*/ },
         addUpDown: (id) => { upDownSet.current.add(id); setUpDown(upDownSet.current.size > 0) },
         addLeaveF2: (id) => { leaveF2Set.current.add(id); setLeaveF2(leaveF2Set.current.size > 0) },
         addTextF10: (id) => { textF10Set.current.add(id); setTextF10(textF10Set.current.size > 0) },
