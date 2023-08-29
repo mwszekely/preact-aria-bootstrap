@@ -124,6 +124,6 @@ export const CkEditorWrapper = memo(forwardElementRef(function CkEditorWrapper({
         }
     }, []);
     // dangerouslySetInnerHTML={{__html: valueHtml}}
-    return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: true, pageKeys: true, textF10: true, typeahead: false, typeaheadActive: false, description: keyboardControlsDescription ?? "Control the editor:", children: _jsx("div", { class: "ck-editor-wrapper", children: useClonedElement(children, { ...props, ref: ref2 }, ref) }) }));
+    return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: true, pageKeys: true, textF10: true, typeaheadStatus: null, activateSpace: false, activateEnter: false, description: keyboardControlsDescription ?? "Control the editor:", children: _jsx("div", { class: "ck-editor-wrapper", children: useClonedElement(children, { ...props, ref: ref2 }, ref) }) }));
 }));
 //# sourceMappingURL=ck-editor-wrapper.js.map

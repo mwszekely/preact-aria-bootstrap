@@ -105,7 +105,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                             imperativeHandle={imperativeHandle}
                             singleSelectionAriaPropName="aria-pressed"
                             singleSelectionMode={selectionMode == "single" ? "activation" : "disabled"}
-                            multiSelectionMode={selectionMode == "multi"? "activation" : "disabled"}
+                            multiSelectionMode={selectionMode == "multi" ? "activation" : "disabled"}
 
                             role="toolbar"  // TODO: Was group, but that doesn't count as an application, I think?
                             pageNavigationSize={0}
@@ -117,7 +117,15 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                                 return (
                                     <>
                                         {labelPosition == "before" && visibleLabel}
-                                        <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != 'none'} description={keyboardControlsDescription || "Keyboard controls for these buttons:"}>
+                                        <KeyboardAssistIcon
+                                            leftRight={orientation == "horizontal"}
+                                            upDown={orientation == "vertical"}
+                                            homeEnd={true}
+                                            pageKeys={false}
+                                            typeaheadStatus={info.typeaheadNavigationReturn.typeaheadStatus}
+                                            activateSpace={info.typeaheadNavigationReturn.typeaheadStatus == 'none'}
+                                            activateEnter={true}
+                                            description={keyboardControlsDescription || "Keyboard controls for these buttons:"}>
                                             <span {...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref })}>
                                                 {labelPosition == "within" && visibleLabel}
                                                 {children}

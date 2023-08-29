@@ -1,4 +1,5 @@
 import { ComponentChildren, Ref, VNode } from "preact";
+import { UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers/react";
 type Test = `keyboard-assist-lr_${boolean}-ud_${boolean}-pg_${boolean}-he_${boolean}-tp_${boolean}`;
 declare module 'preact-prop-helpers' {
     interface PersistentStates extends Record<Test, boolean> {
@@ -12,13 +13,16 @@ export interface KeyboardAssistIconProps {
     upDown: boolean;
     pageKeys: boolean;
     homeEnd: boolean;
-    typeahead: boolean;
     leaveF2?: boolean;
     textF10?: boolean;
+    activateEnter: boolean;
+    activateSpace: boolean;
+    typeaheadStatus: TypeaheadStatus | null;
 }
-export declare const KeyboardAssistIcon: ({ description, leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & {
+type TypeaheadStatus = UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"];
+export declare const KeyboardAssistIcon: ({ description, activateEnter, activateSpace, leftRight, upDown, homeEnd, pageKeys, children, typeaheadStatus, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & {
     children: VNode;
-    typeaheadActive: boolean;
+    typeaheadStatus: TypeaheadStatus | null;
 }, ref?: Ref<any>) => import("preact").JSX.Element;
 export declare function KeyboardAssistProvider({ children }: {
     children: ComponentChildren;

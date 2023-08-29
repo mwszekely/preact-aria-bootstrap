@@ -76,7 +76,15 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
                         return (
                             <>
                                 {labelPosition == "before" && visibleLabel}
-                                <KeyboardAssistIcon leftRight={!!inline} upDown={!inline} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={info.typeaheadNavigationReturn.typeaheadStatus != "none"} description={keyboardControlsDescription ?? "Select an option:"}>
+                                <KeyboardAssistIcon 
+                                leftRight={!!inline} 
+                                upDown={!inline} 
+                                homeEnd={true} 
+                                pageKeys={true} 
+                                typeaheadStatus={info.typeaheadNavigationReturn.typeaheadStatus}
+                                activateSpace={info.typeaheadNavigationReturn.typeaheadStatus == 'none'}
+                                activateEnter={true}
+                                description={keyboardControlsDescription ?? "Select an option:"}>
                                     <E {...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props)}>
                                         {labelPosition == "within" && visibleLabel}
                                         {children}

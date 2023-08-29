@@ -15118,8 +15118,8 @@
   }
 
   const KeyboardAssistContext = G$1(null);
-  const KeyboardAssistIcon = forwardElementRef$1(function KeyboardAssistIcon({ description, leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }, ref) {
-      const { id: figureDescriptionId, addHomeEnd, setDescription, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = q$2(KeyboardAssistContext);
+  const KeyboardAssistIcon = forwardElementRef$1(function KeyboardAssistIcon({ description, activateEnter, activateSpace, leftRight, upDown, homeEnd, pageKeys, children, typeaheadStatus, leaveF2, textF10, ...props }, ref) {
+      const { id: figureDescriptionId, addHomeEnd, setDescription, addActivateEnter, removeActivateEnter, addActivateSpace, removeActivateSpace, addLeftRight, addPageKeys, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeUpDown, setTypeaheadStatus } = q$2(KeyboardAssistContext);
       const [randomId] = useState(() => generateRandomId());
       const [focusedInner, setFocusedInner] = useState(false);
       const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
@@ -15138,13 +15138,26 @@
       upDown &&= focusedInner;
       homeEnd &&= focusedInner;
       pageKeys &&= focusedInner;
-      typeahead &&= focusedInner;
       leaveF2 &&= focusedInner;
       textF10 &&= focusedInner;
+      activateEnter &&= focusedInner;
+      activateSpace &&= focusedInner;
       p$2(() => {
-          if (typeaheadActive)
-              setHasStartedTypeahead();
-      }, [typeaheadActive]);
+          if (activateEnter) {
+              addActivateEnter(randomId);
+              return () => removeActivateEnter(randomId);
+          }
+      }, [activateEnter]);
+      p$2(() => {
+          if (activateSpace) {
+              addActivateSpace(randomId);
+              return () => removeActivateSpace(randomId);
+          }
+      }, [activateSpace]);
+      p$2(() => {
+          setTypeaheadStatus(typeaheadStatus);
+          return () => setTypeaheadStatus(null);
+      }, [typeaheadStatus]);
       p$2(() => {
           if (leftRight) {
               addLeftRight(randomId);
@@ -15169,12 +15182,12 @@
               return () => removeHomeEnd(randomId);
           }
       }, [homeEnd]);
-      p$2(() => {
+      /*useEffect(() => {
           if (typeahead) {
               addTypeahead(randomId);
               return () => removeTypeahead(randomId);
           }
-      }, [typeahead]);
+      }, [typeahead]);*/
       p$2(() => {
           if (focusedInner && leaveF2) {
               addLeaveF2(randomId);
@@ -15198,21 +15211,27 @@
       const [typeahead2, setTypeahead] = useState(false);
       const [leaveF22, setLeaveF2] = useState(false);
       const [textF102, setTextF10] = useState(false);
+      const [activateEnter, setActivateEnter] = useState(false);
+      const [activateSpace, setActivateSpace] = useState(false);
+      const [typeaheadStatus, setTypeaheadStatus] = useState(null);
       const [leftRightDisplay, setLeftRightDisplay] = useState(false);
       const [upDownDisplay, setUpDownDisplay] = useState(false);
       const [homeEndDisplay, setHomeEndDisplay] = useState(false);
       const [pageKeysDisplay, setPageKeysDisplay] = useState(false);
-      const [typeaheadDisplay, setTypeaheadDisplay] = useState(false);
+      //const [typeaheadDisplay, setTypeaheadDisplay] = useState(false);
       const [leaveF2Display, setLeaveF2Display] = useState(false);
       const [textF10Display, setTextF10Display] = useState(false);
       const leftRightSet = _$1(new Set());
       const upDownSet = _$1(new Set());
       const homeEndSet = _$1(new Set());
       const pageKeysSet = _$1(new Set());
-      const typeaheadSet = _$1(new Set());
+      //const typeaheadSet = useRef<Set<string>>(new Set<string>());
       const leaveF2Set = _$1(new Set());
       const textF10Set = _$1(new Set());
+      const activateEnterSet = _$1(new Set());
+      const activateSpaceSet = _$1(new Set());
       const visible = (leftRight2 || upDown2 || homeEnd2 || pageKeys2 || typeahead2);
+      const typeaheadDisplay = (typeaheadStatus != null);
       y$2(() => {
           const visible = (leftRight2 || upDown2 || homeEnd2 || pageKeys2 || typeahead2);
           if (visible) {
@@ -15220,7 +15239,7 @@
               setUpDownDisplay(upDown2);
               setHomeEndDisplay(homeEnd2);
               setPageKeysDisplay(pageKeys2);
-              setTypeaheadDisplay(typeahead2);
+              //setTypeaheadDisplay(typeahead2);
               setLeaveF2Display(leaveF22);
               setTextF10Display(textF102);
           }
@@ -15237,18 +15256,20 @@
           addHomeEnd: (id) => { homeEndSet.current.add(id); setHomeEnd(homeEndSet.current.size > 0); },
           addLeftRight: (id) => { leftRightSet.current.add(id); setLeftRight(leftRightSet.current.size > 0); },
           addPageKeys: (id) => { pageKeysSet.current.add(id); setPageKeys(pageKeysSet.current.size > 0); },
-          addTypeahead: (id) => { typeaheadSet.current.add(id); setTypeahead(typeaheadSet.current.size > 0); },
+          setTypeaheadStatus: (status) => { setTypeaheadStatus(status); setHeardTab(true); },
           addUpDown: (id) => { upDownSet.current.add(id); setUpDown(upDownSet.current.size > 0); },
           addLeaveF2: (id) => { leaveF2Set.current.add(id); setLeaveF2(leaveF2Set.current.size > 0); },
           addTextF10: (id) => { textF10Set.current.add(id); setTextF10(textF10Set.current.size > 0); },
-          removeHomeEnd: (id) => { homeEndSet.current.delete(id); setHomeEnd(homeEndSet.current.size > 0); },
+          addActivateSpace: id => { activateSpaceSet.current.add(id); setActivateSpace(activateSpaceSet.current.size > 0); },
+          addActivateEnter: id => { activateEnterSet.current.add(id); setActivateEnter(activateEnterSet.current.size > 0); },
           removeLeftRight: (id) => { leftRightSet.current.delete(id); setLeftRight(leftRightSet.current.size > 0); },
+          removeUpDown: (id) => { upDownSet.current.delete(id); setUpDown(upDownSet.current.size > 0); },
+          removeHomeEnd: (id) => { homeEndSet.current.delete(id); setHomeEnd(homeEndSet.current.size > 0); },
           removePageKeys: (id) => { pageKeysSet.current.delete(id); setPageKeys(pageKeysSet.current.size > 0); },
-          removeTypeahead: (id) => { typeaheadSet.current.delete(id); setTypeahead(typeaheadSet.current.size > 0); },
           removeLeaveF2: (id) => { leaveF2Set.current.delete(id); setLeaveF2(leaveF2Set.current.size > 0); },
           removeTextF10: (id) => { textF10Set.current.delete(id); setTextF10(textF10Set.current.size > 0); },
-          removeUpDown: (id) => { upDownSet.current.delete(id); setUpDown(upDownSet.current.size > 0); },
-          setHasStartedTypeahead: () => setHeardTab(true),
+          removeActivateSpace: id => { activateSpaceSet.current.delete(id); setActivateSpace(activateSpaceSet.current.size > 0); },
+          removeActivateEnter: id => { activateEnterSet.current.delete(id); setActivateEnter(activateEnterSet.current.size > 0); },
           setDescription: desc => setDescription(desc),
           id: id
       });
@@ -15294,32 +15315,27 @@
               }
           }
       }, { capture: true });
-      return (o$3(KeyboardAssistContext.Provider, { value: context.current, children: [o$3(KeyboardAssistIconDisplay, { id: id, description: description, heardTab: heardTab, userHasHidden: userHasHidden, homeEnd: homeEndDisplay, leftRight: leftRightDisplay, upDown: upDownDisplay, pageKeys: pageKeysDisplay, typeahead: typeaheadDisplay, visible: visible, leaveF2: leaveF2Display, textF10: textF10Display }), children] }));
+      return (o$3(KeyboardAssistContext.Provider, { value: context.current, children: [o$3(KeyboardAssistIconDisplay, { id: id, description: description, heardTab: heardTab, userHasHidden: userHasHidden, homeEnd: homeEndDisplay, leftRight: leftRightDisplay, upDown: upDownDisplay, pageKeys: pageKeysDisplay, visible: visible, leaveF2: leaveF2Display, textF10: textF10Display, activateEnter: activateEnter, activateSpace: activateSpace, typeaheadStatus: typeaheadStatus }), children] }));
   }
-  function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, typeahead, visible, id }) {
-      const labelParts = [
-          leftRight && upDown ? "the arrow keys" : leftRight ? "the left and right arrow keys" : upDown ? "the up and down arrow keys" : null,
-          pageKeys ? "the Page Up and Down keys" : null,
-          homeEnd ? "the Home and End keys" : null,
-          typeahead ? "typing to search by name" : null,
-      ].filter(t => t != null);
-      let label = "";
+  function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, visible, activateEnter, activateSpace, id, typeaheadStatus }) {
+      /*let label = "";
       for (let i = 0; i < labelParts.length; ++i) {
           if (i > 0) {
               if (labelParts.length == 2)
                   label += " or ";
               else if (labelParts.length > 2) {
                   if (i == labelParts.length - 1)
-                      label += ", or ";
+                      label += ", or "
                   else
-                      label += ", ";
+                      label += ", "
               }
           }
           label += labelParts[i];
-      }
-      label = `Navigate using ${label}. Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
+      }*/
+      //let selectableLabel = selectable ? (activateEnter ? activateSpace ? "Enter or Space" : "Enter" : "Space") : "";
+      //label = `Navigate using ${label}. ${selectable ? `Select with ${selectableLabel}. ` : ""}Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
       const show = (heardTab && !userHasHidden && visible);
-      return (o$3(k$3, { children: [o$3("div", { id: id, class: "visually-hidden", children: label }), o$3(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: o$3("div", { class: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [o$3("div", { class: "keyboard-assist-instructions", children: description }), o$3(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), o$3(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), o$3(KeyboardAssistIconPageKeys, { enabled: pageKeys }), o$3(KeyboardAssistIconTypeahead, { enabled: typeahead }), o$3(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), o$3(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), o$3("div", { class: "keyboard-assist-dismiss-message", children: ["Press ", o$3("kbd", { children: "F7" }), " to dismiss these instructions.", o$3("br", {}), "To show again, press ", o$3("kbd", { children: "Shift+F7" }), "."] })] }) })] }));
+      return (o$3(k$3, { children: o$3(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: o$3("div", { class: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [o$3("div", { id: id, class: "keyboard-assist-instructions", children: description }), o$3(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), o$3(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), o$3(KeyboardAssistIconPageKeys, { enabled: pageKeys }), o$3(KeyboardAssistIconTypeahead, { typeaheadStatus: typeaheadStatus }), o$3(KeyboardAssistIconSelectable, { enter: activateEnter || false, space: activateSpace || false }), o$3(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), o$3(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), o$3("div", { class: "keyboard-assist-dismiss-message", children: ["Press ", o$3("kbd", { children: "F7" }), " to dismiss these instructions.", o$3("br", {}), "To show again, press ", o$3("kbd", { children: "Shift+F7" }), "."] })] }) }) }));
   }
   const KeyboardAssistIconArrowKeys = x$1(function KeyboardAssistIconArrowKeys({ leftRight, upDown }) {
       return (o$3("div", { class: "keyboard-assist-arrow-keys", children: [o$3(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-up", children: "\u2191" }), o$3(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-left", children: "\u2190" }), o$3(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-down", children: "\u2193" }), o$3(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-right", children: "\u2192" })] }));
@@ -15330,8 +15346,17 @@
   const KeyboardAssistIconHomeEnd = x$1(function KeyboardAssistIconHomeEnd({ enabled }) {
       return (o$3("div", { class: "keyboard-assist-home-end", children: [o$3(KeyboardAssistIconKey, { enabled: enabled, className: "keyboard-assist-key-home", children: "Home" }), o$3(KeyboardAssistIconKey, { enabled: enabled, className: "keyboard-assist-key-end", children: "End" })] }));
   });
-  const KeyboardAssistIconTypeahead = x$1(function KeyboardAssistIconTypeahead({ enabled }) {
-      return (o$3(CollapseFade, { show: enabled, exitVisibility: "hidden", children: o$3("div", { class: "keyboard-assist-typeahead", children: o$3("div", { className: "keyboard-assist-typeahead-message", children: "(or start typing to search)" }) }) }));
+  const KeyboardAssistIconSelectable = x$1(function KeyboardAssistIconTypeahead({ enter, space }) {
+      let selectableLabel = (enter ? space ? "Enter or Space" : "Enter" : space ? "Space" : "");
+      const visible = enter || space || false;
+      // TODO: modification during render to ensure that it's not jumpy when transitioning in/out
+      let selectableLabelRef = _$1(selectableLabel);
+      if (visible)
+          selectableLabelRef.current = selectableLabel;
+      return (o$3(CollapseFade, { show: visible, exitVisibility: "hidden", children: o$3("div", { class: "keyboard-assist-selectable", children: o$3("div", { className: "keyboard-assist-selectable-message", children: ["Select with ", selectableLabelRef.current] }) }) }));
+  });
+  const KeyboardAssistIconTypeahead = x$1(function KeyboardAssistIconTypeahead({ typeaheadStatus }) {
+      return (o$3(CollapseFade, { show: typeaheadStatus != null, exitVisibility: "hidden", children: o$3("div", { class: "keyboard-assist-typeahead", children: o$3("div", { className: "keyboard-assist-typeahead-message", children: typeaheadStatus == 'none' ? "Start typing to search" : typeaheadStatus == 'valid' ? "Keep typing to continue" : "No result found" }) }) }));
   });
   const KeyboardAssistIconLeaveF2 = x$1(function KeyboardAssistIconLeaveF2({ enabled }) {
       return (o$3(CollapseFade, { show: enabled, exitVisibility: "hidden", children: o$3("div", { class: "keyboard-assist-leave-f2", children: o$3("div", { className: "keyboard-assist-leave-f2-message", children: ["Press ", o$3("kbd", { children: "F2" }), " to return"] }) }) }));
@@ -15361,7 +15386,7 @@
                           }, imperativeHandle: imperativeHandle, singleSelectionAriaPropName: "aria-pressed", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
                           , pageNavigationSize: 0, orientation: orientation, ariaLabel: labelPosition == 'hidden' ? label : null, singleSelectedIndex: selectionMode == "single" ? (pendingIndex ?? selectedIndex) : undefined, render: info => {
                               const visibleLabel = o$3("label", { ...info.propsLabel, children: label });
-                              return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != 'none', description: keyboardControlsDescription || "Keyboard controls for these buttons:", children: o$3("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
+                              return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, activateSpace: info.typeaheadNavigationReturn.typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription || "Keyboard controls for these buttons:", children: o$3("span", { ...useMergedProps({ className: clsx(classBase, variantSize && `btn-group-${variantSize}`, orientation == "vertical" && `${classBase}-vertical`) }, info.propsToolbar, props, { ref }), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
                           } }) }) }) }) }));
   }
 
@@ -15987,7 +16012,7 @@
               return null;
           else
               return o$3("div", { "aria-busy": "true", class: "gridlist-item gridlist-item-placeholder", children: o$3("span", { class: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"), children: o$3("span", { class: "placeholder w-100" }) }) });
-      return (o$3(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: false, description: keyboardControlsDescription ?? "Select a list item:", children: o$3("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
+      return (o$3(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: infoRow.typeaheadNavigationReturn.typeaheadStatus, activateSpace: infoRow.typeaheadNavigationReturn.typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select a list item:", children: o$3("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
   });
   const ListItem = x$1(forwardElementRef$1(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
       const defaultDisabled = q$2(DefaultDisabled);
@@ -16071,7 +16096,7 @@
       return (o$3("div", { ...useMergedProps({ className: "popper-menu" }, { ...props, ref }), children: children }));
   });
   const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }, ref) {
-      return (o$3(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: o$3(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: typeaheadStatus != "none", description: keyboardControlsDescription, children: o$3("div", { ...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref }), children: children }) }) }));
+      return (o$3(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: o$3(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription, children: o$3("div", { ...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref }), children: children }) }) }));
   });
   const StructureMenuList = memoForwardRef(function StructureMenuList({ children, ...props }, ref) {
       return (o$3("div", { ...useMergedProps({ className: "dropdown-menu-list" }, { ...props, ref }), children: children }));
@@ -16172,7 +16197,7 @@
                       const E = (fieldset ? "fieldset" : "span");
                       const L = (fieldset ? "legend" : "label");
                       const visibleLabel = o$3(L, { ...useMergedProps({ class: clsx("form-label radio-group-label") }, info.propsRadioGroupLabel), children: label });
-                      return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: info.typeaheadNavigationReturn.typeaheadStatus != "none", description: keyboardControlsDescription ?? "Select an option:", children: o$3(E, { ...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
+                      return (o$3(k$3, { children: [labelPosition == "before" && visibleLabel, o$3(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, activateSpace: info.typeaheadNavigationReturn.typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select an option:", children: o$3(E, { ...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
                   } }) }) }));
   }
   function Radio({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }, ref) {
@@ -16621,7 +16646,7 @@
           }
       }, []);
       // dangerouslySetInnerHTML={{__html: valueHtml}}
-      return (o$3(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: true, pageKeys: true, textF10: true, typeahead: false, typeaheadActive: false, description: keyboardControlsDescription ?? "Control the editor:", children: o$3("div", { class: "ck-editor-wrapper", children: useClonedElement(children, { ...props, ref: ref2 }, ref) }) }));
+      return (o$3(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: true, pageKeys: true, textF10: true, typeaheadStatus: null, activateSpace: false, activateEnter: false, description: keyboardControlsDescription ?? "Control the editor:", children: o$3("div", { class: "ck-editor-wrapper", children: useClonedElement(children, { ...props, ref: ref2 }, ref) }) }));
   }));
 
   const RTFDefaultItems = ["undo", "redo", "|", "heading", "|", "bold", "italic", "underline", "strikethrough", "highlight", "|", "link", "code", "subscript", "superscript", "|", "removeFormat"];
@@ -18523,7 +18548,7 @@
                       if (info.paginatedChildrenReturn.childCount != null)
                           setChildCount?.(info.paginatedChildrenReturn.childCount);
                   }, [setChildCount, info.paginatedChildrenReturn.childCount]);
-                  return (o$3(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeahead: false, typeaheadActive: false, description: keyboardControlsDescription ?? "Navigate the table:", children: o$3(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: children }) }));
+                  return (o$3(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, activateEnter: false, activateSpace: false, description: keyboardControlsDescription ?? "Navigate the table:", children: o$3(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: children }) }));
               } }) }));
   }));
   const DataTableRow = x$1(forwardElementRef$1(function DataTableRow({ row, children, variantTheme, ...props }, ref) {
@@ -18632,8 +18657,7 @@
       return (o$3(Swappable, { children: o$3("div", { ...useMergedProps({ class: "tab-panels-container" }, { ...props, ref }), children: panels }) }));
   });
   const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, keyboardControlsDescription, ...props }, ref) {
-      let typeaheadActive = (typeaheadStatus && typeaheadStatus != 'none');
-      return (o$3(k$3, { children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeahead: true, typeaheadActive: typeaheadActive, description: keyboardControlsDescription ?? "Select at tab:", children: o$3("ul", { ...useMergedProps({ className: clsx(`nav nav-tabs`, `typeahead-status-${typeaheadStatus}`) }, { ...props, ref }), children: tabs }) }), labelPosition == "after" && labelJsx] }));
+      return (o$3(k$3, { children: [labelPosition == "before" && labelJsx, o$3(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select a tab:", children: o$3("ul", { ...useMergedProps({ className: clsx(`nav nav-tabs`, `typeahead-status-${typeaheadStatus}`) }, { ...props, ref }), children: tabs }) }), labelPosition == "after" && labelJsx] }));
   });
 
   const OrientationContext = G$1("horizontal");

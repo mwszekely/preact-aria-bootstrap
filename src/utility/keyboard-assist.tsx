@@ -1,5 +1,6 @@
 import { ComponentChild, ComponentChildren, createContext, Ref, VNode } from "preact";
 import { generateRandomId, useGlobalHandler, useHasCurrentFocus, useMergedProps, usePersistentState, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
+import { UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers/react";
 import { CollapseFade, SlideZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext, useEffect, useLayoutEffect, useRef } from "preact/hooks";
@@ -16,34 +17,74 @@ declare module 'preact-prop-helpers' {
 
 const Both = [false, true] as const;
 
-export interface KeyboardAssistIconProps { visible: boolean, description: string, leftRight: boolean, upDown: boolean, pageKeys: boolean, homeEnd: boolean, typeahead: boolean, leaveF2?: boolean; textF10?: boolean; }
+export interface KeyboardAssistIconProps {
+    visible: boolean,
+    description: string,
+    leftRight: boolean,
+    upDown: boolean,
+    pageKeys: boolean,
+    homeEnd: boolean,
+    //typeahead: boolean,
+    leaveF2?: boolean;
+    textF10?: boolean;
+    activateEnter: boolean;
+    activateSpace: boolean;
+    typeaheadStatus: TypeaheadStatus | null;
+}
 interface KeyboardAssistContext {
     addLeftRight(id: string): void;
     addUpDown(id: string): void;
     addHomeEnd(id: string): void;
     addPageKeys(id: string): void;
-    addTypeahead(id: string): void;
     addLeaveF2(id: string): void;
     addTextF10(id: string): void;
+    addActivateEnter(id: string): void;
+    addActivateSpace(id: string): void;
 
     setDescription(desc: string): void;
+    setTypeaheadStatus(status: TypeaheadStatus | null): void;
 
     removeLeftRight(id: string): void;
     removeUpDown(id: string): void;
     removeHomeEnd(id: string): void;
     removePageKeys(id: string): void;
-    removeTypeahead(id: string): void;
+    //removeTypeahead(id: string): void;
     removeLeaveF2(id: string): void;
     removeTextF10(id: string): void;
+    removeActivateEnter(id: string): void;
+    removeActivateSpace(id: string): void;
 
     // Any time a child renders with a typeahead, call this to show the instructions (if applicable)
-    setHasStartedTypeahead(): void;
+    //setHasStartedTypeahead(): void;
 
     id: string;
 }
+type TypeaheadStatus = UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"];
+
 const KeyboardAssistContext = createContext<null | KeyboardAssistContext>(null);
-export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ description, leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & { children: VNode, typeaheadActive: boolean; }, ref?: Ref<any>) {
-    const { id: figureDescriptionId, addHomeEnd, setDescription, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = useContext(KeyboardAssistContext)!;
+export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ description, activateEnter, activateSpace, leftRight, upDown, homeEnd, pageKeys, children, typeaheadStatus, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & { children: VNode, typeaheadStatus: TypeaheadStatus | null; }, ref?: Ref<any>) {
+    const {
+        id: figureDescriptionId,
+        addHomeEnd,
+        setDescription,
+        addActivateEnter,
+        removeActivateEnter,
+        addActivateSpace,
+        removeActivateSpace,
+        addLeftRight,
+        addPageKeys,
+        addUpDown,
+        addLeaveF2,
+        addTextF10,
+        removeHomeEnd,
+        removeLeftRight,
+        removePageKeys,
+        removeLeaveF2,
+        removeTextF10,
+        removeUpDown,
+        setTypeaheadStatus
+    } = useContext(KeyboardAssistContext)!;
+
     const [randomId] = useState(() => generateRandomId());
     const [focusedInner, setFocusedInner] = useState(false);
     const { refElementReturn, propsStable } = useRefElement<any>({ refElementParameters: {} });
@@ -63,14 +104,30 @@ export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(
     upDown &&= focusedInner;
     homeEnd &&= focusedInner;
     pageKeys &&= focusedInner;
-    typeahead &&= focusedInner;
     leaveF2 &&= focusedInner;
     textF10 &&= focusedInner;
+    activateEnter &&= focusedInner;
+    activateSpace &&= focusedInner;
 
     useEffect(() => {
-        if (typeaheadActive)
-            setHasStartedTypeahead();
-    }, [typeaheadActive])
+        if (activateEnter) {
+            addActivateEnter(randomId);
+            return () => removeActivateEnter(randomId);
+        }
+    }, [activateEnter])
+
+    useEffect(() => {
+        if (activateSpace) {
+            addActivateSpace(randomId);
+            return () => removeActivateSpace(randomId);
+        }
+    }, [activateSpace])
+
+    useEffect(() => {
+        setTypeaheadStatus(typeaheadStatus);
+        return () => setTypeaheadStatus(null);
+
+    }, [typeaheadStatus])
 
     useEffect(() => {
         if (leftRight) {
@@ -100,12 +157,12 @@ export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(
         }
     }, [homeEnd]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (typeahead) {
             addTypeahead(randomId);
             return () => removeTypeahead(randomId);
         }
-    }, [typeahead]);
+    }, [typeahead]);*/
 
     useEffect(() => {
         if (focusedInner && leaveF2) {
@@ -143,12 +200,15 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
     const [typeahead2, setTypeahead] = useState(false);
     const [leaveF22, setLeaveF2] = useState(false);
     const [textF102, setTextF10] = useState(false);
+    const [activateEnter, setActivateEnter] = useState(false);
+    const [activateSpace, setActivateSpace] = useState(false);
+    const [typeaheadStatus, setTypeaheadStatus] = useState<TypeaheadStatus | null>(null);
 
     const [leftRightDisplay, setLeftRightDisplay] = useState(false);
     const [upDownDisplay, setUpDownDisplay] = useState(false);
     const [homeEndDisplay, setHomeEndDisplay] = useState(false);
     const [pageKeysDisplay, setPageKeysDisplay] = useState(false);
-    const [typeaheadDisplay, setTypeaheadDisplay] = useState(false);
+    //const [typeaheadDisplay, setTypeaheadDisplay] = useState(false);
     const [leaveF2Display, setLeaveF2Display] = useState(false);
     const [textF10Display, setTextF10Display] = useState(false);
 
@@ -156,11 +216,15 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
     const upDownSet = useRef<Set<string>>(new Set<string>());
     const homeEndSet = useRef<Set<string>>(new Set<string>());
     const pageKeysSet = useRef<Set<string>>(new Set<string>());
-    const typeaheadSet = useRef<Set<string>>(new Set<string>());
+    //const typeaheadSet = useRef<Set<string>>(new Set<string>());
     const leaveF2Set = useRef<Set<string>>(new Set<string>());
     const textF10Set = useRef<Set<string>>(new Set<string>());
+    const activateEnterSet = useRef<Set<string>>(new Set<string>());
+    const activateSpaceSet = useRef<Set<string>>(new Set<string>());
 
     const visible = (leftRight2 || upDown2 || homeEnd2 || pageKeys2 || typeahead2);
+
+    const typeaheadDisplay = (typeaheadStatus != null);
 
     useLayoutEffect(() => {
         const visible = (leftRight2 || upDown2 || homeEnd2 || pageKeys2 || typeahead2);
@@ -169,7 +233,7 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
             setUpDownDisplay(upDown2);
             setHomeEndDisplay(homeEnd2);
             setPageKeysDisplay(pageKeys2);
-            setTypeaheadDisplay(typeahead2);
+            //setTypeaheadDisplay(typeahead2);
             setLeaveF2Display(leaveF22);
             setTextF10Display(textF102);
         }
@@ -189,18 +253,20 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
         addHomeEnd: (id) => { homeEndSet.current.add(id); setHomeEnd(homeEndSet.current.size > 0) },
         addLeftRight: (id) => { leftRightSet.current.add(id); setLeftRight(leftRightSet.current.size > 0) },
         addPageKeys: (id) => { pageKeysSet.current.add(id); setPageKeys(pageKeysSet.current.size > 0) },
-        addTypeahead: (id) => { typeaheadSet.current.add(id); setTypeahead(typeaheadSet.current.size > 0) },
+        setTypeaheadStatus: (status) => { setTypeaheadStatus(status); setHeardTab(true); },
         addUpDown: (id) => { upDownSet.current.add(id); setUpDown(upDownSet.current.size > 0) },
         addLeaveF2: (id) => { leaveF2Set.current.add(id); setLeaveF2(leaveF2Set.current.size > 0) },
         addTextF10: (id) => { textF10Set.current.add(id); setTextF10(textF10Set.current.size > 0) },
-        removeHomeEnd: (id) => { homeEndSet.current.delete(id); setHomeEnd(homeEndSet.current.size > 0) },
+        addActivateSpace: id => { activateSpaceSet.current.add(id); setActivateSpace(activateSpaceSet.current.size > 0); },
+        addActivateEnter: id => { activateEnterSet.current.add(id); setActivateEnter(activateEnterSet.current.size > 0); },
         removeLeftRight: (id) => { leftRightSet.current.delete(id); setLeftRight(leftRightSet.current.size > 0) },
+        removeUpDown: (id) => { upDownSet.current.delete(id); setUpDown(upDownSet.current.size > 0) },
+        removeHomeEnd: (id) => { homeEndSet.current.delete(id); setHomeEnd(homeEndSet.current.size > 0) },
         removePageKeys: (id) => { pageKeysSet.current.delete(id); setPageKeys(pageKeysSet.current.size > 0) },
-        removeTypeahead: (id) => { typeaheadSet.current.delete(id); setTypeahead(typeaheadSet.current.size > 0) },
         removeLeaveF2: (id) => { leaveF2Set.current.delete(id); setLeaveF2(leaveF2Set.current.size > 0) },
         removeTextF10: (id) => { textF10Set.current.delete(id); setTextF10(textF10Set.current.size > 0) },
-        removeUpDown: (id) => { upDownSet.current.delete(id); setUpDown(upDownSet.current.size > 0) },
-        setHasStartedTypeahead: () => setHeardTab(true),
+        removeActivateSpace: id => { activateSpaceSet.current.delete(id); setActivateSpace(activateSpaceSet.current.size > 0); },
+        removeActivateEnter: id => { activateEnterSet.current.delete(id); setActivateEnter(activateEnterSet.current.size > 0); },
         setDescription: desc => setDescription(desc),
         id: id
     });
@@ -255,21 +321,38 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
 
     return (
         <KeyboardAssistContext.Provider value={context.current}>
-            <KeyboardAssistIconDisplay id={id} description={description} heardTab={heardTab} userHasHidden={userHasHidden} homeEnd={homeEndDisplay} leftRight={leftRightDisplay} upDown={upDownDisplay} pageKeys={pageKeysDisplay} typeahead={typeaheadDisplay} visible={visible} leaveF2={leaveF2Display} textF10={textF10Display} />
+            <KeyboardAssistIconDisplay
+                id={id}
+                description={description}
+                heardTab={heardTab}
+                userHasHidden={userHasHidden}
+                homeEnd={homeEndDisplay}
+                leftRight={leftRightDisplay}
+                upDown={upDownDisplay}
+                pageKeys={pageKeysDisplay}
+                visible={visible}
+                leaveF2={leaveF2Display}
+                textF10={textF10Display}
+                activateEnter={activateEnter}
+                activateSpace={activateSpace}
+                typeaheadStatus={typeaheadStatus}
+            />
             {children}
         </KeyboardAssistContext.Provider>
     )
 }
 
-function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, typeahead, visible, id }: KeyboardAssistIconProps & { id: string, heardTab: boolean, userHasHidden: boolean }) {
+function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, visible, activateEnter, activateSpace, id, typeaheadStatus }: KeyboardAssistIconProps & { id: string, heardTab: boolean, userHasHidden: boolean }) {
+
+    let selectable = (activateEnter || activateSpace);
 
     const labelParts = ([
         leftRight && upDown ? "the arrow keys" : leftRight ? "the left and right arrow keys" : upDown ? "the up and down arrow keys" : null,
         pageKeys ? "the Page Up and Down keys" : null,
         homeEnd ? "the Home and End keys" : null,
-        typeahead ? "typing to search by name" : null,
+        typeaheadStatus != null ? "typing to search by name" : null,
     ].filter(t => t != null) as string[]);
-    let label = "";
+    /*let label = "";
     for (let i = 0; i < labelParts.length; ++i) {
         if (i > 0) {
             if (labelParts.length == 2)
@@ -282,22 +365,24 @@ function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftR
             }
         }
         label += labelParts[i];
-    }
+    }*/
 
-    label = `Navigate using ${label}. Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
+    //let selectableLabel = selectable ? (activateEnter ? activateSpace ? "Enter or Space" : "Enter" : "Space") : "";
+
+    //label = `Navigate using ${label}. ${selectable ? `Select with ${selectableLabel}. ` : ""}Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
 
     const show = (heardTab && !userHasHidden && visible);
 
     return (
         <>
-            <div id={id} class="visually-hidden">{label}</div>
             <SlideZoomFade show={show} zoomMin={0.875} zoomOriginInline={1} zoomOriginBlock={1} slideTargetBlock={0.125} slideTargetInline={0.125}>
                 <div class="keyboard-assist-icon-container" role="figure" aria-labelledby={id}>
-                    <div class="keyboard-assist-instructions">{description}</div>
+                    <div id={id} class="keyboard-assist-instructions">{description}</div>
                     <KeyboardAssistIconArrowKeys leftRight={leftRight} upDown={upDown} />
                     <KeyboardAssistIconHomeEnd enabled={homeEnd} />
                     <KeyboardAssistIconPageKeys enabled={pageKeys} />
-                    <KeyboardAssistIconTypeahead enabled={typeahead} />
+                    <KeyboardAssistIconTypeahead typeaheadStatus={typeaheadStatus} />
+                    <KeyboardAssistIconSelectable enter={activateEnter || false} space={activateSpace || false} />
                     <KeyboardAssistIconLeaveF2 enabled={leaveF2 || false} />
                     <KeyboardAssistIconRichTextF10 enabled={textF10 || false} />
                     <div class="keyboard-assist-dismiss-message">Press <kbd>F7</kbd> to dismiss these instructions.<br />To show again, press <kbd>Shift+F7</kbd>.</div>
@@ -336,12 +421,30 @@ const KeyboardAssistIconHomeEnd = memo(function KeyboardAssistIconHomeEnd({ enab
     )
 })
 
-const KeyboardAssistIconTypeahead = memo(function KeyboardAssistIconTypeahead({ enabled }: { enabled: boolean }) {
+const KeyboardAssistIconSelectable = memo(function KeyboardAssistIconTypeahead({ enter, space }: { enter: boolean, space: boolean }) {
+    let selectableLabel = (enter ? space ? "Enter or Space" : "Enter" : space ? "Space" : "");
+    const visible: boolean = enter || space || false;
+
+    // TODO: modification during render to ensure that it's not jumpy when transitioning in/out
+    let selectableLabelRef = useRef<string>(selectableLabel);
+    if (visible)
+        selectableLabelRef.current = selectableLabel;
 
     return (
-        <CollapseFade show={enabled} exitVisibility="hidden">
+        <CollapseFade show={visible} exitVisibility="hidden">
+            <div class="keyboard-assist-selectable">
+                <div className="keyboard-assist-selectable-message">Select with {selectableLabelRef.current}</div>
+            </div>
+        </CollapseFade>
+    )
+})
+
+const KeyboardAssistIconTypeahead = memo(function KeyboardAssistIconTypeahead({ typeaheadStatus }: { typeaheadStatus: TypeaheadStatus | null }) {
+
+    return (
+        <CollapseFade show={typeaheadStatus != null} exitVisibility="hidden">
             <div class="keyboard-assist-typeahead">
-                <div className="keyboard-assist-typeahead-message">(or start typing to search)</div>
+                <div className="keyboard-assist-typeahead-message">{typeaheadStatus == 'none' ? "Start typing to search" : typeaheadStatus == 'valid' ? "Keep typing to continue" : "No result found"}</div>
             </div>
         </CollapseFade>
     )

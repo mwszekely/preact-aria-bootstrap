@@ -13200,8 +13200,8 @@ th > button.sort-button {
   display: grid;
   column-gap: calc(var(--keyboard-assist-key-size) * 0.5);
   row-gap: calc(var(--keyboard-assist-key-size) * 0.25);
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto auto auto;
+  grid-template-columns: min-content min-content min-content;
+  grid-auto-rows: auto;
   padding: calc(var(--keyboard-assist-key-size) * 0.25);
   pointer-events: none;
   border: 2px solid #212529;
@@ -13235,10 +13235,6 @@ th > button.sort-button {
   grid-auto-rows: 1fr 1fr;
 }
 
-.keyboard-assist-typeahead {
-  grid-row: 3/span 1;
-}
-
 .keyboard-assist-instructions {
   grid-row: 1/span 1;
 }
@@ -13249,8 +13245,17 @@ th > button.sort-button {
   grid-row: 2/span 1;
 }
 
+.keyboard-assist-typeahead {
+  grid-row: 3/span 1;
+}
+
+.keyboard-assist-selectable {
+  grid-row: 4/span 1;
+}
+
 .keyboard-assist-instructions,
 .keyboard-assist-typeahead,
+.keyboard-assist-selectable,
 .keyboard-assist-rich-text-f10,
 .keyboard-assist-leave-f2 {
   grid-column: 1/-1;
@@ -13265,15 +13270,31 @@ th > button.sort-button {
   grid-column: 1/-1;
 }
 
-.keyboard-assist-typeahead-message {
+.keyboard-assist-typeahead-message,
+.keyboard-assist-selectable-message {
   border-radius: calc(var(--keyboard-assist-key-size) * 2);
   padding: calc(var(--keyboard-assist-key-size) * 0.25) calc(var(--keyboard-assist-key-size) * 0.75);
+  border: 2px solid var(--bs-body-color);
 }
 
-.keyboard-assist-typeahead-message,
+.keyboard-assist-typeahead-message {
+  background: var(--bs-info-bg-subtle);
+  color: var(--bs-info-text-emphasis);
+}
+
+.keyboard-assist-selectable-message {
+  background: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary-text-emphasis);
+}
+
 .keyboard-assist-key {
   color: var(--bs-body-bg);
   background: var(--bs-body-color);
+}
+
+.keyboard-assist-typeahead-message,
+.keyboard-assist-selectable-message,
+.keyboard-assist-key {
   transition-property: opacity, color, background-color, border;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
@@ -13281,11 +13302,13 @@ th > button.sort-button {
 }
 @media (prefers-reduced-motion) {
   .keyboard-assist-typeahead-message,
+  .keyboard-assist-selectable-message,
   .keyboard-assist-key {
     transition-property: opacity !important;
   }
 }
 .keyboard-assist-typeahead-message::after,
+.keyboard-assist-selectable-message::after,
 .keyboard-assist-key::after {
   position: absolute;
   inset: 0;
@@ -13297,6 +13320,10 @@ th > button.sort-button {
   content: "";
 }
 .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-up, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-down, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-left, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-right,
+.keyboard-assist-selectable-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-up,
+.keyboard-assist-selectable-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-down,
+.keyboard-assist-selectable-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-left,
+.keyboard-assist-selectable-message.keyboard-assist-key-disabled.keyboard-assist-key-arrow-right,
 .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-up,
 .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-down,
 .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-arrow-left,
@@ -13308,6 +13335,10 @@ th > button.sort-button {
 }
 .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-page-up, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-page-down, .keyboard-assist-typeahead-message.keyboard-assist-key-disabled.keyboard-assist-key-home,
 .keyboard-assist-typeahead-message.keyboard-assist-key-disabled .keyboard-assist-key-end,
+.keyboard-assist-selectable-message.keyboard-assist-key-disabled.keyboard-assist-key-page-up,
+.keyboard-assist-selectable-message.keyboard-assist-key-disabled.keyboard-assist-key-page-down,
+.keyboard-assist-selectable-message.keyboard-assist-key-disabled.keyboard-assist-key-home,
+.keyboard-assist-selectable-message.keyboard-assist-key-disabled .keyboard-assist-key-end,
 .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-page-up,
 .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-page-down,
 .keyboard-assist-key.keyboard-assist-key-disabled.keyboard-assist-key-home,
@@ -13316,6 +13347,7 @@ th > button.sort-button {
   color: rgba(var(--bs-body-color-rgb), 1);
 }
 .keyboard-assist-typeahead-message.keyboard-assist-key-disabled::after,
+.keyboard-assist-selectable-message.keyboard-assist-key-disabled::after,
 .keyboard-assist-key.keyboard-assist-key-disabled::after {
   opacity: 0.5;
   content: "🚫";

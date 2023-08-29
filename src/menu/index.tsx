@@ -120,7 +120,15 @@ export interface StructureMenuRootProps extends GlobalAttributes<HTMLDivElement,
 export const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }: StructureMenuRootProps, ref: Ref<HTMLDivElement>) {
     return (
         <ZoomFade show={popperOpen} delayMountUntilShown exitVisibility="removed" zoomOriginInline={0} zoomOriginBlock={0} zoomMinInline={0.85} zoomMinBlock={0.85}>
-            <KeyboardAssistIcon leftRight={false} upDown={true} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={typeaheadStatus != "none"} description={keyboardControlsDescription}>
+            <KeyboardAssistIcon 
+            leftRight={false} 
+            upDown={true} 
+            homeEnd={true} 
+            pageKeys={true} 
+            typeaheadStatus={typeaheadStatus}
+            activateSpace={typeaheadStatus == 'none'}
+            activateEnter={true}
+            description={keyboardControlsDescription}>
                 <div {...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref })}>
                     {children}
                 </div>

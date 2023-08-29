@@ -8,8 +8,8 @@ import { forwardElementRef } from "./forward-element-ref.js";
 import { useClonedElement } from "./use-cloned-element.js";
 const Both = [false, true];
 const KeyboardAssistContext = createContext(null);
-export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ description, leftRight, upDown, homeEnd, pageKeys, typeahead, children, typeaheadActive, leaveF2, textF10, ...props }, ref) {
-    const { id: figureDescriptionId, addHomeEnd, setDescription, addLeftRight, addPageKeys, addTypeahead, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeTypeahead, removeUpDown, setHasStartedTypeahead } = useContext(KeyboardAssistContext);
+export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ description, activateEnter, activateSpace, leftRight, upDown, homeEnd, pageKeys, children, typeaheadStatus, leaveF2, textF10, ...props }, ref) {
+    const { id: figureDescriptionId, addHomeEnd, setDescription, addActivateEnter, removeActivateEnter, addActivateSpace, removeActivateSpace, addLeftRight, addPageKeys, addUpDown, addLeaveF2, addTextF10, removeHomeEnd, removeLeftRight, removePageKeys, removeLeaveF2, removeTextF10, removeUpDown, setTypeaheadStatus } = useContext(KeyboardAssistContext);
     const [randomId] = useState(() => generateRandomId());
     const [focusedInner, setFocusedInner] = useState(false);
     const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
@@ -28,13 +28,26 @@ export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(
     upDown &&= focusedInner;
     homeEnd &&= focusedInner;
     pageKeys &&= focusedInner;
-    typeahead &&= focusedInner;
     leaveF2 &&= focusedInner;
     textF10 &&= focusedInner;
+    activateEnter &&= focusedInner;
+    activateSpace &&= focusedInner;
     useEffect(() => {
-        if (typeaheadActive)
-            setHasStartedTypeahead();
-    }, [typeaheadActive]);
+        if (activateEnter) {
+            addActivateEnter(randomId);
+            return () => removeActivateEnter(randomId);
+        }
+    }, [activateEnter]);
+    useEffect(() => {
+        if (activateSpace) {
+            addActivateSpace(randomId);
+            return () => removeActivateSpace(randomId);
+        }
+    }, [activateSpace]);
+    useEffect(() => {
+        setTypeaheadStatus(typeaheadStatus);
+        return () => setTypeaheadStatus(null);
+    }, [typeaheadStatus]);
     useEffect(() => {
         if (leftRight) {
             addLeftRight(randomId);
@@ -59,12 +72,12 @@ export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(
             return () => removeHomeEnd(randomId);
         }
     }, [homeEnd]);
-    useEffect(() => {
+    /*useEffect(() => {
         if (typeahead) {
             addTypeahead(randomId);
             return () => removeTypeahead(randomId);
         }
-    }, [typeahead]);
+    }, [typeahead]);*/
     useEffect(() => {
         if (focusedInner && leaveF2) {
             addLeaveF2(randomId);
@@ -88,21 +101,27 @@ export function KeyboardAssistProvider({ children }) {
     const [typeahead2, setTypeahead] = useState(false);
     const [leaveF22, setLeaveF2] = useState(false);
     const [textF102, setTextF10] = useState(false);
+    const [activateEnter, setActivateEnter] = useState(false);
+    const [activateSpace, setActivateSpace] = useState(false);
+    const [typeaheadStatus, setTypeaheadStatus] = useState(null);
     const [leftRightDisplay, setLeftRightDisplay] = useState(false);
     const [upDownDisplay, setUpDownDisplay] = useState(false);
     const [homeEndDisplay, setHomeEndDisplay] = useState(false);
     const [pageKeysDisplay, setPageKeysDisplay] = useState(false);
-    const [typeaheadDisplay, setTypeaheadDisplay] = useState(false);
+    //const [typeaheadDisplay, setTypeaheadDisplay] = useState(false);
     const [leaveF2Display, setLeaveF2Display] = useState(false);
     const [textF10Display, setTextF10Display] = useState(false);
     const leftRightSet = useRef(new Set());
     const upDownSet = useRef(new Set());
     const homeEndSet = useRef(new Set());
     const pageKeysSet = useRef(new Set());
-    const typeaheadSet = useRef(new Set());
+    //const typeaheadSet = useRef<Set<string>>(new Set<string>());
     const leaveF2Set = useRef(new Set());
     const textF10Set = useRef(new Set());
+    const activateEnterSet = useRef(new Set());
+    const activateSpaceSet = useRef(new Set());
     const visible = (leftRight2 || upDown2 || homeEnd2 || pageKeys2 || typeahead2);
+    const typeaheadDisplay = (typeaheadStatus != null);
     useLayoutEffect(() => {
         const visible = (leftRight2 || upDown2 || homeEnd2 || pageKeys2 || typeahead2);
         if (visible) {
@@ -110,7 +129,7 @@ export function KeyboardAssistProvider({ children }) {
             setUpDownDisplay(upDown2);
             setHomeEndDisplay(homeEnd2);
             setPageKeysDisplay(pageKeys2);
-            setTypeaheadDisplay(typeahead2);
+            //setTypeaheadDisplay(typeahead2);
             setLeaveF2Display(leaveF22);
             setTextF10Display(textF102);
         }
@@ -127,18 +146,20 @@ export function KeyboardAssistProvider({ children }) {
         addHomeEnd: (id) => { homeEndSet.current.add(id); setHomeEnd(homeEndSet.current.size > 0); },
         addLeftRight: (id) => { leftRightSet.current.add(id); setLeftRight(leftRightSet.current.size > 0); },
         addPageKeys: (id) => { pageKeysSet.current.add(id); setPageKeys(pageKeysSet.current.size > 0); },
-        addTypeahead: (id) => { typeaheadSet.current.add(id); setTypeahead(typeaheadSet.current.size > 0); },
+        setTypeaheadStatus: (status) => { setTypeaheadStatus(status); setHeardTab(true); },
         addUpDown: (id) => { upDownSet.current.add(id); setUpDown(upDownSet.current.size > 0); },
         addLeaveF2: (id) => { leaveF2Set.current.add(id); setLeaveF2(leaveF2Set.current.size > 0); },
         addTextF10: (id) => { textF10Set.current.add(id); setTextF10(textF10Set.current.size > 0); },
-        removeHomeEnd: (id) => { homeEndSet.current.delete(id); setHomeEnd(homeEndSet.current.size > 0); },
+        addActivateSpace: id => { activateSpaceSet.current.add(id); setActivateSpace(activateSpaceSet.current.size > 0); },
+        addActivateEnter: id => { activateEnterSet.current.add(id); setActivateEnter(activateEnterSet.current.size > 0); },
         removeLeftRight: (id) => { leftRightSet.current.delete(id); setLeftRight(leftRightSet.current.size > 0); },
+        removeUpDown: (id) => { upDownSet.current.delete(id); setUpDown(upDownSet.current.size > 0); },
+        removeHomeEnd: (id) => { homeEndSet.current.delete(id); setHomeEnd(homeEndSet.current.size > 0); },
         removePageKeys: (id) => { pageKeysSet.current.delete(id); setPageKeys(pageKeysSet.current.size > 0); },
-        removeTypeahead: (id) => { typeaheadSet.current.delete(id); setTypeahead(typeaheadSet.current.size > 0); },
         removeLeaveF2: (id) => { leaveF2Set.current.delete(id); setLeaveF2(leaveF2Set.current.size > 0); },
         removeTextF10: (id) => { textF10Set.current.delete(id); setTextF10(textF10Set.current.size > 0); },
-        removeUpDown: (id) => { upDownSet.current.delete(id); setUpDown(upDownSet.current.size > 0); },
-        setHasStartedTypeahead: () => setHeardTab(true),
+        removeActivateSpace: id => { activateSpaceSet.current.delete(id); setActivateSpace(activateSpaceSet.current.size > 0); },
+        removeActivateEnter: id => { activateEnterSet.current.delete(id); setActivateEnter(activateEnterSet.current.size > 0); },
         setDescription: desc => setDescription(desc),
         id: id
     });
@@ -184,32 +205,34 @@ export function KeyboardAssistProvider({ children }) {
             }
         }
     }, { capture: true });
-    return (_jsxs(KeyboardAssistContext.Provider, { value: context.current, children: [_jsx(KeyboardAssistIconDisplay, { id: id, description: description, heardTab: heardTab, userHasHidden: userHasHidden, homeEnd: homeEndDisplay, leftRight: leftRightDisplay, upDown: upDownDisplay, pageKeys: pageKeysDisplay, typeahead: typeaheadDisplay, visible: visible, leaveF2: leaveF2Display, textF10: textF10Display }), children] }));
+    return (_jsxs(KeyboardAssistContext.Provider, { value: context.current, children: [_jsx(KeyboardAssistIconDisplay, { id: id, description: description, heardTab: heardTab, userHasHidden: userHasHidden, homeEnd: homeEndDisplay, leftRight: leftRightDisplay, upDown: upDownDisplay, pageKeys: pageKeysDisplay, visible: visible, leaveF2: leaveF2Display, textF10: textF10Display, activateEnter: activateEnter, activateSpace: activateSpace, typeaheadStatus: typeaheadStatus }), children] }));
 }
-function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, typeahead, visible, id }) {
+function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, visible, activateEnter, activateSpace, id, typeaheadStatus }) {
+    let selectable = (activateEnter || activateSpace);
     const labelParts = [
         leftRight && upDown ? "the arrow keys" : leftRight ? "the left and right arrow keys" : upDown ? "the up and down arrow keys" : null,
         pageKeys ? "the Page Up and Down keys" : null,
         homeEnd ? "the Home and End keys" : null,
-        typeahead ? "typing to search by name" : null,
+        typeaheadStatus != null ? "typing to search by name" : null,
     ].filter(t => t != null);
-    let label = "";
+    /*let label = "";
     for (let i = 0; i < labelParts.length; ++i) {
         if (i > 0) {
             if (labelParts.length == 2)
                 label += " or ";
             else if (labelParts.length > 2) {
                 if (i == labelParts.length - 1)
-                    label += ", or ";
+                    label += ", or "
                 else
-                    label += ", ";
+                    label += ", "
             }
         }
         label += labelParts[i];
-    }
-    label = `Navigate using ${label}. Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
+    }*/
+    //let selectableLabel = selectable ? (activateEnter ? activateSpace ? "Enter or Space" : "Enter" : "Space") : "";
+    //label = `Navigate using ${label}. ${selectable ? `Select with ${selectableLabel}. ` : ""}Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
     const show = (heardTab && !userHasHidden && visible);
-    return (_jsxs(_Fragment, { children: [_jsx("div", { id: id, class: "visually-hidden", children: label }), _jsx(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: _jsxs("div", { class: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [_jsx("div", { class: "keyboard-assist-instructions", children: description }), _jsx(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), _jsx(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), _jsx(KeyboardAssistIconPageKeys, { enabled: pageKeys }), _jsx(KeyboardAssistIconTypeahead, { enabled: typeahead }), _jsx(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), _jsx(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), _jsxs("div", { class: "keyboard-assist-dismiss-message", children: ["Press ", _jsx("kbd", { children: "F7" }), " to dismiss these instructions.", _jsx("br", {}), "To show again, press ", _jsx("kbd", { children: "Shift+F7" }), "."] })] }) })] }));
+    return (_jsx(_Fragment, { children: _jsx(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: _jsxs("div", { class: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [_jsx("div", { id: id, class: "keyboard-assist-instructions", children: description }), _jsx(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), _jsx(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), _jsx(KeyboardAssistIconPageKeys, { enabled: pageKeys }), _jsx(KeyboardAssistIconTypeahead, { typeaheadStatus: typeaheadStatus }), _jsx(KeyboardAssistIconSelectable, { enter: activateEnter || false, space: activateSpace || false }), _jsx(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), _jsx(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), _jsxs("div", { class: "keyboard-assist-dismiss-message", children: ["Press ", _jsx("kbd", { children: "F7" }), " to dismiss these instructions.", _jsx("br", {}), "To show again, press ", _jsx("kbd", { children: "Shift+F7" }), "."] })] }) }) }));
 }
 const KeyboardAssistIconArrowKeys = memo(function KeyboardAssistIconArrowKeys({ leftRight, upDown }) {
     return (_jsxs("div", { class: "keyboard-assist-arrow-keys", children: [_jsx(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-up", children: "\u2191" }), _jsx(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-left", children: "\u2190" }), _jsx(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-down", children: "\u2193" }), _jsx(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-right", children: "\u2192" })] }));
@@ -220,8 +243,17 @@ const KeyboardAssistIconPageKeys = memo(function KeyboardAssistIconPageKeys({ en
 const KeyboardAssistIconHomeEnd = memo(function KeyboardAssistIconHomeEnd({ enabled }) {
     return (_jsxs("div", { class: "keyboard-assist-home-end", children: [_jsx(KeyboardAssistIconKey, { enabled: enabled, className: "keyboard-assist-key-home", children: "Home" }), _jsx(KeyboardAssistIconKey, { enabled: enabled, className: "keyboard-assist-key-end", children: "End" })] }));
 });
-const KeyboardAssistIconTypeahead = memo(function KeyboardAssistIconTypeahead({ enabled }) {
-    return (_jsx(CollapseFade, { show: enabled, exitVisibility: "hidden", children: _jsx("div", { class: "keyboard-assist-typeahead", children: _jsx("div", { className: "keyboard-assist-typeahead-message", children: "(or start typing to search)" }) }) }));
+const KeyboardAssistIconSelectable = memo(function KeyboardAssistIconTypeahead({ enter, space }) {
+    let selectableLabel = (enter ? space ? "Enter or Space" : "Enter" : space ? "Space" : "");
+    const visible = enter || space || false;
+    // TODO: modification during render to ensure that it's not jumpy when transitioning in/out
+    let selectableLabelRef = useRef(selectableLabel);
+    if (visible)
+        selectableLabelRef.current = selectableLabel;
+    return (_jsx(CollapseFade, { show: visible, exitVisibility: "hidden", children: _jsx("div", { class: "keyboard-assist-selectable", children: _jsxs("div", { className: "keyboard-assist-selectable-message", children: ["Select with ", selectableLabelRef.current] }) }) }));
+});
+const KeyboardAssistIconTypeahead = memo(function KeyboardAssistIconTypeahead({ typeaheadStatus }) {
+    return (_jsx(CollapseFade, { show: typeaheadStatus != null, exitVisibility: "hidden", children: _jsx("div", { class: "keyboard-assist-typeahead", children: _jsx("div", { className: "keyboard-assist-typeahead-message", children: typeaheadStatus == 'none' ? "Start typing to search" : typeaheadStatus == 'valid' ? "Keep typing to continue" : "No result found" }) }) }));
 });
 const KeyboardAssistIconLeaveF2 = memo(function KeyboardAssistIconLeaveF2({ enabled }) {
     return (_jsx(CollapseFade, { show: enabled, exitVisibility: "hidden", children: _jsx("div", { class: "keyboard-assist-leave-f2", children: _jsxs("div", { className: "keyboard-assist-leave-f2-message", children: ["Press ", _jsx("kbd", { children: "F2" }), " to return"] }) }) }));

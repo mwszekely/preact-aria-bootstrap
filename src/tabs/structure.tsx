@@ -84,11 +84,18 @@ export const StructureTabPanelsContainer = memoForwardRef(function StructureTabP
 
 
 export const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, keyboardControlsDescription, ...props }: StructureTabListProps, ref: Ref<HTMLUListElement>) {
-    let typeaheadActive = (typeaheadStatus && typeaheadStatus != 'none');
     return (
         <>
             {labelPosition == "before" && labelJsx}
-            <KeyboardAssistIcon leftRight={orientation == "horizontal"} upDown={orientation == "vertical"} homeEnd={true} pageKeys={false} typeahead={true} typeaheadActive={typeaheadActive} description={keyboardControlsDescription ?? "Select at tab:"}>
+            <KeyboardAssistIcon 
+            leftRight={orientation == "horizontal"} 
+            upDown={orientation == "vertical"} 
+            homeEnd={true} 
+            pageKeys={false} 
+            typeaheadStatus={typeaheadStatus}
+            activateSpace={typeaheadStatus == 'none'} 
+            activateEnter={true}
+            description={keyboardControlsDescription ?? "Select a tab:"}>
                 <ul {...useMergedProps({ className: clsx(`nav nav-tabs`, `typeahead-status-${typeaheadStatus}`) }, { ...props, ref })}>
                     {tabs}
                 </ul>

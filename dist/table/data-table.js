@@ -37,7 +37,7 @@ const DataTableSection = memo(forwardElementRef(function DataTableSection({ chil
                     if (info.paginatedChildrenReturn.childCount != null)
                         setChildCount?.(info.paginatedChildrenReturn.childCount);
                 }, [setChildCount, info.paginatedChildrenReturn.childCount]);
-                return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeahead: false, typeaheadActive: false, description: keyboardControlsDescription ?? "Navigate the table:", children: _jsx(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: children }) }));
+                return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, activateEnter: false, activateSpace: false, description: keyboardControlsDescription ?? "Navigate the table:", children: _jsx(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: children }) }));
             } }) }));
 }));
 export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, children, variantTheme, ...props }, ref) {

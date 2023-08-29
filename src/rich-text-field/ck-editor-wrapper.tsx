@@ -357,7 +357,16 @@ export const CkEditorWrapper = memo(forwardElementRef(function CkEditorWrapper({
     }, []);
     // dangerouslySetInnerHTML={{__html: valueHtml}}
     return (
-        <KeyboardAssistIcon homeEnd={true} leftRight={true} upDown={true} pageKeys={true} textF10={true} typeahead={false} typeaheadActive={false} description={keyboardControlsDescription ?? "Control the editor:"}>
+        <KeyboardAssistIcon 
+        homeEnd={true} 
+        leftRight={true} 
+        upDown={true} 
+        pageKeys={true} 
+        textF10={true} 
+        typeaheadStatus={null} 
+        activateSpace={false}
+        activateEnter={false}
+        description={keyboardControlsDescription ?? "Control the editor:"}>
             <div class="ck-editor-wrapper">
                 {useClonedElement(children, { ...props, ref: ref2 }, ref)}
             </div>

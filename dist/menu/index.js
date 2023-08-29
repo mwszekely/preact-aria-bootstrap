@@ -57,7 +57,7 @@ export const StructureMenuPopper = memoForwardRef(function StructureMenuPopper({
     return (_jsx("div", { ...useMergedProps({ className: "popper-menu" }, { ...props, ref }), children: children }));
 });
 export const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }, ref) {
-    return (_jsx(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: _jsx(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeahead: true, typeaheadActive: typeaheadStatus != "none", description: keyboardControlsDescription, children: _jsx("div", { ...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref }), children: children }) }) }));
+    return (_jsx(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: _jsx(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription, children: _jsx("div", { ...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref }), children: children }) }) }));
 });
 export const StructureMenuList = memoForwardRef(function StructureMenuList({ children, ...props }, ref) {
     return (_jsx("div", { ...useMergedProps({ className: "dropdown-menu-list" }, { ...props, ref }), children: children }));

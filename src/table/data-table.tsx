@@ -103,7 +103,15 @@ const DataTableSection = memo(forwardElementRef(function DataTableSection({ chil
                             setChildCount?.(info.paginatedChildrenReturn.childCount);
                     }, [setChildCount, info.paginatedChildrenReturn.childCount])
                     return (
-                        <KeyboardAssistIcon homeEnd={true} leftRight={true} upDown={location == "body"} pageKeys={true} typeahead={false} typeaheadActive={false} description={keyboardControlsDescription ?? "Navigate the table:"}>
+                        <KeyboardAssistIcon 
+                        homeEnd={true} 
+                        leftRight={true} 
+                        upDown={location == "body"} 
+                        pageKeys={true} 
+                        typeaheadStatus={info.typeaheadNavigationReturn.typeaheadStatus}
+                        activateEnter={false}
+                        activateSpace={false}
+                        description={keyboardControlsDescription ?? "Navigate the table:"}>
                             <TableSection location={location} variantTheme={variantTheme} divider={divider} {...useMergedProps(info.propsTableSection, { ref, ...props })}>{children}</TableSection>
                         </KeyboardAssistIcon>
                     );

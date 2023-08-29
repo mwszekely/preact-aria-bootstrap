@@ -202,7 +202,15 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
 
 
     return (
-        <KeyboardAssistIcon leftRight={(!!iconStart || !!iconEnd)} upDown={true} homeEnd={true} pageKeys={true} typeahead={true} typeaheadActive={false} description={keyboardControlsDescription ?? "Select a list item:"}>
+        <KeyboardAssistIcon 
+        leftRight={(!!iconStart || !!iconEnd)} 
+        upDown={true} 
+        homeEnd={true} 
+        pageKeys={true} 
+        typeaheadStatus={infoRow.typeaheadNavigationReturn.typeaheadStatus}
+        activateSpace={infoRow.typeaheadNavigationReturn.typeaheadStatus == 'none'}
+        activateEnter={true}
+        description={keyboardControlsDescription ?? "Select a list item:"}>
             <div
                 aria-busy={(!show)}
                 {...finalPropsForDiv}>
