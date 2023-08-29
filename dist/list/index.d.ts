@@ -71,7 +71,8 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
      * Optional. Only necessary if this is an "action-only" list; it's not needed for selection behavior.
      */
     onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>;
+    keyboardControlsDescription?: string;
 }
 export declare function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>): import("preact").JSX.Element;
-export declare const ListItem: ({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) => import("preact").JSX.Element;
+export declare const ListItem: ({ index, keyboardControlsDescription, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) => import("preact").JSX.Element;
 //# sourceMappingURL=index.d.ts.map

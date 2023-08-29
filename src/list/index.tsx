@@ -87,7 +87,9 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     /**
      * Optional. Only necessary if this is an "action-only" list; it's not needed for selection behavior.
      */
-    onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>
+    onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>;
+
+    keyboardControlsDescription?: string;
 }
 
 const DefaultDisabled = createContext(false);
@@ -224,7 +226,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
     );
 })
 
-export const ListItem = memo(forwardElementRef(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
+export const ListItem = memo(forwardElementRef(function ListItem({ index, keyboardControlsDescription, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
 
     const defaultDisabled = useContext(DefaultDisabled);
     disabled ||= defaultDisabled;
@@ -258,7 +260,7 @@ export const ListItem = memo(forwardElementRef(function ListItem({ index, varian
                             if (infoRow.staggeredChildReturn.hideBecauseStaggered)
                                 return <div key="hide-because-staggered" class={`gridlist-item gridlist-item-placeholder list-group-item`} role="option" aria-busy="true" /> // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
 
-                            return <ListItemNonPaginated key="show" infoRow={infoRow} progressInfo={progressInfo} badge={badge} children={children} disabled={disabled} iconEnd={iconEnd} iconStart={iconStart} selected={selected} variantTheme={variantTheme} props={props} ref2={ref!} />;
+                            return <ListItemNonPaginated key="show" keyboardControlsDescription={keyboardControlsDescription} infoRow={infoRow} progressInfo={progressInfo} badge={badge} children={children} disabled={disabled} iconEnd={iconEnd} iconStart={iconStart} selected={selected} variantTheme={variantTheme} props={props} ref2={ref!} />;
                         }} />)
             }}
         />

@@ -16016,7 +16016,7 @@
       const typeaheadStatus = q$2(TypeaheadStatus);
       return (o$3(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select a list item:", children: o$3("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
   });
-  const ListItem = x$1(forwardElementRef$1(function ListItem({ index, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
+  const ListItem = x$1(forwardElementRef$1(function ListItem({ index, keyboardControlsDescription, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
       const defaultDisabled = q$2(DefaultDisabled);
       disabled ||= defaultDisabled;
       let everShownPaginated = _$1(false);
@@ -16028,7 +16028,7 @@
                       // TODO: Get a better placeholder system
                       if (infoRow.staggeredChildReturn.hideBecauseStaggered)
                           return o$3("div", { class: `gridlist-item gridlist-item-placeholder list-group-item`, role: "option", "aria-busy": "true" }, "hide-because-staggered"); // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
-                      return o$3(ListItemNonPaginated, { infoRow: infoRow, progressInfo: progressInfo, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: props, ref2: ref }, "show");
+                      return o$3(ListItemNonPaginated, { keyboardControlsDescription: keyboardControlsDescription, infoRow: infoRow, progressInfo: progressInfo, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: props, ref2: ref }, "show");
                   } }));
           } }));
   }));
