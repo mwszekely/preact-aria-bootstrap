@@ -15473,7 +15473,6 @@
                       const loadingJsx = (o$3(Fade, { show: pending, exitVisibility: "removed", children: o$3("span", { class: "spinner-border", ...propsProgressIndicator }) }));
                       if (pressed != null)
                           variantFill ??= (pressed ? "fill" : "outline");
-                      console.log(`Button rendered pressed ${pressed} and fill ${variantFill}`);
                       const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
                       //const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx))
                       const ret = o$3(StructureButtonButton, { ...useMergedProps(otherProps, buttonInfo.props, { className: buttonClass, ref }), children: [children, loadingJsx] });

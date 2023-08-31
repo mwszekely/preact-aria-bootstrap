@@ -213,8 +213,6 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ toolti
                             if (pressed != null)
                                 variantFill ??= (pressed ? "fill" : "outline");
 
-                            console.log(`Button rendered pressed ${pressed} and fill ${variantFill}`);
-
                             const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");
 
                             //const ret = (h(Tag as never, useMergedProps<E>(otherProps, buttonInfo.props, { className: buttonClass, ref }), children, loadingJsx))
