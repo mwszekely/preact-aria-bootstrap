@@ -192,7 +192,7 @@ const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, ico
     );
     const c = <>
         <ListItemStartEnd index={0} hidden={iconStart == null} children={iconStart} />
-        <ListItemText onPress={progressInfo.asyncHandlerReturn.syncHandler} {...finalPropsForText}><span>{children}</span><span class="list-group-item-badge-and-spinner"><div>{badge}</div><div>{loadingJsx}</div></span></ListItemText>
+        <ListItemText onPress={progressInfo.asyncHandlerReturn.syncHandler} {...finalPropsForText}>{children}<span class="list-group-item-badge-and-spinner"><div>{badge}</div><div>{loadingJsx}</div></span></ListItemText>
 
         <ListItemStartEnd index={2} hidden={iconEnd == null} children={iconEnd} />
     </>
