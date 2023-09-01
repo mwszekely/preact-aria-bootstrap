@@ -15439,7 +15439,7 @@
           let isPressed = (isPressedForMultiSelect) ?? null;
           return (o$3(ButtonStructure, { ref: ref, 
               //Tag={(Tag) as never}
-              tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isPressed, onPress: syncHandler ?? null, otherProps: props, variantFill: variantFill ?? null }));
+              tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isPressed, onPress: syncHandler ?? null, excludeSpace: returnFalse, otherProps: props, variantFill: variantFill ?? null }));
       }
       else {
           return (o$3(ToolbarChild, { index: buttonGroupIndex ?? 0, getSortValue: returnZero, disabledProp: "disabled", render: toolbarChildInfo => {
@@ -15456,7 +15456,7 @@
                   let isPressed = toolbarChildInfo.singleSelectionChildReturn.singleSelected || toolbarChildInfo.multiSelectionChildReturn.multiSelected;
                   return (o$3(ButtonStructure, { ref: ref, 
                       //Tag={(Tag) as never}
-                      tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: isPressed, callCount: callCount, onPress: (e) => {
+                      tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: isPressed, callCount: callCount, excludeSpace: toolbarChildInfo.pressParameters.excludeSpace || returnFalse, onPress: (e) => {
                           toolbarChildInfo.pressParameters.onPressSync?.(e);
                           return syncHandler?.(e);
                       }, otherProps: useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable) }));
@@ -15466,8 +15466,8 @@
   /**
    * A "raw" button -- just the markup.
    */
-  const ButtonStructure = x$1(forwardElementRef$1(function ButtonStructure({ tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
-      return (o$3(Button$1, { tagButton: "button", disabled: disabled, onPressSync: onPress, pressed: pressed, render: buttonInfo => {
+  const ButtonStructure = x$1(forwardElementRef$1(function ButtonStructure({ excludeSpace, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
+      return (o$3(Button$1, { tagButton: "button", disabled: disabled, onPressSync: onPress, pressed: pressed, excludeSpace: excludeSpace, render: buttonInfo => {
               return (o$3(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagProgressIndicator: "span", render: progressInfo => {
                       const { propsProgressIndicator, propsProgressRegion } = progressInfo;
                       const loadingJsx = (o$3(Fade, { show: pending, exitVisibility: "removed", children: o$3("span", { class: "spinner-border", ...propsProgressIndicator }) }));

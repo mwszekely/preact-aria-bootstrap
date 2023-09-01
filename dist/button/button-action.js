@@ -1,7 +1,7 @@
 import { Fragment as _Fragment, jsxs as _jsxs, jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { Button as AriaButton, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets";
-import { returnZero, useAsyncHandler, useMergedProps } from "preact-prop-helpers";
+import { returnFalse, returnZero, useAsyncHandler, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext } from "preact/hooks";
@@ -59,7 +59,7 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
         let isPressed = (isPressedForMultiSelect) ?? null;
         return (_jsx(ButtonStructure, { ref: ref, 
             //Tag={(Tag) as never}
-            tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isPressed, onPress: syncHandler ?? null, otherProps: props, variantFill: variantFill ?? null }));
+            tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isPressed, onPress: syncHandler ?? null, excludeSpace: returnFalse, otherProps: props, variantFill: variantFill ?? null }));
     }
     else {
         return (_jsx(ToolbarChild, { index: buttonGroupIndex ?? 0, getSortValue: returnZero, disabledProp: "disabled", render: toolbarChildInfo => {
@@ -76,7 +76,7 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
                 let isPressed = toolbarChildInfo.singleSelectionChildReturn.singleSelected || toolbarChildInfo.multiSelectionChildReturn.multiSelected;
                 return (_jsx(ButtonStructure, { ref: ref, 
                     //Tag={(Tag) as never}
-                    tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: isPressed, callCount: callCount, onPress: (e) => {
+                    tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: isPressed, callCount: callCount, excludeSpace: toolbarChildInfo.pressParameters.excludeSpace || returnFalse, onPress: (e) => {
                         toolbarChildInfo.pressParameters.onPressSync?.(e);
                         return syncHandler?.(e);
                     }, otherProps: useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable) }));
@@ -86,8 +86,8 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
 /**
  * A "raw" button -- just the markup.
  */
-const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
-    return (_jsx(AriaButton, { tagButton: "button", disabled: disabled, onPressSync: onPress, pressed: pressed, render: buttonInfo => {
+const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ excludeSpace, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
+    return (_jsx(AriaButton, { tagButton: "button", disabled: disabled, onPressSync: onPress, pressed: pressed, excludeSpace: excludeSpace, render: buttonInfo => {
             return (_jsx(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagProgressIndicator: "span", render: progressInfo => {
                     const { propsProgressIndicator, propsProgressRegion } = progressInfo;
                     const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border", ...propsProgressIndicator }) }));
