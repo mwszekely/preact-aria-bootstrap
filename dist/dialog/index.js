@@ -16,7 +16,7 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
             const headingJsx = (_jsxs(_Fragment, { children: [_jsx(StructureDialogModalTitle, { children: header }), _jsx(StructureDialogModalCloseButton, { onClose: onClose })] }));
             const bodyJsx = _jsx(StructureDialogModalBody, { children: children });
             const footerJsx = (_jsx(StructureDialogModalFooter, { children: footer }));
-            return (_jsxs(_Fragment, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), useDefaultRenderPortal({
+            return (_jsxs(_Fragment, { children: [anchor && useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), useDefaultRenderPortal({
                         portalId: usePortalId("dialog"),
                         children: (_jsx(StructureDialogPortalRoot, { ...useMergedProps(info.propsFocusContainer, propsPortal || {}), children: _jsxs(StructureDialogModal, { fullscreen: fullscreen, open: open, variantSize: variantSize, ...info.propsDialog, children: [_jsx(StructureDialogBackdrop, { open: open, modal: modal }), _jsx(StructureDialogModalDialog, { open: open, header: header, children: _jsx(StructureDialogModalContent, { childrenHeading: headingJsx, childrenBody: bodyJsx, childrenFooter: footerJsx, headerPosition: headerPosition }) })] }) }))
                     })] }));

@@ -1,6 +1,6 @@
 import { ComponentChildren, h, Ref, VNode } from "preact";
 import { Dialog as AriaDialog, DialogProps as AriaDialogProps, useDefaultRenderPortal } from "preact-aria-widgets";
-import { useMergedProps } from "preact-prop-helpers";
+import { Nullable, useMergedProps } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
@@ -13,7 +13,7 @@ export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children
     onClose: AriaDialogProps<HTMLSpanElement, HTMLSpanElement, HTMLSpanElement, HTMLSpanElement>["onDismiss"];
     headerPosition?: "hidden" | "start";
     header: ComponentChildren;
-    anchor: VNode;
+    anchor: Nullable<VNode>;
     footer?: null | undefined | ComponentChildren;
     variantSize?: "xs" | "sm" | "md" | "lg" | "xl" | "unbounded";
 
@@ -58,7 +58,7 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
 
                 return (
                     <>
-                        {useClonedElement(anchor, useMergedProps(info.propsSource, props), ref)}
+                        {anchor && useClonedElement(anchor, useMergedProps(info.propsSource, props), ref)}
                         {useDefaultRenderPortal({
                             portalId: usePortalId("dialog"),
                             children: (
