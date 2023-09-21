@@ -166,7 +166,9 @@ export function KeyboardAssistProvider({ children }) {
     const [description, setDescription] = useState("Keyboard controls available:");
     const [heardTab, setHeardTab] = useState(false);
     const stateKey = `keyboard-assist-lr_${leftRightDisplay.toString()}-ud_${upDownDisplay.toString()}-pg_${pageKeysDisplay.toString()}-he_${homeEndDisplay.toString()}-tp_${typeaheadDisplay.toString()}-tp_${leaveF22.toString()}-tp_${textF102.toString()}`;
+    /// @ts-expect-error
     const [userHasHidden, setUserHasHidden, getUserHasHidden] = usePersistentState(stateKey, false);
+    /// @ts-expect-error
     const [userHasHiddenAny, setUserHasHiddenAny] = usePersistentState("keyboard-assist-hidden-any", false);
     //const [currentDescription, setCurrentDescription] = useState("Keyboard controls available:");
     useGlobalHandler(document, "keydown", event => {

@@ -41,8 +41,7 @@
         "bootstrap": "5.3.1",
         "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
         "clsx": "^2.0.0",
-        "preact": "^10.16.0",
-        "preact-transition": "github:mwszekely/preact-transition",
+        "preact": "^10.17.1",
         "tslib": "^2.6.1"
     }
 }

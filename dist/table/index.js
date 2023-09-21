@@ -1,2 +1,2 @@
-export { DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow } from "./data-table.js";
+export {};
 //# sourceMappingURL=index.js.map

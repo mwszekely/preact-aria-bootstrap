@@ -1,26 +1,31 @@
 
-import { clsx } from "clsx";
-import { ComponentChildren, createContext, Ref, VNode } from "preact";
-import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection } from "preact-aria-widgets";
-import { useEnsureStability, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
-import { memo } from "preact/compat";
-import { useContext, useLayoutEffect, useMemo } from "preact/hooks";
-import { Paginated } from "../pagination/index.js";
-import { forwardElementRef } from "../utility/forward-element-ref.js";
-import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
-import { useUpdateRenderCounter } from "../utility/render-counter.js";
-import { CaptionedProps, GlobalAttributes, PaginatedProps } from "../utility/types.js";
-import { useClonedElement } from "../utility/use-cloned-element.js";
-import { Table, TableCell, TableCellProps, TableProps, TableRow, TableRowProps, TableSection, TableSectionProps } from "./table.js";
+import { ComponentChildren, createContext } from "preact";
+import { TableCellProps, TableProps } from "./table.js";
 
 export interface DataTableProps extends TableProps {
     children: ComponentChildren;
     staggered?: boolean;
 }
 
-const TableContext = createContext<{ paginationMin: number | null, paginationMax: number | null, staggered: boolean, setChildCount: (null) | ((c: number) => void) }>({ setChildCount: null, paginationMax: null, paginationMin: null, staggered: false });
 
+export interface DataTableCellProps extends Omit<TableCellProps, "tableHeadType"> {
+    /**
+     * Generally text sets this to false, and inputs with their own padding set this to true.
+     */
+    fillY?: boolean;
+    /**
+     * This overrides `children`; if both are provided, `children` are displayed but `value` is used as the sort value.
+     */
+    value?: unknown;
+    column: number;
+    colSpan?: number;
+    /** If omitted `value` is used as the `children`, so at least one of them must be provided */
+    children?: ComponentChildren;
+
+    unsortable?: boolean;
+}
+const TableContext = createContext<{ paginationMin: number | null, paginationMax: number | null, staggered: boolean, setChildCount: (null) | ((c: number) => void) }>({ setChildCount: null, paginationMax: null, paginationMin: null, staggered: false });
+/*
 export const DataTable = memo(forwardElementRef(function DataTable({ staggered, caption, captionPosition, bordered, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }: PaginatedProps<CaptionedProps<DataTableProps>>, ref?: Ref<HTMLTableElement>) {
 
     staggered ||= false;
@@ -58,7 +63,7 @@ export const DataTable = memo(forwardElementRef(function DataTable({ staggered, 
                             </Table>
                             {/*<table {...useMergedProps(info.propsTable, { className: "table" }, { ref, ...props })}>
                             {children}
-                </table>*/}
+                </table>*\/}
                         </Paginated>
                     )
                 }}
@@ -87,9 +92,9 @@ const DataTableSection = memo(forwardElementRef(function DataTableSection({ chil
     return (
         <IsTableHeadContext.Provider value={location == "head"}>
             <AriaTableSection<HTMLTableSectionElement, HTMLTableRowElement, HTMLTableCellElement>
-                staggered={location == "body" && staggered}
+                //staggered={location == "body" && staggered}
                 location={location}
-                getIndex={vnode => vnode.props.row}
+                //getIndex={vnode => vnode.props.row}
                 tagTableSection={`t${location}` as "thead"}
                 paginationMin={location == "body" ? paginationMin : null}
                 paginationMax={location == "body" ? paginationMax : null}
@@ -144,7 +149,7 @@ export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, 
                 return (
                     <Fade show={!hideBecauseStaggered} animateOnMount={info.staggeredChildReturn.parentIsStaggered} delayMountUntilShown={true}>
                         <TableRow {...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" })}>
-                            {/*hideBecausePaginated? null : */children}
+                            {/*hideBecausePaginated? null : *\/children}
                         </TableRow>
                     </Fade>
                 )
@@ -152,23 +157,6 @@ export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, 
         />
     )
 }))
-
-export interface DataTableCellProps extends Omit<TableCellProps, "tableHeadType"> {
-    /**
-     * Generally text sets this to false, and inputs with their own padding set this to true.
-     */
-    fillY?: boolean;
-    /**
-     * This overrides `children`; if both are provided, `children` are displayed but `value` is used as the sort value.
-     */
-    value?: unknown;
-    column: number;
-    colSpan?: number;
-    /** If omitted `value` is used as the `children`, so at least one of them must be provided */
-    children?: ComponentChildren;
-
-    unsortable?: boolean;
-}
 
 export const IsTableHeadContext = createContext(false);
 
@@ -235,10 +223,10 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
                     return (
                         <td class={clsx(fillY && "py-0")}>{children}</td>
                     )
-                }*/
+                }*\/
 
             }}
         />
     )
 }))
-
+*/

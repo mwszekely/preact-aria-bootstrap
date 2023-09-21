@@ -2,7 +2,6 @@ import { ComponentChildren, h, Ref, VNode } from "preact";
 import { AsyncHandler, Nullable } from "preact-prop-helpers";
 import { ButtonThemes } from "../context.js";
 import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types.js";
-export { ListboxSingle, ListboxSingleItem, ListboxSingleItemProps, ListboxSingleProps } from "./listbox-single.js";
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**
      * Disables the entire list if set, allowing no selection or press events to occur.
@@ -28,6 +27,7 @@ export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> 
      * When `selectionMode` is `"single"`, this is called to change the selected index.
      */
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
+    children: VNode[];
 }
 export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**

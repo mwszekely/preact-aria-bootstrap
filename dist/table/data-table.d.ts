@@ -1,33 +1,9 @@
-import { ComponentChildren, Ref, VNode } from "preact";
-import { CaptionedProps, GlobalAttributes, PaginatedProps } from "../utility/types.js";
-import { TableCellProps, TableProps, TableRowProps, TableSectionProps } from "./table.js";
+import { ComponentChildren } from "preact";
+import { TableCellProps, TableProps } from "./table.js";
 export interface DataTableProps extends TableProps {
     children: ComponentChildren;
     staggered?: boolean;
 }
-export declare const DataTable: ({ staggered, caption, captionPosition, bordered, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }: PaginatedProps<CaptionedProps<DataTableProps>>, ref?: Ref<HTMLTableElement>) => import("preact").JSX.Element;
-interface DataTableSectionProps extends TableSectionProps {
-    keyboardControlsDescription?: string;
-}
-export interface DataTableHeadProps extends Omit<DataTableSectionProps, "location">, GlobalAttributes<HTMLTableSectionElement> {
-    ref?: Ref<HTMLTableSectionElement>;
-    children: ComponentChildren;
-}
-export interface DataTableBodyProps extends Omit<DataTableSectionProps, "location">, GlobalAttributes<HTMLTableSectionElement> {
-    ref?: Ref<HTMLTableSectionElement>;
-    children: VNode[];
-}
-export interface DataTableFootProps extends Omit<DataTableSectionProps, "location">, GlobalAttributes<HTMLTableSectionElement> {
-    ref?: Ref<HTMLTableSectionElement>;
-    children: ComponentChildren;
-}
-export declare const DataTableHead: (props: DataTableHeadProps, ref?: Ref<HTMLTableSectionElement>) => import("preact").JSX.Element;
-export declare const DataTableBody: (props: DataTableBodyProps, ref?: Ref<HTMLTableSectionElement>) => import("preact").JSX.Element;
-export declare const DataTableFoot: (props: DataTableFootProps, ref?: Ref<HTMLTableSectionElement>) => import("preact").JSX.Element;
-export interface DataTableRowProps extends TableRowProps {
-    row: number;
-}
-export declare const DataTableRow: ({ row, children, variantTheme, ...props }: DataTableRowProps, ref?: Ref<HTMLTableRowElement>) => import("preact").JSX.Element;
 export interface DataTableCellProps extends Omit<TableCellProps, "tableHeadType"> {
     /**
      * Generally text sets this to false, and inputs with their own padding set this to true.
@@ -43,7 +19,4 @@ export interface DataTableCellProps extends Omit<TableCellProps, "tableHeadType"
     children?: ComponentChildren;
     unsortable?: boolean;
 }
-export declare const IsTableHeadContext: import("preact").Context<boolean>;
-export declare const DataTableCell: ({ column, colSpan, children, value, unsortable, variantTheme, fillY, ...props }: DataTableCellProps, ref?: Ref<HTMLTableCellElement>) => import("preact").JSX.Element;
-export {};
 //# sourceMappingURL=data-table.d.ts.map

@@ -1,7 +1,7 @@
 import { Fragment as _Fragment, jsxs as _jsxs, jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { Button as AriaButton, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets";
-import { returnFalse, returnZero, useAsyncHandler, useMergedProps } from "preact-prop-helpers";
+import { returnFalse, useAsyncHandler, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext } from "preact/hooks";
@@ -62,7 +62,7 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
             tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isPressed, onPress: syncHandler ?? null, excludeSpace: returnFalse, otherProps: props, variantFill: variantFill ?? null }));
     }
     else {
-        return (_jsx(ToolbarChild, { index: buttonGroupIndex ?? 0, getSortValue: returnZero, disabledProp: "disabled", render: toolbarChildInfo => {
+        return (_jsx(ToolbarChild, { index: buttonGroupIndex ?? 0, disabledProp: "disabled", render: toolbarChildInfo => {
                 //let pending = (toolbarChildInfo.multiSelectionChildReturn? isPendingForMultiSelect : selectionLimit == 'single'? isPendingForSingleSelect : individualPending) || false;
                 let pending = (toolbarChildInfo.singleSelectionChildReturn.singleSelectionMode != "disabled" ? isPendingForSingleSelect :
                     toolbarChildInfo.multiSelectionChildReturn.multiSelectionMode != "disabled" ? isPendingForMultiSelect :

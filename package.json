@@ -30,8 +30,8 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "bootstrap": "5.3.0-alpha3",
-    "preact": "^10.13.2"
+    "bootstrap": "5.3.2",
+    "preact": "^10.17.1"
   },
   "typings": "./dist/index.d.ts",
   "dependencies": {
@@ -43,9 +43,9 @@
     "clsx": "^2.0.0",
     "dompurify": "^3.0.5",
     "lodash-es": "^4.17.21",
-    "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
-    "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
-    "preact-transition": "github:mwszekely/preact-transition"
+    "preact-aria-widgets": "github:mwszekely/preact-aria-widgets#betterer-lists",
+    "preact-prop-helpers": "github:mwszekely/preact-prop-helpers#betterer-lists",
+    "preact-transition": "github:mwszekely/preact-transition#betterer-lists"
   },
   "devDependencies": {
     "@playwright/test": "^1.36.2",

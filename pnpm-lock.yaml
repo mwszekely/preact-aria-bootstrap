@@ -30,17 +30,17 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   preact:
-    specifier: ^10.13.2
-    version: 10.13.2
+    specifier: ^10.17.1
+    version: 10.17.1
   preact-aria-widgets:
-    specifier: github:mwszekely/preact-aria-widgets
-    version: github.com/mwszekely/preact-aria-widgets/18c13daed12f2d3756f8fab65acda4883b971241(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+    specifier: github:mwszekely/preact-aria-widgets#betterer-lists
+    version: github.com/mwszekely/preact-aria-widgets/04c8c85e0cc05e0cf6e768e01c669da8845fbd0b(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
   preact-prop-helpers:
-    specifier: github:mwszekely/preact-prop-helpers
-    version: github.com/mwszekely/preact-prop-helpers/ce46b75ffe7a1570cbc30a76178cca994d0d6eba(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+    specifier: github:mwszekely/preact-prop-helpers#betterer-lists
+    version: github.com/mwszekely/preact-prop-helpers/3e1a8e665d273be0ee15c77353b9bc32519da7c6(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
   preact-transition:
-    specifier: github:mwszekely/preact-transition
-    version: github.com/mwszekely/preact-transition/cfd391e9b5f183e99e3914bde7ba97598f36b9e9(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+    specifier: github:mwszekely/preact-transition#betterer-lists
+    version: github.com/mwszekely/preact-transition/9be79057de25442ae9a76e4c12539d8768432a61(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@playwright/test':
@@ -64,21 +64,21 @@ devDependencies:
 
 packages:
 
-  /@floating-ui/core@1.4.2:
-    resolution: {integrity: sha512-olUakR5nr9v2ueVr1yomoJnBTkHGqHzL/iK4AhforiJS/wKJgFphAYpZHZzADLv/zNUFuQwqLH3bcoUhFh2E1Q==}
+  /@floating-ui/core@1.5.0:
+    resolution: {integrity: sha512-kK1h4m36DQ0UHGj5Ah4db7R0rHemTqqO0QLvUqi1/mUUp3LuAWbWxdxSIf/XsnH9VS6rRVPLJCncjRzUvyCLXg==}
     dependencies:
-      '@floating-ui/utils': 0.1.3
+      '@floating-ui/utils': 0.1.4
     dev: false
 
   /@floating-ui/dom@1.5.1:
     resolution: {integrity: sha512-KwvVcPSXg6mQygvA1TjbN/gh///36kKtllIF8SUm0qpFj8+rvYrpvlYdL1JoA71SHpDqgSSdGOSoQ0Mp3uY5aw==}
     dependencies:
-      '@floating-ui/core': 1.4.2
-      '@floating-ui/utils': 0.1.3
+      '@floating-ui/core': 1.5.0
+      '@floating-ui/utils': 0.1.4
     dev: false
 
-  /@floating-ui/utils@0.1.3:
-    resolution: {integrity: sha512-uvnFKtPgzLnpzzTRfhDlvXX0kLYi9lDRQbcDmT8iXl71Rx+uwSuaUIQl3DNC7w5OweAQ7XQMDObML+KaYDQfng==}
+  /@floating-ui/utils@0.1.4:
+    resolution: {integrity: sha512-qprfWkn82Iw821mcKofJ5Pk9wgioHicxcQMxx+5zt5GSKoqdWvgG5AxVmpmUUjzTLPVSH5auBrhI93Deayn/DA==}
     dev: false
 
   /@js-temporal/polyfill@0.4.4:
@@ -94,7 +94,7 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      '@types/node': 20.6.0
+      '@types/node': 20.6.3
       playwright-core: 1.36.2
     optionalDependencies:
       fsevents: 2.3.2
@@ -120,8 +120,8 @@ packages:
     resolution: {integrity: sha512-trNJ/vtMZYMLhfN45uLq4ShQSw0/S7xCTLLVM+WM1rmFpba/VS42jVUgaO3w/NOLiWR/09lnYk0yMaA/atdIsg==}
     dev: true
 
-  /@types/node@20.6.0:
-    resolution: {integrity: sha512-najjVq5KN2vsH2U/xyh2opaSEz6cZMR2SetLIlxlj08nOcmPOemJmUK2o4kUzfLqfrWE0PIrNeE16XhYDd3nqg==}
+  /@types/node@20.6.3:
+    resolution: {integrity: sha512-HksnYH4Ljr4VQgEy2lTStbCKv/P590tmPe5HqOnv9Gprffgv5WXAY+Y5Gqniu0GGqeTCUdBnzC3QSrzPkBkAMA==}
     dev: true
 
   /@types/trusted-types@2.0.4:
@@ -689,7 +689,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.22.5
+      resolve: 1.22.6
       semver: 5.7.2
       validate-npm-package-license: 3.0.4
     dev: true
@@ -780,8 +780,8 @@ packages:
     hasBin: true
     dev: true
 
-  /preact@10.13.2:
-    resolution: {integrity: sha512-q44QFLhOhty2Bd0Y46fnYW0gD/cbVM9dUVtNTDKPcdXSMA7jfY+Jpd6rk3GB0lcQss0z5s/6CmVP0Z/hV+g6pw==}
+  /preact@10.17.1:
+    resolution: {integrity: sha512-X9BODrvQ4Ekwv9GURm9AKAGaomqXmip7NQTZgY7gcNmr7XE83adOMJvd3N42id1tMFU7ojiynRsYnY6/BRFxLA==}
     dev: false
 
   /react-dom@18.2.0(react@18.2.0):
@@ -826,8 +826,8 @@ packages:
       set-function-name: 2.0.1
     dev: true
 
-  /resolve@1.22.5:
-    resolution: {integrity: sha512-qWhv7PF1V95QPvRoUGHxOtnAlEvlXBylMZcjUR9pAumMmveFtcHJRXGIr+TkjfNJVQypqv2qcDiiars2y1PsSg==}
+  /resolve@1.22.6:
+    resolution: {integrity: sha512-njhxM7mV12JfufShqGy3Rz8j11RPdLy4xi15UurGJeoHLfJpVXKdh3ueuOqbYUcDZnffr6X739JBo5LzyahEsw==}
     hasBin: true
     dependencies:
       is-core-module: 2.13.0
@@ -916,7 +916,7 @@ packages:
     resolution: {integrity: sha512-kN9dJbvnySHULIluDHy32WHRUu3Og7B9sbY7tsFLctQkIqnMh3hErYgdMjTYuqmcXX+lK5T1lnUt3G7zNswmZA==}
     dependencies:
       spdx-expression-parse: 3.0.1
-      spdx-license-ids: 3.0.13
+      spdx-license-ids: 3.0.15
     dev: true
 
   /spdx-exceptions@2.3.0:
@@ -927,11 +927,11 @@ packages:
     resolution: {integrity: sha512-cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q==}
     dependencies:
       spdx-exceptions: 2.3.0
-      spdx-license-ids: 3.0.13
+      spdx-license-ids: 3.0.15
     dev: true
 
-  /spdx-license-ids@3.0.13:
-    resolution: {integrity: sha512-XkD+zwiqXHikFZm4AX/7JSCXA98U5Db4AFd5XUg/+9UNtnH75+Z9KxtpYiJZx36mUDVOwH83pl7yvCer6ewM3w==}
+  /spdx-license-ids@3.0.15:
+    resolution: {integrity: sha512-lpT8hSQp9jAKp9mhtBU4Xjon8LPGBvLIuBiSVhMEtmLecTh2mO0tlqrAMp47tBXzMr13NJMQ2lf7RpQGLJ3HsQ==}
     dev: true
 
   /string.prototype.padend@3.1.5:
@@ -1119,9 +1119,9 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  github.com/mwszekely/preact-aria-widgets/18c13daed12f2d3756f8fab65acda4883b971241(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/18c13daed12f2d3756f8fab65acda4883b971241}
-    id: github.com/mwszekely/preact-aria-widgets/18c13daed12f2d3756f8fab65acda4883b971241
+  github.com/mwszekely/preact-aria-widgets/04c8c85e0cc05e0cf6e768e01c669da8845fbd0b(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/04c8c85e0cc05e0cf6e768e01c669da8845fbd0b}
+    id: github.com/mwszekely/preact-aria-widgets/04c8c85e0cc05e0cf6e768e01c669da8845fbd0b
     name: preact-aria-widgets
     version: 0.0.1
     peerDependencies:
@@ -1129,16 +1129,16 @@ packages:
     dependencies:
       clsx: 2.0.0
       lodash-es: 4.17.21
-      preact: 10.13.2
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/ce46b75ffe7a1570cbc30a76178cca994d0d6eba(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+      preact: 10.17.1
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/3e1a8e665d273be0ee15c77353b9bc32519da7c6(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom
     dev: false
 
-  github.com/mwszekely/preact-prop-helpers/ce46b75ffe7a1570cbc30a76178cca994d0d6eba(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/ce46b75ffe7a1570cbc30a76178cca994d0d6eba}
-    id: github.com/mwszekely/preact-prop-helpers/ce46b75ffe7a1570cbc30a76178cca994d0d6eba
+  github.com/mwszekely/preact-prop-helpers/3e1a8e665d273be0ee15c77353b9bc32519da7c6(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/3e1a8e665d273be0ee15c77353b9bc32519da7c6}
+    id: github.com/mwszekely/preact-prop-helpers/3e1a8e665d273be0ee15c77353b9bc32519da7c6
     name: preact-prop-helpers
     version: 0.0.1
     peerDependencies:
@@ -1151,16 +1151,16 @@ packages:
       clsx: 2.0.0
       lodash-es: 4.17.21
       map-and-set-extensions: github.com/mwszekely/map-and-set-extensions/ff68a36e0f4a700fd6612ee30cca86855891f623
-      preact: 10.13.2
+      preact: 10.17.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       tabbable: 6.2.0
       wicg-inert: 3.1.2
     dev: false
 
-  github.com/mwszekely/preact-transition/cfd391e9b5f183e99e3914bde7ba97598f36b9e9(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/cfd391e9b5f183e99e3914bde7ba97598f36b9e9}
-    id: github.com/mwszekely/preact-transition/cfd391e9b5f183e99e3914bde7ba97598f36b9e9
+  github.com/mwszekely/preact-transition/9be79057de25442ae9a76e4c12539d8768432a61(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/9be79057de25442ae9a76e4c12539d8768432a61}
+    id: github.com/mwszekely/preact-transition/9be79057de25442ae9a76e4c12539d8768432a61
     name: preact-transition
     version: 0.1.0
     peerDependencies:
@@ -1168,8 +1168,8 @@ packages:
     dependencies:
       clsx: 2.0.0
       lodash-es: 4.17.21
-      preact: 10.13.2
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/ce46b75ffe7a1570cbc30a76178cca994d0d6eba(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+      preact: 10.17.1
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/3e1a8e665d273be0ee15c77353b9bc32519da7c6(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom

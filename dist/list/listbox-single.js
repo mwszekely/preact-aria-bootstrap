@@ -1,10 +1,4 @@
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-runtime";
-import { clsx } from "clsx";
-import { Listbox, ListboxItem } from "preact-aria-widgets";
-import { EventDetail, returnZero, useMergedProps, useStableCallback, useState } from "preact-prop-helpers";
-import { memo } from "preact/compat";
-import { Paginated } from "../pagination/index.js";
-import { forwardElementRef } from "../utility/forward-element-ref.js";
+export {};
 /**
  * A listbox is a much simpler List.
  *
@@ -13,26 +7,63 @@ import { forwardElementRef } from "../utility/forward-element-ref.js";
  * @param param0
  * @returns
  */
-export function ListboxSingle({ selectedIndex, onSelectedIndexChange, children, label, labelPosition, staggered, paginationLabel, paginationLocation, paginationSize }) {
+/*export function ListboxSingle({ selectedIndex, onSelectedIndexChange, children, label, labelPosition, staggered, paginationLabel, paginationLocation, paginationSize }: PaginatedProps<LabelledProps<RenderableProps<ListboxSingleProps>, never>>) {
     const [paginationMin, setPaginationMin] = useState(paginationSize == null ? null : 0);
     const [paginationMax, setPaginationMax] = useState(paginationSize);
     if (paginationSize)
         paginationLocation ||= "before";
-    return (_jsx(Listbox, { singleSelectedIndex: selectedIndex, singleSelectionMode: "activation", onSingleSelectedIndexChange: useStableCallback((e) => { debugger; onSelectedIndexChange(e[EventDetail].selectedIndex, e); }), staggered: staggered, paginationMin: paginationMin, paginationMax: paginationMax, ariaLabel: labelPosition == "hidden" ? label : null, render: info => {
-            const labelJsx = (_jsx("label", { ...info.propsListboxLabel, children: label }));
-            return (_jsxs(_Fragment, { children: [labelPosition == 'before' && labelJsx, _jsx(Paginated, { paginationSize: paginationSize, childCount: info.paginatedChildrenReturn.childCount || 0, setPaginationEnd: setPaginationMax, setPaginationStart: setPaginationMin, paginationLabel: paginationLabel, paginationLocation: paginationLocation, children: _jsx("ol", { ...useMergedProps(info.propsListbox, { className: "list-group" }), children: children }) }), labelPosition == 'after' && labelJsx] }));
-        } }));
+
+    return (
+        <Listbox<HTMLOListElement, HTMLLIElement, HTMLLabelElement>
+            singleSelectedIndex={selectedIndex}
+            singleSelectionMode="activation"
+            onSingleSelectedIndexChange={useStableCallback((e) => { debugger; onSelectedIndexChange(e[EventDetail].selectedIndex, e) })}
+            staggered={staggered}
+            paginationMin={paginationMin}
+            paginationMax={paginationMax}
+
+            ariaLabel={labelPosition == "hidden" ? label : null}
+            render={info => {
+                const labelJsx = (<label {...info.propsListboxLabel}>{label}</label>);
+                return (
+                    <>
+                        {labelPosition == 'before' && labelJsx}
+
+                        <Paginated paginationSize={paginationSize} childCount={info.paginatedChildrenReturn.childCount || 0} setPaginationEnd={setPaginationMax} setPaginationStart={setPaginationMin} paginationLabel={paginationLabel} paginationLocation={paginationLocation}  >
+                            <ol {...useMergedProps(info.propsListbox, { className: "list-group" })}>
+                                {children}
+                            </ol>
+                        </Paginated>
+                        {labelPosition == 'after' && labelJsx}
+                    </>
+                )
+            }}
+        />
+    );
 }
-export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleItem({ index, disabled, children, ...props }, ref) {
-    return (_jsx(ListboxItem, { getSortValue: returnZero, index: index, multiSelected: undefined, singleSelectionDisabled: disabled, render: info => {
-            if (info.staggeredChildReturn.hideBecauseStaggered)
-                return _jsx("li", { class: "d-none" });
-            if (info.paginatedChildReturn.hideBecausePaginated)
-                return _jsx("li", { class: "d-none" });
-            return (_jsx(ListboxSingleItemStatic, { ...useMergedProps(info.props, { ...props, ref }), disabled: disabled, selected: info.singleSelectionChildReturn.singleSelected, children: children }));
-        } }));
+
+export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleItem({ index, disabled, children, ...props }: RenderableProps<ListboxSingleItemProps>, ref) {
+    return (
+        <ListboxItem<HTMLLIElement>
+            index={index}
+            multiSelected={undefined}
+            singleSelectionDisabled={disabled}
+            render={info => {
+                const p = useMergedProps(info.props, { ...props, ref });
+                
+                if (info.hidden)
+                    return <li class="d-none" />;
+
+                return (
+                    <ListboxSingleItemStatic {...p} disabled={disabled} selected={info.singleSelectionChildReturn.singleSelected as boolean}>{children}</ListboxSingleItemStatic>
+                )
+            }}
+        />
+    )
+}))
+
+const ListboxSingleItemStatic = memo(forwardElementRef(function ListboxSingleItemStatic({ selected, children, disabled, ...props }: RenderableProps<OmitStrong<ElementProps<HTMLLIElement>, "selected"> & { selected: boolean }>, ref) {
+    return <li {...useMergedProps({ ...props, ref }, { className: clsx("list-group-item list-group-item-action", selected && "active", disabled && "disabled") })}>{children}</li>
 }));
-const ListboxSingleItemStatic = memo(forwardElementRef(function ListboxSingleItemStatic({ selected, children, disabled, ...props }, ref) {
-    return _jsx("li", { ...useMergedProps({ ...props, ref }, { className: clsx("list-group-item list-group-item-action", selected && "active", disabled && "disabled") }), children: children });
-}));
+*/ 
 //# sourceMappingURL=listbox-single.js.map

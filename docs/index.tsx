@@ -1,9 +1,10 @@
+import "preact/debug";
+
 import { Ref, render } from "preact";
 import { focus } from "preact-prop-helpers";
 import { forwardRef, memo } from "preact/compat";
-import "preact/debug";
 import { useCallback, useMemo, useState } from "preact/hooks";
-import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast, useRenderCounters } from "../dist/index.js";
+import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast, useRenderCounters } from "../dist/index.js";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
 import * as Radio from "./demos/radio";
@@ -23,32 +24,28 @@ options.event = (e, ...args) => {
 
 function ListDemo() {
     let [count, setCount] = useState(100 as number | null);
-    const [paginationWindow, setPaginationWindow] = useState(10 as number | null);
+    let [paginationWindow, setPaginationWindow] = useState(10 as number | null);
     const [selectedIndex, setSelectedIndex] = useState(null as null | number);
     count ??= 0;
+    if (typeof paginationWindow == 'number' && !isFinite(paginationWindow))
+        paginationWindow = null;
+
+    const ch = useMemo(() => (Array.from(function* () {
+        for (let i = 0; i < (count ?? 0); ++i) {
+            yield <ListDemoItem key={i} i={i} />
+        }
+    }())), [count]);
+
     return (<div>
         {/*<strong>(The gridlist demo is currently down for maintenance &mdash; please enjoy this listbox demo instead.)</strong>*/}
         <TextField type="number" value={count} onValueChange={setCount} label="# of children" labelPosition="floating" />
         <TextField type="number" value={paginationWindow} onValueChange={setPaginationWindow} label="Pagination window" labelPosition="floating" />
         <div>{selectedIndex}</div>
-        <List paginationLocation={paginationWindow == null ? null : "before"} paginationSize={paginationWindow ?? null} paginationLabel="Choose the selected page of items to show" selectedIndex={selectedIndex} selectionMode="single" onSelectedIndexChange={setSelectedIndex} labelPosition="before" label="List (grid)">
-            <ListDemoContents count={count} />
+        <List staggered={true} paginationLocation={paginationWindow == null ? null : "before"} paginationSize={paginationWindow ?? null} paginationLabel="Choose the selected page of items to show" selectedIndex={selectedIndex} selectionMode="single" onSelectedIndexChange={setSelectedIndex} labelPosition="before" label="List (grid)">
+            {ch}
         </List>
     </div>)
 }
-
-const ListDemoContents = memo(({ count }: { count: number }) => {
-    console.log("ListDemoContents");
-    return (
-        <>
-            {Array.from(function* () {
-                for (let i = 0; i < count; ++i) {
-                    yield <ListDemoItem key={i} i={i} />
-                }
-            }())}
-        </>
-    )
-})
 
 const ListDemoMenu = memo(forwardRef((props, ref: Ref<HTMLButtonElement>) => {
     return (
@@ -178,7 +175,7 @@ function ErrorComponent() {
 
 const RandomWords = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.".split(" ");
 
-
+/*
 function TableDemo() {
     let [count, setCount] = useState(100 as number | null);
     const [paginationWindow, setPaginationWindow] = useState(10 as number | null);
@@ -232,7 +229,7 @@ const TableDemoRow = memo(function TableDemoRow({ row }: { row: number }) {
     )
 })
 
-
+*/
 
 function AccordionDemo() {
     return (
@@ -275,7 +272,7 @@ const Component = () => {
     let i0 = 0;
     let i1 = 0;
 
-    return (
+    return (<div>
         <AllProviders targetAssertive="aria-notifications-assertive" targetPolite="aria-notifications-polite">
             <RenderCounterDisplay />
             <Tabs
@@ -309,12 +306,13 @@ const Component = () => {
                     <TabPanel index={i1++}><DialogDemo /></TabPanel>
                     <TabPanel index={i1++}><SliderDemo /></TabPanel>
                     <TabPanel index={i1++}><ToastsDemo /></TabPanel>
-                    <TabPanel index={i1++}><TableDemo /></TabPanel>
+                    <TabPanel index={i1++}><div /></TabPanel>
                     <TabPanel index={i1++}><AccordionDemo /></TabPanel>
                     <TabPanel index={i1++}><OffcanvasDemo /></TabPanel>
                 </>}
             />
         </AllProviders>
+    </div>
     )
 }
 
