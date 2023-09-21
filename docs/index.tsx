@@ -1,10 +1,10 @@
-import "preact/debug";
+//import "preact/debug";
 
 import { Ref, render } from "preact";
 import { focus } from "preact-prop-helpers";
 import { forwardRef, memo } from "preact/compat";
 import { useCallback, useMemo, useState } from "preact/hooks";
-import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast, useRenderCounters } from "../dist/index.js";
+import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast } from "../dist/index.js";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
 import * as Radio from "./demos/radio";
@@ -32,7 +32,7 @@ function ListDemo() {
 
     const ch = useMemo(() => (Array.from(function* () {
         for (let i = 0; i < (count ?? 0); ++i) {
-            yield <ListDemoItem key={i} i={i} />
+            yield <ListDemoItem key={i} index={i} />
         }
     }())), [count]);
 
@@ -73,7 +73,7 @@ const ListDemoButton = memo(forwardRef((props, ref: Ref<HTMLButtonElement>) => {
     )
 }));
 
-const ListDemoItem = memo(({ i }: { i: number }) => {
+const ListDemoItem = memo(({ index: i }: { index: number }) => {
     /*return (
         <ListItem index={i}>List item #{i}</ListItem>
     )*/
@@ -84,15 +84,16 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
      });
      if (!visible)
          return null;*/
+    const ch = `List item #${i}`
     return (
         <ListItem
             index={i}
             onPress={useCallback(async () => { return new Promise<void>(resolve => setTimeout(resolve, 2000)) }, [])}
-            badge={<Badge variantTheme="info">10</Badge>}
-            iconStart={(i & 0b01) ? <ListDemoMenu /> : null}
-            iconEnd={(i & 0b10) ? <ListDemoButton /> : null}>
-            List item #{i}
-        </ListItem>
+            badge={useMemo(() => <Badge variantTheme="info">10</Badge>, [])}
+            iconStart={useMemo(() => (i & 0b01) ? <ListDemoMenu /> : null, [i])}
+            iconEnd={useMemo(() => (i & 0b10) ? <ListDemoButton /> : null, [i])}
+            children={ch}
+        />
     );
 })
 
@@ -249,22 +250,6 @@ declare module 'preact-prop-helpers' {
     }
 }
 
-const RenderCounterDisplay = () => {
-    const counters = useRenderCounters()!;
-
-    const allCounters: (keyof typeof counters)[] = ["DataTable", "DataTableSection", "DataTableRow", "DataTableCell", "Gridlist", "GridlistRow", "GridlistCell"];
-
-    return null;
-    return (
-        <table class="render-counters">
-            <thead><tr><th>Component</th><th>Times rendered</th></tr></thead>
-            <tbody>
-                {allCounters.map((c, i) => (<tr class="render-counter"><td>{allCounters[i]}</td><td>{counters[c]}</td></tr>))}
-            </tbody>
-        </table>
-    )
-}
-
 const Component = () => {
 
     const [tabIndex, setTabIndex] = useState(0);
@@ -274,7 +259,6 @@ const Component = () => {
 
     return (<div>
         <AllProviders targetAssertive="aria-notifications-assertive" targetPolite="aria-notifications-polite">
-            <RenderCounterDisplay />
             <Tabs
                 localStorageKey="main-demo-page-selected-tab-index"
                 label="Select the demo to view"

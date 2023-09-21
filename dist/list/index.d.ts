@@ -59,10 +59,6 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
      */
     iconEnd?: ComponentChildren | null | undefined;
     /**
-     * If this list is sortable, this is the value that will be used for sorting.
-     */
-    getSortValue?: () => unknown;
-    /**
      * A visual indicator in the corner of the list item. Read out alongside the main contents as one long string, so label it well.
      */
     badge?: VNode;
@@ -73,6 +69,8 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>;
     keyboardControlsDescription?: string;
 }
-export declare function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>): import("preact").JSX.Element;
-export declare const ListItem: ({ index, keyboardControlsDescription, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) => import("preact").JSX.Element;
+export declare const List: import("preact").FunctionComponent<Omit<PaginatedProps<LabelledProps<ListProps, never>>, "ref"> & {
+    ref?: Ref<any> | undefined;
+}>;
+export declare const ListItem: ({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) => import("preact").JSX.Element;
 //# sourceMappingURL=index.d.ts.map

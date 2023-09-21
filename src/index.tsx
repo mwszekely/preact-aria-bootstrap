@@ -28,5 +28,4 @@ export { Type, TypeProps } from "./typography/index.js";
 export { AllProviders } from "./utility/all-providers.js";
 export { UtilityClasses } from "./utility/classes.js";
 export { KeyboardAssistProvider } from "./utility/keyboard-assist.js";
-export { RenderCounterProvider, useRenderCounters } from "./utility/render-counter.js";
 

@@ -7,19 +7,19 @@ settings:
 dependencies:
   '@floating-ui/dom':
     specifier: ^1.5.1
-    version: 1.5.1
+    version: 1.5.3
   '@js-temporal/polyfill':
     specifier: ^0.4.4
     version: 0.4.4
   bootstrap:
     specifier: ^5.3.1
-    version: 5.3.1(@popperjs/core@2.11.8)
+    version: 5.3.2(@popperjs/core@2.11.8)
   bootstrap-icons:
     specifier: ^1.10.5
-    version: 1.10.5
+    version: 1.11.1
   bootstrap-sass-variables:
     specifier: github:mwszekely/bootstrap-sass-variables
-    version: github.com/mwszekely/bootstrap-sass-variables/235fd16da297d0b870dc358d5497910dab8be02b(bootstrap@5.3.1)
+    version: github.com/mwszekely/bootstrap-sass-variables/235fd16da297d0b870dc358d5497910dab8be02b(bootstrap@5.3.2)
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
@@ -34,10 +34,10 @@ dependencies:
     version: 10.17.1
   preact-aria-widgets:
     specifier: github:mwszekely/preact-aria-widgets#betterer-lists
-    version: github.com/mwszekely/preact-aria-widgets/04c8c85e0cc05e0cf6e768e01c669da8845fbd0b(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/mwszekely/preact-aria-widgets/e7a2d488c9101e4e69123dbb6c9f04fca21c01ac(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
   preact-prop-helpers:
     specifier: github:mwszekely/preact-prop-helpers#betterer-lists
-    version: github.com/mwszekely/preact-prop-helpers/3e1a8e665d273be0ee15c77353b9bc32519da7c6(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/mwszekely/preact-prop-helpers/4cf9a4e34018bb9bbe15dd7db02a752128a5e8bb(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
   preact-transition:
     specifier: github:mwszekely/preact-transition#betterer-lists
     version: github.com/mwszekely/preact-transition/9be79057de25442ae9a76e4c12539d8768432a61(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
@@ -45,22 +45,22 @@ dependencies:
 devDependencies:
   '@playwright/test':
     specifier: ^1.36.2
-    version: 1.36.2
+    version: 1.38.0
   '@types/dompurify':
     specifier: ^3.0.2
     version: 3.0.2
   '@types/lodash-es':
     specifier: ^4.17.8
-    version: 4.17.8
+    version: 4.17.9
   npm-run-all:
     specifier: ^4.1.5
     version: 4.1.5
   sass:
     specifier: ^1.64.1
-    version: 1.64.1
+    version: 1.68.0
   typescript:
     specifier: ^5.1.6
-    version: 5.1.6
+    version: 5.2.2
 
 packages:
 
@@ -70,8 +70,8 @@ packages:
       '@floating-ui/utils': 0.1.4
     dev: false
 
-  /@floating-ui/dom@1.5.1:
-    resolution: {integrity: sha512-KwvVcPSXg6mQygvA1TjbN/gh///36kKtllIF8SUm0qpFj8+rvYrpvlYdL1JoA71SHpDqgSSdGOSoQ0Mp3uY5aw==}
+  /@floating-ui/dom@1.5.3:
+    resolution: {integrity: sha512-ClAbQnEqJAKCJOEbbLo5IUlZHkNszqhuxS4fHAVxRPXPya6Ysf2G8KypnYcOTpx6I8xcgF9bbHb6g/2KpbV8qA==}
     dependencies:
       '@floating-ui/core': 1.5.0
       '@floating-ui/utils': 0.1.4
@@ -89,15 +89,12 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@playwright/test@1.36.2:
-    resolution: {integrity: sha512-2rVZeyPRjxfPH6J0oGJqE8YxiM1IBRyM8hyrXYK7eSiAqmbNhxwcLa7dZ7fy9Kj26V7FYia5fh9XJRq4Dqme+g==}
+  /@playwright/test@1.38.0:
+    resolution: {integrity: sha512-xis/RXXsLxwThKnlIXouxmIvvT3zvQj1JE39GsNieMUrMpb3/GySHDh2j8itCG22qKVD4MYLBp7xB73cUW/UUw==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      '@types/node': 20.6.3
-      playwright-core: 1.36.2
-    optionalDependencies:
-      fsevents: 2.3.2
+      playwright: 1.38.0
     dev: true
 
   /@popperjs/core@2.11.8:
@@ -110,18 +107,14 @@ packages:
       '@types/trusted-types': 2.0.4
     dev: true
 
-  /@types/lodash-es@4.17.8:
-    resolution: {integrity: sha512-euY3XQcZmIzSy7YH5+Unb3b2X12Wtk54YWINBvvGQ5SmMvwb11JQskGsfkH/5HXK77Kr8GF0wkVDIxzAisWtog==}
+  /@types/lodash-es@4.17.9:
+    resolution: {integrity: sha512-ZTcmhiI3NNU7dEvWLZJkzG6ao49zOIjEgIE0RgV7wbPxU0f2xT3VSAHw2gmst8swH6V0YkLRGp4qPlX/6I90MQ==}
     dependencies:
       '@types/lodash': 4.14.198
     dev: true
 
   /@types/lodash@4.14.198:
     resolution: {integrity: sha512-trNJ/vtMZYMLhfN45uLq4ShQSw0/S7xCTLLVM+WM1rmFpba/VS42jVUgaO3w/NOLiWR/09lnYk0yMaA/atdIsg==}
-    dev: true
-
-  /@types/node@20.6.3:
-    resolution: {integrity: sha512-HksnYH4Ljr4VQgEy2lTStbCKv/P590tmPe5HqOnv9Gprffgv5WXAY+Y5Gqniu0GGqeTCUdBnzC3QSrzPkBkAMA==}
     dev: true
 
   /@types/trusted-types@2.0.4:
@@ -181,12 +174,12 @@ packages:
     resolution: {integrity: sha512-/SLWbEzMoVIMZACCyhD/4Ya2M1PWP1qMKuiymowPcI+PdWDARqeARBjhj73kbUBCxEmTZCUu5TAqxtwUO9C1Ig==}
     dev: false
 
-  /bootstrap-icons@1.10.5:
-    resolution: {integrity: sha512-oSX26F37V7QV7NCE53PPEL45d7EGXmBgHG3pDpZvcRaKVzWMqIRL9wcqJUyEha1esFtM3NJzvmxFXDxjJYD0jQ==}
+  /bootstrap-icons@1.11.1:
+    resolution: {integrity: sha512-F0DDp7nKUX+x/QtpfRZ+XHFya60ng9nfdpdS59vDDfs4Uhuxp7zym/QavMsu/xx51txkoM9eVmpE7D08N35blw==}
     dev: false
 
-  /bootstrap@5.3.1(@popperjs/core@2.11.8):
-    resolution: {integrity: sha512-jzwza3Yagduci2x0rr9MeFSORjcHpt0lRZukZPZQJT1Dth5qzV7XcgGqYzi39KGAVYR8QEDVoO0ubFKOxzMG+g==}
+  /bootstrap@5.3.2(@popperjs/core@2.11.8):
+    resolution: {integrity: sha512-D32nmNWiQHo94BKHLmOrdjlL05q1c8oxbtBphQFb9Z5to6eGRDCm0QgeaZ4zFBHzfg2++rqa2JkqCcxDy0sH0g==}
     peerDependencies:
       '@popperjs/core': ^2.11.8
     dependencies:
@@ -774,10 +767,20 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /playwright-core@1.36.2:
-    resolution: {integrity: sha512-sQYZt31dwkqxOrP7xy2ggDfEzUxM1lodjhsQ3NMMv5uGTRDsLxU0e4xf4wwMkF2gplIxf17QMBCodSFgm6bFVQ==}
+  /playwright-core@1.38.0:
+    resolution: {integrity: sha512-f8z1y8J9zvmHoEhKgspmCvOExF2XdcxMW8jNRuX4vkQFrzV4MlZ55iwb5QeyiFQgOFCUolXiRHgpjSEnqvO48g==}
     engines: {node: '>=16'}
     hasBin: true
+    dev: true
+
+  /playwright@1.38.0:
+    resolution: {integrity: sha512-fJGw+HO0YY+fU/F1N57DMO+TmXHTrmr905J05zwAQE9xkuwP/QLDk63rVhmyxh03dYnEhnRbsdbH9B0UVVRB3A==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      playwright-core: 1.38.0
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /preact@10.17.1:
@@ -853,8 +856,8 @@ packages:
       is-regex: 1.1.4
     dev: true
 
-  /sass@1.64.1:
-    resolution: {integrity: sha512-16rRACSOFEE8VN7SCgBu1MpYCyN7urj9At898tyzdXFhC+a+yOX5dXwAR7L8/IdPJ1NB8OYoXmD55DM30B2kEQ==}
+  /sass@1.68.0:
+    resolution: {integrity: sha512-Lmj9lM/fef0nQswm1J2HJcEsBUba4wgNx2fea6yJHODREoMFnwRpZydBnX/RjyXw2REIwdkbqE4hrTo4qfDBUA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
@@ -1038,8 +1041,8 @@ packages:
       is-typed-array: 1.1.12
     dev: true
 
-  /typescript@5.1.6:
-    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
+  /typescript@5.2.2:
+    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
@@ -1100,7 +1103,7 @@ packages:
       lodash-es: 4.17.21
     dev: false
 
-  github.com/mwszekely/bootstrap-sass-variables/235fd16da297d0b870dc358d5497910dab8be02b(bootstrap@5.3.1):
+  github.com/mwszekely/bootstrap-sass-variables/235fd16da297d0b870dc358d5497910dab8be02b(bootstrap@5.3.2):
     resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/235fd16da297d0b870dc358d5497910dab8be02b}
     id: github.com/mwszekely/bootstrap-sass-variables/235fd16da297d0b870dc358d5497910dab8be02b
     name: bootstrap-sass-variables
@@ -1108,7 +1111,7 @@ packages:
     peerDependencies:
       bootstrap: ^5.3.1
     dependencies:
-      bootstrap: 5.3.1(@popperjs/core@2.11.8)
+      bootstrap: 5.3.2(@popperjs/core@2.11.8)
     dev: false
 
   github.com/mwszekely/map-and-set-extensions/ff68a36e0f4a700fd6612ee30cca86855891f623:
@@ -1119,9 +1122,9 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  github.com/mwszekely/preact-aria-widgets/04c8c85e0cc05e0cf6e768e01c669da8845fbd0b(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/04c8c85e0cc05e0cf6e768e01c669da8845fbd0b}
-    id: github.com/mwszekely/preact-aria-widgets/04c8c85e0cc05e0cf6e768e01c669da8845fbd0b
+  github.com/mwszekely/preact-aria-widgets/e7a2d488c9101e4e69123dbb6c9f04fca21c01ac(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/e7a2d488c9101e4e69123dbb6c9f04fca21c01ac}
+    id: github.com/mwszekely/preact-aria-widgets/e7a2d488c9101e4e69123dbb6c9f04fca21c01ac
     name: preact-aria-widgets
     version: 0.0.1
     peerDependencies:
@@ -1130,15 +1133,15 @@ packages:
       clsx: 2.0.0
       lodash-es: 4.17.21
       preact: 10.17.1
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/3e1a8e665d273be0ee15c77353b9bc32519da7c6(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/4cf9a4e34018bb9bbe15dd7db02a752128a5e8bb(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom
     dev: false
 
-  github.com/mwszekely/preact-prop-helpers/3e1a8e665d273be0ee15c77353b9bc32519da7c6(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/3e1a8e665d273be0ee15c77353b9bc32519da7c6}
-    id: github.com/mwszekely/preact-prop-helpers/3e1a8e665d273be0ee15c77353b9bc32519da7c6
+  github.com/mwszekely/preact-prop-helpers/4cf9a4e34018bb9bbe15dd7db02a752128a5e8bb(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/4cf9a4e34018bb9bbe15dd7db02a752128a5e8bb}
+    id: github.com/mwszekely/preact-prop-helpers/4cf9a4e34018bb9bbe15dd7db02a752128a5e8bb
     name: preact-prop-helpers
     version: 0.0.1
     peerDependencies:
@@ -1169,7 +1172,7 @@ packages:
       clsx: 2.0.0
       lodash-es: 4.17.21
       preact: 10.17.1
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/3e1a8e665d273be0ee15c77353b9bc32519da7c6(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/4cf9a4e34018bb9bbe15dd7db02a752128a5e8bb(preact@10.17.1)(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom

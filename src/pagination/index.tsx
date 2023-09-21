@@ -5,9 +5,10 @@ import { memo } from "preact/compat";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import { BootstrapIcon } from "../icon/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { LabelledProps, PaginatedProps } from "../utility/types.js";
 
-export function Pagination({ childCount, windowSize, onChange, labelPosition, label }: LabelledProps<{ childCount: number, windowSize: number, onChange: (start: number | null, end: number | null) => void }, never>) {
+export function Pagination({ childCount, windowSize, onChange, labelPosition, label, keyboardControlsDescription }: LabelledProps<{ keyboardControlsDescription?: string, childCount: number, windowSize: number, onChange: (start: number | null, end: number | null) => void }, never>) {
 
     labelPosition ??= "before";
     const [page, setPage] = useState(0);
@@ -33,16 +34,25 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
                 return (
                     <>
                         {labelPosition == "before" && labelJsx}
-                        <nav aria-label={labelPosition == 'hidden' ? label : undefined}>
-                            <ul {...useMergedProps(info.propsToolbar, { class: "pagination" })}>
-                                <PaginationChildren childCount={childCount} windowSize={windowSize} />
-                            </ul>
-                        </nav>
+                        <KeyboardAssistIcon
+                            leftRight={true}
+                            upDown={false}
+                            homeEnd={true}
+                            pageKeys={true}
+                            typeaheadStatus={'none'}
+                            activateSpace={true}
+                            activateEnter={true}
+                            description={keyboardControlsDescription ?? "Select a page:"}>
+                            <nav aria-label={labelPosition == 'hidden' ? label : undefined}>
+                                <ul {...useMergedProps(info.propsToolbar, { class: "pagination" })}>
+                                    <PaginationChildren childCount={childCount} windowSize={windowSize} />
+                                </ul>
+                            </nav>
+                        </KeyboardAssistIcon>
                         {labelPosition == "after" && labelJsx}
                     </>
                 )
-            }}
-        />
+            }} />
     )
 }
 
@@ -54,20 +64,22 @@ const PaginationChildren = memo(({ childCount, windowSize }: { windowSize: numbe
     const lastRef = useRef<HTMLButtonElement>(null);
     const centerFirstRef = useRef<HTMLButtonElement>(null);
     const centerLastRef = useRef<HTMLButtonElement>(null);
-    const onFocusFirst = useCallback(() => { centerFirstRef.current?.scrollIntoView({ behavior: "smooth" }) }, []);
-    const onFocusLast = useCallback(() => { centerLastRef.current?.scrollIntoView({ behavior: "smooth" }) }, []);
+    const onFocusFirst = useCallback(() => { centerFirstRef.current?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" }) }, []);
+    const onFocusLast = useCallback(() => { centerLastRef.current?.scrollIntoView({ behavior: "smooth", inline: "end", block: "nearest" }) }, []);
 
     return (
         <>
             <PaginationButtonFirst index={firstIndex} onFocus={onFocusFirst} />
             <span class="pagination-center scroll-shadows scroll-shadows-x">
+                <PaginationButton key={`first`} index={firstIndex + 1} ref={centerFirstRef}>{firstIndex + 1 + 1}</PaginationButton>
                 {Array.from(function* () {
-                    for (let page = firstIndex + 1; page <= lastIndex - 1; ++page) {
+                    for (let page = firstIndex + 2; page <= lastIndex - 2; ++page) {
                         const start = ((page + 0) * windowSize);
                         const end = ((page + 1) * windowSize);
-                        yield <PaginationButton key={`${start}-${end}`} index={page} ref={page == 1 ? centerFirstRef : page == (lastIndex - 1) ? centerLastRef : undefined}>{page + 1}</PaginationButton>
+                        yield <PaginationButton key={`${start}-${end}`} index={page}>{page + 1}</PaginationButton>
                     }
                 }())}
+                <PaginationButton key={`last`} index={lastIndex - 1} ref={centerLastRef}>{lastIndex - 1 + 1}</PaginationButton>
             </span>
             <PaginationButtonLast index={lastIndex} onFocus={onFocusLast} />
         </>
@@ -100,10 +112,10 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
                         longPressThreshold: null,
                         onPressingChange: null,
                         focusSelf
-                    }, 
+                    },
                     refElementReturn
                 })
-                
+
                 const p = useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined });
                 return (
                     <li class="page-item">
