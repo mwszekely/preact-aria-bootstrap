@@ -2092,7 +2092,7 @@ progress {
 .col-form-label-sm {
   padding-top: calc(0.25rem + var(--bs-border-width));
   padding-bottom: calc(0.25rem + var(--bs-border-width));
-  font-size: calc(1rem * .875);
+  font-size: 0.875rem;
 }
 
 .form-text {
@@ -2196,7 +2196,7 @@ progress {
 .form-control-sm {
   min-height: calc(1.5em + 0.5rem + calc(var(--bs-border-width) * 2));
   padding: 0.25rem 0.5rem;
-  font-size: calc(1rem * .875);
+  font-size: 0.875rem;
   border-radius: var(--bs-border-radius-sm);
 }
 .form-control-sm::file-selector-button {
@@ -2295,7 +2295,7 @@ textarea.form-control-lg {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
-  font-size: calc(1rem * .875);
+  font-size: 0.875rem;
   border-radius: var(--bs-border-radius-sm);
 }
 
@@ -2668,7 +2668,7 @@ textarea.form-control-lg {
 .input-group-sm > .input-group-text,
 .input-group-sm > .btn {
   padding: 0.25rem 0.5rem;
-  font-size: calc(1rem * .875);
+  font-size: 0.875rem;
   border-radius: var(--bs-border-radius-sm);
 }
 
@@ -2718,7 +2718,7 @@ textarea.form-control-lg {
   max-width: 100%;
   padding: 0.25rem 0.5rem;
   margin-top: 0.1rem;
-  font-size: calc(1rem * .875);
+  font-size: 0.875rem;
   color: #fff;
   background-color: var(--bs-success);
   border-radius: var(--bs-border-radius);
@@ -2808,7 +2808,7 @@ textarea.form-control-lg {
   max-width: 100%;
   padding: 0.25rem 0.5rem;
   margin-top: 0.1rem;
-  font-size: calc(1rem * .875);
+  font-size: 0.875rem;
   color: #fff;
   background-color: var(--bs-danger);
   border-radius: var(--bs-border-radius);
@@ -3262,7 +3262,7 @@ textarea.form-control-lg {
 .btn-sm, .btn-group-sm > .btn {
   --bs-btn-padding-y: 0.25rem;
   --bs-btn-padding-x: 0.5rem;
-  --bs-btn-font-size: calc(1rem * .875);
+  --bs-btn-font-size: 0.875rem;
   --bs-btn-border-radius: var(--bs-border-radius-sm);
 }
 
@@ -3594,7 +3594,7 @@ textarea.form-control-lg {
   display: block;
   padding: var(--bs-dropdown-header-padding-y) var(--bs-dropdown-header-padding-x);
   margin-bottom: 0;
-  font-size: calc(1rem * .875);
+  font-size: 0.875rem;
   color: var(--bs-dropdown-header-color);
   white-space: nowrap;
 }
@@ -4731,7 +4731,7 @@ textarea.form-control-lg {
 .pagination-sm {
   --bs-pagination-padding-x: 0.5rem;
   --bs-pagination-padding-y: 0.25rem;
-  --bs-pagination-font-size: calc(1rem * .875);
+  --bs-pagination-font-size: 0.875rem;
   --bs-pagination-border-radius: var(--bs-border-radius-sm);
 }
 
@@ -5670,7 +5670,7 @@ textarea.form-control-lg {
   --bs-tooltip-padding-x: 0.5rem;
   --bs-tooltip-padding-y: 0.25rem;
   --bs-tooltip-margin: ;
-  --bs-tooltip-font-size: calc(1rem * .875);
+  --bs-tooltip-font-size: 0.875rem;
   --bs-tooltip-color: var(--bs-body-bg);
   --bs-tooltip-bg: var(--bs-emphasis-color);
   --bs-tooltip-border-radius: var(--bs-border-radius);
@@ -5769,7 +5769,7 @@ textarea.form-control-lg {
 .popover {
   --bs-popover-zindex: 1070;
   --bs-popover-max-width: 276px;
-  --bs-popover-font-size: calc(1rem * .875);
+  --bs-popover-font-size: 0.875rem;
   --bs-popover-bg: var(--bs-body-bg);
   --bs-popover-border-width: var(--bs-border-width);
   --bs-popover-border-color: var(--bs-border-color-translucent);
@@ -12264,7 +12264,6 @@ textarea.form-control-lg {
 .pagination-center > .page-item > .page-link {
   --bs-pagination-border-radius: 0;
   border-radius: 0;
-  background: none;
 }
 .pagination-center > .page-item:first-child > .page-link {
   border-left: none;
@@ -12784,8 +12783,9 @@ textarea.form-control-lg {
 .ptl.ptl-flip {
   backface-visibility: hidden;
   --ptl-properties: transform;
-  --ptl-origin-x: calc(0 + var(--ptl-origin-inline));
-  --ptl-origin-y: calc(0 + var(--ptl-origin-block));
+  transform-origin: calc(var(--ptl-flip-origin-x) * 100%) calc(var(--ptl-flip-origin-y) * 100%);
+  --ptl-flip-origin-x: calc(0 + var(--ptl-flip-origin-inline));
+  --ptl-flip-origin-y: calc(0 + var(--ptl-flip-origin-block));
 }
 .ptl.ptl-flip.ptl-n-i, .ptl.ptl-flip.ptl-x-t, .ptl.ptl-flip.ptl-x-f {
   transform: perspective(var(--ptl-perspective, 800px)) rotate3d(1, 0, 0, calc(var(--ptl-flip-angle-x, 0))) rotate3d(0, 1, 0, calc(var(--ptl-flip-angle-y, 0)));
@@ -12821,6 +12821,10 @@ textarea.form-control-lg {
 }
 .ptl.ptl-flip.ptl-inline-direction-btt {
   --ptl-flip-angle-y: calc(-1 * var(--ptl-flip-angle-inline));
+}
+
+.ptl.ptl-flip.ptl-fade {
+  --ptl-properties: transform, opacity;
 }
 
 .ptl.ptl-collapse {

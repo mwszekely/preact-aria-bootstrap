@@ -18,7 +18,7 @@ export { Popover } from "./popover/index.js";
 export { Radio, RadioGroup } from "./radio/index.js";
 export { DocumentField, RichTextField, RichTextView } from "./rich-text-field/index.js";
 export { Range, RangeThumb } from "./slider/index.js";
-//export { DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow } from "./table/index.js";
+export { DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow } from "./table/index.js";
 export { Tab, TabPanel, Tabs } from "./tabs/index.js";
 export { TextField } from "./text-field/index.js";
 export { Toast, ToastErrorBoundary, ToastsProvider, usePushToast, useUpdateToast } from "./toasts/index.js";

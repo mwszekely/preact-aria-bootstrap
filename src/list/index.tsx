@@ -110,6 +110,7 @@ export const List = memo(forwardRef(monitored(function List({ disabled, selected
     return (
         <DefaultDisabled.Provider value={disabled ?? false}>
             <Gridlist<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLLabelElement>
+                initiallyTabbableColumn={1}
                 singleSelectedIndex={selectedIndex ?? null}
                 singleSelectionAriaPropName="aria-selected"
                 onSingleSelectedIndexChange={useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex) })}
@@ -119,6 +120,7 @@ export const List = memo(forwardRef(monitored(function List({ disabled, selected
                 groupingType="without-groups"
                 singleSelectionMode={selectionMode == "single" ? "activation" : "disabled"}
                 multiSelectionMode={selectionMode == "multi" ? "activation" : "disabled"}
+                
                 render={info => {
 
                     const labelJsx = <label {...info.propsGridlistLabel}>{label}</label>

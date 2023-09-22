@@ -1,4 +1,5 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-runtime";
+import clsx from "clsx";
 import { Toolbar, ToolbarChild } from "preact-aria-widgets";
 import { EventDetail, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { memo } from "preact/compat";
@@ -60,7 +61,7 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
                 refElementReturn
             });
             const p = useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined });
-            return (_jsx("li", { class: "page-item", children: _jsx("button", { ...p, children: children }) }));
+            return (_jsx("li", { class: clsx("page-item", info.singleSelectionChildReturn.singleSelected && "active"), children: _jsx("button", { ...p, children: children }) }));
         } }));
 }));
 export const Paginated = memo(function Paginated({ childCount, setPaginationEnd, setPaginationStart, paginationLabel, paginationLocation, paginationSize, children }) {

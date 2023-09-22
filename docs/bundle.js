@@ -4018,9 +4018,9 @@
       });
       const typeaheadComparator = useStableCallback((lhs, rhs) => {
           if (typeof lhs === "string" && typeof rhs.text === "string") {
-              // During typeahead, all strings longer than ours should be truncated
-              // so that they're all considered equally by that point.
-              return comparatorShared(lhs, rhs.text.substring(0, lhs.length));
+              // TODO: Doing this substring BEFORE normalization is, like, pretty not great?
+              let trimmedRet = comparatorShared(lhs, rhs.text.substring(0, lhs.length));
+              return trimmedRet;
           }
           return lhs - rhs;
       });
@@ -4121,15 +4121,15 @@
                   // These two are only set for elements that are ahead of us, but the principle's the same otherwise
                   let lowestUnsortedIndexNext = null;
                   let lowestSortedIndexNext = sortedTypeaheadIndex;
-                  const updateBestFit = (u) => {
-                      if (!isValidForTypeaheadNavigation(u))
+                  const updateBestFit = (unsortedIndex) => {
+                      if (!isValidForTypeaheadNavigation(unsortedIndex))
                           return;
-                      if (lowestUnsortedIndexAll == null || u < lowestUnsortedIndexAll) {
-                          lowestUnsortedIndexAll = u;
+                      if (lowestUnsortedIndexAll == null || unsortedIndex < lowestUnsortedIndexAll) {
+                          lowestUnsortedIndexAll = unsortedIndex;
                           lowestSortedIndexAll = i;
                       }
-                      if ((lowestUnsortedIndexNext == null || u < lowestUnsortedIndexNext) && u > (getIndex() ?? -Infinity)) {
-                          lowestUnsortedIndexNext = u;
+                      if ((lowestUnsortedIndexNext == null || unsortedIndex < lowestUnsortedIndexNext) && unsortedIndex > (getIndex() ?? -Infinity)) {
+                          lowestUnsortedIndexNext = unsortedIndex;
                           lowestSortedIndexNext = i;
                       }
                   };
@@ -4287,9 +4287,9 @@
    * @hasChild {@link useGridNavigationRow}
    * @hasChild {@link useGridNavigationCell}
    */
-  const useGridNavigation = monitored(function useGridNavigation({ gridNavigationParameters: { onTabbableColumnChange, ...void3 }, linearNavigationParameters, ...listNavigationParameters }) {
+  const useGridNavigation = monitored(function useGridNavigation({ gridNavigationParameters: { onTabbableColumnChange, initiallyTabbableColumn, ...void3 }, linearNavigationParameters, ...listNavigationParameters }) {
       const [getTabbableColumn, setTabbableColumn] = usePassiveState(onTabbableColumnChange, useStableCallback(() => {
-          let t = (listNavigationParameters.rovingTabIndexParameters.initiallyTabbedIndex ?? 0);
+          let t = (initiallyTabbableColumn ?? 0);
           return { actual: t, ideal: t };
       }));
       const { linearNavigationReturn, rovingTabIndexReturn, typeaheadNavigationReturn, managedChildrenParameters, context: { rovingTabIndexContext, typeaheadNavigationContext }, props, ...void1 } = useListNavigation({
@@ -4598,11 +4598,10 @@
           shuffleRef.current = shuffle;
           sortRef.current = sort;
       });
-      const rearrangeableChildrenContext = useMemoObject({
-          provideManglers
-      });
+      const rearrangeableChildrenContext = useMemoObject({ provideManglers });
+      const context = useMemoObject({ rearrangeableChildrenContext });
       return {
-          context: useMemoObject({ rearrangeableChildrenContext }),
+          context,
           indexDemangler,
           indexMangler,
           rearrange,
@@ -8632,9 +8631,9 @@
       return (y$2(Tag, useMergedProps(propsStable, imperativeProps, props, { ref })));
   }
 
-  const Table = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-";
+  const Table$2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-";
   function base64(value) {
-      return Table[value];
+      return Table$2[value];
   }
   function random6Bits() {
       return Math.floor(Math.random() * 0b1000000);
@@ -11485,7 +11484,7 @@
   const GridlistRowContext = G$1(null);
   const GridlistRowsContext = G$1(null);
   const ProcessedChildContext = G$1(null);
-  const Gridlist = x$1(monitored(function Gridlist({ collator, disableHomeEndKeys, noTypeahead, onTabbableIndexChange, groupingType, typeaheadTimeout, singleSelectedIndex, navigatePastEnd, navigatePastStart, onSingleSelectedIndexChange, pageNavigationSize, untabbable, paginationMax, paginationMin, onTabbableColumnChange, ariaLabel, onNavigateLinear, onNavigateTypeahead, imperativeHandle, onElementChange, onMount, onUnmount, render, multiSelectionAriaPropName, multiSelectionMode, onSelectionChange, singleSelectionAriaPropName, singleSelectionMode, ...void1 }) {
+  const Gridlist = x$1(monitored(function Gridlist({ collator, disableHomeEndKeys, noTypeahead, onTabbableIndexChange, groupingType, typeaheadTimeout, singleSelectedIndex, navigatePastEnd, navigatePastStart, onSingleSelectedIndexChange, pageNavigationSize, untabbable, paginationMax, paginationMin, onTabbableColumnChange, ariaLabel, onNavigateLinear, onNavigateTypeahead, imperativeHandle, onElementChange, onMount, onUnmount, render, multiSelectionAriaPropName, multiSelectionMode, onSelectionChange, singleSelectionAriaPropName, singleSelectionMode, initiallyTabbableColumn, ...void1 }) {
       return useComponentC(imperativeHandle, render, GridlistContext, GridlistRowsContext, useGridlist({
           linearNavigationParameters: {
               onNavigateLinear,
@@ -11509,6 +11508,7 @@
           },
           gridNavigationParameters: {
               onTabbableColumnChange,
+              initiallyTabbableColumn: initiallyTabbableColumn || 0
           },
           labelParameters: {
               ariaLabel
@@ -12051,23 +12051,24 @@
 
   G$1(null);
 
-  const TableContext = G$1(null);
+  const TableContext$1 = G$1(null);
   const TableSectionContext = G$1(null);
   const TableRowsContext = G$1(null);
   const ProcessedRowContext = G$1(null);
   const TableRowContext = G$1(null);
-  x$1(monitored(function Table({ ariaLabel, singleSelectionMode, multiSelectionMode, tagTable, imperativeHandle, render, ...void1 }) {
-      return useComponent(imperativeHandle, render, TableContext, useTable({
+  const Table$1 = x$1(monitored(function Table({ ariaLabel, singleSelectionMode, multiSelectionMode, tagTable, imperativeHandle, render, ...void1 }) {
+      return useComponent(imperativeHandle, render, TableContext$1, useTable({
           labelParameters: { ariaLabel },
           tableParameters: { tagTable, },
           singleSelectionParameters: { singleSelectionMode: singleSelectionMode || "disabled" },
           multiSelectionParameters: { multiSelectionMode: multiSelectionMode || "disabled" },
       }));
   }));
-  x$1(monitored(function TableSection({ disableHomeEndKeys, initiallySingleSelectedIndex, untabbable, navigatePastEnd, navigatePastStart, onSingleSelectedIndexChange, onTabbableColumnChange, onTabbableIndexChange, pageNavigationSize, paginationMax, paginationMin, render, location, imperativeHandle, multiSelectionAriaPropName, onSelectionChange, singleSelectionAriaPropName, onNavigateLinear, collator, noTypeahead, onNavigateTypeahead, typeaheadTimeout, tagTableSection, onElementChange, onMount, onUnmount, ...void1 }) {
+  const TableSection$1 = x$1(monitored(function TableSection({ disableHomeEndKeys, initiallySingleSelectedIndex, untabbable, navigatePastEnd, navigatePastStart, onSingleSelectedIndexChange, onTabbableColumnChange, onTabbableIndexChange, pageNavigationSize, paginationMax, paginationMin, render, location, imperativeHandle, multiSelectionAriaPropName, onSelectionChange, singleSelectionAriaPropName, onNavigateLinear, collator, noTypeahead, onNavigateTypeahead, typeaheadTimeout, tagTableSection, onElementChange, onMount, onUnmount, initiallyTabbableColumn, ...void1 }) {
       return useComponentC(imperativeHandle, render, TableSectionContext, TableRowsContext, useTableSection({
           gridNavigationParameters: {
-              onTabbableColumnChange: onTabbableColumnChange
+              onTabbableColumnChange: onTabbableColumnChange,
+              initiallyTabbableColumn: initiallyTabbableColumn || 0
           },
           typeaheadNavigationParameters: {
               onNavigateTypeahead,
@@ -12099,7 +12100,7 @@
               multiSelectionAriaPropName,
               onSelectionChange,
           },
-          contextChildren: useContextWithWarning(TableContext, "table"),
+          contextChildren: useContextWithWarning(TableContext$1, "table"),
           tableSectionParameters: {
               tagTableSection,
               location
@@ -12107,7 +12108,7 @@
           refElementParameters: { onElementChange, onMount, onUnmount }
       }));
   }));
-  x$1(monitored(function TableRows({ render, adjust, children, compare, getIndex, imperativeHandle, onAfterChildLayoutEffect, onChildrenCountChange, onChildrenMountChange, onRearranged, paginationMax, paginationMin, staggered }) {
+  const TableRows = x$1(monitored(function TableRows({ render, adjust, children, compare, getIndex, imperativeHandle, onAfterChildLayoutEffect, onChildrenCountChange, onChildrenMountChange, onRearranged, paginationMax, paginationMin, staggered }) {
       return useComponent(imperativeHandle, render, ProcessedRowContext, useCompleteGridNavigationRows({
           context: q$2(TableRowsContext),
           managedChildrenParameters: {
@@ -12131,7 +12132,7 @@
           }
       }));
   }));
-  x$1(monitored(function TableRow({ index, render, imperativeHandle, onElementChange: oec1, onMount, onUnmount, getText, untabbable, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, focusSelf, multiSelectionDisabled, singleSelectionDisabled, initiallyMultiSelected, initiallyTabbedIndex, navigatePastEnd, navigatePastStart, onMultiSelectChange, onTabbableIndexChange, selected, tagTableRow, ...void1 }) {
+  const TableRow$1 = x$1(monitored(function TableRow({ index, render, imperativeHandle, onElementChange: oec1, onMount, onUnmount, getText, untabbable, onCurrentFocusedChanged, onCurrentFocusedInnerChanged, focusSelf, multiSelectionDisabled, singleSelectionDisabled, initiallyMultiSelected, initiallyTabbedIndex, navigatePastEnd, navigatePastStart, onMultiSelectChange, onTabbableIndexChange, selected, tagTableRow, ...void1 }) {
       const { propsStable, refElementReturn } = useRefElement({
           refElementParameters: {
               onElementChange: useStableCallback((...a) => { oec1?.(...a); oec2?.(...a); }),
@@ -12210,7 +12211,7 @@
           staggeredChildReturn: { hideBecauseStaggered, parentIsStaggered },
       });
   }));
-  x$1(monitored(function TableCell({ index, getText, focusSelf, untabbable, tagTableCell, render, colSpan, imperativeHandle, getSortValue, info, ...void1 }) {
+  const TableCell$1 = x$1(monitored(function TableCell({ index, getText, focusSelf, untabbable, tagTableCell, render, colSpan, imperativeHandle, getSortValue, info, ...void1 }) {
       const defaultFocusSelf = useStableCallback((e) => { focus(e); }, []);
       return useComponent(imperativeHandle, render, null, useTableCell({
           info: {
@@ -15909,7 +15910,7 @@
                   refElementReturn
               });
               const p = useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined });
-              return (o$2("li", { class: "page-item", children: o$2("button", { ...p, children: children }) }));
+              return (o$2("li", { class: clsx("page-item", info.singleSelectionChildReturn.singleSelected && "active"), children: o$2("button", { ...p, children: children }) }));
           } }));
   }));
   const Paginated = x$1(function Paginated({ childCount, setPaginationEnd, setPaginationStart, paginationLabel, paginationLocation, paginationSize, children }) {
@@ -15934,7 +15935,7 @@
       }
       if (paginationSize)
           paginationLocation ||= "before";
-      return (o$2(DefaultDisabled.Provider, { value: disabled ?? false, children: o$2(Gridlist, { singleSelectedIndex: selectedIndex ?? null, singleSelectionAriaPropName: "aria-selected", onSingleSelectedIndexChange: useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex); }), paginationMin: paginationStart, paginationMax: paginationEnd, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", render: info => {
+      return (o$2(DefaultDisabled.Provider, { value: disabled ?? false, children: o$2(Gridlist, { initiallyTabbableColumn: 1, singleSelectedIndex: selectedIndex ?? null, singleSelectionAriaPropName: "aria-selected", onSingleSelectedIndexChange: useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex); }), paginationMin: paginationStart, paginationMax: paginationEnd, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", render: info => {
                   const labelJsx = o$2("label", { ...info.propsGridlistLabel, children: label });
                   return (o$2(TypeaheadStatus.Provider, { value: info.typeaheadNavigationReturn.typeaheadStatus, children: [labelPosition == "before" && labelJsx, o$2(Paginated, { childCount: children.length ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: o$2("div", { ...useMergedProps(props, info.propsGridlist, { ref, class: `list-group gridlist-group` }), children: o$2(GridlistRows, { children: children, paginationMin: paginationStart, paginationMax: paginationEnd, staggered: staggered || false, render: T$2(infoRows => {
                                           return (o$2(k$3, { children: infoRows.rearrangeableChildrenReturn.children }));
@@ -18451,6 +18452,139 @@
       return e[EventDetail].value;
   }
 
+  const Table = x$1(forwardElementRef$1(function Table({ propsContainer, dark, hover, striped, stripedColumns, variantBorder, bordered, variantSize, variantTheme, verticalAlign, ...props }, ref) {
+      return (o$2("div", { ...useMergedProps({ class: clsx("table-container", "table-responsive") }, propsContainer || {}), children: o$2("table", { ...useMergedProps({
+                  class: clsx("table", striped && "table-striped", stripedColumns && "table-striped-columns", hover && "table-hover", dark && "table-dark", variantTheme && `table-${variantTheme}`, variantSize && `table-${variantSize}`, verticalAlign && `align-${verticalAlign}`, bordered && `table-bordered`, variantBorder && `border-${variantBorder}`),
+                  ref
+              }, props) }) }));
+  }));
+  const TableSection = x$1(forwardElementRef$1(function TableSection({ location, divider, variantTheme, ...props }, ref) {
+      const TS = (location == "head" ? "thead" : location == "foot" ? "tfoot" : "tbody");
+      return (o$2(TS, { ...useMergedProps(props, { ref, className: clsx(variantTheme && `table-${variantTheme}`) }) }));
+  }));
+  const TableRow = x$1(forwardElementRef$1(function TableRow({ variantTheme, children, ...props }, ref) {
+      //useWhatCausedRender("TableRow", { props: { ...props, children, variantTheme, ref }, state: {} })
+      return (o$2("tr", { ...useMergedProps({ ref, className: clsx(variantTheme && `table-${variantTheme}`) }, props), children: children }));
+  }));
+  const TableCell = x$1(forwardElementRef$1(function TableCell({ variantTheme, fillY, tableHeadType, children, ...props }, ref) {
+      props = useMergedProps({ ref, className: clsx(variantTheme && `table-${variantTheme}`) }, props);
+      if (tableHeadType) {
+          const thPropsIfSortable = { className: clsx(fillY && "py-0") };
+          const thPropsIfUnsortable = useMergedProps(props, thPropsIfSortable);
+          const buttonPropsIfUnsortable = { className: "sort-button" };
+          const buttonPropsIfSortable = useMergedProps(props, buttonPropsIfUnsortable);
+          return (o$2("th", { ...(tableHeadType == "unsortable" ? thPropsIfUnsortable : thPropsIfSortable), children: tableHeadType == "unsortable" ?
+                  children :
+                  o$2("button", { ...buttonPropsIfSortable, children: o$2("span", { children: children }) }) }));
+      }
+      else {
+          children = useClonedElement(children, props, ref);
+          return (o$2("td", { class: clsx(fillY && "py-0"), children: children }));
+      }
+  }));
+
+  // Allow for nicer props (on the Table instead of the TableSection)
+  const TableContext = G$1({ setChildCount: null, paginationMax: null, paginationMin: null, staggered: false });
+  const DataTable = x$1(forwardElementRef$1(function DataTable({ staggered, caption, captionPosition, bordered, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }, ref) {
+      staggered ||= false;
+      const [childCount, setChildCount] = useState(0);
+      const [paginationStart, setPaginationStart] = useState(0);
+      const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
+      return (o$2(TableContext.Provider, { value: F$2(() => ({ setChildCount, paginationMax: paginationEnd, paginationMin: paginationStart, staggered: staggered }), [setChildCount, paginationStart, paginationEnd, staggered]), children: o$2(Table$1, { ariaLabel: captionPosition == "hidden" ? caption : null, singleSelectionMode: "activation", tagTable: "table", render: info => {
+                  return (o$2(Paginated, { childCount: childCount, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, children: [caption && captionPosition != "hidden" && o$2("caption", { ...useMergedProps(info.propsLabel, { className: clsx(captionPosition == "before" && "caption-top") }), children: caption }), o$2(Table, { bordered: bordered, dark: dark, hover: hover, propsContainer: propsContainer, striped: striped, stripedColumns: stripedColumns, variantBorder: variantBorder, variantSize: variantSize, variantTheme: variantTheme, verticalAlign: verticalAlign, ...useMergedProps(info.propsTable, { className: "table" }, { ref, ...props }), children: children })] }));
+              } }) }));
+  }));
+  const DataTableHead = x$1(forwardElementRef$1(function DataTableHead(props, ref) { return (o$2(DataTableSection, { ref: ref, location: "head", ...props })); }));
+  const DataTableBody = x$1(forwardElementRef$1(function DataTableBody(props, ref) { return (o$2(DataTableSection, { ref: ref, location: "body", ...props })); }));
+  x$1(forwardElementRef$1(function DataTableFoot(props, ref) { return (o$2(DataTableSection, { ref: ref, location: "head", ...props })); }));
+  const DataTableSection = x$1(forwardElementRef$1(function DataTableSection({ children, keyboardControlsDescription, location, variantTheme, divider, ...props }, ref) {
+      const { paginationMax, paginationMin, staggered, setChildCount } = q$2(TableContext);
+      return (o$2(IsTableHeadContext.Provider, { value: location == "head", children: o$2(TableSection$1, { 
+              //staggered={location == "body" && staggered}
+              location: location, 
+              //getIndex={vnode => vnode.props.row}
+              tagTableSection: `t${location}`, paginationMin: location == "body" ? paginationMin : null, paginationMax: location == "body" ? paginationMax : null, render: info => {
+                  const childCount = Array.isArray(children) ? children.length : 1;
+                  y$1(() => {
+                      if (location == "body")
+                          setChildCount?.(childCount);
+                  }, [location, setChildCount, childCount]);
+                  return (o$2(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, activateEnter: false, activateSpace: false, description: keyboardControlsDescription ?? "Navigate the table:", children: o$2(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: F$2(() => o$2(DataTableRows, { children: Array.isArray(children) ? children : [children] }), [children]) }) }));
+              } }) }));
+  }));
+  const DataTableRows = x$1(monitored(function DataTableRows({ children }) {
+      const { paginationMax, paginationMin, staggered, setChildCount } = q$2(TableContext);
+      return (o$2(TableRows, { paginationMax: paginationMax, paginationMin: paginationMin, staggered: staggered, children: children, render: info => {
+              return o$2(k$3, { children: info.rearrangeableChildrenReturn.children });
+          } }));
+  }));
+  const DataTableRow = x$1(forwardElementRef$1(function DataTableRow({ row, children, variantTheme, ...props }, ref) {
+      return (o$2(TableRow$1, { index: row, tagTableRow: "tr", render: info => {
+              info.staggeredChildReturn.hideBecauseStaggered;
+              const hideBecausePaginated = info.paginatedChildReturn.hideBecausePaginated;
+              let tr = (o$2(TableRow, { ...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" }), children: (info.hidden ? null : children) }));
+              if (info.paginatedChildReturn.hideBecausePaginated) {
+                  return tr;
+              }
+              return (o$2(Fade, { show: !info.hidden, animateOnMount: info.staggeredChildReturn.parentIsStaggered, delayMountUntilShown: true, children: tr }));
+          } }));
+  }));
+  const IsTableHeadContext = G$1(false);
+  const DataTableCell = x$1(forwardElementRef$1(function DataTableCell({ column, colSpan, children, value, unsortable, variantTheme, fillY, ...props }, ref) {
+      const { refElementReturn, refElementReturn: { getElement }, propsStable } = useRefElement({ refElementParameters: {} });
+      const [sortingByThisColumn, setSortingByThisColumn] = useState(false);
+      const [sortDirection, setSortDirection] = useState(null);
+      const isTableHead = q$2(IsTableHeadContext);
+      const focusSelf = (e) => {
+          const actualElement = getElement();
+          actualElement?.focus();
+          if (document.activeElement != actualElement)
+              e?.focus();
+      };
+      return (o$2(TableCell$1, { index: column, tagTableCell: isTableHead ? "th" : "td", focusSelf: focusSelf, getSortValue: useStableGetter(value ?? children), colSpan: colSpan, render: info => {
+              const { pressReturn, props: propsPress } = usePress({
+                  pressParameters: {
+                      focusSelf,
+                      allowRepeatPresses: null,
+                      excludeEnter: null,
+                      excludePointer: null,
+                      longPressThreshold: null,
+                      onPressingChange: null,
+                      onPressSync: !isTableHead ? undefined : () => {
+                          const { column, direction } = info.tableCellReturn.sortByThisColumn();
+                          setSortingByThisColumn(true);
+                          setSortDirection(direction);
+                      },
+                      ...info.pressParameters
+                  },
+                  refElementReturn
+              });
+              const p = useMergedProps(propsStable, propsPress, info.propsCell, { ref, ...props });
+              children ??= value;
+              children = useClonedElement(children, info.propsFocus, ref);
+              return o$2(TableCell, { ...p, tableHeadType: isTableHead ? (unsortable ? "unsortable" : "sortable") : null, fillY: fillY, variantTheme: variantTheme, children: children });
+              /*if (isTableHead) {
+                  return (
+                      <th class={clsx(fillY && "py-0")}>
+                          <button className="sort-button" {...p as h.JSX.HTMLAttributes<any>}>
+                              <span>{children}</span>
+                              {sortDirection == null && <BootstrapIcon icon="filter" label={null} />}
+                              {sortDirection == "ascending" && <BootstrapIcon icon="sort-down-alt" label={null} />}
+                              {sortDirection == "descending" && <BootstrapIcon icon="sort-up" label={null} />}
+                          </button>
+                      </th>
+                  )
+              }
+              else {
+                  children ??= (value as string);
+                  children = useClonedElement(children, p, ref);
+                  return (
+                      <td class={clsx(fillY && "py-0")}>{children}</td>
+                  )
+              }*/
+          } }));
+  }));
+
   const StructureTabPanel = memoForwardRef(function StructureTabPanel({ orientation, visibleOffset, visible, children, ...props }, ref) {
       // Get the names of the properties on the transition that are correct for the `orientation` the parent uses.
       // (i.e. if make the transition slide on the X axis for "horizontal" and the Y axis for "vertical")
@@ -18817,7 +18951,7 @@
        if (!visible)
            return null;*/
       const ch = `List item #${i}`;
-      return (o$2(ListItem, { index: i, onPress: T$2(async () => { return new Promise(resolve => setTimeout(resolve, 2000)); }, []), badge: F$2(() => o$2(Badge, { variantTheme: "info", children: "10" }), []), iconStart: F$2(() => (i & 0b01) ? o$2(ListDemoMenu, {}) : null, [i]), iconEnd: F$2(() => (i & 0b10) ? o$2(ListDemoButton, {}) : null, [i]), children: ch }));
+      return (o$2(ListItem, { index: i, onPress: T$2(async () => { return new Promise(resolve => setTimeout(resolve, 2000)); }, []), badge: F$2(() => o$2(Badge, { variantTheme: "info", children: "10" }), []), iconStart: F$2(() => (i % 100 == 0) ? o$2(ListDemoMenu, {}) : null, [i]), iconEnd: F$2(() => ((i & 0b10) == 0) ? o$2(ListDemoButton, {}) : null, [i]), children: ch }));
   });
   function MenuDemo() {
       const [selectedIndex, setSelectedIndex] = h$1(null);
@@ -18847,61 +18981,31 @@
   function ErrorComponent() {
       throw new Error("Demo error was thrown");
   }
-  /*
+  const RandomWords = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.".split(" ");
   function TableDemo() {
-      let [count, setCount] = useState(100 as number | null);
-      const [paginationWindow, setPaginationWindow] = useState(10 as number | null);
+      let [count, setCount] = h$1(100);
+      const [paginationWindow, setPaginationWindow] = h$1(10);
       count ??= 0;
-      return (
-          <div>
-              <TextField type="number" value={count} onValueChange={setCount} label="# of children" labelPosition="floating" />
-              <TextField type="number" value={paginationWindow} onValueChange={setPaginationWindow} label="Pagination window" labelPosition="floating" />
-              <DataTable captionPosition="before" caption="Table demo" paginationSize={paginationWindow} paginationLocation="before">
-                  <DataTableHead>
-                      <DataTableRow row={0}>
-                          <DataTableCell column={0}>Numeric</DataTableCell>
-                          <DataTableCell column={1}>String</DataTableCell>
-                          <DataTableCell column={2}>Date</DataTableCell>
-                          <DataTableCell column={3}>Input</DataTableCell>
-                      </DataTableRow>
-                  </DataTableHead>
-                  <TableDemoBody count={count} />
-              </DataTable>
-          </div>
-      )
+      return (o$2("div", { children: [o$2(TextField, { type: "number", value: count, onValueChange: setCount, label: "# of children", labelPosition: "floating" }), o$2(TextField, { type: "number", value: paginationWindow, onValueChange: setPaginationWindow, label: "Pagination window", labelPosition: "floating" }), o$2(DataTable, { captionPosition: "before", caption: "Table demo", paginationSize: paginationWindow, paginationLocation: "before", children: [o$2(DataTableHead, { children: o$2(DataTableRow, { row: 0, children: [o$2(DataTableCell, { column: 0, children: "Numeric" }), o$2(DataTableCell, { column: 1, children: "String" }), o$2(DataTableCell, { column: 2, children: "Date" }), o$2(DataTableCell, { column: 3, children: "Input" })] }) }), o$2(TableDemoBody, { count: count })] })] }));
   }
-
-  const TableDemoBody = memo(({ count }: { count: number }) => {
+  const TableDemoBody = x$1(({ count }) => {
       console.log("Table body demo rendered");
-      const children = useMemo(() => Array.from(function* () {
+      const children = F$2(() => Array.from(function* () {
           for (let i = 0; i < count; ++i) {
-              yield <TableDemoRow key={i} row={i} />
+              yield o$2(TableDemoRow, { row: i }, i);
           }
-      }()), [count])
-      return (
-          <DataTableBody>{children}</DataTableBody>
-      )
-  })
-
+      }()), [count]);
+      return (o$2(DataTableBody, { children: children }));
+  });
   const baseDate = new Date();
-
-  const TableDemoRow = memo(function TableDemoRow({ row }: { row: number }) {
+  const TableDemoRow = x$1(function TableDemoRow({ row }) {
       const numeric = row;
       const word = RandomWords[row % RandomWords.length];
       const date = new Date(+baseDate + (1000 * 60 * 60 * 24 * (row ** 2)));
-      const [value, setValue] = useState(0 as number | null);
-      console.log("Table row demo rendered")
-      return (
-          <DataTableRow row={numeric}>
-              <DataTableCell column={0} value={row} />
-              <DataTableCell column={1} value={word} />
-              <DataTableCell column={2} value={date}>{date.toLocaleString()}</DataTableCell>
-              <DataTableCell column={3} fillY><TextField type="number" marginBottom={0} value={value} onValueChange={setValue} min={0} max={numeric} labelPosition="hidden" label="Numeric input within a table cell" /></DataTableCell>
-          </DataTableRow>
-      )
-  })
-
-  */
+      const [value, setValue] = h$1(0);
+      console.log("Table row demo rendered");
+      return (o$2(DataTableRow, { row: numeric, children: [o$2(DataTableCell, { column: 0, value: row }), o$2(DataTableCell, { column: 1, value: word }), o$2(DataTableCell, { column: 2, value: date, children: date.toLocaleString() }), o$2(DataTableCell, { column: 3, fillY: true, children: o$2(TextField, { type: "number", marginBottom: 0, value: value, onValueChange: setValue, min: 0, max: numeric, labelPosition: "hidden", label: "Numeric input within a table cell" }) })] }));
+  });
   function AccordionDemo() {
       return (o$2(Accordion, { children: Array.from(function* () {
               for (let i = 0; i < 5; ++i) {
@@ -18913,7 +19017,7 @@
       h$1(0);
       let i0 = 0;
       let i1 = 0;
-      return (o$2("div", { children: o$2(AllProviders, { targetAssertive: "aria-notifications-assertive", targetPolite: "aria-notifications-polite", children: o$2(Tabs, { localStorageKey: "main-demo-page-selected-tab-index", label: "Select the demo to view", labelPosition: "hidden", orientation: "horizontal", tabs: o$2(k$3, { children: [o$2(Tab, { index: i0++, children: "Button" }), o$2(Tab, { index: i0++, children: "Checkbox" }), o$2(Tab, { index: i0++, children: "Menu" }), o$2(Tab, { index: i0++, children: "Tooltip" }), o$2(Tab, { index: i0++, children: "Radio" }), o$2(Tab, { index: i0++, children: "Text field" }), o$2(Tab, { index: i0++, children: "Gridlist demo" }), o$2(Tab, { index: i0++, children: "Dialog" }), o$2(Tab, { index: i0++, children: "Slider" }), o$2(Tab, { index: i0++, children: "Toasts" }), o$2(Tab, { index: i0++, children: "Data Table" }), o$2(Tab, { index: i0++, children: "Accordion" }), o$2(Tab, { index: i0++, children: "Offcanvas" })] }), panels: o$2(k$3, { children: [o$2(TabPanel, { index: i1++, children: o$2(Demo$4, {}) }), o$2(TabPanel, { index: i1++, children: o$2(Demo$3, {}) }), o$2(TabPanel, { index: i1++, children: o$2(MenuDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(Demo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(Demo$2, {}) }), o$2(TabPanel, { index: i1++, children: o$2(Demo$1, {}) }), o$2(TabPanel, { index: i1++, children: o$2(ListDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(DialogDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(SliderDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(ToastsDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2("div", {}) }), o$2(TabPanel, { index: i1++, children: o$2(AccordionDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(OffcanvasDemo, {}) })] }) }) }) }));
+      return (o$2("div", { children: o$2(AllProviders, { targetAssertive: "aria-notifications-assertive", targetPolite: "aria-notifications-polite", children: o$2(Tabs, { localStorageKey: "main-demo-page-selected-tab-index", label: "Select the demo to view", labelPosition: "hidden", orientation: "horizontal", tabs: o$2(k$3, { children: [o$2(Tab, { index: i0++, children: "Button" }), o$2(Tab, { index: i0++, children: "Checkbox" }), o$2(Tab, { index: i0++, children: "Menu" }), o$2(Tab, { index: i0++, children: "Tooltip" }), o$2(Tab, { index: i0++, children: "Radio" }), o$2(Tab, { index: i0++, children: "Text field" }), o$2(Tab, { index: i0++, children: "Gridlist demo" }), o$2(Tab, { index: i0++, children: "Dialog" }), o$2(Tab, { index: i0++, children: "Slider" }), o$2(Tab, { index: i0++, children: "Toasts" }), o$2(Tab, { index: i0++, children: "Data Table" }), o$2(Tab, { index: i0++, children: "Accordion" }), o$2(Tab, { index: i0++, children: "Offcanvas" })] }), panels: o$2(k$3, { children: [o$2(TabPanel, { index: i1++, children: o$2(Demo$4, {}) }), o$2(TabPanel, { index: i1++, children: o$2(Demo$3, {}) }), o$2(TabPanel, { index: i1++, children: o$2(MenuDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(Demo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(Demo$2, {}) }), o$2(TabPanel, { index: i1++, children: o$2(Demo$1, {}) }), o$2(TabPanel, { index: i1++, children: o$2(ListDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(DialogDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(SliderDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(ToastsDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(TableDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(AccordionDemo, {}) }), o$2(TabPanel, { index: i1++, children: o$2(OffcanvasDemo, {}) })] }) }) }) }));
   };
   requestAnimationFrame(() => {
       D$2(o$2(Component, {}), document.getElementById("root"));

@@ -4,7 +4,7 @@ import { Ref, render } from "preact";
 import { focus } from "preact-prop-helpers";
 import { forwardRef, memo } from "preact/compat";
 import { useCallback, useMemo, useState } from "preact/hooks";
-import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast } from "../dist/index.js";
+import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast } from "../dist/index.js";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
 import * as Radio from "./demos/radio";
@@ -90,8 +90,8 @@ const ListDemoItem = memo(({ index: i }: { index: number }) => {
             index={i}
             onPress={useCallback(async () => { return new Promise<void>(resolve => setTimeout(resolve, 2000)) }, [])}
             badge={useMemo(() => <Badge variantTheme="info">10</Badge>, [])}
-            iconStart={useMemo(() => (i & 0b01) ? <ListDemoMenu /> : null, [i])}
-            iconEnd={useMemo(() => (i & 0b10) ? <ListDemoButton /> : null, [i])}
+            iconStart={useMemo(() => (i % 100 == 0) ? <ListDemoMenu /> : null, [i])}
+            iconEnd={useMemo(() => ((i & 0b10) == 0) ? <ListDemoButton /> : null, [i])}
             children={ch}
         />
     );
@@ -176,7 +176,7 @@ function ErrorComponent() {
 
 const RandomWords = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.".split(" ");
 
-/*
+
 function TableDemo() {
     let [count, setCount] = useState(100 as number | null);
     const [paginationWindow, setPaginationWindow] = useState(10 as number | null);
@@ -230,7 +230,7 @@ const TableDemoRow = memo(function TableDemoRow({ row }: { row: number }) {
     )
 })
 
-*/
+
 
 function AccordionDemo() {
     return (
@@ -290,7 +290,7 @@ const Component = () => {
                     <TabPanel index={i1++}><DialogDemo /></TabPanel>
                     <TabPanel index={i1++}><SliderDemo /></TabPanel>
                     <TabPanel index={i1++}><ToastsDemo /></TabPanel>
-                    <TabPanel index={i1++}><div /></TabPanel>
+                    <TabPanel index={i1++}><TableDemo /></TabPanel>
                     <TabPanel index={i1++}><AccordionDemo /></TabPanel>
                     <TabPanel index={i1++}><OffcanvasDemo /></TabPanel>
                 </>}

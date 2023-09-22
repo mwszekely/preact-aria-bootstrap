@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ComponentChildren, Ref } from "preact";
 import { Toolbar, ToolbarChild } from "preact-aria-widgets";
 import { EventDetail, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
@@ -118,7 +119,7 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
 
                 const p = useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined });
                 return (
-                    <li class="page-item">
+                    <li class={clsx("page-item", info.singleSelectionChildReturn.singleSelected && "active")}>
                         <button {...p}>{children}</button>
                     </li>
                 )
