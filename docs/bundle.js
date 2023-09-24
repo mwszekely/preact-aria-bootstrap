@@ -15947,7 +15947,7 @@
       }
       if (paginationSize)
           paginationLocation ||= "before";
-      return (o$2(DefaultDisabled.Provider, { value: disabled ?? false, children: o$2(Gridlist, { initiallyTabbableColumn: 1, singleSelectedIndex: selectedIndex ?? null, singleSelectionAriaPropName: "aria-selected", onSingleSelectedIndexChange: useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex); }), paginationMin: paginationStart, paginationMax: paginationEnd, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", render: info => {
+      return (o$2(DefaultDisabled.Provider, { value: disabled ?? false, children: o$2(Gridlist, { initiallyTabbableColumn: 1, singleSelectedIndex: selectedIndex ?? null, singleSelectionAriaPropName: "aria-selected", onSingleSelectedIndexChange: useStableCallback(e => { debugger; onSelectedIndexChange?.(e[EventDetail].selectedIndex); }), paginationMin: paginationStart, paginationMax: paginationEnd, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", render: info => {
                   const labelJsx = o$2("label", { ...info.propsGridlistLabel, children: label });
                   children ??= [];
                   return (o$2(TypeaheadStatus.Provider, { value: info.typeaheadNavigationReturn.typeaheadStatus, children: [labelPosition == "before" && labelJsx, o$2(Paginated, { childCount: children.length ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: o$2("div", { ...useMergedProps(props, info.propsGridlist, { ref, class: `list-group gridlist-group` }), children: o$2(GridlistRows, { children: children, paginationMin: paginationStart, paginationMax: paginationEnd, staggered: staggered || false, render: T$2(infoRows => {
@@ -15955,8 +15955,15 @@
                                       }, []) }) }) }), labelPosition == "after" && labelJsx] }));
               } }) }));
   })));
-  const ListItemNonPaginated = x$1((function ListItemNonPaginated({ infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }) {
-      return (o$2(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onPress ?? null, capture: returnUndefined, tagProgressIndicator: "span", render: progressInfo => {
+  const ListItemNonPaginated = x$1((function ListItemNonPaginated({ onPressSync, infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }) {
+      return (o$2(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: async (a, b) => {
+              // TODO: How'd we end up with onPress (from the user) AND onPress (from selection)?
+              // Should selection have taken care of that? Does it already? What if it's async?
+              let p = onPress?.(a, b);
+              onPressSync?.(b);
+              if (p && typeof p == "object" && "then" in p)
+                  await p;
+          }, capture: returnUndefined, tagProgressIndicator: "span", render: progressInfo => {
               const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement({ refElementParameters: {} });
               const { pressReturn: { longPress, pressing }, props: p1 } = usePress({
                   pressParameters: {
@@ -16003,7 +16010,7 @@
               // TODO: Get a better placeholder system
               if (infoRow.hidden)
                   return y$2("div", { ...p3, key: "hide-because-staggered", class: `gridlist-item gridlist-item-placeholder list-group-item`, role: "option", "aria-busy": "true" }); // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
-              return o$2(ListItemNonPaginated, { keyboardControlsDescription: keyboardControlsDescription, infoRowProps: infoRow.props, excludeSpace: infoRow.pressParameters.excludeSpace, onPressSync: infoRow.pressParameters.onPressSync, hideBecausePaginated: false, hideBecauseStaggered: false, loadingLabel: loadingLabel, onPress: onPress, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: p2, ref2: ref }, "show");
+              return o$2(ListItemNonPaginated, { keyboardControlsDescription: keyboardControlsDescription, infoRowProps: infoRow.props, excludeSpace: infoRow.pressParameters.excludeSpace, onPressSync: infoRow.pressParameters.onPressSync, onPress: onPress, hideBecausePaginated: false, hideBecauseStaggered: false, loadingLabel: loadingLabel, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: p2, ref2: ref }, "show");
           } }));
   })));
   const ListItemText = x$1(forwardElementRef$1((function ListItemText({ onPress, children, ...props }, ref) {

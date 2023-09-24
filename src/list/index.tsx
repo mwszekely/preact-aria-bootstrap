@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
 import { Gridlist, GridlistChild, GridlistRow, GridlistRows, ProgressWithHandler } from "preact-aria-widgets";
-import { AsyncHandler, EventDetail, Nullable, returnUndefined, useMergedProps, UsePaginatedChildReturnTypeSelf, usePress, UsePressParametersSelf, useRefElement, useStableCallback, UseStaggeredChildReturnTypeSelf, useState, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
+import { AsyncHandler, EventDetail, Nullable, PressEventReason, returnUndefined, useMergedProps, UsePaginatedChildReturnTypeSelf, usePress, UsePressParametersSelf, useRefElement, useStableCallback, UseStaggeredChildReturnTypeSelf, useState, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { forwardRef, memo, TargetedEvent } from "preact/compat";
 import { useCallback, useContext } from "preact/hooks";
@@ -113,19 +113,19 @@ export const List = memo(forwardRef((function List({ disabled, selectedIndex, se
                 initiallyTabbableColumn={1}
                 singleSelectedIndex={selectedIndex ?? null}
                 singleSelectionAriaPropName="aria-selected"
-                onSingleSelectedIndexChange={useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex) })}
+                onSingleSelectedIndexChange={useStableCallback(e => { debugger; onSelectedIndexChange?.(e[EventDetail].selectedIndex) })}
                 paginationMin={paginationStart}
                 paginationMax={paginationEnd}
                 ariaLabel={labelPosition == "hidden" ? label : null}
                 groupingType="without-groups"
                 singleSelectionMode={selectionMode == "single" ? "activation" : "disabled"}
                 multiSelectionMode={selectionMode == "multi" ? "activation" : "disabled"}
-                
+
                 render={info => {
 
                     const labelJsx = <label {...info.propsGridlistLabel}>{label}</label>
                     children ??= [];
-                    
+
                     return (
                         <TypeaheadStatus.Provider value={info.typeaheadNavigationReturn.typeaheadStatus}>
                             {labelPosition == "before" && labelJsx}
@@ -136,7 +136,7 @@ export const List = memo(forwardRef((function List({ disabled, selectedIndex, se
                                         paginationMin={paginationStart}
                                         paginationMax={paginationEnd}
                                         staggered={staggered || false}
-                                        render={useCallback(infoRows => { 
+                                        render={useCallback(infoRows => {
                                             return (
                                                 <>{infoRows.rearrangeableChildrenReturn.children}</>
                                             )
@@ -154,7 +154,7 @@ export const List = memo(forwardRef((function List({ disabled, selectedIndex, se
     )
 })))
 
-const ListItemNonPaginated = memo((function ListItemNonPaginated({ infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }:
+const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }:
     Pick<ListItemProps, "children" | "selected" | "badge" | "variantTheme" | "disabled" | "iconStart" | "iconEnd"> &
     Pick<UsePressParametersSelf<any>, "excludeSpace" | "onPressSync"> &
     Pick<UsePaginatedChildReturnTypeSelf, "hideBecausePaginated"> &
@@ -163,7 +163,15 @@ const ListItemNonPaginated = memo((function ListItemNonPaginated({ infoRowProps,
 
     return (<ProgressWithHandler<h.JSX.TargetedEvent<any, Event>, void, HTMLSpanElement, HTMLLabelElement>
         ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
-        asyncHandler={onPress ?? null}
+        asyncHandler={async (a, b) => {
+            // TODO: How'd we end up with onPress (from the user) AND onPress (from selection)?
+            // Should selection have taken care of that? Does it already? What if it's async?
+            let p = onPress?.(a, b);
+            onPressSync?.(b as PressEventReason<any>);
+            if (p && typeof p == "object" && "then" in p)
+                await p;
+        }
+        }
         capture={returnUndefined}
 
         tagProgressIndicator="span"
@@ -282,10 +290,10 @@ export const ListItem = memo(forwardElementRef((function ListItem({ index, keybo
                     infoRowProps={infoRow.props}
                     excludeSpace={infoRow.pressParameters.excludeSpace}
                     onPressSync={infoRow.pressParameters.onPressSync}
+                    onPress={onPress}
                     hideBecausePaginated={false}
                     hideBecauseStaggered={false}
                     loadingLabel={loadingLabel}
-                    onPress={onPress}
                     badge={badge}
                     children={children}
                     disabled={disabled}
@@ -305,6 +313,7 @@ const ListItemText = memo(forwardElementRef((function ListItemText({ onPress, ch
             index={1}
             onPressSync={onPress}
             render={infoCell => {
+
                 return (
                     <div {...useMergedProps(infoCell.propsCell, infoCell.propsPress, infoCell.propsTabbable, props, { ref }, { class: clsx("gridlist-item-text") })}>
                         {children}

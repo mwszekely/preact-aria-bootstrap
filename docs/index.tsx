@@ -41,7 +41,16 @@ function ListDemo() {
         <TextField type="number" value={count} onValueChange={setCount} label="# of children" labelPosition="floating" />
         <TextField type="number" value={paginationWindow} onValueChange={setPaginationWindow} label="Pagination window" labelPosition="floating" />
         <div>{selectedIndex}</div>
-        <List staggered={true} paginationLocation={paginationWindow == null ? null : "before"} paginationSize={paginationWindow ?? null} paginationLabel="Choose the selected page of items to show" selectedIndex={selectedIndex} selectionMode="single" onSelectedIndexChange={setSelectedIndex} labelPosition="before" label="List (grid)">
+        <List
+            staggered={true}
+            paginationLocation={paginationWindow == null ? null : "before"}
+            paginationSize={paginationWindow ?? null}
+            paginationLabel="Choose the selected page of items to show"
+            selectedIndex={selectedIndex}
+            selectionMode="single"
+            onSelectedIndexChange={setSelectedIndex}
+            labelPosition="before"
+            label="List (grid)">
             {ch}
         </List>
     </div>)
