@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
 import { Gridlist, GridlistChild, GridlistRow, GridlistRows, ProgressWithHandler } from "preact-aria-widgets";
-import { AsyncHandler, EventDetail, monitored, Nullable, returnUndefined, useMergedProps, UsePaginatedChildReturnTypeSelf, usePress, UsePressParametersSelf, useRefElement, useStableCallback, UseStaggeredChildReturnTypeSelf, useState, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
+import { AsyncHandler, EventDetail, Nullable, returnUndefined, useMergedProps, UsePaginatedChildReturnTypeSelf, usePress, UsePressParametersSelf, useRefElement, useStableCallback, UseStaggeredChildReturnTypeSelf, useState, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { forwardRef, memo, TargetedEvent } from "preact/compat";
 import { useCallback, useContext } from "preact/hooks";
@@ -91,7 +91,7 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
 const DefaultDisabled = createContext(false);
 const TypeaheadStatus = createContext<UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"]>("none");
 
-export const List = memo(forwardRef(monitored(function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>, ref?: Ref<any>) {
+export const List = memo(forwardRef((function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>, ref?: Ref<any>) {
 
     labelPosition ??= "before";
     //const [focusedInner, setFocusedInner] = useState(false);
@@ -153,7 +153,7 @@ export const List = memo(forwardRef(monitored(function List({ disabled, selected
     )
 })))
 
-const ListItemNonPaginated = memo(monitored(function ListItemNonPaginated({ infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }:
+const ListItemNonPaginated = memo((function ListItemNonPaginated({ infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }:
     Pick<ListItemProps, "children" | "selected" | "badge" | "variantTheme" | "disabled" | "iconStart" | "iconEnd"> &
     Pick<UsePressParametersSelf<any>, "excludeSpace" | "onPressSync"> &
     Pick<UsePaginatedChildReturnTypeSelf, "hideBecausePaginated"> &
@@ -249,7 +249,7 @@ const ListItemNonPaginated = memo(monitored(function ListItemNonPaginated({ info
     );
 }))
 
-export const ListItem = memo(forwardElementRef(monitored(function ListItem({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
+export const ListItem = memo(forwardElementRef((function ListItem({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
 
     const defaultDisabled = useContext(DefaultDisabled);
     disabled ||= defaultDisabled;
@@ -298,7 +298,7 @@ export const ListItem = memo(forwardElementRef(monitored(function ListItem({ ind
 })));
 
 
-const ListItemText = memo(forwardElementRef(monitored(function ListItemText({ onPress, children, ...props }: h.JSX.HTMLAttributes<any> & { onPress: ((e: h.JSX.TargetedEvent<HTMLDivElement, Event>) => void) | null | undefined }, ref?: Ref<any>) {
+const ListItemText = memo(forwardElementRef((function ListItemText({ onPress, children, ...props }: h.JSX.HTMLAttributes<any> & { onPress: ((e: h.JSX.TargetedEvent<HTMLDivElement, Event>) => void) | null | undefined }, ref?: Ref<any>) {
     return (
         <GridlistChild<HTMLDivElement>
             index={1}
@@ -320,7 +320,7 @@ interface ListItemStartEndProps {
     hidden: boolean;
 }
 
-const ListItemStartEnd = memo(monitored(function ListItemStartEnd({ hidden, index, children }: ListItemStartEndProps) {
+const ListItemStartEnd = memo((function ListItemStartEnd({ hidden, index, children }: ListItemStartEndProps) {
     return (
         <GridlistChild<HTMLDivElement>
             index={index}

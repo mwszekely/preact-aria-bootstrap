@@ -2,7 +2,7 @@
 import clsx from "clsx";
 import { ComponentChildren, Ref, VNode, createContext } from "preact";
 import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableRows } from "preact-aria-widgets";
-import { memo, monitored, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
+import { memo, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
@@ -140,7 +140,7 @@ export interface DataTableRowProps extends TableRowProps {
     row: number;
 }
 
-const DataTableRows = memo(monitored(function DataTableRows({ children }: { children: VNode[] }) {
+const DataTableRows = memo((function DataTableRows({ children }: { children: VNode[] }) {
     const { paginationMax, paginationMin, staggered, setChildCount } = useContext(TableContext);
     return (
         <TableRows

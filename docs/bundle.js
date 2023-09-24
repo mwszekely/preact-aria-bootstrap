@@ -15935,7 +15935,7 @@
 
   const DefaultDisabled = G$1(false);
   const TypeaheadStatus = G$1("none");
-  const List = x$1(k$1(monitored(function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }, ref) {
+  const List = x$1(k$1((function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }, ref) {
       labelPosition ??= "before";
       //const [focusedInner, setFocusedInner] = useState(false);
       //const { refElementReturn, propsStable } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
@@ -15954,7 +15954,7 @@
                                       }, []) }) }) }), labelPosition == "after" && labelJsx] }));
               } }) }));
   })));
-  const ListItemNonPaginated = x$1(monitored(function ListItemNonPaginated({ infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }) {
+  const ListItemNonPaginated = x$1((function ListItemNonPaginated({ infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }) {
       return (o$2(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onPress ?? null, capture: returnUndefined, tagProgressIndicator: "span", render: progressInfo => {
               const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement({ refElementParameters: {} });
               const { pressReturn: { longPress, pressing }, props: p1 } = usePress({
@@ -15990,7 +15990,7 @@
               return (o$2(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select a list item:", children: o$2("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
           } }));
   }));
-  const ListItem = x$1(forwardElementRef$1(monitored(function ListItem({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
+  const ListItem = x$1(forwardElementRef$1((function ListItem({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
       const defaultDisabled = q$2(DefaultDisabled);
       disabled ||= defaultDisabled;
       //let everShownPaginated = useRef(false);
@@ -16005,12 +16005,12 @@
               return o$2(ListItemNonPaginated, { keyboardControlsDescription: keyboardControlsDescription, infoRowProps: infoRow.props, excludeSpace: infoRow.pressParameters.excludeSpace, onPressSync: infoRow.pressParameters.onPressSync, hideBecausePaginated: false, hideBecauseStaggered: false, loadingLabel: loadingLabel, onPress: onPress, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: p2, ref2: ref }, "show");
           } }));
   })));
-  const ListItemText = x$1(forwardElementRef$1(monitored(function ListItemText({ onPress, children, ...props }, ref) {
+  const ListItemText = x$1(forwardElementRef$1((function ListItemText({ onPress, children, ...props }, ref) {
       return (o$2(GridlistChild, { index: 1, onPressSync: onPress, render: infoCell => {
               return (o$2("div", { ...useMergedProps(infoCell.propsCell, infoCell.propsPress, infoCell.propsTabbable, props, { ref }, { class: clsx("gridlist-item-text") }), children: children }));
           } }));
   })));
-  const ListItemStartEnd = x$1(monitored(function ListItemStartEnd({ hidden, index, children }) {
+  const ListItemStartEnd = x$1((function ListItemStartEnd({ hidden, index, children }) {
       return (o$2(GridlistChild, { index: index, untabbable: hidden, focusSelf: useStableCallback(e => {
               e.focus();
           }), render: infoCell => {
@@ -18524,7 +18524,7 @@
                   return (o$2(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, activateEnter: false, activateSpace: false, description: keyboardControlsDescription ?? "Navigate the table:", children: o$2(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: F$2(() => o$2(DataTableRows, { children: Array.isArray(children) ? children : [children] }), [children]) }) }));
               } }) }));
   }));
-  const DataTableRows = x$1(monitored(function DataTableRows({ children }) {
+  const DataTableRows = x$1((function DataTableRows({ children }) {
       const { paginationMax, paginationMin, staggered, setChildCount } = q$2(TableContext);
       return (o$2(TableRows, { paginationMax: paginationMax, paginationMin: paginationMin, staggered: staggered, children: children, render: info => {
               return o$2(k$3, { children: info.rearrangeableChildrenReturn.children });

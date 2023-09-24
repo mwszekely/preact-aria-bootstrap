@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-ru
 import clsx from "clsx";
 import { createContext } from "preact";
 import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableRows } from "preact-aria-widgets";
-import { memo, monitored, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
+import { memo, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
@@ -38,7 +38,7 @@ const DataTableSection = memo(forwardElementRef(function DataTableSection({ chil
                 return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, activateEnter: false, activateSpace: false, description: keyboardControlsDescription ?? "Navigate the table:", children: _jsx(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: useMemo(() => _jsx(DataTableRows, { children: Array.isArray(children) ? children : [children] }), [children]) }) }));
             } }) }));
 }));
-const DataTableRows = memo(monitored(function DataTableRows({ children }) {
+const DataTableRows = memo((function DataTableRows({ children }) {
     const { paginationMax, paginationMin, staggered, setChildCount } = useContext(TableContext);
     return (_jsx(TableRows, { paginationMax: paginationMax, paginationMin: paginationMin, staggered: staggered, children: children, render: info => {
             return _jsx(_Fragment, { children: info.rearrangeableChildrenReturn.children });
