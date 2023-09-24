@@ -124,7 +124,8 @@ export const List = memo(forwardRef((function List({ disabled, selectedIndex, se
                 render={info => {
 
                     const labelJsx = <label {...info.propsGridlistLabel}>{label}</label>
-
+                    children ??= [];
+                    
                     return (
                         <TypeaheadStatus.Provider value={info.typeaheadNavigationReturn.typeaheadStatus}>
                             {labelPosition == "before" && labelJsx}
