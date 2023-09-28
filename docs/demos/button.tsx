@@ -94,6 +94,12 @@ export function Demo() {
             <ButtonAction variantSize="sm" onPress={onPressAsync} disabled>Press me (disabled)</ButtonAction>
             <ButtonAction variantSize="lg" onPress={onToggleSync} pressed={pressed}>Toggle me (sync)</ButtonAction>
             <ButtonAction variantSize="md" onPress={onToggleAsync} pressed={pressed}>Toggle me (async)</ButtonAction>
+            <ButtonGroup  label="Action button group">
+                <AB index={0}  onPress={onPressAsync}/>
+                <AB index={1}  onPress={onPressSync}/>
+                <AB index={2}  onPress={onPressAsync}/>
+                <AB index={3}  onPress={onPressSync}/>
+            </ButtonGroup>
             <ButtonGroup label="Multi-select button group example" orientation="horizontal" labelPosition="before" selectionMode="multi">
                 <MSB index={0} />
                 <MSB index={1} />
@@ -107,6 +113,14 @@ export function Demo() {
                 <SSB index={3} />
             </ButtonGroup>
         </>
+    )
+}
+
+function AB({index, onPress}: {index: number, onPress: Function}) {
+    return (
+        <ButtonAction buttonGroupIndex={index} onPress={onPress as any}>
+            Action button {index % 2 == 0 ? "a" : ""}sync,  #{index}
+        </ButtonAction>
     )
 }
 

@@ -8,7 +8,7 @@
 @use "bootstrap-sass-variables/functions/to-rgb" as *;
 @use "bootstrap-sass-variables/success" as *;
 @use "bootstrap-sass-variables/danger" as *;
-@use "preact-transition/src/index.scss" as *;
+@use "preact-transition/index.scss" as *;
 
 .tabs-container {
     width: 100%;
