@@ -6,7 +6,7 @@
   "source": "src/index.tsx",
   "module": "/dist/index.js",
   "types": "/dist/index.d.ts",
-  "packageManager": "pnpm@8.6.12",
+  "packageManager": "pnpm@8.7.6",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -18,9 +18,9 @@
   "scripts": {
     "build": "npx npm-run-all --npm-path npm -sc clean build:ts build:sass ",
     "watch": "npx npm-run-all --npm-path npm -pc watch:*",
-    "watch:sass": "sass --watch --load-path=\"./node_modules\" ./src/index.scss:./dist/index.css",
+    "watch:sass": "sass --watch --load-path=\"./node_modules/bootstrap-sass-variables/sass\" --load-path=\"./node_modules/preact-transition/sass\" --load-path=\"./node_modules/bootstrap\" ./src/index.scss:./dist/index.css",
     "watch:ts": "tsc --watch",
-    "build:sass": "sass --load-path=\"./node_modules\" ./src/index.scss:./dist/index.css",
+    "build:sass": "sass --load-path=\"./node_modules/bootstrap-sass-variables/sass\" --load-path=\"./node_modules/preact-transition/sass\" --load-path=\"./node_modules/bootstrap\" ./src/index.scss:./dist/index.css",
     "build:ts": "tsc --build",
     "lint": "npx lint ./src",
     "rebuild": "rm \"./pnpm-lock.yaml\" && rm -R \"./node_modules\" && pnpm install && pnpm run build",
@@ -30,8 +30,8 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "bootstrap": "5.3.0-alpha3",
-    "preact": "^10.13.2"
+    "bootstrap": "5.3.2",
+    "preact": "^10.17.1"
   },
   "typings": "./dist/index.d.ts",
   "dependencies": {
@@ -53,6 +53,6 @@
     "@types/lodash-es": "^4.17.8",
     "npm-run-all": "^4.1.5",
     "sass": "^1.64.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   }
 }

@@ -1,5 +1,5 @@
 import { CheckboxGroup as AriaCheckboxGroup, CheckboxGroupChild as AriaCheckboxGroupChild, CheckboxGroupParent as AriaCheckboxGroupParent, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets"
-import { returnZero, useMergedProps, useStableCallback } from "preact-prop-helpers"
+import { useMergedProps, useStableCallback } from "preact-prop-helpers"
 import { useRef, useState } from "preact/hooks"
 import { Checkbox, CheckboxProps } from "../checkbox/index.js"
 import { GlobalAttributes, LabelledProps, OmitStrong } from "../utility/types.js"
@@ -39,7 +39,6 @@ function CheckboxGroupParent({ label, labelPosition, debounce, loadingLabel, thr
 
             })}
             index={0}
-            getSortValue={getSortValue ?? returnZero}
             render={info => {
                 return (
                     <Checkbox
@@ -88,7 +87,6 @@ export function CheckboxGroupChild({ checked, label, labelPosition, onValueChang
 
             })}
             index={index}
-            getSortValue={getSortValue ?? returnZero}
             onChangeFromParent={useStableCallback(async (c, e) => {
                 try {
                     setPendingFromParent(true);

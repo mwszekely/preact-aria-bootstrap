@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, useDefaultRenderPortal } from "preact-aria-widgets";
-import { EventDetail, returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
+import { EventDetail, returnUndefined, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { Fade, ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useRef } from "preact/hooks";
@@ -75,7 +75,7 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
             return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu, e);
         }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
             const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
-            return (_jsx(AriaMenuItem, { imperativeHandle: imperativeHandle, index: index, getSortValue: getSortValue ?? returnZero, singleSelectionDisabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
+            return (_jsx(AriaMenuItem, { imperativeHandle: imperativeHandle, index: index, singleSelectionDisabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
                     return (_jsxs(StructureMenuItem, { ...useMergedProps(menuInfo.props, { ...props, ref }), showSpinner: showSpinner, disabled: (!!disabled), pressing: menuInfo.pressReturn.pressing, children: [children, _jsx(StructureMenuItemSpinner, { showSpinner: showSpinner, ...progressInfo.propsProgressIndicator })] }));
                     /*const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsProgressIndicator} class={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
     

@@ -1,19 +1,17 @@
 import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
-import { Gridlist, GridlistCellInfo, GridlistChild, GridlistRow, GridlistRowInfo, ProgressWithHandler, UseGridlistRowReturnType, UseProgressWithHandlerReturnType } from "preact-aria-widgets";
-import { AsyncHandler, EventDetail, Nullable, returnUndefined, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
-import { UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers/react";
+import { Gridlist, GridlistChild, GridlistRow, GridlistRows, ProgressWithHandler } from "preact-aria-widgets";
+import { AsyncHandler, EventDetail, Nullable, PressEventReason, returnUndefined, useMergedProps, UsePaginatedChildReturnTypeSelf, usePress, UsePressParametersSelf, useRefElement, useStableCallback, UseStaggeredChildReturnTypeSelf, useState, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { memo } from "preact/compat";
-import { useCallback, useContext, useRef } from "preact/hooks";
+import { forwardRef, memo, TargetedEvent } from "preact/compat";
+import { useCallback, useContext } from "preact/hooks";
 import { ButtonThemes } from "../context.js";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
-import { useUpdateRenderCounter } from "../utility/render-counter.js";
 import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
-export { ListboxSingle, ListboxSingleItem, ListboxSingleItemProps, ListboxSingleProps } from "./listbox-single.js";
+//export { ListboxSingle, ListboxSingleItem, ListboxSingleItemProps, ListboxSingleProps } from "./listbox-single.js";
 
 
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
@@ -41,6 +39,8 @@ export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> 
      * When `selectionMode` is `"single"`, this is called to change the selected index.
      */
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
+
+    children: VNode[];
 }
 
 export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "children"> {
@@ -72,10 +72,6 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
      * Optional child on the right side of the list item
      */
     iconEnd?: ComponentChildren | null | undefined;
-    /**
-     * If this list is sortable, this is the value that will be used for sorting.
-     */
-    getSortValue?: () => unknown;
 
     /**
      * A visual indicator in the corner of the list item. Read out alongside the main contents as one long string, so label it well.
@@ -95,7 +91,8 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
 const DefaultDisabled = createContext(false);
 const TypeaheadStatus = createContext<UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"]>("none");
 
-export function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>) {
+export const List = memo(forwardRef((function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>, ref?: Ref<any>) {
+
     labelPosition ??= "before";
     //const [focusedInner, setFocusedInner] = useState(false);
     //const { refElementReturn, propsStable } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
@@ -113,29 +110,39 @@ export function List({ disabled, selectedIndex, selectionMode, onSelectedIndexCh
     return (
         <DefaultDisabled.Provider value={disabled ?? false}>
             <Gridlist<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLLabelElement>
+                initiallyTabbableColumn={1}
                 singleSelectedIndex={selectedIndex ?? null}
                 singleSelectionAriaPropName="aria-selected"
-                onSingleSelectedIndexChange={useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex)})}
+                onSingleSelectedIndexChange={useStableCallback(e => { debugger; onSelectedIndexChange?.(e[EventDetail].selectedIndex) })}
                 paginationMin={paginationStart}
                 paginationMax={paginationEnd}
-                staggered={staggered || false}
                 ariaLabel={labelPosition == "hidden" ? label : null}
                 groupingType="without-groups"
-                singleSelectionMode={selectionMode == "single"? "activation" : "disabled"}
-                multiSelectionMode={selectionMode == "multi"? "activation" : "disabled"}
+                singleSelectionMode={selectionMode == "single" ? "activation" : "disabled"}
+                multiSelectionMode={selectionMode == "multi" ? "activation" : "disabled"}
+
                 render={info => {
 
-                    useUpdateRenderCounter("Gridlist");
-
                     const labelJsx = <label {...info.propsGridlistLabel}>{label}</label>
+                    children ??= [];
 
                     return (
                         <TypeaheadStatus.Provider value={info.typeaheadNavigationReturn.typeaheadStatus}>
                             {labelPosition == "before" && labelJsx}
-                            <Paginated childCount={info.paginatedChildrenReturn.childCount ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
-
-                                <div {...useMergedProps(props, info.propsGridlist, { class: `list-group gridlist-group` })}>{children}</div>
-
+                            <Paginated childCount={children.length ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
+                                <div {...useMergedProps(props, info.propsGridlist, { ref, class: `list-group gridlist-group` })}>
+                                    <GridlistRows
+                                        children={children}
+                                        paginationMin={paginationStart}
+                                        paginationMax={paginationEnd}
+                                        staggered={staggered || false}
+                                        render={useCallback(infoRows => {
+                                            return (
+                                                <>{infoRows.rearrangeableChildrenReturn.children}</>
+                                            )
+                                        }, [])}
+                                    />
+                                </div>
                             </Paginated>
                             {labelPosition == "after" && labelJsx}
                         </TypeaheadStatus.Provider>
@@ -145,135 +152,168 @@ export function List({ disabled, selectedIndex, selectionMode, onSelectedIndexCh
             />
         </DefaultDisabled.Provider>
     )
-}
+})))
 
-const ListItemNonPaginated = memo(({ infoRow, progressInfo, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }: Pick<ListItemProps, "children" | "selected" | "badge" | "variantTheme" | "disabled" | "iconStart" | "iconEnd"> & { props: h.JSX.HTMLAttributes<HTMLDivElement>, ref2: Ref<HTMLDivElement>, progressInfo: UseProgressWithHandlerReturnType<any, any, HTMLSpanElement, HTMLLabelElement>, infoRow: UseGridlistRowReturnType<HTMLDivElement, HTMLDivElement, GridlistRowInfo<HTMLDivElement>, GridlistCellInfo<HTMLDivElement>>, keyboardControlsDescription?: string }) => {
-    useUpdateRenderCounter("GridlistRow");
-    const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
-    const { pressReturn: { longPress, pressing }, props: p1 } = usePress<HTMLDivElement>({
-        pressParameters: {
-            focusSelf: useCallback(() => {
-                return getElement()?.focus();
-            }, []),
-            allowRepeatPresses: null,
-            excludeEnter: null,
-            excludePointer: null,
-            longPressThreshold: null,
-            onPressingChange: null,
-            ...infoRow.pressParameters
-        },
-        refElementReturn
-    });
+const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }:
+    Pick<ListItemProps, "children" | "selected" | "badge" | "variantTheme" | "disabled" | "iconStart" | "iconEnd"> &
+    Pick<UsePressParametersSelf<any>, "excludeSpace" | "onPressSync"> &
+    Pick<UsePaginatedChildReturnTypeSelf, "hideBecausePaginated"> &
+    Pick<UseStaggeredChildReturnTypeSelf, "hideBecauseStaggered"> &
+    { onPress: AsyncHandler<TargetedEvent<HTMLDivElement, Event>, void> | undefined, loadingLabel: Nullable<string>, infoRowProps: h.JSX.HTMLAttributes<HTMLDivElement>, props: h.JSX.HTMLAttributes<HTMLDivElement>, ref2: Ref<HTMLDivElement>, keyboardControlsDescription?: string }) {
 
-    const show = !infoRow.staggeredChildReturn.hideBecauseStaggered;
-    const { propsProgressIndicator, propsProgressRegion } = progressInfo;
-    const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending} exitVisibility="removed"><span class="spinner-border spinner-border-sm text-secondary" {...propsProgressIndicator} /></Fade>)
-    //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
-    const finalPropsForText = useMergedProps(p1, p2);
-    const finalPropsForDiv = useMergedProps(
-        infoRow.props,
-        { ...props, ref: ref2 },
-        {
-            className: clsx(
-                infoRow.paginatedChildReturn.hideBecausePaginated ? "d-none" : "",
-                `gridlist-item`,
-                variantTheme && `list-group-item-${variantTheme}`,
-                infoRow.paginatedChildReturn.hideBecausePaginated ? "d-none" : "",
-                !show && "gridlist-item-placeholder",
-                "list-group-item list-group-item-action",
-                !!iconStart && "list-group-item-with-icon-start",
-                !!iconEnd && "list-group-item-with-icon-end",
-                !!badge && "list-group-item-with-badge",
-                !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending",
-                disabled && "disabled",
-                (infoRow.singleSelectionChildReturn.singleSelected || selected) && `active`
-            )
+    return (<ProgressWithHandler<h.JSX.TargetedEvent<any, Event>, void, HTMLSpanElement, HTMLLabelElement>
+        ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
+        asyncHandler={async (a, b) => {
+            // TODO: How'd we end up with onPress (from the user) AND onPress (from selection)?
+            // Should selection have taken care of that? Does it already? What if it's async?
+            let p = onPress?.(a, b);
+            onPressSync?.(b as PressEventReason<any>);
+            if (p && typeof p == "object" && "then" in p)
+                await p;
         }
-    );
-    const c = <>
-        <ListItemStartEnd index={0} hidden={iconStart == null} children={iconStart} />
-        <ListItemText onPress={progressInfo.asyncHandlerReturn.syncHandler} {...finalPropsForText}>{children}<span class="list-group-item-badge-and-spinner"><div>{badge}</div><div>{loadingJsx}</div></span></ListItemText>
+        }
+        capture={returnUndefined}
 
-        <ListItemStartEnd index={2} hidden={iconEnd == null} children={iconEnd} />
-    </>
+        tagProgressIndicator="span"
+        render={progressInfo => {
 
+            const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
+            const { pressReturn: { longPress, pressing }, props: p1 } = usePress<HTMLDivElement>({
+                pressParameters: {
+                    focusSelf: useCallback(() => {
+                        return getElement()?.focus();
+                    }, []),
+                    allowRepeatPresses: null,
+                    excludeEnter: null,
+                    excludePointer: null,
+                    longPressThreshold: null,
+                    onPressingChange: null,
+                    excludeSpace,
+                    onPressSync: progressInfo.asyncHandlerReturn.syncHandler
+                },
+                refElementReturn
+            });
 
-    if (!show)
-        if (infoRow.paginatedChildReturn.hideBecausePaginated)
-            return null!;
-        else
-            return <div aria-busy="true" class="gridlist-item gridlist-item-placeholder"><span class={clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow")}><span class="placeholder w-100"></span></span></div>;
+            const show = !hideBecauseStaggered;
+            const { propsProgressIndicator, propsProgressRegion } = progressInfo;
+            const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending} exitVisibility="removed"><span class="spinner-border spinner-border-sm text-secondary" {...propsProgressIndicator} /></Fade>)
+            //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
+            const finalPropsForText = useMergedProps(p1, p2);
+            const finalPropsForDiv = useMergedProps(
+                infoRowProps,
+                { ...props, ref: ref2 },
+                {
+                    className: clsx(
+                        hideBecausePaginated ? "d-none" : "",
+                        `gridlist-item`,
+                        variantTheme && `list-group-item-${variantTheme}`,
+                        hideBecausePaginated ? "d-none" : "",
+                        !show && "gridlist-item-placeholder",
+                        "list-group-item list-group-item-action",
+                        !!iconStart && "list-group-item-with-icon-start",
+                        !!iconEnd && "list-group-item-with-icon-end",
+                        !!badge && "list-group-item-with-badge",
+                        !!progressInfo.asyncHandlerReturn.pending && "list-group-item-with-pending",
+                        disabled && "disabled",
+                        (selected) && `active`
+                    )
+                }
+            );
+            const c = <>
+                <ListItemStartEnd index={0} hidden={iconStart == null} children={iconStart} />
+                <ListItemText onPress={progressInfo.asyncHandlerReturn.syncHandler} {...finalPropsForText}>{children}<span class="list-group-item-badge-and-spinner"><div>{badge}</div><div>{loadingJsx}</div></span></ListItemText>
+
+                <ListItemStartEnd index={2} hidden={iconEnd == null} children={iconEnd} />
+            </>
 
             const typeaheadStatus = useContext(TypeaheadStatus);
 
-    return (
-        <KeyboardAssistIcon 
-        leftRight={(!!iconStart || !!iconEnd)} 
-        upDown={true} 
-        homeEnd={true} 
-        pageKeys={true} 
-        typeaheadStatus={typeaheadStatus}
-        activateSpace={typeaheadStatus == 'none'}
-        activateEnter={true}
-        description={keyboardControlsDescription ?? "Select a list item:"}>
-            <div
-                aria-busy={(!show)}
-                {...finalPropsForDiv}>
+            if (!show)
+                if (hideBecausePaginated)
+                    return null!;
+                else
+                    return <div aria-busy="true" class="gridlist-item gridlist-item-placeholder"><span class={clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow")}><span class="placeholder w-100"></span></span></div>;
 
-                {show && c}
-            </div>
-        </KeyboardAssistIcon>
+
+            return (
+                <KeyboardAssistIcon
+                    leftRight={(!!iconStart || !!iconEnd)}
+                    upDown={true}
+                    homeEnd={true}
+                    pageKeys={true}
+                    typeaheadStatus={typeaheadStatus}
+                    activateSpace={typeaheadStatus == 'none'}
+                    activateEnter={true}
+                    description={keyboardControlsDescription ?? "Select a list item:"}>
+                    <div
+                        aria-busy={(!show)}
+                        {...finalPropsForDiv}>
+
+                        {show && c}
+                    </div>
+                </KeyboardAssistIcon>
+            );
+
+        }} />
     );
-})
+}))
 
-export const ListItem = memo(forwardElementRef(function ListItem({ index, keyboardControlsDescription, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
+export const ListItem = memo(forwardElementRef((function ListItem({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
 
     const defaultDisabled = useContext(DefaultDisabled);
     disabled ||= defaultDisabled;
 
-    let everShownPaginated = useRef(false);
+    //let everShownPaginated = useRef(false);
 
     return (
-        <ProgressWithHandler<h.JSX.TargetedEvent<any, Event>, void, HTMLSpanElement, HTMLLabelElement>
-            ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
-            asyncHandler={onPress ?? null}
-            capture={returnUndefined}
+        <GridlistRow<HTMLDivElement, HTMLDivElement>
+            index={index}
+            singleSelectionDisabled={disabled}
+            noTypeahead={true}
+            getText={useCallback((e: HTMLDivElement) => { return e?.querySelector(".gridlist-item-text")?.textContent || "" }, [])}
 
-            tagProgressIndicator="span"
-            render={progressInfo => {
-                return (
-                    <GridlistRow<HTMLDivElement, HTMLDivElement>
-                        index={index}
-                        singleSelectionDisabled={disabled}
-                        noTypeahead={true}
-                        getText={useCallback((e: HTMLDivElement) => { return e?.querySelector(".gridlist-item-text")?.textContent || "" }, [])}
+            render={infoRow => {
 
-                        render={infoRow => {
+                const p2 = (props);
+                const p3 = useMergedProps(infoRow.props, props);
+
+                if (infoRow.paginatedChildReturn.hideBecausePaginated)
+                    return <div {...p3} key="hide-because-paginated" />
 
 
-                            if (infoRow.paginatedChildReturn.hideBecausePaginated && everShownPaginated.current == false)
-                                return <div key="hide-because-paginated" />
+                // TODO: Get a better placeholder system
+                if (infoRow.hidden)
+                    return <div {...p3} key="hide-because-staggered" class={`gridlist-item gridlist-item-placeholder list-group-item`} role="option" aria-busy="true" /> // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
 
-                            everShownPaginated.current = true;
+                return <ListItemNonPaginated key="show"
+                    keyboardControlsDescription={keyboardControlsDescription}
+                    infoRowProps={infoRow.props}
+                    excludeSpace={infoRow.pressParameters.excludeSpace}
+                    onPressSync={infoRow.pressParameters.onPressSync}
+                    onPress={onPress}
+                    hideBecausePaginated={false}
+                    hideBecauseStaggered={false}
+                    loadingLabel={loadingLabel}
+                    badge={badge}
+                    children={children}
+                    disabled={disabled}
+                    iconEnd={iconEnd}
+                    iconStart={iconStart}
+                    selected={selected}
+                    variantTheme={variantTheme}
+                    props={p2}
+                    ref2={ref!} />;
+            }} />)
+})));
 
-                            // TODO: Get a better placeholder system
-                            if (infoRow.staggeredChildReturn.hideBecauseStaggered)
-                                return <div key="hide-because-staggered" class={`gridlist-item gridlist-item-placeholder list-group-item`} role="option" aria-busy="true" /> // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
 
-                            return <ListItemNonPaginated key="show" keyboardControlsDescription={keyboardControlsDescription} infoRow={infoRow} progressInfo={progressInfo} badge={badge} children={children} disabled={disabled} iconEnd={iconEnd} iconStart={iconStart} selected={selected} variantTheme={variantTheme} props={props} ref2={ref!} />;
-                        }} />)
-            }}
-        />
-    )
-}))
-
-const ListItemText = memo(forwardElementRef(function ListItemText({ onPress, children, ...props }: h.JSX.HTMLAttributes<any> & { onPress: ((e: h.JSX.TargetedEvent<HTMLDivElement, Event>) => void) | null | undefined }, ref?: Ref<any>) {
+const ListItemText = memo(forwardElementRef((function ListItemText({ onPress, children, ...props }: h.JSX.HTMLAttributes<any> & { onPress: ((e: h.JSX.TargetedEvent<HTMLDivElement, Event>) => void) | null | undefined }, ref?: Ref<any>) {
     return (
         <GridlistChild<HTMLDivElement>
             index={1}
             onPressSync={onPress}
             render={infoCell => {
-                useUpdateRenderCounter("GridlistCell");
+
                 return (
                     <div {...useMergedProps(infoCell.propsCell, infoCell.propsPress, infoCell.propsTabbable, props, { ref }, { class: clsx("gridlist-item-text") })}>
                         {children}
@@ -282,7 +322,7 @@ const ListItemText = memo(forwardElementRef(function ListItemText({ onPress, chi
             }}
         />
     )
-}))
+})))
 
 interface ListItemStartEndProps {
     index: 0 | 2;
@@ -290,7 +330,7 @@ interface ListItemStartEndProps {
     hidden: boolean;
 }
 
-const ListItemStartEnd = memo(function ListItemStartEnd({ hidden, index, children }: ListItemStartEndProps) {
+const ListItemStartEnd = memo((function ListItemStartEnd({ hidden, index, children }: ListItemStartEndProps) {
     return (
         <GridlistChild<HTMLDivElement>
             index={index}
@@ -299,7 +339,6 @@ const ListItemStartEnd = memo(function ListItemStartEnd({ hidden, index, childre
                 e.focus();
             })}
             render={infoCell => {
-                useUpdateRenderCounter("GridlistCell");
                 const ret = (
                     <div class={clsx("list-group-item-icon", `list-group-item-icon-${index === 0 ? "start" : "end"}`)}>
                         {useClonedElement(children, useMergedProps(infoCell.propsCell, infoCell.propsTabbable), undefined)}
@@ -312,4 +351,4 @@ const ListItemStartEnd = memo(function ListItemStartEnd({ hidden, index, childre
             }}
         />
     )
-})
+}))

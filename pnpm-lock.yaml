@@ -7,78 +7,78 @@ settings:
 dependencies:
   '@floating-ui/dom':
     specifier: ^1.5.1
-    version: 1.5.1
+    version: 1.5.3
   '@js-temporal/polyfill':
     specifier: ^0.4.4
     version: 0.4.4
   bootstrap:
     specifier: ^5.3.1
-    version: 5.3.1(@popperjs/core@2.11.8)
+    version: 5.3.2(@popperjs/core@2.11.8)
   bootstrap-icons:
     specifier: ^1.10.5
-    version: 1.10.5
+    version: 1.11.1
   bootstrap-sass-variables:
     specifier: github:mwszekely/bootstrap-sass-variables
-    version: github.com/mwszekely/bootstrap-sass-variables/235fd16da297d0b870dc358d5497910dab8be02b(bootstrap@5.3.1)
+    version: github.com/mwszekely/bootstrap-sass-variables/7c2c4bb929f4447c223a5b0443b14485396141c9(bootstrap@5.3.2)
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
   dompurify:
     specifier: ^3.0.5
-    version: 3.0.5
+    version: 3.0.6
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
   preact:
-    specifier: ^10.13.2
-    version: 10.13.2
+    specifier: ^10.17.1
+    version: 10.18.0
   preact-aria-widgets:
     specifier: github:mwszekely/preact-aria-widgets
-    version: github.com/mwszekely/preact-aria-widgets/18c13daed12f2d3756f8fab65acda4883b971241(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/mwszekely/preact-aria-widgets/054be77184cdc58da92dcc11a9a9e8ca7e23fd68(preact@10.18.0)(react-dom@18.2.0)(react@18.2.0)
   preact-prop-helpers:
     specifier: github:mwszekely/preact-prop-helpers
-    version: github.com/mwszekely/preact-prop-helpers/ce46b75ffe7a1570cbc30a76178cca994d0d6eba(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/mwszekely/preact-prop-helpers/5bbd2615786e9fbb462ce99390d80408f5767eaf(preact@10.18.0)(react-dom@18.2.0)(react@18.2.0)
   preact-transition:
     specifier: github:mwszekely/preact-transition
-    version: github.com/mwszekely/preact-transition/cfd391e9b5f183e99e3914bde7ba97598f36b9e9(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/mwszekely/preact-transition/5ab631edf2bd42fbf1c5eae6245a125c7b344268(preact@10.18.0)(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@playwright/test':
     specifier: ^1.36.2
-    version: 1.36.2
+    version: 1.38.1
   '@types/dompurify':
     specifier: ^3.0.2
-    version: 3.0.2
+    version: 3.0.3
   '@types/lodash-es':
     specifier: ^4.17.8
-    version: 4.17.8
+    version: 4.17.9
   npm-run-all:
     specifier: ^4.1.5
     version: 4.1.5
   sass:
     specifier: ^1.64.1
-    version: 1.64.1
+    version: 1.68.0
   typescript:
-    specifier: ^5.1.6
-    version: 5.1.6
+    specifier: ^5.2.2
+    version: 5.2.2
 
 packages:
 
-  /@floating-ui/core@1.4.2:
-    resolution: {integrity: sha512-olUakR5nr9v2ueVr1yomoJnBTkHGqHzL/iK4AhforiJS/wKJgFphAYpZHZzADLv/zNUFuQwqLH3bcoUhFh2E1Q==}
+  /@floating-ui/core@1.5.0:
+    resolution: {integrity: sha512-kK1h4m36DQ0UHGj5Ah4db7R0rHemTqqO0QLvUqi1/mUUp3LuAWbWxdxSIf/XsnH9VS6rRVPLJCncjRzUvyCLXg==}
     dependencies:
-      '@floating-ui/utils': 0.1.3
+      '@floating-ui/utils': 0.1.4
     dev: false
 
-  /@floating-ui/dom@1.5.1:
-    resolution: {integrity: sha512-KwvVcPSXg6mQygvA1TjbN/gh///36kKtllIF8SUm0qpFj8+rvYrpvlYdL1JoA71SHpDqgSSdGOSoQ0Mp3uY5aw==}
+  /@floating-ui/dom@1.5.3:
+    resolution: {integrity: sha512-ClAbQnEqJAKCJOEbbLo5IUlZHkNszqhuxS4fHAVxRPXPya6Ysf2G8KypnYcOTpx6I8xcgF9bbHb6g/2KpbV8qA==}
     dependencies:
-      '@floating-ui/core': 1.4.2
-      '@floating-ui/utils': 0.1.3
+      '@floating-ui/core': 1.5.0
+      '@floating-ui/utils': 0.1.4
     dev: false
 
-  /@floating-ui/utils@0.1.3:
-    resolution: {integrity: sha512-uvnFKtPgzLnpzzTRfhDlvXX0kLYi9lDRQbcDmT8iXl71Rx+uwSuaUIQl3DNC7w5OweAQ7XQMDObML+KaYDQfng==}
+  /@floating-ui/utils@0.1.4:
+    resolution: {integrity: sha512-qprfWkn82Iw821mcKofJ5Pk9wgioHicxcQMxx+5zt5GSKoqdWvgG5AxVmpmUUjzTLPVSH5auBrhI93Deayn/DA==}
     dev: false
 
   /@js-temporal/polyfill@0.4.4:
@@ -89,39 +89,32 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@playwright/test@1.36.2:
-    resolution: {integrity: sha512-2rVZeyPRjxfPH6J0oGJqE8YxiM1IBRyM8hyrXYK7eSiAqmbNhxwcLa7dZ7fy9Kj26V7FYia5fh9XJRq4Dqme+g==}
+  /@playwright/test@1.38.1:
+    resolution: {integrity: sha512-NqRp8XMwj3AK+zKLbZShl0r/9wKgzqI/527bkptKXomtuo+dOjU9NdMASQ8DNC9z9zLOMbG53T4eihYr3XR+BQ==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      '@types/node': 20.6.0
-      playwright-core: 1.36.2
-    optionalDependencies:
-      fsevents: 2.3.2
+      playwright: 1.38.1
     dev: true
 
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
-  /@types/dompurify@3.0.2:
-    resolution: {integrity: sha512-YBL4ziFebbbfQfH5mlC+QTJsvh0oJUrWbmxKMyEdL7emlHJqGR2Qb34TEFKj+VCayBvjKy3xczMFNhugThUsfQ==}
+  /@types/dompurify@3.0.3:
+    resolution: {integrity: sha512-odiGr/9/qMqjcBOe5UhcNLOFHSYmKFOyr+bJ/Xu3Qp4k1pNPAlNLUVNNLcLfjQI7+W7ObX58EdD3H+3p3voOvA==}
     dependencies:
       '@types/trusted-types': 2.0.4
     dev: true
 
-  /@types/lodash-es@4.17.8:
-    resolution: {integrity: sha512-euY3XQcZmIzSy7YH5+Unb3b2X12Wtk54YWINBvvGQ5SmMvwb11JQskGsfkH/5HXK77Kr8GF0wkVDIxzAisWtog==}
+  /@types/lodash-es@4.17.9:
+    resolution: {integrity: sha512-ZTcmhiI3NNU7dEvWLZJkzG6ao49zOIjEgIE0RgV7wbPxU0f2xT3VSAHw2gmst8swH6V0YkLRGp4qPlX/6I90MQ==}
     dependencies:
-      '@types/lodash': 4.14.198
+      '@types/lodash': 4.14.199
     dev: true
 
-  /@types/lodash@4.14.198:
-    resolution: {integrity: sha512-trNJ/vtMZYMLhfN45uLq4ShQSw0/S7xCTLLVM+WM1rmFpba/VS42jVUgaO3w/NOLiWR/09lnYk0yMaA/atdIsg==}
-    dev: true
-
-  /@types/node@20.6.0:
-    resolution: {integrity: sha512-najjVq5KN2vsH2U/xyh2opaSEz6cZMR2SetLIlxlj08nOcmPOemJmUK2o4kUzfLqfrWE0PIrNeE16XhYDd3nqg==}
+  /@types/lodash@4.14.199:
+    resolution: {integrity: sha512-Vrjz5N5Ia4SEzWWgIVwnHNEnb1UE1XMkvY5DGXrAeOGE9imk0hgTHh5GyDjLDJi9OTCn9oo9dXH1uToK1VRfrg==}
     dev: true
 
   /@types/trusted-types@2.0.4:
@@ -181,12 +174,12 @@ packages:
     resolution: {integrity: sha512-/SLWbEzMoVIMZACCyhD/4Ya2M1PWP1qMKuiymowPcI+PdWDARqeARBjhj73kbUBCxEmTZCUu5TAqxtwUO9C1Ig==}
     dev: false
 
-  /bootstrap-icons@1.10.5:
-    resolution: {integrity: sha512-oSX26F37V7QV7NCE53PPEL45d7EGXmBgHG3pDpZvcRaKVzWMqIRL9wcqJUyEha1esFtM3NJzvmxFXDxjJYD0jQ==}
+  /bootstrap-icons@1.11.1:
+    resolution: {integrity: sha512-F0DDp7nKUX+x/QtpfRZ+XHFya60ng9nfdpdS59vDDfs4Uhuxp7zym/QavMsu/xx51txkoM9eVmpE7D08N35blw==}
     dev: false
 
-  /bootstrap@5.3.1(@popperjs/core@2.11.8):
-    resolution: {integrity: sha512-jzwza3Yagduci2x0rr9MeFSORjcHpt0lRZukZPZQJT1Dth5qzV7XcgGqYzi39KGAVYR8QEDVoO0ubFKOxzMG+g==}
+  /bootstrap@5.3.2(@popperjs/core@2.11.8):
+    resolution: {integrity: sha512-D32nmNWiQHo94BKHLmOrdjlL05q1c8oxbtBphQFb9Z5to6eGRDCm0QgeaZ4zFBHzfg2++rqa2JkqCcxDy0sH0g==}
     peerDependencies:
       '@popperjs/core': ^2.11.8
     dependencies:
@@ -286,8 +279,8 @@ packages:
       object-keys: 1.1.1
     dev: true
 
-  /dompurify@3.0.5:
-    resolution: {integrity: sha512-F9e6wPGtY+8KNMRAVfxeCOHU0/NPWMSENNq4pQctuXRqqdEPW7q3CrLbR5Nse044WwacyjHGOMlvNsBe1y6z9A==}
+  /dompurify@3.0.6:
+    resolution: {integrity: sha512-ilkD8YEnnGh1zJ240uJsW7AzE+2qpbOUYjacomn3AvJ6J4JhKGSZ2nh4wUIXPZrEPppaCLx5jFe8T89Rk8tQ7w==}
     dev: false
 
   /error-ex@1.3.2:
@@ -689,7 +682,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.22.5
+      resolve: 1.22.6
       semver: 5.7.2
       validate-npm-package-license: 3.0.4
     dev: true
@@ -774,14 +767,24 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /playwright-core@1.36.2:
-    resolution: {integrity: sha512-sQYZt31dwkqxOrP7xy2ggDfEzUxM1lodjhsQ3NMMv5uGTRDsLxU0e4xf4wwMkF2gplIxf17QMBCodSFgm6bFVQ==}
+  /playwright-core@1.38.1:
+    resolution: {integrity: sha512-tQqNFUKa3OfMf4b2jQ7aGLB8o9bS3bOY0yMEtldtC2+spf8QXG9zvXLTXUeRsoNuxEYMgLYR+NXfAa1rjKRcrg==}
     engines: {node: '>=16'}
     hasBin: true
     dev: true
 
-  /preact@10.13.2:
-    resolution: {integrity: sha512-q44QFLhOhty2Bd0Y46fnYW0gD/cbVM9dUVtNTDKPcdXSMA7jfY+Jpd6rk3GB0lcQss0z5s/6CmVP0Z/hV+g6pw==}
+  /playwright@1.38.1:
+    resolution: {integrity: sha512-oRMSJmZrOu1FP5iu3UrCx8JEFRIMxLDM0c/3o4bpzU5Tz97BypefWf7TuTNPWeCe279TPal5RtPPZ+9lW/Qkow==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      playwright-core: 1.38.1
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
+
+  /preact@10.18.0:
+    resolution: {integrity: sha512-O4dGFmErPd3RNVDvXmCbOW6hetnve6vYtjx5qf51mCUmBS96s66MrNQkEII5UThDGoNF7953ptA+aNupiDxVeg==}
     dev: false
 
   /react-dom@18.2.0(react@18.2.0):
@@ -826,8 +829,8 @@ packages:
       set-function-name: 2.0.1
     dev: true
 
-  /resolve@1.22.5:
-    resolution: {integrity: sha512-qWhv7PF1V95QPvRoUGHxOtnAlEvlXBylMZcjUR9pAumMmveFtcHJRXGIr+TkjfNJVQypqv2qcDiiars2y1PsSg==}
+  /resolve@1.22.6:
+    resolution: {integrity: sha512-njhxM7mV12JfufShqGy3Rz8j11RPdLy4xi15UurGJeoHLfJpVXKdh3ueuOqbYUcDZnffr6X739JBo5LzyahEsw==}
     hasBin: true
     dependencies:
       is-core-module: 2.13.0
@@ -853,8 +856,8 @@ packages:
       is-regex: 1.1.4
     dev: true
 
-  /sass@1.64.1:
-    resolution: {integrity: sha512-16rRACSOFEE8VN7SCgBu1MpYCyN7urj9At898tyzdXFhC+a+yOX5dXwAR7L8/IdPJ1NB8OYoXmD55DM30B2kEQ==}
+  /sass@1.68.0:
+    resolution: {integrity: sha512-Lmj9lM/fef0nQswm1J2HJcEsBUba4wgNx2fea6yJHODREoMFnwRpZydBnX/RjyXw2REIwdkbqE4hrTo4qfDBUA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
@@ -916,7 +919,7 @@ packages:
     resolution: {integrity: sha512-kN9dJbvnySHULIluDHy32WHRUu3Og7B9sbY7tsFLctQkIqnMh3hErYgdMjTYuqmcXX+lK5T1lnUt3G7zNswmZA==}
     dependencies:
       spdx-expression-parse: 3.0.1
-      spdx-license-ids: 3.0.13
+      spdx-license-ids: 3.0.15
     dev: true
 
   /spdx-exceptions@2.3.0:
@@ -927,11 +930,11 @@ packages:
     resolution: {integrity: sha512-cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q==}
     dependencies:
       spdx-exceptions: 2.3.0
-      spdx-license-ids: 3.0.13
+      spdx-license-ids: 3.0.15
     dev: true
 
-  /spdx-license-ids@3.0.13:
-    resolution: {integrity: sha512-XkD+zwiqXHikFZm4AX/7JSCXA98U5Db4AFd5XUg/+9UNtnH75+Z9KxtpYiJZx36mUDVOwH83pl7yvCer6ewM3w==}
+  /spdx-license-ids@3.0.15:
+    resolution: {integrity: sha512-lpT8hSQp9jAKp9mhtBU4Xjon8LPGBvLIuBiSVhMEtmLecTh2mO0tlqrAMp47tBXzMr13NJMQ2lf7RpQGLJ3HsQ==}
     dev: true
 
   /string.prototype.padend@3.1.5:
@@ -1038,8 +1041,8 @@ packages:
       is-typed-array: 1.1.12
     dev: true
 
-  /typescript@5.1.6:
-    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
+  /typescript@5.2.2:
+    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
@@ -1100,15 +1103,15 @@ packages:
       lodash-es: 4.17.21
     dev: false
 
-  github.com/mwszekely/bootstrap-sass-variables/235fd16da297d0b870dc358d5497910dab8be02b(bootstrap@5.3.1):
-    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/235fd16da297d0b870dc358d5497910dab8be02b}
-    id: github.com/mwszekely/bootstrap-sass-variables/235fd16da297d0b870dc358d5497910dab8be02b
+  github.com/mwszekely/bootstrap-sass-variables/7c2c4bb929f4447c223a5b0443b14485396141c9(bootstrap@5.3.2):
+    resolution: {tarball: https://codeload.github.com/mwszekely/bootstrap-sass-variables/tar.gz/7c2c4bb929f4447c223a5b0443b14485396141c9}
+    id: github.com/mwszekely/bootstrap-sass-variables/7c2c4bb929f4447c223a5b0443b14485396141c9
     name: bootstrap-sass-variables
     version: 0.0.1
     peerDependencies:
       bootstrap: ^5.3.1
     dependencies:
-      bootstrap: 5.3.1(@popperjs/core@2.11.8)
+      bootstrap: 5.3.2(@popperjs/core@2.11.8)
     dev: false
 
   github.com/mwszekely/map-and-set-extensions/ff68a36e0f4a700fd6612ee30cca86855891f623:
@@ -1119,9 +1122,9 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  github.com/mwszekely/preact-aria-widgets/18c13daed12f2d3756f8fab65acda4883b971241(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/18c13daed12f2d3756f8fab65acda4883b971241}
-    id: github.com/mwszekely/preact-aria-widgets/18c13daed12f2d3756f8fab65acda4883b971241
+  github.com/mwszekely/preact-aria-widgets/054be77184cdc58da92dcc11a9a9e8ca7e23fd68(preact@10.18.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/054be77184cdc58da92dcc11a9a9e8ca7e23fd68}
+    id: github.com/mwszekely/preact-aria-widgets/054be77184cdc58da92dcc11a9a9e8ca7e23fd68
     name: preact-aria-widgets
     version: 0.0.1
     peerDependencies:
@@ -1129,16 +1132,16 @@ packages:
     dependencies:
       clsx: 2.0.0
       lodash-es: 4.17.21
-      preact: 10.13.2
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/ce46b75ffe7a1570cbc30a76178cca994d0d6eba(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+      preact: 10.18.0
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/5bbd2615786e9fbb462ce99390d80408f5767eaf(preact@10.18.0)(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom
     dev: false
 
-  github.com/mwszekely/preact-prop-helpers/ce46b75ffe7a1570cbc30a76178cca994d0d6eba(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/ce46b75ffe7a1570cbc30a76178cca994d0d6eba}
-    id: github.com/mwszekely/preact-prop-helpers/ce46b75ffe7a1570cbc30a76178cca994d0d6eba
+  github.com/mwszekely/preact-prop-helpers/5bbd2615786e9fbb462ce99390d80408f5767eaf(preact@10.18.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/5bbd2615786e9fbb462ce99390d80408f5767eaf}
+    id: github.com/mwszekely/preact-prop-helpers/5bbd2615786e9fbb462ce99390d80408f5767eaf
     name: preact-prop-helpers
     version: 0.0.1
     peerDependencies:
@@ -1151,16 +1154,16 @@ packages:
       clsx: 2.0.0
       lodash-es: 4.17.21
       map-and-set-extensions: github.com/mwszekely/map-and-set-extensions/ff68a36e0f4a700fd6612ee30cca86855891f623
-      preact: 10.13.2
+      preact: 10.18.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       tabbable: 6.2.0
       wicg-inert: 3.1.2
     dev: false
 
-  github.com/mwszekely/preact-transition/cfd391e9b5f183e99e3914bde7ba97598f36b9e9(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/cfd391e9b5f183e99e3914bde7ba97598f36b9e9}
-    id: github.com/mwszekely/preact-transition/cfd391e9b5f183e99e3914bde7ba97598f36b9e9
+  github.com/mwszekely/preact-transition/5ab631edf2bd42fbf1c5eae6245a125c7b344268(preact@10.18.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/5ab631edf2bd42fbf1c5eae6245a125c7b344268}
+    id: github.com/mwszekely/preact-transition/5ab631edf2bd42fbf1c5eae6245a125c7b344268
     name: preact-transition
     version: 0.1.0
     peerDependencies:
@@ -1168,8 +1171,8 @@ packages:
     dependencies:
       clsx: 2.0.0
       lodash-es: 4.17.21
-      preact: 10.13.2
-      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/ce46b75ffe7a1570cbc30a76178cca994d0d6eba(preact@10.13.2)(react-dom@18.2.0)(react@18.2.0)
+      preact: 10.18.0
+      preact-prop-helpers: github.com/mwszekely/preact-prop-helpers/5bbd2615786e9fbb462ce99390d80408f5767eaf(preact@10.18.0)(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom

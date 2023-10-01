@@ -12,7 +12,6 @@ export interface TabsProps extends GlobalAttributes<HTMLDivElement> {
 }
 export interface TabProps extends GlobalAttributes<HTMLLIElement, "children"> {
     index: number;
-    getSortValue?: () => unknown;
     children?: ComponentChildren;
 }
 export interface TabPanelProps extends GlobalAttributes<HTMLDivElement, "children"> {
@@ -20,6 +19,6 @@ export interface TabPanelProps extends GlobalAttributes<HTMLDivElement, "childre
     children?: ComponentChildren;
 }
 export declare const Tabs: ({ keyboardControlsDescription, orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }: LabelledProps<TabsProps, never>, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
-export declare const Tab: ({ index, getSortValue, children, ...props }: TabProps, ref: Ref<HTMLLIElement>) => import("preact").JSX.Element;
+export declare const Tab: ({ index, children, ...props }: TabProps, ref: Ref<HTMLLIElement>) => import("preact").JSX.Element;
 export declare const TabPanel: ({ index, ...props }: TabPanelProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
 //# sourceMappingURL=index.d.ts.map

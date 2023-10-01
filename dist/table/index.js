@@ -1,2 +1,2 @@
-export { DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow } from "./data-table.js";
+export { DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow, IsTableHeadContext } from "./data-table.js";
 //# sourceMappingURL=index.js.map

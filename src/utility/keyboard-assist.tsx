@@ -1,6 +1,5 @@
 import { ComponentChild, ComponentChildren, createContext, Ref, VNode } from "preact";
-import { generateRandomId, useGlobalHandler, useHasCurrentFocus, useMergedProps, usePersistentState, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
-import { UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers/react";
+import { generateRandomId, useGlobalHandler, useHasCurrentFocus, useMergedProps, usePersistentState, useRefElement, useStableCallback, useState, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
 import { CollapseFade, SlideZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext, useEffect, useLayoutEffect, useRef } from "preact/hooks";
@@ -275,6 +274,7 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
 
     const [heardTab, setHeardTab] = useState(false);
     const stateKey = `keyboard-assist-lr_${leftRightDisplay.toString()}-ud_${upDownDisplay.toString()}-pg_${pageKeysDisplay.toString()}-he_${homeEndDisplay.toString()}-tp_${typeaheadDisplay.toString()}-tp_${leaveF22.toString()}-tp_${textF102.toString()}`;
+
     const [userHasHidden, setUserHasHidden, getUserHasHidden] = usePersistentState(stateKey as "keyboard-assist-lr_false-ud_false-pg_false-he_false-tp_false", false);
     const [userHasHiddenAny, setUserHasHiddenAny] = usePersistentState("keyboard-assist-hidden-any", false);
 

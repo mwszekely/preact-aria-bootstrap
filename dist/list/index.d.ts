@@ -2,7 +2,6 @@ import { ComponentChildren, h, Ref, VNode } from "preact";
 import { AsyncHandler, Nullable } from "preact-prop-helpers";
 import { ButtonThemes } from "../context.js";
 import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types.js";
-export { ListboxSingle, ListboxSingleItem, ListboxSingleItemProps, ListboxSingleProps } from "./listbox-single.js";
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**
      * Disables the entire list if set, allowing no selection or press events to occur.
@@ -28,6 +27,7 @@ export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> 
      * When `selectionMode` is `"single"`, this is called to change the selected index.
      */
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
+    children: VNode[];
 }
 export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**
@@ -59,10 +59,6 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
      */
     iconEnd?: ComponentChildren | null | undefined;
     /**
-     * If this list is sortable, this is the value that will be used for sorting.
-     */
-    getSortValue?: () => unknown;
-    /**
      * A visual indicator in the corner of the list item. Read out alongside the main contents as one long string, so label it well.
      */
     badge?: VNode;
@@ -73,6 +69,8 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>;
     keyboardControlsDescription?: string;
 }
-export declare function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>): import("preact").JSX.Element;
-export declare const ListItem: ({ index, keyboardControlsDescription, variantTheme, getSortValue, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) => import("preact").JSX.Element;
+export declare const List: import("preact").FunctionComponent<import("preact/compat").PropsWithoutRef<PaginatedProps<LabelledProps<ListProps, never>>> & {
+    ref?: Ref<any> | undefined;
+}>;
+export declare const ListItem: ({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) => import("preact").JSX.Element;
 //# sourceMappingURL=index.d.ts.map

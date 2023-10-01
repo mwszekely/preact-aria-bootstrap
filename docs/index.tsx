@@ -1,9 +1,10 @@
+//import "preact/debug";
+
 import { Ref, render } from "preact";
 import { focus } from "preact-prop-helpers";
 import { forwardRef, memo } from "preact/compat";
-import "preact/debug";
 import { useCallback, useMemo, useState } from "preact/hooks";
-import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast, useRenderCounters } from "../dist/index.js";
+import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast } from "../dist/index.js";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
 import * as Radio from "./demos/radio";
@@ -23,32 +24,37 @@ options.event = (e, ...args) => {
 
 function ListDemo() {
     let [count, setCount] = useState(100 as number | null);
-    const [paginationWindow, setPaginationWindow] = useState(10 as number | null);
+    let [paginationWindow, setPaginationWindow] = useState(10 as number | null);
     const [selectedIndex, setSelectedIndex] = useState(null as null | number);
     count ??= 0;
+    if (typeof paginationWindow == 'number' && !isFinite(paginationWindow))
+        paginationWindow = null;
+
+    const ch = useMemo(() => (Array.from(function* () {
+        for (let i = 0; i < (count ?? 0); ++i) {
+            yield <ListDemoItem key={i} index={i} />
+        }
+    }())), [count]);
+
     return (<div>
         {/*<strong>(The gridlist demo is currently down for maintenance &mdash; please enjoy this listbox demo instead.)</strong>*/}
         <TextField type="number" value={count} onValueChange={setCount} label="# of children" labelPosition="floating" />
         <TextField type="number" value={paginationWindow} onValueChange={setPaginationWindow} label="Pagination window" labelPosition="floating" />
         <div>{selectedIndex}</div>
-        <List paginationLocation={paginationWindow == null ? null : "before"} paginationSize={paginationWindow ?? null} paginationLabel="Choose the selected page of items to show" selectedIndex={selectedIndex} selectionMode="single" onSelectedIndexChange={setSelectedIndex} labelPosition="before" label="List (grid)">
-            <ListDemoContents count={count} />
+        <List
+            staggered={true}
+            paginationLocation={paginationWindow == null ? null : "before"}
+            paginationSize={paginationWindow ?? null}
+            paginationLabel="Choose the selected page of items to show"
+            selectedIndex={selectedIndex}
+            selectionMode="single"
+            onSelectedIndexChange={setSelectedIndex}
+            labelPosition="before"
+            label="List (grid)">
+            {ch}
         </List>
     </div>)
 }
-
-const ListDemoContents = memo(({ count }: { count: number }) => {
-    console.log("ListDemoContents");
-    return (
-        <>
-            {Array.from(function* () {
-                for (let i = 0; i < count; ++i) {
-                    yield <ListDemoItem key={i} i={i} />
-                }
-            }())}
-        </>
-    )
-})
 
 const ListDemoMenu = memo(forwardRef((props, ref: Ref<HTMLButtonElement>) => {
     return (
@@ -76,7 +82,7 @@ const ListDemoButton = memo(forwardRef((props, ref: Ref<HTMLButtonElement>) => {
     )
 }));
 
-const ListDemoItem = memo(({ i }: { i: number }) => {
+const ListDemoItem = memo(({ index: i }: { index: number }) => {
     /*return (
         <ListItem index={i}>List item #{i}</ListItem>
     )*/
@@ -87,15 +93,16 @@ const ListDemoItem = memo(({ i }: { i: number }) => {
      });
      if (!visible)
          return null;*/
+    const ch = `List item #${i}`
     return (
         <ListItem
             index={i}
             onPress={useCallback(async () => { return new Promise<void>(resolve => setTimeout(resolve, 2000)) }, [])}
-            badge={<Badge variantTheme="info">10</Badge>}
-            iconStart={(i & 0b01) ? <ListDemoMenu /> : null}
-            iconEnd={(i & 0b10) ? <ListDemoButton /> : null}>
-            List item #{i}
-        </ListItem>
+            badge={useMemo(() => <Badge variantTheme="info">10</Badge>, [])}
+            iconStart={useMemo(() => (i % 100 == 0) ? <ListDemoMenu /> : null, [i])}
+            iconEnd={useMemo(() => ((i & 0b10) == 0) ? <ListDemoButton /> : null, [i])}
+            children={ch}
+        />
     );
 })
 
@@ -252,22 +259,6 @@ declare module 'preact-prop-helpers' {
     }
 }
 
-const RenderCounterDisplay = () => {
-    const counters = useRenderCounters()!;
-
-    const allCounters: (keyof typeof counters)[] = ["DataTable", "DataTableSection", "DataTableRow", "DataTableCell", "Gridlist", "GridlistRow", "GridlistCell"];
-
-    return null;
-    return (
-        <table class="render-counters">
-            <thead><tr><th>Component</th><th>Times rendered</th></tr></thead>
-            <tbody>
-                {allCounters.map((c, i) => (<tr class="render-counter"><td>{allCounters[i]}</td><td>{counters[c]}</td></tr>))}
-            </tbody>
-        </table>
-    )
-}
-
 const Component = () => {
 
     const [tabIndex, setTabIndex] = useState(0);
@@ -275,9 +266,8 @@ const Component = () => {
     let i0 = 0;
     let i1 = 0;
 
-    return (
+    return (<div>
         <AllProviders targetAssertive="aria-notifications-assertive" targetPolite="aria-notifications-polite">
-            <RenderCounterDisplay />
             <Tabs
                 localStorageKey="main-demo-page-selected-tab-index"
                 label="Select the demo to view"
@@ -315,6 +305,7 @@ const Component = () => {
                 </>}
             />
         </AllProviders>
+    </div>
     )
 }
 

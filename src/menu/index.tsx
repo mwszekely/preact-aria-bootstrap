@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { ComponentChildren, Ref, VNode } from "preact";
 import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenuItemReturnType, useDefaultRenderPortal } from "preact-aria-widgets";
-import { EventDetail, EventType, UseTypeaheadNavigationReturnTypeSelf, returnUndefined, returnZero, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
+import { EventDetail, EventType, UseTypeaheadNavigationReturnTypeSelf, returnUndefined, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { Fade, ZoomFade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useCallback, useRef } from "preact/hooks";
@@ -182,7 +182,6 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                     <AriaMenuItem<HTMLDivElement>
                         imperativeHandle={imperativeHandle}
                         index={index}
-                        getSortValue={getSortValue ?? returnZero}
                         singleSelectionDisabled={disabled || showSpinner}
                         onPress={progressInfo.asyncHandlerReturn.syncHandler}
                         render={menuInfo => {

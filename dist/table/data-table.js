@@ -1,17 +1,15 @@
-import { jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
-import { clsx } from "clsx";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
+import clsx from "clsx";
 import { createContext } from "preact";
-import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection } from "preact-aria-widgets";
-import { useEnsureStability, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
+import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableRows } from "preact-aria-widgets";
+import { memo, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { memo } from "preact/compat";
-import { useContext, useLayoutEffect, useMemo } from "preact/hooks";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
-import { useUpdateRenderCounter } from "../utility/render-counter.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 import { Table, TableCell, TableRow, TableSection } from "./table.js";
+// Allow for nicer props (on the Table instead of the TableSection)
 const TableContext = createContext({ setChildCount: null, paginationMax: null, paginationMin: null, staggered: false });
 export const DataTable = memo(forwardElementRef(function DataTable({ staggered, caption, captionPosition, bordered, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }, ref) {
     staggered ||= false;
@@ -19,7 +17,6 @@ export const DataTable = memo(forwardElementRef(function DataTable({ staggered, 
     const [paginationStart, setPaginationStart] = useState(0);
     const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
     return (_jsx(TableContext.Provider, { value: useMemo(() => ({ setChildCount, paginationMax: paginationEnd, paginationMin: paginationStart, staggered: staggered }), [setChildCount, paginationStart, paginationEnd, staggered]), children: _jsx(AriaTable, { ariaLabel: captionPosition == "hidden" ? caption : null, singleSelectionMode: "activation", tagTable: "table", render: info => {
-                useUpdateRenderCounter("DataTable");
                 return (_jsxs(Paginated, { childCount: childCount, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, children: [caption && captionPosition != "hidden" && _jsx("caption", { ...useMergedProps(info.propsLabel, { className: clsx(captionPosition == "before" && "caption-top") }), children: caption }), _jsx(Table, { bordered: bordered, dark: dark, hover: hover, propsContainer: propsContainer, striped: striped, stripedColumns: stripedColumns, variantBorder: variantBorder, variantSize: variantSize, variantTheme: variantTheme, verticalAlign: verticalAlign, ...useMergedProps(info.propsTable, { className: "table" }, { ref, ...props }), children: children })] }));
             } }) }));
 }));
@@ -27,29 +24,35 @@ export const DataTableHead = memo(forwardElementRef(function DataTableHead(props
 export const DataTableBody = memo(forwardElementRef(function DataTableBody(props, ref) { return (_jsx(DataTableSection, { ref: ref, location: "body", ...props })); }));
 export const DataTableFoot = memo(forwardElementRef(function DataTableFoot(props, ref) { return (_jsx(DataTableSection, { ref: ref, location: "head", ...props })); }));
 const DataTableSection = memo(forwardElementRef(function DataTableSection({ children, keyboardControlsDescription, location, variantTheme, divider, ...props }, ref) {
-    useEnsureStability("DataTableSection", location);
     const { paginationMax, paginationMin, staggered, setChildCount } = useContext(TableContext);
-    return (_jsx(IsTableHeadContext.Provider, { value: location == "head", children: _jsx(AriaTableSection, { staggered: location == "body" && staggered, location: location, getIndex: vnode => vnode.props.row, tagTableSection: `t${location}`, paginationMin: location == "body" ? paginationMin : null, paginationMax: location == "body" ? paginationMax : null, render: info => {
-                useUpdateRenderCounter("DataTableSection");
-                if (location == "body")
-                    children = info.rearrangeableChildrenReturn.useRearrangedChildren(children);
+    return (_jsx(IsTableHeadContext.Provider, { value: location == "head", children: _jsx(AriaTableSection, { 
+            //staggered={location == "body" && staggered}
+            location: location, 
+            //getIndex={vnode => vnode.props.row}
+            tagTableSection: `t${location}`, paginationMin: location == "body" ? paginationMin : null, paginationMax: location == "body" ? paginationMax : null, render: info => {
+                const childCount = Array.isArray(children) ? children.length : 1;
                 useLayoutEffect(() => {
-                    if (info.paginatedChildrenReturn.childCount != null)
-                        setChildCount?.(info.paginatedChildrenReturn.childCount);
-                }, [setChildCount, info.paginatedChildrenReturn.childCount]);
-                return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, activateEnter: false, activateSpace: false, description: keyboardControlsDescription ?? "Navigate the table:", children: _jsx(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: children }) }));
+                    if (location == "body")
+                        setChildCount?.(childCount);
+                }, [location, setChildCount, childCount]);
+                return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: location == "body", pageKeys: true, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, activateEnter: false, activateSpace: false, description: keyboardControlsDescription ?? "Navigate the table:", children: _jsx(TableSection, { location: location, variantTheme: variantTheme, divider: divider, ...useMergedProps(info.propsTableSection, { ref, ...props }), children: useMemo(() => _jsx(DataTableRows, { children: Array.isArray(children) ? children : [children] }), [children]) }) }));
             } }) }));
+}));
+const DataTableRows = memo((function DataTableRows({ children }) {
+    const { paginationMax, paginationMin, staggered, setChildCount } = useContext(TableContext);
+    return (_jsx(TableRows, { paginationMax: paginationMax, paginationMin: paginationMin, staggered: staggered, children: children, render: info => {
+            return _jsx(_Fragment, { children: info.rearrangeableChildrenReturn.children });
+        } }));
 }));
 export const DataTableRow = memo(forwardElementRef(function DataTableRow({ row, children, variantTheme, ...props }, ref) {
     return (_jsx(AriaTableRow, { index: row, tagTableRow: "tr", render: info => {
-            useUpdateRenderCounter("DataTableRow");
             const hideBecauseStaggered = info.staggeredChildReturn.hideBecauseStaggered;
             const hideBecausePaginated = info.paginatedChildReturn.hideBecausePaginated;
-            //useWhatCausedRender("DataTableRow", { props: { ...props, variantTheme, children, row }, state: info })
-            if (hideBecausePaginated || hideBecauseStaggered) {
-                return _jsx("tr", {});
+            let tr = (_jsx(TableRow, { ...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" }), children: (info.hidden ? null : children) }));
+            if (info.paginatedChildReturn.hideBecausePaginated) {
+                return tr;
             }
-            return (_jsx(Fade, { show: !hideBecauseStaggered, animateOnMount: info.staggeredChildReturn.parentIsStaggered, delayMountUntilShown: true, children: _jsx(TableRow, { ...useMergedProps(info.props, { ref, ...props }, { className: hideBecausePaginated ? "d-none" : "" }), children: /*hideBecausePaginated? null : */ children }) }));
+            return (_jsx(Fade, { show: !info.hidden, animateOnMount: info.staggeredChildReturn.parentIsStaggered, delayMountUntilShown: true, children: tr }));
         } }));
 }));
 export const IsTableHeadContext = createContext(false);
@@ -65,7 +68,6 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
             e?.focus();
     };
     return (_jsx(AriaTableCell, { index: column, tagTableCell: isTableHead ? "th" : "td", focusSelf: focusSelf, getSortValue: useStableGetter(value ?? children), colSpan: colSpan, render: info => {
-            useUpdateRenderCounter("DataTableCell");
             const { pressReturn, props: propsPress } = usePress({
                 pressParameters: {
                     focusSelf,

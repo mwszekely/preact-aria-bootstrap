@@ -2,7 +2,7 @@
 import { clsx } from "clsx";
 import { ComponentChildren, createContext, h, Ref } from "preact";
 import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets";
-import { PersistentStates, returnZero, useMergedProps } from "preact-prop-helpers";
+import { PersistentStates, useMergedProps } from "preact-prop-helpers";
 import { memo, useContext } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes, LabelledProps } from "../utility/types.js";
@@ -20,7 +20,6 @@ export interface TabsProps extends GlobalAttributes<HTMLDivElement> {
 
 export interface TabProps extends GlobalAttributes<HTMLLIElement, "children"> {
     index: number;
-    getSortValue?: () => unknown;
     children?: ComponentChildren;
 }
 
@@ -55,11 +54,10 @@ export const Tabs = memo(forwardElementRef(function Tabs({ keyboardControlsDescr
     )
 }))
 
-export const Tab = memo(forwardElementRef(function Tab({ index, getSortValue, children, ...props }: TabProps, ref: Ref<HTMLLIElement>) {
+export const Tab = memo(forwardElementRef(function Tab({ index, children, ...props }: TabProps, ref: Ref<HTMLLIElement>) {
     return (
         <AriaTab<HTMLSpanElement>
             index={index}
-            getSortValue={getSortValue || returnZero}
 
             render={info => {
                 return (

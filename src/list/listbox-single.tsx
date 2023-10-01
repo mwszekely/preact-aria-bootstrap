@@ -1,11 +1,5 @@
-import { clsx } from "clsx";
-import { RenderableProps } from "preact";
-import { Listbox, ListboxItem } from "preact-aria-widgets";
-import { ElementProps, EventDetail, SelectedIndexChangeEvent, returnZero, useMergedProps, useStableCallback, useState } from "preact-prop-helpers";
-import { memo } from "preact/compat";
-import { Paginated } from "../pagination/index.js";
-import { forwardElementRef } from "../utility/forward-element-ref.js";
-import { GlobalAttributes, LabelledProps, OmitStrong, PaginatedProps } from "../utility/types.js";
+import { SelectedIndexChangeEvent } from "preact-prop-helpers";
+import { GlobalAttributes } from "../utility/types.js";
 
 export interface ListboxSingleProps {
     selectedIndex: number | null;
@@ -26,7 +20,7 @@ export interface ListboxSingleItemProps extends GlobalAttributes<HTMLLIElement> 
  * @param param0 
  * @returns 
  */
-export function ListboxSingle({ selectedIndex, onSelectedIndexChange, children, label, labelPosition, staggered, paginationLabel, paginationLocation, paginationSize }: PaginatedProps<LabelledProps<RenderableProps<ListboxSingleProps>, never>>) {
+/*export function ListboxSingle({ selectedIndex, onSelectedIndexChange, children, label, labelPosition, staggered, paginationLabel, paginationLocation, paginationSize }: PaginatedProps<LabelledProps<RenderableProps<ListboxSingleProps>, never>>) {
     const [paginationMin, setPaginationMin] = useState(paginationSize == null ? null : 0);
     const [paginationMax, setPaginationMax] = useState(paginationSize);
     if (paginationSize)
@@ -64,18 +58,17 @@ export function ListboxSingle({ selectedIndex, onSelectedIndexChange, children, 
 export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleItem({ index, disabled, children, ...props }: RenderableProps<ListboxSingleItemProps>, ref) {
     return (
         <ListboxItem<HTMLLIElement>
-            getSortValue={returnZero}
             index={index}
             multiSelected={undefined}
             singleSelectionDisabled={disabled}
             render={info => {
-                if (info.staggeredChildReturn.hideBecauseStaggered)
-                    return <li class="d-none" />;
-                if (info.paginatedChildReturn.hideBecausePaginated)
+                const p = useMergedProps(info.props, { ...props, ref });
+                
+                if (info.hidden)
                     return <li class="d-none" />;
 
                 return (
-                    <ListboxSingleItemStatic {...useMergedProps(info.props, { ...props, ref })} disabled={disabled} selected={info.singleSelectionChildReturn.singleSelected as boolean}>{children}</ListboxSingleItemStatic>
+                    <ListboxSingleItemStatic {...p} disabled={disabled} selected={info.singleSelectionChildReturn.singleSelected as boolean}>{children}</ListboxSingleItemStatic>
                 )
             }}
         />
@@ -85,3 +78,4 @@ export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleIt
 const ListboxSingleItemStatic = memo(forwardElementRef(function ListboxSingleItemStatic({ selected, children, disabled, ...props }: RenderableProps<OmitStrong<ElementProps<HTMLLIElement>, "selected"> & { selected: boolean }>, ref) {
     return <li {...useMergedProps({ ...props, ref }, { className: clsx("list-group-item list-group-item-action", selected && "active", disabled && "disabled") })}>{children}</li>
 }));
+*/

@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { ComponentChildren, h, Ref, VNode } from "preact";
 import { Button as AriaButton, EventDetail, Progress, TargetedButtonPressEvent, ToolbarChild } from "preact-aria-widgets";
-import { Nullable, returnFalse, returnZero, useAsyncHandler, UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
+import { Nullable, returnFalse, useAsyncHandler, UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { memo } from "preact/compat";
 import { useContext } from "preact/hooks";
@@ -113,7 +113,7 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
         //disabled ||= (pendingIndex != null);
         disabled ||= pending;
         const d = disabled ? disabledType : false;
-        
+
         let isPressed = (isPressedForMultiSelect) ?? null;
         return (
             <ButtonStructure
@@ -138,26 +138,25 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
         )
     }
     else {
-        
+
         return (
             <ToolbarChild<HTMLButtonElement>
                 index={buttonGroupIndex ?? 0}
-                getSortValue={returnZero}
                 disabledProp="disabled"
                 render={toolbarChildInfo => {
 
-                    
-        //let pending = (toolbarChildInfo.multiSelectionChildReturn? isPendingForMultiSelect : selectionLimit == 'single'? isPendingForSingleSelect : individualPending) || false;
 
-        let pending = (toolbarChildInfo.singleSelectionChildReturn.singleSelectionMode != "disabled"? isPendingForSingleSelect : 
-        toolbarChildInfo.multiSelectionChildReturn.multiSelectionMode != "disabled"? isPendingForMultiSelect :
-        individualPending) || false;
+                    //let pending = (toolbarChildInfo.multiSelectionChildReturn? isPendingForMultiSelect : selectionLimit == 'single'? isPendingForSingleSelect : individualPending) || false;
 
-        let disabled = userDisabled;
-        disabled ||= defaultDisabled;
-        //disabled ||= (pendingIndex != null);
-        disabled ||= pending;
-        const d = disabled ? disabledType : false;
+                    let pending = (toolbarChildInfo.singleSelectionChildReturn.singleSelectionMode != "disabled" ? isPendingForSingleSelect :
+                        toolbarChildInfo.multiSelectionChildReturn.multiSelectionMode != "disabled" ? isPendingForMultiSelect :
+                            individualPending) || false;
+
+                    let disabled = userDisabled;
+                    disabled ||= defaultDisabled;
+                    //disabled ||= (pendingIndex != null);
+                    disabled ||= pending;
+                    const d = disabled ? disabledType : false;
 
 
                     isPressedForSingleSelect = (toolbarChildInfo.singleSelectionChildReturn.singleSelected);

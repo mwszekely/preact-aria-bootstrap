@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { createContext } from "preact";
 import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets";
-import { returnZero, useMergedProps } from "preact-prop-helpers";
+import { useMergedProps } from "preact-prop-helpers";
 import { memo, useContext } from "preact/compat";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { StructureTabList, StructureTabPanel, StructureTabPanelsContainer, StructureTabs } from "./structure.js";
@@ -15,8 +15,8 @@ export const Tabs = memo(forwardElementRef(function Tabs({ keyboardControlsDescr
                 return (_jsxs(StructureTabs, { orientation: orientation, ref: ref, ...props, children: [_jsx(StructureTabList, { ...info.propsContainer, childrenLabel: labelJsx, labelPosition: labelPosition, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, orientation: orientation, keyboardControlsDescription: keyboardControlsDescription ?? "Move to a tab:", children: tabs }), _jsx(StructureTabPanelsContainer, { children: panels })] }));
             } }) }));
 }));
-export const Tab = memo(forwardElementRef(function Tab({ index, getSortValue, children, ...props }, ref) {
-    return (_jsx(AriaTab, { index: index, getSortValue: getSortValue || returnZero, render: info => {
+export const Tab = memo(forwardElementRef(function Tab({ index, children, ...props }, ref) {
+    return (_jsx(AriaTab, { index: index, render: info => {
             return (_jsx("li", { ...useMergedProps(props, { ref, className: `nav-item` }), children: _jsx("span", { ...useMergedProps(info.props, { className: clsx(`nav-link`, info.singleSelectionChildReturn.singleSelected && "active") }), children: children }) }));
         } }));
 }));

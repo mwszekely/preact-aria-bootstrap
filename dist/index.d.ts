@@ -11,7 +11,7 @@ export { Figure, FigureProps } from "./figure/index.js";
 export { BootstrapIcon, FontIcon } from "./icon/index.js";
 export { InputGroup, InputGroupProps, InputGroupText } from "./input-group/index.js";
 export { GridBsBreak, GridBsBreakProps, GridBsContainer, GridBsContainerProps, GridBsItem, GridBsItemProps, GridBsRow, GridBsRowProps, GridCss, GridCssItem, GridCssItemProps, GridCssProps, GridResponsive, GridStatic } from "./layout/index.js";
-export { List, ListItem, ListboxSingle, ListboxSingleItem } from "./list/index.js";
+export { List, ListItem } from "./list/index.js";
 export { Menu, MenuItem } from "./menu/index.js";
 export { Offcanvas, OffcanvasProps } from "./offcanvas/index.js";
 export { Popover, PopoverProps } from "./popover/index.js";
@@ -27,5 +27,4 @@ export { Type, TypeProps } from "./typography/index.js";
 export { AllProviders } from "./utility/all-providers.js";
 export { UtilityClasses } from "./utility/classes.js";
 export { KeyboardAssistProvider } from "./utility/keyboard-assist.js";
-export { RenderCounterProvider, useRenderCounters } from "./utility/render-counter.js";
 //# sourceMappingURL=index.d.ts.map
