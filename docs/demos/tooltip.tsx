@@ -1,7 +1,6 @@
 
-import { useStableCallback, useState } from "preact-prop-helpers";
-import { Checkbox, CheckboxGroupChild, Tooltip } from "../../dist/index.js";
-import { useCallback } from "preact/hooks"
+import { Checkbox, Tooltip } from "preact-aria-bootstrap";
+import { useState } from "preact-prop-helpers";
 import { memo } from "preact/compat";
 
 export function Blurb() {

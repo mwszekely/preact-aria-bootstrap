@@ -6,16 +6,16 @@ settings:
 
 dependencies:
   '@floating-ui/dom':
-    specifier: ^1.5.1
+    specifier: ^1.5.3
     version: 1.5.3
   '@js-temporal/polyfill':
     specifier: ^0.4.4
     version: 0.4.4
   bootstrap:
-    specifier: ^5.3.1
+    specifier: ^5.3.2
     version: 5.3.2(@popperjs/core@2.11.8)
   bootstrap-icons:
-    specifier: ^1.10.5
+    specifier: ^1.11.1
     version: 1.11.1
   bootstrap-sass-variables:
     specifier: github:mwszekely/bootstrap-sass-variables
@@ -24,7 +24,7 @@ dependencies:
     specifier: ^2.0.0
     version: 2.0.0
   dompurify:
-    specifier: ^3.0.5
+    specifier: ^3.0.6
     version: 3.0.6
   lodash-es:
     specifier: ^4.17.21
@@ -44,20 +44,20 @@ dependencies:
 
 devDependencies:
   '@playwright/test':
-    specifier: ^1.36.2
-    version: 1.38.1
+    specifier: ^1.39.0
+    version: 1.39.0
   '@types/dompurify':
-    specifier: ^3.0.2
+    specifier: ^3.0.3
     version: 3.0.3
   '@types/lodash-es':
-    specifier: ^4.17.8
+    specifier: ^4.17.9
     version: 4.17.9
   npm-run-all:
     specifier: ^4.1.5
     version: 4.1.5
   sass:
-    specifier: ^1.64.1
-    version: 1.68.0
+    specifier: ^1.69.3
+    version: 1.69.3
   typescript:
     specifier: ^5.2.2
     version: 5.2.2
@@ -89,12 +89,12 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@playwright/test@1.38.1:
-    resolution: {integrity: sha512-NqRp8XMwj3AK+zKLbZShl0r/9wKgzqI/527bkptKXomtuo+dOjU9NdMASQ8DNC9z9zLOMbG53T4eihYr3XR+BQ==}
+  /@playwright/test@1.39.0:
+    resolution: {integrity: sha512-3u1iFqgzl7zr004bGPYiN/5EZpRUSFddQBra8Rqll5N0/vfpqlP9I9EXqAoGacuAbX6c9Ulg/Cjqglp5VkK6UQ==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      playwright: 1.38.1
+      playwright: 1.39.0
     dev: true
 
   /@popperjs/core@2.11.8:
@@ -767,18 +767,18 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /playwright-core@1.38.1:
-    resolution: {integrity: sha512-tQqNFUKa3OfMf4b2jQ7aGLB8o9bS3bOY0yMEtldtC2+spf8QXG9zvXLTXUeRsoNuxEYMgLYR+NXfAa1rjKRcrg==}
+  /playwright-core@1.39.0:
+    resolution: {integrity: sha512-+k4pdZgs1qiM+OUkSjx96YiKsXsmb59evFoqv8SKO067qBA+Z2s/dCzJij/ZhdQcs2zlTAgRKfeiiLm8PQ2qvw==}
     engines: {node: '>=16'}
     hasBin: true
     dev: true
 
-  /playwright@1.38.1:
-    resolution: {integrity: sha512-oRMSJmZrOu1FP5iu3UrCx8JEFRIMxLDM0c/3o4bpzU5Tz97BypefWf7TuTNPWeCe279TPal5RtPPZ+9lW/Qkow==}
+  /playwright@1.39.0:
+    resolution: {integrity: sha512-naE5QT11uC/Oiq0BwZ50gDmy8c8WLPRTEWuSSFVG2egBka/1qMoSqYQcROMT9zLwJ86oPofcTH2jBY/5wWOgIw==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      playwright-core: 1.38.1
+      playwright-core: 1.39.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -856,8 +856,8 @@ packages:
       is-regex: 1.1.4
     dev: true
 
-  /sass@1.68.0:
-    resolution: {integrity: sha512-Lmj9lM/fef0nQswm1J2HJcEsBUba4wgNx2fea6yJHODREoMFnwRpZydBnX/RjyXw2REIwdkbqE4hrTo4qfDBUA==}
+  /sass@1.69.3:
+    resolution: {integrity: sha512-X99+a2iGdXkdWn1akFPs0ZmelUzyAQfvqYc2P/MPTrJRuIRoTffGzT9W9nFqG00S+c8hXzVmgxhUuHFdrwxkhQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:

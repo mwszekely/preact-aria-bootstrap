@@ -1,6 +1,7 @@
 
+import { Radio, RadioGroup } from "preact-aria-bootstrap";
 import { useState } from "preact-prop-helpers";
-import { Radio, RadioGroup } from "../../dist/index.js";
+
 
 export function Blurb() {
     return (

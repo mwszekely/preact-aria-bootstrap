@@ -1,10 +1,10 @@
 //import "preact/debug";
 
 import { Ref, render } from "preact";
+import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast } from "preact-aria-bootstrap";
 import { focus } from "preact-prop-helpers";
 import { forwardRef, memo } from "preact/compat";
 import { useCallback, useMemo, useState } from "preact/hooks";
-import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast } from "../dist/index.js";
 import * as ButtonB from "./demos/button";
 import * as Checkbox from "./demos/checkbox";
 import * as Radio from "./demos/radio";

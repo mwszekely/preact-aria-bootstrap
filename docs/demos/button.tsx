@@ -1,8 +1,8 @@
 
+import { Badge, BootstrapIcon, Button as ButtonAction, ButtonGroup, ButtonThemes } from "preact-aria-bootstrap";
 import { Heading } from "preact-aria-widgets";
 import { useState } from "preact-prop-helpers";
 import { useCallback } from "preact/hooks";
-import { Badge, BootstrapIcon, Button as ButtonAction, ButtonGroup, ButtonThemes } from "../../dist/index.js";
 
 export function Blurb() {
     return (
