@@ -55,7 +55,7 @@ function CheckboxGroupParent({ label, labelPosition, debounce, loadingLabel, thr
 
                         checked={info.checkboxGroupParentReturn.checked}
                         onValueChange={useStableCallback(async (c, e) => { await info.checkboxGroupParentReturn.onParentCheckedChange(e) })}
-                        propsInput={...(useMergedProps(props, info.propsChild, info.propsTabbable) as any)}
+                        propsInput={useMergedProps(props, info.propsChild, info.propsTabbable) as {}}
                     />
                 )
             }}
@@ -117,7 +117,7 @@ export function CheckboxGroupChild({ checked, label, labelPosition, onValueChang
                             await onValueChange?.(checked, event);
                             info.checkboxGroupChildReturn.onChildCheckedChange(checked);
                         })}
-                        propsInput={...(useMergedProps(props, info.propsChild, info.propsTabbable) as any)}
+                        propsInput={useMergedProps(props, info.propsChild, info.propsTabbable)}
                     />
                 )
             }}

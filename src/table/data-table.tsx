@@ -104,7 +104,7 @@ const DataTableSection = memo(forwardElementRef(function DataTableSection({ chil
     const { paginationMax, paginationMin, staggered, setChildCount } = useContext(TableContext);
     return (
         <IsTableHeadContext.Provider value={location == "head"}>
-            <AriaTableSection<HTMLTableSectionElement, HTMLTableRowElement, HTMLTableCellElement>
+            <AriaTableSection<HTMLTableSectionElement, HTMLTableRowElement>
                 //staggered={location == "body" && staggered}
                 location={location}
                 //getIndex={vnode => vnode.props.row}
