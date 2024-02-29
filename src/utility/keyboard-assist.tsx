@@ -344,33 +344,6 @@ export function KeyboardAssistProvider({ children }: { children: ComponentChildr
 
 function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, visible, activateEnter, activateSpace, id, typeaheadStatus }: KeyboardAssistIconProps & { id: string, heardTab: boolean, userHasHidden: boolean }) {
 
-    let selectable = (activateEnter || activateSpace);
-
-    const labelParts = ([
-        leftRight && upDown ? "the arrow keys" : leftRight ? "the left and right arrow keys" : upDown ? "the up and down arrow keys" : null,
-        pageKeys ? "the Page Up and Down keys" : null,
-        homeEnd ? "the Home and End keys" : null,
-        typeaheadStatus != null ? "typing to search by name" : null,
-    ].filter(t => t != null) as string[]);
-    /*let label = "";
-    for (let i = 0; i < labelParts.length; ++i) {
-        if (i > 0) {
-            if (labelParts.length == 2)
-                label += " or ";
-            else if (labelParts.length > 2) {
-                if (i == labelParts.length - 1)
-                    label += ", or "
-                else
-                    label += ", "
-            }
-        }
-        label += labelParts[i];
-    }*/
-
-    //let selectableLabel = selectable ? (activateEnter ? activateSpace ? "Enter or Space" : "Enter" : "Space") : "";
-
-    //label = `Navigate using ${label}. ${selectable ? `Select with ${selectableLabel}. ` : ""}Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
-
     const show = (heardTab && !userHasHidden && visible);
 
     return (
@@ -381,11 +354,11 @@ function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftR
                     <KeyboardAssistIconArrowKeys leftRight={leftRight} upDown={upDown} />
                     <KeyboardAssistIconHomeEnd enabled={homeEnd} />
                     <KeyboardAssistIconPageKeys enabled={pageKeys} />
-                    <KeyboardAssistIconTypeahead typeaheadStatus={typeaheadStatus} />
                     <KeyboardAssistIconSelectable enter={activateEnter || false} space={activateSpace || false} />
+                    <KeyboardAssistIconTypeahead typeaheadStatus={typeaheadStatus} />
                     <KeyboardAssistIconLeaveF2 enabled={leaveF2 || false} />
                     <KeyboardAssistIconRichTextF10 enabled={textF10 || false} />
-                    <div class="keyboard-assist-dismiss-message">Press <kbd>F7</kbd> to dismiss these instructions.<br />To show again, press <kbd>Shift+F7</kbd>.</div>
+                    <div class="keyboard-assist-dismiss-message">To dismiss these instructions, press <kbd>F7</kbd>.<br />To show again, press <kbd>Shift+F7</kbd>.</div>
                 </div>
             </SlideZoomFade>
         </>
@@ -444,7 +417,7 @@ const KeyboardAssistIconTypeahead = memo(function KeyboardAssistIconTypeahead({ 
     return (
         <CollapseFade show={typeaheadStatus != null} exitVisibility="hidden">
             <div class="keyboard-assist-typeahead">
-                <div className="keyboard-assist-typeahead-message">{typeaheadStatus == 'none' ? "Start typing to search" : typeaheadStatus == 'valid' ? "Keep typing to continue" : "No result found"}</div>
+                <div className="keyboard-assist-typeahead-message">{typeaheadStatus == 'none' ? "Search by typing" : typeaheadStatus == 'valid' ? "Keep typing to continue" : "No result found"}</div>
             </div>
         </CollapseFade>
     )

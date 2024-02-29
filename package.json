@@ -25,7 +25,7 @@
     "build": "npx npm-run-all --npm-path npm -pc clean build:*",
     "watch": "npx npm-run-all --npm-path npm -pc clean watch:*",
     "watch:sass": "sass --watch --load-path=\"./node_modules/bootstrap-sass-variables/sass\" --load-path=\"./node_modules/preact-transition/sass\" --load-path=\"./node_modules/bootstrap\" ./src/index.scss:./dist/index.css",
-    "build:sass": "sass --load-path=\"./node_modules/bootstrap-sass-variables/sass\" --load-path=\"./node_modules/preact-transition/sass\" --load-path=\"./node_modules/bootstrap\" ./src/index.scss:./dist/index.css",
+    "build:sass": "sass         --load-path=\"./node_modules/bootstrap-sass-variables/sass\" --load-path=\"./node_modules/preact-transition/sass\" --load-path=\"./node_modules/bootstrap\" ./src/index.scss:./dist/index.css",
     "watch:preact": "tsc --watch",
     "build:preact": "tsc",
     "watch:react": "tsc --project ./tsconfig.react.json --watch",
@@ -42,24 +42,24 @@
     "preact": "^10.17.1"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.5.3",
+    "@floating-ui/dom": "^1.6.3",
     "@js-temporal/polyfill": "^0.4.4",
-    "bootstrap": "^5.3.2",
-    "bootstrap-icons": "^1.11.1",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
-    "clsx": "^2.0.0",
-    "dompurify": "^3.0.6",
+    "clsx": "^2.1.0",
+    "dompurify": "^3.0.9",
     "lodash-es": "^4.17.21",
     "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
     "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
     "preact-transition": "github:mwszekely/preact-transition"
   },
   "devDependencies": {
-    "@playwright/test": "^1.39.0",
-    "@types/dompurify": "^3.0.3",
-    "@types/lodash-es": "^4.17.9",
+    "@playwright/test": "^1.41.2",
+    "@types/dompurify": "^3.0.5",
+    "@types/lodash-es": "^4.17.12",
     "npm-run-all": "^4.1.5",
-    "sass": "^1.69.3",
-    "typescript": "^5.2.2"
+    "sass": "^1.71.1",
+    "typescript": "^5.3.3"
   }
 }

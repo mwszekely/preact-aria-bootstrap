@@ -69,11 +69,11 @@
     grid-row: 2 / span 1;
 }
 
-.keyboard-assist-typeahead {
+.keyboard-assist-selectable {
     grid-row: 3 / span 1;
 }
 
-.keyboard-assist-selectable {
+.keyboard-assist-typeahead {
     grid-row: 4 / span 1;
 }
 
@@ -104,6 +104,7 @@
     //margin: calc(var(--keyboard-assist-key-size) * 0.25) calc(var(--keyboard-assist-key-size) * 0.125);
     padding: calc(var(--keyboard-assist-key-size) * 0.25) calc(var(--keyboard-assist-key-size) * 0.75);
     border: 2px solid var(--bs-body-color);
+    text-align: center;
 }
 
 
@@ -147,6 +148,11 @@
     }
 
     &.keyboard-assist-key-disabled {
+
+        // Including the disabled keys looks too crowded, so just hide them.
+        // TODO: Animate them in/out instead of display:none?
+        display: none;
+        opacity: 0;
 
         &.keyboard-assist-key-arrow-up,
         &.keyboard-assist-key-arrow-down,

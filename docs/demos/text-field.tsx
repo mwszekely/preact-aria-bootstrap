@@ -1,7 +1,7 @@
 
 import { Temporal } from "@js-temporal/polyfill";
-import { BootstrapIcon, DocumentField, InputGroup, RichTextField, RichTextView, TextField } from "preact-aria-bootstrap";
 import { useStableCallback, useState } from "preact-prop-helpers";
+import { BootstrapIcon, DocumentField, InputGroup, RichTextField, RichTextView, TextField } from "../../dist/preact/index.js";
 
 export function Blurb() {
     return (

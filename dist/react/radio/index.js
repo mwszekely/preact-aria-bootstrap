@@ -11,7 +11,7 @@ import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { StructureRadioWrapper } from "./structure.js";
 export const RadioGroupContext = createContext(null);
 export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, keyboardControlsDescription, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
-    labelPosition ??= (fieldset ? "within" : "after");
+    labelPosition ??= (fieldset ? "within" : "before");
     selectionMode ??= "focus";
     const imperativeHandle = useRef(null);
     // Note: We use useAsync, instead of useAsyncHandler, because the actual event handler isn't here.

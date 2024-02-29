@@ -208,31 +208,8 @@ export function KeyboardAssistProvider({ children }) {
     return (_jsxs(KeyboardAssistContext.Provider, { value: context.current, children: [_jsx(KeyboardAssistIconDisplay, { id: id, description: description, heardTab: heardTab, userHasHidden: userHasHidden, homeEnd: homeEndDisplay, leftRight: leftRightDisplay, upDown: upDownDisplay, pageKeys: pageKeysDisplay, visible: visible, leaveF2: leaveF2Display, textF10: textF10Display, activateEnter: activateEnter, activateSpace: activateSpace, typeaheadStatus: typeaheadStatus }), children] }));
 }
 function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftRight, upDown, homeEnd, pageKeys, leaveF2, textF10, visible, activateEnter, activateSpace, id, typeaheadStatus }) {
-    let selectable = (activateEnter || activateSpace);
-    const labelParts = [
-        leftRight && upDown ? "the arrow keys" : leftRight ? "the left and right arrow keys" : upDown ? "the up and down arrow keys" : null,
-        pageKeys ? "the Page Up and Down keys" : null,
-        homeEnd ? "the Home and End keys" : null,
-        typeaheadStatus != null ? "typing to search by name" : null,
-    ].filter(t => t != null);
-    /*let label = "";
-    for (let i = 0; i < labelParts.length; ++i) {
-        if (i > 0) {
-            if (labelParts.length == 2)
-                label += " or ";
-            else if (labelParts.length > 2) {
-                if (i == labelParts.length - 1)
-                    label += ", or "
-                else
-                    label += ", "
-            }
-        }
-        label += labelParts[i];
-    }*/
-    //let selectableLabel = selectable ? (activateEnter ? activateSpace ? "Enter or Space" : "Enter" : "Space") : "";
-    //label = `Navigate using ${label}. ${selectable ? `Select with ${selectableLabel}. ` : ""}Press F7 to hide these instructions. Press Shift+F7 to show them again once hidden.`;
     const show = (heardTab && !userHasHidden && visible);
-    return (_jsx(_Fragment, { children: _jsx(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: _jsxs("div", { class: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [_jsx("div", { id: id, class: "keyboard-assist-instructions", children: description }), _jsx(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), _jsx(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), _jsx(KeyboardAssistIconPageKeys, { enabled: pageKeys }), _jsx(KeyboardAssistIconTypeahead, { typeaheadStatus: typeaheadStatus }), _jsx(KeyboardAssistIconSelectable, { enter: activateEnter || false, space: activateSpace || false }), _jsx(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), _jsx(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), _jsxs("div", { class: "keyboard-assist-dismiss-message", children: ["Press ", _jsx("kbd", { children: "F7" }), " to dismiss these instructions.", _jsx("br", {}), "To show again, press ", _jsx("kbd", { children: "Shift+F7" }), "."] })] }) }) }));
+    return (_jsx(_Fragment, { children: _jsx(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: _jsxs("div", { class: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [_jsx("div", { id: id, class: "keyboard-assist-instructions", children: description }), _jsx(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), _jsx(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), _jsx(KeyboardAssistIconPageKeys, { enabled: pageKeys }), _jsx(KeyboardAssistIconSelectable, { enter: activateEnter || false, space: activateSpace || false }), _jsx(KeyboardAssistIconTypeahead, { typeaheadStatus: typeaheadStatus }), _jsx(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), _jsx(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), _jsxs("div", { class: "keyboard-assist-dismiss-message", children: ["To dismiss these instructions, press ", _jsx("kbd", { children: "F7" }), ".", _jsx("br", {}), "To show again, press ", _jsx("kbd", { children: "Shift+F7" }), "."] })] }) }) }));
 }
 const KeyboardAssistIconArrowKeys = memo(function KeyboardAssistIconArrowKeys({ leftRight, upDown }) {
     return (_jsxs("div", { class: "keyboard-assist-arrow-keys", children: [_jsx(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-up", children: "\u2191" }), _jsx(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-left", children: "\u2190" }), _jsx(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-down", children: "\u2193" }), _jsx(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-right", children: "\u2192" })] }));
@@ -253,7 +230,7 @@ const KeyboardAssistIconSelectable = memo(function KeyboardAssistIconTypeahead({
     return (_jsx(CollapseFade, { show: visible, exitVisibility: "hidden", children: _jsx("div", { class: "keyboard-assist-selectable", children: _jsxs("div", { className: "keyboard-assist-selectable-message", children: ["Select with ", selectableLabelRef.current] }) }) }));
 });
 const KeyboardAssistIconTypeahead = memo(function KeyboardAssistIconTypeahead({ typeaheadStatus }) {
-    return (_jsx(CollapseFade, { show: typeaheadStatus != null, exitVisibility: "hidden", children: _jsx("div", { class: "keyboard-assist-typeahead", children: _jsx("div", { className: "keyboard-assist-typeahead-message", children: typeaheadStatus == 'none' ? "Start typing to search" : typeaheadStatus == 'valid' ? "Keep typing to continue" : "No result found" }) }) }));
+    return (_jsx(CollapseFade, { show: typeaheadStatus != null, exitVisibility: "hidden", children: _jsx("div", { class: "keyboard-assist-typeahead", children: _jsx("div", { className: "keyboard-assist-typeahead-message", children: typeaheadStatus == 'none' ? "Search by typing" : typeaheadStatus == 'valid' ? "Keep typing to continue" : "No result found" }) }) }));
 });
 const KeyboardAssistIconLeaveF2 = memo(function KeyboardAssistIconLeaveF2({ enabled }) {
     return (_jsx(CollapseFade, { show: enabled, exitVisibility: "hidden", children: _jsx("div", { class: "keyboard-assist-leave-f2", children: _jsxs("div", { className: "keyboard-assist-leave-f2-message", children: ["Press ", _jsx("kbd", { children: "F2" }), " to return"] }) }) }));

@@ -13,7 +13,8 @@ export interface AccordionProps extends
 }
 
 export interface AccordionSectionProps extends
-  Pick<AriaAccordionSectionProps<HTMLDivElement, HTMLDivElement, HTMLDivElement>, "open" | "index" | "untabbable" | "disabled" | "bodyRole">,
+  Pick<AriaAccordionSectionProps<HTMLDivElement, HTMLDivElement, HTMLDivElement>, "index">,
+  Partial<Pick<AriaAccordionSectionProps<HTMLDivElement, HTMLDivElement, HTMLDivElement>, "open" | "untabbable" | "disabled" | "bodyRole">>,
   GlobalAttributes<HTMLDivElement, "children"> {
   header: ComponentChildren;
 }
