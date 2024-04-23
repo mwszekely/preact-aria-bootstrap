@@ -12,7 +12,7 @@ import { Tooltip } from "../tooltip/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { LabelledProps } from "../utility/types.js";
 
-interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<h.JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
+export interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<h.JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
     value: T;
     marginBottom?: number;
     onValueChange: null | ((value: T, event: h.JSX.TargetedEvent<E>) => void | Promise<void>);
@@ -30,7 +30,7 @@ interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> ext
     autocomplete?: null | 'off' | 'on' | 'name' | 'honorific-prefix' | 'given-name' | 'additional-name' | 'family-name' | 'nickname' | 'email' | 'username' | 'new-password' | 'current-password' | 'one-time-code' | 'organization-title' | 'organization' | 'street-address' | 'address-line1' | 'address-line2' | 'address-line3' | 'address-line4' | 'country' | 'country-name' | 'postal-code' | 'cc-name' | 'cc-given-name' | 'cc-additional-name' | 'cc-family-name' | 'cc-number' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-csc' | 'cc-type' | 'transaction-currency' | 'transaction-amount' | 'language' | 'bday-day' | 'bday-month' | 'bday-year' | 'sex' | 'tel-country-code' | 'tel-national' | 'tel-area-code' | 'tel-local' | 'tel-extention' | 'impp' | 'url' | 'photo'
 }
 
-interface TextFieldNumericBase<T extends number | bigint> extends TextFieldBase<HTMLInputElement, T | null> {
+export interface TextFieldNumericBase<T extends number | bigint> extends TextFieldBase<HTMLInputElement, T | null> {
     min?: number; // not T
     max?: number; // not T
     step?: number; // not T
@@ -44,13 +44,13 @@ interface TextFieldNumericBase<T extends number | bigint> extends TextFieldBase<
     //base?: number;
 }
 
-interface TextFieldNumberProps extends TextFieldNumericBase<number> { type: "number" }
-interface TextFieldBigIntProps extends TextFieldNumericBase<bigint> { type: "bigint" }
-type TextFieldNumeric = TextFieldNumberProps | TextFieldBigIntProps;
+export interface TextFieldNumberProps extends TextFieldNumericBase<number> { type: "number" }
+export interface TextFieldBigIntProps extends TextFieldNumericBase<bigint> { type: "bigint" }
+type TextFieldNumericProps = TextFieldNumberProps | TextFieldBigIntProps;
 
-interface TextFieldDateTimeProps extends TextFieldBase<HTMLInputElement, Temporal.Instant | null> { type: "datetime-local" }
-interface TextFieldDateProps extends TextFieldBase<HTMLInputElement, Temporal.PlainDate | null> { type: "date" }
-interface TextFieldTimeProps extends TextFieldBase<HTMLInputElement, Temporal.PlainTime | null> {
+export interface TextFieldDateTimeProps extends TextFieldBase<HTMLInputElement, Temporal.Instant | null> { type: "datetime-local" }
+export interface TextFieldDateProps extends TextFieldBase<HTMLInputElement, Temporal.PlainDate | null> { type: "date" }
+export interface TextFieldTimeProps extends TextFieldBase<HTMLInputElement, Temporal.PlainTime | null> {
     type: "time";
 
     /**
@@ -59,7 +59,7 @@ interface TextFieldTimeProps extends TextFieldBase<HTMLInputElement, Temporal.Pl
     seconds?: boolean;
 }
 
-interface TextFieldTextAreaProps extends TextFieldBase<HTMLTextAreaElement, string> {
+export interface TextFieldTextAreaProps extends TextFieldBase<HTMLTextAreaElement, string> {
     type: "text";
     /**
      * Any value > 1 implies this is a textfield element.
@@ -75,12 +75,12 @@ interface TextFieldTextAreaProps extends TextFieldBase<HTMLTextAreaElement, stri
 
 }
 
-interface TextFieldTextInput extends TextFieldBase<HTMLInputElement, string> {
+export interface TextFieldTextInputProps extends TextFieldBase<HTMLInputElement, string> {
     type: "text" | "email" | "search";
 }
 
-type TextFieldTextProps = TextFieldTextInput | TextFieldTextAreaProps;
-type TextFieldProps = TextFieldTextProps | TextFieldNumberProps | TextFieldBigIntProps | TextFieldDateTimeProps | TextFieldDateProps | TextFieldTimeProps;
+export type TextFieldTextProps = TextFieldTextInputProps | TextFieldTextAreaProps;
+export type TextFieldProps = TextFieldTextProps | TextFieldNumberProps | TextFieldBigIntProps | TextFieldDateTimeProps | TextFieldDateProps | TextFieldTimeProps;
 
 export const TextField = memo(forwardElementRef(function TextField({ type, ...props }: LabelledProps<TextFieldProps, "floating" | "tooltip">, ref?: Ref<HTMLInputElement>) {
     switch (type) {
@@ -341,7 +341,7 @@ function TextFieldText({ type, onValueChange, value, label, labelPosition, disab
 }*/
 
 const TextFieldText = memo(forwardElementRef(function TextFieldText(allProps: LabelledProps<TextFieldTextProps, "floating">, ref?: Ref<any>) {
-    const { onValueChange, autocomplete, inputMode, enterKeyHint, type, value, label, loadingLabel, labelPosition, iconEnd, iconStart, marginBottom, debounce, throttle, disabled, placeholder, readonly, size, rows, resizeable, ...props } = allProps as (Partial<LabelledProps<TextFieldTextInput, "floating">> & Partial<LabelledProps<TextFieldTextAreaProps, "floating">>);
+    const { onValueChange, autocomplete, inputMode, enterKeyHint, type, value, label, loadingLabel, labelPosition, iconEnd, iconStart, marginBottom, debounce, throttle, disabled, placeholder, readonly, size, rows, resizeable, ...props } = allProps as (Partial<LabelledProps<TextFieldTextInputProps, "floating">> & Partial<LabelledProps<TextFieldTextAreaProps, "floating">>);
     return (
         <TextFieldBase<HTMLInputElement, string>
             ref={ref}
