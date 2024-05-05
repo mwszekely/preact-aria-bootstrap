@@ -1,10 +1,8 @@
 
 import { clsx } from "clsx";
-import { createContext, h, Ref } from "preact";
-import { Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail, LabelPosition, Progress, TargetedRadioChangeEvent, UseRadioGroupReturnType } from "preact-aria-widgets";
-import { useAsync, UseAsyncHandlerParameters, useMergedProps, useState } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
-import { useContext, useMemo, useRef } from "preact/hooks";
+import { Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail, LabelPosition, Progress, TargetedRadioChangeEvent, UseRadioGroupReturnType } from "preact-aria-widgets/preact";
+import { JSX, Ref, UseAsyncHandlerParameters, createContext, useAsync, useContext, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers/preact";
+import { Fade } from "preact-transition/preact";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -13,7 +11,7 @@ import { StructureRadioWrapper } from "./structure.js";
 
 
 export interface RadioGroupProps<V extends string | number> extends
-    Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">,
+    Pick<JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">,
     Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     selectedValue: V | null;
     fieldset?: boolean;
@@ -38,7 +36,7 @@ export interface RadioGroupContext<V extends string | number> {
 export const RadioGroupContext = createContext<RadioGroupContext<string | number> | null>(null);
 
 export function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, keyboardControlsDescription, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
-    labelPosition ??= (fieldset? "within" : "before");
+    labelPosition ??= (fieldset ? "within" : "before");
     selectionMode ??= "focus";
 
     const imperativeHandle = useRef<UseRadioGroupReturnType<V, HTMLSpanElement, HTMLLabelElement, HTMLInputElement>>(null);
@@ -57,12 +55,14 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
 
     const pendingValue = (pending ? capturedValue : null);
     inline ??= false;
+    if (labelPosition == "hidden")
+        console.assert(typeof label == "string");
 
     return (
         <DisabledContext.Provider value={disabled ?? false}>
             <RadioGroupContext.Provider value={useMemo(() => ({ pendingValue, inline: inline! }), [pendingValue, inline])}>
                 <AriaRadioGroup<V, HTMLSpanElement, HTMLLabelElement, HTMLInputElement>
-                    ariaLabel={labelPosition == 'hidden' ? label : null}
+                    ariaLabel={labelPosition == 'hidden' ? label as string : null}
                     selectedValue={pendingValue ?? selectedValue}
                     imperativeHandle={imperativeHandle}
                     name={name}
@@ -70,21 +70,21 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
                     arrowKeyDirection={inline ? "horizontal" : "vertical"}
                     singleSelectionMode={selectionMode}
                     render={info => {
-                        const E = (fieldset? "fieldset" : "span");
-                        const L = (fieldset? "legend" : "label") as "label";
+                        const E = (fieldset ? "fieldset" : "span");
+                        const L = (fieldset ? "legend" : "label") as "label";
                         const visibleLabel = <L {...useMergedProps({ class: clsx("form-label radio-group-label") }, info.propsRadioGroupLabel)}>{label}</L>
                         return (
                             <>
                                 {labelPosition == "before" && visibleLabel}
-                                <KeyboardAssistIcon 
-                                leftRight={!!inline} 
-                                upDown={!inline} 
-                                homeEnd={true} 
-                                pageKeys={true} 
-                                typeaheadStatus={info.typeaheadNavigationReturn.typeaheadStatus}
-                                activateSpace={info.typeaheadNavigationReturn.typeaheadStatus == 'none'}
-                                activateEnter={true}
-                                description={keyboardControlsDescription ?? "Select an option:"}>
+                                <KeyboardAssistIcon
+                                    leftRight={!!inline}
+                                    upDown={!inline}
+                                    homeEnd={true}
+                                    pageKeys={true}
+                                    typeaheadStatus={info.typeaheadNavigationReturn.typeaheadStatus}
+                                    activateSpace={info.typeaheadNavigationReturn.typeaheadStatus == 'none'}
+                                    activateEnter={true}
+                                    description={keyboardControlsDescription ?? "Select an option:"}>
                                     <E {...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props)}>
                                         {labelPosition == "within" && visibleLabel}
                                         {children}
@@ -101,7 +101,7 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
 }
 
 export interface RadioProps<V extends number | string> extends
-    Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">,
+    Pick<JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">,
     Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     loadingLabel?: string;
     disabled?: boolean;
@@ -145,9 +145,11 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                 );
                 const labelRef = useRef<HTMLLabelElement>(null);
 
+                if (labelPosition == "hidden")
+                    console.assert(typeof label == "string");
                 return (
                     <AriaRadio<LabelPosition, V, HTMLInputElement, HTMLLabelElement>
-                        ariaLabel={labelPosition == 'hidden' ? label : null}
+                        ariaLabel={labelPosition == 'hidden' ? label as string : null}
                         value={value}
                         index={index}
                         labelPosition={labelPosition == "hidden" ? "none" : "separate"}
@@ -157,7 +159,7 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
                         getText={() => labelRef.current?.textContent || `${value}` || ""}
 
                         render={info => {
-                            const inputJsx = <input class="form-check-input" {...useMergedProps(info.propsInput, props, { ref })} />;
+                            const inputJsx = <input className="form-check-input" {...useMergedProps(info.propsInput, props, { ref })} />;
 
                             return (
                                 <StructureRadioWrapper inline={inline || false} pending={pending} labelPosition={labelPosition!}>

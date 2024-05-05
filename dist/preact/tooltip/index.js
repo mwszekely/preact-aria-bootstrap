@@ -1,10 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { cloneElement } from "preact";
-import { Tooltip as AriaTooltip, useDefaultRenderPortal } from "preact-aria-widgets";
-import { useMergedProps, useState } from "preact-prop-helpers";
-import { SlideFade } from "preact-transition";
-import { useCallback, useEffect } from "preact/hooks";
+import { Tooltip as AriaTooltip, useDefaultRenderPortal } from "preact-aria-widgets/preact";
+import { cloneElement, useCallback, useEffect, useMergedProps, useState } from "preact-prop-helpers/preact";
+import { SlideFade } from "preact-transition/preact";
 import { usePopper } from "../popper/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { usePortalId } from "../utility/use-portal-id.js";
@@ -61,7 +59,7 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
             // IMPORTANT:
             // The tooltip must remain non-hidden to assistive technologies even when closed.
             // Don't set hidden or inert or anything like that when is's closed!
-            const tooltipContent = _jsx("div", { ...useMergedProps(propsPopup, {}), children: _jsx(SlideFade, { exitVisibility: "visible", exclusivityKey: "tooltip", duration: transitionDuration, show: hidden ? false : (tooltip == null ? false : (status != null)), slideTargetBlock: slideTargetBlock, slideTargetInline: slideTargetInline, children: _jsxs("div", { ...useMergedProps(propsData, { style: maxWidth ? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup), children: [_jsx("div", { ...useMergedProps(propsArrow, { className: "tooltip-arrow" }) }), _jsx("div", { class: "tooltip-inner", children: tooltip })] }) }) });
+            const tooltipContent = _jsx("div", { ...useMergedProps(propsPopup, {}), children: _jsx(SlideFade, { exitVisibility: "visible", exclusivityKey: "tooltip", duration: transitionDuration, show: hidden ? false : (tooltip == null ? false : (status != null)), slideTargetBlock: slideTargetBlock, slideTargetInline: slideTargetInline, children: _jsxs("div", { ...useMergedProps(propsData, { style: maxWidth ? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup), children: [_jsx("div", { ...useMergedProps(propsArrow, { className: "tooltip-arrow" }) }), _jsx("div", { className: "tooltip-inner", children: tooltip })] }) }) });
             let contentIfRelative = useDefaultRenderPortal({ children: tooltipContent, portalId });
             const portalJsx = absolutePositioning ? tooltipContent : contentIfRelative;
             if (forward) {

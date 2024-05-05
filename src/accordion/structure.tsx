@@ -1,6 +1,5 @@
-import { Ref } from "preact";
-import { useMergedProps } from "preact-prop-helpers";
-import { CollapseFade } from "preact-transition";
+import { Ref, useMergedProps } from "preact-prop-helpers/preact";
+import { CollapseFade } from "preact-transition/preact";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 
@@ -61,7 +60,7 @@ export const StructureAccordionSectionBody = memoForwardRef(function Structure({
     return (
         <CollapseFade show={show}>
             <div {...useMergedProps({ class: "accordion-collapse" }, { ...props, ref })}>
-                <div class="accordion-body">{children}</div>
+                <div className="accordion-body">{children}</div>
             </div>
         </CollapseFade>
     )

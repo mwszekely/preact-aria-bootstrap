@@ -1,7 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
-import { Accordion as AriaAccordion, AccordionSection as AriaAccordionSection } from "preact-aria-widgets";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { Accordion as AriaAccordion, AccordionSection as AriaAccordionSection } from "preact-aria-widgets/preact";
+import { memo, useMergedProps } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { StructureAccordion, StructureAccordionSection, StructureAccordionSectionBody, StructureAccordionSectionHeader, StructureAccordionSectionHeaderButton } from "./structure.js";
 export const Accordion = memo(forwardElementRef(function Accordion({ children, ...props }, ref) {

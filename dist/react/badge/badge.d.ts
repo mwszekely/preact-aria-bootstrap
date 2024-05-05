@@ -1,4 +1,4 @@
-import { Ref } from "preact";
+import { Ref } from "preact-prop-helpers/preact";
 import { ButtonThemes } from "../context.js";
 import { GlobalAttributes } from "../utility/types.js";
 export interface BadgeProps extends GlobalAttributes<HTMLSpanElement, "children"> {
@@ -13,7 +13,7 @@ export interface BadgeProps extends GlobalAttributes<HTMLSpanElement, "children"
  *
  * For example, if this badge represents the number of unread messages with a number, then `children` should probably be something like
  *
- * `<Badge>{10 <span class="visually-hidden">unread messages</span>}</Badge>`
+ * `<Badge>{10 <span className="visually-hidden">unread messages</span>}</Badge>`
  */
-export declare const Badge: ({ children, position, variantTheme, roundedPill, ...props }: BadgeProps, ref: Ref<HTMLSpanElement>) => import("preact").JSX.Element;
+export declare const Badge: ({ children, position, variantTheme, roundedPill, ...props }: BadgeProps, ref: Ref<HTMLSpanElement>) => any;
 //# sourceMappingURL=badge.d.ts.map

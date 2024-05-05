@@ -1,7 +1,6 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { useEnsureStability, useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { memo, useEnsureStability, useMergedProps } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 export const Table = memo(forwardElementRef(function Table({ propsContainer, dark, hover, striped, stripedColumns, variantBorder, bordered, variantSize, variantTheme, verticalAlign, ...props }, ref) {
@@ -32,7 +31,7 @@ export const TableCell = memo(forwardElementRef(function TableCell({ variantThem
     }
     else {
         children = useClonedElement(children, props, ref);
-        return (_jsx("td", { class: clsx(fillY && "py-0"), children: children }));
+        return (_jsx("td", { className: clsx(fillY && "py-0"), children: children }));
     }
 }));
 //# sourceMappingURL=table.js.map

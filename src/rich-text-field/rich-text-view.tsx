@@ -9,7 +9,7 @@ export const RichTextView = memo(function RichTextView({ valueHtml }: { valueHtm
     const sanitized = DOMPurify.sanitize(valueHtml);
 
     return (
-        <span class="rich-text-view" dangerouslySetInnerHTML={{ __html: sanitized }} />
+        <span className="rich-text-view" dangerouslySetInnerHTML={{ __html: sanitized }} />
     )
 
 })

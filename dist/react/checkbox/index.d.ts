@@ -1,8 +1,7 @@
-import { ComponentChildren, h, Ref } from "preact";
-import { TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets";
-import { UseAsyncHandlerParameters } from "preact-prop-helpers";
+import { TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets/preact";
+import { ComponentChildren, JSX, Ref, UseAsyncHandlerParameters } from "preact-prop-helpers/preact";
 import { LabelledProps } from "../utility/types.js";
-export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
+export interface CheckboxProps extends Pick<JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     inline?: boolean;
     checked: boolean | "mixed";
     onValueChange(checked: boolean, event: TargetedCheckboxChangeEvent): void | Promise<void>;
@@ -16,11 +15,11 @@ export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children
     tristate?: boolean;
     imperativeHandle?: Ref<UseCheckboxReturnType<HTMLInputElement, HTMLLabelElement>>;
     /** Optional props to spread *specifically* to the input element */
-    propsInput?: h.JSX.HTMLAttributes<HTMLInputElement>;
+    propsInput?: JSX.HTMLAttributes<HTMLInputElement>;
     /** Optional props to spread *specifically* to the input element */
-    propsLabel?: h.JSX.HTMLAttributes<HTMLLabelElement>;
+    propsLabel?: JSX.HTMLAttributes<HTMLLabelElement>;
 }
-export declare function Checkbox({ label, labelPosition, checked, tristate, onValueChange, loadingLabel, debounce, forciblyPending, throttle, inline, disabled: userDisabled, imperativeHandle, propsInput, propsLabel, ...props }: LabelledProps<CheckboxProps, "tooltip">, ref?: Ref<any>): import("preact").JSX.Element;
+export declare function Checkbox({ label, labelPosition, checked, tristate, onValueChange, loadingLabel, debounce, forciblyPending, throttle, inline, disabled: userDisabled, imperativeHandle, propsInput, propsLabel, ...props }: LabelledProps<CheckboxProps, "tooltip">, ref?: Ref<any>): any;
 export interface StructureCheckboxNormalOuterProps {
     labelPosition: "before" | "after" | "hidden";
     isSwitch: boolean;
@@ -31,7 +30,7 @@ export interface StructureCheckboxNormalOuterProps {
     childrenInput: ComponentChildren;
     childrenTooltip: ComponentChildren;
 }
-export declare const StructureCheckboxNormalOuter: ({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
+export declare const StructureCheckboxNormalOuter: ({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) => any;
 export interface StructureCheckboxInputGroupOuterProps {
     labelPosition: "before" | "after" | "hidden";
     isSwitch: boolean;
@@ -42,5 +41,5 @@ export interface StructureCheckboxInputGroupOuterProps {
     childrenInput: ComponentChildren;
     childrenTooltip: ComponentChildren;
 }
-export declare const StructureCheckboxInputGroupOuter: ({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
+export declare const StructureCheckboxInputGroupOuter: ({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) => any;
 //# sourceMappingURL=index.d.ts.map

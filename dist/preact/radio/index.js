@@ -1,10 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { createContext } from "preact";
-import { Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail, Progress } from "preact-aria-widgets";
-import { useAsync, useMergedProps, useState } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
-import { useContext, useMemo, useRef } from "preact/hooks";
+import { Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail, Progress } from "preact-aria-widgets/preact";
+import { createContext, useAsync, useContext, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers/preact";
+import { Fade } from "preact-transition/preact";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -25,6 +23,8 @@ export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, keyboard
     });
     const pendingValue = (pending ? capturedValue : null);
     inline ??= false;
+    if (labelPosition == "hidden")
+        console.assert(typeof label == "string");
     return (_jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(RadioGroupContext.Provider, { value: useMemo(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: _jsx(AriaRadioGroup, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, imperativeHandle: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", singleSelectionMode: selectionMode, render: info => {
                     const E = (fieldset ? "fieldset" : "span");
                     const L = (fieldset ? "legend" : "label");
@@ -51,8 +51,10 @@ export function Radio({ index, label, value, labelPosition, loadingLabel, deboun
             const pending = singleSelectPending; //(pendingValue != null);
             const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { ...useMergedProps(propsProgressIndicator, { class: "spinner-border" }) }) }));
             const labelRef = useRef(null);
+            if (labelPosition == "hidden")
+                console.assert(typeof label == "string");
             return (_jsx(AriaRadio, { ariaLabel: labelPosition == 'hidden' ? label : null, value: value, index: index, labelPosition: labelPosition == "hidden" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, getText: () => labelRef.current?.textContent || `${value}` || "", render: info => {
-                    const inputJsx = _jsx("input", { class: "form-check-input", ...useMergedProps(info.propsInput, props, { ref }) });
+                    const inputJsx = _jsx("input", { className: "form-check-input", ...useMergedProps(info.propsInput, props, { ref }) });
                     return (_jsxs(StructureRadioWrapper, { inline: inline || false, pending: pending, labelPosition: labelPosition, children: [loadingJsx, _jsxs("label", { ...useMergedProps({ class: "form-check-label", ref: labelRef }, info.propsLabel), children: [labelPosition == "before" && label, labelPosition == "tooltip" ? _jsx(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && label] })] }));
                 } }));
         } }));

@@ -1,9 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import clsx from "clsx";
-import { createContext } from "preact";
-import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableRows } from "preact-aria-widgets";
-import { memo, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
+import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableRows } from "preact-aria-widgets/preact";
+import { createContext, memo, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers/preact";
+import { Fade } from "preact-transition/preact";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -16,6 +15,8 @@ export const DataTable = memo(forwardElementRef(function DataTable({ staggered, 
     const [childCount, setChildCount] = useState(0);
     const [paginationStart, setPaginationStart] = useState(0);
     const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
+    if (caption == "hidden")
+        console.assert(typeof caption == "string");
     return (_jsx(TableContext.Provider, { value: useMemo(() => ({ setChildCount, paginationMax: paginationEnd, paginationMin: paginationStart, staggered: staggered }), [setChildCount, paginationStart, paginationEnd, staggered]), children: _jsx(AriaTable, { ariaLabel: captionPosition == "hidden" ? caption : null, singleSelectionMode: "activation", tagTable: "table", render: info => {
                 return (_jsxs(Paginated, { childCount: childCount, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, children: [caption && captionPosition != "hidden" && _jsx("caption", { ...useMergedProps(info.propsLabel, { className: clsx(captionPosition == "before" && "caption-top") }), children: caption }), _jsx(Table, { bordered: bordered, dark: dark, hover: hover, propsContainer: propsContainer, striped: striped, stripedColumns: stripedColumns, variantBorder: variantBorder, variantSize: variantSize, variantTheme: variantTheme, verticalAlign: verticalAlign, ...useMergedProps(info.propsTable, { className: "table" }, { ref, ...props }), children: children })] }));
             } }) }));
@@ -91,8 +92,8 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
             return _jsx(TableCell, { ...p, tableHeadType: isTableHead ? (unsortable ? "unsortable" : "sortable") : null, fillY: fillY, variantTheme: variantTheme, children: children });
             /*if (isTableHead) {
                 return (
-                    <th class={clsx(fillY && "py-0")}>
-                        <button className="sort-button" {...p as h.JSX.HTMLAttributes<any>}>
+                    <th className={clsx(fillY && "py-0")}>
+                        <button className="sort-button" {...p as JSX.HTMLAttributes<any>}>
                             <span>{children}</span>
                             {sortDirection == null && <BootstrapIcon icon="filter" label={null} />}
                             {sortDirection == "ascending" && <BootstrapIcon icon="sort-down-alt" label={null} />}
@@ -105,7 +106,7 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
                 children ??= (value as string);
                 children = useClonedElement(children, p, ref);
                 return (
-                    <td class={clsx(fillY && "py-0")}>{children}</td>
+                    <td className={clsx(fillY && "py-0")}>{children}</td>
                 )
             }*/
         } }));

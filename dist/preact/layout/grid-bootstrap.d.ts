@@ -1,4 +1,4 @@
-import { Ref } from "preact";
+import { Ref } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 export interface GridBsContainerProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**
@@ -58,8 +58,8 @@ export interface GridBsItemProps extends GlobalAttributes<HTMLDivElement, "child
 export interface GridBsBreakProps extends GlobalAttributes<HTMLDivElement, "children"> {
     hideUntil?: "sm" | "md" | "lg" | "xl" | "xxl";
 }
-export declare const GridBsContainer: ({ fillUntil, children, ...props }: GridBsContainerProps, ref?: Ref<HTMLDivElement>) => import("preact").VNode<import("preact").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
-export declare const GridBsRow: ({ justify, children, gutterHorizontal, gutterHorizontalXs, gutterHorizontalSm, gutterHorizontalMd, gutterHorizontalLg, gutterHorizontalXl, gutterHorizontalXxl, gutterVertical, gutterVerticalXs, gutterVerticalSm, gutterVerticalMd, gutterVerticalLg, gutterVerticalXl, gutterVerticalXxl, gutter, gutterXs, gutterSm, gutterMd, gutterLg, gutterXl, gutterXxl, ...props }: GridBsRowProps, ref: Ref<HTMLDivElement>) => import("preact").VNode<import("preact").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
-export declare const GridBsItem: ({ children, offset, offsetXs, offsetSm, offsetMd, offsetLg, offsetXl, offsetXxl, span, spanXs, spanSm, spanMd, spanLg, spanXl, spanXxl, ...props }: GridBsItemProps, ref: Ref<HTMLDivElement>) => import("preact").VNode<import("preact").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
-export declare const GridBsBreak: ({ hideUntil, children, ...props }: GridBsBreakProps, ref: Ref<HTMLDivElement>) => import("preact").VNode<import("preact").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
+export declare const GridBsContainer: ({ fillUntil, children, ...props }: GridBsContainerProps, ref?: Ref<HTMLDivElement>) => import("preact").VNode<import("preact-prop-helpers").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
+export declare const GridBsRow: ({ justify, children, gutterHorizontal, gutterHorizontalXs, gutterHorizontalSm, gutterHorizontalMd, gutterHorizontalLg, gutterHorizontalXl, gutterHorizontalXxl, gutterVertical, gutterVerticalXs, gutterVerticalSm, gutterVerticalMd, gutterVerticalLg, gutterVerticalXl, gutterVerticalXxl, gutter, gutterXs, gutterSm, gutterMd, gutterLg, gutterXl, gutterXxl, ...props }: GridBsRowProps, ref: Ref<HTMLDivElement>) => import("preact").VNode<import("preact-prop-helpers").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
+export declare const GridBsItem: ({ children, offset, offsetXs, offsetSm, offsetMd, offsetLg, offsetXl, offsetXxl, span, spanXs, spanSm, spanMd, spanLg, spanXl, spanXxl, ...props }: GridBsItemProps, ref: Ref<HTMLDivElement>) => import("preact").VNode<import("preact-prop-helpers").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
+export declare const GridBsBreak: ({ hideUntil, children, ...props }: GridBsBreakProps, ref: Ref<HTMLDivElement>) => import("preact").VNode<import("preact-prop-helpers").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
 //# sourceMappingURL=grid-bootstrap.d.ts.map

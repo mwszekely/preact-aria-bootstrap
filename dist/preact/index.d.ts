@@ -1,4 +1,4 @@
-export { Heading, HeadingReset } from "preact-aria-widgets";
+export { Heading, HeadingReset } from "preact-aria-widgets/preact";
 export { Accordion, AccordionSection, type AccordionProps, type AccordionSectionProps } from "./accordion/index.js";
 export { Badge, type BadgeProps } from "./badge/index.js";
 export { Button, ButtonGroup, type ButtonGroupProps, type ButtonProps } from "./button/index.js";
@@ -21,7 +21,7 @@ export { Range, RangeThumb } from "./slider/index.js";
 export { DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow, type DataTableBodyProps, type DataTableCellProps, type DataTableFootProps, type DataTableHeadProps, type DataTableProps, type DataTableRowProps } from "./table/index.js";
 export { Tab, TabPanel, Tabs, type TabPanelProps, type TabProps, type TabsProps } from "./tabs/index.js";
 export { TextField, type TextFieldBigIntProps, type TextFieldDateProps, type TextFieldDateTimeProps, type TextFieldNumberProps, type TextFieldProps, type TextFieldTextAreaProps, type TextFieldTextInputProps, type TextFieldTextProps, type TextFieldTimeProps } from "./text-field/index.js";
-export { Toast, ToastErrorBoundary, ToastsProvider, usePushToast, useUpdateToast, type PushToast, type ToastProps } from "./toasts/index.js";
+export { Toast, ToastsProvider, usePushToast, useUpdateToast, type PushToast, type ToastProps } from "./toasts/index.js";
 export { Tooltip, type TooltipProps } from "./tooltip/index.js";
 export { Type, type TypeProps } from "./typography/index.js";
 export { AllProviders } from "./utility/all-providers.js";

@@ -1,8 +1,7 @@
 import { clsx } from "clsx";
 import { identity } from "lodash-es";
-import { ProgressWithHandler } from "preact-aria-widgets";
-import { returnFalse, usePassiveState } from "preact-prop-helpers";
-import { useRef } from "preact/hooks";
+import { ProgressWithHandler } from "preact-aria-widgets/preact";
+import { returnFalse, usePassiveState, useRef } from "preact-prop-helpers/preact";
 import { TextFieldSpinner, useCommitTextField } from "../text-field/index.js";
 import { CkEditorWrapper, CkEditorWrapperProps, RichTextToolbarItems } from "./ck-editor-wrapper.js";
 
@@ -89,7 +88,7 @@ export function RichTextField({ implementation, toolbarItems, onValueChange, val
 
                 return (
 
-                    <div class={clsx("rich-text-field", pending && "pending")}>
+                    <div className={clsx("rich-text-field", pending && "pending")}>
                         <TextFieldSpinner callCount={callCount} containerClass="" invocationResult={invocationResult} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsProgressIndicator} />
                         <CkEditorWrapper
                             editorHandle={editorHandle}
@@ -138,10 +137,10 @@ export function DocumentField({ implementation, toolbarItems, onValueChange, val
 
                 return (
 
-                    <div class={clsx("document-field shadow-sm", pending && "pending")}>
+                    <div className={clsx("document-field shadow-sm", pending && "pending")}>
                         <TextFieldSpinner callCount={callCount} containerClass="" invocationResult={invocationResult} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsProgressIndicator} />
-                        <div class="document-field__toolbar shadow-sm"></div>
-                        <div class="document-field__editable-container">
+                        <div className="document-field__toolbar shadow-sm"></div>
+                        <div className="document-field__editable-container">
                             <CkEditorWrapper
                                 implementation={implementation ?? (globalThis as any).CKEDITOR?.DecoupledEditor ?? (globalThis as any).DecoupledEditor}
                                 toolbarItems={toolbarItems ?? DFDefaultItems}
@@ -157,7 +156,7 @@ export function DocumentField({ implementation, toolbarItems, onValueChange, val
                                 }}
                                 {...props}
                             >
-                                <div class="document-field__editable" />
+                                <div className="document-field__editable" />
                             </CkEditorWrapper>
                         </div>
                     </div>

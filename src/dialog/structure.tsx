@@ -1,8 +1,7 @@
 import { clsx } from "clsx";
-import { ComponentChildren, Ref } from "preact";
-import { Heading } from "preact-aria-widgets";
-import { EventType, useMergedProps } from "preact-prop-helpers";
-import { SlideFade } from "preact-transition";
+import { Heading } from "preact-aria-widgets/preact";
+import { ComponentChildren, EventType, Ref, useMergedProps } from "preact-prop-helpers/preact";
+import { SlideFade } from "preact-transition/preact";
 import { Button } from "../button/index.js";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
@@ -55,7 +54,7 @@ export const StructureDialogModalDialog = memoForwardRef(function StructureDialo
 export const StructureDialogModalContent = memoForwardRef(function StructureDialogModalContent({ childrenHeading, childrenBody, childrenFooter, headerPosition, ...props }: StructureDialogModalContentProps, ref: Ref<HTMLSpanElement>) {
     return (
         <span {...useMergedProps({ class: "modal-content" }, { ...props, ref })}>
-            {headerPosition == "start" ? <Heading class="modal-header" heading={childrenHeading}>{childrenBody}</Heading> : childrenBody}
+            {headerPosition == "start" ? <Heading className="modal-header" heading={childrenHeading}>{childrenBody}</Heading> : childrenBody}
             {childrenFooter}
         </span>
     )

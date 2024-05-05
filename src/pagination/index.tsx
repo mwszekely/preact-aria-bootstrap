@@ -1,9 +1,6 @@
 import clsx from "clsx";
-import { ComponentChildren, Ref } from "preact";
-import { Toolbar, ToolbarChild } from "preact-aria-widgets";
-import { EventDetail, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
-import { memo } from "preact/compat";
-import { useCallback, useEffect, useRef } from "preact/hooks";
+import { Toolbar, ToolbarChild } from "preact-aria-widgets/preact";
+import { ComponentChildren, EventDetail, Ref, memo, useCallback, useEffect, useMergedProps, usePress, useRef, useRefElement, useStableCallback, useState } from "preact-prop-helpers/preact";
 import { BootstrapIcon } from "../icon/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -21,9 +18,11 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
         return () => onChange(null, null);
     }, [page, windowSize])
 
+    if (labelPosition == 'hidden')
+        console.assert(typeof label == "string");
     return (
         <Toolbar<HTMLUListElement, HTMLButtonElement, HTMLLabelElement>
-            ariaLabel={labelPosition == "hidden" ? label : null}
+            ariaLabel={labelPosition == "hidden" ? label as string : null}
             singleSelectionAriaPropName="aria-current-page"
             singleSelectionMode="activation"
             singleSelectedIndex={page}
@@ -44,7 +43,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
                             activateSpace={true}
                             activateEnter={true}
                             description={keyboardControlsDescription ?? "Select a page:"}>
-                            <nav aria-label={labelPosition == 'hidden' ? label : undefined}>
+                            <nav aria-label={labelPosition == 'hidden' ? label as string : undefined}>
                                 <ul {...useMergedProps(info.propsToolbar, { class: "pagination" })}>
                                     <PaginationChildren childCount={childCount} windowSize={windowSize} />
                                 </ul>
@@ -71,7 +70,7 @@ const PaginationChildren = memo(({ childCount, windowSize }: { windowSize: numbe
     return (
         <>
             <PaginationButtonFirst index={firstIndex} onFocus={onFocusFirst} />
-            <span class="pagination-center scroll-shadows scroll-shadows-x">
+            <span className="pagination-center scroll-shadows scroll-shadows-x">
                 <PaginationButton key={`first`} index={firstIndex + 1} ref={centerFirstRef}>{firstIndex + 1 + 1}</PaginationButton>
                 {Array.from(function* () {
                     for (let page = firstIndex + 2; page <= lastIndex - 2; ++page) {
@@ -94,7 +93,7 @@ const PaginationButtonLast = memo(forwardElementRef(({ index, onFocus }: { index
     return (<PaginationButton index={index} onFocus={onFocus} ref={ref}>{index + 1} <BootstrapIcon icon="chevron-bar-right" label={null} /></PaginationButton>)
 }))
 
-const PaginationButton = memo(forwardElementRef(function PaginationButton({ index, children, onFocus }: { index: number, children: ComponentChildren, ref?: Ref<HTMLButtonElement>, onFocus?: null | (() => void) }, ref?: Ref<HTMLButtonElement>) {
+const PaginationButton = memo(forwardElementRef(function PaginationButton({ index, children, onFocus }: { index: number, children?: ComponentChildren, ref?: Ref<HTMLButtonElement>, onFocus?: null | (() => void) }, ref?: Ref<HTMLButtonElement>) {
 
     return (
         <ToolbarChild<HTMLButtonElement>
@@ -117,9 +116,10 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
                     refElementReturn
                 })
 
+                // @ts-expect-error onfocusin is correct, not onFocusIn
                 const p = useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined });
                 return (
-                    <li class={clsx("page-item", info.singleSelectionChildReturn.singleSelected && "active")}>
+                    <li className={clsx("page-item", info.singleSelectionChildReturn.singleSelected && "active")}>
                         <button {...p}>{children}</button>
                     </li>
                 )
@@ -131,7 +131,7 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
 
 
 
-export const Paginated = memo(function Paginated({ childCount, setPaginationEnd, setPaginationStart, paginationLabel, paginationLocation, paginationSize, children }: PaginatedProps<{ children: ComponentChildren; childCount: number, setPaginationStart: (n: number | null) => void, setPaginationEnd: (n: number | null) => void }>) {
+export const Paginated = memo(function Paginated({ childCount, setPaginationEnd, setPaginationStart, paginationLabel, paginationLocation, paginationSize, children }: PaginatedProps<{ children?: ComponentChildren; childCount: number, setPaginationStart: (n: number | null) => void, setPaginationEnd: (n: number | null) => void }>) {
 
     const paginationJsx = <Pagination
         windowSize={paginationSize || 500}

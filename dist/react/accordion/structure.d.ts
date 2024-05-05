@@ -1,4 +1,4 @@
-import { Ref } from "preact";
+import { Ref } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 export interface StructureProps<E extends Element> extends GlobalAttributes<E, "children"> {
 }
@@ -28,9 +28,9 @@ export interface StructureAccordionSectionBodyProps extends StructureProps<HTMLD
  *     <StructureAccordionSection>{...}</StructureAccordionSection>
  * </StructureAccordion>
  */
-export declare const StructureAccordion: ({ children, ...props }: StructureAccordionProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
-export declare const StructureAccordionSection: ({ children, ...props }: StructureAccordionSectionProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
-export declare const StructureAccordionSectionHeader: ({ children, ...props }: StructureAccordionSectionHeaderProps, ref: Ref<HTMLHeadingElement>) => import("preact").JSX.Element;
-export declare const StructureAccordionSectionHeaderButton: ({ children, ...props }: StructureAccordionSectionHeaderButtonProps, ref: Ref<HTMLButtonElement>) => import("preact").JSX.Element;
-export declare const StructureAccordionSectionBody: ({ show, children, ...props }: StructureAccordionSectionBodyProps, ref: Ref<HTMLDivElement>) => import("preact").JSX.Element;
+export declare const StructureAccordion: ({ children, ...props }: StructureAccordionProps, ref: Ref<HTMLDivElement>) => any;
+export declare const StructureAccordionSection: ({ children, ...props }: StructureAccordionSectionProps, ref: Ref<HTMLDivElement>) => any;
+export declare const StructureAccordionSectionHeader: ({ children, ...props }: StructureAccordionSectionHeaderProps, ref: Ref<HTMLHeadingElement>) => any;
+export declare const StructureAccordionSectionHeaderButton: ({ children, ...props }: StructureAccordionSectionHeaderButtonProps, ref: Ref<HTMLButtonElement>) => any;
+export declare const StructureAccordionSectionBody: ({ show, children, ...props }: StructureAccordionSectionBodyProps, ref: Ref<HTMLDivElement>) => any;
 //# sourceMappingURL=structure.d.ts.map

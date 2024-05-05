@@ -1,8 +1,6 @@
 import { clsx } from "clsx";
-import { ComponentChildren, createElement, Ref, VNode } from "preact";
-import { Heading } from "preact-aria-widgets";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { Heading } from "preact-aria-widgets/preact";
+import { ComponentChildren, createElement, memo, Ref, useMergedProps, VNode } from "preact-prop-helpers/preact";
 import { ButtonThemes } from "../context.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
@@ -20,9 +18,9 @@ export const Card = memo(forwardElementRef(function Card(p: CardProps, ref: Ref<
     let { children, title, subtitle, variantTheme, ...props } = p;
 
     if (subtitle)
-        children = <CardSubtitle subtitle={subtitle} class={title? "pt-0" : ""}>{children}</CardSubtitle>;
+        children = <CardSubtitle subtitle={subtitle} className={title? "pt-0" : ""}>{children}</CardSubtitle>;
     if (title)
-        children = <CardTitle title={title} class={subtitle? "pb-0" : ""}>{children}</CardTitle>;
+        children = <CardTitle title={title} className={subtitle? "pb-0" : ""}>{children}</CardTitle>;
 
     return (
         <div {...useMergedProps<HTMLDivElement>({ ref, className: clsx("card", variantTheme && `text-bg-${variantTheme}`) }, props)}>{children}</div>
@@ -34,7 +32,7 @@ export interface CardElementParagraphProps extends GlobalAttributes<HTMLDivEleme
      * * `paragraph`: Any generic text. The default. Will be padded around the edges.
      */
     type: "paragraph" | "footer";
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export interface CardElementTitleProps extends GlobalAttributes<HTMLHeadingElement, "children"> {
     /**
@@ -43,7 +41,7 @@ export interface CardElementTitleProps extends GlobalAttributes<HTMLHeadingEleme
      */
     type: "title";
     title: ComponentChildren;
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export interface CardElementSubtitleProps extends GlobalAttributes<HTMLHeadingElement, "children"> {
     /**
@@ -52,7 +50,7 @@ export interface CardElementSubtitleProps extends GlobalAttributes<HTMLHeadingEl
      */
     type: "subtitle";
     subtitle: ComponentChildren;
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export interface CardElementImageProps extends GlobalAttributes<HTMLImageElement, "children"> {
     /**
@@ -61,26 +59,26 @@ export interface CardElementImageProps extends GlobalAttributes<HTMLImageElement
     type: "image";
     src: string;
     position: "bottom" | "top" | "both";
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export interface CardElementFlushProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     /**
      * * `flush` Any non-card content that needs to have no padding. A list, for example.
      */
     type: "flush";
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export interface CardElementFooterProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**
      * * `footer`: A small, separated blurb of info at the bottom of the card.
      */
     type?: "paragraph" | "footer";
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export type CardElementProps = CardElementParagraphProps | CardElementFooterProps | CardElementImageProps | CardElementTitleProps | CardElementSubtitleProps | CardElementFlushProps;
 
 
-function CardElement2<E extends Element>({ type, ...p }: CardElementProps, ref: Ref<E>): VNode<any> {
+function CardElement2<E extends Element>({ type, ...p }: CardElementProps, ref: Ref<E>): VNode {
     switch (type) {
         default:
         case "paragraph": {

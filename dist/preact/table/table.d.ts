@@ -1,4 +1,4 @@
-import { ComponentChildren, h, Ref } from "preact";
+import { ComponentChildren, JSX, Ref } from "preact-prop-helpers/preact";
 import { ButtonThemes } from "../context.js";
 import { GlobalAttributes } from "../utility/types.js";
 export interface TableProps extends GlobalAttributes<HTMLTableElement, "children" | "ref"> {
@@ -16,7 +16,7 @@ export interface TableProps extends GlobalAttributes<HTMLTableElement, "children
      *
      * If you need to pass props to the &lt;div> that contains it, pass them here.
      */
-    propsContainer?: null | undefined | h.JSX.HTMLAttributes<HTMLDivElement>;
+    propsContainer?: null | undefined | JSX.HTMLAttributes<HTMLDivElement>;
 }
 export interface TableRowProps extends GlobalAttributes<HTMLTableRowElement, "children" | "ref"> {
     variantTheme?: ButtonThemes;
@@ -26,14 +26,14 @@ export interface TableCellProps extends GlobalAttributes<HTMLTableCellElement, "
     fillY?: boolean;
     tableHeadType: null | "sortable" | "unsortable";
 }
-export declare const Table: ({ propsContainer, dark, hover, striped, stripedColumns, variantBorder, bordered, variantSize, variantTheme, verticalAlign, ...props }: TableProps, ref?: Ref<HTMLTableElement>) => import("preact").JSX.Element;
+export declare const Table: ({ propsContainer, dark, hover, striped, stripedColumns, variantBorder, bordered, variantSize, variantTheme, verticalAlign, ...props }: TableProps, ref?: Ref<HTMLTableElement>) => JSX.Element;
 export interface TableSectionProps extends GlobalAttributes<HTMLTableSectionElement, "children" | "ref"> {
     divider?: boolean;
     variantTheme?: ButtonThemes;
-    children: ComponentChildren;
+    children?: ComponentChildren;
     location: "head" | "body" | "foot";
 }
-export declare const TableSection: ({ location, divider, variantTheme, ...props }: TableSectionProps, ref?: Ref<HTMLTableSectionElement>) => import("preact").JSX.Element;
-export declare const TableRow: ({ variantTheme, children, ...props }: TableRowProps, ref?: Ref<HTMLTableRowElement>) => import("preact").JSX.Element;
-export declare const TableCell: ({ variantTheme, fillY, tableHeadType, children, ...props }: TableCellProps, ref?: Ref<HTMLTableCellElement>) => import("preact").JSX.Element;
+export declare const TableSection: ({ location, divider, variantTheme, ...props }: TableSectionProps, ref?: Ref<HTMLTableSectionElement>) => JSX.Element;
+export declare const TableRow: ({ variantTheme, children, ...props }: TableRowProps, ref?: Ref<HTMLTableRowElement>) => JSX.Element;
+export declare const TableCell: ({ variantTheme, fillY, tableHeadType, children, ...props }: TableCellProps, ref?: Ref<HTMLTableCellElement>) => JSX.Element;
 //# sourceMappingURL=table.d.ts.map

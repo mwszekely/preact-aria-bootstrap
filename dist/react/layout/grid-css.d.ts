@@ -1,4 +1,4 @@
-import { Ref } from "preact";
+import { JSX, Ref } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 export interface GridCssProps extends GlobalAttributes<HTMLDivElement, "children"> {
     columns?: number;
@@ -21,6 +21,6 @@ export interface GridCssItemProps extends GlobalAttributes<HTMLDivElement, "chil
     startXl?: number;
     startXxl?: number;
 }
-export declare const GridCss: ({ columns, gap, children, ...props }: GridCssProps, ref: Ref<HTMLDivElement>) => import("preact").VNode<import("preact").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
-export declare const GridCssItem: ({ span, spanXs, spanSm, spanMd, spanLg, spanXl, spanXxl, start, startXs, startSm, startMd, startLg, startXl, startXxl, children, ...props }: GridCssItemProps, ref?: Ref<HTMLDivElement>) => import("preact").VNode<import("preact").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
+export declare const GridCss: ({ columns, gap, children, ...props }: GridCssProps, ref: Ref<HTMLDivElement>) => import("preact").VNode<JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
+export declare const GridCssItem: ({ span, spanXs, spanSm, spanMd, spanLg, spanXl, spanXxl, start, startXs, startSm, startMd, startLg, startXl, startXxl, children, ...props }: GridCssItemProps, ref?: Ref<HTMLDivElement>) => import("preact").VNode<JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
 //# sourceMappingURL=grid-css.d.ts.map

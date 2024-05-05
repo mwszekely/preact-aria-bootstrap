@@ -1,7 +1,6 @@
 
 import { clsx } from "clsx";
-import { Ref } from "preact";
-import { useMergedProps } from "preact-prop-helpers";
+import { Ref, useMergedProps } from "preact-prop-helpers/preact";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 

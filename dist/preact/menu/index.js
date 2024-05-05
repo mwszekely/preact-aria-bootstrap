@@ -1,10 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, useDefaultRenderPortal } from "preact-aria-widgets";
-import { EventDetail, returnUndefined, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
-import { Fade, ZoomFade } from "preact-transition";
-import { memo } from "preact/compat";
-import { useCallback, useRef } from "preact/hooks";
+import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, useDefaultRenderPortal } from "preact-aria-widgets/preact";
+import { EventDetail, memo, returnUndefined, useCallback, useMergedProps, useRef, useStableCallback, useState, useTimeout } from "preact-prop-helpers/preact";
+import { Fade, ZoomFade } from "preact-transition/preact";
 import { usePopper } from "../popper/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -77,12 +75,12 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
             const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
             return (_jsx(AriaMenuItem, { imperativeHandle: imperativeHandle, index: index, singleSelectionDisabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
                     return (_jsxs(StructureMenuItem, { ...useMergedProps(menuInfo.props, { ...props, ref }), showSpinner: showSpinner, disabled: (!!disabled), pressing: menuInfo.pressReturn.pressing, children: [children, _jsx(StructureMenuItemSpinner, { showSpinner: showSpinner, ...progressInfo.propsProgressIndicator })] }));
-                    /*const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsProgressIndicator} class={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
+                    /*const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsProgressIndicator} className={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
     
                     return (
                         <div {...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props)}>
                             {children}
-                            <div class="dropdown-item-icon dropdown-item-icon-end">{spinnerJsx}</div>
+                            <div className="dropdown-item-icon dropdown-item-icon-end">{spinnerJsx}</div>
                         </div>
                     )*/
                 } }));
@@ -92,6 +90,6 @@ const StructureMenuItem = memoForwardRef(function StructureMenuItem({ children, 
     return (_jsx("div", { ...useMergedProps({ className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", pressing && "active") }, { ...props, ref }), children: children }));
 });
 const StructureMenuItemSpinner = memoForwardRef(function StructureMenuItemSpinner({ showSpinner, ...props }, ref) {
-    return (_jsx("div", { class: "dropdown-item-icon dropdown-item-icon-end", children: _jsx(Fade, { show: showSpinner, exitVisibility: "removed", children: _jsx("div", { ...useMergedProps({ class: clsx("spinner-border", "spinner-border-sm") }, { ...props, ref }) }) }) }));
+    return (_jsx("div", { className: "dropdown-item-icon dropdown-item-icon-end", children: _jsx(Fade, { show: showSpinner, exitVisibility: "removed", children: _jsx("div", { ...useMergedProps({ class: clsx("spinner-border", "spinner-border-sm") }, { ...props, ref }) }) }) }));
 });
 //# sourceMappingURL=index.js.map

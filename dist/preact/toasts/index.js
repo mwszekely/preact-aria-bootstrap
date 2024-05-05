@@ -1,10 +1,9 @@
 import { Fragment as _Fragment, jsxs as _jsxs, jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { createContext } from "preact";
-import { Toast as AriaToast, Toasts as AriaToasts } from "preact-aria-widgets";
-import { useMergedProps, usePortalChildren } from "preact-prop-helpers";
-import { SlideFade } from "preact-transition";
-import { useContext, useErrorBoundary } from "preact/hooks";
+import { Component } from "preact";
+import { Toast as AriaToast, Toasts as AriaToasts } from "preact-aria-widgets/preact";
+import { createContext, useContext, useMergedProps, usePortalChildren } from "preact-prop-helpers/preact";
+import { SlideFade } from "preact-transition/preact";
 import { Button } from "../button/index.js";
 import { usePortalId } from "../utility/use-portal-id.js";
 const PushToastContext = createContext(null);
@@ -31,7 +30,7 @@ export function Toast({ timeout, politeness, children, ...p }) {
     // const { useToastProps, dismiss, status } = useToast<HTMLDivElement>({ timeout: timeout ?? defaultTimeout, politeness });
     return (_jsx(AriaToast, { index: index, timeout: 10000000 ?? timeout ?? defaultTimeout, children: children, render: info => {
             const show = (info.toastReturn.showing);
-            return (_jsx(ToastDismissContext.Provider, { value: info.toastReturn.dismiss, children: _jsx(SlideFade, { show: show, slideTargetInline: 1, animateOnMount: show, exitVisibility: "removed", children: _jsx("div", { ...useMergedProps(info.props, props, { class: clsx("toast show" /*, colorVariant && `text-bg-${colorVariant}`*/) }), children: _jsxs("div", { class: "d-flex", children: [_jsx("div", { class: "toast-body", children: children }), _jsx(Button, { class: "btn-close me-2 m-auto", "aria-label": "Dismiss alert", onPress: info.toastReturn.dismiss })] }) }) }) }));
+            return (_jsx(ToastDismissContext.Provider, { value: info.toastReturn.dismiss, children: _jsx(SlideFade, { show: show, slideTargetInline: 1, animateOnMount: show, exitVisibility: "removed", children: _jsx("div", { ...useMergedProps(info.props, props, { class: clsx("toast show" /*, colorVariant && `text-bg-${colorVariant}`*/) }), children: _jsxs("div", { className: "d-flex", children: [_jsx("div", { className: "toast-body", children: children }), _jsx(Button, { className: "btn-close me-2 m-auto", "aria-label": "Dismiss alert", onPress: info.toastReturn.dismiss })] }) }) }) }));
         } }));
 }
 function defaultErrorToToast(error) {
@@ -46,9 +45,23 @@ function defaultErrorToToast(error) {
  * @param param0
  * @returns
  */
-export function ToastErrorBoundary({ errorToToast, children }) {
+/*function ToastErrorBoundary({ errorToToast, children }: { errorToToast?: (error: any) => JSX.Element, children?: ComponentChildren }) {
     const pushToast = usePushToast();
-    const [error, resetError] = useErrorBoundary(error => void (pushToast((errorToToast ?? defaultErrorToToast)(error))));
-    return _jsx(_Fragment, { children: children });
+    //const [error, resetError] = useErrorBoundary(error => void (pushToast((errorToToast ?? defaultErrorToToast)(error))));
+    return <>{children}</>;
+}*/
+export class ToastErrorBoundary extends Component {
+    componentDidCatch(error, errorInfo) {
+        this.setState({ hasError: true, error, pushedToast: false });
+    }
+    render() {
+        return (_jsx(PushToastContext.Consumer, { children: (pushToast) => {
+                if (!this.state.pushedToast) {
+                    pushToast(defaultErrorToToast(this.state.error));
+                    this.setState({ pushedToast: true });
+                }
+                return _jsx(_Fragment, { children: this.props.children });
+            } }));
+    }
 }
 //# sourceMappingURL=index.js.map

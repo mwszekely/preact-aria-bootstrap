@@ -1,7 +1,5 @@
-import { ComponentChildren, h, Ref, VNode } from "preact";
-import { Dialog as AriaDialog, DialogProps as AriaDialogProps, useDefaultRenderPortal } from "preact-aria-widgets";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { Dialog as AriaDialog, DialogProps as AriaDialogProps, useDefaultRenderPortal } from "preact-aria-widgets/preact";
+import { ComponentChildren, JSX, Ref, VNode, memo, useMergedProps } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
@@ -16,7 +14,7 @@ export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "child
     anchor: VNode;
 
     /** Props are spread to the anchor element. If you need to have a class name or style set on the dialog itself, pass those here. */
-    propsPortal?: h.JSX.HTMLAttributes<HTMLDivElement>;
+    propsPortal?: JSX.HTMLAttributes<HTMLDivElement>;
 }
 
 export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }: OffcanvasProps, ref?: Ref<HTMLSpanElement>) {

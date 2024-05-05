@@ -1,5 +1,4 @@
-import { ComponentChildren, h, Ref, VNode } from "preact";
-import { AsyncHandler, Nullable } from "preact-prop-helpers";
+import { AsyncHandler, ComponentChildren, JSX, Nullable, Ref, VNode } from "preact-prop-helpers/preact";
 import { ButtonThemes } from "../context.js";
 import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types.js";
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
@@ -66,11 +65,11 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     /**
      * Optional. Only necessary if this is an "action-only" list; it's not needed for selection behavior.
      */
-    onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>;
+    onPress?: AsyncHandler<JSX.TargetedEvent<HTMLDivElement, Event>, void>;
     keyboardControlsDescription?: string;
 }
 export declare const List: import("preact").FunctionComponent<import("preact/compat").PropsWithoutRef<PaginatedProps<LabelledProps<ListProps, never>>> & {
     ref?: Ref<any> | undefined;
 }>;
-export declare const ListItem: ({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) => import("preact").JSX.Element;
+export declare const ListItem: ({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) => JSX.Element;
 //# sourceMappingURL=index.d.ts.map

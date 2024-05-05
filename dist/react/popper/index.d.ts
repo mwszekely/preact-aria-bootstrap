@@ -1,6 +1,5 @@
 import { Alignment, Placement, Side } from "@floating-ui/dom";
-import { h } from "preact";
-import { ElementProps } from "preact-prop-helpers";
+import { ElementProps, JSX } from "preact-prop-helpers/preact";
 export interface UsePopperProps<SourceElement extends Element> {
     popperParameters: {
         placement: Placement;
@@ -23,7 +22,7 @@ export interface UsePopperReturnType<SourceElement extends Element, PopupElement
     propsSource: ElementProps<SourceElement>;
     propsPopup: ElementProps<PopupElement>;
     propsArrow: ElementProps<ArrowElement>;
-    propsData: h.JSX.HTMLAttributes<any>;
+    propsData: JSX.HTMLAttributes<any>;
     popperReturn: {
         usedSide: Side | null;
         usedAlignment: Alignment | null;

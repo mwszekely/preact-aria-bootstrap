@@ -1,11 +1,10 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { ComponentChildren, h, Ref } from "preact";
-import { UseAsyncReturnType } from "preact-prop-helpers";
+import { ComponentChildren, JSX, Ref, UseAsyncReturnType } from "preact-prop-helpers/preact";
 import { LabelledProps } from "../utility/types.js";
-export interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<h.JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
+export interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
     value: T;
     marginBottom?: number;
-    onValueChange: null | ((value: T, event: h.JSX.TargetedEvent<E>) => void | Promise<void>);
+    onValueChange: null | ((value: T, event: JSX.TargetedEvent<E>) => void | Promise<void>);
     iconStart?: ComponentChildren | null | undefined;
     iconEnd?: ComponentChildren | null | undefined;
     size?: "lg" | "sm" | "md" | null;
@@ -66,7 +65,7 @@ export interface TextFieldTextInputProps extends TextFieldBase<HTMLInputElement,
 }
 export type TextFieldTextProps = TextFieldTextInputProps | TextFieldTextAreaProps;
 export type TextFieldProps = TextFieldTextProps | TextFieldNumberProps | TextFieldBigIntProps | TextFieldDateTimeProps | TextFieldDateProps | TextFieldTimeProps;
-export declare const TextField: ({ type, ...props }: LabelledProps<TextFieldProps, "floating" | "tooltip">, ref?: Ref<HTMLInputElement>) => import("preact").JSX.Element;
+export declare const TextField: ({ type, ...props }: LabelledProps<TextFieldProps, "floating" | "tooltip">, ref?: Ref<HTMLInputElement>) => JSX.Element;
 export declare function useCommitTextField<C>({ getFocused, commit, currentCapture, showSpinner, value }: {
     showSpinner: boolean;
     currentCapture: C | undefined;
@@ -80,7 +79,7 @@ export declare const TextFieldSpinner: import("preact").FunctionComponent<{
     debouncingAsync: boolean;
     debouncingSync: boolean;
     pending: boolean;
-    propsIndicator: h.JSX.HTMLAttributes<any>;
+    propsIndicator: JSX.HTMLAttributes<any>;
     invocationResult: UseAsyncReturnType<any, any>["invocationResult"];
 }>;
 //# sourceMappingURL=index.d.ts.map

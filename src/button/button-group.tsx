@@ -1,14 +1,12 @@
 import { clsx } from "clsx";
-import { createContext, h, Ref } from "preact";
-import { Toolbar, ToolbarProps, useLabelSynthetic, UseToolbarParameters, UseToolbarReturnType, UseToolbarSubInfo } from "preact-aria-widgets";
-import { EventDetail, Nullable, useAsync, useMergedProps, useState } from "preact-prop-helpers";
-import { useMemo, useRef } from "preact/hooks";
+import { Toolbar, ToolbarProps, useLabelSynthetic, UseToolbarParameters, UseToolbarReturnType, UseToolbarSubInfo } from "preact-aria-widgets/preact";
+import { createContext, EventDetail, JSX, Nullable, Ref, useAsync, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers/preact";
 import { ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DisabledContext } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { LabelledProps } from "../utility/types.js";
 import { ButtonProps } from "./button-action.js";
 
-export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className"> {
+export interface ButtonGroupProps extends Pick<JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className"> {
     /**
      * Disables all buttons in the group together (buttons cannot individually override this)
      */
@@ -93,6 +91,9 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
 
     const classBase = (separated ? "btn-toolbar" : "btn-group")
 
+    if (labelPosition == 'hidden')
+        console.assert(typeof label == "string");
+    
     return (
         <DefaultButtonSize.Provider value={variantSize ?? null}>
             <DefaultButtonTheme.Provider value={variantTheme ?? null}>
@@ -110,7 +111,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
                             role="toolbar"  // TODO: Was group, but that doesn't count as an application, I think?
                             pageNavigationSize={0}
                             orientation={orientation}
-                            ariaLabel={labelPosition == 'hidden' ? label : null}
+                            ariaLabel={labelPosition == 'hidden' ? label as string : null}
                             singleSelectedIndex={selectionMode == "single" ? (pendingIndex ?? selectedIndex) : undefined}
                             render={info => {
                                 const visibleLabel = <label {...info.propsLabel}>{label}</label>
@@ -142,7 +143,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     )
 }
 
-export function ButtonGroupGroup({ label, labelPosition, children, ...props }: LabelledProps<Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "class" | "className" | "style" | "children">, "within">, ref?: Ref<HTMLSpanElement>) {
+export function ButtonGroupGroup({ label, labelPosition, children, ...props }: LabelledProps<Pick<JSX.HTMLAttributes<HTMLSpanElement>, "class" | "className" | "style" | "children">, "within">, ref?: Ref<HTMLSpanElement>) {
     const { propsInput, propsLabel } = useLabelSynthetic<HTMLSpanElement, HTMLLabelElement>({
         labelParameters: { ariaLabel: labelPosition == "hidden" ? label : null, onLabelClick: null },
         randomIdInputParameters: { prefix: "bggg-" },

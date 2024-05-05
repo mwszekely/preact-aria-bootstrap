@@ -1,5 +1,5 @@
-import { ComponentChildren, createElement, Ref } from "preact";
-import { SliderThumbInfo, UseSliderParameters, UseSliderThumbParameters } from "preact-aria-widgets";
+import { SliderThumbInfo, UseSliderParameters, UseSliderThumbParameters } from "preact-aria-widgets/preact";
+import { ComponentChildren, createElement, Ref } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 export interface RangeProps extends GlobalAttributes<HTMLDivElement> {
     debounce?: number | boolean;

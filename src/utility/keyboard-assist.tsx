@@ -1,8 +1,5 @@
-import { ComponentChild, ComponentChildren, createContext, Ref, VNode } from "preact";
-import { generateRandomId, useGlobalHandler, useHasCurrentFocus, useMergedProps, usePersistentState, useRefElement, useStableCallback, useState, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
-import { CollapseFade, SlideZoomFade } from "preact-transition";
-import { memo } from "preact/compat";
-import { useContext, useEffect, useLayoutEffect, useRef } from "preact/hooks";
+import { ComponentChildren, createContext, generateRandomId, memo, Ref, useContext, useEffect, useGlobalHandler, useHasCurrentFocus, useLayoutEffect, useMergedProps, usePersistentState, useRef, useRefElement, useStableCallback, useState, UseTypeaheadNavigationReturnTypeSelf, VNode } from "preact-prop-helpers/preact";
+import { CollapseFade, SlideZoomFade } from "preact-transition/preact";
 import { forwardElementRef } from "./forward-element-ref.js";
 import { useClonedElement } from "./use-cloned-element.js";
 
@@ -61,7 +58,7 @@ interface KeyboardAssistContext {
 type TypeaheadStatus = UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"];
 
 const KeyboardAssistContext = createContext<null | KeyboardAssistContext>(null);
-export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ description, activateEnter, activateSpace, leftRight, upDown, homeEnd, pageKeys, children, typeaheadStatus, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & { children: VNode, typeaheadStatus: TypeaheadStatus | null; }, ref?: Ref<any>) {
+export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ description, activateEnter, activateSpace, leftRight, upDown, homeEnd, pageKeys, children, typeaheadStatus, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & { children?: VNode, typeaheadStatus: TypeaheadStatus | null; }, ref?: Ref<any>) {
     const {
         id: figureDescriptionId,
         addHomeEnd,
@@ -181,7 +178,7 @@ export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(
         <>
             {/* 
             TODO: Should we place a "dummy" icon here? This would be for assistive technologies, but is that relevant when primarily using the keyboard?
-            <div class="visually-hidden" role="figure" aria-describedby={figureDescriptionId}></div> 
+            <div className="visually-hidden" role="figure" aria-describedby={figureDescriptionId}></div> 
 
             Also: if this is used, e.g., in a tbody, then inserting a dummy icon there won't work!
             */}
@@ -190,7 +187,7 @@ export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon(
     );
 })
 
-export function KeyboardAssistProvider({ children }: { children: ComponentChildren }) {
+export function KeyboardAssistProvider({ children }: { children?: ComponentChildren }) {
     const [id] = useState(() => generateRandomId("keyboard-assist-"));
     const [leftRight2, setLeftRight] = useState(false);
     const [upDown2, setUpDown] = useState(false);
@@ -349,8 +346,8 @@ function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftR
     return (
         <>
             <SlideZoomFade show={show} zoomMin={0.875} zoomOriginInline={1} zoomOriginBlock={1} slideTargetBlock={0.125} slideTargetInline={0.125}>
-                <div class="keyboard-assist-icon-container" role="figure" aria-labelledby={id}>
-                    <div id={id} class="keyboard-assist-instructions">{description}</div>
+                <div className="keyboard-assist-icon-container" role="figure" aria-labelledby={id}>
+                    <div id={id} className="keyboard-assist-instructions">{description}</div>
                     <KeyboardAssistIconArrowKeys leftRight={leftRight} upDown={upDown} />
                     <KeyboardAssistIconHomeEnd enabled={homeEnd} />
                     <KeyboardAssistIconPageKeys enabled={pageKeys} />
@@ -358,7 +355,7 @@ function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftR
                     <KeyboardAssistIconTypeahead typeaheadStatus={typeaheadStatus} />
                     <KeyboardAssistIconLeaveF2 enabled={leaveF2 || false} />
                     <KeyboardAssistIconRichTextF10 enabled={textF10 || false} />
-                    <div class="keyboard-assist-dismiss-message">To dismiss these instructions, press <kbd>F7</kbd>.<br />To show again, press <kbd>Shift+F7</kbd>.</div>
+                    <div className="keyboard-assist-dismiss-message">To dismiss these instructions, press <kbd>F7</kbd>.<br />To show again, press <kbd>Shift+F7</kbd>.</div>
                 </div>
             </SlideZoomFade>
         </>
@@ -367,7 +364,7 @@ function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftR
 
 const KeyboardAssistIconArrowKeys = memo(function KeyboardAssistIconArrowKeys({ leftRight, upDown }: { leftRight: boolean, upDown: boolean }) {
     return (
-        <div class="keyboard-assist-arrow-keys">
+        <div className="keyboard-assist-arrow-keys">
             <KeyboardAssistIconKey enabled={upDown} className="keyboard-assist-key-arrow-up">↑</KeyboardAssistIconKey>
             <KeyboardAssistIconKey enabled={leftRight} className="keyboard-assist-key-arrow-left">←</KeyboardAssistIconKey>
             <KeyboardAssistIconKey enabled={upDown} className="keyboard-assist-key-arrow-down">↓</KeyboardAssistIconKey>
@@ -378,7 +375,7 @@ const KeyboardAssistIconArrowKeys = memo(function KeyboardAssistIconArrowKeys({ 
 
 const KeyboardAssistIconPageKeys = memo(function KeyboardAssistIconPageKeys({ enabled }: { enabled: boolean }) {
     return (
-        <div class="keyboard-assist-page-keys">
+        <div className="keyboard-assist-page-keys">
             <KeyboardAssistIconKey enabled={enabled} className="keyboard-assist-key-page-up">Pg Up</KeyboardAssistIconKey>
             <KeyboardAssistIconKey enabled={enabled} className="keyboard-assist-key-page-down">Pg Dn</KeyboardAssistIconKey>
         </div>
@@ -387,7 +384,7 @@ const KeyboardAssistIconPageKeys = memo(function KeyboardAssistIconPageKeys({ en
 
 const KeyboardAssistIconHomeEnd = memo(function KeyboardAssistIconHomeEnd({ enabled }: { enabled: boolean }) {
     return (
-        <div class="keyboard-assist-home-end">
+        <div className="keyboard-assist-home-end">
             <KeyboardAssistIconKey enabled={enabled} className="keyboard-assist-key-home">Home</KeyboardAssistIconKey>
             <KeyboardAssistIconKey enabled={enabled} className="keyboard-assist-key-end">End</KeyboardAssistIconKey>
         </div>
@@ -405,7 +402,7 @@ const KeyboardAssistIconSelectable = memo(function KeyboardAssistIconTypeahead({
 
     return (
         <CollapseFade show={visible} exitVisibility="hidden">
-            <div class="keyboard-assist-selectable">
+            <div className="keyboard-assist-selectable">
                 <div className="keyboard-assist-selectable-message">Select with {selectableLabelRef.current}</div>
             </div>
         </CollapseFade>
@@ -416,7 +413,7 @@ const KeyboardAssistIconTypeahead = memo(function KeyboardAssistIconTypeahead({ 
 
     return (
         <CollapseFade show={typeaheadStatus != null} exitVisibility="hidden">
-            <div class="keyboard-assist-typeahead">
+            <div className="keyboard-assist-typeahead">
                 <div className="keyboard-assist-typeahead-message">{typeaheadStatus == 'none' ? "Search by typing" : typeaheadStatus == 'valid' ? "Keep typing to continue" : "No result found"}</div>
             </div>
         </CollapseFade>
@@ -427,7 +424,7 @@ const KeyboardAssistIconLeaveF2 = memo(function KeyboardAssistIconLeaveF2({ enab
 
     return (
         <CollapseFade show={enabled} exitVisibility="hidden">
-            <div class="keyboard-assist-leave-f2">
+            <div className="keyboard-assist-leave-f2">
                 <div className="keyboard-assist-leave-f2-message">Press <kbd>F2</kbd> to return</div>
             </div>
         </CollapseFade>
@@ -438,15 +435,15 @@ const KeyboardAssistIconRichTextF10 = memo(function KeyboardAssistIconRichTextF1
 
     return (
         <CollapseFade show={enabled} exitVisibility="hidden">
-            <div class="keyboard-assist-rich-text-f10">
+            <div className="keyboard-assist-rich-text-f10">
                 <div className="keyboard-assist-rich-text-f10-message">Press <kbd>Alt+F10</kbd> to focus the toolbar</div>
             </div>
         </CollapseFade>
     )
 })
 
-const KeyboardAssistIconKey = memo(function KeyboardAssistIconKey({ children, className, enabled }: { children: ComponentChild, className: string, enabled: boolean }) {
-    return (<div class={"keyboard-assist-key " + className + (!enabled ? " keyboard-assist-key-disabled" : "")}>{children}</div>)
+const KeyboardAssistIconKey = memo(function KeyboardAssistIconKey({ children, className, enabled }: { children?: ComponentChildren, className: string, enabled: boolean }) {
+    return (<div className={"keyboard-assist-key " + className + (!enabled ? " keyboard-assist-key-disabled" : "")}>{children}</div>)
 })
 
 function KeyboardAssistIcon2() {
@@ -473,7 +470,7 @@ function KeyboardAssistIcon2() {
     const Y_PAGE = K * 0.3;
     const H_PAGE = K * 0.4;
     return (
-        <svg width={P * 6 + K * 5} height={P * 3 + K * 2} class="keyboard-assist">
+        <svg width={P * 6 + K * 5} height={P * 3 + K * 2} className="keyboard-assist">
 
             <rect x={P * 2 + K * 1} y={P * 1 + K * 0} width={K} height={K} rx={R} ry={R} fill="black" />
             <rect x={P * 1 + K * 0} y={P * 2 + K * 1} width={K} height={K} rx={R} ry={R} fill="black" />

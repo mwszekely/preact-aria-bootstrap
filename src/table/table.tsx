@@ -1,8 +1,6 @@
 
 import { clsx } from "clsx";
-import { ComponentChildren, h, Ref } from "preact";
-import { useEnsureStability, useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { ComponentChildren, JSX, Ref, memo, useEnsureStability, useMergedProps } from "preact-prop-helpers/preact";
 import { ButtonThemes } from "../context.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
@@ -25,7 +23,7 @@ export interface TableProps extends GlobalAttributes<HTMLTableElement, "children
      * 
      * If you need to pass props to the &lt;div> that contains it, pass them here. 
      */
-    propsContainer?: null | undefined | h.JSX.HTMLAttributes<HTMLDivElement>;
+    propsContainer?: null | undefined | JSX.HTMLAttributes<HTMLDivElement>;
 }
 
 export interface TableRowProps extends GlobalAttributes<HTMLTableRowElement, "children" | "ref"> {
@@ -66,7 +64,7 @@ export const Table = memo(forwardElementRef(function Table({ propsContainer, dar
 export interface TableSectionProps extends GlobalAttributes<HTMLTableSectionElement, "children" | "ref"> {
     divider?: boolean;
     variantTheme?: ButtonThemes;
-    children: ComponentChildren;
+    children?: ComponentChildren;
     location: "head" | "body" | "foot";
 }
 
@@ -104,7 +102,7 @@ export const TableCell = memo(forwardElementRef(function TableCell({ variantThem
     else {
         children = useClonedElement(children, props, ref);
         return (
-            <td class={clsx(fillY && "py-0")}>{children}</td>
+            <td className={clsx(fillY && "py-0")}>{children}</td>
         )
     }
 

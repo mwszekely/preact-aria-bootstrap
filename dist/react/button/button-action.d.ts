@@ -1,6 +1,5 @@
-import { ComponentChildren, Ref, VNode } from "preact";
-import { TargetedButtonPressEvent } from "preact-aria-widgets";
-import { Nullable, UseAsyncHandlerParameters } from "preact-prop-helpers";
+import { TargetedButtonPressEvent } from "preact-aria-widgets/preact";
+import { ComponentChildren, Nullable, Ref, UseAsyncHandlerParameters, VNode } from "preact-prop-helpers/preact";
 import { ButtonFills, ButtonSizes, ButtonThemes } from "../context.js";
 import { TooltipProps } from "../tooltip/index.js";
 import { GlobalAttributes } from "../utility/types.js";
@@ -27,7 +26,7 @@ export interface ButtonProps extends GlobalAttributes<HTMLButtonElement, "childr
      */
     pressed?: Nullable<boolean>;
 }
-export declare const Button: ({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) => import("preact").JSX.Element;
+export declare const Button: ({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) => any;
 export interface StructureButtonProps extends GlobalAttributes<HTMLButtonElement, "children"> {
 }
 export interface StructureButtonProgressIndicatorProps extends GlobalAttributes<HTMLProgressElement> {

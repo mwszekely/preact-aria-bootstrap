@@ -1,10 +1,8 @@
 
 import { clsx } from "clsx";
-import { ComponentChildren, h, Ref } from "preact";
-import { Checkbox as AriaCheckbox, CheckboxCheckedType, EventDetail, ProgressWithHandler, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets";
-import { UseAsyncHandlerParameters, useMergedProps } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
-import { useContext } from "preact/hooks";
+import { Checkbox as AriaCheckbox, CheckboxCheckedType, EventDetail, ProgressWithHandler, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets/preact";
+import { ComponentChildren, JSX, Ref, UseAsyncHandlerParameters, useContext, useMergedProps } from "preact-prop-helpers/preact";
+import { Fade } from "preact-transition/preact";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
@@ -12,7 +10,7 @@ import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { LabelledProps } from "../utility/types.js";
 import { StructureCheckboxInput, StructureCheckboxLabel } from "./structure.js";
 
-export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
+export interface CheckboxProps extends Pick<JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     inline?: boolean;
     checked: boolean | "mixed";
     onValueChange(checked: boolean, event: TargetedCheckboxChangeEvent): void | Promise<void>;
@@ -30,10 +28,10 @@ export interface CheckboxProps extends Pick<h.JSX.HTMLAttributes<any>, "children
     imperativeHandle?: Ref<UseCheckboxReturnType<HTMLInputElement, HTMLLabelElement>>;
 
     /** Optional props to spread *specifically* to the input element */
-    propsInput?: h.JSX.HTMLAttributes<HTMLInputElement>;
+    propsInput?: JSX.HTMLAttributes<HTMLInputElement>;
 
     /** Optional props to spread *specifically* to the input element */
-    propsLabel?: h.JSX.HTMLAttributes<HTMLLabelElement>;
+    propsLabel?: JSX.HTMLAttributes<HTMLLabelElement>;
 }
 
 function nextTristate(checked: CheckboxCheckedType) {
@@ -80,7 +78,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                 const pending = (p || debouncingAsync || debouncingSync);
 
                 const loadingJsx = (
-                    <Fade show={p} exitVisibility="removed"><span class="spinner-border spinner-border-sm" {...propsProgressIndicator} /></Fade>
+                    <Fade show={p} exitVisibility="removed"><span className="spinner-border spinner-border-sm" {...propsProgressIndicator} /></Fade>
                 )
 
                 const defaultDisabled = useContext(DisabledContext);
@@ -89,9 +87,12 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                 disabled ||= defaultDisabled;
                 const d = disabled ? disabledType : false;
 
+                if (labelPosition == 'hidden')
+                    console.assert(typeof label == "string");
+
                 return (
                     <AriaCheckbox<HTMLInputElement, HTMLLabelElement>
-                        ariaLabel={labelPosition == 'hidden' ? label : null}
+                        ariaLabel={labelPosition == 'hidden' ? label as string : null}
                         checked={(pending ? currentCapture : null) ?? checked}
                         onCheckedChange={syncHandler}
                         labelPosition={labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate"}

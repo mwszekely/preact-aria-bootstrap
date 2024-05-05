@@ -1,9 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { createContext } from "preact";
-import { Toolbar, useLabelSynthetic } from "preact-aria-widgets";
-import { EventDetail, useAsync, useMergedProps, useState } from "preact-prop-helpers";
-import { useMemo, useRef } from "preact/hooks";
+import { Toolbar, useLabelSynthetic } from "preact-aria-widgets/preact";
+import { createContext, EventDetail, useAsync, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers/preact";
 import { DefaultButtonSize, DefaultButtonTheme, DisabledContext } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 export const ButtonGroupContext = createContext(null);
@@ -19,6 +17,8 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     });
     const pendingIndex = (pending ? capturedIndex : null);
     const classBase = (separated ? "btn-toolbar" : "btn-group");
+    if (labelPosition == 'hidden')
+        console.assert(typeof label == "string");
     return (_jsx(DefaultButtonSize.Provider, { value: variantSize ?? null, children: _jsx(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: _jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(ButtonGroupContext.Provider, { value: useMemo(() => ({ pendingIndex }), [pendingIndex]), children: _jsx(Toolbar, { onSingleSelectedIndexChange: (...e) => {
                             onSelectedIndexChangeSync(...e);
                         }, imperativeHandle: imperativeHandle, singleSelectionAriaPropName: "aria-pressed", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?

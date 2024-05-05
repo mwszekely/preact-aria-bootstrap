@@ -1,11 +1,11 @@
-import { ComponentChildren, Ref } from "preact";
-import { UseMenuSurfaceReturnType } from "preact-aria-widgets";
+import { UseMenuSurfaceReturnType } from "preact-aria-widgets/preact";
+import { ComponentChildren, Ref } from "preact-prop-helpers/preact";
 import { ButtonProps } from "../button/index.js";
 export interface PopoverProps {
     forceOpen?: boolean | null | undefined;
     label: ComponentChildren;
     disabled?: boolean;
-    children: ComponentChildren;
+    children?: ComponentChildren;
     selectedIndex?: number | null;
     align?: "start" | "end";
     buttonVariantSize?: ButtonProps["variantSize"];
@@ -16,5 +16,5 @@ export interface PopoverProps {
     header?: ComponentChildren;
     imperativeHandle?: Ref<UseMenuSurfaceReturnType<HTMLDivElement, HTMLDivElement, HTMLButtonElement>>;
 }
-export declare function Popover({ children, label, align, buttonVariantDropdown, buttonVariantFill, buttonVariantSize, buttonVariantTheme, disabled, forceOpen, imperativeHandle, header, onSelectedIndexChange, selectedIndex, ...props }: PopoverProps, ref?: Ref<HTMLButtonElement>): import("preact").JSX.Element;
+export declare function Popover({ children, label, align, buttonVariantDropdown, buttonVariantFill, buttonVariantSize, buttonVariantTheme, disabled, forceOpen, imperativeHandle, header, onSelectedIndexChange, selectedIndex, ...props }: PopoverProps, ref?: Ref<HTMLButtonElement>): any;
 //# sourceMappingURL=index.d.ts.map

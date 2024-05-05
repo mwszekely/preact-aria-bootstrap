@@ -1,7 +1,6 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { memo, useMergedProps } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { WithinInputGroup } from "./shared.js";
 export const InputGroup = memo(forwardElementRef(function InputGroup({ wrap, size, children, ...props }, ref) {

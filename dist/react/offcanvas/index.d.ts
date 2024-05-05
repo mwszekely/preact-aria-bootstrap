@@ -1,5 +1,5 @@
-import { ComponentChildren, h, Ref, VNode } from "preact";
-import { DialogProps as AriaDialogProps } from "preact-aria-widgets";
+import { DialogProps as AriaDialogProps } from "preact-aria-widgets/preact";
+import { ComponentChildren, JSX, Ref, VNode } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     open: boolean;
@@ -8,7 +8,7 @@ export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "child
     header: ComponentChildren;
     anchor: VNode;
     /** Props are spread to the anchor element. If you need to have a class name or style set on the dialog itself, pass those here. */
-    propsPortal?: h.JSX.HTMLAttributes<HTMLDivElement>;
+    propsPortal?: JSX.HTMLAttributes<HTMLDivElement>;
 }
-export declare const Offcanvas: ({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }: OffcanvasProps, ref?: Ref<HTMLSpanElement>) => import("preact").JSX.Element;
+export declare const Offcanvas: ({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }: OffcanvasProps, ref?: Ref<HTMLSpanElement>) => any;
 //# sourceMappingURL=index.d.ts.map

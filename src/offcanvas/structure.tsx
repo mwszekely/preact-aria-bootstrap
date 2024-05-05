@@ -1,7 +1,6 @@
 import { clsx } from "clsx";
-import { Ref } from "preact";
-import { EventType, useMergedProps } from "preact-prop-helpers";
-import { Fade, Slide } from "preact-transition";
+import { EventType, Ref, useMergedProps } from "preact-prop-helpers/preact";
+import { Fade, Slide } from "preact-transition/preact";
 import { Button } from "../button/index.js";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";

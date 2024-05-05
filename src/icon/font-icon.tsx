@@ -1,5 +1,4 @@
-import { Ref } from "preact";
-import { memo } from "preact/compat";
+import { Ref, memo } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { OmitStrong } from "../utility/types.js";
 import { Icon, IconProps } from "./icon-base.js";
@@ -14,5 +13,5 @@ export interface FontIconProps extends OmitStrong<IconProps<HTMLElement>, "child
  * 
  */
 export const FontIcon = memo(forwardElementRef(function FontIcon(props: FontIconProps, ref: Ref<HTMLElement>) {
-    return (<Icon {...props} ref={ref}><i class="font-icon" /></Icon>);
+    return (<Icon {...props} ref={ref}><i className="font-icon" /></Icon>);
 }));

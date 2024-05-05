@@ -1,15 +1,15 @@
 import { jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { createContext } from "preact";
-import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo, useContext } from "preact/compat";
+import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets/preact";
+import { createContext, memo, useContext, useMergedProps } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { StructureTabList, StructureTabPanel, StructureTabPanelsContainer, StructureTabs } from "./structure.js";
 const OrientationContext = createContext("horizontal");
 export const Tabs = memo(forwardElementRef(function Tabs({ keyboardControlsDescription, orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }, ref) {
     orientation ??= "horizontal";
     labelPosition ??= "before";
+    if (labelPosition == "hidden")
+        console.assert(typeof label == "string");
     return (_jsx(OrientationContext.Provider, { value: orientation, children: _jsx(AriaTabs, { localStorageKey: localStorageKey, orientation: orientation, ariaLabel: labelPosition == "hidden" ? label : null, pageNavigationSize: 0, render: info => {
                 const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
                 return (_jsxs(StructureTabs, { orientation: orientation, ref: ref, ...props, children: [_jsx(StructureTabList, { ...info.propsContainer, childrenLabel: labelJsx, labelPosition: labelPosition, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, orientation: orientation, keyboardControlsDescription: keyboardControlsDescription ?? "Move to a tab:", children: tabs }), _jsx(StructureTabPanelsContainer, { children: panels })] }));

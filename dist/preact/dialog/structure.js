@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Heading } from "preact-aria-widgets";
-import { useMergedProps } from "preact-prop-helpers";
-import { SlideFade } from "preact-transition";
+import { Heading } from "preact-aria-widgets/preact";
+import { useMergedProps } from "preact-prop-helpers/preact";
+import { SlideFade } from "preact-transition/preact";
 import { Button } from "../button/index.js";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 export const StructureDialogPortalRoot = memoForwardRef(function StructureDialogPortalRoot({ children, ...props }, ref) { return (_jsx("div", { ...props, ref: ref, children: children })); });
@@ -25,7 +25,7 @@ export const StructureDialogModalDialog = memoForwardRef(function StructureDialo
     return (_jsx(SlideFade, { animateOnMount: true, delayMountUntilShown: true, show: open, slideTargetBlock: 0.125 * (open ? 1 : -1), children: _jsx("div", { ...useMergedProps({ class: "modal-dialog" }, { ...props, ref }), children: children }) }));
 });
 export const StructureDialogModalContent = memoForwardRef(function StructureDialogModalContent({ childrenHeading, childrenBody, childrenFooter, headerPosition, ...props }, ref) {
-    return (_jsxs("span", { ...useMergedProps({ class: "modal-content" }, { ...props, ref }), children: [headerPosition == "start" ? _jsx(Heading, { class: "modal-header", heading: childrenHeading, children: childrenBody }) : childrenBody, childrenFooter] }));
+    return (_jsxs("span", { ...useMergedProps({ class: "modal-content" }, { ...props, ref }), children: [headerPosition == "start" ? _jsx(Heading, { className: "modal-header", heading: childrenHeading, children: childrenBody }) : childrenBody, childrenFooter] }));
 });
 export const StructureDialogModal = memoForwardRef(function StructureDialogModal({ open, variantSize, fullscreen, children, ...props }, ref) {
     const otherProps = {

@@ -1,6 +1,5 @@
-import { CheckboxGroup as AriaCheckboxGroup, CheckboxGroupChild as AriaCheckboxGroupChild, CheckboxGroupParent as AriaCheckboxGroupParent, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets"
-import { useMergedProps, useStableCallback } from "preact-prop-helpers"
-import { useRef, useState } from "preact/hooks"
+import { CheckboxGroup as AriaCheckboxGroup, CheckboxGroupChild as AriaCheckboxGroupChild, CheckboxGroupParent as AriaCheckboxGroupParent, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets/preact"
+import { useMergedProps, useRef, useStableCallback, useState } from "preact-prop-helpers/preact"
 import { Checkbox, CheckboxProps } from "../checkbox/index.js"
 import { GlobalAttributes, LabelledProps, OmitStrong } from "../utility/types.js"
 

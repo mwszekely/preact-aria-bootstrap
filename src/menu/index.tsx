@@ -1,10 +1,7 @@
 import { clsx } from "clsx";
-import { ComponentChildren, Ref, VNode } from "preact";
-import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenuItemReturnType, useDefaultRenderPortal } from "preact-aria-widgets";
-import { EventDetail, EventType, UseTypeaheadNavigationReturnTypeSelf, returnUndefined, useMergedProps, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
-import { Fade, ZoomFade } from "preact-transition";
-import { memo } from "preact/compat";
-import { useCallback, useRef } from "preact/hooks";
+import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenuItemReturnType, useDefaultRenderPortal } from "preact-aria-widgets/preact";
+import { ComponentChildren, EventDetail, EventType, Ref, UseTypeaheadNavigationReturnTypeSelf, VNode, memo, returnUndefined, useCallback, useMergedProps, useRef, useStableCallback, useState, useTimeout } from "preact-prop-helpers/preact";
+import { Fade, ZoomFade } from "preact-transition/preact";
 import { usePopper } from "../popper/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -15,7 +12,7 @@ import { usePortalId } from "../utility/use-portal-id.js";
 
 export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children"> {
     forceOpen?: boolean | null | undefined;
-    children: ComponentChildren;
+    children?: ComponentChildren;
     selectedIndex?: number | null;
     align?: "start" | "end";
     keyboardControlsDescription?: string;
@@ -155,7 +152,7 @@ export const StructureMenuFocusSentinel = memoForwardRef(function StructureMenuF
 
 export interface MenuItemProps extends GlobalAttributes<HTMLDivElement> {
     index: number;
-    children: ComponentChildren;
+    children?: ComponentChildren;
     disabled?: boolean;
     onPress?: (closeMenu: (e: EventType<any, any>) => void, e: EventType<any, any>) => (void | Promise<void>);
     getSortValue?: () => unknown;
@@ -193,12 +190,12 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                                 </StructureMenuItem>
                             )
 
-                            /*const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsProgressIndicator} class={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
+                            /*const spinnerJsx = (<Fade show={showSpinner} exitVisibility="removed"><div {...progressInfo.propsProgressIndicator} className={clsx("spinner-border", "spinner-border-sm")} /></Fade>)
             
                             return (
                                 <div {...useMergedProps(menuInfo.props, { ref, className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", menuInfo.pressReturn.pressing && "active") }, props)}>
                                     {children}
-                                    <div class="dropdown-item-icon dropdown-item-icon-end">{spinnerJsx}</div>
+                                    <div className="dropdown-item-icon dropdown-item-icon-end">{spinnerJsx}</div>
                                 </div>
                             )*/
                         }}
@@ -231,7 +228,7 @@ const StructureMenuItem = memoForwardRef(function StructureMenuItem({ children, 
 const StructureMenuItemSpinner = memoForwardRef(function StructureMenuItemSpinner({ showSpinner, ...props }: StructureMenuItemSpinnerProps, ref: Ref<HTMLDivElement>) {
 
     return (
-        <div class="dropdown-item-icon dropdown-item-icon-end">
+        <div className="dropdown-item-icon dropdown-item-icon-end">
             <Fade show={showSpinner} exitVisibility="removed">
                 <div {...useMergedProps({ class: clsx("spinner-border", "spinner-border-sm") }, { ...props, ref })} />
             </Fade>

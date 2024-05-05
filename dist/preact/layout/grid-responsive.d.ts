@@ -1,4 +1,4 @@
-import { Ref } from "preact";
+import { Ref } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 /**
  * Very simple, easy responsive grid that guarantees each column is the minimum size.
@@ -10,8 +10,8 @@ import { GlobalAttributes } from "../utility/types.js";
  * Easy one-liners all around here!
  */
 export declare const GridResponsive: <E extends Element>({ minWidth, leftover, children, ...props }: {
-    leftover?: "fill" | "shrink" | undefined;
+    leftover?: "fill" | "shrink";
     minWidth: `${string}em`;
-    tag?: "passthrough" | undefined;
-} & GlobalAttributes<E, "children">, ref: Ref<E>) => import("preact").VNode<import("preact").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
+    tag?: "passthrough";
+} & GlobalAttributes<E, "children">, ref: Ref<E>) => import("preact").VNode<import("preact-prop-helpers").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
 //# sourceMappingURL=grid-responsive.d.ts.map

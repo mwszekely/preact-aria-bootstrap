@@ -1,7 +1,5 @@
 import { clsx } from "clsx";
-import { h, Ref } from "preact";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { JSX, Ref, memo, useMergedProps } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
@@ -31,7 +29,7 @@ export interface GridCssItemProps extends GlobalAttributes<HTMLDivElement, "chil
 }
 
 export const GridCss = memo(forwardElementRef(function GridCss({ columns, gap, children, ...props }: GridCssProps, ref: Ref<HTMLDivElement>) {
-    let style: h.JSX.CSSProperties = {};
+    let style: JSX.CSSProperties = {};
     if (gap != null)
         style["--bs-gap"] = gap;
     if (columns != null)

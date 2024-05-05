@@ -1,7 +1,4 @@
-import { Ref, VNode } from "preact";
-import { useStableGetter } from "preact-prop-helpers";
-import { memo } from "preact/compat";
-import { useEffect, useRef } from "preact/hooks";
+import { Ref, VNode, memo, useEffect, useRef, useStableGetter } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
@@ -147,7 +144,7 @@ export interface CkEditorWrapperProps {
     onWordCountChange?: (count: number) => void;
     onCharacterCountChange?: (count: number) => void;
 
-    children: VNode;
+    children?: VNode;
 
     onReady?: (editor: any) => void;
 
@@ -367,7 +364,7 @@ export const CkEditorWrapper = memo(forwardElementRef(function CkEditorWrapper({
         activateSpace={false}
         activateEnter={false}
         description={keyboardControlsDescription ?? "Control the editor:"}>
-            <div class="ck-editor-wrapper">
+            <div className="ck-editor-wrapper">
                 {useClonedElement(children, { ...props, ref: ref2 }, ref)}
             </div>
         </KeyboardAssistIcon>

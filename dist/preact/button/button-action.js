@@ -1,10 +1,8 @@
 import { Fragment as _Fragment, jsxs as _jsxs, jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Button as AriaButton, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets";
-import { returnFalse, useAsyncHandler, useMergedProps } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
-import { memo } from "preact/compat";
-import { useContext } from "preact/hooks";
+import { Button as AriaButton, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets/preact";
+import { memo, returnFalse, useAsyncHandler, useContext, useMergedProps } from "preact-prop-helpers/preact";
+import { Fade } from "preact-transition/preact";
 import { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
@@ -90,7 +88,7 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ exclud
     return (_jsx(AriaButton, { tagButton: "button", disabled: disabled, onPressSync: onPress, pressed: pressed, excludeSpace: excludeSpace, render: buttonInfo => {
             return (_jsx(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagProgressIndicator: "span", render: progressInfo => {
                     const { propsProgressIndicator, propsProgressRegion } = progressInfo;
-                    const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border", ...propsProgressIndicator }) }));
+                    const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { className: "spinner-border", ...propsProgressIndicator }) }));
                     if (pressed != null)
                         variantFill ??= (pressed ? "fill" : "outline");
                     const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pressing && "active");

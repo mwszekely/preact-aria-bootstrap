@@ -1,4 +1,4 @@
-import { ComponentChildren, createElement, Ref, VNode } from "preact";
+import { ComponentChildren, Ref, VNode } from "preact-prop-helpers/preact";
 import { ButtonThemes } from "../context.js";
 import { GlobalAttributes } from "../utility/types.js";
 export interface CardProps extends GlobalAttributes<HTMLDivElement, "children"> {
@@ -6,13 +6,13 @@ export interface CardProps extends GlobalAttributes<HTMLDivElement, "children"> 
     subtitle?: ComponentChildren;
     variantTheme?: ButtonThemes;
 }
-export declare const Card: (p: CardProps, ref: Ref<HTMLDivElement>) => createElement.JSX.Element;
+export declare const Card: (p: CardProps, ref: Ref<HTMLDivElement>) => any;
 export interface CardElementParagraphProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**
      * * `paragraph`: Any generic text. The default. Will be padded around the edges.
      */
     type: "paragraph" | "footer";
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export interface CardElementTitleProps extends GlobalAttributes<HTMLHeadingElement, "children"> {
     /**
@@ -21,7 +21,7 @@ export interface CardElementTitleProps extends GlobalAttributes<HTMLHeadingEleme
      */
     type: "title";
     title: ComponentChildren;
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export interface CardElementSubtitleProps extends GlobalAttributes<HTMLHeadingElement, "children"> {
     /**
@@ -30,7 +30,7 @@ export interface CardElementSubtitleProps extends GlobalAttributes<HTMLHeadingEl
      */
     type: "subtitle";
     subtitle: ComponentChildren;
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export interface CardElementImageProps extends GlobalAttributes<HTMLImageElement, "children"> {
     /**
@@ -39,24 +39,24 @@ export interface CardElementImageProps extends GlobalAttributes<HTMLImageElement
     type: "image";
     src: string;
     position: "bottom" | "top" | "both";
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export interface CardElementFlushProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     /**
      * * `flush` Any non-card content that needs to have no padding. A list, for example.
      */
     type: "flush";
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export interface CardElementFooterProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**
      * * `footer`: A small, separated blurb of info at the bottom of the card.
      */
     type?: "paragraph" | "footer";
-    children: ComponentChildren;
+    children?: ComponentChildren;
 }
 export type CardElementProps = CardElementParagraphProps | CardElementFooterProps | CardElementImageProps | CardElementTitleProps | CardElementSubtitleProps | CardElementFlushProps;
-declare function CardElement2<E extends Element>({ type, ...p }: CardElementProps, ref: Ref<E>): VNode<any>;
+declare function CardElement2<E extends Element>({ type, ...p }: CardElementProps, ref: Ref<E>): VNode;
 export declare const CardElement: typeof CardElement2;
 export {};
 //# sourceMappingURL=card.d.ts.map

@@ -1,7 +1,5 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
-import { useStableGetter } from "preact-prop-helpers";
-import { memo } from "preact/compat";
-import { useEffect, useRef } from "preact/hooks";
+import { memo, useEffect, useRef, useStableGetter } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
@@ -124,6 +122,6 @@ export const CkEditorWrapper = memo(forwardElementRef(function CkEditorWrapper({
         }
     }, []);
     // dangerouslySetInnerHTML={{__html: valueHtml}}
-    return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: true, pageKeys: true, textF10: true, typeaheadStatus: null, activateSpace: false, activateEnter: false, description: keyboardControlsDescription ?? "Control the editor:", children: _jsx("div", { class: "ck-editor-wrapper", children: useClonedElement(children, { ...props, ref: ref2 }, ref) }) }));
+    return (_jsx(KeyboardAssistIcon, { homeEnd: true, leftRight: true, upDown: true, pageKeys: true, textF10: true, typeaheadStatus: null, activateSpace: false, activateEnter: false, description: keyboardControlsDescription ?? "Control the editor:", children: _jsx("div", { className: "ck-editor-wrapper", children: useClonedElement(children, { ...props, ref: ref2 }, ref) }) }));
 }));
 //# sourceMappingURL=ck-editor-wrapper.js.map

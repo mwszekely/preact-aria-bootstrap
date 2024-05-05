@@ -1,9 +1,9 @@
-import { ComponentChildren, Ref, VNode } from "preact";
+import { ComponentChildren, Ref, VNode } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 export interface FigureProps extends Omit<GlobalAttributes<HTMLElement>, "children"> {
     caption: ComponentChildren;
     align?: "start" | "end" | "center";
-    children: VNode<any>;
+    children: VNode;
 }
-export declare const Figure: ({ children, caption, align, ...props }: FigureProps, ref: Ref<HTMLElement>) => import("preact").JSX.Element;
+export declare const Figure: ({ children, caption, align, ...props }: FigureProps, ref: Ref<HTMLElement>) => import("preact-prop-helpers").JSX.Element;
 //# sourceMappingURL=figure.d.ts.map

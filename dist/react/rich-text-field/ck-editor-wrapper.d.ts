@@ -1,4 +1,4 @@
-import { Ref, VNode } from "preact";
+import { Ref, VNode } from "preact-prop-helpers/preact";
 export type RichTextToolbarItems = '|' | '-' | 'exportPDF' | 'exportWord' | 'findAndReplace' | 'selectAll' | 'heading' | 'bold' | 'italic' | 'strikethrough' | 'underline' | 'code' | 'subscript' | 'superscript' | 'removeFormat' | 'bulletedList' | 'numberedList' | 'todoList' | 'outdent' | 'indent' | 'undo' | 'redo' | 'fontSize' | 'fontFamily' | 'fontColor' | 'fontBackgroundColor' | 'highlight' | 'alignment' | 'alignment:left' | 'alignment:right' | 'alignment:center' | 'alignment:justify' | 'link' | 'insertImage' | 'blockQuote' | 'insertTable' | 'mediaEmbed' | 'codeBlock' | 'htmlEmbed' | 'specialCharacters' | 'horizontalLine' | 'pageBreak' | 'textPartLanguage' | 'sourceEditing';
 interface CkEditorMention {
     dropdownLimit?: number;
@@ -84,7 +84,7 @@ export interface CkEditorWrapperProps {
     typing?: CkEditorTextTransformation;
     onWordCountChange?: (count: number) => void;
     onCharacterCountChange?: (count: number) => void;
-    children: VNode;
+    children?: VNode;
     onReady?: (editor: any) => void;
     onFocusChange: (focused: boolean) => void;
 }
@@ -148,6 +148,6 @@ interface CkEditorHtmlSupportAllowDisallow {
     classes: Array<String | RegExp> | true;
     attributes: Record<string, true | string | RegExp> | Array<string> | true;
 }
-export declare const CkEditorWrapper: ({ children, keyboardControlsDescription, implementation, valueHtml, onValueChange: ovcu, onFocusChange: ofcu, onReady: oru, editorHandle, toolbarItems, placeholder, fontFamilies, mention, fontSizes, htmlEmbed, htmlSupport, link, typing, onCharacterCountChange, onWordCountChange, ...props }: CkEditorWrapperProps, ref2?: Ref<any>) => import("preact").JSX.Element;
+export declare const CkEditorWrapper: ({ children, keyboardControlsDescription, implementation, valueHtml, onValueChange: ovcu, onFocusChange: ofcu, onReady: oru, editorHandle, toolbarItems, placeholder, fontFamilies, mention, fontSizes, htmlEmbed, htmlSupport, link, typing, onCharacterCountChange, onWordCountChange, ...props }: CkEditorWrapperProps, ref2?: Ref<any>) => any;
 export {};
 //# sourceMappingURL=ck-editor-wrapper.d.ts.map

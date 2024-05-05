@@ -1,9 +1,7 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-runtime";
 import clsx from "clsx";
-import { Toolbar, ToolbarChild } from "preact-aria-widgets";
-import { EventDetail, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
-import { memo } from "preact/compat";
-import { useCallback, useEffect, useRef } from "preact/hooks";
+import { Toolbar, ToolbarChild } from "preact-aria-widgets/preact";
+import { EventDetail, memo, useCallback, useEffect, useMergedProps, usePress, useRef, useRefElement, useStableCallback, useState } from "preact-prop-helpers/preact";
 import { BootstrapIcon } from "../icon/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -16,6 +14,8 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
         onChange?.(start, end);
         return () => onChange(null, null);
     }, [page, windowSize]);
+    if (labelPosition == 'hidden')
+        console.assert(typeof label == "string");
     return (_jsx(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, singleSelectionAriaPropName: "aria-current-page", singleSelectionMode: "activation", singleSelectedIndex: page, multiSelectionMode: "disabled", onSingleSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
             const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
             return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx(KeyboardAssistIcon, { leftRight: true, upDown: false, homeEnd: true, pageKeys: true, typeaheadStatus: 'none', activateSpace: true, activateEnter: true, description: keyboardControlsDescription ?? "Select a page:", children: _jsx("nav", { "aria-label": labelPosition == 'hidden' ? label : undefined, children: _jsx("ul", { ...useMergedProps(info.propsToolbar, { class: "pagination" }), children: _jsx(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }) }), labelPosition == "after" && labelJsx] }));
@@ -30,7 +30,7 @@ const PaginationChildren = memo(({ childCount, windowSize }) => {
     const centerLastRef = useRef(null);
     const onFocusFirst = useCallback(() => { centerFirstRef.current?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" }); }, []);
     const onFocusLast = useCallback(() => { centerLastRef.current?.scrollIntoView({ behavior: "smooth", inline: "end", block: "nearest" }); }, []);
-    return (_jsxs(_Fragment, { children: [_jsx(PaginationButtonFirst, { index: firstIndex, onFocus: onFocusFirst }), _jsxs("span", { class: "pagination-center scroll-shadows scroll-shadows-x", children: [_jsx(PaginationButton, { index: firstIndex + 1, ref: centerFirstRef, children: firstIndex + 1 + 1 }, `first`), Array.from(function* () {
+    return (_jsxs(_Fragment, { children: [_jsx(PaginationButtonFirst, { index: firstIndex, onFocus: onFocusFirst }), _jsxs("span", { className: "pagination-center scroll-shadows scroll-shadows-x", children: [_jsx(PaginationButton, { index: firstIndex + 1, ref: centerFirstRef, children: firstIndex + 1 + 1 }, `first`), Array.from(function* () {
                         for (let page = firstIndex + 2; page <= lastIndex - 2; ++page) {
                             const start = ((page + 0) * windowSize);
                             const end = ((page + 1) * windowSize);
@@ -60,8 +60,9 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
                 },
                 refElementReturn
             });
+            // @ts-expect-error onfocusin is correct, not onFocusIn
             const p = useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined });
-            return (_jsx("li", { class: clsx("page-item", info.singleSelectionChildReturn.singleSelected && "active"), children: _jsx("button", { ...p, children: children }) }));
+            return (_jsx("li", { className: clsx("page-item", info.singleSelectionChildReturn.singleSelected && "active"), children: _jsx("button", { ...p, children: children }) }));
         } }));
 }));
 export const Paginated = memo(function Paginated({ childCount, setPaginationEnd, setPaginationStart, paginationLabel, paginationLocation, paginationSize, children }) {

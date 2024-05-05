@@ -1,11 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { Temporal } from "@js-temporal/polyfill";
 import { clsx } from "clsx";
-import { ProgressWithHandler, useLabel } from "preact-aria-widgets";
-import { useHasCurrentFocus, useMergedProps, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
-import { memo } from "preact/compat";
-import { useContext, useLayoutEffect, useRef } from "preact/hooks";
+import { ProgressWithHandler, useLabel } from "preact-aria-widgets/preact";
+import { memo, useContext, useHasCurrentFocus, useLayoutEffect, useMergedProps, useRef, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers/preact";
+import { Fade } from "preact-transition/preact";
 import { DefaultDisabledType } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
@@ -116,11 +114,11 @@ function TextFieldText({ type, onValueChange, value, label, labelPosition, disab
 
     const isTextArea = (resizeable || (rows || 0) > 1);
 
-    const labelJsx = (<label class="form-label" {...useMergedProps(propsLabel1, propsLabel2)}>{label}</label>);
-    const inputJsx = <input value={value} onInput={syncHandler} type="text" class={clsx("form-control", disabled && "disabled", readonly && "readonly", size && `form-control-${size ?? "md"}`)} {...useMergedProps(propsInput1, propsInput2)} />;
-    const textAreaJsx = <textarea class={clsx("form-controls", resizeable && "resizeable")} value={value} onInput={syncHandler} rows={rows ?? 1} />
+    const labelJsx = (<label className="form-label" {...useMergedProps(propsLabel1, propsLabel2)}>{label}</label>);
+    const inputJsx = <input value={value} onInput={syncHandler} type="text" className={clsx("form-control", disabled && "disabled", readonly && "readonly", size && `form-control-${size ?? "md"}`)} {...useMergedProps(propsInput1, propsInput2)} />;
+    const textAreaJsx = <textarea className={clsx("form-controls", resizeable && "resizeable")} value={value} onInput={syncHandler} rows={rows ?? 1} />
     return (
-        <div class={clsx("mb-3", labelPosition == "floating" && "form-floating")}>
+        <div className={clsx("mb-3", labelPosition == "floating" && "form-floating")}>
             {labelPosition == "before" && labelJsx}
             {isTextArea ? textAreaJsx : inputJsx}
             {labelPosition == "after" && labelJsx}
@@ -152,6 +150,9 @@ export function useCommitTextField({ getFocused, commit, currentCapture, showSpi
 }
 const TextFieldBase = memo(forwardElementRef(function TextFieldBase({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }, ref) {
     labelPosition ??= "before";
+    if (labelPosition == "hidden") {
+        console.assert(typeof label == "string");
+    }
     const { refElementReturn: { getElement: getInputElement }, propsStable: propsInput1 } = useRefElement({ refElementParameters: {} });
     const { refElementReturn: { getElement: getLabelElement }, propsStable: propsLabel1 } = useRefElement({ refElementParameters: {} });
     const withinInputGroup = useContext(WithinInputGroup);
@@ -173,7 +174,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase({ capture, o
         pending,
         currentCapture,
         syncHandler
-    } = useAsyncHandler<h.JSX.TargetedEvent<E>, V>({
+    } = useAsyncHandler<JSX.TargetedEvent<E>, V>({
         asyncHandler: onValueChange ?? null,
         capture: useStableCallback(capture),
         debounce: debounce ?? undefined,
@@ -279,17 +280,17 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase({ capture, o
                 "data-async-settle-count": progressInfo.asyncHandlerReturn.settleCount,
                 "data-async-has-error": progressInfo.asyncHandlerReturn.hasError,
             };
-            const labelJsx = (_jsx("label", { class: clsx(!withinInputGroup ? "form-label" : "input-group-text"), ...useMergedProps(propsLabel1, propsLabel2, propsLabel), children: label }));
+            const labelJsx = (_jsx("label", { className: clsx(!withinInputGroup ? "form-label" : "input-group-text"), ...useMergedProps(propsLabel1, propsLabel2, propsLabel), children: label }));
             const inputJsx = _jsx("input", { ...dataProps, inputMode: inputMode || undefined, autocomplete: autocomplete || undefined, placeholder: placeholder ?? undefined, readonly: readonly, onInput: onInput, ...useMergedProps({ ref }, p1, p2, propsInput1, propsInput2, { className: clsx(baseInputClass) }, propsInput) });
             const textAreaJsx = _jsx("textarea", { ...dataProps, placeholder: placeholder ?? undefined, readonly: readonly, onInput: onInput, rows: rows ?? 1, ...useMergedProps({ ref }, p1, p2, { className: clsx(baseInputClass, resizeable && "resizeable") }, propsInput1, propsInput2, propsInput) });
             const finalInputJsx = (isTextArea ? textAreaJsx : inputJsx);
             if (!withinInputGroup) {
                 return (_jsxs("div", { ...useMergedProps({
                         className: clsx("form-text-field", otherClasses, `mb-${marginBottom ?? 3}`, `form-text-field-type-${propsInput.type}`, !!iconStart && "form-text-field-with-icon-start", (!!iconEnd || showSpinner) && "form-text-field-with-icon-end", showSpinner && "pending")
-                    }, otherProps || {}), children: [labelPosition == "before" && labelJsx, _jsxs("div", { class: clsx("form-text-field-control-container", labelPosition == "floating" && "form-floating"), children: [iconStart && _jsx("span", { class: clsx("form-control-icon-start form-control-icon show"), children: iconStart }), labelPosition == "tooltip" ? _jsx(Tooltip, { tooltip: label, absolutePositioning: true, children: finalInputJsx }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && _jsx("span", { class: clsx("form-control-icon-end form-control-icon", !showSpinner && "show"), children: iconEnd }), _jsx(TextFieldSpinner, { callCount: callCount, containerClass: "form-control-icon-end form-control-icon", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator })] }), labelPosition == "after" && labelJsx] }));
+                    }, otherProps || {}), children: [labelPosition == "before" && labelJsx, _jsxs("div", { className: clsx("form-text-field-control-container", labelPosition == "floating" && "form-floating"), children: [iconStart && _jsx("span", { className: clsx("form-control-icon-start form-control-icon show"), children: iconStart }), labelPosition == "tooltip" ? _jsx(Tooltip, { tooltip: label, absolutePositioning: true, children: finalInputJsx }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && _jsx("span", { className: clsx("form-control-icon-end form-control-icon", !showSpinner && "show"), children: iconEnd }), _jsx(TextFieldSpinner, { callCount: callCount, containerClass: "form-control-icon-end form-control-icon", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator })] }), labelPosition == "after" && labelJsx] }));
             }
             else {
-                return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, iconStart && _jsx("span", { class: clsx("input-group-text"), children: iconStart }), labelPosition == "tooltip" ? _jsx(Tooltip, { tooltip: label, absolutePositioning: true, children: finalInputJsx }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && _jsx("span", { class: clsx("input-group-text", !showSpinner && "show"), children: iconEnd }), _jsx(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), labelPosition == "after" && labelJsx] }));
+                return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, iconStart && _jsx("span", { className: clsx("input-group-text"), children: iconStart }), labelPosition == "tooltip" ? _jsx(Tooltip, { tooltip: label, absolutePositioning: true, children: finalInputJsx }) : finalInputJsx, labelPosition == "floating" && labelJsx, iconEnd && _jsx("span", { className: clsx("input-group-text", !showSpinner && "show"), children: iconEnd }), _jsx(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), labelPosition == "after" && labelJsx] }));
             }
         } }));
 }));
@@ -298,12 +299,12 @@ export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSyn
         return null;
     let pendingDisplayType = ((debouncingAsync || debouncingSync) ? 2 : p ? 1 : 0);
     const withinInputGroup = useContext(WithinInputGroup);
-    const ret = (_jsxs(_Fragment, { children: [_jsx(Fade, { show: (pendingDisplayType == 1), animateOnMount: false, exitVisibility: "removed", children: _jsx("span", { class: clsx(containerClass, `spinner-container`, "show"), children: _jsx("span", { class: clsx(`spinner spinner-border spinner-border-sm`), ...((pendingDisplayType == 1) ? propsIndicator : {}) }) }) }), _jsx(Fade, { show: (pendingDisplayType == 2), animateOnMount: false, exitVisibility: "removed", children: _jsx("span", { class: clsx(containerClass, `spinner-container`, "show"), children: _jsx("span", { class: clsx(`spinner spinner-grow spinner-grow-sm`), ...((pendingDisplayType == 2) ? propsIndicator : {}) }) }) })] }));
+    const ret = (_jsxs(_Fragment, { children: [_jsx(Fade, { show: (pendingDisplayType == 1), animateOnMount: false, exitVisibility: "removed", children: _jsx("span", { className: clsx(containerClass, `spinner-container`, "show"), children: _jsx("span", { className: clsx(`spinner spinner-border spinner-border-sm`), ...((pendingDisplayType == 1) ? propsIndicator : {}) }) }) }), _jsx(Fade, { show: (pendingDisplayType == 2), animateOnMount: false, exitVisibility: "removed", children: _jsx("span", { className: clsx(containerClass, `spinner-container`, "show"), children: _jsx("span", { className: clsx(`spinner spinner-grow spinner-grow-sm`), ...((pendingDisplayType == 2) ? propsIndicator : {}) }) }) })] }));
     if (!withinInputGroup) {
         return ret;
     }
     else {
-        return (_jsx("div", { class: "input-group-text input-group-text-field-spinners", children: ret }));
+        return (_jsx("div", { className: "input-group-text input-group-text-field-spinners", children: ret }));
     }
 });
 //# sourceMappingURL=index.js.map

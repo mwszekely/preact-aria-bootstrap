@@ -1,9 +1,6 @@
 import { clsx } from "clsx";
-import { ComponentChildren, createContext, createElement, h, Ref } from "preact";
-import { EventDetail, RangeChangeEvent, SliderContext, SliderThumbInfo, useSlider, UseSliderParameters, useSliderThumb, UseSliderThumbParameters } from "preact-aria-widgets";
-import { generateRandomId, useAsyncHandler, useHasCurrentFocus, useMergedProps, useRefElement } from "preact-prop-helpers";
-import { memo } from "preact/compat";
-import { useContext, useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { EventDetail, RangeChangeEvent, SliderContext, SliderThumbInfo, useSlider, UseSliderParameters, useSliderThumb, UseSliderThumbParameters } from "preact-aria-widgets/preact";
+import { ComponentChildren, createContext, createElement, generateRandomId, JSX, memo, Ref, useAsyncHandler, useContext, useEffect, useHasCurrentFocus, useMemo, useMergedProps, useRef, useRefElement, useState } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 
@@ -81,9 +78,9 @@ export const Range = memo(forwardElementRef(function Range({ max, min, debounce,
                                         <ValueContext.Provider value={value ?? null}>
                                             <OrientationContext.Provider value={orientation ?? "inline"}>
                                                 {createElement((label ? "label" : "div") as any, (useMergedProps<HTMLDivElement>({ class: clsx("form-range-container", orientation == "block" && "form-range-vertical"), ref, style: isFinite(tickCount) ? { "--form-range-tick-count": tickCount } : undefined }, rest)),
-                                                    label && <div class="form-range-label">{label}</div>,
+                                                    label && <div className="form-range-label">{label}</div>,
                                                     children ?? <RangeThumb index={0} min={min} max={max} value={value ?? 0} onValueChange={onValueChange} label={(label as string) ?? ""} />,
-                                                    <div class="form-range-track-background" />,
+                                                    <div className="form-range-track-background" />,
                                                     <GetValueTextContext.Provider value={getValueText ?? defaultGetValueText}>
                                                         <RangeTicks min={min} max={max} step={step} id={id} hideTickValues={hideTickValues} />
                                                     </GetValueTextContext.Provider>
@@ -117,7 +114,7 @@ const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues
         const valuePercent = (i - min) / (max - min);
         let shouldHide = (hideTickValues == "auto" ? !atEnds : hideTickValues);
         children.push(
-            <div class={clsx(
+            <div className={clsx(
                 "form-range-tick",
                 "form-range-tick-line",
                 onValueChange && "form-range-tick-selectable"
@@ -131,10 +128,10 @@ const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues
                 key={i}>{shouldHide ? null : getValueText(i)}</option></div>)
     }
     /*for (let i = min; i <= max; i += step) {
-        children.push(<option value={i} class={clsx("form-range-tick")}>{getValueText(i)}</option>)
+        children.push(<option value={i} className={clsx("form-range-tick")}>{getValueText(i)}</option>)
     }*/
     return (
-        <datalist id={id} class={clsx("form-range-ticks")}>
+        <datalist id={id} className={clsx("form-range-ticks")}>
             {...children}
         </datalist>
     );
@@ -202,7 +199,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
 
         }
 
-        return onValueChangeSync?.(e as any as h.JSX.TargetedEvent<HTMLInputElement, Event>);
+        return onValueChangeSync?.(e as any as JSX.TargetedEvent<HTMLInputElement, Event>);
     }
 
     const { propsSliderThumb, managedChildReturn, sliderThumbReturn: { min: usedMin, max: usedMax } } = useSliderThumb<HTMLInputElement>({
@@ -262,13 +259,13 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
                     step: usedStep,
                     list: useContext(GetListContext)
                 })} />
-            <div class="form-range-track-fill-background" style={{ "--form-range-value-percent": clampedValuePercent }} />
+            <div className="form-range-track-fill-background" style={{ "--form-range-value-percent": clampedValuePercent }} />
         </>
     );
 }));
 
 
-function capture(e: h.JSX.TargetedEvent<HTMLInputElement>): number {
+function capture(e: JSX.TargetedEvent<HTMLInputElement>): number {
     return (e as any as RangeChangeEvent<any>)[EventDetail].value;
 }
 

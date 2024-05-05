@@ -1,4 +1,4 @@
-export { Heading, HeadingReset } from "preact-aria-widgets";
+export { Heading, HeadingReset } from "preact-aria-widgets/preact";
 export { Accordion, AccordionSection } from "./accordion/index.js";
 export { Badge } from "./badge/index.js";
 export { Button, ButtonGroup } from "./button/index.js";
@@ -21,7 +21,7 @@ export { Range, RangeThumb } from "./slider/index.js";
 export { DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow } from "./table/index.js";
 export { Tab, TabPanel, Tabs } from "./tabs/index.js";
 export { TextField } from "./text-field/index.js";
-export { Toast, ToastErrorBoundary, ToastsProvider, usePushToast, useUpdateToast } from "./toasts/index.js";
+export { Toast, ToastsProvider, usePushToast, useUpdateToast } from "./toasts/index.js";
 export { Tooltip } from "./tooltip/index.js";
 export { Type } from "./typography/index.js";
 export { AllProviders } from "./utility/all-providers.js";

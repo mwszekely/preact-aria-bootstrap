@@ -1,4 +1,4 @@
-import { SelectedIndexChangeEvent } from "preact-prop-helpers";
+import { SelectedIndexChangeEvent } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 
 export interface ListboxSingleProps {
@@ -65,7 +65,7 @@ export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleIt
                 const p = useMergedProps(info.props, { ...props, ref });
                 
                 if (info.hidden)
-                    return <li class="d-none" />;
+                    return <li className="d-none" />;
 
                 return (
                     <ListboxSingleItemStatic {...p} disabled={disabled} selected={info.singleSelectionChildReturn.singleSelected as boolean}>{children}</ListboxSingleItemStatic>

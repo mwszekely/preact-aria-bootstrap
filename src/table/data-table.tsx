@@ -1,9 +1,8 @@
 
 import clsx from "clsx";
-import { ComponentChildren, Ref, VNode, createContext } from "preact";
-import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableRows } from "preact-aria-widgets";
-import { memo, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
+import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableRows } from "preact-aria-widgets/preact";
+import { ComponentChildren, Ref, VNode, createContext, memo, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers/preact";
+import { Fade } from "preact-transition/preact";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -12,7 +11,7 @@ import { useClonedElement } from "../utility/use-cloned-element.js";
 import { Table, TableCell, TableCellProps, TableProps, TableRow, TableRowProps, TableSection, TableSectionProps } from "./table.js";
 
 export interface DataTableProps extends TableProps {
-    children: ComponentChildren;
+    children?: ComponentChildren;
     staggered?: boolean;
 }
 
@@ -43,10 +42,12 @@ export const DataTable = memo(forwardElementRef(function DataTable({ staggered, 
     const [childCount, setChildCount] = useState(0);
     const [paginationStart, setPaginationStart] = useState<number | null>(0);
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
+    if (caption == "hidden")
+        console.assert(typeof caption == "string");
     return (
         <TableContext.Provider value={useMemo(() => ({ setChildCount, paginationMax: paginationEnd, paginationMin: paginationStart, staggered: staggered! }), [setChildCount, paginationStart, paginationEnd, staggered])}>
             <AriaTable<HTMLTableElement, HTMLTableCaptionElement>
-                ariaLabel={captionPosition == "hidden" ? caption : null}
+                ariaLabel={captionPosition == "hidden" ? caption as string : null}
 
                 singleSelectionMode="activation"
                 tagTable="table"
@@ -232,8 +233,8 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
                 return <TableCell {...p} tableHeadType={isTableHead ? (unsortable ? "unsortable" : "sortable") : null} fillY={fillY} variantTheme={variantTheme}>{children}</TableCell>
                 /*if (isTableHead) {
                     return (
-                        <th class={clsx(fillY && "py-0")}>
-                            <button className="sort-button" {...p as h.JSX.HTMLAttributes<any>}>
+                        <th className={clsx(fillY && "py-0")}>
+                            <button className="sort-button" {...p as JSX.HTMLAttributes<any>}>
                                 <span>{children}</span>
                                 {sortDirection == null && <BootstrapIcon icon="filter" label={null} />}
                                 {sortDirection == "ascending" && <BootstrapIcon icon="sort-down-alt" label={null} />}
@@ -246,7 +247,7 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
                     children ??= (value as string);
                     children = useClonedElement(children, p, ref);
                     return (
-                        <td class={clsx(fillY && "py-0")}>{children}</td>
+                        <td className={clsx(fillY && "py-0")}>{children}</td>
                     )
                 }*/
 

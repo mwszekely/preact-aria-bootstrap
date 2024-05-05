@@ -1,9 +1,6 @@
 import { Alignment, arrow, computePosition, flip, hide, Middleware, offset, Placement, shift, Side, size } from "@floating-ui/dom";
 import { identity } from "lodash-es";
-import { h } from "preact";
-import { ElementProps, returnZero, runImmediately, useElementSize, useMergedProps, usePassiveState, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
-import { CSSProperties } from "preact/compat";
-import { useCallback, useEffect, useRef } from "preact/hooks";
+import { CSSProperties, ElementProps, JSX, returnZero, runImmediately, useCallback, useEffect, useElementSize, useMergedProps, usePassiveState, useRef, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers/preact";
 
 export interface UsePopperProps<SourceElement extends Element> {
     popperParameters: {
@@ -57,7 +54,7 @@ export interface UsePopperReturnType<SourceElement extends Element, PopupElement
     propsSource: ElementProps<SourceElement>;
     propsPopup: ElementProps<PopupElement>;
     propsArrow: ElementProps<ArrowElement>;
-    propsData: h.JSX.HTMLAttributes<any>;
+    propsData: JSX.HTMLAttributes<any>;
     popperReturn: { usedSide: Side | null; usedAlignment: Alignment | null; hidden: boolean; };
 }
 
@@ -231,8 +228,8 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
     // Because we don't set our mouse coordinates until mousemove,
     // and because we don't listen for mousemove until open (for performance reasons),
     // we need to listen for mouseenter just to capture that initial position at least.
-    const extraSourceProps = useRef<h.JSX.HTMLAttributes<SourceElement>>({
-        onPointerEnterCapture: (e: h.JSX.TargetedPointerEvent<SourceElement>) => {
+    const extraSourceProps = useRef<JSX.HTMLAttributes<SourceElement>>({
+        onPointerEnterCapture: (e: JSX.TargetedPointerEvent<SourceElement>) => {
             setMouseX(e.clientX);
             setMouseY(e.clientY);
         }
@@ -240,9 +237,9 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
 
     return {
         propsSource: useMergedProps(propsSource, extraSourceProps.current),
-        propsPopup: { ...propsPopup, style: popupStyle.current, className: "popper-popup" } as h.JSX.HTMLAttributes<PopupElement>,
-        propsArrow: { ...propsArrow, style: arrowStyle.current, className: "popper-arrow" } as h.JSX.HTMLAttributes<ArrowElement>,
-        propsData: { ...popupProps.current as h.JSX.HTMLAttributes<any> },
+        propsPopup: { ...propsPopup, style: popupStyle.current, className: "popper-popup" } as JSX.HTMLAttributes<PopupElement>,
+        propsArrow: { ...propsArrow, style: arrowStyle.current, className: "popper-arrow" } as JSX.HTMLAttributes<ArrowElement>,
+        propsData: { ...popupProps.current as JSX.HTMLAttributes<any> },
         popperReturn: {
             usedSide,
             usedAlignment,

@@ -1,21 +1,18 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { clsx } from "clsx";
-import { ComponentChildren, h, Ref } from "preact";
-import { LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets";
-import { UseAsyncReturnType, useHasCurrentFocus, useMergedProps, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
-import { memo } from "preact/compat";
-import { useContext, useLayoutEffect, useRef } from "preact/hooks";
+import { LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets/preact";
+import { ComponentChildren, JSX, Ref, UseAsyncReturnType, memo, useContext, useHasCurrentFocus, useLayoutEffect, useMergedProps, useRef, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers/preact";
+import { Fade } from "preact-transition/preact";
 import { DefaultDisabledType } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { LabelledProps } from "../utility/types.js";
 
-export interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<h.JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
+export interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
     value: T;
     marginBottom?: number;
-    onValueChange: null | ((value: T, event: h.JSX.TargetedEvent<E>) => void | Promise<void>);
+    onValueChange: null | ((value: T, event: JSX.TargetedEvent<E>) => void | Promise<void>);
     iconStart?: ComponentChildren | null | undefined;
     iconEnd?: ComponentChildren | null | undefined;
     size?: "lg" | "sm" | "md" | null;
@@ -328,11 +325,11 @@ function TextFieldText({ type, onValueChange, value, label, labelPosition, disab
 
     const isTextArea = (resizeable || (rows || 0) > 1);
 
-    const labelJsx = (<label class="form-label" {...useMergedProps(propsLabel1, propsLabel2)}>{label}</label>);
-    const inputJsx = <input value={value} onInput={syncHandler} type="text" class={clsx("form-control", disabled && "disabled", readonly && "readonly", size && `form-control-${size ?? "md"}`)} {...useMergedProps(propsInput1, propsInput2)} />;
-    const textAreaJsx = <textarea class={clsx("form-controls", resizeable && "resizeable")} value={value} onInput={syncHandler} rows={rows ?? 1} />
+    const labelJsx = (<label className="form-label" {...useMergedProps(propsLabel1, propsLabel2)}>{label}</label>);
+    const inputJsx = <input value={value} onInput={syncHandler} type="text" className={clsx("form-control", disabled && "disabled", readonly && "readonly", size && `form-control-${size ?? "md"}`)} {...useMergedProps(propsInput1, propsInput2)} />;
+    const textAreaJsx = <textarea className={clsx("form-controls", resizeable && "resizeable")} value={value} onInput={syncHandler} rows={rows ?? 1} />
     return (
-        <div class={clsx("mb-3", labelPosition == "floating" && "form-floating")}>
+        <div className={clsx("mb-3", labelPosition == "floating" && "form-floating")}>
             {labelPosition == "before" && labelJsx}
             {isTextArea ? textAreaJsx : inputJsx}
             {labelPosition == "after" && labelJsx}
@@ -424,16 +421,16 @@ interface TFB<E extends HTMLInputElement | HTMLTextAreaElement, V> extends Requi
     rows: number | null;
     resizeable: boolean;
     value: string | number | null;
-    capture: (e: h.JSX.TargetedEvent<E>) => V;
-    onValueChange: null | ((value: V, event: h.JSX.TargetedEvent<E>) => (void | Promise<void>));
+    capture: (e: JSX.TargetedEvent<E>) => V;
+    onValueChange: null | ((value: V, event: JSX.TargetedEvent<E>) => (void | Promise<void>));
     loadingLabel: string;
-    propsInput: h.JSX.HTMLAttributes<E>;
-    propsLabel: h.JSX.HTMLAttributes<HTMLLabelElement>;
+    propsInput: JSX.HTMLAttributes<E>;
+    propsLabel: JSX.HTMLAttributes<HTMLLabelElement>;
     iconEnd: ComponentChildren | null;
     iconStart: ComponentChildren | null;
     marginBottom: number | undefined;
     otherClasses?: string;
-    otherProps?: h.JSX.HTMLAttributes<any>;
+    otherProps?: JSX.HTMLAttributes<any>;
     ref?: Ref<any>;
 }
 
@@ -463,6 +460,10 @@ export function useCommitTextField<C>({ getFocused, commit, currentCapture, show
 
 const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, V>({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }: LabelledProps<TFB<E, V>, "floating" | "tooltip">, ref?: Ref<any>) {
     labelPosition ??= "before";
+
+    if (labelPosition == "hidden") {
+        console.assert(typeof label == "string")
+    }
     
     const { refElementReturn: { getElement: getInputElement }, propsStable: propsInput1 } = useRefElement<HTMLInputElement>({ refElementParameters: {} });
     const { refElementReturn: { getElement: getLabelElement }, propsStable: propsLabel1 } = useRefElement<HTMLLabelElement>({ refElementParameters: {} });
@@ -472,7 +473,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
         propsLabel: propsLabel2
     } = useLabel<LabelPosition, HTMLInputElement, HTMLLabelElement>({
         labelParameters: {
-            ariaLabel: labelPosition == "hidden" ? label : null,
+            ariaLabel: labelPosition == "hidden" ? (label as string) : null,
             labelPosition: "separate",
             onLabelClick: () => { getInputElement()?.focus(); },
             tagInput: "input",
@@ -490,7 +491,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
         pending,
         currentCapture,
         syncHandler
-    } = useAsyncHandler<h.JSX.TargetedEvent<E>, V>({
+    } = useAsyncHandler<JSX.TargetedEvent<E>, V>({
         asyncHandler: onValueChange ?? null,
         capture: useStableCallback(capture),
         debounce: debounce ?? undefined,
@@ -500,7 +501,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
     const isTextArea = (resizeable || (rows || 0) > 1);
 
     return (
-        <ProgressWithHandler<h.JSX.TargetedEvent<E, Event>, V, HTMLSpanElement, HTMLLabelElement>
+        <ProgressWithHandler<JSX.TargetedEvent<E, Event>, V, HTMLSpanElement, HTMLLabelElement>
             ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
             asyncHandler={onValueChange}
             capture={capture}
@@ -633,9 +634,9 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
                     "data-async-has-error": progressInfo.asyncHandlerReturn.hasError,
                 } as {};
 
-                const labelJsx = (<label class={clsx(!withinInputGroup ? "form-label" : "input-group-text")} {...useMergedProps(propsLabel1, propsLabel2, propsLabel as h.JSX.HTMLAttributes<any>)}>{label}</label>);
-                const inputJsx = <input {...dataProps} inputMode={inputMode || undefined} autocomplete={autocomplete || undefined} placeholder={placeholder ?? undefined} readonly={readonly} onInput={onInput as h.JSX.EventHandler<any>} {...useMergedProps({ ref }, p1, p2, propsInput1, propsInput2, { className: clsx(baseInputClass) }, propsInput as h.JSX.HTMLAttributes<any>)} />;
-                const textAreaJsx = <textarea {...dataProps} placeholder={placeholder ?? undefined} readonly={readonly} onInput={onInput as h.JSX.EventHandler<any>} rows={rows ?? 1} {...useMergedProps({ ref }, p1, p2, { className: clsx(baseInputClass, resizeable && "resizeable") }, propsInput1, propsInput2, propsInput as h.JSX.HTMLAttributes<any>)} />
+                const labelJsx = (<label className={clsx(!withinInputGroup ? "form-label" : "input-group-text")} {...useMergedProps(propsLabel1, propsLabel2, propsLabel as JSX.HTMLAttributes<any>)}>{label}</label>);
+                const inputJsx = <input {...dataProps} inputMode={inputMode || undefined} autocomplete={autocomplete || undefined} placeholder={placeholder ?? undefined} readonly={readonly} onInput={onInput as JSX.EventHandler<any>} {...useMergedProps({ ref }, p1, p2, propsInput1, propsInput2, { className: clsx(baseInputClass) }, propsInput as JSX.HTMLAttributes<any>)} />;
+                const textAreaJsx = <textarea {...dataProps} placeholder={placeholder ?? undefined} readonly={readonly} onInput={onInput as JSX.EventHandler<any>} rows={rows ?? 1} {...useMergedProps({ ref }, p1, p2, { className: clsx(baseInputClass, resizeable && "resizeable") }, propsInput1, propsInput2, propsInput as JSX.HTMLAttributes<any>)} />
                 const finalInputJsx = (isTextArea ? textAreaJsx : inputJsx);
 
                 if (!withinInputGroup) {
@@ -653,11 +654,11 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
                                 showSpinner && "pending")
                         }, otherProps || {})}>
                             {labelPosition == "before" && labelJsx}
-                            <div class={clsx("form-text-field-control-container", labelPosition == "floating" && "form-floating")}>
-                                {iconStart && <span class={clsx("form-control-icon-start form-control-icon show")}>{iconStart}</span>}
+                            <div className={clsx("form-text-field-control-container", labelPosition == "floating" && "form-floating")}>
+                                {iconStart && <span className={clsx("form-control-icon-start form-control-icon show")}>{iconStart}</span>}
                                 {labelPosition == "tooltip" ? <Tooltip tooltip={label} absolutePositioning={true}>{finalInputJsx}</Tooltip> : finalInputJsx}
                                 {labelPosition == "floating" && labelJsx}
-                                {iconEnd && <span class={clsx("form-control-icon-end form-control-icon", !showSpinner && "show")}>{iconEnd}</span>}
+                                {iconEnd && <span className={clsx("form-control-icon-end form-control-icon", !showSpinner && "show")}>{iconEnd}</span>}
                                 <TextFieldSpinner callCount={callCount} containerClass={"form-control-icon-end form-control-icon"} invocationResult={invocationResult} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsProgressIndicator} />
                             </div>
                             {labelPosition == "after" && labelJsx}
@@ -670,10 +671,10 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
                     return (
                         <>
                             {labelPosition == "before" && labelJsx}
-                            {iconStart && <span class={clsx("input-group-text")}>{iconStart}</span>}
+                            {iconStart && <span className={clsx("input-group-text")}>{iconStart}</span>}
                             {labelPosition == "tooltip" ? <Tooltip tooltip={label} absolutePositioning={true}>{finalInputJsx}</Tooltip> : finalInputJsx}
                             {labelPosition == "floating" && labelJsx}
-                            {iconEnd && <span class={clsx("input-group-text", !showSpinner && "show")}>{iconEnd}</span>}
+                            {iconEnd && <span className={clsx("input-group-text", !showSpinner && "show")}>{iconEnd}</span>}
                             <TextFieldSpinner callCount={callCount} containerClass={""} invocationResult={invocationResult} debouncingAsync={debouncingAsync} debouncingSync={debouncingSync} pending={p} propsIndicator={propsProgressIndicator} />
                             {labelPosition == "after" && labelJsx}
                         </>
@@ -686,7 +687,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
     );
 }));
 
-export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSync, pending: p, propsIndicator, containerClass, callCount, invocationResult }: { callCount: number, containerClass: string, debouncingAsync: boolean, debouncingSync: boolean, pending: boolean, propsIndicator: h.JSX.HTMLAttributes<any>, invocationResult: UseAsyncReturnType<any, any>["invocationResult"] }) {
+export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSync, pending: p, propsIndicator, containerClass, callCount, invocationResult }: { callCount: number, containerClass: string, debouncingAsync: boolean, debouncingSync: boolean, pending: boolean, propsIndicator: JSX.HTMLAttributes<any>, invocationResult: UseAsyncReturnType<any, any>["invocationResult"] }) {
 
     if (invocationResult != "async")
         return null;
@@ -697,8 +698,8 @@ export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSyn
 
     const ret = (
         <>
-            <Fade show={(pendingDisplayType == 1)} animateOnMount={false} exitVisibility="removed"><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-border spinner-border-sm`)} {...((pendingDisplayType == 1) ? propsIndicator : {})} /></span></Fade>
-            <Fade show={(pendingDisplayType == 2)} animateOnMount={false} exitVisibility="removed"><span class={clsx(containerClass, `spinner-container`, "show")}><span class={clsx(`spinner spinner-grow spinner-grow-sm`)} {...((pendingDisplayType == 2) ? propsIndicator : {})} /></span></Fade>
+            <Fade show={(pendingDisplayType == 1)} animateOnMount={false} exitVisibility="removed"><span className={clsx(containerClass, `spinner-container`, "show")}><span className={clsx(`spinner spinner-border spinner-border-sm`)} {...((pendingDisplayType == 1) ? propsIndicator : {})} /></span></Fade>
+            <Fade show={(pendingDisplayType == 2)} animateOnMount={false} exitVisibility="removed"><span className={clsx(containerClass, `spinner-container`, "show")}><span className={clsx(`spinner spinner-grow spinner-grow-sm`)} {...((pendingDisplayType == 2) ? propsIndicator : {})} /></span></Fade>
         </>
     )
 
@@ -707,7 +708,7 @@ export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSyn
     }
     else {
         return (
-            <div class="input-group-text input-group-text-field-spinners">{ret}</div>
+            <div className="input-group-text input-group-text-field-spinners">{ret}</div>
         )
     }
 })

@@ -1,4 +1,4 @@
-import { SelectedIndexChangeEvent } from "preact-prop-helpers";
+import { SelectedIndexChangeEvent } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 export interface ListboxSingleProps {
     selectedIndex: number | null;

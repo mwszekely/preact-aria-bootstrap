@@ -1,14 +1,13 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { memo, useMergedProps } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 /**
  * **IMPORTANT**: Generally, badges should include extra hidden text for assistive technologies besides just whatever (e.g.) number is visually shown.
  *
  * For example, if this badge represents the number of unread messages with a number, then `children` should probably be something like
  *
- * `<Badge>{10 <span class="visually-hidden">unread messages</span>}</Badge>`
+ * `<Badge>{10 <span className="visually-hidden">unread messages</span>}</Badge>`
  */
 export const Badge = memo(forwardElementRef(function Badge({ children, position, variantTheme, roundedPill, ...props }, ref) {
     position ??= "inline";

@@ -1,9 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Checkbox as AriaCheckbox, EventDetail, ProgressWithHandler } from "preact-aria-widgets";
-import { useMergedProps } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
-import { useContext } from "preact/hooks";
+import { Checkbox as AriaCheckbox, EventDetail, ProgressWithHandler } from "preact-aria-widgets/preact";
+import { useContext, useMergedProps } from "preact-prop-helpers/preact";
+import { Fade } from "preact-transition/preact";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
@@ -37,12 +36,14 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
             const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
             const { pending: p, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
             const pending = (p || debouncingAsync || debouncingSync);
-            const loadingJsx = (_jsx(Fade, { show: p, exitVisibility: "removed", children: _jsx("span", { class: "spinner-border spinner-border-sm", ...propsProgressIndicator }) }));
+            const loadingJsx = (_jsx(Fade, { show: p, exitVisibility: "removed", children: _jsx("span", { className: "spinner-border spinner-border-sm", ...propsProgressIndicator }) }));
             const defaultDisabled = useContext(DisabledContext);
             const disabledType = useContext(DefaultDisabledType);
             let disabled = userDisabled;
             disabled ||= defaultDisabled;
             const d = disabled ? disabledType : false;
+            if (labelPosition == 'hidden')
+                console.assert(typeof label == "string");
             return (_jsx(AriaCheckbox, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, imperativeHandle: imperativeHandle, render: info => {
                     let inputJsx = _jsx(StructureCheckboxInput, { ...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {}) });
                     const visibleLabel = _jsx(StructureCheckboxLabel, { ...useMergedProps(info.propsLabel, propsLabel || {}), children: label });

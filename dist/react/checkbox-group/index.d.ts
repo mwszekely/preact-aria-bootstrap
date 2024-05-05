@@ -3,7 +3,7 @@ import { GlobalAttributes, LabelledProps, OmitStrong } from "../utility/types.js
 export interface CheckboxGroupProps extends GlobalAttributes<HTMLSpanElement, "children">, CheckboxGroupParentProps {
     orientation: "horizontal" | "vertical";
 }
-export declare function CheckboxGroup({ orientation, children, label, labelPosition, debounce, loadingLabel, throttle, disabled, inline, getSortValue }: CheckboxGroupProps): import("preact-prop-helpers").JSX.Element;
+export declare function CheckboxGroup({ orientation, children, label, labelPosition, debounce, loadingLabel, throttle, disabled, inline, getSortValue }: CheckboxGroupProps): any;
 interface CheckboxGroupParentProps extends OmitStrong<LabelledProps<CheckboxProps, "tooltip">, "onValueChange" | "checked" | "tristate" | "imperativeHandle"> {
     getSortValue?(): unknown;
 }
@@ -15,6 +15,6 @@ export interface CheckboxGroupChildProps extends OmitStrong<LabelledProps<Checkb
      */
     index: number;
 }
-export declare function CheckboxGroupChild({ checked, label, labelPosition, onValueChange, debounce, throttle, disabled, inline, loadingLabel, tristate, getSortValue, untabbable, index, ...props }: CheckboxGroupChildProps): import("preact-prop-helpers").JSX.Element;
+export declare function CheckboxGroupChild({ checked, label, labelPosition, onValueChange, debounce, throttle, disabled, inline, loadingLabel, tristate, getSortValue, untabbable, index, ...props }: CheckboxGroupChildProps): any;
 export {};
 //# sourceMappingURL=index.d.ts.map

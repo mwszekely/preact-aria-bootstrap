@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
-import { memo } from "preact/compat";
+import { memo } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { Icon } from "./icon-base.js";
 /**
@@ -8,6 +8,6 @@ import { Icon } from "./icon-base.js";
  *
  */
 export const FontIcon = memo(forwardElementRef(function FontIcon(props, ref) {
-    return (_jsx(Icon, { ...props, ref: ref, children: _jsx("i", { class: "font-icon" }) }));
+    return (_jsx(Icon, { ...props, ref: ref, children: _jsx("i", { className: "font-icon" }) }));
 }));
 //# sourceMappingURL=font-icon.js.map

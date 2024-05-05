@@ -1,10 +1,7 @@
 import { clsx } from "clsx";
-import { ComponentChildren, createContext, h, Ref, VNode } from "preact";
-import { Gridlist, GridlistChild, GridlistRow, GridlistRows, ProgressWithHandler } from "preact-aria-widgets";
-import { AsyncHandler, EventDetail, Nullable, PressEventReason, returnUndefined, useMergedProps, UsePaginatedChildReturnTypeSelf, usePress, UsePressParametersSelf, useRefElement, useStableCallback, UseStaggeredChildReturnTypeSelf, useState, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
-import { forwardRef, memo, TargetedEvent } from "preact/compat";
-import { useCallback, useContext } from "preact/hooks";
+import { Gridlist, GridlistChild, GridlistRow, GridlistRows, ProgressWithHandler } from "preact-aria-widgets/preact";
+import { AsyncHandler, ComponentChildren, EventDetail, JSX, Nullable, PressEventReason, Ref, UsePaginatedChildReturnTypeSelf, UsePressParametersSelf, UseStaggeredChildReturnTypeSelf, UseTypeaheadNavigationReturnTypeSelf, VNode, createContext, forwardRef, memo, returnUndefined, useCallback, useContext, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers/preact";
+import { Fade } from "preact-transition/preact";
 import { ButtonThemes } from "../context.js";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
@@ -83,7 +80,7 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     /**
      * Optional. Only necessary if this is an "action-only" list; it's not needed for selection behavior.
      */
-    onPress?: AsyncHandler<h.JSX.TargetedEvent<HTMLDivElement, Event>, void>;
+    onPress?: AsyncHandler<JSX.TargetedEvent<HTMLDivElement, Event>, void>;
 
     keyboardControlsDescription?: string;
 }
@@ -107,6 +104,9 @@ export const List = memo(forwardRef((function List({ disabled, selectedIndex, se
     if (paginationSize)
         paginationLocation ||= "before";
 
+    if (labelPosition == "hidden")
+        console.assert(typeof label == "string");
+
     return (
         <DefaultDisabled.Provider value={disabled ?? false}>
             <Gridlist<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLLabelElement>
@@ -116,7 +116,7 @@ export const List = memo(forwardRef((function List({ disabled, selectedIndex, se
                 onSingleSelectedIndexChange={useStableCallback(e => { debugger; onSelectedIndexChange?.(e[EventDetail].selectedIndex) })}
                 paginationMin={paginationStart}
                 paginationMax={paginationEnd}
-                ariaLabel={labelPosition == "hidden" ? label : null}
+                ariaLabel={labelPosition == "hidden" ? label as string : null}
                 groupingType="without-groups"
                 singleSelectionMode={selectionMode == "single" ? "activation" : "disabled"}
                 multiSelectionMode={selectionMode == "multi" ? "activation" : "disabled"}
@@ -159,9 +159,9 @@ const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, 
     Pick<UsePressParametersSelf<any>, "excludeSpace" | "onPressSync"> &
     Pick<UsePaginatedChildReturnTypeSelf, "hideBecausePaginated"> &
     Pick<UseStaggeredChildReturnTypeSelf, "hideBecauseStaggered"> &
-    { onPress: AsyncHandler<TargetedEvent<HTMLDivElement, Event>, void> | undefined, loadingLabel: Nullable<string>, infoRowProps: h.JSX.HTMLAttributes<HTMLDivElement>, props: h.JSX.HTMLAttributes<HTMLDivElement>, ref2: Ref<HTMLDivElement>, keyboardControlsDescription?: string }) {
+    { onPress: AsyncHandler<JSX.TargetedEvent<HTMLDivElement, Event>, void> | undefined, loadingLabel: Nullable<string>, infoRowProps: JSX.HTMLAttributes<HTMLDivElement>, props: JSX.HTMLAttributes<HTMLDivElement>, ref2: Ref<HTMLDivElement>, keyboardControlsDescription?: string }) {
 
-    return (<ProgressWithHandler<h.JSX.TargetedEvent<any, Event>, void, HTMLSpanElement, HTMLLabelElement>
+    return (<ProgressWithHandler<JSX.TargetedEvent<any, Event>, void, HTMLSpanElement, HTMLLabelElement>
         ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
         asyncHandler={async (a, b) => {
             // TODO: How'd we end up with onPress (from the user) AND onPress (from selection)?
@@ -196,7 +196,7 @@ const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, 
 
             const show = !hideBecauseStaggered;
             const { propsProgressIndicator, propsProgressRegion } = progressInfo;
-            const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending} exitVisibility="removed"><span class="spinner-border spinner-border-sm text-secondary" {...propsProgressIndicator} /></Fade>)
+            const loadingJsx = (<Fade show={progressInfo.asyncHandlerReturn.pending} exitVisibility="removed"><span className="spinner-border spinner-border-sm text-secondary" {...propsProgressIndicator} /></Fade>)
             //const buttonClass = clsx(`btn position-relative`, variantDropdown && "dropdown-toggle", variantDropdown == "split" && "dropdown-toggle-split", variantSize && `btn-${variantSize}`, `btn${variantFill == "outline" ? "-outline" : ""}-${variantTheme || "primary"}`, pending && "pending", pressed && "pressed", disabled && "disabled", buttonInfo.pressReturn.pseudoActive && "active");
             const finalPropsForText = useMergedProps(p1, p2);
             const finalPropsForDiv = useMergedProps(
@@ -221,7 +221,7 @@ const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, 
             );
             const c = <>
                 <ListItemStartEnd index={0} hidden={iconStart == null} children={iconStart} />
-                <ListItemText onPress={progressInfo.asyncHandlerReturn.syncHandler} {...finalPropsForText}>{children}<span class="list-group-item-badge-and-spinner"><div>{badge}</div><div>{loadingJsx}</div></span></ListItemText>
+                <ListItemText onPress={progressInfo.asyncHandlerReturn.syncHandler} {...finalPropsForText}>{children}<span className="list-group-item-badge-and-spinner"><div>{badge}</div><div>{loadingJsx}</div></span></ListItemText>
 
                 <ListItemStartEnd index={2} hidden={iconEnd == null} children={iconEnd} />
             </>
@@ -232,7 +232,7 @@ const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, 
                 if (hideBecausePaginated)
                     return null!;
                 else
-                    return <div aria-busy="true" class="gridlist-item gridlist-item-placeholder"><span class={clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow")}><span class="placeholder w-100"></span></span></div>;
+                    return <div aria-busy="true" className="gridlist-item gridlist-item-placeholder"><span className={clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow")}><span className="placeholder w-100"></span></span></div>;
 
 
             return (
@@ -283,7 +283,7 @@ export const ListItem = memo(forwardElementRef((function ListItem({ index, keybo
 
                 // TODO: Get a better placeholder system
                 if (infoRow.hidden)
-                    return <div {...p3} key="hide-because-staggered" class={`gridlist-item gridlist-item-placeholder list-group-item`} role="option" aria-busy="true" /> // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
+                    return <div {...p3} key="hide-because-staggered" className={`gridlist-item gridlist-item-placeholder list-group-item`} role="option" aria-busy="true" /> // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
 
                 return <ListItemNonPaginated key="show"
                     keyboardControlsDescription={keyboardControlsDescription}
@@ -307,7 +307,7 @@ export const ListItem = memo(forwardElementRef((function ListItem({ index, keybo
 })));
 
 
-const ListItemText = memo(forwardElementRef((function ListItemText({ onPress, children, ...props }: h.JSX.HTMLAttributes<any> & { onPress: ((e: h.JSX.TargetedEvent<HTMLDivElement, Event>) => void) | null | undefined }, ref?: Ref<any>) {
+const ListItemText = memo(forwardElementRef((function ListItemText({ onPress, children, ...props }: JSX.HTMLAttributes<any> & { onPress: ((e: JSX.TargetedEvent<HTMLDivElement, Event>) => void) | null | undefined }, ref?: Ref<any>) {
     return (
         <GridlistChild<HTMLDivElement>
             index={1}
@@ -326,7 +326,7 @@ const ListItemText = memo(forwardElementRef((function ListItemText({ onPress, ch
 
 interface ListItemStartEndProps {
     index: 0 | 2;
-    children: ComponentChildren;
+    children?: ComponentChildren;
     hidden: boolean;
 }
 
@@ -340,7 +340,7 @@ const ListItemStartEnd = memo((function ListItemStartEnd({ hidden, index, childr
             })}
             render={infoCell => {
                 const ret = (
-                    <div class={clsx("list-group-item-icon", `list-group-item-icon-${index === 0 ? "start" : "end"}`)}>
+                    <div className={clsx("list-group-item-icon", `list-group-item-icon-${index === 0 ? "start" : "end"}`)}>
                         {useClonedElement(children, useMergedProps(infoCell.propsCell, infoCell.propsTabbable), undefined)}
                     </div>
                 )

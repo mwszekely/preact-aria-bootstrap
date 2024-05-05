@@ -1,10 +1,8 @@
-import { cloneElement, h, Ref, VNode } from "preact";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { cloneElement, JSX, memo, Ref, useMergedProps, VNode } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 
 
-export interface IconProps<E extends Element> extends Omit<h.JSX.HTMLAttributes<E>, "label" | "children"> {
+export interface IconProps<E extends Element> extends Omit<JSX.HTMLAttributes<E>, "label" | "children"> {
     /**
      * All icons must either have an accessible label, or
      * explicitly declare that they do not have a label (and are implicitly presentation-only).
@@ -19,7 +17,7 @@ export interface IconProps<E extends Element> extends Omit<h.JSX.HTMLAttributes<
      */
     //tooltip?: ComponentChild;
 
-    children: VNode<any>;
+    children?: VNode;
 }
 
 export const Icon = memo(forwardElementRef(function Icon<E extends Element>({ label, role, "aria-label": ariaLabel, children, ref: unused, ...props }: IconProps<E>, ref: Ref<HTMLElement>) {
@@ -27,12 +25,12 @@ export const Icon = memo(forwardElementRef(function Icon<E extends Element>({ la
 
     const iconProps = useMergedProps<any>(props, {
         class: "icon",
-        [children.type === "img" ? "alt" : "aria-label"]: (ariaLabel || (label ?? undefined)),
+        [children?.type === "img" ? "alt" : "aria-label"]: (ariaLabel || (label ?? undefined)),
         role: (role || (label ? "img" : "presentation")),
         ref,
     })
 
-    const iconElement = cloneElement(children, useMergedProps<any>(children.props, iconProps));
+    const iconElement = cloneElement(children as any, useMergedProps<any>(("props" in (children || {}) as any? (children as any).props : {}), iconProps));
 
     return iconElement;
 }));

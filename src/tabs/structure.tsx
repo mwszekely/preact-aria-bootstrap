@@ -1,9 +1,7 @@
 
 import { clsx } from "clsx";
-import { ComponentChildren, Ref } from "preact";
-import { UseTypeaheadNavigationReturnTypeSelf, useMergedProps, useState, useTimeout } from "preact-prop-helpers";
-import { SlideZoomFade, Swappable } from "preact-transition";
-import { memo } from "preact/compat";
+import { ComponentChildren, Ref, UseTypeaheadNavigationReturnTypeSelf, memo, useMergedProps, useState, useTimeout } from "preact-prop-helpers/preact";
+import { SlideZoomFade, Swappable } from "preact-transition/preact";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { GlobalAttributes } from "../utility/types.js";
@@ -41,7 +39,7 @@ export const StructureTabPanel = memoForwardRef(function StructureTabPanel({ ori
     );
 })
 
-const TabPanelChildren = memo(function TabPanelChildren({ children, visible }: { visible: boolean, children: ComponentChildren }) {
+const TabPanelChildren = memo(function TabPanelChildren({ children, visible }: { visible: boolean, children?: ComponentChildren }) {
     // It's more than likely that any given panel's children will be heavy to render,
     // but we *really* don't want that to block the transition animation
     // so we wait until just slightly after the transition starts to actually mount the children.
@@ -57,12 +55,12 @@ const TabPanelChildren = memo(function TabPanelChildren({ children, visible }: {
 export interface StructureTabsProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> { }
 export interface StructureTabPanelsContainerProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> { }
 
-export interface StructureTabListProps extends GlobalAttributes<HTMLUListElement, "children">, Pick<TabsProps, "orientation"> { 
-    childrenLabel: ComponentChildren; 
-    labelPosition: "before" | "after" | "hidden"; 
+export interface StructureTabListProps extends GlobalAttributes<HTMLUListElement, "children">, Pick<TabsProps, "orientation"> {
+    childrenLabel: ComponentChildren;
+    labelPosition: "before" | "after" | "hidden";
     typeaheadStatus: UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"],
     keyboardControlsDescription: string;
- }
+}
 
 export const StructureTabs = memoForwardRef(function StructureTabs({ orientation, children, ...props }: StructureTabsProps, ref: Ref<HTMLDivElement>) {
     return (
@@ -74,11 +72,7 @@ export const StructureTabs = memoForwardRef(function StructureTabs({ orientation
 
 export const StructureTabPanelsContainer = memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }: StructureTabPanelsContainerProps, ref: Ref<HTMLDivElement>) {
     return (
-        <Swappable>
-            <div {...useMergedProps({ class: "tab-panels-container" }, { ...props, ref })}>
-                {panels}
-            </div>
-        </Swappable>
+        <Swappable children={<div {...useMergedProps({ class: "tab-panels-container" }, { ...props, ref })}>{panels}</div>} />
     )
 })
 
@@ -87,15 +81,15 @@ export const StructureTabList = memoForwardRef(function StructureTabList({ orien
     return (
         <>
             {labelPosition == "before" && labelJsx}
-            <KeyboardAssistIcon 
-            leftRight={orientation == "horizontal"} 
-            upDown={orientation == "vertical"} 
-            homeEnd={true} 
-            pageKeys={false} 
-            typeaheadStatus={typeaheadStatus}
-            activateSpace={typeaheadStatus == 'none'} 
-            activateEnter={true}
-            description={keyboardControlsDescription ?? "Select a tab:"}>
+            <KeyboardAssistIcon
+                leftRight={orientation == "horizontal"}
+                upDown={orientation == "vertical"}
+                homeEnd={true}
+                pageKeys={false}
+                typeaheadStatus={typeaheadStatus}
+                activateSpace={typeaheadStatus == 'none'}
+                activateEnter={true}
+                description={keyboardControlsDescription ?? "Select a tab:"}>
                 <ul {...useMergedProps({ className: clsx(`nav nav-tabs`, `typeahead-status-${typeaheadStatus}`) }, { ...props, ref })}>
                     {tabs}
                 </ul>

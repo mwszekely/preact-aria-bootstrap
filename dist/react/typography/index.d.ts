@@ -1,4 +1,4 @@
-import { Ref } from "preact";
+import { Ref } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 interface TypePropsBase<T extends EventTarget> extends GlobalAttributes<T, "children"> {
 }
@@ -30,6 +30,6 @@ interface TypeItalicsProps extends TypePropsBase<HTMLElement> {
     semantics: "emphasized" | "idiomatic" | "none";
 }
 export type TypeProps = (TypeLeadProps | TypeHighlightProps | TypeStrikeProps | TypeUnderlineProps | TypeSmallProps | TypeBoldProps | TypeItalicsProps);
-export declare const Type: ({ type, ...rest }: TypeProps, ref: Ref<any>) => import("preact").JSX.Element | null;
+export declare const Type: ({ type, ...rest }: TypeProps, ref: Ref<any>) => any;
 export {};
 //# sourceMappingURL=index.d.ts.map

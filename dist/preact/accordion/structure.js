@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
-import { useMergedProps } from "preact-prop-helpers";
-import { CollapseFade } from "preact-transition";
+import { useMergedProps } from "preact-prop-helpers/preact";
+import { CollapseFade } from "preact-transition/preact";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 /**
  *
@@ -30,6 +30,6 @@ export const StructureAccordionSectionHeaderButton = memoForwardRef(function Str
     return (_jsx("button", { ...useMergedProps({ class: "accordion-button", type: "button" }, { ...props, ref }), children: children }));
 });
 export const StructureAccordionSectionBody = memoForwardRef(function Structure({ show, children, ...props }, ref) {
-    return (_jsx(CollapseFade, { show: show, children: _jsx("div", { ...useMergedProps({ class: "accordion-collapse" }, { ...props, ref }), children: _jsx("div", { class: "accordion-body", children: children }) }) }));
+    return (_jsx(CollapseFade, { show: show, children: _jsx("div", { ...useMergedProps({ class: "accordion-collapse" }, { ...props, ref }), children: _jsx("div", { className: "accordion-body", children: children }) }) }));
 });
 //# sourceMappingURL=structure.js.map

@@ -1,10 +1,8 @@
 import { clsx } from "clsx";
-import { cloneElement, ComponentChildren, Ref, VNode } from "preact";
-import { Tooltip as AriaTooltip, TooltipStatus, useDefaultRenderPortal } from "preact-aria-widgets";
-import { useMergedProps, useState } from "preact-prop-helpers";
-import { SlideFade } from "preact-transition";
-import { useCallback, useEffect } from "preact/hooks";
-import { usePopper, UsePopperProps } from "../popper/index.js";
+import { Tooltip as AriaTooltip, TooltipStatus, useDefaultRenderPortal } from "preact-aria-widgets/preact";
+import { ComponentChildren, Ref, VNode, cloneElement, useCallback, useEffect, useMergedProps, useState } from "preact-prop-helpers/preact";
+import { SlideFade } from "preact-transition/preact";
+import { UsePopperProps, usePopper } from "../popper/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { usePortalId } from "../utility/use-portal-id.js";
@@ -38,7 +36,7 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
     /**
      * The trigger that causes the tooltip to show.
      */
-    children: ComponentChildren;
+    children?: ComponentChildren;
 
     /**
      * If true, `position: absolute` is used instead of `position: fixed`.
@@ -146,7 +144,7 @@ export const Tooltip = forwardElementRef(function Tooltip({ forward, getElement,
                     <SlideFade exitVisibility="visible" exclusivityKey="tooltip" duration={transitionDuration} show={hidden ? false : (tooltip == null ? false : (status != null))} slideTargetBlock={slideTargetBlock} slideTargetInline={slideTargetInline} /*zoomMin={0.8} zoomOriginBlock={zoomOriginBlock} zoomOriginInline={zoomOriginInline}*/ /*zoomOriginInline={(alignMode == "element" ? 0.5 : 0)}*/>
                         <div {...useMergedProps<any>(propsData, { style: maxWidth ? { "--bs-tooltip-max-width": maxWidth } : {}, className: clsx("bs-tooltip-auto tooltip", absolutePositioning && "portal-tooltip-child") }, tooltipInfo.propsPopup)}>
                             <div {...useMergedProps(propsArrow, { className: "tooltip-arrow" })} />
-                            <div class="tooltip-inner">
+                            <div className="tooltip-inner">
                                 {tooltip}
                             </div>
                         </div>

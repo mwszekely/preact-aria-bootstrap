@@ -1,6 +1,5 @@
-import { ComponentChildren, h, Ref, VNode } from "preact";
-import { DialogProps as AriaDialogProps } from "preact-aria-widgets";
-import { Nullable } from "preact-prop-helpers";
+import { DialogProps as AriaDialogProps } from "preact-aria-widgets/preact";
+import { ComponentChildren, JSX, Nullable, Ref, VNode } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     open: boolean;
@@ -15,11 +14,11 @@ export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children
      */
     fullscreen?: boolean | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
     /** Props are spread to the anchor element. If you need to have a class name or style set on the dialog itself, pass those here. */
-    propsPortal?: h.JSX.HTMLAttributes<HTMLDivElement>;
+    propsPortal?: JSX.HTMLAttributes<HTMLDivElement>;
     /**
      * If true, this dialog cannot be closed with the Escape key or by clicking the backdrop.
      */
     modal?: boolean;
 }
-export declare const Dialog: ({ open, fullscreen, variantSize, header, headerPosition, footer, onClose, anchor, modal, children, propsPortal, ...props }: DialogProps, ref?: Ref<HTMLSpanElement>) => import("preact").JSX.Element;
+export declare const Dialog: ({ open, fullscreen, variantSize, header, headerPosition, footer, onClose, anchor, modal, children, propsPortal, ...props }: DialogProps, ref?: Ref<HTMLSpanElement>) => JSX.Element;
 //# sourceMappingURL=index.d.ts.map

@@ -1,8 +1,7 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { useMergedProps, useState, useTimeout } from "preact-prop-helpers";
-import { SlideZoomFade, Swappable } from "preact-transition";
-import { memo } from "preact/compat";
+import { memo, useMergedProps, useState, useTimeout } from "preact-prop-helpers/preact";
+import { SlideZoomFade, Swappable } from "preact-transition/preact";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 export const StructureTabPanel = memoForwardRef(function StructureTabPanel({ orientation, visibleOffset, visible, children, ...props }, ref) {

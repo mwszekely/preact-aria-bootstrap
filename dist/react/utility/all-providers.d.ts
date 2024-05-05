@@ -1,7 +1,7 @@
-import { ComponentChildren } from "preact";
-import { NotificationProviderProps } from "preact-aria-widgets";
+import { NotificationProviderProps } from "preact-aria-widgets/preact";
+import { ComponentChildren } from "preact-prop-helpers/preact";
 export declare const AllProviders: ({ children, targetAssertive, targetPolite, toastsVisibleCount }: {
-    children: ComponentChildren;
-    toastsVisibleCount?: number | undefined;
-} & NotificationProviderProps) => import("preact").JSX.Element;
+    children?: ComponentChildren;
+    toastsVisibleCount?: number;
+} & NotificationProviderProps) => any;
 //# sourceMappingURL=all-providers.d.ts.map

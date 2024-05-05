@@ -1,17 +1,17 @@
-import { ComponentChildren, h } from "preact";
-import { ToastProps as AriaToastProps } from "preact-aria-widgets";
-import { PushPortalChild, UpdatePortalChild } from "preact-prop-helpers";
+import { Component, ErrorInfo } from "preact";
+import { ToastProps as AriaToastProps } from "preact-aria-widgets/preact";
+import { ComponentChildren, PushPortalChild, UpdatePortalChild } from "preact-prop-helpers/preact";
 export type PushToast = PushPortalChild;
 export type UpdateToast = UpdatePortalChild;
 export declare function ToastsProvider({ children, defaultTimeout, visibleCount }: {
-    children: ComponentChildren;
+    children?: ComponentChildren;
     visibleCount: number;
     defaultTimeout?: number;
 }): import("preact").JSX.Element;
 export declare function usePushToast(): (child: import("preact").JSX.Element) => number;
 export declare function useUpdateToast(): (index: number, child: import("preact").JSX.Element) => void;
 export interface ToastProps extends Pick<AriaToastProps<HTMLDivElement>, "politeness" | "index"> {
-    children: ComponentChildren;
+    children?: ComponentChildren;
     timeout?: number;
 }
 export declare function Toast({ timeout, politeness, children, ...p }: Omit<ToastProps, "index">): import("preact").JSX.Element;
@@ -24,8 +24,14 @@ export declare function Toast({ timeout, politeness, children, ...p }: Omit<Toas
  * @param param0
  * @returns
  */
-export declare function ToastErrorBoundary({ errorToToast, children }: {
-    errorToToast?: (error: any) => h.JSX.Element;
-    children: ComponentChildren;
-}): import("preact").JSX.Element;
+export declare class ToastErrorBoundary extends Component<{
+    children?: ComponentChildren;
+}, {
+    hasError: boolean;
+    error: unknown;
+    pushedToast: boolean;
+}> {
+    componentDidCatch(error: any, errorInfo: ErrorInfo): void;
+    render(): import("preact").JSX.Element;
+}
 //# sourceMappingURL=index.d.ts.map

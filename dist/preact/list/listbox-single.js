@@ -52,7 +52,7 @@ export const ListboxSingleItem = memo(forwardElementRef(function ListboxSingleIt
                 const p = useMergedProps(info.props, { ...props, ref });
                 
                 if (info.hidden)
-                    return <li class="d-none" />;
+                    return <li className="d-none" />;
 
                 return (
                     <ListboxSingleItemStatic {...p} disabled={disabled} selected={info.singleSelectionChildReturn.singleSelected as boolean}>{children}</ListboxSingleItemStatic>

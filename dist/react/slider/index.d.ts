@@ -1,5 +1,5 @@
-import { ComponentChildren, createElement, Ref } from "preact";
-import { SliderThumbInfo, UseSliderParameters, UseSliderThumbParameters } from "preact-aria-widgets";
+import { SliderThumbInfo, UseSliderParameters, UseSliderThumbParameters } from "preact-aria-widgets/preact";
+import { ComponentChildren, Ref } from "preact-prop-helpers/preact";
 import { GlobalAttributes } from "../utility/types.js";
 export interface RangeProps extends GlobalAttributes<HTMLDivElement> {
     debounce?: number | boolean;
@@ -34,6 +34,6 @@ export interface RangeThumbProps {
     max?: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["sliderThumbParameters"]["max"];
     min?: UseSliderThumbParameters<HTMLInputElement, SliderThumbInfo>["sliderThumbParameters"]["min"];
 }
-export declare const Range: ({ max, min, debounce, hideTickValues, hideTicks, orientation, children, getValueText, getTooltipText, value, onValueChange, step, snap, label, disabled, ...rest }: RangeProps, ref: Ref<HTMLDivElement>) => createElement.JSX.Element;
-export declare const RangeThumb: ({ index, value, max, min, onValueChange: onValueChangeAsync, disabled, label }: RangeThumbProps, ref: Ref<HTMLInputElement>) => createElement.JSX.Element;
+export declare const Range: ({ max, min, debounce, hideTickValues, hideTicks, orientation, children, getValueText, getTooltipText, value, onValueChange, step, snap, label, disabled, ...rest }: RangeProps, ref: Ref<HTMLDivElement>) => any;
+export declare const RangeThumb: ({ index, value, max, min, onValueChange: onValueChangeAsync, disabled, label }: RangeThumbProps, ref: Ref<HTMLInputElement>) => any;
 //# sourceMappingURL=index.d.ts.map

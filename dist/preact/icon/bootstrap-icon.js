@@ -1,6 +1,5 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { memo, useMergedProps } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { FontIcon } from "./font-icon.js";
 /**

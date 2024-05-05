@@ -1,14 +1,12 @@
 import { clsx } from "clsx";
-import { cloneElement, ComponentChildren, Ref, VNode } from "preact";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { cloneElement, ComponentChildren, memo, Ref, useMergedProps, VNode } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 
 export interface FigureProps extends Omit<GlobalAttributes<HTMLElement>, "children"> {
     caption: ComponentChildren;
     align?: "start" | "end" | "center";
-    children: VNode<any>;
+    children: VNode;
 }
 
 export const Figure = memo(forwardElementRef(function Figure({ children, caption, align, ...props }: FigureProps, ref: Ref<HTMLElement>) {

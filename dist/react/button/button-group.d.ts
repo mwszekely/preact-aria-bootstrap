@@ -1,10 +1,9 @@
-import { h, Ref } from "preact";
-import { ToolbarProps } from "preact-aria-widgets";
-import { Nullable } from "preact-prop-helpers";
+import { ToolbarProps } from "preact-aria-widgets/preact";
+import { JSX, Nullable, Ref } from "preact-prop-helpers/preact";
 import { ButtonThemes } from "../context.js";
 import { LabelledProps } from "../utility/types.js";
 import { ButtonProps } from "./button-action.js";
-export interface ButtonGroupProps extends Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className"> {
+export interface ButtonGroupProps extends Pick<JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className"> {
     /**
      * Disables all buttons in the group together (buttons cannot individually override this)
      */
@@ -60,6 +59,6 @@ export interface ButtonGroupContext {
     pendingIndex: number | null;
 }
 export declare const ButtonGroupContext: import("preact").Context<ButtonGroupContext | null>;
-export declare function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, keyboardControlsDescription, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>): import("preact").JSX.Element;
-export declare function ButtonGroupGroup({ label, labelPosition, children, ...props }: LabelledProps<Pick<h.JSX.HTMLAttributes<HTMLSpanElement>, "class" | "className" | "style" | "children">, "within">, ref?: Ref<HTMLSpanElement>): import("preact").JSX.Element;
+export declare function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, keyboardControlsDescription, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }: LabelledProps<ButtonGroupProps, "within">, ref?: Ref<HTMLSpanElement>): any;
+export declare function ButtonGroupGroup({ label, labelPosition, children, ...props }: LabelledProps<Pick<JSX.HTMLAttributes<HTMLSpanElement>, "class" | "className" | "style" | "children">, "within">, ref?: Ref<HTMLSpanElement>): any;
 //# sourceMappingURL=button-group.d.ts.map

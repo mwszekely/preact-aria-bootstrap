@@ -1,16 +1,14 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { createElement } from "preact";
-import { Heading } from "preact-aria-widgets";
-import { useMergedProps } from "preact-prop-helpers";
-import { memo } from "preact/compat";
+import { Heading } from "preact-aria-widgets/preact";
+import { createElement, memo, useMergedProps } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 export const Card = memo(forwardElementRef(function Card(p, ref) {
     let { children, title, subtitle, variantTheme, ...props } = p;
     if (subtitle)
-        children = _jsx(CardSubtitle, { subtitle: subtitle, class: title ? "pt-0" : "", children: children });
+        children = _jsx(CardSubtitle, { subtitle: subtitle, className: title ? "pt-0" : "", children: children });
     if (title)
-        children = _jsx(CardTitle, { title: title, class: subtitle ? "pb-0" : "", children: children });
+        children = _jsx(CardTitle, { title: title, className: subtitle ? "pb-0" : "", children: children });
     return (_jsx("div", { ...useMergedProps({ ref, className: clsx("card", variantTheme && `text-bg-${variantTheme}`) }, props), children: children }));
 }));
 function CardElement2({ type, ...p }, ref) {

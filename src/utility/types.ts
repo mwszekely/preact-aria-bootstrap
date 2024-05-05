@@ -1,4 +1,4 @@
-import { ComponentChildren, h } from "preact";
+import { ComponentChildren, JSX } from "preact-prop-helpers/preact";
 
 export type OmitStrong<T, K extends keyof T> = Omit<T, K>;
 
@@ -40,5 +40,5 @@ interface PaginatedComponent2 {
 export type PaginatedProps<P> = P & (PaginatedComponent1 | PaginatedComponent2);
 
 
-export type GlobalAttributes<T extends EventTarget, Others extends keyof h.JSX.HTMLAttributes<T> = never> = Pick<h.JSX.HTMLAttributes<T>, "ref" | "class" | "className" | "style" | Others>;
+export type GlobalAttributes<T extends EventTarget, Others extends keyof JSX.HTMLAttributes<T> = never> = Pick<JSX.HTMLAttributes<T>, "ref" | "class" | "className" | "style" | Others>;
 

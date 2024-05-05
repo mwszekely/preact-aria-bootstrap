@@ -1,10 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { createContext, createElement } from "preact";
-import { EventDetail, useSlider, useSliderThumb } from "preact-aria-widgets";
-import { generateRandomId, useAsyncHandler, useHasCurrentFocus, useMergedProps, useRefElement } from "preact-prop-helpers";
-import { memo } from "preact/compat";
-import { useContext, useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { EventDetail, useSlider, useSliderThumb } from "preact-aria-widgets/preact";
+import { createContext, createElement, generateRandomId, memo, useAsyncHandler, useContext, useEffect, useHasCurrentFocus, useMemo, useMergedProps, useRef, useRefElement, useState } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 const RangeThumbContext = createContext(null);
 const DebounceContext = createContext(false);
@@ -22,7 +19,7 @@ export const Range = memo(forwardElementRef(function Range({ max, min, debounce,
     id ??= "";
     step ??= "any";
     let tickCount = (step == "any" ? Infinity : Math.ceil(1 + (max - min) / step));
-    return (_jsx(OnValueChangeContext.Provider, { value: onValueChange, children: _jsx(RangeThumbContext.Provider, { value: context, children: _jsx(DebounceContext.Provider, { value: debounce ?? false, children: _jsx(GetValueTextContext.Provider, { value: getTooltipText ?? getValueText ?? defaultGetValueText, children: _jsx(GetListContext.Provider, { value: id, children: _jsx(StepContext.Provider, { value: step, children: _jsx(SnapContext.Provider, { value: snap ?? "discrete", children: _jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(ValueContext.Provider, { value: value ?? null, children: _jsx(OrientationContext.Provider, { value: orientation ?? "inline", children: createElement((label ? "label" : "div"), (useMergedProps({ class: clsx("form-range-container", orientation == "block" && "form-range-vertical"), ref, style: isFinite(tickCount) ? { "--form-range-tick-count": tickCount } : undefined }, rest)), label && _jsx("div", { class: "form-range-label", children: label }), children ?? _jsx(RangeThumb, { index: 0, min: min, max: max, value: value ?? 0, onValueChange: onValueChange, label: label ?? "" }), _jsx("div", { class: "form-range-track-background" }), _jsx(GetValueTextContext.Provider, { value: getValueText ?? defaultGetValueText, children: _jsx(RangeTicks, { min: min, max: max, step: step, id: id, hideTickValues: hideTickValues }) })) }) }) }) }) }) }) }) }) }) }));
+    return (_jsx(OnValueChangeContext.Provider, { value: onValueChange, children: _jsx(RangeThumbContext.Provider, { value: context, children: _jsx(DebounceContext.Provider, { value: debounce ?? false, children: _jsx(GetValueTextContext.Provider, { value: getTooltipText ?? getValueText ?? defaultGetValueText, children: _jsx(GetListContext.Provider, { value: id, children: _jsx(StepContext.Provider, { value: step, children: _jsx(SnapContext.Provider, { value: snap ?? "discrete", children: _jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(ValueContext.Provider, { value: value ?? null, children: _jsx(OrientationContext.Provider, { value: orientation ?? "inline", children: createElement((label ? "label" : "div"), (useMergedProps({ class: clsx("form-range-container", orientation == "block" && "form-range-vertical"), ref, style: isFinite(tickCount) ? { "--form-range-tick-count": tickCount } : undefined }, rest)), label && _jsx("div", { className: "form-range-label", children: label }), children ?? _jsx(RangeThumb, { index: 0, min: min, max: max, value: value ?? 0, onValueChange: onValueChange, label: label ?? "" }), _jsx("div", { className: "form-range-track-background" }), _jsx(GetValueTextContext.Provider, { value: getValueText ?? defaultGetValueText, children: _jsx(RangeTicks, { min: min, max: max, step: step, id: id, hideTickValues: hideTickValues }) })) }) }) }) }) }) }) }) }) }) }));
 }));
 function defaultGetValueText(number) {
     return `${number}`;
@@ -38,14 +35,14 @@ const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues
         const atEnds = (i == min || (i + step) > max);
         const valuePercent = (i - min) / (max - min);
         let shouldHide = (hideTickValues == "auto" ? !atEnds : hideTickValues);
-        children.push(_jsx("div", { class: clsx("form-range-tick", "form-range-tick-line", onValueChange && "form-range-tick-selectable"), children: _jsx("option", { onClick: () => {
+        children.push(_jsx("div", { className: clsx("form-range-tick", "form-range-tick-line", onValueChange && "form-range-tick-selectable"), children: _jsx("option", { onClick: () => {
                     onValueChange?.(i);
                 }, value: i, children: shouldHide ? null : getValueText(i) }, i) }));
     }
     /*for (let i = min; i <= max; i += step) {
-        children.push(<option value={i} class={clsx("form-range-tick")}>{getValueText(i)}</option>)
+        children.push(<option value={i} className={clsx("form-range-tick")}>{getValueText(i)}</option>)
     }*/
-    return (_jsxs("datalist", { id: id, class: clsx("form-range-ticks"), children: [...children] }));
+    return (_jsxs("datalist", { id: id, className: clsx("form-range-ticks"), children: [...children] }));
 });
 export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, value, max, min, onValueChange: onValueChangeAsync, disabled, label }, ref) {
     const parentOnValueChange = useContext(OnValueChangeContext);
@@ -150,7 +147,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
                     tabIndex: 0,
                     step: usedStep,
                     list: useContext(GetListContext)
-                }) }), _jsx("div", { class: "form-range-track-fill-background", style: { "--form-range-value-percent": clampedValuePercent } })] }));
+                }) }), _jsx("div", { className: "form-range-track-fill-background", style: { "--form-range-value-percent": clampedValuePercent } })] }));
 }));
 function capture(e) {
     return e[EventDetail].value;

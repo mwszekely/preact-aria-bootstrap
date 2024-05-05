@@ -1,9 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { identity } from "lodash-es";
-import { ProgressWithHandler } from "preact-aria-widgets";
-import { returnFalse, usePassiveState } from "preact-prop-helpers";
-import { useRef } from "preact/hooks";
+import { ProgressWithHandler } from "preact-aria-widgets/preact";
+import { returnFalse, usePassiveState, useRef } from "preact-prop-helpers/preact";
 import { TextFieldSpinner, useCommitTextField } from "../text-field/index.js";
 import { CkEditorWrapper } from "./ck-editor-wrapper.js";
 const RTFDefaultItems = ["undo", "redo", "|", "heading", "|", "bold", "italic", "underline", "strikethrough", "highlight", "|", "link", "code", "subscript", "superscript", "|", "removeFormat"];
@@ -38,7 +37,7 @@ export function RichTextField({ implementation, toolbarItems, onValueChange, val
                 value: valueHtml
             });
             const editorHandle = useRef(null);
-            return (_jsxs("div", { class: clsx("rich-text-field", pending && "pending"), children: [_jsx(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), _jsx(CkEditorWrapper, { editorHandle: editorHandle, implementation: implementation ?? globalThis.CKEDITOR?.ClassicEditor ?? globalThis.ClassicEditor, toolbarItems: toolbarItems ?? RTFDefaultItems, onFocusChange: setFocused, onValueChange: value => {
+            return (_jsxs("div", { className: clsx("rich-text-field", pending && "pending"), children: [_jsx(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), _jsx(CkEditorWrapper, { editorHandle: editorHandle, implementation: implementation ?? globalThis.CKEDITOR?.ClassicEditor ?? globalThis.ClassicEditor, toolbarItems: toolbarItems ?? RTFDefaultItems, onFocusChange: setFocused, onValueChange: value => {
                             syncHandler(value);
                         }, valueHtml: (pending ? currentCapture : valueHtml) || "", ...props, children: _jsx("textarea", {}) })] }));
         } }));
@@ -61,12 +60,12 @@ export function DocumentField({ implementation, toolbarItems, onValueChange, val
                 value: valueHtml
             });
             const editorHandle = useRef(null);
-            return (_jsxs("div", { class: clsx("document-field shadow-sm", pending && "pending"), children: [_jsx(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), _jsx("div", { class: "document-field__toolbar shadow-sm" }), _jsx("div", { class: "document-field__editable-container", children: _jsx(CkEditorWrapper, { implementation: implementation ?? globalThis.CKEDITOR?.DecoupledEditor ?? globalThis.DecoupledEditor, toolbarItems: toolbarItems ?? DFDefaultItems, editorHandle: editorHandle, onFocusChange: setFocused, onValueChange: value => {
+            return (_jsxs("div", { className: clsx("document-field shadow-sm", pending && "pending"), children: [_jsx(TextFieldSpinner, { callCount: callCount, containerClass: "", invocationResult: invocationResult, debouncingAsync: debouncingAsync, debouncingSync: debouncingSync, pending: p, propsIndicator: propsProgressIndicator }), _jsx("div", { className: "document-field__toolbar shadow-sm" }), _jsx("div", { className: "document-field__editable-container", children: _jsx(CkEditorWrapper, { implementation: implementation ?? globalThis.CKEDITOR?.DecoupledEditor ?? globalThis.DecoupledEditor, toolbarItems: toolbarItems ?? DFDefaultItems, editorHandle: editorHandle, onFocusChange: setFocused, onValueChange: value => {
                                 syncHandler(value);
                             }, valueHtml: (pending ? currentCapture : valueHtml) || "", onReady: editor => {
                                 const toolbarContainer = document.querySelector('.document-field__toolbar');
                                 toolbarContainer?.appendChild(editor.ui.view.toolbar.element);
-                            }, ...props, children: _jsx("div", { class: "document-field__editable" }) }) })] }));
+                            }, ...props, children: _jsx("div", { className: "document-field__editable" }) }) })] }));
         } }));
 }
 function defaultToolbar() {

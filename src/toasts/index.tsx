@@ -1,9 +1,8 @@
 import { clsx } from "clsx";
-import { ComponentChildren, createContext, h } from "preact";
-import { Toast as AriaToast, ToastProps as AriaToastProps, Toasts as AriaToasts } from "preact-aria-widgets";
-import { PushPortalChild, UpdatePortalChild, useMergedProps, usePortalChildren } from "preact-prop-helpers";
-import { SlideFade } from "preact-transition";
-import { useContext, useErrorBoundary } from "preact/hooks";
+import { Component, ErrorInfo } from "preact";
+import { Toast as AriaToast, ToastProps as AriaToastProps, Toasts as AriaToasts } from "preact-aria-widgets/preact";
+import { ComponentChildren, PushPortalChild, UpdatePortalChild, createContext, useContext, useMergedProps, usePortalChildren } from "preact-prop-helpers/preact";
+import { SlideFade } from "preact-transition/preact";
 import { Button } from "../button/index.js";
 import { usePortalId } from "../utility/use-portal-id.js";
 
@@ -15,7 +14,7 @@ export type UpdateToast = UpdatePortalChild;
 const PushToastContext = createContext<PushPortalChild>(null!);
 const UpdateToastContext = createContext<UpdatePortalChild>(null!);
 const DefaultToastTimeout = createContext(Infinity);
-export function ToastsProvider({ children, defaultTimeout, visibleCount }: { children: ComponentChildren, visibleCount: number; defaultTimeout?: number }) {
+export function ToastsProvider({ children, defaultTimeout, visibleCount }: { children?: ComponentChildren, visibleCount: number; defaultTimeout?: number }) {
 
     const { children: portalChildren, portalElement, pushChild, removeChild, updateChild } = usePortalChildren({ target: usePortalId("toast") })
 
@@ -47,7 +46,7 @@ export function useUpdateToast() {
     return updateToast;
 }
 
-export interface ToastProps extends Pick<AriaToastProps<HTMLDivElement>, "politeness" | "index"> { children: ComponentChildren; timeout?: number; }
+export interface ToastProps extends Pick<AriaToastProps<HTMLDivElement>, "politeness" | "index"> { children?: ComponentChildren; timeout?: number; }
 
 
 const ToastDismissContext = createContext<() => void>(null!);
@@ -69,11 +68,11 @@ export function Toast({ timeout, politeness, children, ...p }: Omit<ToastProps, 
                     <ToastDismissContext.Provider value={info.toastReturn.dismiss}>
                         <SlideFade show={show} slideTargetInline={1} animateOnMount={show} exitVisibility="removed">
                             <div {...useMergedProps(info.props, props, { class: clsx("toast show"/*, colorVariant && `text-bg-${colorVariant}`*/) })} >
-                                <div class="d-flex">
-                                    <div class="toast-body">
+                                <div className="d-flex">
+                                    <div className="toast-body">
                                         {children}
                                     </div>
-                                    <Button class="btn-close me-2 m-auto" aria-label="Dismiss alert" onPress={info.toastReturn.dismiss} />
+                                    <Button className="btn-close me-2 m-auto" aria-label="Dismiss alert" onPress={info.toastReturn.dismiss} />
                                 </div>
                             </div>
                         </SlideFade>
@@ -97,20 +96,39 @@ function defaultErrorToToast(error: any) {
  * @param param0 
  * @returns 
  */
-export function ToastErrorBoundary({ errorToToast, children }: { errorToToast?: (error: any) => h.JSX.Element, children: ComponentChildren }) {
+/*function ToastErrorBoundary({ errorToToast, children }: { errorToToast?: (error: any) => JSX.Element, children?: ComponentChildren }) {
     const pushToast = usePushToast();
-    const [error, resetError] = useErrorBoundary(error => void (pushToast((errorToToast ?? defaultErrorToToast)(error))));
+    //const [error, resetError] = useErrorBoundary(error => void (pushToast((errorToToast ?? defaultErrorToToast)(error))));
     return <>{children}</>;
+}*/
+
+export class ToastErrorBoundary extends Component<{ children?: ComponentChildren }, { hasError: boolean, error: unknown, pushedToast: boolean }> {
+    componentDidCatch(error: any, errorInfo: ErrorInfo): void {
+        this.setState({ hasError: true, error, pushedToast: false });
+    }
+    render() {
+
+        return (
+            <PushToastContext.Consumer children={(pushToast: PushPortalChild) => {
+                if (!this.state.pushedToast) {
+                    pushToast(defaultErrorToToast(this.state.error));
+                    this.setState({ pushedToast: true });
+                }
+                return <>{this.props.children}</>
+            }
+            } />
+        );
+    }
 }
 
 /*
-export function ToastHeader({ children }: { children: ComponentChildren }) {
+export function ToastHeader({ children }: { children?: ComponentChildren }) {
     return (
-        <div class="toast-header">
-            <div class="me-auto">
+        <div className="toast-header">
+            <div className="me-auto">
                 {children}
             </div>
-            <Button class="btn-close" aria-label="Close" />
+            <Button className="btn-close" aria-label="Close" />
         </div>
     )
 }*/

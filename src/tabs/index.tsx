@@ -1,9 +1,7 @@
 
 import { clsx } from "clsx";
-import { ComponentChildren, createContext, h, Ref } from "preact";
-import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets";
-import { PersistentStates, useMergedProps } from "preact-prop-helpers";
-import { memo, useContext } from "preact/compat";
+import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets/preact";
+import { ComponentChildren, JSX, PersistentStates, Ref, createContext, memo, useContext, useMergedProps } from "preact-prop-helpers/preact";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes, LabelledProps } from "../utility/types.js";
 import { StructureTabList, StructureTabPanel, StructureTabPanelsContainer, StructureTabs } from "./structure.js";
@@ -13,8 +11,8 @@ export interface TabsProps extends GlobalAttributes<HTMLDivElement> {
     tabs: ComponentChildren;
     panels: ComponentChildren;
     localStorageKey: keyof PersistentStates | null;
-    propsTabsContainer?: h.JSX.HTMLAttributes<HTMLUListElement>;
-    propsPanelsContainer?: h.JSX.HTMLAttributes<HTMLDivElement>;
+    propsTabsContainer?: JSX.HTMLAttributes<HTMLUListElement>;
+    propsPanelsContainer?: JSX.HTMLAttributes<HTMLDivElement>;
     keyboardControlsDescription?: string;
 }
 
@@ -33,12 +31,14 @@ const OrientationContext = createContext<"horizontal" | "vertical">("horizontal"
 export const Tabs = memo(forwardElementRef(function Tabs({ keyboardControlsDescription, orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }: LabelledProps<TabsProps, never>, ref: Ref<HTMLDivElement>) {
     orientation ??= "horizontal"
     labelPosition ??= "before";
+    if (labelPosition == "hidden")
+        console.assert(typeof label == "string");
     return (
         <OrientationContext.Provider value={orientation}>
             <AriaTabs<HTMLUListElement, HTMLLIElement, HTMLLabelElement>
                 localStorageKey={localStorageKey}
                 orientation={orientation}
-                ariaLabel={labelPosition == "hidden" ? label : null}
+                ariaLabel={labelPosition == "hidden" ? label as string : null}
                 pageNavigationSize={0}
                 render={info => {
                     const labelJsx = <label {...info.propsLabel}>{label}</label>;

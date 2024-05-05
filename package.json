@@ -19,6 +19,11 @@
       "browser": "./dist/react/index.js",
       "import": "./dist/react/index.js"
     },
+    "./preact": {
+      "types": "./dist/preact/index.d.ts",
+      "browser": "./dist/preact/index.js",
+      "import": "./dist/preact/index.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -28,8 +33,8 @@
     "build:sass": "sass         --load-path=\"./node_modules/bootstrap-sass-variables/sass\" --load-path=\"./node_modules/preact-transition/sass\" --load-path=\"./node_modules/bootstrap\" ./src/index.scss:./dist/index.css",
     "watch:preact": "tsc --watch",
     "build:preact": "tsc",
-    "watch:react": "tsc --project ./tsconfig.react.json --watch",
-    "build:react": "tsc --project ./tsconfig.react.json",
+    "build:react": "npx rollup -c",
+    "watch:react": "npx rollup -c --watch",
     "test": "playwright test --ui",
     "lint": "npx eslint ./src",
     "clean": "tsc --build --clean",
@@ -39,7 +44,7 @@
   "license": "ISC",
   "peerDependencies": {
     "bootstrap": "5.3.2",
-    "preact": "^10.17.1"
+    "preact": "^10.21.0"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.6.3",
@@ -47,19 +52,26 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
-    "clsx": "^2.1.0",
+    "clsx": "^2.1.1",
     "dompurify": "^3.0.9",
     "lodash-es": "^4.17.21",
+    "preact": "^10.21.0",
     "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
     "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
     "preact-transition": "github:mwszekely/preact-transition"
   },
   "devDependencies": {
     "@playwright/test": "^1.41.2",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@types/dompurify": "^3.0.5",
     "@types/lodash-es": "^4.17.12",
     "npm-run-all": "^4.1.5",
+    "rollup": "^4.17.2",
+    "rollup-plugin-sourcemaps": "^0.6.3",
     "sass": "^1.71.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   }
 }

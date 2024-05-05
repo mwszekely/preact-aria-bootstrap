@@ -1,9 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { ParentDepthContext, useDefault, useDefaultRenderPortal, useMenuSurface } from "preact-aria-widgets";
-import { useMergedProps, useRandomId, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
-import { ZoomFade } from "preact-transition";
-import { useCallback, useContext, useImperativeHandle } from "preact/hooks";
+import { ParentDepthContext, useDefault, useDefaultRenderPortal, useMenuSurface } from "preact-aria-widgets/preact";
+import { useCallback, useContext, useImperativeHandle, useMergedProps, useRandomId, useStableCallback, useState, useTimeout } from "preact-prop-helpers/preact";
+import { ZoomFade } from "preact-transition/preact";
 import { Button } from "../button/index.js";
 import { usePopper } from "../popper/index.js";
 import { usePortalId } from "../utility/use-portal-id.js";
@@ -58,7 +57,7 @@ export function Popover({ children, label, align, buttonVariantDropdown, buttonV
     });
     return (_jsxs(_Fragment, { children: [_jsx(Button, { variantDropdown: buttonVariantDropdown, variantFill: buttonVariantFill, variantSize: buttonVariantSize, variantTheme: buttonVariantTheme, onPress: onAnchorPress, disabled: disabled, ...useMergedProps({ class: popperOpen ? "active" : "", ref }, props, info.propsTrigger, propsSource), children: label }), useDefaultRenderPortal({
                 portalId,
-                children: (_jsx(ParentDepthContext.Provider, { value: myDepth, children: _jsxs("div", { ...useMergedProps(propsPopup, { className: "popper-popover" }), children: [_jsx("div", { ...propsArrow }), _jsx(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: _jsxs("div", { ...useMergedProps(info.propsSurface, { className: clsx("popover bs-popover-auto fade show") }), children: [_jsx("div", { ...info.propsSentinel }), header && _jsx("h3", { class: "popover-header", children: header }), _jsx("div", { ...useMergedProps(info.propsTarget, { className: "dpopover-body" }), children: children }), _jsx("div", { ...info.propsSentinel })] }) })] }) }))
+                children: (_jsx(ParentDepthContext.Provider, { value: myDepth, children: _jsxs("div", { ...useMergedProps(propsPopup, { className: "popper-popover" }), children: [_jsx("div", { ...propsArrow }), _jsx(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: _jsxs("div", { ...useMergedProps(info.propsSurface, { className: clsx("popover bs-popover-auto fade show") }), children: [_jsx("div", { ...info.propsSentinel }), header && _jsx("h3", { className: "popover-header", children: header }), _jsx("div", { ...useMergedProps(info.propsTarget, { className: "dpopover-body" }), children: children }), _jsx("div", { ...info.propsSentinel })] }) })] }) }))
             })] }));
 }
 //# sourceMappingURL=index.js.map
