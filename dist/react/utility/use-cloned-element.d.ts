@@ -1,3 +1,3 @@
-import { ComponentChildren, createElement, JSX, Ref } from "preact-prop-helpers/preact";
+import { ComponentChildren, createElement, JSX, Ref } from "preact-prop-helpers";
 export declare function useClonedElement(children: ComponentChildren | undefined | null, props: JSX.HTMLAttributes<any>, ref: Ref<any> | null | undefined, Tag?: keyof JSX.IntrinsicElements): import("preact").VNode<createElement.JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
 //# sourceMappingURL=use-cloned-element.d.ts.map

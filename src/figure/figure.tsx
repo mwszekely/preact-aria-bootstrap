@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { cloneElement, ComponentChildren, memo, Ref, useMergedProps, VNode } from "preact-prop-helpers/preact";
+import { cloneElement, ComponentChildren, memo, Ref, useMergedProps, VNode } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 

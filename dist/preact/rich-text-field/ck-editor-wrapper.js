@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
-import { memo, useEffect, useRef, useStableGetter } from "preact-prop-helpers/preact";
+import { memo, useEffect, useRef, useStableGetter } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";

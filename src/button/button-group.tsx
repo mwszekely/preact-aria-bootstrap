@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
-import { Toolbar, ToolbarProps, useLabelSynthetic, UseToolbarParameters, UseToolbarReturnType, UseToolbarSubInfo } from "preact-aria-widgets/preact";
-import { createContext, EventDetail, JSX, Nullable, Ref, useAsync, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers/preact";
+import { Toolbar, ToolbarProps, useLabelSynthetic, UseToolbarParameters, UseToolbarReturnType, UseToolbarSubInfo } from "preact-aria-widgets";
+import { createContext, EventDetail, JSX, Nullable, Ref, useAsync, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers";
 import { ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DisabledContext } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { LabelledProps } from "../utility/types.js";

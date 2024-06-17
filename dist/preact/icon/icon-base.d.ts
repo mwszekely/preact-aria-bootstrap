@@ -1,4 +1,4 @@
-import { JSX, Ref, VNode } from "preact-prop-helpers/preact";
+import { JSX, Ref, VNode } from "preact-prop-helpers";
 export interface IconProps<E extends Element> extends Omit<JSX.HTMLAttributes<E>, "label" | "children"> {
     /**
      * All icons must either have an accessible label, or

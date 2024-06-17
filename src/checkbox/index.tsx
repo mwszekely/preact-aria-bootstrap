@@ -1,8 +1,8 @@
 
 import { clsx } from "clsx";
-import { Checkbox as AriaCheckbox, CheckboxCheckedType, EventDetail, ProgressWithHandler, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets/preact";
-import { ComponentChildren, JSX, Ref, UseAsyncHandlerParameters, useContext, useMergedProps } from "preact-prop-helpers/preact";
-import { Fade } from "preact-transition/preact";
+import { Checkbox as AriaCheckbox, CheckboxCheckedType, EventDetail, ProgressWithHandler, TargetedCheckboxChangeEvent, UseCheckboxReturnType } from "preact-aria-widgets";
+import { ComponentChildren, JSX, Ref, UseAsyncHandlerParameters, useContext, useMergedProps } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";

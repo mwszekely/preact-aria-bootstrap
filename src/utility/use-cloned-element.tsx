@@ -1,4 +1,4 @@
-import { ComponentChildren, createElement, JSX, Ref, useMergedProps, VNode } from "preact-prop-helpers/preact";
+import { ComponentChildren, createElement, JSX, Ref, useMergedProps, VNode } from "preact-prop-helpers";
 
 function childrenIsVnode(children?: ComponentChildren | null | undefined): children is VNode {
     if (children && (children as VNode).type && (children as VNode).props)

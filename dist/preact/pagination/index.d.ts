@@ -1,4 +1,4 @@
-import { ComponentChildren } from "preact-prop-helpers/preact";
+import { ComponentChildren } from "preact-prop-helpers";
 import { LabelledProps, PaginatedProps } from "../utility/types.js";
 export declare function Pagination({ childCount, windowSize, onChange, labelPosition, label, keyboardControlsDescription }: LabelledProps<{
     keyboardControlsDescription?: string;

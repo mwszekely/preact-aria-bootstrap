@@ -1,6 +1,6 @@
 import { Component, ErrorInfo } from "preact";
-import { ToastProps as AriaToastProps } from "preact-aria-widgets/preact";
-import { ComponentChildren, PushPortalChild, UpdatePortalChild } from "preact-prop-helpers/preact";
+import { ToastProps as AriaToastProps } from "preact-aria-widgets";
+import { ComponentChildren, PushPortalChild, UpdatePortalChild } from "preact-prop-helpers";
 export type PushToast = PushPortalChild;
 export type UpdateToast = UpdatePortalChild;
 export declare function ToastsProvider({ children, defaultTimeout, visibleCount }: {

@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { memo, useMergedProps } from "preact-prop-helpers/preact";
+import { memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 /**
  * **IMPORTANT**: Generally, badges should include extra hidden text for assistive technologies besides just whatever (e.g.) number is visually shown.

@@ -1,4 +1,4 @@
-import { memo, useMergedProps } from "preact-prop-helpers/preact";
+import { memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 /**

@@ -1,4 +1,4 @@
-import { Ref } from "preact-prop-helpers/preact";
+import { Ref } from "preact-prop-helpers";
 import { IconProps } from "./icon-base.js";
 export interface ImageIconProps extends Omit<IconProps<HTMLImageElement>, "children"> {
 }

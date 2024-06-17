@@ -1,4 +1,4 @@
-import { JSX, Ref } from "preact-prop-helpers/preact";
+import { JSX, Ref } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 export interface InputGroupProps extends Pick<JSX.HTMLAttributes<HTMLDivElement>, "children" | "style" | "class" | "className"> {
     wrap?: boolean;

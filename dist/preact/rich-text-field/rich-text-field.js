@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { identity } from "lodash-es";
-import { ProgressWithHandler } from "preact-aria-widgets/preact";
-import { returnFalse, usePassiveState, useRef } from "preact-prop-helpers/preact";
+import { ProgressWithHandler } from "preact-aria-widgets";
+import { returnFalse, usePassiveState, useRef } from "preact-prop-helpers";
 import { TextFieldSpinner, useCommitTextField } from "../text-field/index.js";
 import { CkEditorWrapper } from "./ck-editor-wrapper.js";
 const RTFDefaultItems = ["undo", "redo", "|", "heading", "|", "bold", "italic", "underline", "strikethrough", "highlight", "|", "link", "code", "subscript", "superscript", "|", "removeFormat"];

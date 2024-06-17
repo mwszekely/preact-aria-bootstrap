@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { useMergedProps } from "preact-prop-helpers/preact";
-import { Fade, Slide } from "preact-transition/preact";
+import { useMergedProps } from "preact-prop-helpers";
+import { Fade, Slide } from "preact-transition";
 import { Button } from "../button/index.js";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 export const StructureOffcanvasPortalRoot = memoForwardRef(function StructureOffcanvasPortalRoot({ children, ...props }, ref) { return (_jsx("div", { ...props, ref: ref, children: children })); });

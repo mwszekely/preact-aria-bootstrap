@@ -1,4 +1,4 @@
-import { JSX, Ref } from "preact-prop-helpers/preact";
+import { JSX, Ref } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 export interface GridCssProps extends GlobalAttributes<HTMLDivElement, "children"> {
     columns?: number;

@@ -1,6 +1,6 @@
 import { Alignment, arrow, computePosition, flip, hide, Middleware, offset, Placement, shift, Side, size } from "@floating-ui/dom";
 import { identity } from "lodash-es";
-import { CSSProperties, ElementProps, JSX, returnZero, runImmediately, useCallback, useEffect, useElementSize, useMergedProps, usePassiveState, useRef, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers/preact";
+import { CSSProperties, ElementProps, JSX, returnZero, runImmediately, useCallback, useEffect, useElementSize, useMergedProps, usePassiveState, useRef, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 
 export interface UsePopperProps<SourceElement extends Element> {
     popperParameters: {

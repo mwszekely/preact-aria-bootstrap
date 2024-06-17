@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
-import { memo } from "preact-prop-helpers/preact";
+import { memo } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { Icon } from "./icon-base.js";
 /**

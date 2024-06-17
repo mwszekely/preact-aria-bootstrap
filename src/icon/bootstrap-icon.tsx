@@ -1,4 +1,4 @@
-import { Ref, memo, useMergedProps } from "preact-prop-helpers/preact";
+import { Ref, memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { FontIcon, FontIconProps } from "./font-icon.js";
 

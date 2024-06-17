@@ -1,4 +1,4 @@
-import { ComponentChildren, Ref, VNode } from "preact-prop-helpers/preact";
+import { ComponentChildren, Ref, VNode } from "preact-prop-helpers";
 import { CaptionedProps, GlobalAttributes, PaginatedProps } from "../utility/types.js";
 import { TableCellProps, TableProps, TableRowProps, TableSectionProps } from "./table.js";
 export interface DataTableProps extends TableProps {

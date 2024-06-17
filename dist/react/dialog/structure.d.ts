@@ -1,4 +1,4 @@
-import { ComponentChildren, EventType, Ref } from "preact-prop-helpers/preact";
+import { ComponentChildren, EventType, Ref } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 import type { DialogProps } from "./index.js";
 export interface StructureDialogPortalRootProps extends GlobalAttributes<HTMLDivElement, "children"> {

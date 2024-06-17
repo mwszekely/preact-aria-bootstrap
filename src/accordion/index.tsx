@@ -1,6 +1,6 @@
 
-import { Accordion as AriaAccordion, AccordionProps as AriaAccordionProps, AccordionSection as AriaAccordionSection, AccordionSectionProps as AriaAccordionSectionProps } from "preact-aria-widgets/preact";
-import { ComponentChildren, Ref, memo, useMergedProps } from "preact-prop-helpers/preact";
+import { Accordion as AriaAccordion, AccordionProps as AriaAccordionProps, AccordionSection as AriaAccordionSection, AccordionSectionProps as AriaAccordionSectionProps } from "preact-aria-widgets";
+import { ComponentChildren, Ref, memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { StructureAccordion, StructureAccordionSection, StructureAccordionSectionBody, StructureAccordionSectionHeader, StructureAccordionSectionHeaderButton } from "./structure.js";

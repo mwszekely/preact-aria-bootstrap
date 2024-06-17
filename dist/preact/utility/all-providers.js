@@ -1,7 +1,7 @@
 import { jsxs as _jsxs, jsx as _jsx } from "preact/jsx-runtime";
-import { NotificationProviderContext, useNotificationProvider } from "preact-aria-widgets/preact";
-import { memo } from "preact-prop-helpers/preact";
-import { ExclusiveTransitionProvider } from "preact-transition/preact";
+import { NotificationProviderContext, useNotificationProvider } from "preact-aria-widgets";
+import { memo } from "preact-prop-helpers";
+import { ExclusiveTransitionProvider } from "preact-transition";
 import { ToastErrorBoundary, ToastsProvider } from "../toasts/index.js";
 import { KeyboardAssistProvider } from "./keyboard-assist.js";
 export const AllProviders = memo(({ children, targetAssertive, targetPolite, toastsVisibleCount }) => {

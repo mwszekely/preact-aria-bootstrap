@@ -1,4 +1,4 @@
-import { ComponentChildren, Ref, VNode } from "preact-prop-helpers/preact";
+import { ComponentChildren, Ref, VNode } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 export interface FigureProps extends Omit<GlobalAttributes<HTMLElement>, "children"> {
     caption: ComponentChildren;

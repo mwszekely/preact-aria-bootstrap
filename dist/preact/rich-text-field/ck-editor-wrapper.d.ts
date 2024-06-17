@@ -1,4 +1,4 @@
-import { Ref, VNode } from "preact-prop-helpers/preact";
+import { Ref, VNode } from "preact-prop-helpers";
 export type RichTextToolbarItems = '|' | '-' | 'exportPDF' | 'exportWord' | 'findAndReplace' | 'selectAll' | 'heading' | 'bold' | 'italic' | 'strikethrough' | 'underline' | 'code' | 'subscript' | 'superscript' | 'removeFormat' | 'bulletedList' | 'numberedList' | 'todoList' | 'outdent' | 'indent' | 'undo' | 'redo' | 'fontSize' | 'fontFamily' | 'fontColor' | 'fontBackgroundColor' | 'highlight' | 'alignment' | 'alignment:left' | 'alignment:right' | 'alignment:center' | 'alignment:justify' | 'link' | 'insertImage' | 'blockQuote' | 'insertTable' | 'mediaEmbed' | 'codeBlock' | 'htmlEmbed' | 'specialCharacters' | 'horizontalLine' | 'pageBreak' | 'textPartLanguage' | 'sourceEditing';
 interface CkEditorMention {
     dropdownLimit?: number;

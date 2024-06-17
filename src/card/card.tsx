@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
-import { Heading } from "preact-aria-widgets/preact";
-import { ComponentChildren, createElement, memo, Ref, useMergedProps, VNode } from "preact-prop-helpers/preact";
+import { Heading } from "preact-aria-widgets";
+import { ComponentChildren, createElement, memo, Ref, useMergedProps, VNode } from "preact-prop-helpers";
 import { ButtonThemes } from "../context.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";

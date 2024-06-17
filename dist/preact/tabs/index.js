@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets/preact";
-import { createContext, memo, useContext, useMergedProps } from "preact-prop-helpers/preact";
+import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets";
+import { createContext, memo, useContext, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { StructureTabList, StructureTabPanel, StructureTabPanelsContainer, StructureTabs } from "./structure.js";
 const OrientationContext = createContext("horizontal");

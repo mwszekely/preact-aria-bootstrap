@@ -1,4 +1,4 @@
-import { ComponentChildren, JSX, PersistentStates, Ref } from "preact-prop-helpers/preact";
+import { ComponentChildren, JSX, PersistentStates, Ref } from "preact-prop-helpers";
 import { GlobalAttributes, LabelledProps } from "../utility/types.js";
 export interface TabsProps extends GlobalAttributes<HTMLDivElement> {
     orientation?: "horizontal" | "vertical";

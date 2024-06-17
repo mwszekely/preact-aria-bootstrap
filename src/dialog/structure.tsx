@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
-import { Heading } from "preact-aria-widgets/preact";
-import { ComponentChildren, EventType, Ref, useMergedProps } from "preact-prop-helpers/preact";
-import { SlideFade } from "preact-transition/preact";
+import { Heading } from "preact-aria-widgets";
+import { ComponentChildren, EventType, Ref, useMergedProps } from "preact-prop-helpers";
+import { SlideFade } from "preact-transition";
 import { Button } from "../button/index.js";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";

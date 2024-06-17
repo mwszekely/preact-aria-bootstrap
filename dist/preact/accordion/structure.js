@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
-import { useMergedProps } from "preact-prop-helpers/preact";
-import { CollapseFade } from "preact-transition/preact";
+import { useMergedProps } from "preact-prop-helpers";
+import { CollapseFade } from "preact-transition";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 /**
  *

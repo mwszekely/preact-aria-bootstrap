@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
-import { Dialog as AriaDialog, useDefaultRenderPortal } from "preact-aria-widgets/preact";
-import { memo, useMergedProps } from "preact-prop-helpers/preact";
+import { Dialog as AriaDialog, useDefaultRenderPortal } from "preact-aria-widgets";
+import { memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 import { usePortalId } from "../utility/use-portal-id.js";

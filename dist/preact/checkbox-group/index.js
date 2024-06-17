@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
-import { CheckboxGroup as AriaCheckboxGroup, CheckboxGroupChild as AriaCheckboxGroupChild, CheckboxGroupParent as AriaCheckboxGroupParent } from "preact-aria-widgets/preact";
-import { useMergedProps, useRef, useStableCallback, useState } from "preact-prop-helpers/preact";
+import { CheckboxGroup as AriaCheckboxGroup, CheckboxGroupChild as AriaCheckboxGroupChild, CheckboxGroupParent as AriaCheckboxGroupParent } from "preact-aria-widgets";
+import { useMergedProps, useRef, useStableCallback, useState } from "preact-prop-helpers";
 import { Checkbox } from "../checkbox/index.js";
 export function CheckboxGroup({ orientation, children, label, labelPosition, debounce, loadingLabel, throttle, disabled, inline, getSortValue }) {
     return (_jsx(AriaCheckboxGroup, { orientation: orientation, render: info => {

@@ -1,8 +1,8 @@
 import { clsx } from "clsx";
 import { Component, ErrorInfo } from "preact";
-import { Toast as AriaToast, ToastProps as AriaToastProps, Toasts as AriaToasts } from "preact-aria-widgets/preact";
-import { ComponentChildren, PushPortalChild, UpdatePortalChild, createContext, useContext, useMergedProps, usePortalChildren } from "preact-prop-helpers/preact";
-import { SlideFade } from "preact-transition/preact";
+import { Toast as AriaToast, ToastProps as AriaToastProps, Toasts as AriaToasts } from "preact-aria-widgets";
+import { ComponentChildren, PushPortalChild, UpdatePortalChild, createContext, useContext, useMergedProps, usePortalChildren } from "preact-prop-helpers";
+import { SlideFade } from "preact-transition";
 import { Button } from "../button/index.js";
 import { usePortalId } from "../utility/use-portal-id.js";
 

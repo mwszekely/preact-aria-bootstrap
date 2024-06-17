@@ -1,4 +1,4 @@
-import { Ref, memo } from "preact-prop-helpers/preact";
+import { Ref, memo } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { OmitStrong } from "../utility/types.js";
 import { Icon, IconProps } from "./icon-base.js";

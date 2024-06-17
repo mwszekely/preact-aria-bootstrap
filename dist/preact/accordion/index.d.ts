@@ -1,5 +1,5 @@
-import { AccordionProps as AriaAccordionProps, AccordionSectionProps as AriaAccordionSectionProps } from "preact-aria-widgets/preact";
-import { ComponentChildren, Ref } from "preact-prop-helpers/preact";
+import { AccordionProps as AriaAccordionProps, AccordionSectionProps as AriaAccordionSectionProps } from "preact-aria-widgets";
+import { ComponentChildren, Ref } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 export interface AccordionProps extends Partial<Pick<AriaAccordionProps<HTMLButtonElement>, "orientation" | "localStorageKey">>, GlobalAttributes<HTMLDivElement, "children"> {
 }

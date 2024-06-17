@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
-import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenuItemReturnType, useDefaultRenderPortal } from "preact-aria-widgets/preact";
-import { ComponentChildren, EventDetail, EventType, Ref, UseTypeaheadNavigationReturnTypeSelf, VNode, memo, returnUndefined, useCallback, useMergedProps, useRef, useStableCallback, useState, useTimeout } from "preact-prop-helpers/preact";
-import { Fade, ZoomFade } from "preact-transition/preact";
+import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenuItemReturnType, useDefaultRenderPortal } from "preact-aria-widgets";
+import { ComponentChildren, EventDetail, EventType, Ref, UseTypeaheadNavigationReturnTypeSelf, VNode, memo, returnUndefined, useCallback, useMergedProps, useRef, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
+import { Fade, ZoomFade } from "preact-transition";
 import { usePopper } from "../popper/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";

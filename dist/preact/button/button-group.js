@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Toolbar, useLabelSynthetic } from "preact-aria-widgets/preact";
-import { createContext, EventDetail, useAsync, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers/preact";
+import { Toolbar, useLabelSynthetic } from "preact-aria-widgets";
+import { createContext, EventDetail, useAsync, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers";
 import { DefaultButtonSize, DefaultButtonTheme, DisabledContext } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 export const ButtonGroupContext = createContext(null);

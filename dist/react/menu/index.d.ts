@@ -1,4 +1,4 @@
-import { ComponentChildren, EventType, Ref, UseTypeaheadNavigationReturnTypeSelf, VNode } from "preact-prop-helpers/preact";
+import { ComponentChildren, EventType, Ref, UseTypeaheadNavigationReturnTypeSelf, VNode } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children"> {
     forceOpen?: boolean | null | undefined;

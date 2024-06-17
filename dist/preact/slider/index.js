@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { EventDetail, useSlider, useSliderThumb } from "preact-aria-widgets/preact";
-import { createContext, createElement, generateRandomId, memo, useAsyncHandler, useContext, useEffect, useHasCurrentFocus, useMemo, useMergedProps, useRef, useRefElement, useState } from "preact-prop-helpers/preact";
+import { EventDetail, useSlider, useSliderThumb } from "preact-aria-widgets";
+import { createContext, createElement, generateRandomId, memo, useAsyncHandler, useContext, useEffect, useHasCurrentFocus, useMemo, useMergedProps, useRef, useRefElement, useState } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 const RangeThumbContext = createContext(null);
 const DebounceContext = createContext(false);

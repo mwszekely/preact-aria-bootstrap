@@ -1,8 +1,8 @@
 
 import { clsx } from "clsx";
-import { Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail, LabelPosition, Progress, TargetedRadioChangeEvent, UseRadioGroupReturnType } from "preact-aria-widgets/preact";
-import { JSX, Ref, UseAsyncHandlerParameters, createContext, useAsync, useContext, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers/preact";
-import { Fade } from "preact-transition/preact";
+import { Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail, LabelPosition, Progress, TargetedRadioChangeEvent, UseRadioGroupReturnType } from "preact-aria-widgets";
+import { JSX, Ref, UseAsyncHandlerParameters, createContext, useAsync, useContext, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";

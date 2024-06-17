@@ -1,4 +1,4 @@
-import { Ref } from "preact-prop-helpers/preact";
+import { Ref } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 export interface GridBsContainerProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**

@@ -1,4 +1,4 @@
-import { ComponentChildren, Ref, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers/preact";
+import { ComponentChildren, Ref, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 import type { TabsProps } from "./index.js";
 export interface StructureTabPanelProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> {

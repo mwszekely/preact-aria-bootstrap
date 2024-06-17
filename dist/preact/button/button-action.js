@@ -1,8 +1,8 @@
 import { Fragment as _Fragment, jsxs as _jsxs, jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Button as AriaButton, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets/preact";
-import { memo, returnFalse, useAsyncHandler, useContext, useMergedProps } from "preact-prop-helpers/preact";
-import { Fade } from "preact-transition/preact";
+import { Button as AriaButton, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets";
+import { memo, returnFalse, useAsyncHandler, useContext, useMergedProps } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";

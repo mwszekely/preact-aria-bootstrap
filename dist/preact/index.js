@@ -1,4 +1,4 @@
-export { Heading, HeadingReset } from "preact-aria-widgets/preact";
+export { Heading, HeadingReset } from "preact-aria-widgets";
 export { Accordion, AccordionSection } from "./accordion/index.js";
 export { Badge } from "./badge/index.js";
 export { Button, ButtonGroup } from "./button/index.js";

@@ -1,8 +1,8 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { clsx } from "clsx";
-import { LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets/preact";
-import { ComponentChildren, JSX, Ref, UseAsyncReturnType, memo, useContext, useHasCurrentFocus, useLayoutEffect, useMergedProps, useRef, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers/preact";
-import { Fade } from "preact-transition/preact";
+import { LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets";
+import { ComponentChildren, JSX, Ref, UseAsyncReturnType, memo, useContext, useHasCurrentFocus, useLayoutEffect, useMergedProps, useRef, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { DefaultDisabledType } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";

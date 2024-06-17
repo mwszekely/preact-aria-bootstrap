@@ -1,4 +1,4 @@
-import { createContext } from "preact-prop-helpers/preact";
+import { createContext } from "preact-prop-helpers";
 export const DisabledContext = createContext(false);
 export const DefaultDisabledType = createContext("soft");
 export const DefaultButtonTheme = createContext(null);

@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
-import { createElement, useMergedProps } from "preact-prop-helpers/preact";
+import { createElement, useMergedProps } from "preact-prop-helpers";
 function childrenIsVnode(children) {
     if (children && children.type && children.props)
         return true;

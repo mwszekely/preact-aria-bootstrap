@@ -1,4 +1,4 @@
-import { AsyncHandler, ComponentChildren, JSX, Nullable, Ref, VNode } from "preact-prop-helpers/preact";
+import { AsyncHandler, ComponentChildren, JSX, Nullable, Ref, VNode } from "preact-prop-helpers";
 import { ButtonThemes } from "../context.js";
 import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types.js";
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {

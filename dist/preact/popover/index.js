@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { ParentDepthContext, useDefault, useDefaultRenderPortal, useMenuSurface } from "preact-aria-widgets/preact";
-import { useCallback, useContext, useImperativeHandle, useMergedProps, useRandomId, useStableCallback, useState, useTimeout } from "preact-prop-helpers/preact";
-import { ZoomFade } from "preact-transition/preact";
+import { ParentDepthContext, useDefault, useDefaultRenderPortal, useMenuSurface } from "preact-aria-widgets";
+import { useCallback, useContext, useImperativeHandle, useMergedProps, useRandomId, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
+import { ZoomFade } from "preact-transition";
 import { Button } from "../button/index.js";
 import { usePopper } from "../popper/index.js";
 import { usePortalId } from "../utility/use-portal-id.js";

@@ -1,4 +1,4 @@
-import { ComponentChildren, Ref, UseTypeaheadNavigationReturnTypeSelf, VNode } from "preact-prop-helpers/preact";
+import { ComponentChildren, Ref, UseTypeaheadNavigationReturnTypeSelf, VNode } from "preact-prop-helpers";
 type Test = `keyboard-assist-lr_${boolean}-ud_${boolean}-pg_${boolean}-he_${boolean}-tp_${boolean}`;
 declare module 'preact-prop-helpers' {
     interface PersistentStates extends Record<Test, boolean> {

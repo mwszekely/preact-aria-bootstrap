@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
-import { memo, useMergedProps } from "preact-prop-helpers/preact";
+import { memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 export const Type = memo(forwardElementRef(function Type({ type, ...rest }, ref) {

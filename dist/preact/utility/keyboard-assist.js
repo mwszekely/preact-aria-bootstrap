@@ -1,6 +1,6 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
-import { createContext, generateRandomId, memo, useContext, useEffect, useGlobalHandler, useHasCurrentFocus, useLayoutEffect, useMergedProps, usePersistentState, useRef, useRefElement, useStableCallback, useState } from "preact-prop-helpers/preact";
-import { CollapseFade, SlideZoomFade } from "preact-transition/preact";
+import { createContext, generateRandomId, getDocument, memo, useContext, useEffect, useGlobalHandler, useHasCurrentFocus, useLayoutEffect, useMergedProps, usePersistentState, useRef, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
+import { CollapseFade, SlideZoomFade } from "preact-transition";
 import { forwardElementRef } from "./forward-element-ref.js";
 import { useClonedElement } from "./use-cloned-element.js";
 const Both = [false, true];
@@ -166,7 +166,7 @@ export function KeyboardAssistProvider({ children }) {
     const [userHasHidden, setUserHasHidden, getUserHasHidden] = usePersistentState(stateKey, false);
     const [userHasHiddenAny, setUserHasHiddenAny] = usePersistentState("keyboard-assist-hidden-any", false);
     //const [currentDescription, setCurrentDescription] = useState("Keyboard controls available:");
-    useGlobalHandler(document, "keydown", event => {
+    useGlobalHandler(getDocument(), "keydown", event => {
         if (event.key == "Tab") {
             setHeardTab(true);
         }

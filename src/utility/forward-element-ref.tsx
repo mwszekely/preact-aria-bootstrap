@@ -1,4 +1,4 @@
-import { forwardRef, memo } from "preact-prop-helpers/preact";
+import { forwardRef, memo } from "preact-prop-helpers";
 
 interface MutableRefObject<T> {
     current: T;

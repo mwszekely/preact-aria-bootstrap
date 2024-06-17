@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Checkbox as AriaCheckbox, EventDetail, ProgressWithHandler } from "preact-aria-widgets/preact";
-import { useContext, useMergedProps } from "preact-prop-helpers/preact";
-import { Fade } from "preact-transition/preact";
+import { Checkbox as AriaCheckbox, EventDetail, ProgressWithHandler } from "preact-aria-widgets";
+import { useContext, useMergedProps } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";

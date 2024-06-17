@@ -1,4 +1,4 @@
-import { Ref } from "preact-prop-helpers/preact";
+import { Ref } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 interface TypePropsBase<T extends EventTarget> extends GlobalAttributes<T, "children"> {
 }

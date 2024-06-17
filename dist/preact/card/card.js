@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Heading } from "preact-aria-widgets/preact";
-import { createElement, memo, useMergedProps } from "preact-prop-helpers/preact";
+import { Heading } from "preact-aria-widgets";
+import { createElement, memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 export const Card = memo(forwardElementRef(function Card(p, ref) {
     let { children, title, subtitle, variantTheme, ...props } = p;

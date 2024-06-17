@@ -1,4 +1,4 @@
-import { Ref } from "preact-prop-helpers/preact";
+import { Ref } from "preact-prop-helpers";
 import { OmitStrong } from "../utility/types.js";
 import { IconProps } from "./icon-base.js";
 export interface FontIconProps extends OmitStrong<IconProps<HTMLElement>, "children"> {

@@ -1,4 +1,4 @@
-import { Ref, VNode, memo, useEffect, useRef, useStableGetter } from "preact-prop-helpers/preact";
+import { Ref, VNode, memo, useEffect, useRef, useStableGetter } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";

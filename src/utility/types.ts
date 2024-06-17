@@ -1,4 +1,4 @@
-import { ComponentChildren, JSX } from "preact-prop-helpers/preact";
+import { ComponentChildren, JSX } from "preact-prop-helpers";
 
 export type OmitStrong<T, K extends keyof T> = Omit<T, K>;
 

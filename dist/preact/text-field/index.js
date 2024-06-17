@@ -1,9 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { Temporal } from "@js-temporal/polyfill";
 import { clsx } from "clsx";
-import { ProgressWithHandler, useLabel } from "preact-aria-widgets/preact";
-import { memo, useContext, useHasCurrentFocus, useLayoutEffect, useMergedProps, useRef, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers/preact";
-import { Fade } from "preact-transition/preact";
+import { ProgressWithHandler, useLabel } from "preact-aria-widgets";
+import { memo, useContext, useHasCurrentFocus, useLayoutEffect, useMergedProps, useRef, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { DefaultDisabledType } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";

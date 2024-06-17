@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Heading } from "preact-aria-widgets/preact";
-import { useMergedProps } from "preact-prop-helpers/preact";
-import { SlideFade } from "preact-transition/preact";
+import { Heading } from "preact-aria-widgets";
+import { useMergedProps } from "preact-prop-helpers";
+import { SlideFade } from "preact-transition";
 import { Button } from "../button/index.js";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 export const StructureDialogPortalRoot = memoForwardRef(function StructureDialogPortalRoot({ children, ...props }, ref) { return (_jsx("div", { ...props, ref: ref, children: children })); });

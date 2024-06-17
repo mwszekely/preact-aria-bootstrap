@@ -1,5 +1,5 @@
-import { ToolbarProps } from "preact-aria-widgets/preact";
-import { JSX, Nullable, Ref } from "preact-prop-helpers/preact";
+import { ToolbarProps } from "preact-aria-widgets";
+import { JSX, Nullable, Ref } from "preact-prop-helpers";
 import { ButtonThemes } from "../context.js";
 import { LabelledProps } from "../utility/types.js";
 import { ButtonProps } from "./button-action.js";

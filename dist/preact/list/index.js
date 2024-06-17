@@ -1,9 +1,9 @@
 import { createElement as _createElement } from "preact";
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Gridlist, GridlistChild, GridlistRow, GridlistRows, ProgressWithHandler } from "preact-aria-widgets/preact";
-import { EventDetail, createContext, forwardRef, memo, returnUndefined, useCallback, useContext, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers/preact";
-import { Fade } from "preact-transition/preact";
+import { Gridlist, GridlistChild, GridlistRow, GridlistRows, ProgressWithHandler } from "preact-aria-widgets";
+import { EventDetail, createContext, forwardRef, memo, returnUndefined, useCallback, useContext, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";

@@ -1,5 +1,5 @@
 import { Alignment, Placement, Side } from "@floating-ui/dom";
-import { ElementProps, JSX } from "preact-prop-helpers/preact";
+import { ElementProps, JSX } from "preact-prop-helpers";
 export interface UsePopperProps<SourceElement extends Element> {
     popperParameters: {
         placement: Placement;

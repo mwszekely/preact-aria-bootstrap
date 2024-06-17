@@ -1,5 +1,5 @@
-import { DialogProps as AriaDialogProps } from "preact-aria-widgets/preact";
-import { ComponentChildren, JSX, Nullable, Ref, VNode } from "preact-prop-helpers/preact";
+import { DialogProps as AriaDialogProps } from "preact-aria-widgets";
+import { ComponentChildren, JSX, Nullable, Ref, VNode } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children"> {
     open: boolean;

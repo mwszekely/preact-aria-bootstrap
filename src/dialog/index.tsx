@@ -1,5 +1,5 @@
-import { Dialog as AriaDialog, DialogProps as AriaDialogProps, useDefaultRenderPortal } from "preact-aria-widgets/preact";
-import { ComponentChildren, JSX, Nullable, Ref, VNode, memo, useMergedProps } from "preact-prop-helpers/preact";
+import { Dialog as AriaDialog, DialogProps as AriaDialogProps, useDefaultRenderPortal } from "preact-aria-widgets";
+import { ComponentChildren, JSX, Nullable, Ref, VNode, memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";

@@ -1,4 +1,4 @@
-import { Ref } from "preact-prop-helpers/preact";
+import { Ref } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 /**
  * Very simple, easy static grid that guarantees the number of columns is displayed,

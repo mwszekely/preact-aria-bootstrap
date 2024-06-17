@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Tooltip as AriaTooltip, useDefaultRenderPortal } from "preact-aria-widgets/preact";
-import { cloneElement, useCallback, useEffect, useMergedProps, useState } from "preact-prop-helpers/preact";
-import { SlideFade } from "preact-transition/preact";
+import { Tooltip as AriaTooltip, useDefaultRenderPortal } from "preact-aria-widgets";
+import { cloneElement, useCallback, useEffect, useMergedProps, useState } from "preact-prop-helpers";
+import { SlideFade } from "preact-transition";
 import { usePopper } from "../popper/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { usePortalId } from "../utility/use-portal-id.js";

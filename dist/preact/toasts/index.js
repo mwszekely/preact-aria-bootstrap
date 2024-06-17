@@ -1,9 +1,9 @@
 import { Fragment as _Fragment, jsxs as _jsxs, jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { Component } from "preact";
-import { Toast as AriaToast, Toasts as AriaToasts } from "preact-aria-widgets/preact";
-import { createContext, useContext, useMergedProps, usePortalChildren } from "preact-prop-helpers/preact";
-import { SlideFade } from "preact-transition/preact";
+import { Toast as AriaToast, Toasts as AriaToasts } from "preact-aria-widgets";
+import { createContext, useContext, useMergedProps, usePortalChildren } from "preact-prop-helpers";
+import { SlideFade } from "preact-transition";
 import { Button } from "../button/index.js";
 import { usePortalId } from "../utility/use-portal-id.js";
 const PushToastContext = createContext(null);

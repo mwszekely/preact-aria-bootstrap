@@ -1,4 +1,4 @@
-import { Ref } from "preact-prop-helpers/preact";
+import { Ref } from "preact-prop-helpers";
 import { FontIconProps } from "./font-icon.js";
 export interface BootstrapIconProps extends Pick<FontIconProps, "label" | "className" | "class" | "style" | "role"> {
     icon: (typeof BootstrapIconClasses)[number];

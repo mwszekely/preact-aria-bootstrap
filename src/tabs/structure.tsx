@@ -1,7 +1,7 @@
 
 import { clsx } from "clsx";
-import { ComponentChildren, Ref, UseTypeaheadNavigationReturnTypeSelf, memo, useMergedProps, useState, useTimeout } from "preact-prop-helpers/preact";
-import { SlideZoomFade, Swappable } from "preact-transition/preact";
+import { ComponentChildren, Ref, UseTypeaheadNavigationReturnTypeSelf, memo, useMergedProps, useState, useTimeout } from "preact-prop-helpers";
+import { SlideZoomFade, Swappable } from "preact-transition";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { GlobalAttributes } from "../utility/types.js";

@@ -37,13 +37,13 @@ importers:
         version: 10.22.0
       preact-aria-widgets:
         specifier: github:mwszekely/preact-aria-widgets
-        version: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/90436be4ef92237033ba645f20d46f9b8bbd2b71(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))
+        version: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/3c1c466102cbe498603e1a1aaa7ecb698464e208(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))
       preact-prop-helpers:
         specifier: github:mwszekely/preact-prop-helpers
-        version: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/fa64938df7829120e069fe1f36c12eb0be25d036(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/836a174fe6a5f2ab6beaabc001247b998f038388(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       preact-transition:
         specifier: github:mwszekely/preact-transition
-        version: https://codeload.github.com/mwszekely/preact-transition/tar.gz/ec141c882b3372697df0ca25373e3f39281a8bda(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))
+        version: https://codeload.github.com/mwszekely/preact-transition/tar.gz/afeb54451b566bed3b5b52ba8e36d4f1ed67fe8a(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))
     devDependencies:
       '@playwright/test':
         specifier: ^1.44.1
@@ -59,7 +59,7 @@ importers:
         version: 5.0.7(rollup@4.18.0)
       '@rollup/plugin-typescript':
         specifier: ^11.1.6
-        version: 11.1.6(rollup@4.18.0)(tslib@2.6.2)(typescript@5.4.5)
+        version: 11.1.6(rollup@4.18.0)(tslib@2.6.3)(typescript@5.4.5)
       '@types/dompurify':
         specifier: ^3.0.5
         version: 3.0.5
@@ -74,18 +74,18 @@ importers:
         version: 4.18.0
       rollup-plugin-sourcemaps:
         specifier: ^0.6.3
-        version: 0.6.3(@types/node@20.12.8)(rollup@4.18.0)
+        version: 0.6.3(@types/node@20.14.4)(rollup@4.18.0)
       sass:
         specifier: ^1.77.5
-        version: 1.77.5
+        version: 1.77.6
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
 
 packages:
 
-  '@floating-ui/core@1.6.1':
-    resolution: {integrity: sha512-42UH54oPZHPdRHdw6BgoBD6cg/eVTmVrFcgeRDM3jbO7uxSoipVcmcIGFcA5jmOHO5apcyvBhkSKES3fQJnu7A==}
+  '@floating-ui/core@1.6.2':
+    resolution: {integrity: sha512-+2XpQV9LLZeanU4ZevzRnGFg2neDeKHgFLjP6YLW+tly0IvrhqT4u8enLGjLH3qeh85g19xY5rsAusfwTdn5lg==}
 
   '@floating-ui/dom@1.6.5':
     resolution: {integrity: sha512-Nsdud2X65Dz+1RHjAIP0t8z5e2ff/IRbei6BqFrl1urT8sDVzM1HMQ+R0XcU5ceRfyO3I6ayeqIfh+6Wb8LGTw==}
@@ -263,11 +263,11 @@ packages:
   '@types/lodash-es@4.17.12':
     resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
 
-  '@types/lodash@4.17.1':
-    resolution: {integrity: sha512-X+2qazGS3jxLAIz5JDXDzglAF3KpijdhFxlf/V1+hEsOUc+HnWi81L/uv/EvGuV90WY+7mPGFCUDGfQC3Gj95Q==}
+  '@types/lodash@4.17.5':
+    resolution: {integrity: sha512-MBIOHVZqVqgfro1euRDWX7OO0fBVUUMrN6Pwm8LQsz8cWhEpihlvR70ENj3f40j58TNxZaWv2ndSkInykNBBJw==}
 
-  '@types/node@20.12.8':
-    resolution: {integrity: sha512-NU0rJLJnshZWdE/097cdCBbyW1h4hEg0xpovcoAQYHl8dnEyp/NAOiE45pvc+Bd1Dt+2r94v2eGFpQJ4R7g+2w==}
+  '@types/node@20.14.4':
+    resolution: {integrity: sha512-1ChboN+57suCT2t/f8lwtPY/k3qTpuD/qnqQuYoBg6OQOcPyaw7PiZVdGpaZYAvhDDtqrt0oAaM8+oSu1xsUGw==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -350,8 +350,8 @@ packages:
   brace-expansion@2.0.1:
     resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
 
-  braces@3.0.2:
-    resolution: {integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==}
+  braces@3.0.3:
+    resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
   builtin-modules@3.3.0:
@@ -478,8 +478,8 @@ packages:
   estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
 
-  fill-range@7.0.1:
-    resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
+  fill-range@7.1.1:
+    resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
 
   for-each@0.3.3:
@@ -565,8 +565,8 @@ packages:
   hosted-git-info@2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
 
-  immutable@4.3.5:
-    resolution: {integrity: sha512-8eabxkth9gZatlwl5TBuJnCsoTADlL6ftEr7A4qgdaTsPyreilDSnUk57SO+jfKcNtxPa22U5KK6DSeAYhpBJw==}
+  immutable@4.3.6:
+    resolution: {integrity: sha512-Ju0+lEMyzMVZarkTn/gqRpdqd5dOPaz1mCZ0SH3JV6iFw81PldE/PEB1hWVEA288HPt4WXW8O7AWxB10M+03QQ==}
 
   internal-slot@1.0.7:
     resolution: {integrity: sha512-NGnrKwXzSms2qUUih/ILZ5JBqNTSa1+ZmP6flaIp6KmSElgE9qdndzS3cqjrDovwFdmwsGsLdeFgB6suw+1e9g==}
@@ -794,22 +794,22 @@ packages:
     resolution: {integrity: sha512-d7Uw+eZoloe0EHDIYoe+bQ5WXnGMOpmiZFTuMWCwpjzzkL2nTjcKiAk4hh8TjnGye2TwWOk3UXucZ+3rbmBa8Q==}
     engines: {node: '>= 0.4'}
 
-  preact-aria-widgets@https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/90436be4ef92237033ba645f20d46f9b8bbd2b71:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/90436be4ef92237033ba645f20d46f9b8bbd2b71}
+  preact-aria-widgets@https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/3c1c466102cbe498603e1a1aaa7ecb698464e208:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/3c1c466102cbe498603e1a1aaa7ecb698464e208}
     version: 0.0.1
     peerDependencies:
       preact: ^10.21.0
 
-  preact-prop-helpers@https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/fa64938df7829120e069fe1f36c12eb0be25d036:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/fa64938df7829120e069fe1f36c12eb0be25d036}
+  preact-prop-helpers@https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/836a174fe6a5f2ab6beaabc001247b998f038388:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/836a174fe6a5f2ab6beaabc001247b998f038388}
     version: 0.0.1
     peerDependencies:
       preact: ^10.13.2
       react: ^18.2.0
       react-dom: ^18.2.0
 
-  preact-transition@https://codeload.github.com/mwszekely/preact-transition/tar.gz/ec141c882b3372697df0ca25373e3f39281a8bda:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/ec141c882b3372697df0ca25373e3f39281a8bda}
+  preact-transition@https://codeload.github.com/mwszekely/preact-transition/tar.gz/afeb54451b566bed3b5b52ba8e36d4f1ed67fe8a:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-transition/tar.gz/afeb54451b566bed3b5b52ba8e36d4f1ed67fe8a}
     version: 0.1.0
     peerDependencies:
       preact: ^10.21.0
@@ -865,8 +865,8 @@ packages:
     resolution: {integrity: sha512-CdASjNJPvRa7roO6Ra/gLYBTzYzzPyyBXxIMdGW3USQLyjWEls2RgW5UBTXaQVp+OrpeCK3bLem8smtmheoRuw==}
     engines: {node: '>= 0.4'}
 
-  sass@1.77.5:
-    resolution: {integrity: sha512-oDfX1mukIlxacPdQqNb6mV2tVCrnE+P3nVYioy72V5tlk56CPNcO4TCuFcaCRKKfJ1M3lH95CleRS+dVKL2qMg==}
+  sass@1.77.6:
+    resolution: {integrity: sha512-ByXE1oLD79GVq9Ht1PeHWCPMPB8XHpBuz1r85oByKHjZY6qV6rWnQovQzXJXuQ/XyE1Oj3iPk3lo28uzaRA2/Q==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -929,8 +929,8 @@ packages:
   spdx-expression-parse@3.0.1:
     resolution: {integrity: sha512-cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q==}
 
-  spdx-license-ids@3.0.17:
-    resolution: {integrity: sha512-sh8PWc/ftMqAAdFiBu6Fy6JUOYjqDJBJvIhpfDMyHrr0Rbp5liZqd4TjtQ/RgfLjKFZb+LMx5hpml5qOWy0qvg==}
+  spdx-license-ids@3.0.18:
+    resolution: {integrity: sha512-xxRs31BqRYHwiMzudOrpSiHtZ8i/GeionCBDSilhYRj+9gIcI8wCZTlXZKu9vZIVqViP3dcp9qE5G6AlIaD+TQ==}
 
   string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
@@ -982,8 +982,8 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  tslib@2.6.2:
-    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+  tslib@2.6.3:
+    resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
 
   typed-array-buffer@1.0.2:
     resolution: {integrity: sha512-gEymJYKZtKXzzBzM4jqa9w6Q1Jjm7x2d+sh19AdsD4wqnMPDYyvwpsIc2Q/835kHuo3BEQ7CjelGhfTsoBb2MQ==}
@@ -1044,13 +1044,13 @@ packages:
 
 snapshots:
 
-  '@floating-ui/core@1.6.1':
+  '@floating-ui/core@1.6.2':
     dependencies:
       '@floating-ui/utils': 0.2.2
 
   '@floating-ui/dom@1.6.5':
     dependencies:
-      '@floating-ui/core': 1.6.1
+      '@floating-ui/core': 1.6.2
       '@floating-ui/utils': 0.2.2
 
   '@floating-ui/utils@0.2.2': {}
@@ -1069,7 +1069,7 @@ snapshots:
   '@js-temporal/polyfill@0.4.4':
     dependencies:
       jsbi: 4.3.0
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -1109,14 +1109,14 @@ snapshots:
     optionalDependencies:
       rollup: 4.18.0
 
-  '@rollup/plugin-typescript@11.1.6(rollup@4.18.0)(tslib@2.6.2)(typescript@5.4.5)':
+  '@rollup/plugin-typescript@11.1.6(rollup@4.18.0)(tslib@2.6.3)(typescript@5.4.5)':
     dependencies:
       '@rollup/pluginutils': 5.1.0(rollup@4.18.0)
       resolve: 1.22.8
       typescript: 5.4.5
     optionalDependencies:
       rollup: 4.18.0
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@rollup/pluginutils@3.1.0(rollup@4.18.0)':
     dependencies:
@@ -1191,11 +1191,11 @@ snapshots:
 
   '@types/lodash-es@4.17.12':
     dependencies:
-      '@types/lodash': 4.17.1
+      '@types/lodash': 4.17.5
 
-  '@types/lodash@4.17.1': {}
+  '@types/lodash@4.17.5': {}
 
-  '@types/node@20.12.8':
+  '@types/node@20.14.4':
     dependencies:
       undici-types: 5.26.5
 
@@ -1273,9 +1273,9 @@ snapshots:
     dependencies:
       balanced-match: 1.0.2
 
-  braces@3.0.2:
+  braces@3.0.3:
     dependencies:
-      fill-range: 7.0.1
+      fill-range: 7.1.1
 
   builtin-modules@3.3.0: {}
 
@@ -1296,7 +1296,7 @@ snapshots:
   chokidar@3.6.0:
     dependencies:
       anymatch: 3.1.3
-      braces: 3.0.2
+      braces: 3.0.3
       glob-parent: 5.1.2
       is-binary-path: 2.1.0
       is-glob: 4.0.3
@@ -1460,7 +1460,7 @@ snapshots:
 
   estree-walker@2.0.2: {}
 
-  fill-range@7.0.1:
+  fill-range@7.1.1:
     dependencies:
       to-regex-range: 5.0.1
 
@@ -1549,7 +1549,7 @@ snapshots:
 
   hosted-git-info@2.8.9: {}
 
-  immutable@4.3.5: {}
+  immutable@4.3.6: {}
 
   internal-slot@1.0.7:
     dependencies:
@@ -1679,7 +1679,7 @@ snapshots:
 
   map-and-set-extensions@https://codeload.github.com/mwszekely/map-and-set-extensions/tar.gz/350d567c32944f93981c3165a9911bf4cea7fa8a:
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   memorystream@0.3.1: {}
 
@@ -1763,19 +1763,19 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  preact-aria-widgets@https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/90436be4ef92237033ba645f20d46f9b8bbd2b71(preact@10.22.0)(react-dom@18.3.1(react@18.3.1)):
+  preact-aria-widgets@https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/3c1c466102cbe498603e1a1aaa7ecb698464e208(preact@10.22.0)(react-dom@18.3.1(react@18.3.1)):
     dependencies:
       clsx: 2.1.1
       lodash-es: 4.17.21
       preact: 10.22.0
-      preact-prop-helpers: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/fa64938df7829120e069fe1f36c12eb0be25d036(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      preact-prop-helpers: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/836a174fe6a5f2ab6beaabc001247b998f038388(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
     transitivePeerDependencies:
       - react-dom
 
-  preact-prop-helpers@https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/fa64938df7829120e069fe1f36c12eb0be25d036(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  preact-prop-helpers@https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/836a174fe6a5f2ab6beaabc001247b998f038388(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@types/node': 20.12.8
+      '@types/node': 20.14.4
       async-to-sync: https://codeload.github.com/mwszekely/async-to-sync/tar.gz/624c049a849d0a02039c1ec14f78617394daabce
       blocking-elements: 0.1.1
       clsx: 2.1.1
@@ -1787,12 +1787,12 @@ snapshots:
       tabbable: 6.2.0
       wicg-inert: 3.1.2
 
-  preact-transition@https://codeload.github.com/mwszekely/preact-transition/tar.gz/ec141c882b3372697df0ca25373e3f39281a8bda(preact@10.22.0)(react-dom@18.3.1(react@18.3.1)):
+  preact-transition@https://codeload.github.com/mwszekely/preact-transition/tar.gz/afeb54451b566bed3b5b52ba8e36d4f1ed67fe8a(preact@10.22.0)(react-dom@18.3.1(react@18.3.1)):
     dependencies:
       clsx: 2.1.1
       lodash-es: 4.17.21
       preact: 10.22.0
-      preact-prop-helpers: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/fa64938df7829120e069fe1f36c12eb0be25d036(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      preact-prop-helpers: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/836a174fe6a5f2ab6beaabc001247b998f038388(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
     transitivePeerDependencies:
       - react-dom
@@ -1832,13 +1832,13 @@ snapshots:
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
-  rollup-plugin-sourcemaps@0.6.3(@types/node@20.12.8)(rollup@4.18.0):
+  rollup-plugin-sourcemaps@0.6.3(@types/node@20.14.4)(rollup@4.18.0):
     dependencies:
       '@rollup/pluginutils': 3.1.0(rollup@4.18.0)
       rollup: 4.18.0
       source-map-resolve: 0.6.0
     optionalDependencies:
-      '@types/node': 20.12.8
+      '@types/node': 20.14.4
 
   rollup@4.18.0:
     dependencies:
@@ -1875,10 +1875,10 @@ snapshots:
       es-errors: 1.3.0
       is-regex: 1.1.4
 
-  sass@1.77.5:
+  sass@1.77.6:
     dependencies:
       chokidar: 3.6.0
-      immutable: 4.3.5
+      immutable: 4.3.6
       source-map-js: 1.2.0
 
   scheduler@0.23.2:
@@ -1936,16 +1936,16 @@ snapshots:
   spdx-correct@3.2.0:
     dependencies:
       spdx-expression-parse: 3.0.1
-      spdx-license-ids: 3.0.17
+      spdx-license-ids: 3.0.18
 
   spdx-exceptions@2.5.0: {}
 
   spdx-expression-parse@3.0.1:
     dependencies:
       spdx-exceptions: 2.5.0
-      spdx-license-ids: 3.0.17
+      spdx-license-ids: 3.0.18
 
-  spdx-license-ids@3.0.17: {}
+  spdx-license-ids@3.0.18: {}
 
   string-width@4.2.3:
     dependencies:
@@ -2007,7 +2007,7 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  tslib@2.6.2: {}
+  tslib@2.6.3: {}
 
   typed-array-buffer@1.0.2:
     dependencies:

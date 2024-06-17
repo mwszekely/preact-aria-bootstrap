@@ -1,4 +1,4 @@
-import { Ref } from "preact-prop-helpers/preact";
+import { Ref } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 /**
  * Very simple, easy responsive grid that guarantees each column is the minimum size.

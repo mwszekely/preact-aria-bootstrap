@@ -1,4 +1,4 @@
-import { JSX, Ref, UseAsyncHandlerParameters } from "preact-prop-helpers/preact";
+import { JSX, Ref, UseAsyncHandlerParameters } from "preact-prop-helpers";
 import { LabelledProps } from "../utility/types.js";
 export interface RadioGroupProps<V extends string | number> extends Pick<JSX.HTMLAttributes<HTMLSpanElement>, "children" | "style" | "class" | "className">, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     selectedValue: V | null;

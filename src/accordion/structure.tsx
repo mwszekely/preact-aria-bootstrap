@@ -1,5 +1,5 @@
-import { Ref, useMergedProps } from "preact-prop-helpers/preact";
-import { CollapseFade } from "preact-transition/preact";
+import { Ref, useMergedProps } from "preact-prop-helpers";
+import { CollapseFade } from "preact-transition";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 

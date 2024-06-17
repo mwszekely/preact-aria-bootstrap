@@ -1,7 +1,7 @@
 
 import { clsx } from "clsx";
-import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets/preact";
-import { ComponentChildren, JSX, PersistentStates, Ref, createContext, memo, useContext, useMergedProps } from "preact-prop-helpers/preact";
+import { Tab as AriaTab, TabPanel as AriaTabPanel, Tabs as AriaTabs } from "preact-aria-widgets";
+import { ComponentChildren, JSX, PersistentStates, Ref, createContext, memo, useContext, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes, LabelledProps } from "../utility/types.js";
 import { StructureTabList, StructureTabPanel, StructureTabPanelsContainer, StructureTabs } from "./structure.js";

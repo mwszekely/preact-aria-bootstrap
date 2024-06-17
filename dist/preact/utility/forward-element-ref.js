@@ -1,4 +1,4 @@
-import { forwardRef, memo } from "preact-prop-helpers/preact";
+import { forwardRef, memo } from "preact-prop-helpers";
 export function forwardElementRef(t) {
     return forwardRef(t);
 }

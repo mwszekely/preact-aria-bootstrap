@@ -1,4 +1,4 @@
-import { ComponentChildren, Ref } from "preact-prop-helpers/preact";
+import { ComponentChildren, Ref } from "preact-prop-helpers";
 import { UsePopperProps } from "../popper/index.js";
 import { GlobalAttributes } from "../utility/types.js";
 export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "children"> {

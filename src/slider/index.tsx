@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
-import { EventDetail, RangeChangeEvent, SliderContext, SliderThumbInfo, useSlider, UseSliderParameters, useSliderThumb, UseSliderThumbParameters } from "preact-aria-widgets/preact";
-import { ComponentChildren, createContext, createElement, generateRandomId, JSX, memo, Ref, useAsyncHandler, useContext, useEffect, useHasCurrentFocus, useMemo, useMergedProps, useRef, useRefElement, useState } from "preact-prop-helpers/preact";
+import { EventDetail, RangeChangeEvent, SliderContext, SliderThumbInfo, useSlider, UseSliderParameters, useSliderThumb, UseSliderThumbParameters } from "preact-aria-widgets";
+import { ComponentChildren, createContext, createElement, generateRandomId, JSX, memo, Ref, useAsyncHandler, useContext, useEffect, useHasCurrentFocus, useMemo, useMergedProps, useRef, useRefElement, useState } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 

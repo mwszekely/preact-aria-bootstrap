@@ -1,6 +1,6 @@
 import { arrow, computePosition, flip, hide, offset, shift, size } from "@floating-ui/dom";
 import { identity } from "lodash-es";
-import { returnZero, runImmediately, useCallback, useEffect, useElementSize, useMergedProps, usePassiveState, useRef, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers/preact";
+import { returnZero, runImmediately, useCallback, useEffect, useElementSize, useMergedProps, usePassiveState, useRef, useRefElement, useStableCallback, useStableGetter, useState } from "preact-prop-helpers";
 const Map1 = {
     "data-popup-source-x": "popupSourceX",
     "data-popup-source-y": "popupSourceY",

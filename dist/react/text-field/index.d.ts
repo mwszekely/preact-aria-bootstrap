@@ -1,5 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { ComponentChildren, JSX, Ref, UseAsyncReturnType } from "preact-prop-helpers/preact";
+import { ComponentChildren, JSX, Ref, UseAsyncReturnType } from "preact-prop-helpers";
 import { LabelledProps } from "../utility/types.js";
 export interface TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, T> extends Pick<JSX.HTMLAttributes<E>, "class" | "className" | "style"> {
     value: T;

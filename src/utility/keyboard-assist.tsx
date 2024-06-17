@@ -1,5 +1,5 @@
-import { ComponentChildren, createContext, generateRandomId, memo, Ref, useContext, useEffect, useGlobalHandler, useHasCurrentFocus, useLayoutEffect, useMergedProps, usePersistentState, useRef, useRefElement, useStableCallback, useState, UseTypeaheadNavigationReturnTypeSelf, VNode } from "preact-prop-helpers/preact";
-import { CollapseFade, SlideZoomFade } from "preact-transition/preact";
+import { ComponentChildren, createContext, generateRandomId, getDocument, memo, Ref, useContext, useEffect, useGlobalHandler, useHasCurrentFocus, useLayoutEffect, useMergedProps, usePersistentState, useRef, useRefElement, useStableCallback, useState, UseTypeaheadNavigationReturnTypeSelf, VNode } from "preact-prop-helpers";
+import { CollapseFade, SlideZoomFade } from "preact-transition";
 import { forwardElementRef } from "./forward-element-ref.js";
 import { useClonedElement } from "./use-cloned-element.js";
 
@@ -277,7 +277,7 @@ export function KeyboardAssistProvider({ children }: { children?: ComponentChild
 
     //const [currentDescription, setCurrentDescription] = useState("Keyboard controls available:");
 
-    useGlobalHandler(document, "keydown", event => {
+    useGlobalHandler(getDocument(), "keydown", event => {
         if ((event as KeyboardEvent).key == "Tab") {
             setHeardTab(true);
         }

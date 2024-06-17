@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { Toolbar, ToolbarChild } from "preact-aria-widgets/preact";
-import { ComponentChildren, EventDetail, Ref, memo, useCallback, useEffect, useMergedProps, usePress, useRef, useRefElement, useStableCallback, useState } from "preact-prop-helpers/preact";
+import { Toolbar, ToolbarChild } from "preact-aria-widgets";
+import { ComponentChildren, EventDetail, Ref, memo, useCallback, useEffect, useMergedProps, usePress, useRef, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { BootstrapIcon } from "../icon/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";

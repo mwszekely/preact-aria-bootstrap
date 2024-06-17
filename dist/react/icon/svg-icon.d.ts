@@ -1,4 +1,4 @@
-import { Ref } from "preact-prop-helpers/preact";
+import { Ref } from "preact-prop-helpers";
 import { IconProps } from "./icon-base.js";
 export interface SvgIconProps extends Omit<IconProps<SVGSVGElement>, "children"> {
 }

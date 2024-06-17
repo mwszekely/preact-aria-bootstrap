@@ -1,5 +1,5 @@
-import { UseMenuSurfaceReturnType } from "preact-aria-widgets/preact";
-import { ComponentChildren, Ref } from "preact-prop-helpers/preact";
+import { UseMenuSurfaceReturnType } from "preact-aria-widgets";
+import { ComponentChildren, Ref } from "preact-prop-helpers";
 import { ButtonProps } from "../button/index.js";
 export interface PopoverProps {
     forceOpen?: boolean | null | undefined;

@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { Ref, memo, useMergedProps } from "preact-prop-helpers/preact";
+import { Ref, memo, useMergedProps } from "preact-prop-helpers";
 import { ButtonThemes } from "../context.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";

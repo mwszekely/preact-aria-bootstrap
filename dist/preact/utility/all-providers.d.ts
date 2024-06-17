@@ -1,5 +1,5 @@
-import { NotificationProviderProps } from "preact-aria-widgets/preact";
-import { ComponentChildren } from "preact-prop-helpers/preact";
+import { NotificationProviderProps } from "preact-aria-widgets";
+import { ComponentChildren } from "preact-prop-helpers";
 export declare const AllProviders: ({ children, targetAssertive, targetPolite, toastsVisibleCount }: {
     children?: ComponentChildren;
     toastsVisibleCount?: number;

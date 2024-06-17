@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import clsx from "clsx";
-import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableRows } from "preact-aria-widgets/preact";
-import { createContext, memo, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers/preact";
-import { Fade } from "preact-transition/preact";
+import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableRows } from "preact-aria-widgets";
+import { createContext, memo, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";

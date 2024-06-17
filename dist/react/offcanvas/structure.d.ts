@@ -1,4 +1,4 @@
-import { EventType, Ref } from "preact-prop-helpers/preact";
+import { EventType, Ref } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 import type { OffcanvasProps } from "./index.js";
 export interface StructureOffcanvasPortalRootProps extends GlobalAttributes<HTMLDivElement, "children"> {

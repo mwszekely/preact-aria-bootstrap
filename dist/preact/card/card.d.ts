@@ -1,4 +1,4 @@
-import { ComponentChildren, createElement, Ref, VNode } from "preact-prop-helpers/preact";
+import { ComponentChildren, createElement, Ref, VNode } from "preact-prop-helpers";
 import { ButtonThemes } from "../context.js";
 import { GlobalAttributes } from "../utility/types.js";
 export interface CardProps extends GlobalAttributes<HTMLDivElement, "children"> {

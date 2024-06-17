@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
-import { Button as AriaButton, EventDetail, Progress, TargetedButtonPressEvent, ToolbarChild } from "preact-aria-widgets/preact";
-import { ComponentChildren, JSX, Nullable, Ref, UseAsyncHandlerParameters, VNode, memo, returnFalse, useAsyncHandler, useContext, useMergedProps } from "preact-prop-helpers/preact";
-import { Fade } from "preact-transition/preact";
+import { Button as AriaButton, EventDetail, Progress, TargetedButtonPressEvent, ToolbarChild } from "preact-aria-widgets";
+import { ComponentChildren, JSX, Nullable, Ref, UseAsyncHandlerParameters, VNode, memo, returnFalse, useAsyncHandler, useContext, useMergedProps } from "preact-prop-helpers";
+import { Fade } from "preact-transition";
 import { ButtonFills, ButtonSizes, ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip, TooltipProps } from "../tooltip/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";

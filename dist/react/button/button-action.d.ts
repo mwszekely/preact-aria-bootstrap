@@ -1,5 +1,5 @@
-import { TargetedButtonPressEvent } from "preact-aria-widgets/preact";
-import { ComponentChildren, Nullable, Ref, UseAsyncHandlerParameters, VNode } from "preact-prop-helpers/preact";
+import { TargetedButtonPressEvent } from "preact-aria-widgets";
+import { ComponentChildren, Nullable, Ref, UseAsyncHandlerParameters, VNode } from "preact-prop-helpers";
 import { ButtonFills, ButtonSizes, ButtonThemes } from "../context.js";
 import { TooltipProps } from "../tooltip/index.js";
 import { GlobalAttributes } from "../utility/types.js";

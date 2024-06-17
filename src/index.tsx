@@ -1,5 +1,5 @@
 
-export { Heading, HeadingReset } from "preact-aria-widgets/preact";
+export { Heading, HeadingReset } from "preact-aria-widgets";
 export { Accordion, AccordionSection, type AccordionProps, type AccordionSectionProps } from "./accordion/index.js";
 export { Badge, type BadgeProps } from "./badge/index.js";
 export { Button, ButtonGroup, type ButtonGroupProps, type ButtonProps } from "./button/index.js";
