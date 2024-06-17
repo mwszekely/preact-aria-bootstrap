@@ -94,7 +94,8 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
                 setForceSnap(true);
                 if (snapTimeout.current > 0)
                     clearTimeout(snapTimeout.current);
-                snapTimeout.current = window.setTimeout(() => { setForceSnap(false); }, 500);
+                if (typeof window !== "undefined")
+                    snapTimeout.current = window.setTimeout(() => { setForceSnap(false); }, 500);
                 e[EventDetail].value = closestStep;
             }
         }

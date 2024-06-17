@@ -46,7 +46,7 @@ const Map1 = {
 }
 
 function roundByDPR(value: number) {
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = typeof window === "undefined" ? 1 : (window.devicePixelRatio || 1);
     return Math.round(value * dpr) / dpr;
 }
 
@@ -204,13 +204,15 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
                     handleUpdate(false);
                 }
             }
-            document.addEventListener("scroll", scrollListener, { capture: true, passive: true });
-            window.addEventListener("resize", scrollListener, { capture: true, passive: true });
-            document.addEventListener("mousemove", mouseListener, { capture: true, passive: true });
-            return () => {
-                document.removeEventListener("scroll", scrollListener, { capture: true });
-                document.removeEventListener("mousemove", mouseListener, { capture: true });
-                window.removeEventListener("resize", scrollListener, { capture: true });
+            if (typeof window !== "undefined") {
+                document.addEventListener("scroll", scrollListener, { capture: true, passive: true });
+                window.addEventListener("resize", scrollListener, { capture: true, passive: true });
+                document.addEventListener("mousemove", mouseListener, { capture: true, passive: true });
+                return () => {
+                    document.removeEventListener("scroll", scrollListener, { capture: true });
+                    document.removeEventListener("mousemove", mouseListener, { capture: true });
+                    window.removeEventListener("resize", scrollListener, { capture: true });
+                }
             }
         }
     }, [open])
