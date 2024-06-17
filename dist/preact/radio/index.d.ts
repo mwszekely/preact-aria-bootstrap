@@ -19,12 +19,12 @@ export interface RadioGroupContext<V extends string | number> {
     inline: boolean;
 }
 export declare const RadioGroupContext: import("preact").Context<RadioGroupContext<string | number> | null>;
-export declare function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, keyboardControlsDescription, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>): JSX.Element;
+export declare const RadioGroup: <V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, keyboardControlsDescription, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) => JSX.Element;
 export interface RadioProps<V extends number | string> extends Pick<JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">, Partial<Pick<UseAsyncHandlerParameters<any, any>, "debounce" | "throttle">> {
     loadingLabel?: string;
     disabled?: boolean;
     value: V;
     index: number;
 }
-export declare function Radio<V extends number | string>({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }: LabelledProps<RadioProps<V>, "tooltip">, ref?: Ref<any>): JSX.Element;
+export declare const Radio: <V extends string | number>({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }: LabelledProps<RadioProps<V>, "tooltip">, ref?: Ref<any>) => JSX.Element;
 //# sourceMappingURL=index.d.ts.map

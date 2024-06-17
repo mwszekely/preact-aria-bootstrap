@@ -7,8 +7,9 @@ import { DefaultDisabledType, DisabledContext } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { StructureRadioWrapper } from "./structure.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
 export const RadioGroupContext = createContext(null);
-export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, keyboardControlsDescription, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
+export const RadioGroup = forwardElementRef(function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, keyboardControlsDescription, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }, ref) {
     labelPosition ??= (fieldset ? "within" : "before");
     selectionMode ??= "focus";
     const imperativeHandle = useRef(null);
@@ -31,8 +32,8 @@ export function RadioGroup({ onValueChange: onSelectedIndexChangeAsync, keyboard
                     const visibleLabel = _jsx(L, { ...useMergedProps({ class: clsx("form-label radio-group-label") }, info.propsRadioGroupLabel), children: label });
                     return (_jsxs(_Fragment, { children: [labelPosition == "before" && visibleLabel, _jsx(KeyboardAssistIcon, { leftRight: !!inline, upDown: !inline, homeEnd: true, pageKeys: true, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, activateSpace: info.typeaheadNavigationReturn.typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select an option:", children: _jsxs(E, { ...useMergedProps({ className: clsx("radio-group"), ref }, info.propsRadioGroup, props), children: [labelPosition == "within" && visibleLabel, children] }) }), labelPosition == "after" && visibleLabel] }));
                 } }) }) }));
-}
-export function Radio({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }, ref) {
+});
+export const Radio = forwardElementRef(function Radio({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }, ref) {
     labelPosition ||= "after";
     const radioGroupInfo = useContext(RadioGroupContext);
     const { pendingValue, inline } = (radioGroupInfo ?? {});
@@ -58,5 +59,5 @@ export function Radio({ index, label, value, labelPosition, loadingLabel, deboun
                     return (_jsxs(StructureRadioWrapper, { inline: inline || false, pending: pending, labelPosition: labelPosition, children: [loadingJsx, _jsxs("label", { ...useMergedProps({ class: "form-check-label", ref: labelRef }, info.propsLabel), children: [labelPosition == "before" && label, labelPosition == "tooltip" ? _jsx(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && label] })] }));
                 } }));
         } }));
-}
+});
 //# sourceMappingURL=index.js.map

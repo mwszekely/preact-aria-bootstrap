@@ -56,7 +56,7 @@ export class ToastErrorBoundary extends Component {
     }
     render() {
         return (_jsx(PushToastContext.Consumer, { children: (pushToast) => {
-                if (!this.state.pushedToast) {
+                if (!this.state.pushedToast && this.state.error) {
                     pushToast(defaultErrorToToast(this.state.error));
                     this.setState({ pushedToast: true });
                 }

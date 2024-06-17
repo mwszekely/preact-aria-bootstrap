@@ -110,7 +110,7 @@ export class ToastErrorBoundary extends Component<{ children?: ComponentChildren
 
         return (
             <PushToastContext.Consumer children={(pushToast: PushPortalChild) => {
-                if (!this.state.pushedToast) {
+                if (!this.state.pushedToast && this.state.error) {
                     pushToast(defaultErrorToToast(this.state.error));
                     this.setState({ pushedToast: true });
                 }

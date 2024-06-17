@@ -8,6 +8,7 @@ import { Tooltip } from "../tooltip/index.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { LabelledProps } from "../utility/types.js";
 import { StructureRadioWrapper } from "./structure.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
 
 
 export interface RadioGroupProps<V extends string | number> extends
@@ -35,7 +36,7 @@ export interface RadioGroupContext<V extends string | number> {
 }
 export const RadioGroupContext = createContext<RadioGroupContext<string | number> | null>(null);
 
-export function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, keyboardControlsDescription, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
+export const RadioGroup = forwardElementRef(function RadioGroup<V extends string | number>({ onValueChange: onSelectedIndexChangeAsync, keyboardControlsDescription, fieldset, selectionMode, name, children, inline, selectedValue, debounce, throttle, label, labelPosition, disabled, ...props }: LabelledProps<RadioGroupProps<V>, "within">, ref?: Ref<any>) {
     labelPosition ??= (fieldset ? "within" : "before");
     selectionMode ??= "focus";
 
@@ -98,7 +99,7 @@ export function RadioGroup<V extends string | number>({ onValueChange: onSelecte
             </RadioGroupContext.Provider>
         </DisabledContext.Provider>
     )
-}
+})
 
 export interface RadioProps<V extends number | string> extends
     Pick<JSX.HTMLAttributes<any>, "children" | "style" | "class" | "className">,
@@ -109,7 +110,7 @@ export interface RadioProps<V extends number | string> extends
     index: number;
 }
 
-export function Radio<V extends number | string>({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }: LabelledProps<RadioProps<V>, "tooltip">, ref?: Ref<any>) {
+export const Radio = forwardElementRef(function Radio<V extends number | string>({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }: LabelledProps<RadioProps<V>, "tooltip">, ref?: Ref<any>) {
 
     labelPosition ||= "after";
 
@@ -178,4 +179,4 @@ export function Radio<V extends number | string>({ index, label, value, labelPos
             }}
         />
     )
-}
+})
