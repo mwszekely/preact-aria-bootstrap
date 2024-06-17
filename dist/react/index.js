@@ -1833,7 +1833,7 @@ function getClientRectsByMouse(element, mouseX, mouseY) {
 
 function usePortalId(type) {
     const fullId = `portal-${type}`;
-    if (document.getElementById(fullId) == null) {
+    if (typeof window !== 'undefined' && window.document.getElementById(fullId) == null) {
         let portalRoot = document.getElementById("portal");
         let thisRoot = document.createElement("div");
         thisRoot.id = fullId;
