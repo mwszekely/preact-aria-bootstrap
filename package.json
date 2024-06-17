@@ -7,7 +7,7 @@
   "module": "/dist/preact/index.js",
   "types": "/dist/preact/index.d.ts",
   "typings": "./dist/preact/index.d.ts",
-  "packageManager": "pnpm@8.9.0",
+  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a",
   "exports": {
     ".": {
       "types": "./dist/preact/index.d.ts",
@@ -47,31 +47,31 @@
     "preact": "^10.21.0"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.6.3",
+    "@floating-ui/dom": "^1.6.5",
     "@js-temporal/polyfill": "^0.4.4",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
     "clsx": "^2.1.1",
-    "dompurify": "^3.0.9",
+    "dompurify": "^3.1.5",
     "lodash-es": "^4.17.21",
-    "preact": "^10.21.0",
+    "preact": "^10.22.0",
     "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
     "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
     "preact-transition": "github:mwszekely/preact-transition"
   },
   "devDependencies": {
-    "@playwright/test": "^1.41.2",
-    "@rollup/plugin-commonjs": "^25.0.7",
+    "@playwright/test": "^1.44.1",
+    "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-replace": "^5.0.7",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/dompurify": "^3.0.5",
     "@types/lodash-es": "^4.17.12",
     "npm-run-all": "^4.1.5",
-    "rollup": "^4.17.2",
+    "rollup": "^4.18.0",
     "rollup-plugin-sourcemaps": "^0.6.3",
-    "sass": "^1.71.1",
+    "sass": "^1.77.5",
     "typescript": "^5.4.5"
   }
 }
