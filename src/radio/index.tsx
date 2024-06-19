@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail, LabelPosition, Progress, TargetedRadioChangeEvent, UseRadioGroupReturnType } from "preact-aria-widgets";
 import { JSX, Ref, UseAsyncHandlerParameters, createContext, useAsync, useContext, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { DefaultDisabledType, DisabledContext } from "../context.js";
+import { DefaultDisabledType, DisabledContext, useAutoAsyncHandler } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { LabelledProps } from "../utility/types.js";
@@ -47,7 +47,7 @@ export const RadioGroup = forwardElementRef(function RadioGroup<V extends string
     // we're just listening for a regular ol' function.
     const [capturedValue, setCapturedValue] = useState(null as V | null);
     const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync<[TargetedRadioChangeEvent<V>], void | Promise<void>>(
-        (event) => { return onSelectedIndexChangeAsync?.(event[EventDetail].selectedValue!, event); },
+        useAutoAsyncHandler((event: TargetedRadioChangeEvent<V>) => { return onSelectedIndexChangeAsync?.(event[EventDetail].selectedValue!, event); }),
         {
             capture: (event) => { setCapturedValue(event[EventDetail].selectedValue!); return [event]; },
             throttle,

@@ -5,6 +5,7 @@ import { ProgressWithHandler } from "preact-aria-widgets";
 import { returnFalse, usePassiveState, useRef } from "preact-prop-helpers";
 import { TextFieldSpinner, useCommitTextField } from "../text-field/index.js";
 import { CkEditorWrapper } from "./ck-editor-wrapper.js";
+import { useAutoAsyncHandler } from "../context.js";
 const RTFDefaultItems = ["undo", "redo", "|", "heading", "|", "bold", "italic", "underline", "strikethrough", "highlight", "|", "link", "code", "subscript", "superscript", "|", "removeFormat"];
 const DFDefaultItems = [
     "undo", "redo", "|",
@@ -20,7 +21,7 @@ const DFDefaultItems = [
     "textPartLanguage"
 ];
 export function RichTextField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }) {
-    return (_jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagProgressIndicator: "div", render: progressInfo => {
+    return (_jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: useAutoAsyncHandler(onValueChange), capture: identity, tagProgressIndicator: "div", render: progressInfo => {
             const [getFocused, setFocused] = usePassiveState(null, returnFalse);
             const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
             const { pending: p, callCount, debouncingAsync, debouncingSync, currentCapture, syncHandler, invocationResult } = asyncHandlerReturn;
@@ -43,7 +44,7 @@ export function RichTextField({ implementation, toolbarItems, onValueChange, val
         } }));
 }
 export function DocumentField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }) {
-    return (_jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagProgressIndicator: "div", render: progressInfo => {
+    return (_jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: useAutoAsyncHandler(onValueChange), capture: identity, tagProgressIndicator: "div", render: progressInfo => {
             const [getFocused, setFocused] = usePassiveState(null, returnFalse);
             const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
             const { pending: p, callCount, debouncingAsync, debouncingSync, currentCapture, syncHandler, invocationResult } = asyncHandlerReturn;

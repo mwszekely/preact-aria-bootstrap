@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { Toolbar, ToolbarProps, useLabelSynthetic, UseToolbarParameters, UseToolbarReturnType, UseToolbarSubInfo } from "preact-aria-widgets";
-import { createContext, EventDetail, JSX, Nullable, Ref, useAsync, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers";
-import { ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DisabledContext } from "../context.js";
+import { createContext, EventDetail, JSX, Nullable, Ref, TargetedEnhancedEvent, useAsync, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers";
+import { ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DisabledContext, useAutoAsyncHandler } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { LabelledProps } from "../utility/types.js";
 import { ButtonProps } from "./button-action.js";
@@ -80,7 +80,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     type OSSI = UseToolbarParameters<HTMLSpanElement, HTMLButtonElement, UseToolbarSubInfo<HTMLButtonElement>>["singleSelectionDeclarativeParameters"]["onSingleSelectedIndexChange"];
     const [capturedIndex, setCapturedIndex] = useState(null as number | null);
     const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync<Parameters<NonNullable<OSSI>>, void | Promise<void>>(
-        (e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); },
+        useAutoAsyncHandler((e: TargetedEnhancedEvent<Event, { selectedIndex: number; }>) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); }),
         {
             capture: (e) => { setCapturedIndex(e[EventDetail].selectedIndex); return [e]; },
             debounce: null,
@@ -93,7 +93,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
 
     if (labelPosition == 'hidden')
         console.assert(typeof label == "string", `<ButtonGroup />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
-    
+
     return (
         <DefaultButtonSize.Provider value={variantSize ?? null}>
             <DefaultButtonTheme.Provider value={variantTheme ?? null}>

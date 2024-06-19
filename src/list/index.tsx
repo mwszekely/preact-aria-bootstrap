@@ -2,7 +2,7 @@ import { clsx } from "clsx";
 import { Gridlist, GridlistChild, GridlistRow, GridlistRows, ProgressWithHandler } from "preact-aria-widgets";
 import { AsyncHandler, ComponentChildren, EventDetail, JSX, Nullable, PressEventReason, Ref, UsePaginatedChildReturnTypeSelf, UsePressParametersSelf, UseStaggeredChildReturnTypeSelf, UseTypeaheadNavigationReturnTypeSelf, VNode, createContext, forwardRef, memo, returnUndefined, useCallback, useContext, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { ButtonThemes } from "../context.js";
+import { ButtonThemes, useAutoAsyncHandler } from "../context.js";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
@@ -163,14 +163,14 @@ const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, 
 
     return (<ProgressWithHandler<JSX.TargetedEvent<any, Event>, void, HTMLSpanElement, HTMLLabelElement>
         ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
-        asyncHandler={async (a, b) => {
+        asyncHandler={useAutoAsyncHandler(async (a: void, b: JSX.TargetedEvent<any, Event>) => {
             // TODO: How'd we end up with onPress (from the user) AND onPress (from selection)?
             // Should selection have taken care of that? Does it already? What if it's async?
             let p = onPress?.(a, b);
             onPressSync?.(b as PressEventReason<any>);
             if (p && typeof p == "object" && "then" in p)
                 await p;
-        }
+        })
         }
         capture={returnUndefined}
 

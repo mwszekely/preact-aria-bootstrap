@@ -5,7 +5,7 @@ export { Button, ButtonGroup } from "./button/index.js";
 export { Card, CardElement, CardGroup } from "./card/index.js";
 export { CheckboxGroup, CheckboxGroupChild } from "./checkbox-group/index.js";
 export { Checkbox } from "./checkbox/index.js";
-export { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "./context.js";
+export { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext, AutoAsyncHandlers } from "./context.js";
 export { Dialog } from "./dialog/index.js";
 export { Figure } from "./figure/index.js";
 export { BootstrapIcon, FontIcon } from "./icon/index.js";

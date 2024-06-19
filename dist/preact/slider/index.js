@@ -3,6 +3,7 @@ import { clsx } from "clsx";
 import { EventDetail, useSlider, useSliderThumb } from "preact-aria-widgets";
 import { createContext, createElement, generateRandomId, memo, useAsyncHandler, useContext, useEffect, useHasCurrentFocus, useMemo, useMergedProps, useRef, useRefElement, useState } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
+import { useAutoAsyncHandler } from "../context.js";
 const RangeThumbContext = createContext(null);
 const DebounceContext = createContext(false);
 const ValueContext = createContext(null);
@@ -50,7 +51,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
     const debounceSetting = useContext(DebounceContext);
     console.assert(typeof label == "string", `<RangeThumb />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     const { syncHandler, pending, hasError, currentCapture } = useAsyncHandler({
-        asyncHandler: async (v, e) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); },
+        asyncHandler: useAutoAsyncHandler(async (v) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); }),
         capture,
         debounce: debounceSetting == true ? 1500 : debounceSetting != false ? debounceSetting : undefined,
         throttle: undefined

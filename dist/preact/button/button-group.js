@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-ru
 import { clsx } from "clsx";
 import { Toolbar, useLabelSynthetic } from "preact-aria-widgets";
 import { createContext, EventDetail, useAsync, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers";
-import { DefaultButtonSize, DefaultButtonTheme, DisabledContext } from "../context.js";
+import { DefaultButtonSize, DefaultButtonTheme, DisabledContext, useAutoAsyncHandler } from "../context.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 export const ButtonGroupContext = createContext(null);
 export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsync, keyboardControlsDescription, variantTheme, variantSize, orientation, label, labelPosition, separated, disabled, selectedIndex, selectionMode, ...props }, ref) {
@@ -10,7 +10,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     orientation ||= "horizontal";
     const imperativeHandle = useRef(null);
     const [capturedIndex, setCapturedIndex] = useState(null);
-    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); }, {
+    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync(useAutoAsyncHandler((e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); }), {
         capture: (e) => { setCapturedIndex(e[EventDetail].selectedIndex); return [e]; },
         debounce: null,
         throttle: null,

@@ -6,7 +6,7 @@ export { Button, ButtonGroup, type ButtonGroupProps, type ButtonProps } from "./
 export { Card, CardElement, CardGroup, type CardElementProps } from "./card/index.js";
 export { CheckboxGroup, CheckboxGroupChild, type CheckboxGroupChildProps, type CheckboxGroupProps } from "./checkbox-group/index.js";
 export { Checkbox, type CheckboxProps } from "./checkbox/index.js";
-export { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext, type ButtonFills, type ButtonSizes, type ButtonThemes } from "./context.js";
+export { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext, AutoAsyncHandlers, type ButtonFills, type ButtonSizes, type ButtonThemes } from "./context.js";
 export { Dialog, type DialogProps } from "./dialog/index.js";
 export { Figure, type FigureProps } from "./figure/index.js";
 export { BootstrapIcon, FontIcon, type BootstrapIconProps, type FontIconProps } from "./icon/index.js";

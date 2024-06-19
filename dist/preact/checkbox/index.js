@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { Checkbox as AriaCheckbox, EventDetail, ProgressWithHandler } from "preact-aria-widgets";
 import { useContext, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { DefaultDisabledType, DisabledContext } from "../context.js";
+import { DefaultDisabledType, DisabledContext, useAutoAsyncHandler } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
@@ -22,12 +22,12 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
     if (isSwitch)
         delete props._isSwitch;
     const withinInputGroup = useContext(WithinInputGroup);
-    return (_jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", forciblyPending: forciblyPending, asyncHandler: (next, event) => {
+    return (_jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", forciblyPending: forciblyPending, asyncHandler: useAutoAsyncHandler((next, event) => {
             if (tristate)
                 return onValueChange(nextTristate(checked), event);
             else
                 return onValueChange?.(next, event);
-        }, capture: e => {
+        }), capture: e => {
             if (tristate)
                 return nextTristate(checked);
             else

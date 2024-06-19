@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { LabelPosition, ProgressWithHandler, useLabel } from "preact-aria-widgets";
 import { ComponentChildren, JSX, Ref, UseAsyncReturnType, memo, useContext, useHasCurrentFocus, useLayoutEffect, useMergedProps, useRef, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { DefaultDisabledType } from "../context.js";
+import { DefaultDisabledType, useAutoAsyncHandler } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
@@ -503,7 +503,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
     return (
         <ProgressWithHandler<JSX.TargetedEvent<E, Event>, V, HTMLSpanElement, HTMLLabelElement>
             ariaLabel={loadingLabel ?? "Please wait while the operation completes."}
-            asyncHandler={onValueChange}
+            asyncHandler={useAutoAsyncHandler(onValueChange)}
             capture={capture}
             debounce={debounce ?? 500}
             throttle={throttle ?? 1000}

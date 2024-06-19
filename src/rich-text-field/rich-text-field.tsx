@@ -4,6 +4,7 @@ import { ProgressWithHandler } from "preact-aria-widgets";
 import { returnFalse, usePassiveState, useRef } from "preact-prop-helpers";
 import { TextFieldSpinner, useCommitTextField } from "../text-field/index.js";
 import { CkEditorWrapper, CkEditorWrapperProps, RichTextToolbarItems } from "./ck-editor-wrapper.js";
+import { useAutoAsyncHandler } from "../context.js";
 
 declare const CKEDITOR: {
     ClassicEditor: any;
@@ -63,7 +64,7 @@ export function RichTextField({ implementation, toolbarItems, onValueChange, val
     return (
         <ProgressWithHandler<string, string, HTMLSpanElement, HTMLLabelElement>
             ariaLabel={"Saving..."}
-            asyncHandler={onValueChange}
+            asyncHandler={useAutoAsyncHandler(onValueChange)}
             capture={identity}
             tagProgressIndicator="div"
             render={progressInfo => {
@@ -112,7 +113,7 @@ export function DocumentField({ implementation, toolbarItems, onValueChange, val
     return (
         <ProgressWithHandler<string, string, HTMLSpanElement, HTMLLabelElement>
             ariaLabel={"Saving..."}
-            asyncHandler={onValueChange}
+            asyncHandler={useAutoAsyncHandler(onValueChange)}
             capture={identity}
             tagProgressIndicator="div"
             render={progressInfo => {

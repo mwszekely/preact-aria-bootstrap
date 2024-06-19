@@ -3,6 +3,7 @@ import { EventDetail, RangeChangeEvent, SliderContext, SliderThumbInfo, useSlide
 import { ComponentChildren, createContext, createElement, generateRandomId, JSX, memo, Ref, useAsyncHandler, useContext, useEffect, useHasCurrentFocus, useMemo, useMergedProps, useRef, useRefElement, useState } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
+import { useAutoAsyncHandler } from "../context.js";
 
 
 
@@ -143,7 +144,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
     const debounceSetting = useContext(DebounceContext);
     console.assert(typeof label == "string", `<RangeThumb />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     const { syncHandler, pending, hasError, currentCapture } = useAsyncHandler({
-        asyncHandler: async (v, e) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); },
+        asyncHandler: useAutoAsyncHandler(async (v: number) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); }),
         capture,
         debounce: debounceSetting == true ? 1500 : debounceSetting != false ? debounceSetting : undefined,
         throttle: undefined

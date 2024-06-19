@@ -4,7 +4,7 @@ import { clsx } from "clsx";
 import { ProgressWithHandler, useLabel } from "preact-aria-widgets";
 import { memo, useContext, useHasCurrentFocus, useLayoutEffect, useMergedProps, useRef, useRefElement, useStableCallback, useTimeout } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { DefaultDisabledType } from "../context.js";
+import { DefaultDisabledType, useAutoAsyncHandler } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
@@ -181,7 +181,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase({ capture, o
         throttle: throttle ?? undefined
     });*/
     const isTextArea = (resizeable || (rows || 0) > 1);
-    return (_jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onValueChange, capture: capture, debounce: debounce ?? 500, throttle: throttle ?? 1000, tagProgressIndicator: "span", render: progressInfo => {
+    return (_jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: useAutoAsyncHandler(onValueChange), capture: capture, debounce: debounce ?? 500, throttle: throttle ?? 1000, tagProgressIndicator: "span", render: progressInfo => {
             const { asyncHandlerReturn: { pending: p, debouncingAsync, callCount, debouncingSync, currentCapture, syncHandler, invocationResult }, propsProgressIndicator } = progressInfo;
             const showSpinner = (p || debouncingAsync || debouncingSync);
             const updateDOMValue = useStableCallback((newValue) => {

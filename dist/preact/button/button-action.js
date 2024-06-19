@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { Button as AriaButton, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets";
 import { memo, returnFalse, useAsyncHandler, useContext, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext } from "../context.js";
+import { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext, useAutoAsyncHandler } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { ButtonGroupContext } from "./button-group.js";
@@ -14,7 +14,7 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
     variantTheme ??= defaultTheme ?? undefined;
     variantSize ??= defaultSize ?? undefined;
     const { currentCapture, pending: individualPending, syncHandler, callCount } = useAsyncHandler({
-        asyncHandler: onPressAsync,
+        asyncHandler: useAutoAsyncHandler(onPressAsync),
         capture: (e) => e[EventDetail].pressed ?? null,
         debounce,
         throttle

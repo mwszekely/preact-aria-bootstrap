@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { Radio as AriaRadio, RadioGroup as AriaRadioGroup, EventDetail, Progress } from "preact-aria-widgets";
 import { createContext, useAsync, useContext, useMemo, useMergedProps, useRef, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
-import { DefaultDisabledType, DisabledContext } from "../context.js";
+import { DefaultDisabledType, DisabledContext, useAutoAsyncHandler } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { StructureRadioWrapper } from "./structure.js";
@@ -17,7 +17,7 @@ export const RadioGroup = forwardElementRef(function RadioGroup({ onValueChange:
     // If we were listening for the individual radios' onInput events, we would do that, but
     // we're just listening for a regular ol' function.
     const [capturedValue, setCapturedValue] = useState(null);
-    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((event) => { return onSelectedIndexChangeAsync?.(event[EventDetail].selectedValue, event); }, {
+    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync(useAutoAsyncHandler((event) => { return onSelectedIndexChangeAsync?.(event[EventDetail].selectedValue, event); }), {
         capture: (event) => { setCapturedValue(event[EventDetail].selectedValue); return [event]; },
         throttle,
         debounce

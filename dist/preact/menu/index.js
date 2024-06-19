@@ -8,6 +8,7 @@ import { forwardElementRef, memoForwardRef } from "../utility/forward-element-re
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 import { usePortalId } from "../utility/use-portal-id.js";
+import { useAutoAsyncHandler } from "../context.js";
 export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }, ref) {
     const [openFromAnchor, setOpenFromAnchor, getOpenFromAnchor] = useState(forceOpen ?? false);
     const onOpen = useCallback(() => { setOpenFromAnchor(true); }, []);
@@ -68,10 +69,10 @@ export const StructureMenuFocusSentinel = memoForwardRef(function StructureMenuF
 });
 export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }, ref) {
     const imperativeHandle = useRef(null);
-    return (_jsx(ProgressWithHandler, { asyncHandler: (_unused, e) => {
+    return (_jsx(ProgressWithHandler, { asyncHandler: useAutoAsyncHandler((_unused, e) => {
             console.assert(!!imperativeHandle.current);
             return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu, e);
-        }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
+        }), ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
             const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
             return (_jsx(AriaMenuItem, { imperativeHandle: imperativeHandle, index: index, singleSelectionDisabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
                     return (_jsxs(StructureMenuItem, { ...useMergedProps(menuInfo.props, { ...props, ref }), showSpinner: showSpinner, disabled: (!!disabled), pressing: menuInfo.pressReturn.pressing, children: [children, _jsx(StructureMenuItemSpinner, { showSpinner: showSpinner, ...progressInfo.propsProgressIndicator })] }));

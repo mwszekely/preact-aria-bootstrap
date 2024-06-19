@@ -8,6 +8,7 @@ import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 import { usePortalId } from "../utility/use-portal-id.js";
+import { useAutoAsyncHandler } from "../context.js";
 
 
 export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children"> {
@@ -164,10 +165,10 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
 
     return (
         <ProgressWithHandler<Event, undefined, HTMLDivElement, HTMLDivElement>
-            asyncHandler={(_unused, e) => {
+            asyncHandler={useAutoAsyncHandler((_unused: undefined, e: Event) => {
                 console.assert(!!imperativeHandle.current);
                 return onPress?.(imperativeHandle.current!.menuItemReturn.closeMenu, e);
-            }}
+            })}
             ariaLabel={loadingLabel || "The operation is in progress"}
             capture={returnUndefined}
             tagProgressIndicator="div"

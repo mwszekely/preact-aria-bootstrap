@@ -11163,6 +11163,21 @@ const Badge = x$1(forwardElementRef$1(function Badge({ children, position, varia
         }, props), children: children });
 }));
 
+const AutoAsyncHandlers = G$1(false);
+function useAutoAsyncHandler(syncOrAsyncHandler) {
+    const autoAsync = P$2(AutoAsyncHandlers);
+    return x$2((...args) => {
+        if (syncOrAsyncHandler) {
+            if (autoAsync) {
+                return new Promise(resolve => setTimeout(resolve, 10)).then(() => syncOrAsyncHandler(...args));
+            }
+            else {
+                const ret = syncOrAsyncHandler(...args);
+                return ret;
+            }
+        }
+    }, [syncOrAsyncHandler, autoAsync]);
+}
 const DisabledContext$1 = G$1(false);
 const DefaultDisabledType = G$1("soft");
 const DefaultButtonTheme = G$1(null);
@@ -13245,7 +13260,7 @@ function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsy
     orientation ||= "horizontal";
     const imperativeHandle = F$1(null);
     const [capturedIndex, setCapturedIndex] = useState(null);
-    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); }, {
+    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync(useAutoAsyncHandler((e) => { return onSelectedIndexChangeAsync?.(e[EventDetail].selectedIndex); }), {
         capture: (e) => { setCapturedIndex(e[EventDetail].selectedIndex); return [e]; },
         debounce: null,
         throttle: null,
@@ -13270,7 +13285,7 @@ const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex, child
     variantTheme ??= defaultTheme ?? undefined;
     variantSize ??= defaultSize ?? undefined;
     const { currentCapture, pending: individualPending, syncHandler, callCount } = useAsyncHandler({
-        asyncHandler: onPressAsync,
+        asyncHandler: useAutoAsyncHandler(onPressAsync),
         capture: (e) => e[EventDetail].pressed ?? null,
         debounce,
         throttle
@@ -13458,12 +13473,12 @@ function Checkbox({ label, labelPosition, checked, tristate, onValueChange, load
     if (isSwitch)
         delete props._isSwitch;
     const withinInputGroup = P$2(WithinInputGroup);
-    return (jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", forciblyPending: forciblyPending, asyncHandler: (next, event) => {
+    return (jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", forciblyPending: forciblyPending, asyncHandler: useAutoAsyncHandler((next, event) => {
             if (tristate)
                 return onValueChange(nextTristate(checked), event);
             else
                 return onValueChange?.(next, event);
-        }, capture: e => {
+        }), capture: e => {
             if (tristate)
                 return nextTristate(checked);
             else
@@ -13807,14 +13822,14 @@ const List = x$1(k$1((function List({ disabled, selectedIndex, selectionMode, on
             } }) }));
 })));
 const ListItemNonPaginated = x$1((function ListItemNonPaginated({ onPressSync, infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }) {
-    return (jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: async (a, b) => {
+    return (jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: useAutoAsyncHandler(async (a, b) => {
             // TODO: How'd we end up with onPress (from the user) AND onPress (from selection)?
             // Should selection have taken care of that? Does it already? What if it's async?
             let p = onPress?.(a, b);
             onPressSync?.(b);
             if (p && typeof p == "object" && "then" in p)
                 await p;
-        }, capture: returnUndefined, tagProgressIndicator: "span", render: progressInfo => {
+        }), capture: returnUndefined, tagProgressIndicator: "span", render: progressInfo => {
             const { refElementReturn: { getElement }, refElementReturn, propsStable: p2 } = useRefElement({ refElementParameters: {} });
             const { pressReturn: { longPress, pressing }, props: p1 } = usePress({
                 pressParameters: {
@@ -13941,10 +13956,10 @@ const StructureMenuFocusSentinel = memoForwardRef(function StructureMenuFocusSen
 });
 const MenuItem = x$1(forwardElementRef$1(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }, ref) {
     const imperativeHandle = F$1(null);
-    return (jsx(ProgressWithHandler, { asyncHandler: (_unused, e) => {
+    return (jsx(ProgressWithHandler, { asyncHandler: useAutoAsyncHandler((_unused, e) => {
             console.assert(!!imperativeHandle.current);
             return onPress?.(imperativeHandle.current.menuItemReturn.closeMenu, e);
-        }, ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
+        }), ariaLabel: loadingLabel || "The operation is in progress", capture: returnUndefined, tagProgressIndicator: "div", render: progressInfo => {
             const showSpinner = (progressInfo.asyncHandlerReturn.pending || progressInfo.asyncHandlerReturn.debouncingAsync || progressInfo.asyncHandlerReturn.debouncingSync);
             return (jsx(MenuItem$1, { imperativeHandle: imperativeHandle, index: index, singleSelectionDisabled: disabled || showSpinner, onPress: progressInfo.asyncHandlerReturn.syncHandler, render: menuInfo => {
                     return (jsxs(StructureMenuItem, { ...useMergedProps(menuInfo.props, { ...props, ref }), showSpinner: showSpinner, disabled: (!!disabled), pressing: menuInfo.pressReturn.pressing, children: [children, jsx(StructureMenuItemSpinner, { showSpinner: showSpinner, ...progressInfo.propsProgressIndicator })] }));
@@ -14073,7 +14088,7 @@ const RadioGroup = forwardElementRef$1(function RadioGroup({ onValueChange: onSe
     // If we were listening for the individual radios' onInput events, we would do that, but
     // we're just listening for a regular ol' function.
     const [capturedValue, setCapturedValue] = useState(null);
-    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync((event) => { return onSelectedIndexChangeAsync?.(event[EventDetail].selectedValue, event); }, {
+    const { syncHandler: onSelectedIndexChangeSync, pending } = useAsync(useAutoAsyncHandler((event) => { return onSelectedIndexChangeAsync?.(event[EventDetail].selectedValue, event); }), {
         capture: (event) => { setCapturedValue(event[EventDetail].selectedValue); return [event]; },
         throttle,
         debounce
@@ -14294,7 +14309,7 @@ const TextFieldBase = x$1(forwardElementRef$1(function TextFieldBase({ capture, 
         throttle: throttle ?? undefined
     });*/
     const isTextArea = (resizeable || (rows || 0) > 1);
-    return (jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: onValueChange, capture: capture, debounce: debounce ?? 500, throttle: throttle ?? 1000, tagProgressIndicator: "span", render: progressInfo => {
+    return (jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: useAutoAsyncHandler(onValueChange), capture: capture, debounce: debounce ?? 500, throttle: throttle ?? 1000, tagProgressIndicator: "span", render: progressInfo => {
             const { asyncHandlerReturn: { pending: p, debouncingAsync, callCount, debouncingSync, currentCapture, syncHandler, invocationResult }, propsProgressIndicator } = progressInfo;
             const showSpinner = (p || debouncingAsync || debouncingSync);
             const updateDOMValue = useStableCallback((newValue) => {
@@ -14558,7 +14573,7 @@ const DFDefaultItems = [
     "textPartLanguage"
 ];
 function RichTextField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }) {
-    return (jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagProgressIndicator: "div", render: progressInfo => {
+    return (jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: useAutoAsyncHandler(onValueChange), capture: identity, tagProgressIndicator: "div", render: progressInfo => {
             const [getFocused, setFocused] = usePassiveState(null, returnFalse);
             const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
             const { pending: p, callCount, debouncingAsync, debouncingSync, currentCapture, syncHandler, invocationResult } = asyncHandlerReturn;
@@ -14581,7 +14596,7 @@ function RichTextField({ implementation, toolbarItems, onValueChange, valueHtml,
         } }));
 }
 function DocumentField({ implementation, toolbarItems, onValueChange, valueHtml, ...props }) {
-    return (jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: onValueChange, capture: identity, tagProgressIndicator: "div", render: progressInfo => {
+    return (jsx(ProgressWithHandler, { ariaLabel: "Saving...", asyncHandler: useAutoAsyncHandler(onValueChange), capture: identity, tagProgressIndicator: "div", render: progressInfo => {
             const [getFocused, setFocused] = usePassiveState(null, returnFalse);
             const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
             const { pending: p, callCount, debouncingAsync, debouncingSync, currentCapture, syncHandler, invocationResult } = asyncHandlerReturn;
@@ -16211,7 +16226,7 @@ const RangeThumb = x$1(forwardElementRef$1(function RangeThumb({ index, value, m
     const debounceSetting = P$2(DebounceContext);
     console.assert(typeof label == "string", `<RangeThumb />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     const { syncHandler, pending, hasError, currentCapture } = useAsyncHandler({
-        asyncHandler: async (v, e) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); },
+        asyncHandler: useAutoAsyncHandler(async (v) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); }),
         capture,
         debounce: debounceSetting == true ? 1500 : debounceSetting != false ? debounceSetting : undefined,
         throttle: undefined
@@ -16742,5 +16757,5 @@ const UtilityClasses = {
     }
 };
 
-export { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, ButtonGroup, Card, CardElement, CardGroup, Checkbox, CheckboxGroup, CheckboxGroupChild, DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow, DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, Dialog, DisabledContext$1 as DisabledContext, DocumentField, Figure, FontIcon, GridBsBreak, GridBsContainer, GridBsItem, GridBsRow, GridCss, GridCssItem, GridResponsive, GridStatic, Heading, HeadingReset, InputGroup, InputGroupText, KeyboardAssistProvider, List, ListItem, Menu, MenuItem, Offcanvas, Popover, Radio, RadioGroup, Range, RangeThumb, RichTextField, RichTextView, Tab, TabPanel, Tabs, TextField, Toast, ToastsProvider, Tooltip, Type, UtilityClasses, usePushToast, useUpdateToast };
+export { Accordion, AccordionSection, AllProviders, AutoAsyncHandlers, Badge, BootstrapIcon, Button, ButtonGroup, Card, CardElement, CardGroup, Checkbox, CheckboxGroup, CheckboxGroupChild, DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow, DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, Dialog, DisabledContext$1 as DisabledContext, DocumentField, Figure, FontIcon, GridBsBreak, GridBsContainer, GridBsItem, GridBsRow, GridCss, GridCssItem, GridResponsive, GridStatic, Heading, HeadingReset, InputGroup, InputGroupText, KeyboardAssistProvider, List, ListItem, Menu, MenuItem, Offcanvas, Popover, Radio, RadioGroup, Range, RangeThumb, RichTextField, RichTextView, Tab, TabPanel, Tabs, TextField, Toast, ToastsProvider, Tooltip, Type, UtilityClasses, usePushToast, useUpdateToast };
 //# sourceMappingURL=index.js.map
