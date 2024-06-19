@@ -141,7 +141,7 @@ export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, va
     const parentOnValueChange = useContext(OnValueChangeContext);
     const context = useContext(RangeThumbContext);
     const debounceSetting = useContext(DebounceContext);
-    console.assert(typeof label == "string");
+    console.assert(typeof label == "string", `<RangeThumb />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     const { syncHandler, pending, hasError, currentCapture } = useAsyncHandler({
         asyncHandler: async (v, e) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); },
         capture,

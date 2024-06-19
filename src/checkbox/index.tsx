@@ -88,7 +88,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                 const d = disabled ? disabledType : false;
 
                 if (labelPosition == 'hidden')
-                    console.assert(typeof label == "string");
+                    console.assert(typeof label == "string", `<Checkbox />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
 
                 return (
                     <AriaCheckbox<HTMLInputElement, HTMLLabelElement>

@@ -8,7 +8,7 @@ import { StructureOffcanvasBackdrop, StructureOffcanvasModal, StructureOffcanvas
 export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }, ref) {
     headerPosition ??= "start";
     if (headerPosition == "hidden") {
-        console.assert(typeof header == "string", `An offcanvas whose label is hidden must provide the label to use as a string to the header`);
+        console.assert(typeof header == "string", `<Offcanvas />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     }
     return (_jsx(AriaDialog, { ariaLabel: headerPosition == "hidden" ? header : null, active: open, onDismiss: onClose, focusPopup: (e, f) => f()?.focus?.(), dismissBackdropActive: true, dismissEscapeActive: true, render: info => {
             return (_jsxs(_Fragment, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), useDefaultRenderPortal({

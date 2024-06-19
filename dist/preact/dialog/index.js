@@ -9,7 +9,7 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
     variantSize ??= "xl";
     headerPosition ??= "start";
     if (headerPosition == "hidden") {
-        console.assert(typeof header == "string", `A dialog whose label is hidden must provide the label to use as a string to the header`);
+        console.assert(typeof header == "string", `<Dialog />: A dialog whose label is hidden must provide the label to use as a string to the header`);
     }
     return (_jsx(AriaDialog, { ariaLabel: headerPosition == "hidden" ? header : null, active: open, onDismiss: onClose, focusPopup: (e, f) => f()?.focus?.(), dismissBackdropActive: modal ? false : true, dismissEscapeActive: modal ? false : true, render: info => {
             const headingJsx = (_jsxs(_Fragment, { children: [_jsx(StructureDialogModalTitle, { children: header }), _jsx(StructureDialogModalCloseButton, { onClose: onClose })] }));

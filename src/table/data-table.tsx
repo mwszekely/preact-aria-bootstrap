@@ -43,7 +43,7 @@ export const DataTable = memo(forwardElementRef(function DataTable({ staggered, 
     const [paginationStart, setPaginationStart] = useState<number | null>(0);
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
     if (caption == "hidden")
-        console.assert(typeof caption == "string");
+        console.assert(typeof caption == "string", `<DataTable />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (
         <TableContext.Provider value={useMemo(() => ({ setChildCount, paginationMax: paginationEnd, paginationMin: paginationStart, staggered: staggered! }), [setChildCount, paginationStart, paginationEnd, staggered])}>
             <AriaTable<HTMLTableElement, HTMLTableCaptionElement>

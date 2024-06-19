@@ -462,7 +462,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
     labelPosition ??= "before";
 
     if (labelPosition == "hidden") {
-        console.assert(typeof label == "string")
+        console.assert(typeof label == "string", `<TextField />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`)
     }
     
     const { refElementReturn: { getElement: getInputElement }, propsStable: propsInput1 } = useRefElement<HTMLInputElement>({ refElementParameters: {} });

@@ -34,7 +34,7 @@ export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen,
 
     headerPosition ??= "start";
     if (headerPosition == "hidden") {
-        console.assert(typeof header == "string", `A dialog whose label is hidden must provide the label to use as a string to the header`);
+        console.assert(typeof header == "string", `<Dialog />: A dialog whose label is hidden must provide the label to use as a string to the header`);
     }
     return (
         <AriaDialog<HTMLDivElement, HTMLSpanElement, HTMLDivElement, HTMLSpanElement>

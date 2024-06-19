@@ -18,12 +18,12 @@ export const List = memo(forwardRef((function List({ disabled, selectedIndex, se
     const [paginationStart, setPaginationStart] = useState(paginationSize == null ? null : 0);
     const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
     if (selectedIndex != null || onSelectedIndexChange != null) {
-        console.assert(selectionMode == "single", `selectedIndex was specified even though selection is not enabled. Use the selectionMode prop to enable selection.`);
+        console.assert(selectionMode == "single", `<List />: selectedIndex was specified even though selection is not enabled. Use the selectionMode prop to enable selection.`);
     }
     if (paginationSize)
         paginationLocation ||= "before";
     if (labelPosition == "hidden")
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<List />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (_jsx(DefaultDisabled.Provider, { value: disabled ?? false, children: _jsx(Gridlist, { initiallyTabbableColumn: 1, singleSelectedIndex: selectedIndex ?? null, singleSelectionAriaPropName: "aria-selected", onSingleSelectedIndexChange: useStableCallback(e => { debugger; onSelectedIndexChange?.(e[EventDetail].selectedIndex); }), paginationMin: paginationStart, paginationMax: paginationEnd, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", render: info => {
                 const labelJsx = _jsx("label", { ...info.propsGridlistLabel, children: label });
                 children ??= [];

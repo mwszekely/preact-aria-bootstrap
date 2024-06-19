@@ -20,7 +20,7 @@ export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "child
 export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }: OffcanvasProps, ref?: Ref<HTMLSpanElement>) {
     headerPosition ??= "start";
     if (headerPosition == "hidden") {
-        console.assert(typeof header == "string", `An offcanvas whose label is hidden must provide the label to use as a string to the header`);
+        console.assert(typeof header == "string", `<Offcanvas />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     }
     return (
         <AriaDialog<HTMLDivElement, HTMLSpanElement, HTMLDivElement, HTMLHeadingElement>

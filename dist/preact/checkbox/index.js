@@ -43,7 +43,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
             disabled ||= defaultDisabled;
             const d = disabled ? disabledType : false;
             if (labelPosition == 'hidden')
-                console.assert(typeof label == "string");
+                console.assert(typeof label == "string", `<Checkbox />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
             return (_jsx(AriaCheckbox, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, imperativeHandle: imperativeHandle, render: info => {
                     let inputJsx = _jsx(StructureCheckboxInput, { ...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {}) });
                     const visibleLabel = _jsx(StructureCheckboxLabel, { ...useMergedProps(info.propsLabel, propsLabel || {}), children: label });

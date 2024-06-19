@@ -98,14 +98,14 @@ export const List = memo(forwardRef((function List({ disabled, selectedIndex, se
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
 
     if (selectedIndex != null || onSelectedIndexChange != null) {
-        console.assert(selectionMode == "single", `selectedIndex was specified even though selection is not enabled. Use the selectionMode prop to enable selection.`);
+        console.assert(selectionMode == "single", `<List />: selectedIndex was specified even though selection is not enabled. Use the selectionMode prop to enable selection.`);
     }
 
     if (paginationSize)
         paginationLocation ||= "before";
 
     if (labelPosition == "hidden")
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<List />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
 
     return (
         <DefaultDisabled.Provider value={disabled ?? false}>

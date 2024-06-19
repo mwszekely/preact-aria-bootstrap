@@ -57,7 +57,7 @@ export const RadioGroup = forwardElementRef(function RadioGroup<V extends string
     const pendingValue = (pending ? capturedValue : null);
     inline ??= false;
     if (labelPosition == "hidden")
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<RadioGroup />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
 
     return (
         <DisabledContext.Provider value={disabled ?? false}>
@@ -147,7 +147,7 @@ export const Radio = forwardElementRef(function Radio<V extends number | string>
                 const labelRef = useRef<HTMLLabelElement>(null);
 
                 if (labelPosition == "hidden")
-                    console.assert(typeof label == "string");
+                    console.assert(typeof label == "string", `<Radio />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
                 return (
                     <AriaRadio<LabelPosition, V, HTMLInputElement, HTMLLabelElement>
                         ariaLabel={labelPosition == 'hidden' ? label as string : null}

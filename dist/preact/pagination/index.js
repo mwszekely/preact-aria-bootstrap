@@ -15,7 +15,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
         return () => onChange(null, null);
     }, [page, windowSize]);
     if (labelPosition == 'hidden')
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<Pagination />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (_jsx(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, singleSelectionAriaPropName: "aria-current-page", singleSelectionMode: "activation", singleSelectedIndex: page, multiSelectionMode: "disabled", onSingleSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
             const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
             return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx(KeyboardAssistIcon, { leftRight: true, upDown: false, homeEnd: true, pageKeys: true, typeaheadStatus: 'none', activateSpace: true, activateEnter: true, description: keyboardControlsDescription ?? "Select a page:", children: _jsx("nav", { "aria-label": labelPosition == 'hidden' ? label : undefined, children: _jsx("ul", { ...useMergedProps(info.propsToolbar, { class: "pagination" }), children: _jsx(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }) }), labelPosition == "after" && labelJsx] }));

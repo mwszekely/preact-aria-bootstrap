@@ -16,7 +16,7 @@ export const DataTable = memo(forwardElementRef(function DataTable({ staggered, 
     const [paginationStart, setPaginationStart] = useState(0);
     const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
     if (caption == "hidden")
-        console.assert(typeof caption == "string");
+        console.assert(typeof caption == "string", `<DataTable />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (_jsx(TableContext.Provider, { value: useMemo(() => ({ setChildCount, paginationMax: paginationEnd, paginationMin: paginationStart, staggered: staggered }), [setChildCount, paginationStart, paginationEnd, staggered]), children: _jsx(AriaTable, { ariaLabel: captionPosition == "hidden" ? caption : null, singleSelectionMode: "activation", tagTable: "table", render: info => {
                 return (_jsxs(Paginated, { childCount: childCount, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, children: [caption && captionPosition != "hidden" && _jsx("caption", { ...useMergedProps(info.propsLabel, { className: clsx(captionPosition == "before" && "caption-top") }), children: caption }), _jsx(Table, { bordered: bordered, dark: dark, hover: hover, propsContainer: propsContainer, striped: striped, stripedColumns: stripedColumns, variantBorder: variantBorder, variantSize: variantSize, variantTheme: variantTheme, verticalAlign: verticalAlign, ...useMergedProps(info.propsTable, { className: "table" }, { ref, ...props }), children: children })] }));
             } }) }));

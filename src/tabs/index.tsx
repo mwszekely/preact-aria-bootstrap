@@ -32,7 +32,7 @@ export const Tabs = memo(forwardElementRef(function Tabs({ keyboardControlsDescr
     orientation ??= "horizontal"
     labelPosition ??= "before";
     if (labelPosition == "hidden")
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<Tabs />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (
         <OrientationContext.Provider value={orientation}>
             <AriaTabs<HTMLUListElement, HTMLLIElement, HTMLLabelElement>

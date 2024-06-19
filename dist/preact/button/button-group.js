@@ -18,7 +18,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     const pendingIndex = (pending ? capturedIndex : null);
     const classBase = (separated ? "btn-toolbar" : "btn-group");
     if (labelPosition == 'hidden')
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<ButtonGroup />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (_jsx(DefaultButtonSize.Provider, { value: variantSize ?? null, children: _jsx(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: _jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(ButtonGroupContext.Provider, { value: useMemo(() => ({ pendingIndex }), [pendingIndex]), children: _jsx(Toolbar, { onSingleSelectedIndexChange: (...e) => {
                             onSelectedIndexChangeSync(...e);
                         }, imperativeHandle: imperativeHandle, singleSelectionAriaPropName: "aria-pressed", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?

@@ -592,9 +592,9 @@ function useGlobalHandlerSingle(target, type, handler, options) {
 }
 
 // eslint-disable-next-line no-restricted-globals
-function getWindow$1(element) { return (typeof window != "undefined") ? undefined : (element?.ownerDocument?.defaultView ?? globalThis ?? {}); }
+function getWindow$1(element) { return (typeof window == "undefined") ? undefined : (element?.ownerDocument?.defaultView ?? globalThis ?? {}); }
 // eslint-disable-next-line no-restricted-globals
-function getDocument(element) { return (typeof window != "undefined") ? undefined : (element?.ownerDocument ?? getWindow$1()?.document) ?? undefined; }
+function getDocument(element) { return (typeof window == "undefined") ? undefined : (element?.ownerDocument ?? getWindow$1()?.document) ?? undefined; }
 
 /**
  * Handles events for a backdrop on a modal dialog -- the kind where the user expects the modal to close when they click/tap outside of it.
@@ -6394,29 +6394,35 @@ monitored(function useLayoutEffectDebug(effect, inputs) {
     return useEffectDebug(effect, inputs, A$2);
 });
 
-function getFromLocalStorage(key, converter = JSON.parse, storage = localStorage) {
-    try {
-        const item = storage.getItem(key);
-        if (item == null)
+const defaultStorage = (typeof window === 'undefined' ? undefined : window.localStorage);
+function getFromLocalStorage(key, converter = JSON.parse, storage = defaultStorage) {
+    if (storage != null) {
+        try {
+            const item = storage.getItem(key);
+            if (item == null)
+                return null;
+            return converter(item);
+        }
+        catch (e) {
+            /* eslint-disable no-debugger */
+            debugger;
             return null;
-        return converter(item);
+        }
     }
-    catch (e) {
-        /* eslint-disable no-debugger */
-        debugger;
-        return null;
-    }
+    return null;
 }
-function storeToLocalStorage(key, value, converter = JSON.stringify, storage = localStorage) {
-    try {
-        if (value == null)
-            storage.removeItem(key);
-        else
-            storage.setItem(key, converter(value));
-    }
-    catch (e) {
-        /* eslint-disable no-debugger */
-        debugger;
+function storeToLocalStorage(key, value, converter = JSON.stringify, storage = defaultStorage) {
+    if (storage != null) {
+        try {
+            if (value == null)
+                storage.removeItem(key);
+            else
+                storage.setItem(key, converter(value));
+        }
+        catch (e) {
+            /* eslint-disable no-debugger */
+            debugger;
+        }
     }
 }
 //function dummy<Key extends keyof PersistentStates, T = PersistentStates[Key]>(key: Key | null, initialValue: T, fromString: ((value: string) => T) = JSON.parse, toString: ((value: T) => string) = JSON.stringify, storage: Storage = localStorage): [T, StateUpdater<T>, () => T] { return null!; }
@@ -6437,7 +6443,7 @@ function storeToLocalStorage(key, value, converter = JSON.stringify, storage = l
  * @param toString -
  * @returns
  */
-function usePersistentState(key, initialValue, fromString = JSON.parse, toString = JSON.stringify, storage = localStorage) {
+function usePersistentState(key, initialValue, fromString = JSON.parse, toString = JSON.stringify, storage = defaultStorage) {
     const [localCopy, setLocalCopy, getLocalCopy] = useState(() => ((key ? (getFromLocalStorage(key, fromString, storage)) : null) ?? initialValue));
     const getInitialValue = useStableGetter(initialValue);
     // Ensure that if our key changes, we also update `localCopy` to match.
@@ -7469,7 +7475,7 @@ const useGridlistRow = monitored(function useGridlistRow({ gridlistRowParameters
     });
     // `selected` should only be true/false for multi-selection
     if (cx1.multiSelectionContext.multiSelectionMode == "disabled")
-        console.assert(selected == null);
+        console.assert(selected == null, `useGridlistRow: multiSelectionMode is disabled, but selected is ${selected} (instead of null).`);
     props.role = "row";
     return {
         pressParameters,
@@ -7714,7 +7720,7 @@ const useFocusSentinel = monitored(function useFocusSentinel({ focusSentinel: { 
  */
 const useToolbar = monitored(function useToolbar({ linearNavigationParameters, toolbarParameters: { orientation, role, disabled }, labelParameters, rovingTabIndexParameters, singleSelectionParameters, singleSelectionDeclarativeParameters, ...listNavParameters }) {
     if (singleSelectionDeclarativeParameters.singleSelectedIndex !== undefined) {
-        console.assert(singleSelectionParameters.singleSelectionMode != "disabled");
+        console.assert(singleSelectionParameters.singleSelectionMode != "disabled", `useToolbar: When singleSelectionMode is "disabled", singleSelectedIndex must be null.`);
     }
     const { contextChildren, contextProcessing, props, ...listNavReturn } = useCompleteListNavigationDeclarative({
         ...listNavParameters,
@@ -7924,8 +7930,12 @@ const NotificationProviderContext = G$1(null);
 const useNotificationProvider = monitored(function useNotificationProvider({ targetAssertive, targetPolite }) {
     const { children: childrenPolite, pushChild: notifyPolite, portalElement: politeElement } = usePortalChildren({ target: targetPolite });
     const { children: childrenAssertive, pushChild: notifyAssertive, portalElement: assertiveElement } = usePortalChildren({ target: targetAssertive });
-    console.assert(politeElement?.getAttribute("aria-live") == "polite");
-    console.assert(assertiveElement?.getAttribute("aria-live") == "assertive");
+    console.assert(politeElement != null, `useNotificationProvider: targetPolite is missing`);
+    console.assert(assertiveElement != null, `useNotificationProvider: targetAssertive is missing`);
+    if (politeElement)
+        console.assert(politeElement.getAttribute("aria-live") == "polite", `useNotificationProvider: targetPolite missing attribute "aria-live=polite"`);
+    if (assertiveElement)
+        console.assert(assertiveElement.getAttribute("aria-live") == "assertive", `useNotificationProvider: targetAssertive is missing, or missing "aria-live=assertive"`);
     const notify = useCallback((mode, child) => {
         return mode == "assertive" ? notifyAssertive(child) : notifyPolite(child);
     }, [notifyAssertive, notifyPolite]);
@@ -8245,17 +8255,6 @@ const useTable = monitored(function useTable({ labelParameters, tableParameters:
     const [getSortBody, setSortBody] = usePassiveState(null, returnNull);
     const [_sortDirection, setSortDirection, getSortDirection] = useState("ascending");
     const [_sortColumn, setSortColumn, getSortColumn] = useState(null);
-    /*const updateSortDirection = useCallback((column: number) => {
-        const { column: currentColumn, direction: currentDirection } = getSortColumn();
-        const next = { column, direction: column != currentColumn ? "ascending" : (currentDirection == "ascending" ? "descending" : "ascending") } as const;
-        setSortColumn(next);
-        return next;
-    }, []);
-    const sortByColumn = useCallback((column: number) => {
-        const next = updateSortDirection(column);
-        getSortBody()?.();
-        return next;
-    }, [])*/
     const sortByColumn = useCallback((column) => {
         let nextSortDirection = getSortDirection();
         let nextSortIndex = getSortColumn();
@@ -8799,7 +8798,7 @@ function delayedAlert(message: string) {
  * @compositeParams
  */
 const useTooltip = monitored(function useTooltip({ tooltipParameters: { onStatus, tooltipSemanticType, hoverDelay, usesLongPress }, activeElementParameters, escapeDismissParameters, pressReturn: { longPress, ...void2 }, ...void1 }) {
-    useGlobalHandler(window, "mouseout", useCallback((e) => {
+    useGlobalHandler(getWindow$1(), "mouseout", useCallback((e) => {
         if (e.relatedTarget == null)
             onHoverChanged(false, "popup");
     }, []));
@@ -9565,7 +9564,7 @@ const ListboxItemInner = x$1((function ListboxItemInner({ getText, untabbable, i
         refElementParameters: { onElementChange, onMount, onUnmount },
         singleSelectionChildParameters: { singleSelectionDisabled: singleSelectionDisabled || false },
         multiSelectionChildParameters: { multiSelectionDisabled: multiSelectionDisabled || false },
-        multiSelectionChildDeclarativeParameters: { onMultiSelectedChange, multiSelected: multiSelected || false },
+        multiSelectionChildDeclarativeParameters: { onMultiSelectedChange, multiSelected: multiSelected ?? null },
     });
     return useComponent(imperativeHandle, render, null, {
         hasCurrentFocusReturn,
@@ -10292,6 +10291,8 @@ function useExclusiveTransition({ transitionParameters: { show }, exclusiveTrans
 }
 
 function getTimeoutDuration(element) {
+    if (typeof window === 'undefined')
+        return 250;
     return Math.max(...(window.getComputedStyle(element || document.body).getPropertyValue(`transition-duration`)).split(",").map(str => {
         if (str.endsWith("ms"))
             return +str.substring(0, str.length - 2);
@@ -13252,7 +13253,7 @@ function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexChangeAsy
     const pendingIndex = (pending ? capturedIndex : null);
     const classBase = (separated ? "btn-toolbar" : "btn-group");
     if (labelPosition == 'hidden')
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<ButtonGroup />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (jsx(DefaultButtonSize.Provider, { value: variantSize ?? null, children: jsx(DefaultButtonTheme.Provider, { value: variantTheme ?? null, children: jsx(DisabledContext$1.Provider, { value: disabled ?? false, children: jsx(ButtonGroupContext.Provider, { value: q$1(() => ({ pendingIndex }), [pendingIndex]), children: jsx(Toolbar, { onSingleSelectedIndexChange: (...e) => {
                             onSelectedIndexChangeSync(...e);
                         }, imperativeHandle: imperativeHandle, singleSelectionAriaPropName: "aria-pressed", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", role: "toolbar" // TODO: Was group, but that doesn't count as an application, I think?
@@ -13478,7 +13479,7 @@ function Checkbox({ label, labelPosition, checked, tristate, onValueChange, load
             disabled ||= defaultDisabled;
             const d = disabled ? disabledType : false;
             if (labelPosition == 'hidden')
-                console.assert(typeof label == "string");
+                console.assert(typeof label == "string", `<Checkbox />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
             return (jsx(Checkbox$1, { ariaLabel: labelPosition == 'hidden' ? label : null, checked: (pending ? currentCapture : null) ?? checked, onCheckedChange: syncHandler, labelPosition: labelPosition == "hidden" || labelPosition == "tooltip" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, imperativeHandle: imperativeHandle, render: info => {
                     let inputJsx = jsx(StructureCheckboxInput, { ...useMergedProps(info.propsInput, propsInput || {}, withinInputGroup ? { class: "mt-0" } : {}) });
                     const visibleLabel = jsx(StructureCheckboxLabel, { ...useMergedProps(info.propsLabel, propsLabel || {}), children: label });
@@ -13581,7 +13582,7 @@ const Dialog = x$1(forwardElementRef$1(function Dialog({ open, fullscreen, varia
     variantSize ??= "xl";
     headerPosition ??= "start";
     if (headerPosition == "hidden") {
-        console.assert(typeof header == "string", `A dialog whose label is hidden must provide the label to use as a string to the header`);
+        console.assert(typeof header == "string", `<Dialog />: A dialog whose label is hidden must provide the label to use as a string to the header`);
     }
     return (jsx(Dialog$1, { ariaLabel: headerPosition == "hidden" ? header : null, active: open, onDismiss: onClose, focusPopup: (e, f) => f()?.focus?.(), dismissBackdropActive: modal ? false : true, dismissEscapeActive: modal ? false : true, render: info => {
             const headingJsx = (jsxs(Fragment, { children: [jsx(StructureDialogModalTitle, { children: header }), jsx(StructureDialogModalCloseButton, { onClose: onClose })] }));
@@ -13723,7 +13724,7 @@ function Pagination({ childCount, windowSize, onChange, labelPosition, label, ke
         return () => onChange(null, null);
     }, [page, windowSize]);
     if (labelPosition == 'hidden')
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<Pagination />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (jsx(Toolbar, { ariaLabel: labelPosition == "hidden" ? label : null, singleSelectionAriaPropName: "aria-current-page", singleSelectionMode: "activation", singleSelectedIndex: page, multiSelectionMode: "disabled", onSingleSelectedIndexChange: useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, []), orientation: "horizontal", render: info => {
             const labelJsx = jsx("label", { ...info.propsLabel, children: label });
             return (jsxs(Fragment, { children: [labelPosition == "before" && labelJsx, jsx(KeyboardAssistIcon, { leftRight: true, upDown: false, homeEnd: true, pageKeys: true, typeaheadStatus: 'none', activateSpace: true, activateEnter: true, description: keyboardControlsDescription ?? "Select a page:", children: jsx("nav", { "aria-label": labelPosition == 'hidden' ? label : undefined, children: jsx("ul", { ...useMergedProps(info.propsToolbar, { class: "pagination" }), children: jsx(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }) }), labelPosition == "after" && labelJsx] }));
@@ -13791,12 +13792,12 @@ const List = x$1(k$1((function List({ disabled, selectedIndex, selectionMode, on
     const [paginationStart, setPaginationStart] = useState(paginationSize == null ? null : 0);
     const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
     if (selectedIndex != null || onSelectedIndexChange != null) {
-        console.assert(selectionMode == "single", `selectedIndex was specified even though selection is not enabled. Use the selectionMode prop to enable selection.`);
+        console.assert(selectionMode == "single", `<List />: selectedIndex was specified even though selection is not enabled. Use the selectionMode prop to enable selection.`);
     }
     if (paginationSize)
         paginationLocation ||= "before";
     if (labelPosition == "hidden")
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<List />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (jsx(DefaultDisabled.Provider, { value: disabled ?? false, children: jsx(Gridlist, { initiallyTabbableColumn: 1, singleSelectedIndex: selectedIndex ?? null, singleSelectionAriaPropName: "aria-selected", onSingleSelectedIndexChange: useStableCallback(e => { debugger; onSelectedIndexChange?.(e[EventDetail].selectedIndex); }), paginationMin: paginationStart, paginationMax: paginationEnd, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", render: info => {
                 const labelJsx = jsx("label", { ...info.propsGridlistLabel, children: label });
                 children ??= [];
@@ -13992,7 +13993,7 @@ const StructureOffcanvasModal = memoForwardRef(function StructureOffcanvasModal(
 const Offcanvas = x$1(forwardElementRef$1(function Offcanvas({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }, ref) {
     headerPosition ??= "start";
     if (headerPosition == "hidden") {
-        console.assert(typeof header == "string", `An offcanvas whose label is hidden must provide the label to use as a string to the header`);
+        console.assert(typeof header == "string", `<Offcanvas />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     }
     return (jsx(Dialog$1, { ariaLabel: headerPosition == "hidden" ? header : null, active: open, onDismiss: onClose, focusPopup: (e, f) => f()?.focus?.(), dismissBackdropActive: true, dismissEscapeActive: true, render: info => {
             return (jsxs(Fragment, { children: [useClonedElement(anchor, useMergedProps(info.propsSource, props), ref), useDefaultRenderPortal({
@@ -14080,7 +14081,7 @@ const RadioGroup = forwardElementRef$1(function RadioGroup({ onValueChange: onSe
     const pendingValue = (pending ? capturedValue : null);
     inline ??= false;
     if (labelPosition == "hidden")
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<RadioGroup />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (jsx(DisabledContext$1.Provider, { value: disabled ?? false, children: jsx(RadioGroupContext.Provider, { value: q$1(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: jsx(RadioGroup$1, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, imperativeHandle: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", singleSelectionMode: selectionMode, render: info => {
                     const E = (fieldset ? "fieldset" : "span");
                     const L = (fieldset ? "legend" : "label");
@@ -14108,7 +14109,7 @@ const Radio = forwardElementRef$1(function Radio({ index, label, value, labelPos
             const loadingJsx = (jsx(Fade, { show: pending, exitVisibility: "removed", children: jsx("span", { ...useMergedProps(propsProgressIndicator, { class: "spinner-border" }) }) }));
             const labelRef = F$1(null);
             if (labelPosition == "hidden")
-                console.assert(typeof label == "string");
+                console.assert(typeof label == "string", `<Radio />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
             return (jsx(Radio$1, { ariaLabel: labelPosition == 'hidden' ? label : null, value: value, index: index, labelPosition: labelPosition == "hidden" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, getText: () => labelRef.current?.textContent || `${value}` || "", render: info => {
                     const inputJsx = jsx("input", { className: "form-check-input", ...useMergedProps(info.propsInput, props, { ref }) });
                     return (jsxs(StructureRadioWrapper, { inline: inline || false, pending: pending, labelPosition: labelPosition, children: [loadingJsx, jsxs("label", { ...useMergedProps({ class: "form-check-label", ref: labelRef }, info.propsLabel), children: [labelPosition == "before" && label, labelPosition == "tooltip" ? jsx(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && label] })] }));
@@ -14263,7 +14264,7 @@ function useCommitTextField({ getFocused, commit, currentCapture, showSpinner, v
 const TextFieldBase = x$1(forwardElementRef$1(function TextFieldBase({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }, ref) {
     labelPosition ??= "before";
     if (labelPosition == "hidden") {
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<TextField />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     }
     const { refElementReturn: { getElement: getInputElement }, propsStable: propsInput1 } = useRefElement({ refElementParameters: {} });
     const { refElementReturn: { getElement: getLabelElement }, propsStable: propsLabel1 } = useRefElement({ refElementParameters: {} });
@@ -16208,7 +16209,7 @@ const RangeThumb = x$1(forwardElementRef$1(function RangeThumb({ index, value, m
     const parentOnValueChange = P$2(OnValueChangeContext);
     const context = P$2(RangeThumbContext);
     const debounceSetting = P$2(DebounceContext);
-    console.assert(typeof label == "string");
+    console.assert(typeof label == "string", `<RangeThumb />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     const { syncHandler, pending, hasError, currentCapture } = useAsyncHandler({
         asyncHandler: async (v, e) => { await parentOnValueChange?.(v); await onValueChangeAsync?.(v); },
         capture,
@@ -16354,7 +16355,7 @@ const DataTable = x$1(forwardElementRef$1(function DataTable({ staggered, captio
     const [paginationStart, setPaginationStart] = useState(0);
     const [paginationEnd, setPaginationEnd] = useState(paginationSize ?? null);
     if (caption == "hidden")
-        console.assert(typeof caption == "string");
+        console.assert(typeof caption == "string", `<DataTable />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (jsx(TableContext.Provider, { value: q$1(() => ({ setChildCount, paginationMax: paginationEnd, paginationMin: paginationStart, staggered: staggered }), [setChildCount, paginationStart, paginationEnd, staggered]), children: jsx(Table$1, { ariaLabel: captionPosition == "hidden" ? caption : null, singleSelectionMode: "activation", tagTable: "table", render: info => {
                 return (jsxs(Paginated, { childCount: childCount, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, children: [caption && captionPosition != "hidden" && jsx("caption", { ...useMergedProps(info.propsLabel, { className: clsx$1(captionPosition == "before" && "caption-top") }), children: caption }), jsx(Table, { bordered: bordered, dark: dark, hover: hover, propsContainer: propsContainer, striped: striped, stripedColumns: stripedColumns, variantBorder: variantBorder, variantSize: variantSize, variantTheme: variantTheme, verticalAlign: verticalAlign, ...useMergedProps(info.propsTable, { className: "table" }, { ref, ...props }), children: children })] }));
             } }) }));
@@ -16495,7 +16496,7 @@ const Tabs = x$1(forwardElementRef$1(function Tabs({ keyboardControlsDescription
     orientation ??= "horizontal";
     labelPosition ??= "before";
     if (labelPosition == "hidden")
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<Tabs />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (jsx(OrientationContext.Provider, { value: orientation, children: jsx(Tabs$1, { localStorageKey: localStorageKey, orientation: orientation, ariaLabel: labelPosition == "hidden" ? label : null, pageNavigationSize: 0, render: info => {
                 const labelJsx = jsx("label", { ...info.propsLabel, children: label });
                 return (jsxs(StructureTabs, { orientation: orientation, ref: ref, ...props, children: [jsx(StructureTabList, { ...info.propsContainer, childrenLabel: labelJsx, labelPosition: labelPosition, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, orientation: orientation, keyboardControlsDescription: keyboardControlsDescription ?? "Move to a tab:", children: tabs }), jsx(StructureTabPanelsContainer, { children: panels })] }));

@@ -25,7 +25,7 @@ export const RadioGroup = forwardElementRef(function RadioGroup({ onValueChange:
     const pendingValue = (pending ? capturedValue : null);
     inline ??= false;
     if (labelPosition == "hidden")
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<RadioGroup />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (_jsx(DisabledContext.Provider, { value: disabled ?? false, children: _jsx(RadioGroupContext.Provider, { value: useMemo(() => ({ pendingValue, inline: inline }), [pendingValue, inline]), children: _jsx(AriaRadioGroup, { ariaLabel: labelPosition == 'hidden' ? label : null, selectedValue: pendingValue ?? selectedValue, imperativeHandle: imperativeHandle, name: name, onSelectedValueChange: onSelectedIndexChangeSync, arrowKeyDirection: inline ? "horizontal" : "vertical", singleSelectionMode: selectionMode, render: info => {
                     const E = (fieldset ? "fieldset" : "span");
                     const L = (fieldset ? "legend" : "label");
@@ -53,7 +53,7 @@ export const Radio = forwardElementRef(function Radio({ index, label, value, lab
             const loadingJsx = (_jsx(Fade, { show: pending, exitVisibility: "removed", children: _jsx("span", { ...useMergedProps(propsProgressIndicator, { class: "spinner-border" }) }) }));
             const labelRef = useRef(null);
             if (labelPosition == "hidden")
-                console.assert(typeof label == "string");
+                console.assert(typeof label == "string", `<Radio />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
             return (_jsx(AriaRadio, { ariaLabel: labelPosition == 'hidden' ? label : null, value: value, index: index, labelPosition: labelPosition == "hidden" ? "none" : "separate", tagInput: "input", tagLabel: "label", disabled: d, getText: () => labelRef.current?.textContent || `${value}` || "", render: info => {
                     const inputJsx = _jsx("input", { className: "form-check-input", ...useMergedProps(info.propsInput, props, { ref }) });
                     return (_jsxs(StructureRadioWrapper, { inline: inline || false, pending: pending, labelPosition: labelPosition, children: [loadingJsx, _jsxs("label", { ...useMergedProps({ class: "form-check-label", ref: labelRef }, info.propsLabel), children: [labelPosition == "before" && label, labelPosition == "tooltip" ? _jsx(Tooltip, { forward: true, tooltip: label, alignMode: "element", absolutePositioning: true, children: inputJsx }) : inputJsx, labelPosition == "after" && label] })] }));

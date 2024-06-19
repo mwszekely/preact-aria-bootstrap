@@ -92,7 +92,7 @@ export function ButtonGroup({ children, onSelectedIndexChange: onSelectedIndexCh
     const classBase = (separated ? "btn-toolbar" : "btn-group")
 
     if (labelPosition == 'hidden')
-        console.assert(typeof label == "string");
+        console.assert(typeof label == "string", `<ButtonGroup />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     
     return (
         <DefaultButtonSize.Provider value={variantSize ?? null}>
