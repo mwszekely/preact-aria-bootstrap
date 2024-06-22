@@ -36,7 +36,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
             const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
             const { pending: p, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
             const pending = (forciblyPending || p || debouncingAsync || debouncingSync);
-            const loadingJsx = (_jsx(Fade, { show: p, exitVisibility: "removed", children: _jsx("span", { className: "spinner-border spinner-border-sm", ...propsProgressIndicator }) }));
+            const loadingJsx = (_jsx(Fade, { show: forciblyPending || p, exitVisibility: "removed", children: _jsx("span", { className: "spinner-border spinner-border-sm", ...propsProgressIndicator }) }));
             const defaultDisabled = useContext(DisabledContext);
             const disabledType = useContext(DefaultDisabledType);
             let disabled = userDisabled;

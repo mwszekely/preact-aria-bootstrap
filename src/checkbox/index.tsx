@@ -78,7 +78,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                 const pending = (forciblyPending || p || debouncingAsync || debouncingSync);
 
                 const loadingJsx = (
-                    <Fade show={p} exitVisibility="removed"><span className="spinner-border spinner-border-sm" {...propsProgressIndicator} /></Fade>
+                    <Fade show={forciblyPending || p} exitVisibility="removed"><span className="spinner-border spinner-border-sm" {...propsProgressIndicator} /></Fade>
                 )
 
                 const defaultDisabled = useContext(DisabledContext);
