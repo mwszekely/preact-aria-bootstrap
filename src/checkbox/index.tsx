@@ -75,7 +75,7 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                 const { asyncHandlerReturn, propsProgressIndicator, propsProgressRegion } = progressInfo;
                 const { pending: p, debouncingAsync, debouncingSync, currentCapture, syncHandler } = asyncHandlerReturn;
 
-                const pending = (p || debouncingAsync || debouncingSync);
+                const pending = (forciblyPending || p || debouncingAsync || debouncingSync);
 
                 const loadingJsx = (
                     <Fade show={p} exitVisibility="removed"><span className="spinner-border spinner-border-sm" {...propsProgressIndicator} /></Fade>
