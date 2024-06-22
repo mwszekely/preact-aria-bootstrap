@@ -2,13 +2,13 @@ import { clsx } from "clsx";
 import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenuItemReturnType, useDefaultRenderPortal } from "preact-aria-widgets";
 import { ComponentChildren, EventDetail, EventType, Ref, UseTypeaheadNavigationReturnTypeSelf, VNode, memo, returnUndefined, useCallback, useMergedProps, useRef, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { Fade, ZoomFade } from "preact-transition";
+import { useAutoAsyncHandler } from "../context.js";
 import { usePopper } from "../popper/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 import { usePortalId } from "../utility/use-portal-id.js";
-import { useAutoAsyncHandler } from "../context.js";
 
 
 export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children"> {
@@ -25,7 +25,7 @@ export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children
     anchor: VNode;
 }
 
-export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) {
+export const Menu = /* @__PURE__ */ memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) {
     const [openFromAnchor, setOpenFromAnchor, getOpenFromAnchor] = useState(forceOpen ?? false);
     const onOpen = useCallback(() => { setOpenFromAnchor(true); }, []);
     const onClose = useCallback(() => { setOpenFromAnchor(false); }, []);
@@ -105,7 +105,7 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
 
 export interface StructureMenuPopperProps extends GlobalAttributes<HTMLDivElement, "children"> { }
 
-export const StructureMenuPopper = memoForwardRef(function StructureMenuPopper({ children, ...props }: StructureMenuPopperProps, ref: Ref<HTMLDivElement>) {
+export const StructureMenuPopper = /* @__PURE__ */ memoForwardRef(function StructureMenuPopper({ children, ...props }: StructureMenuPopperProps, ref: Ref<HTMLDivElement>) {
     return (<div {...useMergedProps({ className: "popper-menu" }, { ...props, ref })}>{children}</div>)
 });
 
@@ -115,7 +115,7 @@ export interface StructureMenuRootProps extends GlobalAttributes<HTMLDivElement,
     keyboardControlsDescription: string;
 }
 
-export const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }: StructureMenuRootProps, ref: Ref<HTMLDivElement>) {
+export const StructureMenuRoot = /* @__PURE__ */ memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }: StructureMenuRootProps, ref: Ref<HTMLDivElement>) {
     return (
         <ZoomFade show={popperOpen} delayMountUntilShown exitVisibility="removed" zoomOriginInline={0} zoomOriginBlock={0} zoomMinInline={0.85} zoomMinBlock={0.85}>
             <KeyboardAssistIcon 
@@ -137,17 +137,17 @@ export const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ pop
 
 export interface StructureMenuListProps extends GlobalAttributes<HTMLDivElement, "children"> { }
 
-export const StructureMenuList = memoForwardRef(function StructureMenuList({ children, ...props }: StructureMenuListProps, ref: Ref<HTMLDivElement>) {
+export const StructureMenuList = /* @__PURE__ */ memoForwardRef(function StructureMenuList({ children, ...props }: StructureMenuListProps, ref: Ref<HTMLDivElement>) {
     return (
         <div {...useMergedProps({ className: "dropdown-menu-list" }, { ...props, ref })}>{children}</div>
     )
 })
 
-export const StructureMenuArrow = memoForwardRef(function StructureMenuArrow(props: GlobalAttributes<HTMLDivElement>, ref: Ref<HTMLDivElement>) {
+export const StructureMenuArrow = /* @__PURE__ */ memoForwardRef(function StructureMenuArrow(props: GlobalAttributes<HTMLDivElement>, ref: Ref<HTMLDivElement>) {
     return (<div {...props} ref={ref} />)
 })
 
-export const StructureMenuFocusSentinel = memoForwardRef(function StructureMenuFocusSentinel(props: GlobalAttributes<HTMLDivElement>, ref: Ref<HTMLDivElement>) {
+export const StructureMenuFocusSentinel = /* @__PURE__ */ memoForwardRef(function StructureMenuFocusSentinel(props: GlobalAttributes<HTMLDivElement>, ref: Ref<HTMLDivElement>) {
     return (<div {...props} ref={ref} />)
 })
 
@@ -160,7 +160,7 @@ export interface MenuItemProps extends GlobalAttributes<HTMLDivElement> {
     loadingLabel?: string;
 }
 
-export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }: MenuItemProps, ref?: Ref<HTMLDivElement>) {
+export const MenuItem = /* @__PURE__ */ memo(forwardElementRef(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }: MenuItemProps, ref?: Ref<HTMLDivElement>) {
     const imperativeHandle = useRef<UseMenuItemReturnType<HTMLDivElement, any>>(null);
 
     return (
@@ -217,7 +217,7 @@ export interface StructureMenuItemSpinnerProps extends GlobalAttributes<HTMLDivE
     showSpinner: boolean;
 }
 
-const StructureMenuItem = memoForwardRef(function StructureMenuItem({ children, showSpinner, disabled, pressing, ...props }: StructureMenuItemProps, ref: Ref<HTMLDivElement>) {
+const StructureMenuItem = /* @__PURE__ */ memoForwardRef(function StructureMenuItem({ children, showSpinner, disabled, pressing, ...props }: StructureMenuItemProps, ref: Ref<HTMLDivElement>) {
     return (
         <div {...useMergedProps({ className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", pressing && "active") }, { ...props, ref })}>
             {children}
@@ -226,7 +226,7 @@ const StructureMenuItem = memoForwardRef(function StructureMenuItem({ children, 
 });
 
 
-const StructureMenuItemSpinner = memoForwardRef(function StructureMenuItemSpinner({ showSpinner, ...props }: StructureMenuItemSpinnerProps, ref: Ref<HTMLDivElement>) {
+const StructureMenuItemSpinner = /* @__PURE__ */ memoForwardRef(function StructureMenuItemSpinner({ showSpinner, ...props }: StructureMenuItemSpinnerProps, ref: Ref<HTMLDivElement>) {
 
     return (
         <div className="dropdown-item-icon dropdown-item-icon-end">

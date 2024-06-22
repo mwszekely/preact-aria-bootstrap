@@ -20,7 +20,7 @@ export interface IconProps<E extends Element> extends Omit<JSX.HTMLAttributes<E>
     children?: VNode;
 }
 
-export const Icon = memo(forwardElementRef(function Icon<E extends Element>({ label, role, "aria-label": ariaLabel, children, ref: unused, ...props }: IconProps<E>, ref: Ref<HTMLElement>) {
+export const Icon = /* @__PURE__ */ memo(forwardElementRef(function Icon<E extends Element>({ label, role, "aria-label": ariaLabel, children, ref: unused, ...props }: IconProps<E>, ref: Ref<HTMLElement>) {
     console.assert(ref == unused || unused == null);
 
     const iconProps = useMergedProps<any>(props, {

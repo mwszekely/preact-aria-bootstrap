@@ -17,31 +17,31 @@ export interface StructureDialogModalCloseButtonProps extends GlobalAttributes<H
 export interface StructureDialogModalDialogProps extends GlobalAttributes<HTMLDivElement, "children">, Required<Pick<DialogProps, "open" | "header">> { }
 export interface StructureDialogModalContentProps extends GlobalAttributes<HTMLSpanElement>, Pick<DialogProps, "headerPosition"> { childrenHeading: ComponentChildren; childrenBody: ComponentChildren; childrenFooter: ComponentChildren | null; }
 
-export const StructureDialogPortalRoot = memoForwardRef(function StructureDialogPortalRoot({ children, ...props }: StructureDialogPortalRootProps, ref: Ref<HTMLDivElement>) { return (<div {...props} ref={ref}>{children}</div>) })
-export const StructureDialogBackdrop = memoForwardRef(function StructureDialogBackdrop({ open, modal, ...props }: StructureDialogBackdropProps, ref: Ref<HTMLDivElement>) {
+export const StructureDialogPortalRoot = /* @__PURE__ */ memoForwardRef(function StructureDialogPortalRoot({ children, ...props }: StructureDialogPortalRootProps, ref: Ref<HTMLDivElement>) { return (<div {...props} ref={ref}>{children}</div>) })
+export const StructureDialogBackdrop = /* @__PURE__ */ memoForwardRef(function StructureDialogBackdrop({ open, modal, ...props }: StructureDialogBackdropProps, ref: Ref<HTMLDivElement>) {
     return (
         <div {...useMergedProps({ class: clsx("dialog-backdrop", open && "visible", modal && "dialog-backdrop-blur"), role: "presentation" }, { ...props, ref })} />
     )
 });
 
-export const StructureDialogModalTitle = memoForwardRef(function StructureDialogModalTitle({ children, ...props }: StructureDialogModalTitleProps, ref: Ref<HTMLDivElement>) {
+export const StructureDialogModalTitle = /* @__PURE__ */ memoForwardRef(function StructureDialogModalTitle({ children, ...props }: StructureDialogModalTitleProps, ref: Ref<HTMLDivElement>) {
     return (<div {...useMergedProps({ class: "modal-title" }, { ...props, ref })}>{children}</div>)
 })
 
-export const StructureDialogModalCloseButton = memoForwardRef(function StructureDialogModalCloseButton({ onClose, ...props }: StructureDialogModalCloseButtonProps, ref: Ref<HTMLDivElement>) {
+export const StructureDialogModalCloseButton = /* @__PURE__ */ memoForwardRef(function StructureDialogModalCloseButton({ onClose, ...props }: StructureDialogModalCloseButtonProps, ref: Ref<HTMLDivElement>) {
     return (<Button onPress={(_pressed, e) => onClose(e, "escape")} {...useMergedProps({ class: "btn-close", "aria-label": "Close" }, { ...props, ref }) as {}} />)
 })
 
-export const StructureDialogModalBody = memoForwardRef(function StructureDialogModalBody({ children, ...props }: StructureDialogModalBodyProps, ref: Ref<HTMLDivElement>) {
+export const StructureDialogModalBody = /* @__PURE__ */ memoForwardRef(function StructureDialogModalBody({ children, ...props }: StructureDialogModalBodyProps, ref: Ref<HTMLDivElement>) {
     return (<div {...useMergedProps({ class: "modal-body" }, { ...props, ref })}>{children}</div>)
 })
 
-export const StructureDialogModalFooter = memoForwardRef(function StructureDialogModalFooter({ children, ...props }: StructureDialogModalFooterProps, ref: Ref<HTMLDivElement>) {
+export const StructureDialogModalFooter = /* @__PURE__ */ memoForwardRef(function StructureDialogModalFooter({ children, ...props }: StructureDialogModalFooterProps, ref: Ref<HTMLDivElement>) {
     return (children == null ? null : <div {...useMergedProps({ class: "modal-footer" }, { ...props, ref })}>{children}</div>)
 })
 
 
-export const StructureDialogModalDialog = memoForwardRef(function StructureDialogModalDialog({ open, children, header, ...props }: StructureDialogModalDialogProps, ref: Ref<HTMLDivElement>) {
+export const StructureDialogModalDialog = /* @__PURE__ */ memoForwardRef(function StructureDialogModalDialog({ open, children, header, ...props }: StructureDialogModalDialogProps, ref: Ref<HTMLDivElement>) {
     return (
         <SlideFade animateOnMount={true} delayMountUntilShown={true} show={open} slideTargetBlock={0.125 * (open ? 1 : -1)}>
             <div {...useMergedProps({ class: "modal-dialog" }, { ...props, ref })}>
@@ -51,7 +51,7 @@ export const StructureDialogModalDialog = memoForwardRef(function StructureDialo
     )
 })
 
-export const StructureDialogModalContent = memoForwardRef(function StructureDialogModalContent({ childrenHeading, childrenBody, childrenFooter, headerPosition, ...props }: StructureDialogModalContentProps, ref: Ref<HTMLSpanElement>) {
+export const StructureDialogModalContent = /* @__PURE__ */ memoForwardRef(function StructureDialogModalContent({ childrenHeading, childrenBody, childrenFooter, headerPosition, ...props }: StructureDialogModalContentProps, ref: Ref<HTMLSpanElement>) {
     return (
         <span {...useMergedProps({ class: "modal-content" }, { ...props, ref })}>
             {headerPosition == "start" ? <Heading className="modal-header" heading={childrenHeading}>{childrenBody}</Heading> : childrenBody}
@@ -60,7 +60,7 @@ export const StructureDialogModalContent = memoForwardRef(function StructureDial
     )
 })
 
-export const StructureDialogModal = memoForwardRef(function StructureDialogModal({ open, variantSize, fullscreen, children, ...props }: StructureDialogModalProps, ref: Ref<HTMLDivElement>) {
+export const StructureDialogModal = /* @__PURE__ */ memoForwardRef(function StructureDialogModal({ open, variantSize, fullscreen, children, ...props }: StructureDialogModalProps, ref: Ref<HTMLDivElement>) {
 
     const otherProps = {
         tabIndex: -1,

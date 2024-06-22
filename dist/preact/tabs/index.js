@@ -5,7 +5,7 @@ import { createContext, memo, useContext, useMergedProps } from "preact-prop-hel
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { StructureTabList, StructureTabPanel, StructureTabPanelsContainer, StructureTabs } from "./structure.js";
 const OrientationContext = createContext("horizontal");
-export const Tabs = memo(forwardElementRef(function Tabs({ keyboardControlsDescription, orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }, ref) {
+export const Tabs = /* @__PURE__ */ memo(forwardElementRef(function Tabs({ keyboardControlsDescription, orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }, ref) {
     orientation ??= "horizontal";
     labelPosition ??= "before";
     if (labelPosition == "hidden")
@@ -15,12 +15,12 @@ export const Tabs = memo(forwardElementRef(function Tabs({ keyboardControlsDescr
                 return (_jsxs(StructureTabs, { orientation: orientation, ref: ref, ...props, children: [_jsx(StructureTabList, { ...info.propsContainer, childrenLabel: labelJsx, labelPosition: labelPosition, typeaheadStatus: info.typeaheadNavigationReturn.typeaheadStatus, orientation: orientation, keyboardControlsDescription: keyboardControlsDescription ?? "Move to a tab:", children: tabs }), _jsx(StructureTabPanelsContainer, { children: panels })] }));
             } }) }));
 }));
-export const Tab = memo(forwardElementRef(function Tab({ index, children, ...props }, ref) {
+export const Tab = /* @__PURE__ */ memo(forwardElementRef(function Tab({ index, children, ...props }, ref) {
     return (_jsx(AriaTab, { index: index, render: info => {
             return (_jsx("li", { ...useMergedProps(props, { ref, className: `nav-item` }), children: _jsx("span", { ...useMergedProps(info.props, { className: clsx(`nav-link`, info.singleSelectionChildReturn.singleSelected && "active") }), children: children }) }));
         } }));
 }));
-export const TabPanel = memo(forwardElementRef(function TabPanel({ index, ...props }, ref) {
+export const TabPanel = /* @__PURE__ */ memo(forwardElementRef(function TabPanel({ index, ...props }, ref) {
     const orientation = useContext(OrientationContext);
     return (_jsx(AriaTabPanel, { index: index, render: info => {
             return (_jsx(StructureTabPanel, { ref: ref, visible: info.tabPanelReturn.visible, visibleOffset: info.tabPanelReturn.visibleOffset || 0, orientation: orientation, ...useMergedProps(info.props, props) }));

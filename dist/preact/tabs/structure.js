@@ -4,7 +4,7 @@ import { memo, useMergedProps, useState, useTimeout } from "preact-prop-helpers"
 import { SlideZoomFade, Swappable } from "preact-transition";
 import { memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
-export const StructureTabPanel = memoForwardRef(function StructureTabPanel({ orientation, visibleOffset, visible, children, ...props }, ref) {
+export const StructureTabPanel = /* @__PURE__ */ memoForwardRef(function StructureTabPanel({ orientation, visibleOffset, visible, children, ...props }, ref) {
     // Get the names of the properties on the transition that are correct for the `orientation` the parent uses.
     // (i.e. if make the transition slide on the X axis for "horizontal" and the Y axis for "vertical")
     const zeroValued = (orientation == "horizontal" ? "slideTargetBlock" : "slideTargetInline");
@@ -22,7 +22,7 @@ export const StructureTabPanel = memoForwardRef(function StructureTabPanel({ ori
     // which is bad if one tab is heavier than others -- it'll still affect them even when closed.
     return (_jsx(SlideZoomFade, { delayMountUntilShown: true, exitVisibility: "removed", duration: 500, show: visible, zoomMin: (11 / 12), ...transitionProps, children: _jsx("div", { ...useMergedProps({ className: clsx("tab-panel scroll-shadows scroll-shadows-y") }, { ...props, ref }), children: _jsx(TabPanelChildren, { visible: visible || false, children: children }) }) }));
 });
-const TabPanelChildren = memo(function TabPanelChildren({ children, visible }) {
+const TabPanelChildren = /* @__PURE__ */ memo(function TabPanelChildren({ children, visible }) {
     // It's more than likely that any given panel's children will be heavy to render,
     // but we *really* don't want that to block the transition animation
     // so we wait until just slightly after the transition starts to actually mount the children.
@@ -34,13 +34,13 @@ const TabPanelChildren = memo(function TabPanelChildren({ children, visible }) {
     });
     return _jsx(_Fragment, { children: delayedVisible && children });
 });
-export const StructureTabs = memoForwardRef(function StructureTabs({ orientation, children, ...props }, ref) {
+export const StructureTabs = /* @__PURE__ */ memoForwardRef(function StructureTabs({ orientation, children, ...props }, ref) {
     return (_jsx("div", { ...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref }), children: children }));
 });
-export const StructureTabPanelsContainer = memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }, ref) {
+export const StructureTabPanelsContainer = /* @__PURE__ */ memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }, ref) {
     return (_jsx(Swappable, { children: _jsx("div", { ...useMergedProps({ class: "tab-panels-container" }, { ...props, ref }), children: panels }) }));
 });
-export const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, keyboardControlsDescription, ...props }, ref) {
+export const StructureTabList = /* @__PURE__ */ memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, keyboardControlsDescription, ...props }, ref) {
     return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx(KeyboardAssistIcon, { leftRight: orientation == "horizontal", upDown: orientation == "vertical", homeEnd: true, pageKeys: false, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select a tab:", children: _jsx("ul", { ...useMergedProps({ className: clsx(`nav nav-tabs`, `typeahead-status-${typeaheadStatus}`) }, { ...props, ref }), children: tabs }) }), labelPosition == "after" && labelJsx] }));
 });
 //# sourceMappingURL=structure.js.map

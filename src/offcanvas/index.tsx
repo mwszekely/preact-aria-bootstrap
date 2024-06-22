@@ -17,7 +17,7 @@ export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "child
     propsPortal?: JSX.HTMLAttributes<HTMLDivElement>;
 }
 
-export const Offcanvas = memo(forwardElementRef(function Offcanvas({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }: OffcanvasProps, ref?: Ref<HTMLSpanElement>) {
+export const Offcanvas = /* @__PURE__ */ memo(forwardElementRef(function Offcanvas({ open, header, headerPosition, onClose, anchor, children, propsPortal, ...props }: OffcanvasProps, ref?: Ref<HTMLSpanElement>) {
     headerPosition ??= "start";
     if (headerPosition == "hidden") {
         console.assert(typeof header == "string", `<Offcanvas />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);

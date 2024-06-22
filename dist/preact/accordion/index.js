@@ -3,12 +3,12 @@ import { Accordion as AriaAccordion, AccordionSection as AriaAccordionSection } 
 import { memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { StructureAccordion, StructureAccordionSection, StructureAccordionSectionBody, StructureAccordionSectionHeader, StructureAccordionSectionHeaderButton } from "./structure.js";
-export const Accordion = memo(forwardElementRef(function Accordion({ children, ...props }, ref) {
+export const Accordion = /* @__PURE__ */ memo(forwardElementRef(function Accordion({ children, ...props }, ref) {
     return (_jsx(AriaAccordion, { orientation: "vertical", render: info => {
             return (_jsx(StructureAccordion, { ...useMergedProps({ ...props, ref }), children: children }));
         } }));
 }));
-export const AccordionSection = memo(forwardElementRef(function AccordionSection({ index, children, header, bodyRole, disabled, untabbable, open, ...props }, ref) {
+export const AccordionSection = /* @__PURE__ */ memo(forwardElementRef(function AccordionSection({ index, children, header, bodyRole, disabled, untabbable, open, ...props }, ref) {
     return (_jsx(AriaAccordionSection, { index: index, tagButton: "button", bodyRole: bodyRole, disabled: disabled, untabbable: untabbable, open: open, render: info => {
             const show = info.accordionSectionReturn.expanded;
             const propsHeader = info.propsHeader;

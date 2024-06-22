@@ -20,7 +20,7 @@ export interface BadgeProps extends GlobalAttributes<HTMLSpanElement, "children"
  * 
  * `<Badge>{10 <span className="visually-hidden">unread messages</span>}</Badge>`
  */
-export const Badge = memo(forwardElementRef(function Badge({ children, position, variantTheme, roundedPill, ...props }: BadgeProps, ref: Ref<HTMLSpanElement>) {
+export const Badge = /* @__PURE__ */ memo(forwardElementRef(function Badge({ children, position, variantTheme, roundedPill, ...props }: BadgeProps, ref: Ref<HTMLSpanElement>) {
     position ??= "inline";
 
     return <span {...useMergedProps<HTMLSpanElement>({

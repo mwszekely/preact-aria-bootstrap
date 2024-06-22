@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { Heading } from "preact-aria-widgets";
 import { createElement, memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
-export const Card = memo(forwardElementRef(function Card(p, ref) {
+export const Card = /* @__PURE__ */ memo(forwardElementRef(function Card(p, ref) {
     let { children, title, subtitle, variantTheme, ...props } = p;
     if (subtitle)
         children = _jsx(CardSubtitle, { subtitle: subtitle, className: title ? "pt-0" : "", children: children });
@@ -40,29 +40,29 @@ function CardElement2({ type, ...p }, ref) {
         }
     }
 }
-export const CardElement = memo(forwardElementRef(CardElement2));
-const CardImage = memo(forwardElementRef(function CardImage(p, ref) {
+export const CardElement = /* @__PURE__ */ memo(forwardElementRef(CardElement2));
+const CardImage = /* @__PURE__ */ memo(forwardElementRef(function CardImage(p, ref) {
     const { position, src, ...props } = p;
     return (_jsx("img", { ...useMergedProps(props, { ref, className: `card-img${position == "both" ? "" : `-${position}`}` }) }));
 }));
-const CardBody = memo(forwardElementRef(function CardBody(props, ref) {
+const CardBody = /* @__PURE__ */ memo(forwardElementRef(function CardBody(props, ref) {
     return (_jsx("div", { ...useMergedProps(props, { ref, className: "card-body" }) }));
 }));
-const CardFooter = memo(forwardElementRef(function CardFooter(p, ref) {
+const CardFooter = /* @__PURE__ */ memo(forwardElementRef(function CardFooter(p, ref) {
     const { ...props } = p;
     return (_jsx("div", { ...useMergedProps(props, { ref, className: "card-footer" }) }));
 }));
-const CardTitle = memo(forwardElementRef(function CardTitle(p, ref) {
+const CardTitle = /* @__PURE__ */ memo(forwardElementRef(function CardTitle(p, ref) {
     const { title, children, ref: unused, ...props } = p;
     console.assert(ref == unused || unused == null);
     return _jsx(Heading, { heading: title, ...useMergedProps(props, { ref, className: "card-title card-body" }), children: children });
 }));
-const CardSubtitle = memo(forwardElementRef(function CardSubtitle(p, ref) {
+const CardSubtitle = /* @__PURE__ */ memo(forwardElementRef(function CardSubtitle(p, ref) {
     const { subtitle, children, ref: unused, ...props } = p;
     console.assert(ref == unused || unused == null);
     return _jsx(Heading, { heading: subtitle, ...useMergedProps(props, { ref, className: clsx("card-subtitle card-body", "mb-2", "text-muted") }), children: children });
 }));
-const CardText = memo(forwardElementRef(function CardText(props, ref) {
+const CardText = /* @__PURE__ */ memo(forwardElementRef(function CardText(props, ref) {
     return (_jsx("div", { ...useMergedProps(props, { ref, className: "card-text" }) }));
 }));
 //# sourceMappingURL=card.js.map

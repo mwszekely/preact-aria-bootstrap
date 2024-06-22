@@ -9,7 +9,7 @@ import { useClonedElement } from "../utility/use-cloned-element.js";
  * 
  * (This can, of course, be achieved fairly easily with other grids -- this is more of a fun one-liner)
  */
-export const GridStatic = memo(forwardElementRef(function ResponsiveGrid<E extends Element>({ columns, children, ...props }: { columns: number | string } & GlobalAttributes<E, "children">, ref: Ref<E>) {
+export const GridStatic = /* @__PURE__ */ memo(forwardElementRef(function ResponsiveGrid<E extends Element>({ columns, children, ...props }: { columns: number | string } & GlobalAttributes<E, "children">, ref: Ref<E>) {
 
     const mergedProps = useMergedProps<E>({
         className: "static-grid",

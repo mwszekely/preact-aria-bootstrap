@@ -208,16 +208,16 @@ function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftR
     const show = (heardTab && !userHasHidden && visible);
     return (_jsx(_Fragment, { children: _jsx(SlideZoomFade, { show: show, zoomMin: 0.875, zoomOriginInline: 1, zoomOriginBlock: 1, slideTargetBlock: 0.125, slideTargetInline: 0.125, children: _jsxs("div", { className: "keyboard-assist-icon-container", role: "figure", "aria-labelledby": id, children: [_jsx("div", { id: id, className: "keyboard-assist-instructions", children: description }), _jsx(KeyboardAssistIconArrowKeys, { leftRight: leftRight, upDown: upDown }), _jsx(KeyboardAssistIconHomeEnd, { enabled: homeEnd }), _jsx(KeyboardAssistIconPageKeys, { enabled: pageKeys }), _jsx(KeyboardAssistIconSelectable, { enter: activateEnter || false, space: activateSpace || false }), _jsx(KeyboardAssistIconTypeahead, { typeaheadStatus: typeaheadStatus }), _jsx(KeyboardAssistIconLeaveF2, { enabled: leaveF2 || false }), _jsx(KeyboardAssistIconRichTextF10, { enabled: textF10 || false }), _jsxs("div", { className: "keyboard-assist-dismiss-message", children: ["To dismiss these instructions, press ", _jsx("kbd", { children: "F7" }), ".", _jsx("br", {}), "To show again, press ", _jsx("kbd", { children: "Shift+F7" }), "."] })] }) }) }));
 }
-const KeyboardAssistIconArrowKeys = memo(function KeyboardAssistIconArrowKeys({ leftRight, upDown }) {
+const KeyboardAssistIconArrowKeys = /* @__PURE__ */ memo(function KeyboardAssistIconArrowKeys({ leftRight, upDown }) {
     return (_jsxs("div", { className: "keyboard-assist-arrow-keys", children: [_jsx(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-up", children: "\u2191" }), _jsx(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-left", children: "\u2190" }), _jsx(KeyboardAssistIconKey, { enabled: upDown, className: "keyboard-assist-key-arrow-down", children: "\u2193" }), _jsx(KeyboardAssistIconKey, { enabled: leftRight, className: "keyboard-assist-key-arrow-right", children: "\u2192" })] }));
 });
-const KeyboardAssistIconPageKeys = memo(function KeyboardAssistIconPageKeys({ enabled }) {
+const KeyboardAssistIconPageKeys = /* @__PURE__ */ memo(function KeyboardAssistIconPageKeys({ enabled }) {
     return (_jsxs("div", { className: "keyboard-assist-page-keys", children: [_jsx(KeyboardAssistIconKey, { enabled: enabled, className: "keyboard-assist-key-page-up", children: "Pg Up" }), _jsx(KeyboardAssistIconKey, { enabled: enabled, className: "keyboard-assist-key-page-down", children: "Pg Dn" })] }));
 });
-const KeyboardAssistIconHomeEnd = memo(function KeyboardAssistIconHomeEnd({ enabled }) {
+const KeyboardAssistIconHomeEnd = /* @__PURE__ */ memo(function KeyboardAssistIconHomeEnd({ enabled }) {
     return (_jsxs("div", { className: "keyboard-assist-home-end", children: [_jsx(KeyboardAssistIconKey, { enabled: enabled, className: "keyboard-assist-key-home", children: "Home" }), _jsx(KeyboardAssistIconKey, { enabled: enabled, className: "keyboard-assist-key-end", children: "End" })] }));
 });
-const KeyboardAssistIconSelectable = memo(function KeyboardAssistIconTypeahead({ enter, space }) {
+const KeyboardAssistIconSelectable = /* @__PURE__ */ memo(function KeyboardAssistIconTypeahead({ enter, space }) {
     let selectableLabel = (enter ? space ? "Enter or Space" : "Enter" : space ? "Space" : "");
     const visible = enter || space || false;
     // TODO: modification during render to ensure that it's not jumpy when transitioning in/out
@@ -226,16 +226,16 @@ const KeyboardAssistIconSelectable = memo(function KeyboardAssistIconTypeahead({
         selectableLabelRef.current = selectableLabel;
     return (_jsx(CollapseFade, { show: visible, exitVisibility: "hidden", children: _jsx("div", { className: "keyboard-assist-selectable", children: _jsxs("div", { className: "keyboard-assist-selectable-message", children: ["Select with ", selectableLabelRef.current] }) }) }));
 });
-const KeyboardAssistIconTypeahead = memo(function KeyboardAssistIconTypeahead({ typeaheadStatus }) {
+const KeyboardAssistIconTypeahead = /* @__PURE__ */ memo(function KeyboardAssistIconTypeahead({ typeaheadStatus }) {
     return (_jsx(CollapseFade, { show: typeaheadStatus != null, exitVisibility: "hidden", children: _jsx("div", { className: "keyboard-assist-typeahead", children: _jsx("div", { className: "keyboard-assist-typeahead-message", children: typeaheadStatus == 'none' ? "Search by typing" : typeaheadStatus == 'valid' ? "Keep typing to continue" : "No result found" }) }) }));
 });
-const KeyboardAssistIconLeaveF2 = memo(function KeyboardAssistIconLeaveF2({ enabled }) {
+const KeyboardAssistIconLeaveF2 = /* @__PURE__ */ memo(function KeyboardAssistIconLeaveF2({ enabled }) {
     return (_jsx(CollapseFade, { show: enabled, exitVisibility: "hidden", children: _jsx("div", { className: "keyboard-assist-leave-f2", children: _jsxs("div", { className: "keyboard-assist-leave-f2-message", children: ["Press ", _jsx("kbd", { children: "F2" }), " to return"] }) }) }));
 });
-const KeyboardAssistIconRichTextF10 = memo(function KeyboardAssistIconRichTextF10({ enabled }) {
+const KeyboardAssistIconRichTextF10 = /* @__PURE__ */ memo(function KeyboardAssistIconRichTextF10({ enabled }) {
     return (_jsx(CollapseFade, { show: enabled, exitVisibility: "hidden", children: _jsx("div", { className: "keyboard-assist-rich-text-f10", children: _jsxs("div", { className: "keyboard-assist-rich-text-f10-message", children: ["Press ", _jsx("kbd", { children: "Alt+F10" }), " to focus the toolbar"] }) }) }));
 });
-const KeyboardAssistIconKey = memo(function KeyboardAssistIconKey({ children, className, enabled }) {
+const KeyboardAssistIconKey = /* @__PURE__ */ memo(function KeyboardAssistIconKey({ children, className, enabled }) {
     return (_jsx("div", { className: "keyboard-assist-key " + className + (!enabled ? " keyboard-assist-key-disabled" : ""), children: children }));
 });
 function KeyboardAssistIcon2() {

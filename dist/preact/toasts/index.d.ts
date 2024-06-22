@@ -8,8 +8,8 @@ export declare function ToastsProvider({ children, defaultTimeout, visibleCount 
     visibleCount: number;
     defaultTimeout?: number;
 }): import("preact").JSX.Element;
-export declare function usePushToast(): (child: import("preact").JSX.Element) => number;
-export declare function useUpdateToast(): (index: number, child: import("preact").JSX.Element) => void;
+export declare function usePushToast(): (child: import("preact-prop-helpers").VNode) => number;
+export declare function useUpdateToast(): (index: number, child: import("preact-prop-helpers").VNode) => void;
 export interface ToastProps extends Pick<AriaToastProps<HTMLDivElement>, "politeness" | "index"> {
     children?: ComponentChildren;
     timeout?: number;

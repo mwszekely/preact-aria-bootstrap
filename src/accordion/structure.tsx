@@ -28,13 +28,13 @@ export interface StructureAccordionSectionBodyProps extends StructureProps<HTMLD
  */
 
 
-export const StructureAccordion = memoForwardRef(function StructureAccordion({ children, ...props }: StructureAccordionProps, ref: Ref<HTMLDivElement>) {
+export const StructureAccordion = /* @__PURE__ */ memoForwardRef(function StructureAccordion({ children, ...props }: StructureAccordionProps, ref: Ref<HTMLDivElement>) {
     return (
         <div {...useMergedProps({ class: "accordion" }, { ...props, ref })}>{children}</div>
     )
 });
 
-export const StructureAccordionSection = memoForwardRef(function Structure({ children, ...props }: StructureAccordionSectionProps, ref: Ref<HTMLDivElement>) {
+export const StructureAccordionSection = /* @__PURE__ */ memoForwardRef(function Structure({ children, ...props }: StructureAccordionSectionProps, ref: Ref<HTMLDivElement>) {
     return (
         <div {...useMergedProps({ class: "accordion-item" }, { ...props, ref })}>
             {children}
@@ -42,7 +42,7 @@ export const StructureAccordionSection = memoForwardRef(function Structure({ chi
     )
 });
 
-export const StructureAccordionSectionHeader = memoForwardRef(function Structure({ children, ...props }: StructureAccordionSectionHeaderProps, ref: Ref<HTMLHeadingElement>) {
+export const StructureAccordionSectionHeader = /* @__PURE__ */ memoForwardRef(function Structure({ children, ...props }: StructureAccordionSectionHeaderProps, ref: Ref<HTMLHeadingElement>) {
     return (
         <h2 {...useMergedProps({ class: "accordion-header" }, { ...props, ref })}>
             {children}
@@ -50,13 +50,13 @@ export const StructureAccordionSectionHeader = memoForwardRef(function Structure
     )
 });
 
-export const StructureAccordionSectionHeaderButton = memoForwardRef(function Structure({ children, ...props }: StructureAccordionSectionHeaderButtonProps, ref: Ref<HTMLButtonElement>) {
+export const StructureAccordionSectionHeaderButton = /* @__PURE__ */ memoForwardRef(function Structure({ children, ...props }: StructureAccordionSectionHeaderButtonProps, ref: Ref<HTMLButtonElement>) {
     return (
         <button {...useMergedProps<HTMLButtonElement>({ class: "accordion-button", type: "button" }, { ...props, ref })}>{children}</button>
     )
 });
 
-export const StructureAccordionSectionBody = memoForwardRef(function Structure({ show, children, ...props }: StructureAccordionSectionBodyProps, ref: Ref<HTMLDivElement>) {
+export const StructureAccordionSectionBody = /* @__PURE__ */ memoForwardRef(function Structure({ show, children, ...props }: StructureAccordionSectionBodyProps, ref: Ref<HTMLDivElement>) {
     return (
         <CollapseFade show={show}>
             <div {...useMergedProps({ class: "accordion-collapse" }, { ...props, ref })}>

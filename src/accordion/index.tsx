@@ -17,7 +17,7 @@ export interface AccordionSectionProps extends
   header: ComponentChildren;
 }
 
-export const Accordion = memo(forwardElementRef(function Accordion({ children, ...props }: AccordionProps, ref: Ref<HTMLDivElement>) {
+export const Accordion = /* @__PURE__ */ memo(forwardElementRef(function Accordion({ children, ...props }: AccordionProps, ref: Ref<HTMLDivElement>) {
   return (
     <AriaAccordion
       orientation="vertical"
@@ -29,7 +29,7 @@ export const Accordion = memo(forwardElementRef(function Accordion({ children, .
   )
 }));
 
-export const AccordionSection = memo(forwardElementRef(function AccordionSection({ index, children, header, bodyRole, disabled, untabbable, open, ...props }: AccordionSectionProps, ref: Ref<HTMLDivElement>) {
+export const AccordionSection = /* @__PURE__ */ memo(forwardElementRef(function AccordionSection({ index, children, header, bodyRole, disabled, untabbable, open, ...props }: AccordionSectionProps, ref: Ref<HTMLDivElement>) {
   return (
     <AriaAccordionSection<HTMLDivElement, HTMLButtonElement, HTMLDivElement>
       index={index}

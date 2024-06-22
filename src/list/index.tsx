@@ -88,7 +88,7 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
 const DefaultDisabled = createContext(false);
 const TypeaheadStatus = createContext<UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"]>("none");
 
-export const List = memo(forwardRef((function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>, ref?: Ref<any>) {
+export const List = /* @__PURE__ */ memo(forwardRef((function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }: PaginatedProps<LabelledProps<ListProps, never>>, ref?: Ref<any>) {
 
     labelPosition ??= "before";
     //const [focusedInner, setFocusedInner] = useState(false);
@@ -154,7 +154,7 @@ export const List = memo(forwardRef((function List({ disabled, selectedIndex, se
     )
 })))
 
-const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }:
+const ListItemNonPaginated = /* @__PURE__ */ memo((function ListItemNonPaginated({ onPressSync, infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }:
     Pick<ListItemProps, "children" | "selected" | "badge" | "variantTheme" | "disabled" | "iconStart" | "iconEnd"> &
     Pick<UsePressParametersSelf<any>, "excludeSpace" | "onPressSync"> &
     Pick<UsePaginatedChildReturnTypeSelf, "hideBecausePaginated"> &
@@ -258,7 +258,7 @@ const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, 
     );
 }))
 
-export const ListItem = memo(forwardElementRef((function ListItem({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
+export const ListItem = /* @__PURE__ */ memo(forwardElementRef((function ListItem({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }: ListItemProps, ref?: Ref<any>) {
 
     const defaultDisabled = useContext(DefaultDisabled);
     disabled ||= defaultDisabled;
@@ -307,7 +307,7 @@ export const ListItem = memo(forwardElementRef((function ListItem({ index, keybo
 })));
 
 
-const ListItemText = memo(forwardElementRef((function ListItemText({ onPress, children, ...props }: JSX.HTMLAttributes<any> & { onPress: ((e: JSX.TargetedEvent<HTMLDivElement, Event>) => void) | null | undefined }, ref?: Ref<any>) {
+const ListItemText = /* @__PURE__ */ memo(forwardElementRef((function ListItemText({ onPress, children, ...props }: JSX.HTMLAttributes<any> & { onPress: ((e: JSX.TargetedEvent<HTMLDivElement, Event>) => void) | null | undefined }, ref?: Ref<any>) {
     return (
         <GridlistChild<HTMLDivElement>
             index={1}
@@ -330,7 +330,7 @@ interface ListItemStartEndProps {
     hidden: boolean;
 }
 
-const ListItemStartEnd = memo((function ListItemStartEnd({ hidden, index, children }: ListItemStartEndProps) {
+const ListItemStartEnd = /* @__PURE__ */ memo((function ListItemStartEnd({ hidden, index, children }: ListItemStartEndProps) {
     return (
         <GridlistChild<HTMLDivElement>
             index={index}

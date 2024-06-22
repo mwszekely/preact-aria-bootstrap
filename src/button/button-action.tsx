@@ -44,7 +44,7 @@ export interface ButtonProps extends
     pressed?: Nullable<boolean>;
 }
 
-export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) {
+export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) {
     //Tag ??= "button" as never;
 
     let defaultTheme = useContext(DefaultButtonTheme);
@@ -191,7 +191,7 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
 /**
  * A "raw" button -- just the markup.
  */
-const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ excludeSpace, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }: { excludeSpace: () => boolean, ref: Ref<HTMLButtonElement> | undefined, callCount: number, variantDropdown: "joined" | "split" | null; variantSize: "sm" | "md" | "lg" | undefined; variantFill: "fill" | "outline" | null; tooltip: ComponentChildren | undefined, children?: ComponentChildren, variantTheme: ButtonThemes, pending: boolean, loadingLabel: string | null, disabled: boolean | "soft" | "hard", tooltipPlacement: TooltipProps["placement"], pressed: null | boolean, onPress: null | ((e: TargetedButtonPressEvent<HTMLButtonElement>) => void), otherProps: JSX.HTMLAttributes<HTMLButtonElement> }, ref?: Ref<HTMLButtonElement>) {
+const ButtonStructure = /* @__PURE__ */ memo(forwardElementRef(function ButtonStructure({ excludeSpace, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }: { excludeSpace: () => boolean, ref: Ref<HTMLButtonElement> | undefined, callCount: number, variantDropdown: "joined" | "split" | null; variantSize: "sm" | "md" | "lg" | undefined; variantFill: "fill" | "outline" | null; tooltip: ComponentChildren | undefined, children?: ComponentChildren, variantTheme: ButtonThemes, pending: boolean, loadingLabel: string | null, disabled: boolean | "soft" | "hard", tooltipPlacement: TooltipProps["placement"], pressed: null | boolean, onPress: null | ((e: TargetedButtonPressEvent<HTMLButtonElement>) => void), otherProps: JSX.HTMLAttributes<HTMLButtonElement> }, ref?: Ref<HTMLButtonElement>) {
     return (
         <AriaButton<HTMLButtonElement>
             tagButton="button"
@@ -237,19 +237,19 @@ export interface StructureButtonProps extends GlobalAttributes<HTMLButtonElement
 export interface StructureButtonProgressIndicatorProps extends GlobalAttributes<HTMLProgressElement> { }
 export interface StructureButtonProgressLabelProps extends GlobalAttributes<HTMLLabelElement, "children"> { }
 
-const StructureButtonButton = memoForwardRef(function ButtonStructure({ children, ...props }: StructureButtonProps, ref: Ref<HTMLButtonElement>) {
+const StructureButtonButton = /* @__PURE__ */ memoForwardRef(function ButtonStructure({ children, ...props }: StructureButtonProps, ref: Ref<HTMLButtonElement>) {
     return (
         <button {...useMergedProps({ class: "btn" }, { ...props, ref })}>{children}</button>
     )
 })
 
-const StructureButtonProgressLabel = memoForwardRef(function StructureButtonProgress({ children, ...props }: StructureButtonProgressLabelProps, ref: Ref<HTMLLabelElement>) {
+const StructureButtonProgressLabel = /* @__PURE__ */ memoForwardRef(function StructureButtonProgress({ children, ...props }: StructureButtonProgressLabelProps, ref: Ref<HTMLLabelElement>) {
     return (
         <label {...useMergedProps({ class: "btn-progress-label" }, { ...props, ref })}>{children}</label>
     )
 })
 
-const StructureButtonProgressIndicator = memoForwardRef(function StructureButtonProgress({ ...props }: StructureButtonProgressIndicatorProps, ref: Ref<HTMLProgressElement>) {
+const StructureButtonProgressIndicator = /* @__PURE__ */ memoForwardRef(function StructureButtonProgress({ ...props }: StructureButtonProgressIndicatorProps, ref: Ref<HTMLProgressElement>) {
     return (
         <progress {...useMergedProps({ class: "btn-progress-indicator" }, { ...props, ref })} />
     )

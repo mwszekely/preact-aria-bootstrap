@@ -29,7 +29,7 @@ export interface DialogProps extends GlobalAttributes<HTMLSpanElement, "children
     modal?: boolean;
 }
 
-export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen, variantSize, header, headerPosition, footer, onClose, anchor, modal, children, propsPortal, ...props }: DialogProps, ref?: Ref<HTMLSpanElement>) {
+export const Dialog = /* @__PURE__ */ memo(forwardElementRef(function Dialog({ open, fullscreen, variantSize, header, headerPosition, footer, onClose, anchor, modal, children, propsPortal, ...props }: DialogProps, ref?: Ref<HTMLSpanElement>) {
     variantSize ??= "xl";
 
     headerPosition ??= "start";

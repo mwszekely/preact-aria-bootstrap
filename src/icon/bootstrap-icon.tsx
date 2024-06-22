@@ -9,7 +9,7 @@ export interface BootstrapIconProps extends Pick<FontIconProps, "label" | "class
 /**
  * Specialization of a FontIcon to display any given Bootstrap icon.
  */
-export const BootstrapIcon = memo(forwardElementRef(function BootstrapIcon({ icon, label, ...props }: BootstrapIconProps, ref: Ref<HTMLElement>) {
+export const BootstrapIcon = /* @__PURE__ */ memo(forwardElementRef(function BootstrapIcon({ icon, label, ...props }: BootstrapIconProps, ref: Ref<HTMLElement>) {
 
     // Merge our custom CSS class with any additional classes that were passed in to this component
     const mergedProps = useMergedProps<HTMLElement>({ class: `bi bi-${icon}` }, props);

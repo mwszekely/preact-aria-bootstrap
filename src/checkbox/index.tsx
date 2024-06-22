@@ -162,7 +162,7 @@ export interface StructureCheckboxNormalOuterProps {
     childrenTooltip: ComponentChildren;
 }
 
-export const StructureCheckboxNormalOuter = memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) {
+export const StructureCheckboxNormalOuter = /* @__PURE__ */ memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) {
     return (
         <div {...useMergedProps({
             className: clsx(
@@ -197,7 +197,7 @@ export interface StructureCheckboxInputGroupOuterProps {
     childrenTooltip: ComponentChildren;
 }
 
-export const StructureCheckboxInputGroupOuter = memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) {
+export const StructureCheckboxInputGroupOuter = /* @__PURE__ */ memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }: StructureCheckboxNormalOuterProps, ref: Ref<HTMLDivElement>) {
     const label2 = <div {...({ className: clsx("input-group-text", pending && "pending") })}>{visibleLabel}</div>;
     return (
         <>

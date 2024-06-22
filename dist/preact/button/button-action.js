@@ -7,7 +7,7 @@ import { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledCon
 import { Tooltip } from "../tooltip/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { ButtonGroupContext } from "./button-group.js";
-export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }, ref) {
+export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, buttonGroupIndex, children, tooltipPlacement, badge, pressed: standaloneOrMultiSelectPressed, disabled: userDisabled, onPress: onPressAsync, variantDropdown, variantFill, variantSize, loadingLabel, throttle, debounce, variantTheme, ...props }, ref) {
     //Tag ??= "button" as never;
     let defaultTheme = useContext(DefaultButtonTheme);
     let defaultSize = useContext(DefaultButtonSize);
@@ -84,7 +84,7 @@ export const Button = memoForwardRef(function Button({ tooltip, buttonGroupIndex
 /**
  * A "raw" button -- just the markup.
  */
-const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ excludeSpace, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
+const ButtonStructure = /* @__PURE__ */ memo(forwardElementRef(function ButtonStructure({ excludeSpace, tooltip, disabled, onPress, pressed, loadingLabel, otherProps, tooltipPlacement, pending, variantDropdown, variantTheme, variantFill, variantSize, children, callCount }, ref) {
     return (_jsx(AriaButton, { tagButton: "button", disabled: disabled, onPressSync: onPress, pressed: pressed, excludeSpace: excludeSpace, render: buttonInfo => {
             return (_jsx(Progress, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", value: pending ? "indeterminate" : "disabled", tagProgressIndicator: "span", render: progressInfo => {
                     const { propsProgressIndicator, propsProgressRegion } = progressInfo;
@@ -103,13 +103,13 @@ const ButtonStructure = memo(forwardElementRef(function ButtonStructure({ exclud
                 } }));
         } }));
 }));
-const StructureButtonButton = memoForwardRef(function ButtonStructure({ children, ...props }, ref) {
+const StructureButtonButton = /* @__PURE__ */ memoForwardRef(function ButtonStructure({ children, ...props }, ref) {
     return (_jsx("button", { ...useMergedProps({ class: "btn" }, { ...props, ref }), children: children }));
 });
-const StructureButtonProgressLabel = memoForwardRef(function StructureButtonProgress({ children, ...props }, ref) {
+const StructureButtonProgressLabel = /* @__PURE__ */ memoForwardRef(function StructureButtonProgress({ children, ...props }, ref) {
     return (_jsx("label", { ...useMergedProps({ class: "btn-progress-label" }, { ...props, ref }), children: children }));
 });
-const StructureButtonProgressIndicator = memoForwardRef(function StructureButtonProgress({ ...props }, ref) {
+const StructureButtonProgressIndicator = /* @__PURE__ */ memoForwardRef(function StructureButtonProgress({ ...props }, ref) {
     return (_jsx("progress", { ...useMergedProps({ class: "btn-progress-indicator" }, { ...props, ref }) }));
 });
 //# sourceMappingURL=button-action.js.map

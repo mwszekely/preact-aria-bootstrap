@@ -7,7 +7,7 @@ import { Icon } from "./icon-base.js";
  *
  *
  */
-export const FontIcon = memo(forwardElementRef(function FontIcon(props, ref) {
+export const FontIcon = /* @__PURE__ */ memo(forwardElementRef(function FontIcon(props, ref) {
     return (_jsx(Icon, { ...props, ref: ref, children: _jsx("i", { className: "font-icon" }) }));
 }));
 //# sourceMappingURL=font-icon.js.map

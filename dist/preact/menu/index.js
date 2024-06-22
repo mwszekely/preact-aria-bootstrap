@@ -3,13 +3,13 @@ import { clsx } from "clsx";
 import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, useDefaultRenderPortal } from "preact-aria-widgets";
 import { EventDetail, memo, returnUndefined, useCallback, useMergedProps, useRef, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { Fade, ZoomFade } from "preact-transition";
+import { useAutoAsyncHandler } from "../context.js";
 import { usePopper } from "../popper/index.js";
 import { forwardElementRef, memoForwardRef } from "../utility/forward-element-ref.js";
 import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 import { usePortalId } from "../utility/use-portal-id.js";
-import { useAutoAsyncHandler } from "../context.js";
-export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }, ref) {
+export const Menu = /* @__PURE__ */ memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }, ref) {
     const [openFromAnchor, setOpenFromAnchor, getOpenFromAnchor] = useState(forceOpen ?? false);
     const onOpen = useCallback(() => { setOpenFromAnchor(true); }, []);
     const onClose = useCallback(() => { setOpenFromAnchor(false); }, []);
@@ -52,22 +52,22 @@ export const Menu = memo(forwardElementRef(function Menu({ anchor, forceOpen, ch
                     })] }));
         } }));
 }));
-export const StructureMenuPopper = memoForwardRef(function StructureMenuPopper({ children, ...props }, ref) {
+export const StructureMenuPopper = /* @__PURE__ */ memoForwardRef(function StructureMenuPopper({ children, ...props }, ref) {
     return (_jsx("div", { ...useMergedProps({ className: "popper-menu" }, { ...props, ref }), children: children }));
 });
-export const StructureMenuRoot = memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }, ref) {
+export const StructureMenuRoot = /* @__PURE__ */ memoForwardRef(function StructureMenuRoot({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }, ref) {
     return (_jsx(ZoomFade, { show: popperOpen, delayMountUntilShown: true, exitVisibility: "removed", zoomOriginInline: 0, zoomOriginBlock: 0, zoomMinInline: 0.85, zoomMinBlock: 0.85, children: _jsx(KeyboardAssistIcon, { leftRight: false, upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription, children: _jsx("div", { ...useMergedProps({ className: clsx("dropdown-menu shadow show") }, { ...props, ref }), children: children }) }) }));
 });
-export const StructureMenuList = memoForwardRef(function StructureMenuList({ children, ...props }, ref) {
+export const StructureMenuList = /* @__PURE__ */ memoForwardRef(function StructureMenuList({ children, ...props }, ref) {
     return (_jsx("div", { ...useMergedProps({ className: "dropdown-menu-list" }, { ...props, ref }), children: children }));
 });
-export const StructureMenuArrow = memoForwardRef(function StructureMenuArrow(props, ref) {
+export const StructureMenuArrow = /* @__PURE__ */ memoForwardRef(function StructureMenuArrow(props, ref) {
     return (_jsx("div", { ...props, ref: ref }));
 });
-export const StructureMenuFocusSentinel = memoForwardRef(function StructureMenuFocusSentinel(props, ref) {
+export const StructureMenuFocusSentinel = /* @__PURE__ */ memoForwardRef(function StructureMenuFocusSentinel(props, ref) {
     return (_jsx("div", { ...props, ref: ref }));
 });
-export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }, ref) {
+export const MenuItem = /* @__PURE__ */ memo(forwardElementRef(function MenuItem({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }, ref) {
     const imperativeHandle = useRef(null);
     return (_jsx(ProgressWithHandler, { asyncHandler: useAutoAsyncHandler((_unused, e) => {
             console.assert(!!imperativeHandle.current);
@@ -87,10 +87,10 @@ export const MenuItem = memo(forwardElementRef(function MenuItem({ index, getSor
                 } }));
         } }));
 }));
-const StructureMenuItem = memoForwardRef(function StructureMenuItem({ children, showSpinner, disabled, pressing, ...props }, ref) {
+const StructureMenuItem = /* @__PURE__ */ memoForwardRef(function StructureMenuItem({ children, showSpinner, disabled, pressing, ...props }, ref) {
     return (_jsx("div", { ...useMergedProps({ className: clsx("dropdown-item dropdown-item-with-icon-end", showSpinner && "pending", disabled && "disabled", pressing && "active") }, { ...props, ref }), children: children }));
 });
-const StructureMenuItemSpinner = memoForwardRef(function StructureMenuItemSpinner({ showSpinner, ...props }, ref) {
+const StructureMenuItemSpinner = /* @__PURE__ */ memoForwardRef(function StructureMenuItemSpinner({ showSpinner, ...props }, ref) {
     return (_jsx("div", { className: "dropdown-item-icon dropdown-item-icon-end", children: _jsx(Fade, { show: showSpinner, exitVisibility: "removed", children: _jsx("div", { ...useMergedProps({ class: clsx("spinner-border", "spinner-border-sm") }, { ...props, ref }) }) }) }));
 });
 //# sourceMappingURL=index.js.map

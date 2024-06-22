@@ -362,7 +362,7 @@ function KeyboardAssistIconDisplay({ heardTab, description, userHasHidden, leftR
     )
 }
 
-const KeyboardAssistIconArrowKeys = memo(function KeyboardAssistIconArrowKeys({ leftRight, upDown }: { leftRight: boolean, upDown: boolean }) {
+const KeyboardAssistIconArrowKeys = /* @__PURE__ */ memo(function KeyboardAssistIconArrowKeys({ leftRight, upDown }: { leftRight: boolean, upDown: boolean }) {
     return (
         <div className="keyboard-assist-arrow-keys">
             <KeyboardAssistIconKey enabled={upDown} className="keyboard-assist-key-arrow-up">↑</KeyboardAssistIconKey>
@@ -373,7 +373,7 @@ const KeyboardAssistIconArrowKeys = memo(function KeyboardAssistIconArrowKeys({ 
     )
 })
 
-const KeyboardAssistIconPageKeys = memo(function KeyboardAssistIconPageKeys({ enabled }: { enabled: boolean }) {
+const KeyboardAssistIconPageKeys = /* @__PURE__ */ memo(function KeyboardAssistIconPageKeys({ enabled }: { enabled: boolean }) {
     return (
         <div className="keyboard-assist-page-keys">
             <KeyboardAssistIconKey enabled={enabled} className="keyboard-assist-key-page-up">Pg Up</KeyboardAssistIconKey>
@@ -382,7 +382,7 @@ const KeyboardAssistIconPageKeys = memo(function KeyboardAssistIconPageKeys({ en
     )
 })
 
-const KeyboardAssistIconHomeEnd = memo(function KeyboardAssistIconHomeEnd({ enabled }: { enabled: boolean }) {
+const KeyboardAssistIconHomeEnd = /* @__PURE__ */ memo(function KeyboardAssistIconHomeEnd({ enabled }: { enabled: boolean }) {
     return (
         <div className="keyboard-assist-home-end">
             <KeyboardAssistIconKey enabled={enabled} className="keyboard-assist-key-home">Home</KeyboardAssistIconKey>
@@ -391,7 +391,7 @@ const KeyboardAssistIconHomeEnd = memo(function KeyboardAssistIconHomeEnd({ enab
     )
 })
 
-const KeyboardAssistIconSelectable = memo(function KeyboardAssistIconTypeahead({ enter, space }: { enter: boolean, space: boolean }) {
+const KeyboardAssistIconSelectable = /* @__PURE__ */ memo(function KeyboardAssistIconTypeahead({ enter, space }: { enter: boolean, space: boolean }) {
     let selectableLabel = (enter ? space ? "Enter or Space" : "Enter" : space ? "Space" : "");
     const visible: boolean = enter || space || false;
 
@@ -409,7 +409,7 @@ const KeyboardAssistIconSelectable = memo(function KeyboardAssistIconTypeahead({
     )
 })
 
-const KeyboardAssistIconTypeahead = memo(function KeyboardAssistIconTypeahead({ typeaheadStatus }: { typeaheadStatus: TypeaheadStatus | null }) {
+const KeyboardAssistIconTypeahead = /* @__PURE__ */ memo(function KeyboardAssistIconTypeahead({ typeaheadStatus }: { typeaheadStatus: TypeaheadStatus | null }) {
 
     return (
         <CollapseFade show={typeaheadStatus != null} exitVisibility="hidden">
@@ -420,7 +420,7 @@ const KeyboardAssistIconTypeahead = memo(function KeyboardAssistIconTypeahead({ 
     )
 })
 
-const KeyboardAssistIconLeaveF2 = memo(function KeyboardAssistIconLeaveF2({ enabled }: { enabled: boolean }) {
+const KeyboardAssistIconLeaveF2 = /* @__PURE__ */ memo(function KeyboardAssistIconLeaveF2({ enabled }: { enabled: boolean }) {
 
     return (
         <CollapseFade show={enabled} exitVisibility="hidden">
@@ -431,7 +431,7 @@ const KeyboardAssistIconLeaveF2 = memo(function KeyboardAssistIconLeaveF2({ enab
     )
 })
 
-const KeyboardAssistIconRichTextF10 = memo(function KeyboardAssistIconRichTextF10({ enabled }: { enabled: boolean }) {
+const KeyboardAssistIconRichTextF10 = /* @__PURE__ */ memo(function KeyboardAssistIconRichTextF10({ enabled }: { enabled: boolean }) {
 
     return (
         <CollapseFade show={enabled} exitVisibility="hidden">
@@ -442,7 +442,7 @@ const KeyboardAssistIconRichTextF10 = memo(function KeyboardAssistIconRichTextF1
     )
 })
 
-const KeyboardAssistIconKey = memo(function KeyboardAssistIconKey({ children, className, enabled }: { children?: ComponentChildren, className: string, enabled: boolean }) {
+const KeyboardAssistIconKey = /* @__PURE__ */ memo(function KeyboardAssistIconKey({ children, className, enabled }: { children?: ComponentChildren, className: string, enabled: boolean }) {
     return (<div className={"keyboard-assist-key " + className + (!enabled ? " keyboard-assist-key-disabled" : "")}>{children}</div>)
 })
 

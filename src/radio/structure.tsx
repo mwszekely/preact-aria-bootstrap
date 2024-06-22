@@ -12,7 +12,7 @@ export interface StructureRadioWrapperProps extends GlobalAttributes<HTMLSpanEle
     labelPosition: "before" | "after" | "hidden" | "tooltip";
 }
 
-export const StructureRadioWrapper = memoForwardRef(function StructureRadioWrapper({ labelPosition, pending, inline, children, ...props }: StructureRadioWrapperProps, ref: Ref<HTMLSpanElement>) {
+export const StructureRadioWrapper = /* @__PURE__ */ memoForwardRef(function StructureRadioWrapper({ labelPosition, pending, inline, children, ...props }: StructureRadioWrapperProps, ref: Ref<HTMLSpanElement>) {
     return (
         <span {...useMergedProps({ ...props, ref }, {
             className: clsx(

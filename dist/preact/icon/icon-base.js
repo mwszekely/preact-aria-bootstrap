@@ -1,6 +1,6 @@
 import { cloneElement, memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
-export const Icon = memo(forwardElementRef(function Icon({ label, role, "aria-label": ariaLabel, children, ref: unused, ...props }, ref) {
+export const Icon = /* @__PURE__ */ memo(forwardElementRef(function Icon({ label, role, "aria-label": ariaLabel, children, ref: unused, ...props }, ref) {
     console.assert(ref == unused || unused == null);
     const iconProps = useMergedProps(props, {
         class: "icon",

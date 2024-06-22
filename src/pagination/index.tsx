@@ -56,7 +56,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
     )
 }
 
-const PaginationChildren = memo(({ childCount, windowSize }: { windowSize: number, childCount: number }) => {
+const PaginationChildren = /* @__PURE__ */ memo(({ childCount, windowSize }: { windowSize: number, childCount: number }) => {
     const firstIndex = 0;
     const lastIndex = Math.ceil((childCount) / windowSize) - 1; // INCLUSIVE! Not exclusive as usual for ending points.
 
@@ -86,14 +86,14 @@ const PaginationChildren = memo(({ childCount, windowSize }: { windowSize: numbe
     )
 })
 
-const PaginationButtonFirst = memo(forwardElementRef(({ index, onFocus }: { index: number, onFocus: () => void }, ref?: Ref<HTMLButtonElement>) => {
+const PaginationButtonFirst = /* @__PURE__ */ memo(forwardElementRef(({ index, onFocus }: { index: number, onFocus: () => void }, ref?: Ref<HTMLButtonElement>) => {
     return (<PaginationButton index={index} onFocus={onFocus} ref={ref}><BootstrapIcon icon="chevron-bar-left" label={null} /> {index + 1}</PaginationButton>)
 }))
-const PaginationButtonLast = memo(forwardElementRef(({ index, onFocus }: { index: number, onFocus: () => void }, ref?: Ref<HTMLButtonElement>) => {
+const PaginationButtonLast = /* @__PURE__ */ memo(forwardElementRef(({ index, onFocus }: { index: number, onFocus: () => void }, ref?: Ref<HTMLButtonElement>) => {
     return (<PaginationButton index={index} onFocus={onFocus} ref={ref}>{index + 1} <BootstrapIcon icon="chevron-bar-right" label={null} /></PaginationButton>)
 }))
 
-const PaginationButton = memo(forwardElementRef(function PaginationButton({ index, children, onFocus }: { index: number, children?: ComponentChildren, ref?: Ref<HTMLButtonElement>, onFocus?: null | (() => void) }, ref?: Ref<HTMLButtonElement>) {
+const PaginationButton = /* @__PURE__ */ memo(forwardElementRef(function PaginationButton({ index, children, onFocus }: { index: number, children?: ComponentChildren, ref?: Ref<HTMLButtonElement>, onFocus?: null | (() => void) }, ref?: Ref<HTMLButtonElement>) {
 
     return (
         <ToolbarChild<HTMLButtonElement>
@@ -131,7 +131,7 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
 
 
 
-export const Paginated = memo(function Paginated({ childCount, setPaginationEnd, setPaginationStart, paginationLabel, paginationLocation, paginationSize, children }: PaginatedProps<{ children?: ComponentChildren; childCount: number, setPaginationStart: (n: number | null) => void, setPaginationEnd: (n: number | null) => void }>) {
+export const Paginated = /* @__PURE__ */ memo(function Paginated({ childCount, setPaginationEnd, setPaginationStart, paginationLabel, paginationLocation, paginationSize, children }: PaginatedProps<{ children?: ComponentChildren; childCount: number, setPaginationStart: (n: number | null) => void, setPaginationEnd: (n: number | null) => void }>) {
 
     const paginationJsx = <Pagination
         windowSize={paginationSize || 500}

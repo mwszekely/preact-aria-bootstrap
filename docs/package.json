@@ -4,6 +4,7 @@
     "description": "A small set of hooks and other functions related to modifying Preact props.",
     "main": "index.tsx",
     "packageManager": "pnpm@8.6.11",
+    "type": "module",
     "browserslist": "defaults, iOS >= 12",
     "scripts": {
         "build": "npx npm-run-all --npm-path npm -sc build:js build:sass build:css",
@@ -31,7 +32,7 @@
         "npm-run-all": "^4.1.5",
         "postcss": "^8.4.35",
         "postcss-cli": "^11.0.0",
-        "rollup": "^4.12.0",
+        "rollup": "^4.18.0",
         "rollup-plugin-sourcemaps": "^0.6.3",
         "sass": "^1.71.1",
         "serve": "^14.2.1",
@@ -39,6 +40,8 @@
     },
     "dependencies": {
         "bootswatch-sass-variables": "github:mwszekely/bootswatch-sass-variables",
+        "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
+        "preact-prop-helpers": "github:mwszekely/preact-prop-helpers",
         "clsx": "^2.1.0",
         "tslib": "^2.6.2"
     }

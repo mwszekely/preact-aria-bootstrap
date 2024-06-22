@@ -37,7 +37,7 @@ importers:
         version: 10.22.0
       preact-aria-widgets:
         specifier: github:mwszekely/preact-aria-widgets
-        version: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/3386af09f61146a890917096908456714904a4fc(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))
+        version: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/157628a75070a19f01819b43251ce0f4bff0aa0d(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))
       preact-prop-helpers:
         specifier: github:mwszekely/preact-prop-helpers
         version: https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/b21cbbd4f30e1930d8ed9d48c741da664a536040(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -59,7 +59,7 @@ importers:
         version: 5.0.7(rollup@4.18.0)
       '@rollup/plugin-typescript':
         specifier: ^11.1.6
-        version: 11.1.6(rollup@4.18.0)(tslib@2.6.3)(typescript@5.4.5)
+        version: 11.1.6(rollup@4.18.0)(tslib@2.6.3)(typescript@5.5.2)
       '@types/dompurify':
         specifier: ^3.0.5
         version: 3.0.5
@@ -74,13 +74,13 @@ importers:
         version: 4.18.0
       rollup-plugin-sourcemaps:
         specifier: ^0.6.3
-        version: 0.6.3(@types/node@20.14.6)(rollup@4.18.0)
+        version: 0.6.3(@types/node@20.14.7)(rollup@4.18.0)
       sass:
         specifier: ^1.77.5
         version: 1.77.6
       typescript:
         specifier: ^5.4.5
-        version: 5.4.5
+        version: 5.5.2
 
 packages:
 
@@ -266,8 +266,8 @@ packages:
   '@types/lodash@4.17.5':
     resolution: {integrity: sha512-MBIOHVZqVqgfro1euRDWX7OO0fBVUUMrN6Pwm8LQsz8cWhEpihlvR70ENj3f40j58TNxZaWv2ndSkInykNBBJw==}
 
-  '@types/node@20.14.6':
-    resolution: {integrity: sha512-JbA0XIJPL1IiNnU7PFxDXyfAwcwVVrOoqyzzyQTyMeVhBzkJVMSkC1LlVsRQ2lpqiY4n6Bb9oCS6lzDKVQxbZw==}
+  '@types/node@20.14.7':
+    resolution: {integrity: sha512-uTr2m2IbJJucF3KUxgnGOZvYbN0QgkGyWxG6973HCpMYFy2KfcgYuIwkJQMQkt1VbBMlvWRbpshFTLxnxCZjKQ==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -598,8 +598,9 @@ packages:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
     engines: {node: '>= 0.4'}
 
-  is-core-module@2.13.1:
-    resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
+  is-core-module@2.14.0:
+    resolution: {integrity: sha512-a5dFJih5ZLYlRtDc0dZWP7RiKr6xIKzmn/oAYCDvdLThadVgyJwlaoQPmRtMSpz+rk0OGAgIu+TcM9HUF0fk1A==}
+    engines: {node: '>= 0.4'}
 
   is-data-view@1.0.1:
     resolution: {integrity: sha512-AHkaJrsUVW6wq6JS8y3JnM/GJF/9cf+k20+iDzlSaJrinEo5+7vRiteOSwBhHRiAyQATN1AmY4hwzxJKPmYf+w==}
@@ -797,8 +798,8 @@ packages:
     resolution: {integrity: sha512-d7Uw+eZoloe0EHDIYoe+bQ5WXnGMOpmiZFTuMWCwpjzzkL2nTjcKiAk4hh8TjnGye2TwWOk3UXucZ+3rbmBa8Q==}
     engines: {node: '>= 0.4'}
 
-  preact-aria-widgets@https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/3386af09f61146a890917096908456714904a4fc:
-    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/3386af09f61146a890917096908456714904a4fc}
+  preact-aria-widgets@https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/157628a75070a19f01819b43251ce0f4bff0aa0d:
+    resolution: {tarball: https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/157628a75070a19f01819b43251ce0f4bff0aa0d}
     version: 0.0.1
     peerDependencies:
       preact: ^10.21.0
@@ -1004,8 +1005,8 @@ packages:
     resolution: {integrity: sha512-/OxDN6OtAk5KBpGb28T+HZc2M+ADtvRxXrKKbUwtsLgdoxgX13hyy7ek6bFRl5+aBs2yZzB0c4CnQfAtVypW/g==}
     engines: {node: '>= 0.4'}
 
-  typescript@5.4.5:
-    resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
+  typescript@5.5.2:
+    resolution: {integrity: sha512-NcRtPEOsPFFWjobJEtfihkLCZCXZt/os3zf8nTxjVH3RvTSxjrCamJpbExGvYOF+tFHc3pA65qpdwPbzjohhew==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1112,11 +1113,11 @@ snapshots:
     optionalDependencies:
       rollup: 4.18.0
 
-  '@rollup/plugin-typescript@11.1.6(rollup@4.18.0)(tslib@2.6.3)(typescript@5.4.5)':
+  '@rollup/plugin-typescript@11.1.6(rollup@4.18.0)(tslib@2.6.3)(typescript@5.5.2)':
     dependencies:
       '@rollup/pluginutils': 5.1.0(rollup@4.18.0)
       resolve: 1.22.8
-      typescript: 5.4.5
+      typescript: 5.5.2
     optionalDependencies:
       rollup: 4.18.0
       tslib: 2.6.3
@@ -1198,7 +1199,7 @@ snapshots:
 
   '@types/lodash@4.17.5': {}
 
-  '@types/node@20.14.6':
+  '@types/node@20.14.7':
     dependencies:
       undici-types: 5.26.5
 
@@ -1587,7 +1588,7 @@ snapshots:
 
   is-callable@1.2.7: {}
 
-  is-core-module@2.13.1:
+  is-core-module@2.14.0:
     dependencies:
       hasown: 2.0.2
 
@@ -1769,7 +1770,7 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  preact-aria-widgets@https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/3386af09f61146a890917096908456714904a4fc(preact@10.22.0)(react-dom@18.3.1(react@18.3.1)):
+  preact-aria-widgets@https://codeload.github.com/mwszekely/preact-aria-widgets/tar.gz/157628a75070a19f01819b43251ce0f4bff0aa0d(preact@10.22.0)(react-dom@18.3.1(react@18.3.1)):
     dependencies:
       clsx: 2.1.1
       lodash-es: 4.17.21
@@ -1781,7 +1782,7 @@ snapshots:
 
   preact-prop-helpers@https://codeload.github.com/mwszekely/preact-prop-helpers/tar.gz/b21cbbd4f30e1930d8ed9d48c741da664a536040(preact@10.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@types/node': 20.14.6
+      '@types/node': 20.14.7
       async-to-sync: https://codeload.github.com/mwszekely/async-to-sync/tar.gz/624c049a849d0a02039c1ec14f78617394daabce
       blocking-elements: 0.1.1
       clsx: 2.1.1
@@ -1834,17 +1835,17 @@ snapshots:
 
   resolve@1.22.8:
     dependencies:
-      is-core-module: 2.13.1
+      is-core-module: 2.14.0
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
-  rollup-plugin-sourcemaps@0.6.3(@types/node@20.14.6)(rollup@4.18.0):
+  rollup-plugin-sourcemaps@0.6.3(@types/node@20.14.7)(rollup@4.18.0):
     dependencies:
       '@rollup/pluginutils': 3.1.0(rollup@4.18.0)
       rollup: 4.18.0
       source-map-resolve: 0.6.0
     optionalDependencies:
-      '@types/node': 20.14.6
+      '@types/node': 20.14.7
 
   rollup@4.18.0:
     dependencies:
@@ -2047,7 +2048,7 @@ snapshots:
       is-typed-array: 1.1.13
       possible-typed-array-names: 1.0.0
 
-  typescript@5.4.5: {}
+  typescript@5.5.2: {}
 
   unbox-primitive@1.0.2:
     dependencies:

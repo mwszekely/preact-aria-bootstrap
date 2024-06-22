@@ -21,7 +21,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
             return (_jsxs(_Fragment, { children: [labelPosition == "before" && labelJsx, _jsx(KeyboardAssistIcon, { leftRight: true, upDown: false, homeEnd: true, pageKeys: true, typeaheadStatus: 'none', activateSpace: true, activateEnter: true, description: keyboardControlsDescription ?? "Select a page:", children: _jsx("nav", { "aria-label": labelPosition == 'hidden' ? label : undefined, children: _jsx("ul", { ...useMergedProps(info.propsToolbar, { class: "pagination" }), children: _jsx(PaginationChildren, { childCount: childCount, windowSize: windowSize }) }) }) }), labelPosition == "after" && labelJsx] }));
         } }));
 }
-const PaginationChildren = memo(({ childCount, windowSize }) => {
+const PaginationChildren = /* @__PURE__ */ memo(({ childCount, windowSize }) => {
     const firstIndex = 0;
     const lastIndex = Math.ceil((childCount) / windowSize) - 1; // INCLUSIVE! Not exclusive as usual for ending points.
     const firstRef = useRef(null);
@@ -38,13 +38,13 @@ const PaginationChildren = memo(({ childCount, windowSize }) => {
                         }
                     }()), _jsx(PaginationButton, { index: lastIndex - 1, ref: centerLastRef, children: lastIndex - 1 + 1 }, `last`)] }), _jsx(PaginationButtonLast, { index: lastIndex, onFocus: onFocusLast })] }));
 });
-const PaginationButtonFirst = memo(forwardElementRef(({ index, onFocus }, ref) => {
+const PaginationButtonFirst = /* @__PURE__ */ memo(forwardElementRef(({ index, onFocus }, ref) => {
     return (_jsxs(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: [_jsx(BootstrapIcon, { icon: "chevron-bar-left", label: null }), " ", index + 1] }));
 }));
-const PaginationButtonLast = memo(forwardElementRef(({ index, onFocus }, ref) => {
+const PaginationButtonLast = /* @__PURE__ */ memo(forwardElementRef(({ index, onFocus }, ref) => {
     return (_jsxs(PaginationButton, { index: index, onFocus: onFocus, ref: ref, children: [index + 1, " ", _jsx(BootstrapIcon, { icon: "chevron-bar-right", label: null })] }));
 }));
-const PaginationButton = memo(forwardElementRef(function PaginationButton({ index, children, onFocus }, ref) {
+const PaginationButton = /* @__PURE__ */ memo(forwardElementRef(function PaginationButton({ index, children, onFocus }, ref) {
     return (_jsx(ToolbarChild, { index: index, disabledProp: "disabled", render: info => {
             const { refElementReturn, propsStable } = useRefElement({ refElementParameters: {} });
             const focusSelf = useCallback((e) => { e.focus(); }, []);
@@ -65,7 +65,7 @@ const PaginationButton = memo(forwardElementRef(function PaginationButton({ inde
             return (_jsx("li", { className: clsx("page-item", info.singleSelectionChildReturn.singleSelected && "active"), children: _jsx("button", { ...p, children: children }) }));
         } }));
 }));
-export const Paginated = memo(function Paginated({ childCount, setPaginationEnd, setPaginationStart, paginationLabel, paginationLocation, paginationSize, children }) {
+export const Paginated = /* @__PURE__ */ memo(function Paginated({ childCount, setPaginationEnd, setPaginationStart, paginationLabel, paginationLocation, paginationSize, children }) {
     const paginationJsx = _jsx(Pagination, { windowSize: paginationSize || 500, labelPosition: "hidden", label: paginationLabel, childCount: childCount, onChange: (start, end) => {
             setPaginationStart(start);
             setPaginationEnd(end);

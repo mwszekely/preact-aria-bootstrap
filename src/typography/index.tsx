@@ -19,7 +19,7 @@ interface TypeItalicsProps extends TypePropsBase<HTMLElement> { type: 'italics';
 
 export type TypeProps = (TypeLeadProps | TypeHighlightProps | TypeStrikeProps | TypeUnderlineProps | TypeSmallProps | TypeBoldProps | TypeItalicsProps)
 
-export const Type = memo(forwardElementRef(function Type({ type, ...rest }: TypeProps, ref: Ref<any>) {
+export const Type = /* @__PURE__ */ memo(forwardElementRef(function Type({ type, ...rest }: TypeProps, ref: Ref<any>) {
     switch (type) {
         case 'lead': return <TypeLead {...rest as any} ref={ref} />
         case 'bold': return <TypeBold {...rest as any} ref={ref} />
@@ -33,17 +33,17 @@ export const Type = memo(forwardElementRef(function Type({ type, ...rest }: Type
     return null;
 }))
 
-const TypeLead = memo(forwardElementRef(function TypeLead({ children, ...rest }: Omit<TypeLeadProps, "type">, ref?: Ref<any>) {
+const TypeLead = /* @__PURE__ */ memo(forwardElementRef(function TypeLead({ children, ...rest }: Omit<TypeLeadProps, "type">, ref?: Ref<any>) {
     return useClonedElement(children, useMergedProps({ class: "lead" }, rest), ref, 'p');
 }));
-const TypeHighlighted = memo(forwardElementRef(function TypeMark({ children, semantics, ...rest }: Omit<TypeHighlightProps, "type">, ref?: Ref<any>) {
+const TypeHighlighted = /* @__PURE__ */ memo(forwardElementRef(function TypeMark({ children, semantics, ...rest }: Omit<TypeHighlightProps, "type">, ref?: Ref<any>) {
     if (semantics == 'none')
         return useClonedElement(children, useMergedProps({ class: "mark" }, rest), ref, 'span');
     else
         return <mark {...rest} ref={ref}>{children}</mark>
 }));
 
-const TypeStrike = memo(forwardElementRef(function TypeDel({ children, semantics, ...rest }: Omit<TypeStrikeProps, "type">, ref?: Ref<any>) {
+const TypeStrike = /* @__PURE__ */ memo(forwardElementRef(function TypeDel({ children, semantics, ...rest }: Omit<TypeStrikeProps, "type">, ref?: Ref<any>) {
 
     if (semantics == 'deleted')
         return <del {...rest} ref={ref}>{children}</del>
@@ -52,7 +52,7 @@ const TypeStrike = memo(forwardElementRef(function TypeDel({ children, semantics
     else
         return useClonedElement(children, useMergedProps({ class: "text-decoration-line-through" }, rest), ref);
 }));
-const TypeUnderline = memo(forwardElementRef(function TypeIns({ children, semantics, ...rest }: Omit<TypeUnderlineProps, "type">, ref?: Ref<any>) {
+const TypeUnderline = /* @__PURE__ */ memo(forwardElementRef(function TypeIns({ children, semantics, ...rest }: Omit<TypeUnderlineProps, "type">, ref?: Ref<any>) {
 
     if (semantics == 'inserted')
         return <ins {...rest} ref={ref}>{children}</ins>
@@ -61,13 +61,13 @@ const TypeUnderline = memo(forwardElementRef(function TypeIns({ children, semant
     else
         return useClonedElement(children, useMergedProps({ class: "text-decoration-underline" }, rest), ref);
 }));
-const TypeSmall = memo(forwardElementRef(function TypeSmall({ children, semantics, ...rest }: Omit<TypeSmallProps, "type">, ref?: Ref<any>) {
+const TypeSmall = /* @__PURE__ */ memo(forwardElementRef(function TypeSmall({ children, semantics, ...rest }: Omit<TypeSmallProps, "type">, ref?: Ref<any>) {
     if (semantics == 'fine')
         return <small {...rest} ref={ref}>{children}</small>
     else
         return useClonedElement(children, useMergedProps({ class: "small" }, rest), ref);
 }));
-const TypeBold = memo(forwardElementRef(function TypeStrong({ children, semantics, ...rest }: Omit<TypeBoldProps, "type">, ref?: Ref<any>) {
+const TypeBold = /* @__PURE__ */ memo(forwardElementRef(function TypeStrong({ children, semantics, ...rest }: Omit<TypeBoldProps, "type">, ref?: Ref<any>) {
     if (semantics == 'important')
         return <strong {...rest} ref={ref}>{children}</strong>
     else if (semantics == 'noticeable')
@@ -75,7 +75,7 @@ const TypeBold = memo(forwardElementRef(function TypeStrong({ children, semantic
     else
         return useClonedElement(children, useMergedProps({}, rest), ref);
 }));
-const TypeItalics = memo(forwardElementRef(function TypeEm({ children, semantics, ...rest }: Omit<TypeItalicsProps, "type">, ref?: Ref<any>) {
+const TypeItalics = /* @__PURE__ */ memo(forwardElementRef(function TypeEm({ children, semantics, ...rest }: Omit<TypeItalicsProps, "type">, ref?: Ref<any>) {
     if (semantics == 'emphasized')
         return <em {...rest} ref={ref}>{children}</em>
     else if (semantics == 'idiomatic')

@@ -8,7 +8,7 @@ import { DefaultDisabledType, useAutoAsyncHandler } from "../context.js";
 import { WithinInputGroup } from "../input-group/shared.js";
 import { Tooltip } from "../tooltip/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
-export const TextField = memo(forwardElementRef(function TextField({ type, ...props }, ref) {
+export const TextField = /* @__PURE__ */ memo(forwardElementRef(function TextField({ type, ...props }, ref) {
     switch (type) {
         case "bigint":
             return (_jsx(TextFieldBigInt, { ref: ref, type: type, ...props }));
@@ -26,7 +26,7 @@ export const TextField = memo(forwardElementRef(function TextField({ type, ...pr
             return (_jsx(TextFieldText, { ref: ref, type: type, ...props }));
     }
 }));
-const TextFieldDateTime = memo(forwardElementRef(function TextFieldDateTime({ type, value, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }, ref) {
+const TextFieldDateTime = /* @__PURE__ */ memo(forwardElementRef(function TextFieldDateTime({ type, value, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }, ref) {
     let value2 = value ? value.toString({ smallestUnit: "second" }) : null;
     if (value2) {
         console.assert(value2.endsWith("Z"));
@@ -40,7 +40,7 @@ const TextFieldDateTime = memo(forwardElementRef(function TextFieldDateTime({ ty
             return null;
         }, iconEnd: iconEnd, iconStart: iconStart, loadingLabel: loadingLabel ?? "Please wait while the operation completes", readonly: readonly ?? false, size: size ?? null, throttle: throttle ?? 0, debounce: debounce ?? 0, resizeable: false, rows: 1, disabled: disabled ?? false, inputMode: inputMode ?? null, placeholder: placeholder ?? null, autocomplete: autocomplete ?? null, label: label, labelPosition: labelPosition, onValueChange: onValueChangeDateTime, propsInput: useMergedProps(props, { type: "datetime-local" }), propsLabel: {}, value: value2, marginBottom: marginBottom }));
 }));
-const TextFieldDate = memo(forwardElementRef(function TextFieldDateTime({ type, value, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }, ref) {
+const TextFieldDate = /* @__PURE__ */ memo(forwardElementRef(function TextFieldDateTime({ type, value, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }, ref) {
     let value2 = value ? value.toString({}) : null;
     return (_jsx(TextFieldBase, { ref: ref, capture: e => {
             //if (e.currentTarget.valueAsDate)
@@ -52,7 +52,7 @@ const TextFieldDate = memo(forwardElementRef(function TextFieldDateTime({ type, 
         // capture={e => e.currentTarget.valueAsDate ? Temporal.PlainDate.from(e.currentTarget.valueAsDate.toISOString()) : null}
         iconEnd: iconEnd, iconStart: iconStart, loadingLabel: loadingLabel ?? "Please wait while the operation completes", readonly: readonly ?? false, size: size ?? null, throttle: throttle ?? 0, debounce: debounce ?? 0, resizeable: false, rows: 1, disabled: disabled ?? false, inputMode: inputMode ?? null, placeholder: placeholder ?? null, autocomplete: autocomplete ?? null, label: label, labelPosition: labelPosition, onValueChange: onValueChangeDateTime, propsInput: useMergedProps(props, { type: "date" }), propsLabel: {}, value: value2, marginBottom: marginBottom }));
 }));
-const TextFieldTime = memo(forwardElementRef(function TextFieldDateTime({ type, value, seconds, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }, ref) {
+const TextFieldTime = /* @__PURE__ */ memo(forwardElementRef(function TextFieldDateTime({ type, value, seconds, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }, ref) {
     let value2 = value ? (`${value.hour.toString().padStart(2, "0")}:${value.minute.toString().padStart(2, "0")}${seconds ? `:${value.second.toString().padStart(2, "0")}` : ``}`) : null;
     return (_jsx(TextFieldBase, { ref: ref, capture: e => {
             if (e.currentTarget.value) {
@@ -73,14 +73,14 @@ const TextFieldTime = memo(forwardElementRef(function TextFieldDateTime({ type, 
             return null;
         }, iconEnd: iconEnd, iconStart: iconStart, loadingLabel: loadingLabel ?? "Please wait while the operation completes", readonly: readonly ?? false, size: size ?? null, throttle: throttle ?? 0, debounce: debounce ?? 0, resizeable: false, rows: 1, disabled: disabled ?? false, inputMode: inputMode ?? null, placeholder: placeholder ?? null, autocomplete: autocomplete ?? null, label: label, otherClasses: seconds ? "form-text-field-time-seconds" : "", labelPosition: labelPosition, onValueChange: onValueChangeDateTime, propsInput: useMergedProps(props, { type: "time", step: seconds ? 1 : 60 }), propsLabel: {}, value: value2, marginBottom: marginBottom }));
 }));
-const TextFieldNumber = memo(forwardElementRef(function TextFieldNumber({ type, value, onValueChange: onValueChangeNumber, digitDisplay, showSpinButtons, marginBottom, iconEnd, iconStart, loadingLabel, min, max, step, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }, ref) {
+const TextFieldNumber = /* @__PURE__ */ memo(forwardElementRef(function TextFieldNumber({ type, value, onValueChange: onValueChangeNumber, digitDisplay, showSpinButtons, marginBottom, iconEnd, iconStart, loadingLabel, min, max, step, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }, ref) {
     if (value != null && max != null && value > max)
         value = max;
     if (value != null && min != null && value < min)
         value = min;
     return (_jsx(TextFieldBase, { ref: ref, capture: e => Math.max(Math.min(e.currentTarget.valueAsNumber, max ?? Infinity), min ?? -Infinity), iconEnd: iconEnd, iconStart: iconStart, loadingLabel: loadingLabel ?? "Please wait while the operation completes", readonly: readonly ?? false, size: size ?? null, throttle: throttle ?? 0, debounce: debounce ?? 0, resizeable: false, rows: 1, disabled: disabled ?? false, inputMode: inputMode ?? null, placeholder: placeholder ?? null, autocomplete: autocomplete ?? null, label: label, labelPosition: labelPosition, onValueChange: onValueChangeNumber, propsInput: useMergedProps(props, { min, max, type: "number" }), otherClasses: clsx(!showSpinButtons ? "hide-spin-buttons" : "", digitDisplay && "form-text-field-number-sized"), otherProps: { style: (digitDisplay ? { "--form-text-field-digits": (digitDisplay) } : {}) }, propsLabel: {}, value: value, marginBottom: marginBottom }));
 }));
-const TextFieldBigInt = memo(forwardElementRef(function TextFieldBigInt({ type, value, onValueChange: onValueChangeNumber, marginBottom, loadingLabel, min, max, step, iconEnd, iconStart, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }, ref) {
+const TextFieldBigInt = /* @__PURE__ */ memo(forwardElementRef(function TextFieldBigInt({ type, value, onValueChange: onValueChangeNumber, marginBottom, loadingLabel, min, max, step, iconEnd, iconStart, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }, ref) {
     return (_jsx(TextFieldBase, { ref: ref, marginBottom: marginBottom, capture: e => BigInt(e.currentTarget.value), iconEnd: iconEnd, iconStart: iconStart, loadingLabel: loadingLabel ?? "Please wait while the operation completes", readonly: readonly ?? false, size: size ?? null, throttle: throttle ?? null, resizeable: false, rows: 1, debounce: debounce ?? null, disabled: disabled ?? false, inputMode: inputMode ?? null, placeholder: placeholder ?? null, autocomplete: autocomplete ?? null, label: label, labelPosition: labelPosition, onValueChange: onValueChangeNumber, propsInput: useMergedProps(props, { min, max, step, type: "number" }), propsLabel: {}, value: value?.toString() ?? null }));
 }));
 /*
@@ -125,7 +125,7 @@ function TextFieldText({ type, onValueChange, value, label, labelPosition, disab
         </div>
     );
 }*/
-const TextFieldText = memo(forwardElementRef(function TextFieldText(allProps, ref) {
+const TextFieldText = /* @__PURE__ */ memo(forwardElementRef(function TextFieldText(allProps, ref) {
     const { onValueChange, autocomplete, inputMode, enterKeyHint, type, value, label, loadingLabel, labelPosition, iconEnd, iconStart, marginBottom, debounce, throttle, disabled, placeholder, readonly, size, rows, resizeable, ...props } = allProps;
     return (_jsx(TextFieldBase, { ref: ref, iconEnd: iconEnd, iconStart: iconStart, loadingLabel: loadingLabel ?? "Please wait while the operation completes", value: value ?? "", resizeable: resizeable ?? false, capture: e => e.currentTarget.value, placeholder: placeholder ?? null, rows: rows ?? 1, readonly: readonly || false, onValueChange: onValueChange || null, propsInput: useMergedProps(props, { type: "text" }), propsLabel: {}, size: size || null, inputMode: inputMode || null, autocomplete: autocomplete || null, marginBottom: marginBottom, label: label, labelPosition: labelPosition, debounce: debounce ?? null, throttle: throttle ?? null, disabled: disabled ?? false }));
 }));
@@ -148,7 +148,7 @@ export function useCommitTextField({ getFocused, commit, currentCapture, showSpi
         }
     });
 }
-const TextFieldBase = memo(forwardElementRef(function TextFieldBase({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }, ref) {
+const TextFieldBase = /* @__PURE__ */ memo(forwardElementRef(function TextFieldBase({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }, ref) {
     labelPosition ??= "before";
     if (labelPosition == "hidden") {
         console.assert(typeof label == "string", `<TextField />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
@@ -294,7 +294,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase({ capture, o
             }
         } }));
 }));
-export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSync, pending: p, propsIndicator, containerClass, callCount, invocationResult }) {
+export const TextFieldSpinner = /* @__PURE__ */ memo(function A({ debouncingAsync, debouncingSync, pending: p, propsIndicator, containerClass, callCount, invocationResult }) {
     if (invocationResult != "async")
         return null;
     let pendingDisplayType = ((debouncingAsync || debouncingSync) ? 2 : p ? 1 : 0);

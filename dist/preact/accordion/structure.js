@@ -17,19 +17,19 @@ import { memoForwardRef } from "../utility/forward-element-ref.js";
  *     <StructureAccordionSection>{...}</StructureAccordionSection>
  * </StructureAccordion>
  */
-export const StructureAccordion = memoForwardRef(function StructureAccordion({ children, ...props }, ref) {
+export const StructureAccordion = /* @__PURE__ */ memoForwardRef(function StructureAccordion({ children, ...props }, ref) {
     return (_jsx("div", { ...useMergedProps({ class: "accordion" }, { ...props, ref }), children: children }));
 });
-export const StructureAccordionSection = memoForwardRef(function Structure({ children, ...props }, ref) {
+export const StructureAccordionSection = /* @__PURE__ */ memoForwardRef(function Structure({ children, ...props }, ref) {
     return (_jsx("div", { ...useMergedProps({ class: "accordion-item" }, { ...props, ref }), children: children }));
 });
-export const StructureAccordionSectionHeader = memoForwardRef(function Structure({ children, ...props }, ref) {
+export const StructureAccordionSectionHeader = /* @__PURE__ */ memoForwardRef(function Structure({ children, ...props }, ref) {
     return (_jsx("h2", { ...useMergedProps({ class: "accordion-header" }, { ...props, ref }), children: children }));
 });
-export const StructureAccordionSectionHeaderButton = memoForwardRef(function Structure({ children, ...props }, ref) {
+export const StructureAccordionSectionHeaderButton = /* @__PURE__ */ memoForwardRef(function Structure({ children, ...props }, ref) {
     return (_jsx("button", { ...useMergedProps({ class: "accordion-button", type: "button" }, { ...props, ref }), children: children }));
 });
-export const StructureAccordionSectionBody = memoForwardRef(function Structure({ show, children, ...props }, ref) {
+export const StructureAccordionSectionBody = /* @__PURE__ */ memoForwardRef(function Structure({ show, children, ...props }, ref) {
     return (_jsx(CollapseFade, { show: show, children: _jsx("div", { ...useMergedProps({ class: "accordion-collapse" }, { ...props, ref }), children: _jsx("div", { className: "accordion-body", children: children }) }) }));
 });
 //# sourceMappingURL=structure.js.map

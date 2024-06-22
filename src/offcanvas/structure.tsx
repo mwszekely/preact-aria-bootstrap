@@ -15,8 +15,8 @@ export interface StructureOffcanvasModalHeaderProps extends GlobalAttributes<HTM
 export interface StructureOffcanvasModalCloseButtonProps extends GlobalAttributes<HTMLDivElement> { onClose(e: EventType<any, any>, reason: "escape"): void; }
 
 
-export const StructureOffcanvasPortalRoot = memoForwardRef(function StructureOffcanvasPortalRoot({ children, ...props }: StructureOffcanvasPortalRootProps, ref: Ref<HTMLDivElement>) { return (<div {...props} ref={ref}>{children}</div>) })
-export const StructureOffcanvasBackdrop = memoForwardRef(function StructureOffcanvasBackdrop({ open, ...props }: StructureOffcanvasBackdropProps, ref: Ref<HTMLDivElement>) {
+export const StructureOffcanvasPortalRoot = /* @__PURE__ */ memoForwardRef(function StructureOffcanvasPortalRoot({ children, ...props }: StructureOffcanvasPortalRootProps, ref: Ref<HTMLDivElement>) { return (<div {...props} ref={ref}>{children}</div>) })
+export const StructureOffcanvasBackdrop = /* @__PURE__ */ memoForwardRef(function StructureOffcanvasBackdrop({ open, ...props }: StructureOffcanvasBackdropProps, ref: Ref<HTMLDivElement>) {
     return (
         <Fade show={open} fadeMax={0.25} duration={350}>
             <div {...useMergedProps({ class: "offcanvas-backdrop" }, { ...props, ref })} />
@@ -24,25 +24,25 @@ export const StructureOffcanvasBackdrop = memoForwardRef(function StructureOffca
     )
 });
 
-export const StructureOffcanvasModalTitle = memoForwardRef(function StructureOffcanvasModalTitle({ children, ...props }: StructureOffcanvasModalTitleProps, ref: Ref<HTMLDivElement>) {
+export const StructureOffcanvasModalTitle = /* @__PURE__ */ memoForwardRef(function StructureOffcanvasModalTitle({ children, ...props }: StructureOffcanvasModalTitleProps, ref: Ref<HTMLDivElement>) {
     return (<div {...useMergedProps({ class: "offcanvas-title" }, { ...props, ref })}>{children}</div>)
 })
 
-export const StructureOffcanvasModalCloseButton = memoForwardRef(function StructureOffcanvasModalCloseButton({ onClose, ...props }: StructureOffcanvasModalCloseButtonProps, ref: Ref<HTMLDivElement>) {
+export const StructureOffcanvasModalCloseButton = /* @__PURE__ */ memoForwardRef(function StructureOffcanvasModalCloseButton({ onClose, ...props }: StructureOffcanvasModalCloseButtonProps, ref: Ref<HTMLDivElement>) {
     return (<Button onPress={(_pressed, e) => onClose(e, "escape")} {...useMergedProps({ class: "btn-close", "aria-label": "Close" }, { ...props, ref }) as {}} />)
 })
 
-export const StructureOffcanvasModalBody = memoForwardRef(function StructureOffcanvasModalBody({ children, ...props }: StructureOffcanvasModalBodyProps, ref: Ref<HTMLDivElement>) {
+export const StructureOffcanvasModalBody = /* @__PURE__ */ memoForwardRef(function StructureOffcanvasModalBody({ children, ...props }: StructureOffcanvasModalBodyProps, ref: Ref<HTMLDivElement>) {
     return (<div {...useMergedProps({ class: "offcanvas-body" }, { ...props, ref })}>{children}</div>)
 })
 
-export const StructureOffcanvasModalHeader = memoForwardRef(function StructureOffcanvasModalHeader({ children, ...props }: StructureOffcanvasModalHeaderProps, ref: Ref<HTMLDivElement>) {
+export const StructureOffcanvasModalHeader = /* @__PURE__ */ memoForwardRef(function StructureOffcanvasModalHeader({ children, ...props }: StructureOffcanvasModalHeaderProps, ref: Ref<HTMLDivElement>) {
     return (<div {...useMergedProps({ class: "offcanvas-header" }, { ...props, ref })}>{children}</div>)
 })
 
 
 
-export const StructureOffcanvasModal = memoForwardRef(function StructureOffcanvasModal({ open, children, ...props }: StructureOffcanvasModalProps, ref: Ref<HTMLDivElement>) {
+export const StructureOffcanvasModal = /* @__PURE__ */ memoForwardRef(function StructureOffcanvasModal({ open, children, ...props }: StructureOffcanvasModalProps, ref: Ref<HTMLDivElement>) {
 
     const otherProps = {
         tabIndex: -1,

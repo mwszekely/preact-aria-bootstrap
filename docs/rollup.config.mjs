@@ -10,10 +10,11 @@ const extensions = [".js", ".jsx", ".ts", ".tsx"];
 export default {
     input: "index.tsx",
     output: {
-        file: "bundle.js",
-        format: "iife",
+        dir: ".",
+        format: "es",
         name: "bundle",
         sourcemap: true,
+        
     },
     treeshake: "recommended",
     plugins: [

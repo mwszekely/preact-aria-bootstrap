@@ -36,7 +36,7 @@ export interface TableCellProps extends GlobalAttributes<HTMLTableCellElement, "
     tableHeadType: null | "sortable" | "unsortable";
 }
 
-export const Table = memo(forwardElementRef(function Table({ propsContainer, dark, hover, striped, stripedColumns, variantBorder, bordered, variantSize, variantTheme, verticalAlign, ...props }: TableProps, ref?: Ref<HTMLTableElement>) {
+export const Table = /* @__PURE__ */ memo(forwardElementRef(function Table({ propsContainer, dark, hover, striped, stripedColumns, variantBorder, bordered, variantSize, variantTheme, verticalAlign, ...props }: TableProps, ref?: Ref<HTMLTableElement>) {
 
 
     return (
@@ -68,21 +68,21 @@ export interface TableSectionProps extends GlobalAttributes<HTMLTableSectionElem
     location: "head" | "body" | "foot";
 }
 
-export const TableSection = memo(forwardElementRef(function TableSection({ location, divider, variantTheme, ...props }: TableSectionProps, ref?: Ref<HTMLTableSectionElement>) {
+export const TableSection = /* @__PURE__ */ memo(forwardElementRef(function TableSection({ location, divider, variantTheme, ...props }: TableSectionProps, ref?: Ref<HTMLTableSectionElement>) {
     const TS = (location == "head" ? "thead" : location == "foot" ? "tfoot" : "tbody");
     return (
         <TS {...useMergedProps(props, { ref, className: clsx(variantTheme && `table-${variantTheme}`) })} />
     )
 }))
 
-export const TableRow = memo(forwardElementRef(function TableRow({ variantTheme, children, ...props }: TableRowProps, ref?: Ref<HTMLTableRowElement>) {
+export const TableRow = /* @__PURE__ */ memo(forwardElementRef(function TableRow({ variantTheme, children, ...props }: TableRowProps, ref?: Ref<HTMLTableRowElement>) {
     //useWhatCausedRender("TableRow", { props: { ...props, children, variantTheme, ref }, state: {} })
     return (
         <tr {...useMergedProps({ ref, className: clsx(variantTheme && `table-${variantTheme}`) }, props)}>{children}</tr>
     )
 }))
 
-export const TableCell = memo(forwardElementRef(function TableCell({ variantTheme, fillY, tableHeadType, children, ...props }: TableCellProps, ref?: Ref<HTMLTableCellElement>) {
+export const TableCell = /* @__PURE__ */ memo(forwardElementRef(function TableCell({ variantTheme, fillY, tableHeadType, children, ...props }: TableCellProps, ref?: Ref<HTMLTableCellElement>) {
     useEnsureStability("TableCell", !!tableHeadType);
     props = useMergedProps({ ref, className: clsx(variantTheme && `table-${variantTheme}`) }, props);
     if (tableHeadType) {

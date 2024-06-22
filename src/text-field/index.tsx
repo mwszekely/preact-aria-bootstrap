@@ -79,7 +79,7 @@ export interface TextFieldTextInputProps extends TextFieldBase<HTMLInputElement,
 export type TextFieldTextProps = TextFieldTextInputProps | TextFieldTextAreaProps;
 export type TextFieldProps = TextFieldTextProps | TextFieldNumberProps | TextFieldBigIntProps | TextFieldDateTimeProps | TextFieldDateProps | TextFieldTimeProps;
 
-export const TextField = memo(forwardElementRef(function TextField({ type, ...props }: LabelledProps<TextFieldProps, "floating" | "tooltip">, ref?: Ref<HTMLInputElement>) {
+export const TextField = /* @__PURE__ */ memo(forwardElementRef(function TextField({ type, ...props }: LabelledProps<TextFieldProps, "floating" | "tooltip">, ref?: Ref<HTMLInputElement>) {
     switch (type) {
         case "bigint":
             return (<TextFieldBigInt ref={ref} type={type} {...props as any} />);
@@ -98,7 +98,7 @@ export const TextField = memo(forwardElementRef(function TextField({ type, ...pr
     }
 }))
 
-const TextFieldDateTime = memo(forwardElementRef(function TextFieldDateTime({ type, value, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }: LabelledProps<TextFieldDateTimeProps, "floating">, ref?: Ref<HTMLInputElement>) {
+const TextFieldDateTime = /* @__PURE__ */ memo(forwardElementRef(function TextFieldDateTime({ type, value, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }: LabelledProps<TextFieldDateTimeProps, "floating">, ref?: Ref<HTMLInputElement>) {
     let value2 = value ? value.toString({ smallestUnit: "second" }) : null;
     if (value2) {
         console.assert(value2.endsWith("Z"));
@@ -139,7 +139,7 @@ const TextFieldDateTime = memo(forwardElementRef(function TextFieldDateTime({ ty
     )
 }))
 
-const TextFieldDate = memo(forwardElementRef(function TextFieldDateTime({ type, value, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }: LabelledProps<TextFieldDateProps, "floating">, ref?: Ref<HTMLInputElement>) {
+const TextFieldDate = /* @__PURE__ */ memo(forwardElementRef(function TextFieldDateTime({ type, value, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }: LabelledProps<TextFieldDateProps, "floating">, ref?: Ref<HTMLInputElement>) {
     let value2 = value ? value.toString({}) : null;
 
     return (
@@ -177,7 +177,7 @@ const TextFieldDate = memo(forwardElementRef(function TextFieldDateTime({ type, 
     )
 }))
 
-const TextFieldTime = memo(forwardElementRef(function TextFieldDateTime({ type, value, seconds, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }: LabelledProps<TextFieldTimeProps, "floating">, ref?: Ref<HTMLInputElement>) {
+const TextFieldTime = /* @__PURE__ */ memo(forwardElementRef(function TextFieldDateTime({ type, value, seconds, onValueChange: onValueChangeDateTime, marginBottom, iconEnd, iconStart, loadingLabel, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }: LabelledProps<TextFieldTimeProps, "floating">, ref?: Ref<HTMLInputElement>) {
     let value2 = value ? (`${value.hour.toString().padStart(2, "0")}:${value.minute.toString().padStart(2, "0")}${seconds ? `:${value.second.toString().padStart(2, "0")}` : ``}`) : null;
 
     return (
@@ -226,7 +226,7 @@ const TextFieldTime = memo(forwardElementRef(function TextFieldDateTime({ type, 
     )
 }))
 
-const TextFieldNumber = memo(forwardElementRef(function TextFieldNumber({ type, value, onValueChange: onValueChangeNumber, digitDisplay, showSpinButtons, marginBottom, iconEnd, iconStart, loadingLabel, min, max, step, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }: LabelledProps<TextFieldNumberProps, "floating">, ref?: Ref<HTMLInputElement>) {
+const TextFieldNumber = /* @__PURE__ */ memo(forwardElementRef(function TextFieldNumber({ type, value, onValueChange: onValueChangeNumber, digitDisplay, showSpinButtons, marginBottom, iconEnd, iconStart, loadingLabel, min, max, step, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }: LabelledProps<TextFieldNumberProps, "floating">, ref?: Ref<HTMLInputElement>) {
 
     if (value != null && max != null && value > max)
         value = max;
@@ -265,7 +265,7 @@ const TextFieldNumber = memo(forwardElementRef(function TextFieldNumber({ type, 
 }));
 
 
-const TextFieldBigInt = memo(forwardElementRef(function TextFieldBigInt({ type, value, onValueChange: onValueChangeNumber, marginBottom, loadingLabel, min, max, step, iconEnd, iconStart, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }: LabelledProps<TextFieldBigIntProps, "floating">, ref?: Ref<any>) {
+const TextFieldBigInt = /* @__PURE__ */ memo(forwardElementRef(function TextFieldBigInt({ type, value, onValueChange: onValueChangeNumber, marginBottom, loadingLabel, min, max, step, iconEnd, iconStart, debounce, throttle, disabled, placeholder, readonly, size, label, labelPosition, autocomplete, inputMode, enterKeyHint, ...props }: LabelledProps<TextFieldBigIntProps, "floating">, ref?: Ref<any>) {
     return (
         <TextFieldBase<HTMLInputElement, bigint>
             ref={ref}
@@ -337,7 +337,7 @@ function TextFieldText({ type, onValueChange, value, label, labelPosition, disab
     );
 }*/
 
-const TextFieldText = memo(forwardElementRef(function TextFieldText(allProps: LabelledProps<TextFieldTextProps, "floating">, ref?: Ref<any>) {
+const TextFieldText = /* @__PURE__ */ memo(forwardElementRef(function TextFieldText(allProps: LabelledProps<TextFieldTextProps, "floating">, ref?: Ref<any>) {
     const { onValueChange, autocomplete, inputMode, enterKeyHint, type, value, label, loadingLabel, labelPosition, iconEnd, iconStart, marginBottom, debounce, throttle, disabled, placeholder, readonly, size, rows, resizeable, ...props } = allProps as (Partial<LabelledProps<TextFieldTextInputProps, "floating">> & Partial<LabelledProps<TextFieldTextAreaProps, "floating">>);
     return (
         <TextFieldBase<HTMLInputElement, string>
@@ -458,7 +458,7 @@ export function useCommitTextField<C>({ getFocused, commit, currentCapture, show
     });
 }
 
-const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, V>({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }: LabelledProps<TFB<E, V>, "floating" | "tooltip">, ref?: Ref<any>) {
+const TextFieldBase = /* @__PURE__ */ memo(forwardElementRef(function TextFieldBase<E extends HTMLInputElement | HTMLTextAreaElement, V>({ capture, otherClasses, otherProps, marginBottom, autocomplete, iconEnd, iconStart, inputMode, loadingLabel, rows, resizeable, value, onValueChange, label, labelPosition, propsInput, propsLabel, debounce, disabled, placeholder, size, readonly, throttle }: LabelledProps<TFB<E, V>, "floating" | "tooltip">, ref?: Ref<any>) {
     labelPosition ??= "before";
 
     if (labelPosition == "hidden") {
@@ -687,7 +687,7 @@ const TextFieldBase = memo(forwardElementRef(function TextFieldBase<E extends HT
     );
 }));
 
-export const TextFieldSpinner = memo(function A({ debouncingAsync, debouncingSync, pending: p, propsIndicator, containerClass, callCount, invocationResult }: { callCount: number, containerClass: string, debouncingAsync: boolean, debouncingSync: boolean, pending: boolean, propsIndicator: JSX.HTMLAttributes<any>, invocationResult: UseAsyncReturnType<any, any>["invocationResult"] }) {
+export const TextFieldSpinner = /* @__PURE__ */ memo(function A({ debouncingAsync, debouncingSync, pending: p, propsIndicator, containerClass, callCount, invocationResult }: { callCount: number, containerClass: string, debouncingAsync: boolean, debouncingSync: boolean, pending: boolean, propsIndicator: JSX.HTMLAttributes<any>, invocationResult: UseAsyncReturnType<any, any>["invocationResult"] }) {
 
     if (invocationResult != "async")
         return null;

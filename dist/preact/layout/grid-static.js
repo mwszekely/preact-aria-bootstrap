@@ -7,7 +7,7 @@ import { useClonedElement } from "../utility/use-cloned-element.js";
  *
  * (This can, of course, be achieved fairly easily with other grids -- this is more of a fun one-liner)
  */
-export const GridStatic = memo(forwardElementRef(function ResponsiveGrid({ columns, children, ...props }, ref) {
+export const GridStatic = /* @__PURE__ */ memo(forwardElementRef(function ResponsiveGrid({ columns, children, ...props }, ref) {
     const mergedProps = useMergedProps({
         className: "static-grid",
         style: typeof columns === "string" ? { "--static-grid-columns": columns } : { "--grid-column-count": columns }

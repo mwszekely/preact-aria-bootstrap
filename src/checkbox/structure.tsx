@@ -8,7 +8,7 @@ import { GlobalAttributes } from "../utility/types.js";
 
 export interface StructureCheckboxInputProps extends GlobalAttributes<HTMLInputElement> { }
 
-export const StructureCheckboxInput = memoForwardRef(function StructureCheckboxInput({ ...props }: StructureCheckboxInputProps, ref: Ref<HTMLInputElement>) {
+export const StructureCheckboxInput = /* @__PURE__ */ memoForwardRef(function StructureCheckboxInput({ ...props }: StructureCheckboxInputProps, ref: Ref<HTMLInputElement>) {
     return (
         <input {...useMergedProps({ class: clsx("form-check-input") }, { ...props, ref })} />
     )
@@ -17,7 +17,7 @@ export const StructureCheckboxInput = memoForwardRef(function StructureCheckboxI
 
 export interface StructureCheckboxLabelProps extends GlobalAttributes<HTMLLabelElement, "children"> { }
 
-export const StructureCheckboxLabel = memoForwardRef(function StructureCheckboxLabel({ children, ...props }: StructureCheckboxLabelProps, ref: Ref<HTMLLabelElement>) {
+export const StructureCheckboxLabel = /* @__PURE__ */ memoForwardRef(function StructureCheckboxLabel({ children, ...props }: StructureCheckboxLabelProps, ref: Ref<HTMLLabelElement>) {
     return (
         <label {...useMergedProps({ class: "form-check-label" }, { ...props, ref })}>{children}</label>
     )

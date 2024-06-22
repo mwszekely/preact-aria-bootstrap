@@ -10,7 +10,7 @@ import { useClonedElement } from "../utility/use-cloned-element.js";
  *
  * Easy one-liners all around here!
  */
-export const GridResponsive = memo(forwardElementRef(function ResponsiveGrid({ minWidth, leftover, children, ...props }, ref) {
+export const GridResponsive = /* @__PURE__ */ memo(forwardElementRef(function ResponsiveGrid({ minWidth, leftover, children, ...props }, ref) {
     const mergedProps = useMergedProps({
         className: "responsive-grid",
         style: !minWidth ? {} : {

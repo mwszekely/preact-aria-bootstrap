@@ -5,7 +5,7 @@ import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 import { usePortalId } from "../utility/use-portal-id.js";
 import { StructureDialogBackdrop, StructureDialogModal, StructureDialogModalBody, StructureDialogModalCloseButton, StructureDialogModalContent, StructureDialogModalDialog, StructureDialogModalFooter, StructureDialogModalTitle, StructureDialogPortalRoot } from "./structure.js";
-export const Dialog = memo(forwardElementRef(function Dialog({ open, fullscreen, variantSize, header, headerPosition, footer, onClose, anchor, modal, children, propsPortal, ...props }, ref) {
+export const Dialog = /* @__PURE__ */ memo(forwardElementRef(function Dialog({ open, fullscreen, variantSize, header, headerPosition, footer, onClose, anchor, modal, children, propsPortal, ...props }, ref) {
     variantSize ??= "xl";
     headerPosition ??= "start";
     if (headerPosition == "hidden") {

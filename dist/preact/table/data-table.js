@@ -10,7 +10,7 @@ import { useClonedElement } from "../utility/use-cloned-element.js";
 import { Table, TableCell, TableRow, TableSection } from "./table.js";
 // Allow for nicer props (on the Table instead of the TableSection)
 const TableContext = createContext({ setChildCount: null, paginationMax: null, paginationMin: null, staggered: false });
-export const DataTable = memo(forwardElementRef(function DataTable({ staggered, caption, captionPosition, bordered, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }, ref) {
+export const DataTable = /* @__PURE__ */ memo(forwardElementRef(function DataTable({ staggered, caption, captionPosition, bordered, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }, ref) {
     staggered ||= false;
     const [childCount, setChildCount] = useState(0);
     const [paginationStart, setPaginationStart] = useState(0);

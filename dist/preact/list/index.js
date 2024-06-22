@@ -11,7 +11,7 @@ import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
 const DefaultDisabled = createContext(false);
 const TypeaheadStatus = createContext("none");
-export const List = memo(forwardRef((function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }, ref) {
+export const List = /* @__PURE__ */ memo(forwardRef((function List({ disabled, selectedIndex, selectionMode, onSelectedIndexChange, label, labelPosition, children, paginationLabel, paginationLocation, paginationSize, staggered, ...props }, ref) {
     labelPosition ??= "before";
     //const [focusedInner, setFocusedInner] = useState(false);
     //const { refElementReturn, propsStable } = useRefElement<HTMLDivElement>({ refElementParameters: {} })
@@ -33,7 +33,7 @@ export const List = memo(forwardRef((function List({ disabled, selectedIndex, se
                                     }, []) }) }) }), labelPosition == "after" && labelJsx] }));
             } }) }));
 })));
-const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }) {
+const ListItemNonPaginated = /* @__PURE__ */ memo((function ListItemNonPaginated({ onPressSync, infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }) {
     return (_jsx(ProgressWithHandler, { ariaLabel: loadingLabel ?? "Please wait while the operation completes.", asyncHandler: useAutoAsyncHandler(async (a, b) => {
             // TODO: How'd we end up with onPress (from the user) AND onPress (from selection)?
             // Should selection have taken care of that? Does it already? What if it's async?
@@ -76,7 +76,7 @@ const ListItemNonPaginated = memo((function ListItemNonPaginated({ onPressSync, 
             return (_jsx(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select a list item:", children: _jsx("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
         } }));
 }));
-export const ListItem = memo(forwardElementRef((function ListItem({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
+export const ListItem = /* @__PURE__ */ memo(forwardElementRef((function ListItem({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
     const defaultDisabled = useContext(DefaultDisabled);
     disabled ||= defaultDisabled;
     //let everShownPaginated = useRef(false);
@@ -91,12 +91,12 @@ export const ListItem = memo(forwardElementRef((function ListItem({ index, keybo
             return _jsx(ListItemNonPaginated, { keyboardControlsDescription: keyboardControlsDescription, infoRowProps: infoRow.props, excludeSpace: infoRow.pressParameters.excludeSpace, onPressSync: infoRow.pressParameters.onPressSync, onPress: onPress, hideBecausePaginated: false, hideBecauseStaggered: false, loadingLabel: loadingLabel, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: p2, ref2: ref }, "show");
         } }));
 })));
-const ListItemText = memo(forwardElementRef((function ListItemText({ onPress, children, ...props }, ref) {
+const ListItemText = /* @__PURE__ */ memo(forwardElementRef((function ListItemText({ onPress, children, ...props }, ref) {
     return (_jsx(GridlistChild, { index: 1, onPressSync: onPress, render: infoCell => {
             return (_jsx("div", { ...useMergedProps(infoCell.propsCell, infoCell.propsPress, infoCell.propsTabbable, props, { ref }, { class: clsx("gridlist-item-text") }), children: children }));
         } }));
 })));
-const ListItemStartEnd = memo((function ListItemStartEnd({ hidden, index, children }) {
+const ListItemStartEnd = /* @__PURE__ */ memo((function ListItemStartEnd({ hidden, index, children }) {
     return (_jsx(GridlistChild, { index: index, untabbable: hidden, focusSelf: useStableCallback(e => {
             e.focus();
         }), render: infoCell => {

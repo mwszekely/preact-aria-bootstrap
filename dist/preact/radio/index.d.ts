@@ -26,5 +26,5 @@ export interface RadioProps<V extends number | string> extends Pick<JSX.HTMLAttr
     value: V;
     index: number;
 }
-export declare const Radio: <V extends string | number>({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }: LabelledProps<RadioProps<V>, "tooltip">, ref?: Ref<any>) => JSX.Element;
+export declare const Radio: <V extends number | string>({ index, label, value, labelPosition, loadingLabel, debounce, throttle, disabled: userDisabled, ...props }: LabelledProps<RadioProps<V>, "tooltip">, ref?: Ref<any>) => JSX.Element;
 //# sourceMappingURL=index.d.ts.map

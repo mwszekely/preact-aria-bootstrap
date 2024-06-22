@@ -9,7 +9,7 @@ import { forwardElementRef } from "../utility/forward-element-ref.js";
  *
  * `<Badge>{10 <span className="visually-hidden">unread messages</span>}</Badge>`
  */
-export const Badge = memo(forwardElementRef(function Badge({ children, position, variantTheme, roundedPill, ...props }, ref) {
+export const Badge = /* @__PURE__ */ memo(forwardElementRef(function Badge({ children, position, variantTheme, roundedPill, ...props }, ref) {
     position ??= "inline";
     return _jsx("span", { ...useMergedProps({
             ref,

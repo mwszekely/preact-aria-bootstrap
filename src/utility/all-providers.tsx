@@ -4,7 +4,7 @@ import { ExclusiveTransitionProvider } from "preact-transition";
 import { ToastErrorBoundary, ToastsProvider } from "../toasts/index.js";
 import { KeyboardAssistProvider } from "./keyboard-assist.js";
 
-export const AllProviders = memo(({ children, targetAssertive, targetPolite, toastsVisibleCount }: { children?: ComponentChildren, toastsVisibleCount?: number } & NotificationProviderProps) => {
+export const AllProviders = /* @__PURE__ */ memo(({ children, targetAssertive, targetPolite, toastsVisibleCount }: { children?: ComponentChildren, toastsVisibleCount?: number } & NotificationProviderProps) => {
 
     const { children: portalChildren, context } = useNotificationProvider({ targetAssertive, targetPolite })
 

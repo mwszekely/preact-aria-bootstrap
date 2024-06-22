@@ -28,7 +28,7 @@ export interface GridCssItemProps extends GlobalAttributes<HTMLDivElement, "chil
     startXxl?: number;
 }
 
-export const GridCss = memo(forwardElementRef(function GridCss({ columns, gap, children, ...props }: GridCssProps, ref: Ref<HTMLDivElement>) {
+export const GridCss = /* @__PURE__ */ memo(forwardElementRef(function GridCss({ columns, gap, children, ...props }: GridCssProps, ref: Ref<HTMLDivElement>) {
     let style: JSX.CSSProperties = {};
     if (gap != null)
         style["--bs-gap"] = gap;
@@ -38,7 +38,7 @@ export const GridCss = memo(forwardElementRef(function GridCss({ columns, gap, c
     return (useClonedElement(children, useMergedProps(props, { class: "grid", style }), ref));
 }))
 
-export const GridCssItem = memo(forwardElementRef(function GridCssItem({
+export const GridCssItem = /* @__PURE__ */ memo(forwardElementRef(function GridCssItem({
     span, spanXs, spanSm, spanMd, spanLg, spanXl, spanXxl,
     start, startXs, startSm, startMd, startLg, startXl, startXxl,
     children,

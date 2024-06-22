@@ -2,8 +2,8 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-ru
 import { clsx } from "clsx";
 import { EventDetail, useSlider, useSliderThumb } from "preact-aria-widgets";
 import { createContext, createElement, generateRandomId, memo, useAsyncHandler, useContext, useEffect, useHasCurrentFocus, useMemo, useMergedProps, useRef, useRefElement, useState } from "preact-prop-helpers";
-import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { useAutoAsyncHandler } from "../context.js";
+import { forwardElementRef } from "../utility/forward-element-ref.js";
 const RangeThumbContext = createContext(null);
 const DebounceContext = createContext(false);
 const ValueContext = createContext(null);
@@ -14,7 +14,7 @@ const SnapContext = createContext("discrete");
 const DisabledContext = createContext(false);
 const OrientationContext = createContext("inline");
 const OnValueChangeContext = createContext(null);
-export const Range = memo(forwardElementRef(function Range({ max, min, debounce, hideTickValues, hideTicks, orientation, children, getValueText, getTooltipText, value, onValueChange, step, snap, label, disabled, ...rest }, ref) {
+export const Range = /* @__PURE__ */ memo(forwardElementRef(function Range({ max, min, debounce, hideTickValues, hideTicks, orientation, children, getValueText, getTooltipText, value, onValueChange, step, snap, label, disabled, ...rest }, ref) {
     const { context, managedChildrenReturn } = useSlider({ managedChildrenParameters: {}, sliderParameters: { min, max } });
     let id = useMemo(generateRandomId, []);
     id ??= "";
@@ -25,7 +25,7 @@ export const Range = memo(forwardElementRef(function Range({ max, min, debounce,
 function defaultGetValueText(number) {
     return `${number}`;
 }
-const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues }) {
+const RangeTicks = /* @__PURE__ */ memo(function RangeTicks({ step, min, max, id, hideTickValues }) {
     const onValueChange = useContext(OnValueChangeContext);
     if (step == "any")
         return null;
@@ -45,7 +45,7 @@ const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues
     }*/
     return (_jsxs("datalist", { id: id, className: clsx("form-range-ticks"), children: [...children] }));
 });
-export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, value, max, min, onValueChange: onValueChangeAsync, disabled, label }, ref) {
+export const RangeThumb = /* @__PURE__ */ memo(forwardElementRef(function RangeThumb({ index, value, max, min, onValueChange: onValueChangeAsync, disabled, label }, ref) {
     const parentOnValueChange = useContext(OnValueChangeContext);
     const context = useContext(RangeThumbContext);
     const debounceSetting = useContext(DebounceContext);

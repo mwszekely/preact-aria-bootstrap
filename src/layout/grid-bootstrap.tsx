@@ -70,7 +70,7 @@ export interface GridBsBreakProps extends GlobalAttributes<HTMLDivElement, "chil
     hideUntil?: "sm" | "md" | "lg" | "xl" | "xxl";
 }
 
-export const GridBsContainer = memo(forwardElementRef(function GridContainer({ fillUntil, children, ...props }: GridBsContainerProps, ref?: Ref<HTMLDivElement>) {
+export const GridBsContainer = /* @__PURE__ */ memo(forwardElementRef(function GridContainer({ fillUntil, children, ...props }: GridBsContainerProps, ref?: Ref<HTMLDivElement>) {
     fillUntil ??= "auto"
     return (useClonedElement(children, useMergedProps(props, {
         className:
@@ -81,7 +81,7 @@ export const GridBsContainer = memo(forwardElementRef(function GridContainer({ f
     }), ref))
 }));
 
-export const GridBsRow = memo(forwardElementRef(function GridRow({
+export const GridBsRow = /* @__PURE__ */ memo(forwardElementRef(function GridRow({
     justify,
     children,
 
@@ -141,7 +141,7 @@ export const GridBsRow = memo(forwardElementRef(function GridRow({
     )
 }));
 
-export const GridBsItem = memo(forwardElementRef(function GridItem({
+export const GridBsItem = /* @__PURE__ */ memo(forwardElementRef(function GridItem({
     children,
     offset,
     offsetXs,
@@ -184,6 +184,6 @@ export const GridBsItem = memo(forwardElementRef(function GridItem({
     )
 }));
 
-export const GridBsBreak = memo(forwardElementRef(function GridBreak({ hideUntil, children, ...props }: GridBsBreakProps, ref: Ref<HTMLDivElement>) {
+export const GridBsBreak = /* @__PURE__ */ memo(forwardElementRef(function GridBreak({ hideUntil, children, ...props }: GridBsBreakProps, ref: Ref<HTMLDivElement>) {
     return (useClonedElement(children, useMergedProps(props, { className: clsx("w-100", hideUntil && `d-none d-${hideUntil}-block`) }), ref))
 }))

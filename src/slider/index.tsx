@@ -1,9 +1,9 @@
 import { clsx } from "clsx";
 import { EventDetail, RangeChangeEvent, SliderContext, SliderThumbInfo, useSlider, UseSliderParameters, useSliderThumb, UseSliderThumbParameters } from "preact-aria-widgets";
 import { ComponentChildren, createContext, createElement, generateRandomId, JSX, memo, Ref, useAsyncHandler, useContext, useEffect, useHasCurrentFocus, useMemo, useMergedProps, useRef, useRefElement, useState } from "preact-prop-helpers";
+import { useAutoAsyncHandler } from "../context.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
-import { useAutoAsyncHandler } from "../context.js";
 
 
 
@@ -57,7 +57,7 @@ const DisabledContext = createContext(false);
 const OrientationContext = createContext<"block" | "inline">("inline");
 const OnValueChangeContext = createContext<RangeProps["onValueChange"]>(null!);
 
-export const Range = memo(forwardElementRef(function Range({ max, min, debounce, hideTickValues, hideTicks, orientation, children, getValueText, getTooltipText, value, onValueChange, step, snap, label, disabled, ...rest }: RangeProps, ref: Ref<HTMLDivElement>) {
+export const Range = /* @__PURE__ */ memo(forwardElementRef(function Range({ max, min, debounce, hideTickValues, hideTicks, orientation, children, getValueText, getTooltipText, value, onValueChange, step, snap, label, disabled, ...rest }: RangeProps, ref: Ref<HTMLDivElement>) {
     const {
         context,
         managedChildrenReturn
@@ -103,7 +103,7 @@ function defaultGetValueText(number: number) {
     return `${number}`
 }
 
-const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues }: { id: string; step: number | "any", min: number, max: number, hideTickValues?: boolean | "auto" }) {
+const RangeTicks = /* @__PURE__ */ memo(function RangeTicks({ step, min, max, id, hideTickValues }: { id: string; step: number | "any", min: number, max: number, hideTickValues?: boolean | "auto" }) {
     const onValueChange = useContext(OnValueChangeContext);
     if (step == "any")
         return null;
@@ -138,7 +138,7 @@ const RangeTicks = memo(function RangeTicks({ step, min, max, id, hideTickValues
     );
 });
 
-export const RangeThumb = memo(forwardElementRef(function RangeThumb({ index, value, max, min, onValueChange: onValueChangeAsync, disabled, label }: RangeThumbProps, ref: Ref<HTMLInputElement>) {
+export const RangeThumb = /* @__PURE__ */ memo(forwardElementRef(function RangeThumb({ index, value, max, min, onValueChange: onValueChangeAsync, disabled, label }: RangeThumbProps, ref: Ref<HTMLInputElement>) {
     const parentOnValueChange = useContext(OnValueChangeContext);
     const context = useContext(RangeThumbContext);
     const debounceSetting = useContext(DebounceContext);

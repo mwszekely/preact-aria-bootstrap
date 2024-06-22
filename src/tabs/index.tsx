@@ -28,7 +28,7 @@ export interface TabPanelProps extends GlobalAttributes<HTMLDivElement, "childre
 
 const OrientationContext = createContext<"horizontal" | "vertical">("horizontal");
 
-export const Tabs = memo(forwardElementRef(function Tabs({ keyboardControlsDescription, orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }: LabelledProps<TabsProps, never>, ref: Ref<HTMLDivElement>) {
+export const Tabs = /* @__PURE__ */ memo(forwardElementRef(function Tabs({ keyboardControlsDescription, orientation, label, localStorageKey, labelPosition, panels, tabs, propsPanelsContainer, propsTabsContainer, ...props }: LabelledProps<TabsProps, never>, ref: Ref<HTMLDivElement>) {
     orientation ??= "horizontal"
     labelPosition ??= "before";
     if (labelPosition == "hidden")
@@ -54,7 +54,7 @@ export const Tabs = memo(forwardElementRef(function Tabs({ keyboardControlsDescr
     )
 }))
 
-export const Tab = memo(forwardElementRef(function Tab({ index, children, ...props }: TabProps, ref: Ref<HTMLLIElement>) {
+export const Tab = /* @__PURE__ */ memo(forwardElementRef(function Tab({ index, children, ...props }: TabProps, ref: Ref<HTMLLIElement>) {
     return (
         <AriaTab<HTMLSpanElement>
             index={index}
@@ -72,7 +72,7 @@ export const Tab = memo(forwardElementRef(function Tab({ index, children, ...pro
     )
 }))
 
-export const TabPanel = memo(forwardElementRef(function TabPanel({ index, ...props }: TabPanelProps, ref: Ref<HTMLDivElement>) {
+export const TabPanel = /* @__PURE__ */ memo(forwardElementRef(function TabPanel({ index, ...props }: TabPanelProps, ref: Ref<HTMLDivElement>) {
     const orientation = useContext(OrientationContext);
 
     return (

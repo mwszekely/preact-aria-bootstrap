@@ -10,7 +10,7 @@ import type { TabsProps } from "./index.js";
 
 export interface StructureTabPanelProps extends GlobalAttributes<HTMLDivElement, "children">, Pick<TabsProps, "orientation"> { visibleOffset: number; visible: boolean | null; }
 
-export const StructureTabPanel = memoForwardRef(function StructureTabPanel({ orientation, visibleOffset, visible, children, ...props }: StructureTabPanelProps, ref: Ref<HTMLDivElement>) {
+export const StructureTabPanel = /* @__PURE__ */ memoForwardRef(function StructureTabPanel({ orientation, visibleOffset, visible, children, ...props }: StructureTabPanelProps, ref: Ref<HTMLDivElement>) {
 
     // Get the names of the properties on the transition that are correct for the `orientation` the parent uses.
     // (i.e. if make the transition slide on the X axis for "horizontal" and the Y axis for "vertical")
@@ -39,7 +39,7 @@ export const StructureTabPanel = memoForwardRef(function StructureTabPanel({ ori
     );
 })
 
-const TabPanelChildren = memo(function TabPanelChildren({ children, visible }: { visible: boolean, children?: ComponentChildren }) {
+const TabPanelChildren = /* @__PURE__ */ memo(function TabPanelChildren({ children, visible }: { visible: boolean, children?: ComponentChildren }) {
     // It's more than likely that any given panel's children will be heavy to render,
     // but we *really* don't want that to block the transition animation
     // so we wait until just slightly after the transition starts to actually mount the children.
@@ -62,7 +62,7 @@ export interface StructureTabListProps extends GlobalAttributes<HTMLUListElement
     keyboardControlsDescription: string;
 }
 
-export const StructureTabs = memoForwardRef(function StructureTabs({ orientation, children, ...props }: StructureTabsProps, ref: Ref<HTMLDivElement>) {
+export const StructureTabs = /* @__PURE__ */ memoForwardRef(function StructureTabs({ orientation, children, ...props }: StructureTabsProps, ref: Ref<HTMLDivElement>) {
     return (
         <div {...useMergedProps({ class: clsx("tabs-container", orientation == "vertical" && "tabs-container-vertical") }, { ...props, ref })}>
             {children}
@@ -70,14 +70,14 @@ export const StructureTabs = memoForwardRef(function StructureTabs({ orientation
     )
 })
 
-export const StructureTabPanelsContainer = memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }: StructureTabPanelsContainerProps, ref: Ref<HTMLDivElement>) {
+export const StructureTabPanelsContainer = /* @__PURE__ */ memoForwardRef(function StructureTabPanelsContainer({ orientation, children: panels, ...props }: StructureTabPanelsContainerProps, ref: Ref<HTMLDivElement>) {
     return (
         <Swappable children={<div {...useMergedProps({ class: "tab-panels-container" }, { ...props, ref })}>{panels}</div>} />
     )
 })
 
 
-export const StructureTabList = memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, keyboardControlsDescription, ...props }: StructureTabListProps, ref: Ref<HTMLUListElement>) {
+export const StructureTabList = /* @__PURE__ */ memoForwardRef(function StructureTabList({ orientation, typeaheadStatus, labelPosition, childrenLabel: labelJsx, children: tabs, keyboardControlsDescription, ...props }: StructureTabListProps, ref: Ref<HTMLUListElement>) {
     return (
         <>
             {labelPosition == "before" && labelJsx}

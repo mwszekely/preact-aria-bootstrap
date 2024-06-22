@@ -4,7 +4,7 @@ import DOMPurify from 'dompurify';
 import { memo } from 'preact/compat';
 
 
-export const RichTextView = memo(function RichTextView({ valueHtml }: { valueHtml: string }) {
+export const RichTextView = /* @__PURE__ */ memo(function RichTextView({ valueHtml }: { valueHtml: string }) {
     const sanitized = DOMPurify.sanitize(valueHtml);
 
     return (

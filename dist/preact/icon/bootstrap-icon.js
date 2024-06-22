@@ -5,7 +5,7 @@ import { FontIcon } from "./font-icon.js";
 /**
  * Specialization of a FontIcon to display any given Bootstrap icon.
  */
-export const BootstrapIcon = memo(forwardElementRef(function BootstrapIcon({ icon, label, ...props }, ref) {
+export const BootstrapIcon = /* @__PURE__ */ memo(forwardElementRef(function BootstrapIcon({ icon, label, ...props }, ref) {
     // Merge our custom CSS class with any additional classes that were passed in to this component
     const mergedProps = useMergedProps({ class: `bi bi-${icon}` }, props);
     // Render the actual FontIcon

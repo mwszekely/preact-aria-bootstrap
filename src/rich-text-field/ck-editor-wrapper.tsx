@@ -226,7 +226,7 @@ interface CkEditorHtmlSupportAllowDisallow {
     attributes: Record<string, true | string | RegExp> | Array<string> | true;
 }
 
-export const CkEditorWrapper = memo(forwardElementRef(function CkEditorWrapper({ children, keyboardControlsDescription, implementation, valueHtml, onValueChange: ovcu, onFocusChange: ofcu, onReady: oru, editorHandle, toolbarItems, placeholder, fontFamilies, mention, fontSizes, htmlEmbed, htmlSupport, link, typing, onCharacterCountChange, onWordCountChange, ...props }: CkEditorWrapperProps, ref2?: Ref<any>) {
+export const CkEditorWrapper = /* @__PURE__ */ memo(forwardElementRef(function CkEditorWrapper({ children, keyboardControlsDescription, implementation, valueHtml, onValueChange: ovcu, onFocusChange: ofcu, onReady: oru, editorHandle, toolbarItems, placeholder, fontFamilies, mention, fontSizes, htmlEmbed, htmlSupport, link, typing, onCharacterCountChange, onWordCountChange, ...props }: CkEditorWrapperProps, ref2?: Ref<any>) {
 
     fontSizes ||= [10, 12, 14, 'default', 18, 20, 22];
 

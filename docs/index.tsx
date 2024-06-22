@@ -5,11 +5,11 @@ import { focus } from "preact-prop-helpers";
 import { forwardRef, memo } from "preact/compat";
 import { useCallback, useMemo, useState } from "preact/hooks";
 import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast } from "../dist/preact/index.js";
-import * as ButtonB from "./demos/button";
-import * as Checkbox from "./demos/checkbox";
-import * as Radio from "./demos/radio";
-import * as TextFieldD from "./demos/text-field";
-import * as Tooltip from "./demos/tooltip";
+import * as ButtonB from "./demos/button.js";
+import * as Checkbox from "./demos/checkbox.js";
+import * as Radio from "./demos/radio.js";
+import * as TextFieldD from "./demos/text-field.js";
+import * as Tooltip from "./demos/tooltip.js";
 
 
 //(window as any)._generate_setState_stacks = true;

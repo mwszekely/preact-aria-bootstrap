@@ -60,12 +60,12 @@ export function Checkbox({ label, labelPosition, checked, tristate, onValueChang
                 } }));
         } }));
 }
-export const StructureCheckboxNormalOuter = memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }, ref) {
+export const StructureCheckboxNormalOuter = /* @__PURE__ */ memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }, ref) {
     return (_jsxs("div", { ...useMergedProps({
             className: clsx("form-check", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline", labelPosition == "before" && "form-check-reverse")
         }, { ...props, ref }), children: [loadingJsx, labelPosition == "before" && visibleLabel, inputJsx, labelPosition == "after" && visibleLabel] }));
 });
-export const StructureCheckboxInputGroupOuter = memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }, ref) {
+export const StructureCheckboxInputGroupOuter = /* @__PURE__ */ memoForwardRef(function StructureCheckboxNormalOuter({ labelPosition, isSwitch, pending, inline, childrenProgressIndicator: loadingJsx, childrenTooltip: label, childrenInput: inputJsx, childrenLabel: visibleLabel, ...props }, ref) {
     const label2 = _jsx("div", { ...({ className: clsx("input-group-text", pending && "pending") }), children: visibleLabel });
     return (_jsxs(_Fragment, { children: [labelPosition == "before" && label2, _jsx("div", { ...useMergedProps({
                     className: clsx("input-group-text", pending && "pending", isSwitch && "form-switch", inline && "form-check-inline")

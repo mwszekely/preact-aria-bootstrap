@@ -9,7 +9,7 @@ export interface InputGroupProps extends Pick<JSX.HTMLAttributes<HTMLDivElement>
     size?: "sm" | "md" | "lg";
 }
 
-export const InputGroup = memo(forwardElementRef(function InputGroup({ wrap, size, children, ...props }: InputGroupProps, ref?: Ref<HTMLDivElement>) {
+export const InputGroup = /* @__PURE__ */ memo(forwardElementRef(function InputGroup({ wrap, size, children, ...props }: InputGroupProps, ref?: Ref<HTMLDivElement>) {
     return (
         <WithinInputGroup.Provider value={true}>
             <div {...useMergedProps({ class: clsx("input-group", !wrap && "flex-nowrap", size && `input-group-${size}`), ref, children }, props)} />
@@ -17,6 +17,6 @@ export const InputGroup = memo(forwardElementRef(function InputGroup({ wrap, siz
     )
 }));
 
-export const InputGroupText = memo(forwardElementRef(function InputGroupText(props: GlobalAttributes<HTMLDivElement, "children">, ref: Ref<HTMLDivElement>) {
+export const InputGroupText = /* @__PURE__ */ memo(forwardElementRef(function InputGroupText(props: GlobalAttributes<HTMLDivElement, "children">, ref: Ref<HTMLDivElement>) {
     return <div {...useMergedProps({ className: "input-group-text" }, props)} ref={ref} />
 }))
