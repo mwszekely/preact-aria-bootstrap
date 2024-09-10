@@ -15,5 +15,5 @@ export interface BadgeProps extends GlobalAttributes<HTMLSpanElement, "children"
  *
  * `<Badge>{10 <span className="visually-hidden">unread messages</span>}</Badge>`
  */
-export declare const Badge: ({ children, position, variantTheme, roundedPill, ...props }: BadgeProps, ref: Ref<HTMLSpanElement>) => import("preact-prop-helpers").JSX.Element;
+export declare const Badge: ({ children, position, variantTheme, roundedPill, ...props }: BadgeProps, ref: Ref<HTMLSpanElement>) => import("preact").h.JSX.Element;
 //# sourceMappingURL=badge.d.ts.map

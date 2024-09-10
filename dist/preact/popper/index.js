@@ -28,8 +28,8 @@ export function usePopper({ popperParameters: { open, getElement, alignMode, pla
     const [hidden, setHidden] = useState(false);
     const [usedSide, setUsedSide] = useState(null);
     const [usedAlignment, setUsedAlignment] = useState(null);
-    const [getMouseX, setMouseX] = usePassiveState(null, returnZero, runImmediately);
-    const [getMouseY, setMouseY] = usePassiveState(null, returnZero, runImmediately);
+    const [getMouseX, setMouseX] = usePassiveState(null, returnZero, { debounceRendering: runImmediately });
+    const [getMouseY, setMouseY] = usePassiveState(null, returnZero, { debounceRendering: runImmediately });
     const cachedRects = useRef(null);
     const cachedRect = useRef(null);
     //const getPlacement = useStableGetter(placement);

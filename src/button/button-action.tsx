@@ -158,7 +158,7 @@ export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, 
 
                     isPressedForSingleSelect = (toolbarChildInfo.singleSelectionChildReturn.singleSelected);
 
-                    let isPressed = toolbarChildInfo.singleSelectionChildReturn.singleSelected || toolbarChildInfo.multiSelectionChildReturn.multiSelected;
+                    let isPressed = isPressedForMultiSelect || toolbarChildInfo.singleSelectionChildReturn.singleSelected || toolbarChildInfo.multiSelectionChildReturn.multiSelected;
 
                     return (<ButtonStructure
                         ref={ref}

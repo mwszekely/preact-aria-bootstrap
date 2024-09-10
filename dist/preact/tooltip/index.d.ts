@@ -56,5 +56,5 @@ export interface TooltipProps extends GlobalAttributes<HTMLSpanElement, "childre
  *
  * E.G. a checkbox is TINY and can be hard to hover over, but we can't add ::after pseudo elements to increase its size because it's replaced.
  */
-export declare const Tooltip: ({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, hoverDelay, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) => import("preact-prop-helpers").JSX.Element;
+export declare const Tooltip: ({ forward, getElement, forceOpen, children, tooltip, placement, maxWidth, hoverDelay, containsTabbable, absolutePositioning, semanticType, alignMode, ...props }: TooltipProps, ref?: Ref<any>) => import("preact").h.JSX.Element;
 //# sourceMappingURL=index.d.ts.map

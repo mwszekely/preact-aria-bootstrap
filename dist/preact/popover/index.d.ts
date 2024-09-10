@@ -16,5 +16,5 @@ export interface PopoverProps {
     header?: ComponentChildren;
     imperativeHandle?: Ref<UseMenuSurfaceReturnType<HTMLDivElement, HTMLDivElement, HTMLButtonElement>>;
 }
-export declare function Popover({ children, label, align, buttonVariantDropdown, buttonVariantFill, buttonVariantSize, buttonVariantTheme, disabled, forceOpen, imperativeHandle, header, onSelectedIndexChange, selectedIndex, ...props }: PopoverProps, ref?: Ref<HTMLButtonElement>): import("preact-prop-helpers").JSX.Element;
+export declare function Popover({ children, label, align, buttonVariantDropdown, buttonVariantFill, buttonVariantSize, buttonVariantTheme, disabled, forceOpen, imperativeHandle, header, onSelectedIndexChange, selectedIndex, ...props }: PopoverProps, ref?: Ref<HTMLButtonElement>): import("preact").h.JSX.Element;
 //# sourceMappingURL=index.d.ts.map

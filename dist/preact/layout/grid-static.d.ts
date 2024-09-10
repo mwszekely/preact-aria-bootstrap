@@ -8,5 +8,5 @@ import { GlobalAttributes } from "../utility/types.js";
  */
 export declare const GridStatic: <E extends Element>({ columns, children, ...props }: {
     columns: number | string;
-} & GlobalAttributes<E, "children">, ref: Ref<E>) => import("preact").VNode<import("preact-prop-helpers").JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
+} & GlobalAttributes<E, "children">, ref: Ref<E>) => import("preact").VNode<import("preact").h.JSX.DOMAttributes<HTMLInputElement> & import("preact").ClassAttributes<HTMLInputElement>>;
 //# sourceMappingURL=grid-static.d.ts.map

@@ -67,8 +67,8 @@ export function usePopper<SourceElement extends Element, PopupElement extends HT
     const [usedSide, setUsedSide] = useState<Side | null>(null);
     const [usedAlignment, setUsedAlignment] = useState<Alignment | null>(null);
 
-    const [getMouseX, setMouseX] = usePassiveState(null, returnZero, runImmediately);
-    const [getMouseY, setMouseY] = usePassiveState(null, returnZero, runImmediately);
+    const [getMouseX, setMouseX] = usePassiveState(null, returnZero, { debounceRendering: runImmediately });
+    const [getMouseY, setMouseY] = usePassiveState(null, returnZero, { debounceRendering: runImmediately });
     const cachedRects = useRef<DOMRectList | null>(null);
     const cachedRect = useRef<DOMRectReadOnly | null>(null);
     //const getPlacement = useStableGetter(placement);

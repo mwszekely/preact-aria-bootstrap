@@ -6,6 +6,6 @@ export interface AccordionProps extends Partial<Pick<AriaAccordionProps<HTMLButt
 export interface AccordionSectionProps extends Pick<AriaAccordionSectionProps<HTMLDivElement, HTMLDivElement, HTMLDivElement>, "index">, Partial<Pick<AriaAccordionSectionProps<HTMLDivElement, HTMLDivElement, HTMLDivElement>, "open" | "untabbable" | "disabled" | "bodyRole">>, GlobalAttributes<HTMLDivElement, "children"> {
     header: ComponentChildren;
 }
-export declare const Accordion: ({ children, ...props }: AccordionProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
-export declare const AccordionSection: ({ index, children, header, bodyRole, disabled, untabbable, open, ...props }: AccordionSectionProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
+export declare const Accordion: ({ children, ...props }: AccordionProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
+export declare const AccordionSection: ({ index, children, header, bodyRole, disabled, untabbable, open, ...props }: AccordionSectionProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
 //# sourceMappingURL=index.d.ts.map

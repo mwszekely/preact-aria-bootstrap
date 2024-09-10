@@ -5,7 +5,7 @@ export declare function Pagination({ childCount, windowSize, onChange, labelPosi
     childCount: number;
     windowSize: number;
     onChange: (start: number | null, end: number | null) => void;
-}, never>): import("preact-prop-helpers").JSX.Element;
+}, never>): import("preact").h.JSX.Element;
 export declare const Paginated: import("preact").FunctionComponent<PaginatedProps<{
     children?: ComponentChildren;
     childCount: number;

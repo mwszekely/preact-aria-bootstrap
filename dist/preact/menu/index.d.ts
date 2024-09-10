@@ -12,21 +12,21 @@ export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children
      */
     anchor: VNode;
 }
-export declare const Menu: ({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) => import("preact-prop-helpers").JSX.Element;
+export declare const Menu: ({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) => import("preact").h.JSX.Element;
 export interface StructureMenuPopperProps extends GlobalAttributes<HTMLDivElement, "children"> {
 }
-export declare const StructureMenuPopper: ({ children, ...props }: StructureMenuPopperProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
+export declare const StructureMenuPopper: ({ children, ...props }: StructureMenuPopperProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
 export interface StructureMenuRootProps extends GlobalAttributes<HTMLDivElement, "children"> {
     popperOpen: boolean;
     typeaheadStatus: UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"];
     keyboardControlsDescription: string;
 }
-export declare const StructureMenuRoot: ({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }: StructureMenuRootProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
+export declare const StructureMenuRoot: ({ popperOpen, typeaheadStatus, children, keyboardControlsDescription, ...props }: StructureMenuRootProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
 export interface StructureMenuListProps extends GlobalAttributes<HTMLDivElement, "children"> {
 }
-export declare const StructureMenuList: ({ children, ...props }: StructureMenuListProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
-export declare const StructureMenuArrow: (props: GlobalAttributes<HTMLDivElement>, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
-export declare const StructureMenuFocusSentinel: (props: GlobalAttributes<HTMLDivElement>, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
+export declare const StructureMenuList: ({ children, ...props }: StructureMenuListProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
+export declare const StructureMenuArrow: (props: GlobalAttributes<HTMLDivElement>, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
+export declare const StructureMenuFocusSentinel: (props: GlobalAttributes<HTMLDivElement>, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
 export interface MenuItemProps extends GlobalAttributes<HTMLDivElement> {
     index: number;
     children?: ComponentChildren;
@@ -35,7 +35,7 @@ export interface MenuItemProps extends GlobalAttributes<HTMLDivElement> {
     getSortValue?: () => unknown;
     loadingLabel?: string;
 }
-export declare const MenuItem: ({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }: MenuItemProps, ref?: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
+export declare const MenuItem: ({ index, getSortValue, disabled, loadingLabel, onPress, children, ...props }: MenuItemProps, ref?: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
 export interface StructureMenuItemProps extends GlobalAttributes<HTMLDivElement, "children"> {
     showSpinner: boolean;
     disabled: boolean;

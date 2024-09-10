@@ -55,11 +55,12 @@ export function Toast({ timeout, politeness, children, ...p }: Omit<ToastProps, 
     const defaultTimeout = useContext(DefaultToastTimeout);
     // const { useToastProps, dismiss, status } = useToast<HTMLDivElement>({ timeout: timeout ?? defaultTimeout, politeness });
 
+    const t: number | null = 10000000
 
     return (
         <AriaToast<HTMLDivElement>
             index={index}
-            timeout={10000000 ?? timeout ?? defaultTimeout}
+            timeout={(((t) as never as number | null)) ?? timeout ?? defaultTimeout}
             children={children}
             render={info => {
                 const show = (info.toastReturn.showing);

@@ -22,9 +22,9 @@ type TypeaheadStatus = UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"];
 export declare const KeyboardAssistIcon: ({ description, activateEnter, activateSpace, leftRight, upDown, homeEnd, pageKeys, children, typeaheadStatus, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & {
     children?: VNode;
     typeaheadStatus: TypeaheadStatus | null;
-}, ref?: Ref<any>) => import("preact-prop-helpers").JSX.Element;
+}, ref?: Ref<any>) => import("preact").h.JSX.Element;
 export declare function KeyboardAssistProvider({ children }: {
     children?: ComponentChildren;
-}): import("preact-prop-helpers").JSX.Element;
+}): import("preact").h.JSX.Element;
 export {};
 //# sourceMappingURL=keyboard-assist.d.ts.map

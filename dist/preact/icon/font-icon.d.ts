@@ -8,5 +8,5 @@ export interface FontIconProps extends OmitStrong<IconProps<HTMLElement>, "child
  *
  *
  */
-export declare const FontIcon: (props: FontIconProps, ref: Ref<HTMLElement>) => import("preact-prop-helpers").JSX.Element;
+export declare const FontIcon: (props: FontIconProps, ref: Ref<HTMLElement>) => import("preact").h.JSX.Element;
 //# sourceMappingURL=font-icon.d.ts.map

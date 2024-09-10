@@ -26,13 +26,13 @@ export interface StructureDialogModalContentProps extends GlobalAttributes<HTMLS
     childrenBody: ComponentChildren;
     childrenFooter: ComponentChildren | null;
 }
-export declare const StructureDialogPortalRoot: ({ children, ...props }: StructureDialogPortalRootProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
-export declare const StructureDialogBackdrop: ({ open, modal, ...props }: StructureDialogBackdropProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
-export declare const StructureDialogModalTitle: ({ children, ...props }: StructureDialogModalTitleProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
-export declare const StructureDialogModalCloseButton: ({ onClose, ...props }: StructureDialogModalCloseButtonProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
-export declare const StructureDialogModalBody: ({ children, ...props }: StructureDialogModalBodyProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
-export declare const StructureDialogModalFooter: ({ children, ...props }: StructureDialogModalFooterProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element | null;
-export declare const StructureDialogModalDialog: ({ open, children, header, ...props }: StructureDialogModalDialogProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
-export declare const StructureDialogModalContent: ({ childrenHeading, childrenBody, childrenFooter, headerPosition, ...props }: StructureDialogModalContentProps, ref: Ref<HTMLSpanElement>) => import("preact-prop-helpers").JSX.Element;
-export declare const StructureDialogModal: ({ open, variantSize, fullscreen, children, ...props }: StructureDialogModalProps, ref: Ref<HTMLDivElement>) => import("preact-prop-helpers").JSX.Element;
+export declare const StructureDialogPortalRoot: ({ children, ...props }: StructureDialogPortalRootProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
+export declare const StructureDialogBackdrop: ({ open, modal, ...props }: StructureDialogBackdropProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
+export declare const StructureDialogModalTitle: ({ children, ...props }: StructureDialogModalTitleProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
+export declare const StructureDialogModalCloseButton: ({ onClose, ...props }: StructureDialogModalCloseButtonProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
+export declare const StructureDialogModalBody: ({ children, ...props }: StructureDialogModalBodyProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
+export declare const StructureDialogModalFooter: ({ children, ...props }: StructureDialogModalFooterProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element | null;
+export declare const StructureDialogModalDialog: ({ open, children, header, ...props }: StructureDialogModalDialogProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
+export declare const StructureDialogModalContent: ({ childrenHeading, childrenBody, childrenFooter, headerPosition, ...props }: StructureDialogModalContentProps, ref: Ref<HTMLSpanElement>) => import("preact").h.JSX.Element;
+export declare const StructureDialogModal: ({ open, variantSize, fullscreen, children, ...props }: StructureDialogModalProps, ref: Ref<HTMLDivElement>) => import("preact").h.JSX.Element;
 //# sourceMappingURL=structure.d.ts.map

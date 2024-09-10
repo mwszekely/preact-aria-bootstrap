@@ -71,7 +71,7 @@ export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, 
                 disabled ||= pending;
                 const d = disabled ? disabledType : false;
                 isPressedForSingleSelect = (toolbarChildInfo.singleSelectionChildReturn.singleSelected);
-                let isPressed = toolbarChildInfo.singleSelectionChildReturn.singleSelected || toolbarChildInfo.multiSelectionChildReturn.multiSelected;
+                let isPressed = isPressedForMultiSelect || toolbarChildInfo.singleSelectionChildReturn.singleSelected || toolbarChildInfo.multiSelectionChildReturn.multiSelected;
                 return (_jsx(ButtonStructure, { ref: ref, 
                     //Tag={(Tag) as never}
                     tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: isPressed, callCount: callCount, excludeSpace: toolbarChildInfo.pressParameters.excludeSpace || returnFalse, onPress: (e) => {

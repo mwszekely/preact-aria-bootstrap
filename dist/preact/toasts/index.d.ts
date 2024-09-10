@@ -7,14 +7,14 @@ export declare function ToastsProvider({ children, defaultTimeout, visibleCount 
     children?: ComponentChildren;
     visibleCount: number;
     defaultTimeout?: number;
-}): import("preact").JSX.Element;
+}): import("preact").h.JSX.Element;
 export declare function usePushToast(): (child: import("preact-prop-helpers").VNode) => number;
 export declare function useUpdateToast(): (index: number, child: import("preact-prop-helpers").VNode) => void;
 export interface ToastProps extends Pick<AriaToastProps<HTMLDivElement>, "politeness" | "index"> {
     children?: ComponentChildren;
     timeout?: number;
 }
-export declare function Toast({ timeout, politeness, children, ...p }: Omit<ToastProps, "index">): import("preact").JSX.Element;
+export declare function Toast({ timeout, politeness, children, ...p }: Omit<ToastProps, "index">): import("preact").h.JSX.Element;
 /**
  * A component that will catch any errors thrown during render
  * and present them as toasts.
@@ -32,6 +32,6 @@ export declare class ToastErrorBoundary extends Component<{
     pushedToast: boolean;
 }> {
     componentDidCatch(error: any, errorInfo: ErrorInfo): void;
-    render(): import("preact").JSX.Element;
+    render(): import("preact").h.JSX.Element;
 }
 //# sourceMappingURL=index.d.ts.map

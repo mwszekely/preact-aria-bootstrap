@@ -30,6 +30,6 @@ interface TypeItalicsProps extends TypePropsBase<HTMLElement> {
     semantics: "emphasized" | "idiomatic" | "none";
 }
 export type TypeProps = (TypeLeadProps | TypeHighlightProps | TypeStrikeProps | TypeUnderlineProps | TypeSmallProps | TypeBoldProps | TypeItalicsProps);
-export declare const Type: ({ type, ...rest }: TypeProps, ref: Ref<any>) => import("preact-prop-helpers").JSX.Element | null;
+export declare const Type: ({ type, ...rest }: TypeProps, ref: Ref<any>) => import("preact").h.JSX.Element | null;
 export {};
 //# sourceMappingURL=index.d.ts.map
