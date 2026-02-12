@@ -81,7 +81,7 @@
         }
     </style>
     <script>
-
+        window._monitor_call_duration = true;
         window.onerror = function (e) {
             debugger;
             for (let p of arguments) {
@@ -96,7 +96,7 @@
     <div id="portal"></div>
     <div id="aria-notifications-polite" class="visually-hidden" aria-live="polite"></div>
     <div id="aria-notifications-assertive" class="visually-hidden" aria-live="assertive"></div>
-    <script src="./bundle.js"></script>
+    <script src="./index.js"></script>
 </body>
 
 </html>

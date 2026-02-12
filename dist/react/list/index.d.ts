@@ -1,4 +1,4 @@
-import { AsyncHandler, ComponentChildren, JSX, Nullable, Ref, VNode } from "preact-prop-helpers";
+import { AsyncHandler, ComponentChildren, JSX, Nullable, Ref } from "preact-prop-helpers";
 import { ButtonThemes } from "../context.js";
 import { GlobalAttributes, LabelledProps, PaginatedProps } from "../utility/types.js";
 export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> {
@@ -26,7 +26,7 @@ export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> 
      * When `selectionMode` is `"single"`, this is called to change the selected index.
      */
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
-    children: VNode[];
+    children: JSX.Element[];
 }
 export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "children"> {
     /**
@@ -60,7 +60,7 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     /**
      * A visual indicator in the corner of the list item. Read out alongside the main contents as one long string, so label it well.
      */
-    badge?: VNode;
+    badge?: JSX.Element;
     loadingLabel?: string;
     /**
      * Optional. Only necessary if this is an "action-only" list; it's not needed for selection behavior.

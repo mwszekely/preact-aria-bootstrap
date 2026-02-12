@@ -1,4 +1,4 @@
-import { cloneElement, JSX, memo, Ref, useMergedProps, VNode } from "preact-prop-helpers";
+import { cloneElement, JSX, memo, Ref, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 
 
@@ -17,7 +17,7 @@ export interface IconProps<E extends Element> extends Omit<JSX.HTMLAttributes<E>
      */
     //tooltip?: ComponentChild;
 
-    children?: VNode;
+    children?: JSX.Element;
 }
 
 export const Icon = /* @__PURE__ */ memo(forwardElementRef(function Icon<E extends Element>({ label, role, "aria-label": ariaLabel, children, ref: unused, ...props }: IconProps<E>, ref: Ref<HTMLElement>) {

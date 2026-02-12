@@ -1,7 +1,7 @@
 import { createElement as _createElement } from "preact";
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "preact/jsx-runtime";
 import { clsx } from "clsx";
-import { Gridlist, GridlistChild, GridlistRow, GridlistRows, ProgressWithHandler } from "preact-aria-widgets";
+import { Gridlist, GridlistCell, GridlistRow, ProgressWithHandler } from "preact-aria-widgets";
 import { EventDetail, createContext, forwardRef, memo, returnUndefined, useCallback, useContext, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { useAutoAsyncHandler } from "../context.js";
@@ -25,12 +25,11 @@ export const List = /* @__PURE__ */ memo(forwardRef((function List({ disabled, s
         paginationLocation ||= "before";
     if (labelPosition == "hidden")
         console.assert(typeof label == "string", `<List />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
-    return (_jsx(DefaultDisabled.Provider, { value: disabled ?? false, children: _jsx(Gridlist, { initiallyTabbableColumn: 1, singleSelectedIndex: selectedIndex ?? null, singleSelectionAriaPropName: "aria-selected", onSingleSelectedIndexChange: useStableCallback(e => { debugger; onSelectedIndexChange?.(e[EventDetail].selectedIndex); }), paginationMin: paginationStart, paginationMax: paginationEnd, ariaLabel: labelPosition == "hidden" ? label : null, groupingType: "without-groups", singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", render: info => {
-                const labelJsx = _jsx("label", { ...info.propsGridlistLabel, children: label });
+    return (_jsx(DefaultDisabled.Provider, { value: disabled ?? false, children: _jsx(Gridlist, { initiallyTabbableColumn: 1, singleSelectedIndex: selectedIndex ?? null, singleSelectionAriaPropName: "aria-selected", onSingleSelectedIndexChange: useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex); }), paginationMin: paginationStart, paginationMax: paginationEnd, staggered: staggered || false, ariaLabel: labelPosition == "hidden" ? label : null, singleSelectionMode: selectionMode == "single" ? "activation" : "disabled", multiSelectionMode: selectionMode == "multi" ? "activation" : "disabled", children: children, render: info => {
+                info.rearrangeableChildrenReturn.children;
+                const labelJsx = _jsx("label", { ...info.propsLabel, children: label });
                 children ??= [];
-                return (_jsxs(TypeaheadStatus.Provider, { value: info.typeaheadNavigationReturn.typeaheadStatus, children: [labelPosition == "before" && labelJsx, _jsx(Paginated, { childCount: children.length ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: _jsx("div", { ...useMergedProps(props, info.propsGridlist, { ref, class: `list-group gridlist-group` }), children: _jsx(GridlistRows, { children: children, paginationMin: paginationStart, paginationMax: paginationEnd, staggered: staggered || false, render: useCallback(infoRows => {
-                                        return (_jsx(_Fragment, { children: infoRows.rearrangeableChildrenReturn.children }));
-                                    }, []) }) }) }), labelPosition == "after" && labelJsx] }));
+                return (_jsxs(TypeaheadStatus.Provider, { value: info.typeaheadNavigationReturn.typeaheadStatus, children: [labelPosition == "before" && labelJsx, _jsx(Paginated, { childCount: children.length ?? 0, paginationLabel: paginationLabel, paginationLocation: paginationLocation, paginationSize: paginationSize, setPaginationEnd: setPaginationEnd, setPaginationStart: setPaginationStart, children: _jsx("div", { ...useMergedProps(props, info.props, { ref, class: `list-group gridlist-group` }), children: info.rearrangeableChildrenReturn.children }) }), labelPosition == "after" && labelJsx] }));
             } }) }));
 })));
 const ListItemNonPaginated = /* @__PURE__ */ memo((function ListItemNonPaginated({ onPressSync, infoRowProps, hideBecausePaginated, hideBecauseStaggered, excludeSpace, onPress, loadingLabel, badge, disabled, iconEnd, iconStart, variantTheme, selected, keyboardControlsDescription, children, props, ref2 }) {
@@ -73,7 +72,7 @@ const ListItemNonPaginated = /* @__PURE__ */ memo((function ListItemNonPaginated
                     return null;
                 else
                     return _jsx("div", { "aria-busy": "true", className: "gridlist-item gridlist-item-placeholder", children: _jsx("span", { className: clsx(!show ? "opacity-100" : "opacity-0", "placeholder-glow"), children: _jsx("span", { className: "placeholder w-100" }) }) });
-            return (_jsx(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select a list item:", children: _jsx("div", { "aria-busy": (!show), ...finalPropsForDiv, children: show && c }) }));
+            return (_jsx(KeyboardAssistIcon, { leftRight: (!!iconStart || !!iconEnd), upDown: true, homeEnd: true, pageKeys: true, typeaheadStatus: typeaheadStatus, activateSpace: typeaheadStatus == 'none', activateEnter: true, description: keyboardControlsDescription ?? "Select a list item:", children: _jsx("div", { "aria-busy": show ? undefined : "true", ...finalPropsForDiv, children: show && c }) }));
         } }));
 }));
 export const ListItem = /* @__PURE__ */ memo(forwardElementRef((function ListItem({ index, keyboardControlsDescription, variantTheme, children, selected, disabled, iconEnd, iconStart, badge, onPress, loadingLabel, onSelectedChange, ...props }, ref) {
@@ -83,21 +82,24 @@ export const ListItem = /* @__PURE__ */ memo(forwardElementRef((function ListIte
     return (_jsx(GridlistRow, { index: index, singleSelectionDisabled: disabled, noTypeahead: true, getText: useCallback((e) => { return e?.querySelector(".gridlist-item-text")?.textContent || ""; }, []), render: infoRow => {
             const p2 = (props);
             const p3 = useMergedProps(infoRow.props, props);
-            if (infoRow.paginatedChildReturn.hideBecausePaginated)
-                return _createElement("div", { ...p3, key: "hide-because-paginated" });
-            // TODO: Get a better placeholder system
-            if (infoRow.hidden)
-                return _createElement("div", { ...p3, key: "hide-because-staggered", className: `gridlist-item gridlist-item-placeholder list-group-item`, role: "option", "aria-busy": "true" }); // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
-            return _jsx(ListItemNonPaginated, { keyboardControlsDescription: keyboardControlsDescription, infoRowProps: infoRow.props, excludeSpace: infoRow.pressParameters.excludeSpace, onPressSync: infoRow.pressParameters.onPressSync, onPress: onPress, hideBecausePaginated: false, hideBecauseStaggered: false, loadingLabel: loadingLabel, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: p2, ref2: ref }, "show");
+            if (infoRow.hide) {
+                if (infoRow.paginatedChildReturn.hideBecausePaginated)
+                    return _createElement("div", { ...p3, key: "hide-because-paginated" });
+                else //if (infoRow.staggeredChildReturn.hideBecauseStaggered)
+                    return _createElement("div", { ...p3, key: "hide-because-staggered", className: `gridlist-item gridlist-item-placeholder list-group-item`, role: "option", "aria-busy": "true" }); // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
+            }
+            else {
+                return _jsx(ListItemNonPaginated, { keyboardControlsDescription: keyboardControlsDescription, infoRowProps: infoRow.props, excludeSpace: infoRow.pressParameters.excludeSpace, onPressSync: infoRow.selectionChildReturn.firePressSelectionEvent, onPress: onPress, hideBecausePaginated: false, hideBecauseStaggered: false, loadingLabel: loadingLabel, badge: badge, children: children, disabled: disabled, iconEnd: iconEnd, iconStart: iconStart, selected: selected, variantTheme: variantTheme, props: p2, ref2: ref }, "show");
+            }
         } }));
 })));
 const ListItemText = /* @__PURE__ */ memo(forwardElementRef((function ListItemText({ onPress, children, ...props }, ref) {
-    return (_jsx(GridlistChild, { index: 1, onPressSync: onPress, render: infoCell => {
+    return (_jsx(GridlistCell, { index: 1, onPressSync: onPress, render: infoCell => {
             return (_jsx("div", { ...useMergedProps(infoCell.propsCell, infoCell.propsPress, infoCell.propsTabbable, props, { ref }, { class: clsx("gridlist-item-text") }), children: children }));
         } }));
 })));
 const ListItemStartEnd = /* @__PURE__ */ memo((function ListItemStartEnd({ hidden, index, children }) {
-    return (_jsx(GridlistChild, { index: index, untabbable: hidden, focusSelf: useStableCallback(e => {
+    return (_jsx(GridlistCell, { index: index, untabbable: hidden, focusSelf: useStableCallback(e => {
             e.focus();
         }), render: infoCell => {
             const ret = (_jsx("div", { className: clsx("list-group-item-icon", `list-group-item-icon-${index === 0 ? "start" : "end"}`), children: useClonedElement(children, useMergedProps(infoCell.propsCell, infoCell.propsTabbable), undefined) }));

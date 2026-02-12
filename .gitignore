@@ -14,6 +14,8 @@ demo/index.css.map
 demo/index.d.ts
 demo/index.d.ts.map
 !dist/**
+playwright-report/
+playwright-report/**
 
 # Logs
 logs

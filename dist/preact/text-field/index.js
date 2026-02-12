@@ -282,7 +282,7 @@ const TextFieldBase = /* @__PURE__ */ memo(forwardElementRef(function TextFieldB
             };
             const labelJsx = (_jsx("label", { className: clsx(!withinInputGroup ? "form-label" : "input-group-text"), ...useMergedProps(propsLabel1, propsLabel2, propsLabel), children: label }));
             const inputJsx = _jsx("input", { ...dataProps, inputMode: inputMode || undefined, autocomplete: autocomplete || undefined, placeholder: placeholder ?? undefined, readonly: readonly, onInput: onInput, ...useMergedProps({ ref }, p1, p2, propsInput1, propsInput2, { className: clsx(baseInputClass) }, propsInput) });
-            const textAreaJsx = _jsx("textarea", { ...dataProps, placeholder: placeholder ?? undefined, readonly: readonly, onInput: onInput, rows: rows ?? 1, ...useMergedProps({ ref }, p1, p2, { className: clsx(baseInputClass, resizeable && "resizeable") }, propsInput1, propsInput2, propsInput) });
+            const textAreaJsx = _jsx("textarea", { ...dataProps, placeholder: placeholder ?? undefined, readOnly: readonly, onInput: onInput, rows: rows ?? 1, ...useMergedProps({ ref }, p1, p2, { className: clsx(baseInputClass, resizeable && "resizeable") }, propsInput1, propsInput2, propsInput) });
             const finalInputJsx = (isTextArea ? textAreaJsx : inputJsx);
             if (!withinInputGroup) {
                 return (_jsxs("div", { ...useMergedProps({

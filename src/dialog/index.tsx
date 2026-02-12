@@ -37,7 +37,7 @@ export const Dialog = /* @__PURE__ */ memo(forwardElementRef(function Dialog({ o
         console.assert(typeof header == "string", `<Dialog />: A dialog whose label is hidden must provide the label to use as a string to the header`);
     }
     return (
-        <AriaDialog<HTMLDivElement, HTMLSpanElement, HTMLDivElement, HTMLSpanElement>
+        <AriaDialog<HTMLSpanElement, HTMLSpanElement, HTMLDivElement, HTMLSpanElement>
 
             ariaLabel={headerPosition == "hidden" ? header as string : null}
             active={open}
@@ -52,7 +52,7 @@ export const Dialog = /* @__PURE__ */ memo(forwardElementRef(function Dialog({ o
                     <StructureDialogModalCloseButton onClose={onClose} />
                 </>)
                 const bodyJsx = <StructureDialogModalBody>{children}</StructureDialogModalBody>
-                const footerJsx = (<StructureDialogModalFooter>{footer}</StructureDialogModalFooter>);
+                const footerJsx = <StructureDialogModalFooter>{footer}</StructureDialogModalFooter>;
 
                 return (
                     <>
@@ -60,11 +60,12 @@ export const Dialog = /* @__PURE__ */ memo(forwardElementRef(function Dialog({ o
                         {useDefaultRenderPortal({
                             portalId: usePortalId("dialog"),
                             children: (
-                                <StructureDialogPortalRoot {...useMergedProps(info.propsFocusContainer, propsPortal || {})}>
-                                    <StructureDialogModal fullscreen={fullscreen} open={open} variantSize={variantSize} {...(info.propsDialog as {})}>
+                                <StructureDialogPortalRoot {...propsPortal}>
+                                    <StructureDialogModal fullscreen={fullscreen} open={open} variantSize={variantSize}>
                                         <StructureDialogBackdrop open={open} modal={modal} />
-                                        <StructureDialogModalDialog open={open} header={header}>
+                                        <StructureDialogModalDialog {...info.propsDialog} open={open} header={header}>
                                             <StructureDialogModalContent
+                                                {...info.propsFocusContainer}
                                                 childrenHeading={headingJsx}
                                                 childrenBody={bodyJsx}
                                                 childrenFooter={footerJsx}

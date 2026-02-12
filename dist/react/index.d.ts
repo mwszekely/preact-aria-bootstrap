@@ -5,7 +5,7 @@ export { Button, ButtonGroup, type ButtonGroupProps, type ButtonProps } from "./
 export { Card, CardElement, CardGroup, type CardElementProps } from "./card/index.js";
 export { CheckboxGroup, CheckboxGroupChild, type CheckboxGroupChildProps, type CheckboxGroupProps } from "./checkbox-group/index.js";
 export { Checkbox, type CheckboxProps } from "./checkbox/index.js";
-export { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext, AutoAsyncHandlers, type ButtonFills, type ButtonSizes, type ButtonThemes } from "./context.js";
+export { AutoAsyncHandlers, DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext, type ButtonFills, type ButtonSizes, type ButtonThemes } from "./context.js";
 export { Dialog, type DialogProps } from "./dialog/index.js";
 export { Figure, type FigureProps } from "./figure/index.js";
 export { BootstrapIcon, FontIcon, type BootstrapIconProps, type FontIconProps } from "./icon/index.js";
@@ -18,7 +18,7 @@ export { Popover, type PopoverProps } from "./popover/index.js";
 export { Radio, RadioGroup } from "./radio/index.js";
 export { DocumentField, RichTextField, RichTextView, type DocumentFieldProps, type RichTextFieldProps } from "./rich-text-field/index.js";
 export { Range, RangeThumb } from "./slider/index.js";
-export { DataTable, DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableRow, type DataTableBodyProps, type DataTableCellProps, type DataTableFootProps, type DataTableHeadProps, type DataTableProps, type DataTableRowProps } from "./table/index.js";
+export { DataTable, DataTableBodyRow, DataTableCell, DataTableHeadRow, type DataTableCellProps, type DataTableProps } from "./table/index.js";
 export { Tab, TabPanel, Tabs, type TabPanelProps, type TabProps, type TabsProps } from "./tabs/index.js";
 export { TextField, type TextFieldBigIntProps, type TextFieldDateProps, type TextFieldDateTimeProps, type TextFieldNumberProps, type TextFieldProps, type TextFieldTextAreaProps, type TextFieldTextInputProps, type TextFieldTextProps, type TextFieldTimeProps } from "./text-field/index.js";
 export { Toast, ToastsProvider, usePushToast, useUpdateToast, type PushToast, type ToastProps } from "./toasts/index.js";

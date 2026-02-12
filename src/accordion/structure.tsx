@@ -52,7 +52,7 @@ export const StructureAccordionSectionHeader = /* @__PURE__ */ memoForwardRef(fu
 
 export const StructureAccordionSectionHeaderButton = /* @__PURE__ */ memoForwardRef(function Structure({ children, ...props }: StructureAccordionSectionHeaderButtonProps, ref: Ref<HTMLButtonElement>) {
     return (
-        <button {...useMergedProps<HTMLButtonElement>({ class: "accordion-button", type: "button" }, { ...props, ref })}>{children}</button>
+        <button {...useMergedProps<HTMLButtonElement>({ class: "accordion-button", type: "button" } as {}, { ...props, ref })}>{children}</button>
     )
 });
 

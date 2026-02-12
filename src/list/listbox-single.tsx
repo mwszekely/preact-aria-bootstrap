@@ -1,10 +1,10 @@
-import { SelectedIndexChangeEvent } from "preact-prop-helpers";
+import { SingleSelectionChangeEvent } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 
 export interface ListboxSingleProps {
     selectedIndex: number | null;
     staggered?: boolean;
-    onSelectedIndexChange: (nextIndex: number | null, event: SelectedIndexChangeEvent) => void;
+    onSelectedIndexChange: (nextIndex: number | null, event: SingleSelectionChangeEvent) => void;
 }
 
 export interface ListboxSingleItemProps extends GlobalAttributes<HTMLLIElement> {

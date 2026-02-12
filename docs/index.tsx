@@ -4,13 +4,12 @@ import { Ref, render } from "preact";
 import { focus } from "preact-prop-helpers";
 import { forwardRef, memo } from "preact/compat";
 import { useCallback, useMemo, useState } from "preact/hooks";
-import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, DataTable, DataTableBody, DataTableCell, DataTableHead, DataTableRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast } from "../dist/preact/index.js";
+import { Accordion, AccordionSection, AllProviders, Badge, BootstrapIcon, Button, Button as ButtonAction, Checkbox, DataTable, DataTableBodyRow, DataTableCell, DataTableHeadRow, Dialog, List, ListItem, Menu, MenuItem, Offcanvas, Range, RangeThumb, Tab, TabPanel, Tabs, TextField, Toast, usePushToast } from "../dist/preact/index.js";
 import * as ButtonB from "./demos/button.js";
-import * as Checkbox from "./demos/checkbox.js";
+import * as CheckboxD from "./demos/checkbox.js";
 import * as Radio from "./demos/radio.js";
 import * as TextFieldD from "./demos/text-field.js";
 import * as Tooltip from "./demos/tooltip.js";
-
 
 //(window as any)._generate_setState_stacks = true;
 
@@ -124,11 +123,21 @@ function MenuDemo() {
 
 function DialogDemo() {
     const [open, setOpen] = useState(false);
+    const [modal, setModal] = useState<boolean>(false);
+    const [fullscreen, setFullscreen] = useState<boolean>(false);
 
     return (
-        <Dialog open={open} modal onClose={() => setOpen(false)} header={<span>Dialog title</span>} anchor={<ButtonAction onPress={() => setOpen(true)}>Open dialog</ButtonAction>}>
-            <div>This is the dialog content</div>
-        </Dialog>
+        <>
+            <Checkbox label="Modal" checked={modal} onValueChange={setModal} />
+            <Dialog
+                open={open}
+                modal={modal}
+                fullscreen={fullscreen}
+                onClose={() => setOpen(false)} header={<span>Dialog title</span>}
+                anchor={<ButtonAction onPress={() => setOpen(true)}>Open dialog</ButtonAction>}>
+                <div>This is the dialog content</div>
+            </Dialog>
+        </>
     )
 }
 
@@ -167,7 +176,6 @@ function SliderDemo() {
 function ToastsDemo() {
     const pushToast = usePushToast();
     const [mountError, setMountError] = useState(false);
-
     return (
         <div>
             <Button onPress={() => { pushToast(<Toast timeout={2000}>This is a toast</Toast>) }}>Push toast</Button>
@@ -188,38 +196,39 @@ const RandomWords = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 
 function TableDemo() {
     let [count, setCount] = useState(100 as number | null);
-    const [paginationWindow, setPaginationWindow] = useState(10 as number | null);
-    count ??= 0;
-    return (
-        <div>
-            <TextField type="number" value={count} onValueChange={setCount} label="# of children" labelPosition="floating" />
-            <TextField type="number" value={paginationWindow} onValueChange={setPaginationWindow} label="Pagination window" labelPosition="floating" />
-            <DataTable captionPosition="before" caption="Table demo" paginationSize={paginationWindow} paginationLocation="before">
-                <DataTableHead>
-                    <DataTableRow row={0}>
-                        <DataTableCell column={0}>Numeric</DataTableCell>
-                        <DataTableCell column={1}>String</DataTableCell>
-                        <DataTableCell column={2}>Date</DataTableCell>
-                        <DataTableCell column={3}>Input</DataTableCell>
-                    </DataTableRow>
-                </DataTableHead>
-                <TableDemoBody count={count} />
-            </DataTable>
-        </div>
-    )
-}
+    let [paginationWindow, setPaginationWindow] = useState(10 as number | null);
+    if (typeof paginationWindow == 'number' && !isFinite(paginationWindow))
+        paginationWindow = null;
 
-const TableDemoBody = memo(({ count }: { count: number }) => {
-    console.log("Table body demo rendered");
+    count ??= 0;
     const children = useMemo(() => Array.from(function* () {
+        count ??= 0;
         for (let i = 0; i < count; ++i) {
             yield <TableDemoRow key={i} row={i} />
         }
     }()), [count])
     return (
-        <DataTableBody>{children}</DataTableBody>
+        <div>
+            <TextField type="number" value={count} onValueChange={setCount} label="# of children" labelPosition="floating" />
+            <TextField type="number" value={paginationWindow} onValueChange={setPaginationWindow} label="Pagination window" labelPosition="floating" />
+            <DataTable
+                captionPosition="before"
+                caption="Table demo"
+                paginationSize={paginationWindow}
+                paginationLocation="before"
+                paginationLabel="Table page selector"
+                header={
+                    <DataTableHeadRow row={0}>
+                        <DataTableCell column={0}>Numeric</DataTableCell>
+                        <DataTableCell column={1}>String</DataTableCell>
+                        <DataTableCell column={2}>Date</DataTableCell>
+                        <DataTableCell column={3}>Input</DataTableCell>
+                    </DataTableHeadRow>
+                }
+            >{children}</DataTable>
+        </div>
     )
-})
+}
 
 const baseDate = new Date();
 
@@ -230,12 +239,12 @@ const TableDemoRow = memo(function TableDemoRow({ row }: { row: number }) {
     const [value, setValue] = useState(0 as number | null);
     console.log("Table row demo rendered")
     return (
-        <DataTableRow row={numeric}>
+        <DataTableBodyRow row={numeric}>
             <DataTableCell column={0} value={row} />
             <DataTableCell column={1} value={word} />
             <DataTableCell column={2} value={date}>{date.toLocaleString()}</DataTableCell>
             <DataTableCell column={3} fillY><TextField type="number" marginBottom={0} value={value} onValueChange={setValue} min={0} max={numeric} labelPosition="hidden" label="Numeric input within a table cell" /></DataTableCell>
-        </DataTableRow>
+        </DataTableBodyRow>
     )
 })
 
@@ -269,7 +278,7 @@ const Component = () => {
     return (<div>
         <AllProviders targetAssertive="aria-notifications-assertive" targetPolite="aria-notifications-polite">
             <Tabs
-                localStorageKey="main-demo-page-selected-tab-index"
+                localStorageKey={"main-demo-page-selected-tab-index" as never}
                 label="Select the demo to view"
                 labelPosition="hidden"
                 orientation="horizontal"
@@ -290,7 +299,7 @@ const Component = () => {
                 </>}
                 panels={<>
                     <TabPanel index={i1++}><ButtonB.Demo /></TabPanel>
-                    <TabPanel index={i1++}><Checkbox.Demo /></TabPanel>
+                    <TabPanel index={i1++}><CheckboxD.Demo /></TabPanel>
                     <TabPanel index={i1++}><MenuDemo /></TabPanel>
                     <TabPanel index={i1++}><Tooltip.Demo /></TabPanel>
                     <TabPanel index={i1++}><Radio.Demo /></TabPanel>

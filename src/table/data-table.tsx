@@ -1,18 +1,17 @@
 
 import clsx from "clsx";
-import { Table as AriaTable, TableCell as AriaTableCell, TableRow as AriaTableRow, TableSection as AriaTableSection, TableRows } from "preact-aria-widgets";
-import { ComponentChildren, Ref, VNode, createContext, memo, useContext, useLayoutEffect, useMemo, useMergedProps, usePress, useRefElement, useStableGetter, useState } from "preact-prop-helpers";
-import { Fade } from "preact-transition";
+import { Table as AriaTable, TableBody as AriaTableBody, TableBodyRow as AriaTableBodyRow, TableCell as AriaTableCell, TableHead as AriaTableHead, TableHeadRow as AriaTableHeadRow } from "preact-aria-widgets";
+import { ComponentChildren, JSX, Ref, createContext, memo, useContext, useMergedProps, useState } from "preact-prop-helpers";
 import { Paginated } from "../pagination/index.js";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
-import { KeyboardAssistIcon } from "../utility/keyboard-assist.js";
-import { CaptionedProps, GlobalAttributes, PaginatedProps } from "../utility/types.js";
-import { useClonedElement } from "../utility/use-cloned-element.js";
-import { Table, TableCell, TableCellProps, TableProps, TableRow, TableRowProps, TableSection, TableSectionProps } from "./table.js";
+import { CaptionedProps, PaginatedProps } from "../utility/types.js";
+import { Table, TableCell, TableCellProps, TableProps, TableRow } from "./table.js";
 
 export interface DataTableProps extends TableProps {
-    children?: ComponentChildren;
+    children: JSX.Element[];
     staggered?: boolean;
+    header?: ComponentChildren;
+    // footer?: ComponentChildren;
 }
 
 
@@ -33,59 +32,170 @@ export interface DataTableCellProps extends Omit<TableCellProps, "tableHeadType"
     unsortable?: boolean;
 }
 
-// Allow for nicer props (on the Table instead of the TableSection)
-const TableContext = createContext<{ paginationMin: number | null, paginationMax: number | null, staggered: boolean, setChildCount: (null) | ((c: number) => void) }>({ setChildCount: null, paginationMax: null, paginationMin: null, staggered: false });
+//export interface DataTableHeadProps {
+//    children?: ComponentChildren;
+//}
 
-export const DataTable = /* @__PURE__ */ memo(forwardElementRef(function DataTable({ staggered, caption, captionPosition, bordered, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }: PaginatedProps<CaptionedProps<DataTableProps>>, ref?: Ref<HTMLTableElement>) {
+//export interface DataTableBodyProps {
+//    children: VNode[];
+//}
+
+export interface DataTableHeadRowProps {
+    row: number;
+    children?: ComponentChildren;
+}
+
+export interface DataTableBodyRowProps {
+    row: number;
+    children?: ComponentChildren;
+}
+
+const IsTableHeadContext = createContext(false);
+
+
+// Allow for nicer props (on the Table instead of the TableSection)
+//const TableContext = createContext<{ paginationMin: number | null, paginationMax: number | null, staggered: boolean, setChildCount: (null) | ((c: number) => void) }>({ setChildCount: null, paginationMax: null, paginationMin: null, staggered: false });
+
+export const DataTable = /* @__PURE__ */ memo(forwardElementRef(function DataTable({ staggered, caption, captionPosition, bordered, header, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }: PaginatedProps<CaptionedProps<DataTableProps>>, ref?: Ref<HTMLTableElement>) {
 
     staggered ||= false;
-    const [childCount, setChildCount] = useState(0);
-    const [paginationStart, setPaginationStart] = useState<number | null>(0);
+    const [paginationStart, setPaginationStart] = useState<number | null>(paginationSize == null ? null : 0);
     const [paginationEnd, setPaginationEnd] = useState<number | null>(paginationSize ?? null);
     if (caption == "hidden")
         console.assert(typeof caption == "string", `<DataTable />: When labelPosition is 'hidden', the label must be a string (as opposed to arbitrary JSX)`);
     return (
-        <TableContext.Provider value={useMemo(() => ({ setChildCount, paginationMax: paginationEnd, paginationMin: paginationStart, staggered: staggered! }), [setChildCount, paginationStart, paginationEnd, staggered])}>
-            <AriaTable<HTMLTableElement, HTMLTableCaptionElement>
-                ariaLabel={captionPosition == "hidden" ? caption as string : null}
+        //<TableContext.Provider value={useMemo(() => ({ setChildCount, paginationMax: paginationEnd, paginationMin: paginationStart, staggered: staggered! }), [setChildCount, paginationStart, paginationEnd, staggered])}>
+        <AriaTable<HTMLTableElement, HTMLTableRowElement, HTMLTableCaptionElement>
+            paginationMin={paginationStart}
+            paginationMax={paginationEnd}
+            //staggered={staggered || false}
+            ariaLabel={captionPosition == "hidden" ? caption as string : null}
+            noTypeahead={true}  // TODO: Fix this? This should be doable
 
-                singleSelectionMode="activation"
-                tagTable="table"
-                render={info => {
+            singleSelectionMode="activation"
+            tagTable="table"
+            render={infoTable => {
+                return (
+                    <Paginated childCount={children.length ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
+                        {caption && captionPosition != "hidden" && <caption {...useMergedProps(infoTable.propsLabel, { className: clsx(captionPosition == "before" && "caption-top") })}>{caption}</caption>}
+                        <Table
+                            bordered={bordered}
+                            dark={dark}
+                            hover={hover}
+                            propsContainer={propsContainer}
+                            striped={striped}
+                            stripedColumns={stripedColumns}
+                            variantBorder={variantBorder}
+                            variantSize={variantSize}
+                            variantTheme={variantTheme}
+                            verticalAlign={verticalAlign}
+                            {...useMergedProps(infoTable.propsTable, { className: "table" }, { ref, ...props })}
+                        >
 
-                    return (
-                        <Paginated
-                            childCount={childCount}
-                            setPaginationEnd={setPaginationEnd}
-                            setPaginationStart={setPaginationStart}
-                            paginationLabel={paginationLabel}
-                            paginationLocation={paginationLocation}
-                            paginationSize={paginationSize}>
-
-                            {caption && captionPosition != "hidden" && <caption {...useMergedProps(info.propsLabel, { className: clsx(captionPosition == "before" && "caption-top") })}>{caption}</caption>}
-                            <Table
-                                bordered={bordered}
-                                dark={dark}
-                                hover={hover}
-                                propsContainer={propsContainer}
-                                striped={striped}
-                                stripedColumns={stripedColumns}
-                                variantBorder={variantBorder}
-                                variantSize={variantSize}
-                                variantTheme={variantTheme}
-                                verticalAlign={verticalAlign}
-                                {...useMergedProps(info.propsTable, { className: "table" }, { ref, ...props })}
-                            >
-                                {children}
-                            </Table>
-                        </Paginated>
-                    )
-                }}
-            />
-        </TableContext.Provider>
+                            <IsTableHeadContext.Provider value={true}>
+                                <AriaTableHead<HTMLTableSectionElement>
+                                    tagHead="thead"
+                                    render={infoHead => {
+                                        return (
+                                            <thead {...infoHead.props}>
+                                                {header}
+                                            </thead>
+                                        )
+                                    }}
+                                />
+                            </IsTableHeadContext.Provider>
+                            <AriaTableBody<HTMLTableSectionElement, HTMLTableRowElement>
+                                tagTableSection="tbody"
+                                paginationMin={paginationStart}
+                                paginationMax={paginationEnd}
+                                children={children}
+                                render={infoBody => {
+                                    return (
+                                        <tbody {...infoBody.propsTableSection} >
+                                            {infoBody.rearrangeableChildrenReturn.children}
+                                        </tbody>
+                                    );
+                                }}
+                            />
+                        </Table>
+                    </Paginated>
+                )
+            }}
+        />
+        //</TableContext.Provider>
     )
-}))
+}));
 
+
+export const DataTableHeadRow = /* @__PURE__ */ memo(forwardElementRef(function DataTableHeadRow({ row, children }: DataTableHeadRowProps, ref?: Ref<HTMLTableRowElement>) {
+    return (
+        <AriaTableHeadRow<HTMLTableRowElement, HTMLTableCellElement> index={row} tagTableRow="tr" render={info => {
+            return (
+                <TableRow {...info.props} ref={ref}>
+                    {children}
+                </TableRow>
+            );
+        }} />
+    );
+}));
+
+
+const DataTableBodyRowNonPaginated = /* @__PURE__ */ memo(forwardElementRef(function DataTableBodyRowNonPaginated({ row, children, ...props }: DataTableBodyRowProps, ref?: Ref<HTMLTableRowElement>) {
+    return (
+        <TableRow {...props} ref={ref}>
+            {children}
+        </TableRow>
+    );
+}));
+
+export const DataTableBodyRow = /* @__PURE__ */ memo(forwardElementRef(function DataTableBodyRow({ row, children, ...props }: DataTableBodyRowProps, ref?: Ref<HTMLTableRowElement>) {
+
+    return (
+        <AriaTableBodyRow<HTMLTableRowElement, HTMLTableCellElement> index={row} tagTableRow="tr" render={info => {
+            const p3 = useMergedProps(props, info.props, { ref });
+            if (info.hide) {
+                if (info.paginatedChildReturn.hideBecausePaginated)
+                    return <tr {...p3} key="hide-because-paginated" />
+                else //if (infoRow.staggeredChildReturn.hideBecauseStaggered)
+                    return <tr {...p3} key="hide-because-staggered" aria-busy="true" /> // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
+            }
+            else {
+                return (<DataTableBodyRowNonPaginated key="show" row={row} {...p3} children={children} />);
+            }
+        }} />
+    );
+}));
+
+export const DataTableCell = /* @__PURE__ */ memo(forwardElementRef(function DataTableBodyRow({ column, children, fillY, unsortable, variantTheme, colSpan, value, ...props }: DataTableCellProps, ref?: Ref<HTMLTableCellElement>) {
+    const isHeadCell = useContext(IsTableHeadContext);
+    children ??= `${value}`;
+
+    return (
+        <AriaTableCell<HTMLTableCellElement> 
+        index={column} 
+        tagTableCell="td" 
+        focusSelf={e => { e.focus(); }}
+        render={info => {
+            const mergedProps = useMergedProps(props, info.propsCell, info.propsFocus, { ref })
+            if (isHeadCell) {
+                return (
+                    <TableCell tableHeadType={unsortable ? "unsortable" : "sortable"} {...mergedProps}>
+                        {children}
+                    </TableCell>
+                );
+            }
+            else {
+                return (
+                    <TableCell tableHeadType={null} {...mergedProps}>
+                        {children}
+                    </TableCell>
+                );
+            }
+        }} />
+    );
+}));
+
+/*
 interface DataTableSectionProps extends TableSectionProps {
     keyboardControlsDescription?: string;
     children: (VNode[] | VNode);
@@ -205,7 +315,7 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
             index={column}
             tagTableCell={isTableHead ? "th" : "td"}
             focusSelf={focusSelf}
-            getSortValue={useStableGetter(value ?? children)}
+            
             colSpan={colSpan}
             render={info => {
 
@@ -249,10 +359,10 @@ export const DataTableCell = memo(forwardElementRef(function DataTableCell({ col
                     return (
                         <td className={clsx(fillY && "py-0")}>{children}</td>
                     )
-                }*/
+                }*\/
 
             }}
         />
     )
 }))
-
+*/

@@ -131,7 +131,7 @@ const TextFieldDateTime = /* @__PURE__ */ memo(forwardElementRef(function TextFi
             label={label as any}
             labelPosition={labelPosition as any}
             onValueChange={onValueChangeDateTime}
-            propsInput={useMergedProps(props, { type: "datetime-local" })}
+            propsInput={useMergedProps(props, { type: "datetime-local" } as {})}
             propsLabel={{}}
             value={value2}
             marginBottom={marginBottom}
@@ -169,7 +169,7 @@ const TextFieldDate = /* @__PURE__ */ memo(forwardElementRef(function TextFieldD
             label={label as any}
             labelPosition={labelPosition as any}
             onValueChange={onValueChangeDateTime}
-            propsInput={useMergedProps(props, { type: "date" })}
+            propsInput={useMergedProps(props, { type: "date" } as {})}
             propsLabel={{}}
             value={value2}
             marginBottom={marginBottom}
@@ -218,7 +218,7 @@ const TextFieldTime = /* @__PURE__ */ memo(forwardElementRef(function TextFieldD
             otherClasses={seconds ? "form-text-field-time-seconds" : ""}
             labelPosition={labelPosition as any}
             onValueChange={onValueChangeDateTime}
-            propsInput={useMergedProps(props, { type: "time", step: seconds ? 1 : 60 })}
+            propsInput={useMergedProps(props, { type: "time", step: seconds ? 1 : 60 } as {})}
             propsLabel={{}}
             value={value2}
             marginBottom={marginBottom}
@@ -254,7 +254,7 @@ const TextFieldNumber = /* @__PURE__ */ memo(forwardElementRef(function TextFiel
             label={label as any}
             labelPosition={labelPosition as any}
             onValueChange={onValueChangeNumber}
-            propsInput={useMergedProps(props, { min, max, type: "number" })}
+            propsInput={useMergedProps(props, { min, max, type: "number" } as {})}
             otherClasses={clsx(!showSpinButtons ? "hide-spin-buttons" : "", digitDisplay && "form-text-field-number-sized")}
             otherProps={{ style: (digitDisplay ? { "--form-text-field-digits": (digitDisplay) } : {}) as {} }}
             propsLabel={{}}
@@ -287,7 +287,7 @@ const TextFieldBigInt = /* @__PURE__ */ memo(forwardElementRef(function TextFiel
             label={label as any}
             labelPosition={labelPosition as any}
             onValueChange={onValueChangeNumber}
-            propsInput={useMergedProps<HTMLInputElement>(props, { min, max, step, type: "number" })}
+            propsInput={useMergedProps<HTMLInputElement>(props, { min, max, step, type: "number" } as {})}
             propsLabel={{}}
             value={value?.toString() ?? null}
         />
@@ -352,7 +352,7 @@ const TextFieldText = /* @__PURE__ */ memo(forwardElementRef(function TextFieldT
             rows={rows ?? 1}
             readonly={readonly || false}
             onValueChange={onValueChange as any || null}
-            propsInput={useMergedProps(props, { type: "text" })}
+            propsInput={useMergedProps(props, { type: "text" } as {})}
             propsLabel={{}}
             size={size || null}
             inputMode={inputMode || null}
@@ -636,7 +636,7 @@ const TextFieldBase = /* @__PURE__ */ memo(forwardElementRef(function TextFieldB
 
                 const labelJsx = (<label className={clsx(!withinInputGroup ? "form-label" : "input-group-text")} {...useMergedProps(propsLabel1, propsLabel2, propsLabel as JSX.HTMLAttributes<any>)}>{label}</label>);
                 const inputJsx = <input {...dataProps} inputMode={inputMode || undefined} autocomplete={autocomplete || undefined} placeholder={placeholder ?? undefined} readonly={readonly} onInput={onInput as JSX.EventHandler<any>} {...useMergedProps({ ref }, p1, p2, propsInput1, propsInput2, { className: clsx(baseInputClass) }, propsInput as JSX.HTMLAttributes<any>)} />;
-                const textAreaJsx = <textarea {...dataProps} placeholder={placeholder ?? undefined} readonly={readonly} onInput={onInput as JSX.EventHandler<any>} rows={rows ?? 1} {...useMergedProps({ ref }, p1, p2, { className: clsx(baseInputClass, resizeable && "resizeable") }, propsInput1, propsInput2, propsInput as JSX.HTMLAttributes<any>)} />
+                const textAreaJsx = <textarea {...dataProps} placeholder={placeholder ?? undefined} readOnly={readonly} onInput={onInput as JSX.EventHandler<any>} rows={rows ?? 1} {...useMergedProps({ ref }, p1, p2, { className: clsx(baseInputClass, resizeable && "resizeable") }, propsInput1, propsInput2, propsInput as JSX.HTMLAttributes<any>)} />
                 const finalInputJsx = (isTextArea ? textAreaJsx : inputJsx);
 
                 if (!withinInputGroup) {
@@ -648,7 +648,7 @@ const TextFieldBase = /* @__PURE__ */ memo(forwardElementRef(function TextFieldB
                                 "form-text-field",
                                 otherClasses,
                                 `mb-${marginBottom ?? 3}`,
-                                `form-text-field-type-${propsInput.type}`,
+                                `form-text-field-type-${(propsInput as any).type}`,
                                 !!iconStart && "form-text-field-with-icon-start",
                                 (!!iconEnd || showSpinner) && "form-text-field-with-icon-end",
                                 showSpinner && "pending")

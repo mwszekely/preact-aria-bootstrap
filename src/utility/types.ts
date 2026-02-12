@@ -40,5 +40,5 @@ interface PaginatedComponent2 {
 export type PaginatedProps<P> = P & (PaginatedComponent1 | PaginatedComponent2);
 
 
-export type GlobalAttributes<T extends EventTarget, Others extends keyof JSX.HTMLAttributes<T> = never> = Pick<JSX.HTMLAttributes<T>, "ref" | "class" | "className" | "style" | Others>;
+export type GlobalAttributes<T extends EventTarget, Others extends keyof JSX.HTMLAttributes<T> = never> = Pick<JSX.HTMLAttributes<T>, "ref" | "class" | "className" | "style" | "hidden" | Others>;
 

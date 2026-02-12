@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { Menu as AriaMenu, MenuItem as AriaMenuItem, ProgressWithHandler, UseMenuItemReturnType, useDefaultRenderPortal } from "preact-aria-widgets";
-import { ComponentChildren, EventDetail, EventType, Ref, UseTypeaheadNavigationReturnTypeSelf, VNode, memo, returnUndefined, useCallback, useMergedProps, useRef, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
+import { ComponentChildren, EventDetail, EventType, JSX, Ref, UseTypeaheadNavigationReturnTypeSelf, memo, returnUndefined, useCallback, useMergedProps, useRef, useStableCallback, useState, useTimeout } from "preact-prop-helpers";
 import { Fade, ZoomFade } from "preact-transition";
 import { useAutoAsyncHandler } from "../context.js";
 import { usePopper } from "../popper/index.js";
@@ -22,7 +22,7 @@ export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children
     /**
      * This **MUST** be a `Button` or something that accepts `onPress` as a prop.
      */
-    anchor: VNode;
+    anchor: JSX.Element;
 }
 
 export const Menu = /* @__PURE__ */ memo(forwardElementRef(function Menu({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) {

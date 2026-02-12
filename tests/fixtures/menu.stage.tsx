@@ -1,6 +1,6 @@
 
 import { EventType } from "preact-prop-helpers";
-import { Button, Menu, MenuItem } from "../../dist/index.js";
+import { Button, Menu, MenuItem } from "../../dist/preact/index.js";
 import { TestItem } from "../util.js";
 
 export interface MenuConstants {

@@ -7,7 +7,7 @@
   "module": "/dist/preact/index.js",
   "types": "/dist/preact/index.d.ts",
   "typings": "./dist/preact/index.d.ts",
-  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a",
+  "packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531",
   "exports": {
     ".": {
       "types": "./dist/preact/index.d.ts",
@@ -29,8 +29,8 @@
   "scripts": {
     "build": "npx npm-run-all --npm-path npm -pc clean build:*",
     "watch": "npx npm-run-all --npm-path npm -pc clean watch:*",
-    "watch:sass": "sass --watch --load-path=\"./node_modules/bootstrap-sass-variables/sass\" --load-path=\"./node_modules/preact-transition/sass\" --load-path=\"./node_modules/bootstrap\" ./src/index.scss:./dist/index.css",
-    "build:sass": "sass         --load-path=\"./node_modules/bootstrap-sass-variables/sass\" --load-path=\"./node_modules/preact-transition/sass\" --load-path=\"./node_modules/bootstrap\" ./src/index.scss:./dist/index.css",
+    "watch:sass": "sass --quiet-deps --watch --load-path=\"./node_modules/bootstrap-sass-variables/sass\" --load-path=\"./node_modules/preact-transition/sass\" --load-path=\"./node_modules/bootstrap\" ./src/index.scss:./dist/index.css",
+    "build:sass": "sass --quiet-deps         --load-path=\"./node_modules/bootstrap-sass-variables/sass\" --load-path=\"./node_modules/preact-transition/sass\" --load-path=\"./node_modules/bootstrap\" ./src/index.scss:./dist/index.css",
     "watch:preact": "tsc --watch",
     "build:preact": "tsc",
     "build:react": "npx rollup -c",
@@ -47,13 +47,13 @@
     "preact": "^10.21.0"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.6.5",
+    "@floating-ui/dom": "^1.6.12",
     "@js-temporal/polyfill": "^0.4.4",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "bootstrap-sass-variables": "github:mwszekely/bootstrap-sass-variables",
     "clsx": "^2.1.1",
-    "dompurify": "^3.1.5",
+    "dompurify": "^3.2.3",
     "lodash-es": "^4.17.21",
     "preact": "^10.22.0",
     "preact-aria-widgets": "github:mwszekely/preact-aria-widgets",
@@ -61,17 +61,17 @@
     "preact-transition": "github:mwszekely/preact-transition"
   },
   "devDependencies": {
-    "@playwright/test": "^1.44.1",
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-replace": "^5.0.7",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/dompurify": "^3.0.5",
+    "@playwright/test": "^1.49.1",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-replace": "^6.0.1",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "@types/dompurify": "^3.2.0",
     "@types/lodash-es": "^4.17.12",
     "npm-run-all": "^4.1.5",
-    "rollup": "^4.18.0",
+    "rollup": "^4.28.1",
     "rollup-plugin-sourcemaps": "^0.6.3",
-    "sass": "^1.77.5",
-    "typescript": "^5.4.5"
+    "sass": "^1.82.0",
+    "typescript": "^5.7.2"
   }
 }

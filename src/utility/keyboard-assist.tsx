@@ -1,4 +1,4 @@
-import { ComponentChildren, createContext, generateRandomId, getDocument, memo, Ref, useContext, useEffect, useGlobalHandler, useHasCurrentFocus, useLayoutEffect, useMergedProps, usePersistentState, useRef, useRefElement, useStableCallback, useState, UseTypeaheadNavigationReturnTypeSelf, VNode } from "preact-prop-helpers";
+import { ComponentChildren, createContext, generateRandomId, getDocument, JSX, memo, Ref, useContext, useEffect, useGlobalHandler, useHasCurrentFocus, useLayoutEffect, useMergedProps, usePersistentState, useRef, useRefElement, useStableCallback, useState, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
 import { CollapseFade, SlideZoomFade } from "preact-transition";
 import { forwardElementRef } from "./forward-element-ref.js";
 import { useClonedElement } from "./use-cloned-element.js";
@@ -58,7 +58,7 @@ interface KeyboardAssistContext {
 type TypeaheadStatus = UseTypeaheadNavigationReturnTypeSelf["typeaheadStatus"];
 
 const KeyboardAssistContext = createContext<null | KeyboardAssistContext>(null);
-export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ description, activateEnter, activateSpace, leftRight, upDown, homeEnd, pageKeys, children, typeaheadStatus, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & { children?: VNode, typeaheadStatus: TypeaheadStatus | null; }, ref?: Ref<any>) {
+export const KeyboardAssistIcon = forwardElementRef(function KeyboardAssistIcon({ description, activateEnter, activateSpace, leftRight, upDown, homeEnd, pageKeys, children, typeaheadStatus, leaveF2, textF10, ...props }: Omit<KeyboardAssistIconProps, "visible"> & { children?: JSX.Element, typeaheadStatus: TypeaheadStatus | null; }, ref?: Ref<any>) {
     const {
         id: figureDescriptionId,
         addHomeEnd,

@@ -105,6 +105,7 @@
     padding: calc(var(--keyboard-assist-key-size) * 0.25) calc(var(--keyboard-assist-key-size) * 0.75);
     border: 2px solid var(--bs-body-color);
     text-align: center;
+    text-wrap: balance;
 }
 
 
@@ -151,8 +152,10 @@
 
         // Including the disabled keys looks too crowded, so just hide them.
         // TODO: Animate them in/out instead of display:none?
-        display: none;
-        opacity: 0;
+        //
+        // TODO but more: Hiding them is terrible when rapidly bouncing between disabled and not.
+        // display: none;
+        opacity: 0.2;
 
         &.keyboard-assist-key-arrow-up,
         &.keyboard-assist-key-arrow-down,
@@ -172,11 +175,11 @@
             color: rgba(var(--bs-body-color-rgb), 1);
         }
 
-        &::after {
+        /*&::after {
             opacity: 0.5;
             content: "🚫";
             font-size: calc(var(--keyboard-assist-key-size) * 0.75);
-        }
+        }*/
     }
 }
 

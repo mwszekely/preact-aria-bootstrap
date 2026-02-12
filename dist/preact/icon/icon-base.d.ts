@@ -1,4 +1,4 @@
-import { JSX, Ref, VNode } from "preact-prop-helpers";
+import { JSX, Ref } from "preact-prop-helpers";
 export interface IconProps<E extends Element> extends Omit<JSX.HTMLAttributes<E>, "label" | "children"> {
     /**
      * All icons must either have an accessible label, or
@@ -10,7 +10,7 @@ export interface IconProps<E extends Element> extends Omit<JSX.HTMLAttributes<E>
      * are used to display help in a tooltip. If a tooltip is provided, then this
      * icon will become focusable for keyboard users (besides also, well, having a tooltip).
      */
-    children?: VNode;
+    children?: JSX.Element;
 }
 export declare const Icon: <E extends Element>({ label, role, "aria-label": ariaLabel, children, ref: unused, ...props }: IconProps<E>, ref: Ref<HTMLElement>) => import("preact").VNode<any>;
 //# sourceMappingURL=icon-base.d.ts.map

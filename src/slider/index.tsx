@@ -260,7 +260,7 @@ export const RangeThumb = /* @__PURE__ */ memo(forwardElementRef(function RangeT
                     tabIndex: 0,
                     step: usedStep,
                     list: useContext(GetListContext)
-                })} />
+                } as {})} />
             <div className="form-range-track-fill-background" style={{ "--form-range-value-percent": clampedValuePercent }} />
         </>
     );

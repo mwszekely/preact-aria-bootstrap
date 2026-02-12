@@ -13,5 +13,5 @@ export interface FontIconProps extends OmitStrong<IconProps<HTMLElement>, "child
  * 
  */
 export const FontIcon = /* @__PURE__ */ memo(forwardElementRef(function FontIcon(props: FontIconProps, ref: Ref<HTMLElement>) {
-    return (<Icon {...props} ref={ref}><i className="font-icon" /></Icon>);
+    return (<Icon {...props} ref={ref}><i className="font-icon" role="presentation" /></Icon>);
 }));

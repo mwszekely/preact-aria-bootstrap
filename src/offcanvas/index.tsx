@@ -1,5 +1,5 @@
 import { Dialog as AriaDialog, DialogProps as AriaDialogProps, useDefaultRenderPortal } from "preact-aria-widgets";
-import { ComponentChildren, JSX, Ref, VNode, memo, useMergedProps } from "preact-prop-helpers";
+import { ComponentChildren, JSX, Ref, memo, useMergedProps } from "preact-prop-helpers";
 import { forwardElementRef } from "../utility/forward-element-ref.js";
 import { GlobalAttributes } from "../utility/types.js";
 import { useClonedElement } from "../utility/use-cloned-element.js";
@@ -11,7 +11,7 @@ export interface OffcanvasProps extends GlobalAttributes<HTMLSpanElement, "child
     onClose: AriaDialogProps<HTMLSpanElement, HTMLSpanElement, HTMLSpanElement, HTMLSpanElement>["onDismiss"];
     headerPosition?: "hidden" | "start";
     header: ComponentChildren;
-    anchor: VNode;
+    anchor: JSX.Element;
 
     /** Props are spread to the anchor element. If you need to have a class name or style set on the dialog itself, pass those here. */
     propsPortal?: JSX.HTMLAttributes<HTMLDivElement>;

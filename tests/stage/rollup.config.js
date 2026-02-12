@@ -13,9 +13,10 @@ export default {
     input: "stage/index.tsx",
     output: {
         file: "stage/index.js",
-        format: "iife",
+        format: "module",
         name: "bundle",
         sourcemap: true,
+        inlineDynamicImports: true
     },
     treeshake: "recommended",
     plugins: [

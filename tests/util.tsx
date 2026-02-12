@@ -1,6 +1,6 @@
 import { RenderableProps } from "preact";
 import { useForceUpdate, useSearchParamStateDeclarative } from "preact-prop-helpers";
-import { StateUpdater, useCallback, useLayoutEffect, useRef } from "preact/hooks";
+import { useCallback, useLayoutEffect, useRef } from "preact/hooks";
 import { ButtonConstants } from "./fixtures/button.stage.js";
 import { MenuConstants } from "./fixtures/menu.stage.js";
 
@@ -24,6 +24,7 @@ export function useTestSyncState<K extends keyof TestingConstants, K2 extends ke
     return [value, setValue, getValue] as const;
 }
 
+export type StateUpdater2<S> = ((prevState: S) => S);
 
 /**
  * A special version of `useState` whose `setState` returns a promise that resolves a bit after the function finishes rendering.
@@ -32,7 +33,7 @@ export function useTestSyncState<K extends keyof TestingConstants, K2 extends ke
  * @param initialState 
  * @returns 
  */
-function useTestSyncState2<S>(initialState: S | (() => S), key: string, fromString: (str: string) => S | null): readonly [S, (...args: Parameters<StateUpdater<S>>) => Promise<ReturnType<StateUpdater<S>>>, () => S] {
+function useTestSyncState2<S>(initialState: S | (() => S), key: string, fromString: (str: string) => S | null): readonly [S, (...args: Parameters<StateUpdater2<S>>) => Promise<void>, () => S] {
 
 
     let resolveRef = useRef<(() => void) | null>(null);
@@ -49,7 +50,7 @@ function useTestSyncState2<S>(initialState: S | (() => S), key: string, fromStri
         //return () => clearTimeout(handle);
     });
 
-    return [value, useCallback(async (...args: Parameters<StateUpdater<S>>) => {
+    return [value, useCallback(async (...args: Parameters<StateUpdater2<S>>) => {
         setValue(...(args as [never]));
         forceUpdate();  // TODO: It's either this, or resolve the promise immediately (if the value hasn't changed)
         return promiseRef.current ??= new Promise<void>(resolve => { resolveRef.current = resolve; })

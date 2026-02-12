@@ -1,9 +1,10 @@
-import { ComponentChildren, Ref, VNode } from "preact-prop-helpers";
-import { CaptionedProps, GlobalAttributes, PaginatedProps } from "../utility/types.js";
-import { TableCellProps, TableProps, TableRowProps, TableSectionProps } from "./table.js";
+import { ComponentChildren, JSX, Ref } from "preact-prop-helpers";
+import { CaptionedProps, PaginatedProps } from "../utility/types.js";
+import { TableCellProps, TableProps } from "./table.js";
 export interface DataTableProps extends TableProps {
-    children?: ComponentChildren;
+    children: JSX.Element[];
     staggered?: boolean;
+    header?: ComponentChildren;
 }
 export interface DataTableCellProps extends Omit<TableCellProps, "tableHeadType"> {
     /**
@@ -20,31 +21,16 @@ export interface DataTableCellProps extends Omit<TableCellProps, "tableHeadType"
     children?: ComponentChildren;
     unsortable?: boolean;
 }
-export declare const DataTable: ({ staggered, caption, captionPosition, bordered, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }: PaginatedProps<CaptionedProps<DataTableProps>>, ref?: Ref<HTMLTableElement>) => any;
-interface DataTableSectionProps extends TableSectionProps {
-    keyboardControlsDescription?: string;
-    children: (VNode[] | VNode);
-}
-export interface DataTableHeadProps extends Omit<DataTableSectionProps, "location">, GlobalAttributes<HTMLTableSectionElement> {
-    ref?: Ref<HTMLTableSectionElement>;
-    children: VNode;
-}
-export interface DataTableBodyProps extends Omit<DataTableSectionProps, "location">, GlobalAttributes<HTMLTableSectionElement> {
-    ref?: Ref<HTMLTableSectionElement>;
-    children: VNode[];
-}
-export interface DataTableFootProps extends Omit<DataTableSectionProps, "location">, GlobalAttributes<HTMLTableSectionElement> {
-    ref?: Ref<HTMLTableSectionElement>;
-    children: VNode;
-}
-export declare const DataTableHead: (props: DataTableHeadProps, ref?: Ref<HTMLTableSectionElement>) => any;
-export declare const DataTableBody: (props: DataTableBodyProps, ref?: Ref<HTMLTableSectionElement>) => any;
-export declare const DataTableFoot: (props: DataTableFootProps, ref?: Ref<HTMLTableSectionElement>) => any;
-export interface DataTableRowProps extends TableRowProps {
+export interface DataTableHeadRowProps {
     row: number;
+    children?: ComponentChildren;
 }
-export declare const DataTableRow: ({ row, children, variantTheme, ...props }: DataTableRowProps, ref?: Ref<HTMLTableRowElement>) => any;
-export declare const IsTableHeadContext: import("preact").Context<boolean>;
-export declare const DataTableCell: ({ column, colSpan, children, value, unsortable, variantTheme, fillY, ...props }: DataTableCellProps, ref?: Ref<HTMLTableCellElement>) => any;
-export {};
+export interface DataTableBodyRowProps {
+    row: number;
+    children?: ComponentChildren;
+}
+export declare const DataTable: ({ staggered, caption, captionPosition, bordered, header, dark, hover, striped, propsContainer, stripedColumns, variantBorder, variantSize, variantTheme, verticalAlign, children, paginationLabel, paginationLocation, paginationSize, ...props }: PaginatedProps<CaptionedProps<DataTableProps>>, ref?: Ref<HTMLTableElement>) => any;
+export declare const DataTableHeadRow: ({ row, children }: DataTableHeadRowProps, ref?: Ref<HTMLTableRowElement>) => any;
+export declare const DataTableBodyRow: ({ row, children, ...props }: DataTableBodyRowProps, ref?: Ref<HTMLTableRowElement>) => any;
+export declare const DataTableCell: ({ column, children, fillY, unsortable, variantTheme, colSpan, value, ...props }: DataTableCellProps, ref?: Ref<HTMLTableCellElement>) => any;
 //# sourceMappingURL=data-table.d.ts.map

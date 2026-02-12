@@ -1,7 +1,7 @@
 import { render } from "preact";
 import { useSearchParamStateDeclarative } from "preact-prop-helpers";
 import { useEffect, useRef } from "preact/hooks";
-import { AllProviders } from "../../dist/index.js";
+import { AllProviders } from "../../dist/preact/index.js";
 import { SharedFixtures } from "../fixtures/base.fixture.js";
 import { TestBasesButton } from "../fixtures/button.stage.js";
 import { TestBasesMenu } from "../fixtures/menu.stage.js";

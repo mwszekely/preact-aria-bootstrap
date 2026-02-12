@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
-import { Gridlist, GridlistChild, GridlistRow, GridlistRows, ProgressWithHandler } from "preact-aria-widgets";
-import { AsyncHandler, ComponentChildren, EventDetail, JSX, Nullable, PressEventReason, Ref, UsePaginatedChildReturnTypeSelf, UsePressParametersSelf, UseStaggeredChildReturnTypeSelf, UseTypeaheadNavigationReturnTypeSelf, VNode, createContext, forwardRef, memo, returnUndefined, useCallback, useContext, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
+import { Gridlist, GridlistCell, GridlistRow, ProgressWithHandler } from "preact-aria-widgets";
+import { AsyncHandler, ComponentChildren, EventDetail, JSX, Nullable, PressEventReason, Ref, UsePaginatedChildReturnTypeSelf, UsePressParametersSelf, UseStaggeredChildReturnTypeSelf, UseTypeaheadNavigationReturnTypeSelf, createContext, forwardRef, memo, returnUndefined, useCallback, useContext, useMergedProps, usePress, useRefElement, useStableCallback, useState } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { ButtonThemes, useAutoAsyncHandler } from "../context.js";
 import { Paginated } from "../pagination/index.js";
@@ -37,7 +37,7 @@ export interface ListProps extends GlobalAttributes<HTMLDivElement, "children"> 
      */
     onSelectedIndexChange?: null | ((index: number | null) => (void | Promise<void>));
 
-    children: VNode[];
+    children: JSX.Element[];
 }
 
 export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "children"> {
@@ -73,7 +73,7 @@ export interface ListItemProps extends GlobalAttributes<HTMLDivElement, "childre
     /**
      * A visual indicator in the corner of the list item. Read out alongside the main contents as one long string, so label it well.
      */
-    badge?: VNode;
+    badge?: JSX.Element;
 
     loadingLabel?: string;
 
@@ -109,39 +109,29 @@ export const List = /* @__PURE__ */ memo(forwardRef((function List({ disabled, s
 
     return (
         <DefaultDisabled.Provider value={disabled ?? false}>
-            <Gridlist<HTMLDivElement, HTMLDivElement, HTMLDivElement, HTMLLabelElement>
+            <Gridlist<HTMLDivElement, HTMLDivElement, HTMLLabelElement>
                 initiallyTabbableColumn={1}
                 singleSelectedIndex={selectedIndex ?? null}
                 singleSelectionAriaPropName="aria-selected"
-                onSingleSelectedIndexChange={useStableCallback(e => { debugger; onSelectedIndexChange?.(e[EventDetail].selectedIndex) })}
+                onSingleSelectedIndexChange={useStableCallback(e => { onSelectedIndexChange?.(e[EventDetail].selectedIndex) })}
                 paginationMin={paginationStart}
                 paginationMax={paginationEnd}
+                staggered={staggered || false}
                 ariaLabel={labelPosition == "hidden" ? label as string : null}
-                groupingType="without-groups"
                 singleSelectionMode={selectionMode == "single" ? "activation" : "disabled"}
                 multiSelectionMode={selectionMode == "multi" ? "activation" : "disabled"}
-
+                children={children}
                 render={info => {
-
-                    const labelJsx = <label {...info.propsGridlistLabel}>{label}</label>
+                    info.rearrangeableChildrenReturn.children
+                    const labelJsx = <label {...info.propsLabel}>{label}</label>
                     children ??= [];
 
                     return (
                         <TypeaheadStatus.Provider value={info.typeaheadNavigationReturn.typeaheadStatus}>
                             {labelPosition == "before" && labelJsx}
                             <Paginated childCount={children.length ?? 0} paginationLabel={paginationLabel} paginationLocation={paginationLocation} paginationSize={paginationSize} setPaginationEnd={setPaginationEnd} setPaginationStart={setPaginationStart}>
-                                <div {...useMergedProps(props, info.propsGridlist, { ref, class: `list-group gridlist-group` })}>
-                                    <GridlistRows
-                                        children={children}
-                                        paginationMin={paginationStart}
-                                        paginationMax={paginationEnd}
-                                        staggered={staggered || false}
-                                        render={useCallback(infoRows => {
-                                            return (
-                                                <>{infoRows.rearrangeableChildrenReturn.children}</>
-                                            )
-                                        }, [])}
-                                    />
+                                <div {...useMergedProps(props, info.props, { ref, class: `list-group gridlist-group` })}>
+                                    {info.rearrangeableChildrenReturn.children}
                                 </div>
                             </Paginated>
                             {labelPosition == "after" && labelJsx}
@@ -246,7 +236,7 @@ const ListItemNonPaginated = /* @__PURE__ */ memo((function ListItemNonPaginated
                     activateEnter={true}
                     description={keyboardControlsDescription ?? "Select a list item:"}>
                     <div
-                        aria-busy={(!show)}
+                        aria-busy={show? undefined : "true"}
                         {...finalPropsForDiv}>
 
                         {show && c}
@@ -277,19 +267,18 @@ export const ListItem = /* @__PURE__ */ memo(forwardElementRef((function ListIte
                 const p2 = (props);
                 const p3 = useMergedProps(infoRow.props, props);
 
-                if (infoRow.paginatedChildReturn.hideBecausePaginated)
-                    return <div {...p3} key="hide-because-paginated" />
-
-
-                // TODO: Get a better placeholder system
-                if (infoRow.hidden)
-                    return <div {...p3} key="hide-because-staggered" className={`gridlist-item gridlist-item-placeholder list-group-item`} role="option" aria-busy="true" /> // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
-
-                return <ListItemNonPaginated key="show"
+                if (infoRow.hide) {
+                    if (infoRow.paginatedChildReturn.hideBecausePaginated)
+                        return <div {...p3} key="hide-because-paginated" />
+                    else //if (infoRow.staggeredChildReturn.hideBecauseStaggered)
+                        return <div {...p3} key="hide-because-staggered" className={`gridlist-item gridlist-item-placeholder list-group-item`} role="option" aria-busy="true" /> // Besides being a placeholder visually, this is orders of magnitude faster than null, for some reason?
+                }
+                else {
+                    return <ListItemNonPaginated key="show"
                     keyboardControlsDescription={keyboardControlsDescription}
                     infoRowProps={infoRow.props}
                     excludeSpace={infoRow.pressParameters.excludeSpace}
-                    onPressSync={infoRow.pressParameters.onPressSync}
+                    onPressSync={infoRow.selectionChildReturn.firePressSelectionEvent}
                     onPress={onPress}
                     hideBecausePaginated={false}
                     hideBecauseStaggered={false}
@@ -303,13 +292,14 @@ export const ListItem = /* @__PURE__ */ memo(forwardElementRef((function ListIte
                     variantTheme={variantTheme}
                     props={p2}
                     ref2={ref!} />;
+                }
             }} />)
 })));
 
 
 const ListItemText = /* @__PURE__ */ memo(forwardElementRef((function ListItemText({ onPress, children, ...props }: JSX.HTMLAttributes<any> & { onPress: ((e: JSX.TargetedEvent<HTMLDivElement, Event>) => void) | null | undefined }, ref?: Ref<any>) {
     return (
-        <GridlistChild<HTMLDivElement>
+        <GridlistCell<HTMLDivElement>
             index={1}
             onPressSync={onPress}
             render={infoCell => {
@@ -332,7 +322,7 @@ interface ListItemStartEndProps {
 
 const ListItemStartEnd = /* @__PURE__ */ memo((function ListItemStartEnd({ hidden, index, children }: ListItemStartEndProps) {
     return (
-        <GridlistChild<HTMLDivElement>
+        <GridlistCell<HTMLDivElement>
             index={index}
             untabbable={hidden}
             focusSelf={useStableCallback(e => {

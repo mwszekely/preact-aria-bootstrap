@@ -8,7 +8,7 @@ import { Button } from "../button/index.js";
 import { usePortalId } from "../utility/use-portal-id.js";
 const PushToastContext = createContext(null);
 const UpdateToastContext = createContext(null);
-const DefaultToastTimeout = createContext(Infinity);
+const DefaultToastTimeout = createContext(1000000);
 export function ToastsProvider({ children, defaultTimeout, visibleCount }) {
     const { children: portalChildren, portalElement, pushChild, removeChild, updateChild } = usePortalChildren({ target: usePortalId("toast") });
     return (_jsx(DefaultToastTimeout.Provider, { value: defaultTimeout ?? Infinity, children: _jsx(PushToastContext.Provider, { value: pushChild, children: _jsx(UpdateToastContext.Provider, { value: updateChild, children: _jsx(AriaToasts, { visibleCount: visibleCount, render: info => {
@@ -28,8 +28,7 @@ export function Toast({ timeout, politeness, children, ...p }) {
     const { index, ...props } = p;
     const defaultTimeout = useContext(DefaultToastTimeout);
     // const { useToastProps, dismiss, status } = useToast<HTMLDivElement>({ timeout: timeout ?? defaultTimeout, politeness });
-    const t = 10000000;
-    return (_jsx(AriaToast, { index: index, timeout: (t) ?? timeout ?? defaultTimeout, children: children, render: info => {
+    return (_jsx(AriaToast, { index: index, timeout: timeout ?? defaultTimeout, children: children, render: info => {
             const show = (info.toastReturn.showing);
             return (_jsx(ToastDismissContext.Provider, { value: info.toastReturn.dismiss, children: _jsx(SlideFade, { show: show, slideTargetInline: 1, animateOnMount: show, exitVisibility: "removed", children: _jsx("div", { ...useMergedProps(info.props, props, { class: clsx("toast show" /*, colorVariant && `text-bg-${colorVariant}`*/) }), children: _jsxs("div", { className: "d-flex", children: [_jsx("div", { className: "toast-body", children: children }), _jsx(Button, { className: "btn-close me-2 m-auto", "aria-label": "Dismiss alert", onPress: info.toastReturn.dismiss })] }) }) }) }));
         } }));

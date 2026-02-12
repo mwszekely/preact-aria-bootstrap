@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { Button as AriaButton, EventDetail, Progress, TargetedButtonPressEvent, ToolbarChild } from "preact-aria-widgets";
-import { ComponentChildren, JSX, Nullable, Ref, UseAsyncHandlerParameters, VNode, memo, returnFalse, useAsyncHandler, useContext, useMergedProps } from "preact-prop-helpers";
+import { AsyncHandler, ComponentChildren, JSX, Nullable, Ref, UseAsyncHandlerParameters, VNode, memo, returnFalse, useAsyncHandler, useCallback, useContext, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { ButtonFills, ButtonSizes, ButtonThemes, DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext, useAutoAsyncHandler } from "../context.js";
 import { Tooltip, TooltipProps } from "../tooltip/index.js";
@@ -52,8 +52,15 @@ export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, 
     variantTheme ??= defaultTheme ?? undefined;
     variantSize ??= defaultSize ?? undefined;
 
-    const { currentCapture, pending: individualPending, syncHandler, callCount } = useAsyncHandler({
-        asyncHandler: useAutoAsyncHandler(onPressAsync),
+    const revisedAsyncHandler = useCallback<AsyncHandler<TargetedButtonPressEvent<HTMLButtonElement>, boolean | null>>((p, e) => {
+        let ret = onPressAsync?.(p ?? null, e);
+        if (ret instanceof Promise)
+            return ret;
+    }, [onPressAsync]);
+
+
+    const { currentCapture, pending: individualPending, syncHandler, callCount } = useAsyncHandler<TargetedButtonPressEvent<HTMLButtonElement>, boolean | null>({
+        asyncHandler: useAutoAsyncHandler(revisedAsyncHandler),
         capture: (e) => e[EventDetail].pressed ?? null,
         debounce,
         throttle
@@ -101,14 +108,13 @@ export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, 
 
     children = <>{children}{badge}</>
 
+    let disabled = userDisabled;
+    disabled ||= defaultDisabled;
+    disabled ||= individualPending;
 
     if (buttonGroupInfo == null) {
         //variantSize ??= "md";
         let pending = individualPending;
-        let disabled = userDisabled;
-        disabled ||= defaultDisabled;
-        //disabled ||= (pendingIndex != null);
-        disabled ||= pending;
         const d = disabled ? disabledType : false;
 
         let isPressed = (isPressedForMultiSelect) ?? null;
@@ -140,6 +146,10 @@ export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, 
             <ToolbarChild<HTMLButtonElement>
                 index={buttonGroupIndex ?? 0}
                 disabledProp="disabled"
+                onMultiSelectedChange={syncHandler as any}
+                multiSelected={isPressedForMultiSelect}
+                multiSelectionDisabled={disabled}
+                singleSelectionDisabled={disabled}
                 render={toolbarChildInfo => {
 
 
@@ -177,8 +187,11 @@ export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, 
                         callCount={callCount}
                         excludeSpace={toolbarChildInfo.pressParameters.excludeSpace || returnFalse}
                         onPress={(e) => {
-                            toolbarChildInfo.pressParameters.onPressSync?.(e);
-                            return syncHandler?.(e);
+                            debugger;
+                            if (toolbarChildInfo.multiSelectionChildReturn.multiSelectionMode == "disabled" && toolbarChildInfo.singleSelectionChildReturn.singleSelectionMode == "disabled")
+                                syncHandler(e);
+                            else
+                                toolbarChildInfo.selectionChildReturn.firePressSelectionEvent(e);
                         }}
                         otherProps={useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable)}
                     />);

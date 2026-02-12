@@ -1,4 +1,4 @@
-import { ComponentChildren, EventType, Ref, UseTypeaheadNavigationReturnTypeSelf, VNode } from "preact-prop-helpers";
+import { ComponentChildren, EventType, JSX, Ref, UseTypeaheadNavigationReturnTypeSelf } from "preact-prop-helpers";
 import { GlobalAttributes } from "../utility/types.js";
 export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children"> {
     forceOpen?: boolean | null | undefined;
@@ -10,7 +10,7 @@ export interface MenuProps extends GlobalAttributes<HTMLButtonElement, "children
     /**
      * This **MUST** be a `Button` or something that accepts `onPress` as a prop.
      */
-    anchor: VNode;
+    anchor: JSX.Element;
 }
 export declare const Menu: ({ anchor, forceOpen, children, selectedIndex, align, keyboardControlsDescription, onSelectedIndexChange, ...props }: MenuProps, ref?: Ref<HTMLButtonElement>) => any;
 export interface StructureMenuPopperProps extends GlobalAttributes<HTMLDivElement, "children"> {

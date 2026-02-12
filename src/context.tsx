@@ -4,7 +4,7 @@ import { useCallback } from "preact/hooks";
 
 export const AutoAsyncHandlers = createContext(false);
 
-export function useAutoAsyncHandler<T extends (...args: any[]) => any>(syncOrAsyncHandler: T | null | undefined) {
+export function useAutoAsyncHandler<T extends (...args: any[]) => any>(syncOrAsyncHandler: T | null | undefined): ((...args: Parameters<T>) => (Awaited<ReturnType<T>> |  Promise<Awaited<ReturnType<T>>> | void)) {
     const autoAsync = useContext(AutoAsyncHandlers);
     return useCallback((...args: Parameters<T>): ReturnType<T> | Promise<ReturnType<T>> | void => {
         if (syncOrAsyncHandler) {

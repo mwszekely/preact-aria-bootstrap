@@ -1,7 +1,7 @@
 import { Fragment as _Fragment, jsxs as _jsxs, jsx as _jsx } from "preact/jsx-runtime";
 import { clsx } from "clsx";
 import { Button as AriaButton, EventDetail, Progress, ToolbarChild } from "preact-aria-widgets";
-import { memo, returnFalse, useAsyncHandler, useContext, useMergedProps } from "preact-prop-helpers";
+import { memo, returnFalse, useAsyncHandler, useCallback, useContext, useMergedProps } from "preact-prop-helpers";
 import { Fade } from "preact-transition";
 import { DefaultButtonSize, DefaultButtonTheme, DefaultDisabledType, DisabledContext, useAutoAsyncHandler } from "../context.js";
 import { Tooltip } from "../tooltip/index.js";
@@ -13,8 +13,13 @@ export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, 
     let defaultSize = useContext(DefaultButtonSize);
     variantTheme ??= defaultTheme ?? undefined;
     variantSize ??= defaultSize ?? undefined;
+    const revisedAsyncHandler = useCallback((p, e) => {
+        let ret = onPressAsync?.(p ?? null, e);
+        if (ret instanceof Promise)
+            return ret;
+    }, [onPressAsync]);
     const { currentCapture, pending: individualPending, syncHandler, callCount } = useAsyncHandler({
-        asyncHandler: useAutoAsyncHandler(onPressAsync),
+        asyncHandler: useAutoAsyncHandler(revisedAsyncHandler),
         capture: (e) => e[EventDetail].pressed ?? null,
         debounce,
         throttle
@@ -46,13 +51,12 @@ export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, 
     const disabledType = useContext(DefaultDisabledType);
     //const pending = ((individualPending || singleSelectPending) ?? false);
     children = _jsxs(_Fragment, { children: [children, badge] });
+    let disabled = userDisabled;
+    disabled ||= defaultDisabled;
+    disabled ||= individualPending;
     if (buttonGroupInfo == null) {
         //variantSize ??= "md";
         let pending = individualPending;
-        let disabled = userDisabled;
-        disabled ||= defaultDisabled;
-        //disabled ||= (pendingIndex != null);
-        disabled ||= pending;
         const d = disabled ? disabledType : false;
         let isPressed = (isPressedForMultiSelect) ?? null;
         return (_jsx(ButtonStructure, { ref: ref, 
@@ -60,7 +64,7 @@ export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, 
             tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, callCount: callCount, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantSize: variantSize, variantDropdown: variantDropdown || null, pressed: isPressed, onPress: syncHandler ?? null, excludeSpace: returnFalse, otherProps: props, variantFill: variantFill ?? null }));
     }
     else {
-        return (_jsx(ToolbarChild, { index: buttonGroupIndex ?? 0, disabledProp: "disabled", render: toolbarChildInfo => {
+        return (_jsx(ToolbarChild, { index: buttonGroupIndex ?? 0, disabledProp: "disabled", onMultiSelectedChange: syncHandler, multiSelected: isPressedForMultiSelect, multiSelectionDisabled: disabled, singleSelectionDisabled: disabled, render: toolbarChildInfo => {
                 //let pending = (toolbarChildInfo.multiSelectionChildReturn? isPendingForMultiSelect : selectionLimit == 'single'? isPendingForSingleSelect : individualPending) || false;
                 let pending = (toolbarChildInfo.singleSelectionChildReturn.singleSelectionMode != "disabled" ? isPendingForSingleSelect :
                     toolbarChildInfo.multiSelectionChildReturn.multiSelectionMode != "disabled" ? isPendingForMultiSelect :
@@ -75,8 +79,11 @@ export const Button = /* @__PURE__ */ memoForwardRef(function Button({ tooltip, 
                 return (_jsx(ButtonStructure, { ref: ref, 
                     //Tag={(Tag) as never}
                     tooltip: tooltip, disabled: d, pending: pending, children: children, tooltipPlacement: tooltipPlacement, loadingLabel: loadingLabel ?? null, variantTheme: variantTheme ?? "primary", variantFill: variantFill ?? null, variantSize: variantSize ?? "md", variantDropdown: variantDropdown || null, pressed: isPressed, callCount: callCount, excludeSpace: toolbarChildInfo.pressParameters.excludeSpace || returnFalse, onPress: (e) => {
-                        toolbarChildInfo.pressParameters.onPressSync?.(e);
-                        return syncHandler?.(e);
+                        debugger;
+                        if (toolbarChildInfo.multiSelectionChildReturn.multiSelectionMode == "disabled" && toolbarChildInfo.singleSelectionChildReturn.singleSelectionMode == "disabled")
+                            syncHandler(e);
+                        else
+                            toolbarChildInfo.selectionChildReturn.firePressSelectionEvent(e);
                     }, otherProps: useMergedProps(props, toolbarChildInfo.propsChild, toolbarChildInfo.propsTabbable) }));
             } }));
     }

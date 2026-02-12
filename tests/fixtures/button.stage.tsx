@@ -1,5 +1,5 @@
 import { Nullable } from "preact-prop-helpers";
-import { Badge, Button, ButtonFills, ButtonSizes, ButtonThemes, DefaultDisabledType } from "../../dist/index.js";
+import { Badge, Button, ButtonFills, ButtonSizes, ButtonThemes, DefaultDisabledType } from "../../dist/preact/index.js";
 import { TestItem, fromStringBoolean, fromStringString, useTestSyncState } from "../util.js";
 
 export interface ButtonConstants {

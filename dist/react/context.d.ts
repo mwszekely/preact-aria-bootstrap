@@ -1,5 +1,5 @@
 export declare const AutoAsyncHandlers: import("preact").Context<boolean>;
-export declare function useAutoAsyncHandler<T extends (...args: any[]) => any>(syncOrAsyncHandler: T | null | undefined): T;
+export declare function useAutoAsyncHandler<T extends (...args: any[]) => any>(syncOrAsyncHandler: T | null | undefined): ((...args: Parameters<T>) => (Awaited<ReturnType<T>> | Promise<Awaited<ReturnType<T>>> | void));
 export declare const DisabledContext: import("preact").Context<boolean>;
 export declare const DefaultDisabledType: import("preact").Context<"soft" | "hard">;
 export declare const DefaultButtonTheme: import("preact").Context<ButtonThemes | null>;

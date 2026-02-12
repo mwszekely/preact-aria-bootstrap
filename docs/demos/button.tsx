@@ -61,6 +61,8 @@ export function Demo() {
         setSelectedIndexSync(index);
     }, [])
 
+    let a: React.ReactElement;
+
     return (
         <>
             <Heading heading="Button Props">
@@ -94,29 +96,35 @@ export function Demo() {
             <ButtonAction variantSize="sm" onPress={onPressAsync} disabled>Press me (disabled)</ButtonAction>
             <ButtonAction variantSize="lg" onPress={onToggleSync} pressed={pressed}>Toggle me (sync)</ButtonAction>
             <ButtonAction variantSize="md" onPress={onToggleAsync} pressed={pressed}>Toggle me (async)</ButtonAction>
-            <ButtonGroup  label="Action button group">
-                <AB index={0}  onPress={onPressAsync}/>
-                <AB index={1}  onPress={onPressSync}/>
-                <AB index={2}  onPress={onPressAsync}/>
-                <AB index={3}  onPress={onPressSync}/>
-            </ButtonGroup>
-            <ButtonGroup label="Multi-select button group example" orientation="horizontal" labelPosition="before" selectionMode="multi">
-                <MSB index={0} />
-                <MSB index={1} />
-                <MSB index={2} />
-                <MSB index={3} />
-            </ButtonGroup>
-            <ButtonGroup label={`Single-select button group example (selected index: ${selectedIndex ?? "null"})`} selectedIndex={selectedIndex} onSelectedIndexChange={setSelectedIndexAsync} orientation="horizontal" labelPosition="before" selectionMode="single">
-                <SSB index={0} />
-                <SSB index={1} />
-                <SSB index={2} />
-                <SSB index={3} />
-            </ButtonGroup>
+            <div>
+                <ButtonGroup label="Action button group">
+                    <AB index={0} onPress={onPressAsync} />
+                    <AB index={1} onPress={onPressSync} />
+                    <AB index={2} onPress={onPressAsync} />
+                    <AB index={3} onPress={onPressSync} />
+                </ButtonGroup>
+            </div>
+            <div>
+                <ButtonGroup label="Multi-select button group example" orientation="horizontal" labelPosition="before" selectionMode="multi">
+                    <MSB index={0} />
+                    <MSB index={1} />
+                    <MSB index={2} />
+                    <MSB index={3} />
+                </ButtonGroup>
+            </div>
+            <div>
+                <ButtonGroup label={`Single-select button group example (selected index: ${selectedIndex ?? "null"})`} selectedIndex={selectedIndex} onSelectedIndexChange={setSelectedIndexAsync} orientation="horizontal" labelPosition="before" selectionMode="single">
+                    <SSB index={0} />
+                    <SSB index={1} />
+                    <SSB index={2} />
+                    <SSB index={3} />
+                </ButtonGroup>
+            </div>
         </>
     )
 }
 
-function AB({index, onPress}: {index: number, onPress: Function}) {
+function AB({ index, onPress }: { index: number, onPress: Function }) {
     return (
         <ButtonAction buttonGroupIndex={index} onPress={onPress as any}>
             Action button {index % 2 == 0 ? "a" : ""}sync,  #{index}
@@ -128,6 +136,7 @@ function MSB({ index }: { index: number }) {
     const [pressed, setPressed] = useState(false);
 
     const onToggleSync = useCallback(async (pressed: boolean | null) => {
+        debugger;
         setPressed(!!pressed);
     }, [])
     const onToggleAsync = useCallback(async (pressed: boolean | null) => {
@@ -135,7 +144,9 @@ function MSB({ index }: { index: number }) {
         onToggleSync(pressed);
     }, [])
 
-    return <ButtonAction buttonGroupIndex={index} onPress={index % 2 == 0 ? onToggleAsync : onToggleSync} pressed={pressed}>Toggle me ({index % 2 == 0 ? "a" : ""}sync, #{index}, {pressed?.toString() || "null"})</ButtonAction>
+    return <ButtonAction buttonGroupIndex={index} onPress={(pressed) => {
+        return (index % 2 == 0 ? onToggleAsync : onToggleSync)(pressed);
+    }} pressed={pressed}>Toggle me ({index % 2 == 0 ? "a" : ""}sync, #{index}, {pressed?.toString() || "null"})</ButtonAction>
 }
 
 function SSB({ index }: { index: number }) {

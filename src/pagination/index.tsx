@@ -24,7 +24,7 @@ export function Pagination({ childCount, windowSize, onChange, labelPosition, la
         <Toolbar<HTMLUListElement, HTMLButtonElement, HTMLLabelElement>
             ariaLabel={labelPosition == "hidden" ? label as string : null}
             singleSelectionAriaPropName="aria-current-page"
-            singleSelectionMode="activation"
+            singleSelectionMode="focus"
             singleSelectedIndex={page}
             multiSelectionMode="disabled"
             onSingleSelectedIndexChange={useStableCallback((event) => { setPage(event[EventDetail].selectedIndex || 0); }, [])}
@@ -106,6 +106,7 @@ const PaginationButton = /* @__PURE__ */ memo(forwardElementRef(function Paginat
                 const { pressReturn, props: propsPress } = usePress<HTMLButtonElement>({
                     pressParameters: {
                         ...info.pressParameters,
+                        onPressSync: info.selectionChildReturn.firePressSelectionEvent,
                         allowRepeatPresses: false,
                         excludeEnter: null,
                         excludePointer: null,
@@ -114,7 +115,7 @@ const PaginationButton = /* @__PURE__ */ memo(forwardElementRef(function Paginat
                         focusSelf
                     },
                     refElementReturn
-                })
+                });
 
                 // @ts-expect-error onfocusin is correct, not onFocusIn
                 const p = useMergedProps(info.propsChild, info.propsTabbable, propsStable, propsPress, { class: "page-link", ref, onfocusin: onFocus || undefined });

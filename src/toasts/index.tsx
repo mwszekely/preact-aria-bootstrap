@@ -13,7 +13,7 @@ export type PushToast = PushPortalChild
 export type UpdateToast = UpdatePortalChild;
 const PushToastContext = createContext<PushPortalChild>(null!);
 const UpdateToastContext = createContext<UpdatePortalChild>(null!);
-const DefaultToastTimeout = createContext(Infinity);
+const DefaultToastTimeout = createContext(1000000);
 export function ToastsProvider({ children, defaultTimeout, visibleCount }: { children?: ComponentChildren, visibleCount: number; defaultTimeout?: number }) {
 
     const { children: portalChildren, portalElement, pushChild, removeChild, updateChild } = usePortalChildren({ target: usePortalId("toast") })
@@ -55,12 +55,10 @@ export function Toast({ timeout, politeness, children, ...p }: Omit<ToastProps, 
     const defaultTimeout = useContext(DefaultToastTimeout);
     // const { useToastProps, dismiss, status } = useToast<HTMLDivElement>({ timeout: timeout ?? defaultTimeout, politeness });
 
-    const t: number | null = 10000000
-
     return (
         <AriaToast<HTMLDivElement>
             index={index}
-            timeout={(((t) as never as number | null)) ?? timeout ?? defaultTimeout}
+            timeout={timeout ?? defaultTimeout}
             children={children}
             render={info => {
                 const show = (info.toastReturn.showing);
